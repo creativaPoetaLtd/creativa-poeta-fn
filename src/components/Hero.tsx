@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import image8 from '../assets/flags/image8.jpg';
 import logo from '../assets/flags/logopoeta1.png'; // Make sure to replace 'creativa-poeta-logo.png' with the actual file name of your logo
-
 const Hero = () => {
     return (
         <>
