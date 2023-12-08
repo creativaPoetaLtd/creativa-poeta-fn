@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@font-face {
+  font-family: "Academy";
+  src: url("../assets/fonts/academy.ttf") format("truetype");
+} */
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+.logo , .menu{
+  font-family: 'Black Ops One', cursive;
+}
+
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.menus{
+  background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black background */
+}
+
+
+
+@keyframes bounce {
+    0% {
+      transform: translateY(5);
+    }
+    50% {
+      transform: translateY(70px);
+    }
+    100% {
+      transform: translateY(6);
+    }
+  }
+  /* .creative-design1{
+    font-style: ;
+    font-size: 3rem;
+  }
+  .creative-design2{
+    font-size: 4rem;
+  } */
+  .animate-bounce{
+    animation-name: bounce;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+  
+  .animate-pulse{
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 2;
+  }
+
+  /* .faq{
+    background-image: url('./assets/flags/image4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  } */
+  .parteners {
+    position: relative;
+    overflow: hidden;
+    /* Add any other styles you need */
+  }
+  
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+.sidebar {
+  transition: transform 0.9s ease-in-out;
+  transform: translateX(+100%);
+}
+
+.mainn {
+  background-image: url('./assets/noss.png');
+}
+
+.sidebar.visible {
+  transform: translateX(0);
+}
+
+.sidebar-closing {
+  transition: transform 0.9s ease-in-out;
+  transform: translateX(100%);
+}
+
+
+.visible2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
+}
+.slide-animation {
+  animation: slideBackground 30s linear infinite;
+}
+
+.homesec{
+  animation: "slideAnimation 0.9s ease-in-out", 
+
+}
+@keyframes slideAnimation {
+  0% {
+    transform: translateX(-100000%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+
+/* Add these classes to your existing CSS or create a new CSS file */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.9s ease-in-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.9s ease-in-out forwards;
+}
+
+@keyframes slideAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes backOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes backOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+
+.parteners{
+  background-image: url('./assets/flags/image2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.contact, .footer {
+  background-image: url('./assets/flags/image3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about {
+  background-image: url('./assets/flags/image4.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    background-image: url('./assets/phone123.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+  
+
+.faq {
+  position: relative;
+  overflow: hidden;
+  /* Add any other styles you need */
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.foote {
+  background-image: url('./assets/footerLogo.png');
+  background-repeat: no-repeat;
+  opacity: 2.2;
+
+  /* background-size: cover; */
+  background-position: center;
+  
+  /* backg÷round-attachment: fixed; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.projects {
+  background-image: url('./assets/back.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+.projects {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.projects::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projects::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.projects::-webkit-scrollbar-track {
+  background-color: transparent;
+}
