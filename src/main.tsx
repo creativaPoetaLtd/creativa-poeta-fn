@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // import TermsAndConditions from './components/unUsedComponents/TermsAndConditions.tsx';
 import TermsPage from './pages/TermsPage.tsx';
 import FaqPage from './pages/FaqPage.tsx';
+import ContactPage from './pages/ContactPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
         <Route path="/FAQ" element={<FaqPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>
     <ToastContainer />

@@ -163,13 +163,13 @@ function NavBar() {
                   F.A.Q.
                 </Link>
 
-                <a
-                  href="#contact"
+                <Link
+                  to="/contact"
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
                 >
                   Contacts
-                </a>
+                </Link>
               </div>
               <p className="text-white">
                 <img src={logoBurger}
