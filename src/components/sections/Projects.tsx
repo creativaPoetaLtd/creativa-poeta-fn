@@ -23,7 +23,7 @@ const Projects = () => {
             </div>
 
             <div className="laptop:h-[9%] tablet:h-[7%] phone:h-[6%] h-[5%] laptop:w-[5.57%]  tablet:w-[3%] w-[4%] absolute xs:h-[.8%] laptop:left-0 left-0 top-0 border-r-2 border-white"></div>
-      {/* <div className="very-buttom laptop:h-[7%] desktop:h-[7%] tablet:h-[4%] phone:h-[4.4%] h-[4.4%] xs:h-[3.5%] laptop:w-[1%] w-[35%] absolute laptop:right-1/2 right-1/2 bottom-0 border-r-2 border-white"></div> */}
+            {/* <div className="very-buttom laptop:h-[7%] desktop:h-[7%] tablet:h-[4%] phone:h-[4.4%] h-[4.4%] xs:h-[3.5%] laptop:w-[1%] w-[35%] absolute laptop:right-1/2 right-1/2 bottom-0 border-r-2 border-white"></div> */}
         </section>
     )
 }
