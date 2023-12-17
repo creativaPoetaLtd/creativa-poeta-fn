@@ -10,7 +10,7 @@ import SlideLeft from "../buttons/SlideLeft";
 import SlideRight from "../buttons/SlideRight";
 import logopoeta1 from '../../assets/flags/logopoeta1.png'
 import Confirm from "../unUsedComponents/Confirm";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const backgrounds = [
@@ -50,13 +50,13 @@ const Home = () => {
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
   const [successMessage, setsuccessMessage] = useState('' as any);
-  const [errorMessage, setErrorMessage] = useState('' as any)  
+  const [errorMessage, setErrorMessage] = useState('' as any)
   useEffect(() => {
     if (token) {
       setToken(true);
     }
   }, [token]);
- 
+
   useEffect(() => {
     const confirmToken = async () => {
       const res = await fetch('https://blue-angry-gorilla.cyclic.app/confirm', {
@@ -67,7 +67,7 @@ const Home = () => {
         body: JSON.stringify({ token: token })
       });
       const data = await res.json();
-      if(data.error) setTokenValid(true);
+      if (data.error) setTokenValid(true);
       else setTokenValid(false);
       const message = data?.message
       const emes = data?.error
@@ -79,9 +79,9 @@ const Home = () => {
 
 
 
-const handleCloseConfitm = () => {
-  setToken(false);
-}
+  const handleCloseConfitm = () => {
+    setToken(false);
+  }
 
   // const [touchStartX, setTouchStartX] = useState(null); // Add this line
   const [touchStartX, setTouchStartX] = useState<number | null>(null); // Adjust the state type
@@ -103,7 +103,7 @@ const handleCloseConfitm = () => {
       setShowTitle(true);
     }, 900);
 
-  
+
     const descriptionTimeout = setTimeout(() => {
       setShowDescription(true);
     }, 10000);
@@ -137,7 +137,7 @@ const handleCloseConfitm = () => {
     }
   };
 
-  
+
 
   const handleTouchEnd = () => {
     setTouchStartX(null);
@@ -186,7 +186,10 @@ const handleCloseConfitm = () => {
               </p>
             </div>
             <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-0 w-full space-y-4 laptop:space-y-0 tablet:space-y-0">
-              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">COMMENCER UN PROJET</button>
+              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
+                <Link to="/commencer-project">COMMENCER UN PROJET
+                </Link >
+              </button>
               <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">A PROPOS DE NOUS</button>
             </div>
             <SlideLeft backgrounds={backgrounds} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
@@ -247,11 +250,11 @@ const handleCloseConfitm = () => {
         </div>
       </div>
 
-      {istToken&&!isTokenValid &&(
-         <Confirm message={successMessage} isSuccess={true} onClose={handleCloseConfitm} />
+      {istToken && !isTokenValid && (
+        <Confirm message={successMessage} isSuccess={true} onClose={handleCloseConfitm} />
       )}
-      {istToken&&isTokenValid &&(
-         <Confirm message={errorMessage} isSuccess={false} onClose={handleCloseConfitm} />
+      {istToken && isTokenValid && (
+        <Confirm message={errorMessage} isSuccess={false} onClose={handleCloseConfitm} />
       )}
 
     </section>

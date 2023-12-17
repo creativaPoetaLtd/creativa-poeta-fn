@@ -33,7 +33,7 @@ const Contact = () => {
                   doloremque ducimus numquam doloribus, error sed.
                 </p>
 
-                <button className="px-8 py-3 mt-6 text-sm font-bold tracking-wide text-black capitalize transition-colors duration-300 transform bg-yellow-500 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
+                <button className="px-8 py-3 mt-6 text-md font-bold tracking-wide text-black capitalize transition-colors duration-300 transform bg-yellow-500 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
                   get in touch
                 </button>
 
@@ -119,7 +119,7 @@ const Contact = () => {
 
               <div className="mt-8 w-full desktop:w-[46%] laptop:w-[46%] tablet:w-full">
                 <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-black shadow-2xl rounded-xl ">
-                  <h1 className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+                  <h1 className="text-2xl font-medium text-white ">
                     Contact form
                   </h1>
 
@@ -129,7 +129,7 @@ const Contact = () => {
 
                   <form className="mt-6">
                     <div className="flex-1">
-                      <label className="block mb-2 text-sm text-white ">
+                      <label className="block mb-2 text-md text-white ">
                         Full Name
                       </label>
                       <input
@@ -140,27 +140,27 @@ const Contact = () => {
                     </div>
 
                     <div className="flex-1 mt-6">
-                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                      <label className="block mb-2 text-md text-white ">
                         Email address
                       </label>
                       <input
                         type="email"
                         placeholder="johndoe@example.com"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 bg-black border border-yellow-200 rounded-md "
+                        className="block w-full px-5 py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
                       />
                     </div>
 
                     <div className="w-full mt-6">
-                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                      <label className="block mb-2 text-md text-white ">
                         Message
                       </label>
                       <textarea
-                        className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-black border border-yellow-200 rounded-md md:h-48 "
+                        className="block w-full h-32 px-5 py-3 mt-2 text-white placeholder-gray-400 bg-black border border-yellow-200 rounded-md md:h-48 "
                         placeholder="Message"
                       ></textarea>
                     </div>
 
-                    <button className="w-full px-6 py-3 mt-6 text-sm font-bold tracking-wide text-black capitalize transition-colors duration-300 transform bg-yellow-400 rounded-md hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
+                    <button className="w-full px-6 py-3 mt-6 text-md font-bold tracking-wide text-black capitalize transition-colors duration-300 transform bg-yellow-400 rounded-md hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
                       get in touch
                     </button>
                   </form>
