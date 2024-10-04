@@ -109,7 +109,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#about" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  A propos
+                  {NavLocale[lang]?.about}
                 </a>
                 <a
                   href="#projects"
