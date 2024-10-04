@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BurgerButton from "./BurgerButton";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTimes, FaTwitter } from "react-icons/fa";
@@ -6,14 +6,62 @@ import { HiOutlineMail } from "react-icons/hi";
 import logoBurger from '../../assets/flags/logoBurger.png'
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { Dropdown, Menu } from "antd";
+import NavLocale from "../../i18n/NavLocale";
+import  getLangFromLocalStorage  from "../../../utils/Lang";
+
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [servicesSubMenuVisible, setServicesSubMenuVisible] = useState(false);
+  const [selectedLang, setSelectedLang] = useState<string>("en");
+
+  const lang:any = getLangFromLocalStorage();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentLocal = window.localStorage.getItem("selectedLang") || "en";
+      setSelectedLang(currentLocal);
+    }
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
-
+  const handleLanguageChange = (lang: string) => {
+    setSelectedLang(lang === "English" ? "en" : lang === "French" ? "fr" : "kiny");
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(
+        "selectedLang",
+        lang === "English" ? "en" : lang === "French" ? "fr" : "kiny"
+      );
+      window.location.reload();
+    }
+  };
+  const langMenu = (
+    <Menu onClick={({ key }) => handleLanguageChange(key)}>
+      <Menu.Item key="English">
+        <div className="flagAndLang flex items-center space-x-2">
+          <img src="/uk.svg" alt="flag" className="w-6 h-4" />
+          <span className="text-
+          text-gray-900 text-sm">English</span>
+        </div>
+      </Menu.Item>
+        <Menu.Item key="Kinyarwanda">
+          <div className="flagAndLang flex items-center space-x-2">
+            <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
+            <span className="text-
+            text-gray-900 text-sm">Kinyarwanda</span>
+          </div>
+        </Menu.Item>
+       <Menu.Item key="French">
+          <div className="flagAndLang flex items-center space-x-2">
+            <img src="/fr.png" alt="flag" className="w-6 h-4" />
+            <span className="text-
+            text-gray-900 text-sm">French</span>
+          </div>
+        </Menu.Item>
+    </Menu>
+  );
   const toggleServicesSubMenu = () => {
     setServicesSubMenuVisible(!servicesSubMenuVisible);
   };
@@ -41,7 +89,9 @@ function NavBar() {
               style={{ maxHeight: "80vh", overflowY: "auto" }}
             >
               <div className="flex text-[#EEBA2B] justify-between">
-                <p className="hidden">Navigation</p>
+                <p className="D">
+                {NavLocale[lang]?.navigation}
+                </p>
                 <div className=" flex mx-auto text-2xl justify-center absolute top-5 right-12 text-center text-white items-center">
                   <FaTimes onClick={toggleSidebar} />
                 </div>
@@ -138,7 +188,7 @@ function NavBar() {
                       </a>
                       <a
                         href="#services"
-                        onClick={toggleSidebar}
+                        onClick={toggleSidebar} 
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
@@ -171,6 +221,21 @@ function NavBar() {
                   Contacts
                 </Link>
               </div>
+              <div className="localizationButtonSwitcher flex justify-start">
+            <Dropdown overlay={langMenu} trigger={["click"]}>
+              <button className="currentLocal flex items-center space-x-2">
+                <img
+                  src={selectedLang === "en" ? "/uk.svg" : selectedLang === "fr" ? "/fr.png" : "/rwanda.png"}
+                  alt="flag"
+                  className="w-6 h-4"
+                />
+                <span className="text-
+                text-white text-sm">
+                  {selectedLang === "en" ? "English" : selectedLang === "fr" ? "French" : "Kinyarwanda"}
+                </span>
+              </button>
+            </Dropdown>
+          </div>
               <p className="text-white">
                 <img src={logoBurger}
                   alt="test"
