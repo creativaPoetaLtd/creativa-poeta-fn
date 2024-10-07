@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useLocation } from "react-router-dom";
 import BurgerButton from "./BurgerButton";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTimes, FaTwitter } from "react-icons/fa";
@@ -6,62 +6,61 @@ import { HiOutlineMail } from "react-icons/hi";
 import logoBurger from '../../assets/flags/logoBurger.png'
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Dropdown, Menu } from "antd";
 import NavLocale from "../../i18n/NavLocale";
 import  getLangFromLocalStorage  from "../../../utils/Lang";
 
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [servicesSubMenuVisible, setServicesSubMenuVisible] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<string>("en");
+  // const [selectedLang, setSelectedLang] = useState<string>("en");
 
   const lang:any = getLangFromLocalStorage();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const currentLocal = window.localStorage.getItem("selectedLang") || "en";
-      setSelectedLang(currentLocal);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const currentLocal = window.localStorage.getItem("selectedLang") || "en";
+  //     setSelectedLang(currentLocal);
+  //   }
+  // }, []);
 
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
-  const handleLanguageChange = (lang: string) => {
-    setSelectedLang(lang === "English" ? "en" : lang === "French" ? "fr" : "kiny");
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(
-        "selectedLang",
-        lang === "English" ? "en" : lang === "French" ? "fr" : "kiny"
-      );
-      window.location.reload();
-    }
-  };
-  const langMenu = (
-    <Menu onClick={({ key }) => handleLanguageChange(key)}>
-      <Menu.Item key="English">
-        <div className="flagAndLang flex items-center space-x-2">
-          <img src="/uk.svg" alt="flag" className="w-6 h-4" />
-          <span className="text-
-          text-gray-900 text-sm">English</span>
-        </div>
-      </Menu.Item>
-        <Menu.Item key="Kinyarwanda">
-          <div className="flagAndLang flex items-center space-x-2">
-            <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
-            <span className="text-
-            text-gray-900 text-sm">Kinyarwanda</span>
-          </div>
-        </Menu.Item>
-       <Menu.Item key="French">
-          <div className="flagAndLang flex items-center space-x-2">
-            <img src="/fr.png" alt="flag" className="w-6 h-4" />
-            <span className="text-
-            text-gray-900 text-sm">French</span>
-          </div>
-        </Menu.Item>
-    </Menu>
-  );
+  // const handleLanguageChange = (lang: string) => {
+  //   setSelectedLang(lang === "English" ? "en" : lang === "French" ? "fr" : "kiny");
+  //   if (typeof window !== "undefined") {
+  //     window.localStorage.setItem(
+  //       "selectedLang",
+  //       lang === "English" ? "en" : lang === "French" ? "fr" : "kiny"
+  //     );
+  //     window.location.reload();
+  //   }
+  // };
+  // const langMenu = (
+  //   <Menu onClick={({ key }) => handleLanguageChange(key)}>
+  //     <Menu.Item key="English">
+  //       <div className="flagAndLang flex items-center space-x-2">
+  //         <img src="/uk.svg" alt="flag" className="w-6 h-4" />
+  //         <span className="text-
+  //         text-gray-900 text-sm">English</span>
+  //       </div>
+  //     </Menu.Item>
+  //       <Menu.Item key="Kinyarwanda">
+  //         <div className="flagAndLang flex items-center space-x-2">
+  //           <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
+  //           <span className="text-
+  //           text-gray-900 text-sm">Kinyarwanda</span>
+  //         </div>
+  //       </Menu.Item>
+  //      <Menu.Item key="French">
+  //         <div className="flagAndLang flex items-center space-x-2">
+  //           <img src="/fr.png" alt="flag" className="w-6 h-4" />
+  //           <span className="text-
+  //           text-gray-900 text-sm">French</span>
+  //         </div>
+  //       </Menu.Item>
+  //   </Menu>
+  // );
   const toggleServicesSubMenu = () => {
     setServicesSubMenuVisible(!servicesSubMenuVisible);
   };
@@ -102,7 +101,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white mt-12 text-xl hover:text-[#EEBA2B] ${location.hash === "#home" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  Accueil
+                  {NavLocale[lang]?.home}
                 </a>
                 <a
                   href="#about"
@@ -116,7 +115,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#parteners" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  Nos Projects
+                  {NavLocale[lang]?.Projects}
                 </a>
                 <div onClick={toggleServicesSubMenu}>
                   <div className="flex my-auto justify-between">
@@ -124,7 +123,7 @@ function NavBar() {
                       className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] cursor-pointer ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                         }`}
                     >
-                      Services
+                      {NavLocale[lang]?.services}
                     </p>
                     {servicesSubMenuVisible ? <AiOutlineMinus className="flex justify-center mt-2 cursor-pointer text-slate-700 text-xl my-auto items-center text-center" /> : <AiOutlinePlus className="text-slate-700 cursor-pointer flex justify-center mt-2 text-xl my-auto items-center text-center rotate-90" />}
                   </div>
@@ -136,7 +135,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Design graphique
+                        {NavLocale[lang]?.subservice1}
                       </a>
                       <a
                         href="#services"
@@ -144,7 +143,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Rédaction de contenu
+                        {NavLocale[lang]?.subservice2}
                       </a>
                       <a
                         href="#services"
@@ -152,7 +151,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Développement de projets
+                        {NavLocale[lang]?.subservice3}
                       </a>
                       <a
                         href="#services"
@@ -160,7 +159,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Création, édition et montage vidéo
+                        {NavLocale[lang]?.subservice4}
                       </a>
                       <a
                         href="#services"
@@ -168,7 +167,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Marketing digital
+                        {NavLocale[lang]?.subservice5}
                       </a>
                       <a
                         href="#services"
@@ -176,7 +175,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Conception publicitaire
+                        {NavLocale[lang]?.subservice6}
                       </a>
                       <a
                         href="#services"
@@ -184,7 +183,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Développement de projets
+                        {NavLocale[lang]?.subservice7}
                       </a>
                       <a
                         href="#services"
@@ -192,7 +191,7 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Création de site internet
+                        {NavLocale[lang]?.subservice9}
                       </a>
                       <a
                         href="#services"
@@ -200,7 +199,8 @@ function NavBar() {
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
-                        Assistance technologique </a>
+                        {NavLocale[lang]?.subservice8}
+                         </a>
                     </div>
                   )}
                 </div>
@@ -210,7 +210,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  F.A.Q.
+                  {NavLocale[lang]?.faq}
                 </Link>
 
                 <Link
@@ -218,10 +218,10 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  Contacts
+                  {NavLocale[lang]?.contacts}
                 </Link>
               </div>
-              <div className="localizationButtonSwitcher flex justify-start">
+              {/* <div className="localizationButtonSwitcher flex justify-start">
             <Dropdown overlay={langMenu} trigger={["click"]}>
               <button className="currentLocal flex items-center space-x-2">
                 <img
@@ -235,7 +235,7 @@ function NavBar() {
                 </span>
               </button>
             </Dropdown>
-          </div>
+          </div> */}
               <p className="text-white">
                 <img src={logoBurger}
                   alt="test"

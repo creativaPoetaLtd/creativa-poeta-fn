@@ -4,6 +4,10 @@ import Popup from "./MailConfirm";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import {FiPhone} from 'react-icons/fi';
+import getLangFromLocalStorage from "../../../utils/Lang";
+import FooterLocale from "../../i18n/FooterLocale";
+
+const lang:any = getLangFromLocalStorage();
 const Cont = () => {
 
   const [showPopup, setShowPopup] = useState(false);
@@ -90,35 +94,35 @@ const Cont = () => {
         <div className=" items-center flex justify-center">
           <div className="w-full flex flex-col  basis basis-full space-y-0">
             <div className="contuctus-text flex-center flex justify-center text-center p-2 desktop:mt-4 laptop:mt-4 tablet:mt-0 mt-4">
-              <h1 className="laptop:text-2xl desktop:text-2xl text-2xl font-bold">Nous contacter</h1>
+              <h1 className="laptop:text-2xl desktop:text-2xl text-2xl font-bold">{FooterLocale[lang].contact1}</h1>
             </div>
             <div className="flex flex-col laptop:flex-col desktop:flex-col laptop:mt-0 desktop:0 mt-2 backdrop-blur-sm">
               <div className="flex flex-col laptop:basis-full desktop:basis-full basis-full  h-full">
                 <div className="forms py-9">
                   <form className="form" onSubmit={handleSubmit}>
                     <div className="flex flex-col">
-                      <label className="bg-gre text-md text-gray-500">Nom</label>
+                      <label className="bg-gre text-md text-gray-500">{FooterLocale[lang].nom}</label>
                       <input 
                       className="border-b-2 border-b-gray-700 bg-inherit outline-none text-[#EEBA2B]  hover:border-white py-2" 
                       type="text"
                       value={name}
                       onChange={handleNameChange}
                        />
-                      <label className="  text-md  text-gray-500">E-mail</label>
+                      <label className="  text-md  text-gray-500">{FooterLocale[lang].email}</label>
                       <input 
                       className=" bg-inherit border-b-2 border-b-gray-700 outline-none text-[#EEBA2B] hover:border-white  py-2" 
                       type="email" 
                       value={email}
                       onChange={handleEmailChange}
                       />
-                      <label className="bg-gre  text-md  text-gray-500">Message</label>
+                      <label className="bg-gre  text-md  text-gray-500">{FooterLocale[lang].message}</label>
                       <textarea 
                       className=" outline-none hover:border-white py-2 bg-inherit text-[#EEBA2B] border-b-2 border-b-gray-700 h-20"
                       value={message}
                       onChange={handleMessageChange}
                        />
                       <button className=" rounded-md p-3 mt-8 bg-[#EEBA2B] border text-white font-semibold">
-                        {!isLoading ? "Envoyer" : 'attendez...'}
+                        {!isLoading ? `${FooterLocale[lang].ohereza}` : 'attendez...'}
                       </button>
                     </div>
                   </form>

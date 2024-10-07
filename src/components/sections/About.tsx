@@ -1,5 +1,8 @@
 // About.tsx
+import getLangFromLocalStorage from "../../../utils/Lang";
+import AboutLocale from "../../i18n/AboutLocale";
 
+const lang:any = getLangFromLocalStorage();
 const About = () => {
 
   return (
@@ -12,14 +15,14 @@ const About = () => {
                 <h1 className="laptop:text-2xl text-md font-bold text-black mx-0 animate-fade-in  animate-bounce">SALUT</h1>
               </div> */}
               <div className="flex justify-evenly">
-                <h1 className="laptop:text-5xl tablet:text-3xl text-2xl font-bold text-slate-800 mx-0 animate-fade-in animate-bounce underline-offset-6">QUI SOMMES-NOUS </h1>
+                <h1 className="laptop:text-5xl tablet:text-3xl text-2xl font-bold text-slate-800 mx-0 animate-fade-in animate-bounce underline-offset-6">{AboutLocale[lang].title}</h1>
               </div>
             </div>
             <div className="flex justify-evenly mx-auto h-px bg-white animate-bounce w-full">
             </div>
           </div>
           <div className="flex justify-evenly laptop:px-40 px-4">
-            <h1 className="laptop:text-2xl leading-relaxed tablet:text-2xl text-slate-80 mx-0 animate-fade-in animate-bounce underline-offset-6 text- text-justify justify-evenly">Passionnés par l'expression artistique et la création inspirante, nous sommes une entreprise regroupant des designers, rédacteurs et développeurs web expérimentés qui vous offrent des solutions créatives uniques. Notre objectif principal est de comprendre vos besoins afin de créer des résultats exceptionnels. Grâce à notre approche axée sur la créativité et l'excellence, nous captivons l'attention et laissons une impression durable. N'hésitez pas à nous contacter dès aujourd'hui pour discuter de vos projets et découvrir comment nous pouvons vous aider à atteindre vos objectifs créatifs</h1>
+            <h1 className="laptop:text-2xl leading-relaxed tablet:text-2xl text-slate-80 mx-0 animate-fade-in animate-bounce underline-offset-6 text- text-justify justify-evenly">{AboutLocale[lang].decription}</h1>
           </div>
         </div>
         <div className="very-top laptop:h-[13%] tablet:h-[13%] phone:h-[10%] h-[8%] laptop:w-[10%] w-[35%] absolute laptop:right-20 right-11 top-0 border-r-2 border-neutral-100">
@@ -29,7 +32,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <a href="#contact" className="contact us bg-black text-white font-bold py-2 px-4 rounded-md absolute bottom-0 left-0 desktop:mb-28 laptop:mb-28 ipod:mb-56 phone:mb-24 tablet:mb-56 xs:mb-16 laptop:ml-40 desktop:ml-40 ml-3 border-2 border-[#FFE533]">CONTACTEZ NOTRE EQUIPE</a>
+      <a href="#contact" className="contact us bg-black text-white font-bold py-2 px-4 rounded-md absolute bottom-0 left-0 desktop:mb-28 laptop:mb-28 ipod:mb-56 phone:mb-24 tablet:mb-56 xs:mb-16 laptop:ml-40 desktop:ml-40 ml-3 border-2 border-[#FFE533]">{AboutLocale[lang].action}</a>
     </section>
   );
 };

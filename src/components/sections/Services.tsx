@@ -1,5 +1,8 @@
 import blogData from "../../data/blog";
+import ServiceLocale from "../../i18n/ServiceLocale";
+import getLangFromLocalStorage from "../../../utils/Lang";
 
+const lang:any = getLangFromLocalStorage();
 const Services = () => {
   
   return (
@@ -7,7 +10,7 @@ const Services = () => {
       
       <div className="mt-[2%] pb-12   w-full flex felx-col flex-col space-y-7">
         <h1 className="laptop:text-5xl text-3xl font-bold mx-auto  text-[#EEBA2B]">
-         <b className="text-slate-500">NOS</b><br></br>SERVICE
+         <b className="text-slate-500">{ServiceLocale[lang].title1}</b><br></br>{ServiceLocale[lang].title2}
            
         </h1>
         <div className="w-full  grid laptop:grid-cols-2 laptop:gap-20 desktop:gap-20 tablet:gap-12 gap-10 desktop:grid-cols-2 tablet:grid-cols-1 grid-cols-1 laptop:p-28 desktop:p-28 tablet:p-8 p-4 ">
