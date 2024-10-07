@@ -11,21 +11,24 @@ import SlideRight from "../buttons/SlideRight";
 import logopoeta1 from '../../assets/flags/logopoeta1.png'
 import Confirm from "../unUsedComponents/Confirm";
 import { useLocation } from 'react-router-dom';
+import HomeLocale from "../../i18n/HomeLocale";
+import getLangFromLocalStorage from "../../../utils/Lang";
 
+const lang:any = getLangFromLocalStorage();
 
 const backgrounds = [
   {
     image: image8,
     content: {
-      title: "inspired innovation",
-      description: "Un souffle de créativité, une touche poétique, voilà Creativa Poeta",
+      title: HomeLocale[lang].ttile1,
+      description: HomeLocale[lang].description1,
     },
   },
   {
     image: image2,
     content: {
-      title: "transformez vos idées en réalité",
-      description: "Des solutions sur mesure qui captivent votre public et vous démarquent de la concurrence",
+      title: HomeLocale[lang].title2,
+      description: HomeLocale[lang].description2,
     },
   },
   // {
@@ -36,7 +39,6 @@ const backgrounds = [
   //   },
   // },
 ];
-
 
 
 const Home = () => {
@@ -186,8 +188,8 @@ const handleCloseConfitm = () => {
               </p>
             </div>
             <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-0 w-full space-y-4 laptop:space-y-0 tablet:space-y-0">
-              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">COMMENCER UN PROJET</button>
-              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">A PROPOS DE NOUS</button>
+              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in"> {HomeLocale[lang].action1} </button>
+              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">{HomeLocale[lang].action2}</button>
             </div>
             <SlideLeft backgrounds={backgrounds} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
             <SlideRight backgrounds={backgrounds} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
@@ -243,7 +245,7 @@ const handleCloseConfitm = () => {
       <div className="very-buttom h-[10%] laptop:w-[10%] tablet:w-[17%] phone:w-[35%] w-[38%] absolute laptop:right-20 right-11 bottom-0 border-r-2 border-[#FFE533]">
         <div className="buttons h-full flex cursor-pointer items-start space-x-1">
           <button className="font-bold w-5 text-md text-[#FFFF00]"><AiOutlineDown /></button>
-          <button className="text-white tablet:text-xs desktop:text-xs phone:text-xs laptop:text-xs text-xs font-bold"><a href="#about">SCROLL DOWN</a></button>
+          <button className="text-white tablet:text-xs desktop:text-xs phone:text-xs laptop:text-xs text-xs font-bold"><a href="#about">{HomeLocale[lang].scroll}</a></button>
         </div>
       </div>
 

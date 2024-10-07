@@ -4,7 +4,10 @@ import Cont from '../unUsedComponents/Cont';
 // import { SetStateAction, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { Link } from 'react-router-dom';
+import getLangFromLocalStorage from '../../../utils/Lang';
+import FooterLocale from '../../i18n/FooterLocale';
 
+const lang:any = getLangFromLocalStorage();
 function Footer() {
   // const { t } = useTranslation();
   // const today = new Date();
@@ -49,42 +52,42 @@ function Footer() {
           <img src={logopoeta1} alt="logo" className="laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] laptop:h-[100%] desktop:h-[100%] h-[100%] w-[50%]"/>
           </h1>
           <p className='flex justify-start text-justify  items-start pr-7 float-left mt-3 text-slate-400'>
-          La créativité est notre passion et notre métier. Nous sommes animés par elle. Notre mission est de donner vie à vos idées, de renforcer votre présence en ligne et de susciter l'engagement de votre public. Avec une équipe d'experts passionnés, nous offrons une gamme de services adaptés à vos besoins. Contactez-nous pour démarrer votre prochain projet.
-          </p>
+             {FooterLocale[lang].desc}          
+             </p>
           <div className='flex desktop:flex-row laptop:flex-row tablet:flex-row flex-col w-full justify-start items-start float-left laptop:mt-3 desktop:mt-3 tablet:mt-3 mt-3 h-fit'>
           <div className='flex flex-col laptop:pr-12 desktop:pr-12 tablet:pr-6 pr-1 justify-start items-start laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
               <p className='flex justify-start items-start float-left mt-3 text-[#EEBA2B] text-xl font-bold'>
-                Nos Compétences
+                {FooterLocale[lang].title}
                 </p>
-                <p className='flex justify-start items-start float-left text-start mt-3 text-slate-400'>Conception de logos</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Affiches et flyers personnalisés</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Cartes de visite uniques</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Rédaction de contenu web</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Révision et correction de textes</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Rédaction de lettres personnalisées et de documents professionnels</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Création de discours et de poésie</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Assistance en écriture de mémoires et de rapports</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Conception de sites web</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Stratégies de marketing digital</p>
+                <p className='flex justify-start items-start float-left text-start mt-3 text-slate-400'> {FooterLocale[lang].comptence1} </p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence2}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence3}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence4}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence5}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence6}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence7}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence8}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence9}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence10}</p>
             </div>
             <div className='flex flex-col justify-start items-start pr-5 laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
           
-                <p className='flex justify-start items-start float-left text-start laptop:mt-12 desktop:mt-12 tablet:mt-12 mt-1 text-slate-400'>Gestion des réseaux sociaux </p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Campagnes publicitaires visuelles</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Création de contenu marketing</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Aide à l'utilisation des outils numériques</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Assistance pour les démarches administratives en ligne </p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Conseils en sécurité en ligne</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Assistance pour acheter sur Internet</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Production de vidéos publicitaires</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Podcasts créatifs</p>
-                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>Édition et montage de vidéos promotionnelles</p>
+                <p className='flex justify-start items-start float-left text-start laptop:mt-12 desktop:mt-12 tablet:mt-12 mt-1 text-slate-400'>{FooterLocale[lang].comptence11} </p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence12}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence13}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence14}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence15}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence16}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence17}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence18}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence19}</p>
+                <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence20}</p>
             </div>
             </div>
             <div className='flex flex-col w-full justify-start items-start mt-5  h-fit'>
-            <p className='flex justify-start items-start float-left text-slate-400 pr-7'>Que vous soyez un entrepreneur, un créateur de contenu, une entreprise ou un particulier, nous sommes là pour donner vie à vos idées et pour vous aider à réussir dans votre domaine.</p>
+            <p className='flex justify-start items-start float-left text-slate-400 pr-7'>{FooterLocale[lang].comptence21}</p>
              <p className='flex justify-start items-start float-left mt-5 text-white font-bold'>
-             Votre créativité, notre passion.
+             {FooterLocale[lang].comptence22}
              </p>
              </div>
         </div>

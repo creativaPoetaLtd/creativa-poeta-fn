@@ -6,63 +6,66 @@ import vid from '../assets/vid.png'
 import proj from '../assets/proj.png'
 import co from '../assets/co.png'
 import des from '../assets/des.png'
+import getLangFromLocalStorage from '../../utils/Lang'
+import ServiceLocale from '../i18n/ServiceLocale'
 
+const lang:any = getLangFromLocalStorage();
 const blogData = [
     {
         id: 1,
-        h1: 'Design',
-        h2: 'graphique',
+        h1: ServiceLocale[lang].service11,
+        h2: ServiceLocale[lang].service12,
         image : des,
-        description: "Des créations visuelles saisissantes qui captivent l'attention et transmettent votre message avec impact"
+        description: ServiceLocale[lang].description1
     },
     {
         id: 2,
-        h1: 'Rédaction',
-        h2: 'de contenu',
+        h1: ServiceLocale[lang].service21,
+        h2: ServiceLocale[lang].service22,
         image : co, 
-        description: "Des mots soigneusement choisis qui racontent votre histoire et engagent votre audience de manière captivante"
+        description: ServiceLocale[lang].description2
     },
     {
         id: 3,
-        h1: 'Développement',
-        h2: ' de projets',
+        h1: ServiceLocale[lang].service31,
+        h2: ServiceLocale[lang].service32,
         image : proj,
-        description: "Des conseils avisés et des stratégies sur mesure pour vous guider à chaque étape de votre projet, de l'idéation à la réalisation"
+        description: ServiceLocale[lang].description3
     },
     {
         id: 4,
-        h1: 'Création, édition et ',
-        h2: 'montage vidéo',        
+        h1: ServiceLocale[lang].service41,
+        h2: ServiceLocale[lang].service42,       
         image : vid,    
-        description: "Que vous visiez à devenir un Youtubeur ou à partager vos vidéos sur TikTok, Instagram, Facebook, etc., nous sublimons vos enregistrements bruts et créons des vidéos de haute qualité pour briller sur toutes les plateformes en ligne.(spécialement pour youtubeur, tiktok, Instagram,… et pour  créat.eurs.rices de contenus)"
+        description: ServiceLocale[lang].description4
     },
     {
         id: 5,
-        h1: 'Marketing',
-        h2: 'digital',
+        h1: ServiceLocale[lang].service51,
+        h2: ServiceLocale[lang].service52,
         image : market,
-        description: 'Des conseils stratégiques et des solutions personnalisées pour améliorer votre visibilité en ligne, générer du trafic qualifié et augmenter vos conversions'
+        description: ServiceLocale[lang].description5
     },
     {
         id: 6,
-        h1: 'Conception',
-        h2: 'publicitaire',
+        h1: ServiceLocale[lang].service61,
+        h2: ServiceLocale[lang].service62,
         image : pub,
-        description: "On donne vie à votre message. Nous transformons vos idées en campagnes publicitaires visuelles et audiovisuelles qui captivent l'audience, renforcent votre présence sur tous les canaux de communication, suscitent l'intérêt et incitent à l'action."
+        description: ServiceLocale[lang].description6
     },
     {
         id: 7,
-        h1: 'Création ',
-        h2: 'de site internet',
+        h1: ServiceLocale[lang].service71,
+        h2: ServiceLocale[lang].service72,
         image : web,
-        description: "Des sites web modernes, intuitifs et esthétiquement plaisants qui vous aident à vous démarquer et à atteindre vos objectifs en ligne"
+        description: ServiceLocale[lang].description8
     },
     {
         id: 8,
-        h1: 'Assistance technologique,',
-        h2: 'Accompagnement numérique',
+        h1: ServiceLocale[lang].service81,
+        h2: ServiceLocale[lang].service82,
         image : tech,
-        description: "Maîtrisez les nouvelles technologies en toute confiance avec notre service d'assistance gratuit. Nous vous aidons à naviguer dans l'univers numérique, que ce soit pour vos achats en ligne, vos démarches administratives ou l'utilisation des réseaux sociaux. Notre équipe expérimentée vous accompagne pas à pas, vous offrant la tranquillité d'esprit et la sécurité dont vous avez besoin. Libérez le plein potentiel de la technologie et simplifiez votre vie numérique dès maintenant (gratuit)"
+        description: ServiceLocale[lang].description8
     },
 ]
 
