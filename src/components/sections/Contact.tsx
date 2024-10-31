@@ -2,11 +2,10 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import Popup from "../unUsedComponents/MailConfirm";
 import { useState } from "react";
-// import Footer from "./Footer";
 import { toast } from "react-toastify";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-
   const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -26,10 +25,9 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    setIsLoading(true);
     e.preventDefault();
-  
-    // Check if any field is empty or if the email is invalid
+    setIsLoading(true);
+
     if (!email || !name || !message) {
       toast.error('Veuillez remplir tous les champs.', {
         theme: 'colored',
@@ -37,8 +35,7 @@ const Contact = () => {
       setIsLoading(false);
       return;
     }
-  
-    // Email validation using regular expression
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error('Veuillez saisir une adresse e-mail valide.', {
@@ -47,40 +44,39 @@ const Contact = () => {
       setIsLoading(false);
       return;
     }
-  
+
     try {
-      const response = await fetch('https://blue-angry-gorilla.cyclic.app/users/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, name, message }),
-      });
-  
-      const data = await response.json();
-  
-      if (data.error) {
-        alert(data.error);
-        setIsLoading(false);
-        return;
-      }
-  
-      setIsLoading(false);
+      // EmailJS configuration
+      const serviceID = 'service_9qlvez4';
+      const templateID = 'service_9qlvez4';
+      const publicKey = 'xX4q61Mzs09zxCu_A';
+
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message,
+      };
+
+      // Send email via EmailJS
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+
+      // Reset the form fields after success
       setEmail('');
       setName('');
       setMessage('');
-      toast.success(data.message, {
+      toast.success('Message envoyé avec succès!', {
         theme: 'colored',
       });
+
     } catch (error) {
+      console.error('EmailJS error:', error);
       toast.error('Erreur réseau. Veuillez réessayer plus tard.', {
         theme: 'colored',
       });
+    } finally {
       setIsLoading(false);
     }
   };
-  
-
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -124,9 +120,9 @@ const Contact = () => {
                       value={message}
                       onChange={handleMessageChange}
                        />
-                      <button className=" rounded-md p-3 mt-8 bg-[#EEBA2B] border text-white font-semibold">
-                        {!isLoading ? "Envoyer" : 'attendez...'}
-                      </button>
+                      <button className="rounded-md p-3 mt-8 bg-[#EEBA2B] border text-white font-semibold">
+          {!isLoading ? "Envoyer" : 'attendez...'}
+        </button>
                     </div>
                   </form>
                 </div>
@@ -181,7 +177,6 @@ const Contact = () => {
         )}
 
       </section>
-      {/* <Footer setShowPopUp={setShowPopup} /> */}
       </>
 
     );

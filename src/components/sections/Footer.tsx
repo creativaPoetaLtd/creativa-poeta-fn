@@ -6,6 +6,7 @@ import Cont from '../unUsedComponents/Cont';
 // import { Link } from 'react-router-dom';
 import getLangFromLocalStorage from '../../../utils/Lang';
 import FooterLocale from '../../i18n/FooterLocale';
+import { Link } from 'react-router-dom';
 
 const lang:any = getLangFromLocalStorage();
 function Footer() {
@@ -58,30 +59,69 @@ function Footer() {
           <div className='flex flex-col laptop:pr-12 desktop:pr-12 tablet:pr-6 pr-1 justify-start items-start laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
               <p className='flex justify-start items-start float-left mt-3 text-[#EEBA2B] text-xl font-bold'>
                 {FooterLocale[lang].title}
-                </p>
+              </p>
+                <Link to="/services/design" >
                 <p className='flex justify-start items-start float-left text-start mt-3 text-slate-400'> {FooterLocale[lang].comptence1} </p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence2}</p>
+                </Link>
+                <Link to="/services/website-creation">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence3}</p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence4}</p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence5}</p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence6}</p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence7}</p>
+                </Link>
+                <Link to="/services/content-writing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence8}</p>
+                </Link>
+                  <Link to="/services/design">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence9}</p>
+                </Link>
+                <Link to="/services/digital-marketing">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence10}</p>
+                </Link>
             </div>
             <div className='flex flex-col justify-start items-start pr-5 laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
-          
+                <Link to="/services/digital-marketing">
                 <p className='flex justify-start items-start float-left text-start laptop:mt-12 desktop:mt-12 tablet:mt-12 mt-1 text-slate-400'>{FooterLocale[lang].comptence11} </p>
+                </Link>
+                <Link to="/services/advertising-design">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence12}</p>
+                </Link>
+                <Link to="/services/advertising-design">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence13}</p>
+                </Link>
+                <Link to="/services/digital-support">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence14}</p>
+                </Link>
+                <Link to="/services/digital-support">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence15}</p>
+                </Link>
+                <Link to="/services/digital-support">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence16}</p>
+                </Link>
+                <Link to="/services/digital-support">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence17}</p>
+                </Link>
+                <Link to="/services/video-creation">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence18}</p>
+                </Link>
+                <Link to="/services/video-creation">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence19}</p>
+                </Link>
+                <Link to="/services/video-creation">
                 <p className='flex justify-start items-start float-left text-start mt-1 text-slate-400'>{FooterLocale[lang].comptence20}</p>
+                </Link>
             </div>
             </div>
             <div className='flex flex-col w-full justify-start items-start mt-5  h-fit'>

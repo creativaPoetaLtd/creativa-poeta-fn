@@ -59,6 +59,14 @@ function MoreNavBar() {
               >
                 {t("services")}
               </Link>
+              {/* jobs */}
+              <Link to="/jobs"
+                onClick={toggleSidebar}
+                className={` overflow-y-auto rounded text-red-200 hover:text-[#EEBA2B] ${location.hash === "#jobs" ? "bg-[#EEBA2B]" : ""}`}
+              >
+                {t("jobs")}
+              </Link>
+
               <Link to="/#parteners"
                 onClick={toggleSidebar}
                 className={` overflow-y-auto rounded text-red-200 hover:text-[#EEBA2B] ${location.hash === "#parteners" ? "bg-[#EEBA2B]" : ""}`}

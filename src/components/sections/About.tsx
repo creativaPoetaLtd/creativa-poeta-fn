@@ -1,4 +1,3 @@
-// About.tsx
 import getLangFromLocalStorage from "../../../utils/Lang";
 import AboutLocale from "../../i18n/AboutLocale";
 
@@ -11,9 +10,7 @@ const About = () => {
         <div className="laptop:mt-[0%]  laptop:py-0 desktop:py-0 phone:py-0 tablet:py-0 iphone:py-0 ipod:py-0 xs:py-20 tablet:mt-[0%] laptop:space-y-10 space-y-5 mt-[0rem]">
           <div className="flex justify-evenly flex-col laptop:space-y-10 space-y-5 laptop:w-[50%] w-[90%] tablet:w-[70%] mx-auto">
             <div className="flex justify-evenly flex-col laptop:space-y-5 space-x-3">
-              {/* <div className="flex justify-center">
-                <h1 className="laptop:text-2xl text-md font-bold text-black mx-0 animate-fade-in  animate-bounce">SALUT</h1>
-              </div> */}
+            
               <div className="flex justify-evenly">
                 <h1 className="laptop:text-5xl tablet:text-3xl text-2xl font-bold text-slate-800 mx-0 animate-fade-in animate-bounce underline-offset-6">{AboutLocale[lang].title}</h1>
               </div>
@@ -32,7 +29,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      <a href="#contact" className="contact us bg-black text-white font-bold py-2 px-4 rounded-md absolute bottom-0 left-0 desktop:mb-28 laptop:mb-28 ipod:mb-56 phone:mb-24 tablet:mb-56 xs:mb-16 laptop:ml-40 desktop:ml-40 ml-3 border-2 border-[#FFE533]">{AboutLocale[lang].action}</a>
+      <a href="/contact" className="contact us bg-black text-white font-bold py-2 px-4 rounded-md absolute bottom-0 left-0 desktop:mb-28 laptop:mb-28 ipod:mb-56 phone:mb-24 tablet:mb-56 xs:mb-16 laptop:ml-40 desktop:ml-40 ml-3 border-2 border-[#FFE533]">{AboutLocale[lang].action}</a>
     </section>
   );
 };
