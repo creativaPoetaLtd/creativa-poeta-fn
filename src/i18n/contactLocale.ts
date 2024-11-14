@@ -1,0 +1,53 @@
+const contactLocale: any = {
+    fr: {
+        validation: "Veuillez remplir tous les champs.",
+        email: "Veuillez saisir une adresse e-mail valide.",
+        intro: "Nous sommes là pour vous aider, transformer vos idées en produits frais et répondre à toutes vos questions. Vous souhaitez nous contacter ? Nous aimerions avoir de vos nouvelles. Demandez-nous tout et nous vous répondrons dans les plus brefs délais.",
+        cta: "entrer en contact",
+        socials:"Suivez-nous sur les réseaux sociaux",
+        form: "Formulaire de contact",
+        title: "Posez-nous toutes vos questions et nous serions ravis de vous entendre",
+        fullName: "Nom complet",
+        emailAddress: "Adresse e-mail",
+        message: "Message",
+        action: "Envoyer",
+        wait:"attendez...",
+        success: "Message envoyé avec succès!",
+        sendErrror: "Erreur réseau. Veuillez réessayer plus tard.",
+
+    },
+    en: {
+        validation: "Please fill in all fields.",
+        email: "Please enter a valid email address.",
+        intro: "We are here to help you, turn your ideas into fresh products, and answer all your questions. Do you want to contact us? We would love to hear from you. Ask us anything and we will get back to you as soon as possible.",
+        cta: "get in touch",
+        socials:"Follow us on social media",
+        form: "Contact form",
+        title: "Ask us everything and we would love to hear from you",
+        fullName: "Full Name",
+        emailAddress: "Email Address",
+        message: "Message",
+        action: "Send",
+        wait:"please wait...",
+        success: "Message sent successfully!",
+        sendErrror: "Network error. Please try again later.",
+    },
+    kiny: {
+        validation: "Banza wuzuze amakuru yose.",
+        email: "Andika emeyili yawe neza.",
+        intro: "Turi hano kugufasha, guhindura ibitekerezo byawe impamo, no kugusubiza buri kibazo waba wibaza. Wifuza kutwandikira? Twishimiye kuvugana nawe. Baza buri kibazo cyose waba wibaza cyangwa amakuru yose ukeneye maze tugusubize mu gihe gito.",
+        cta: "Twandikire",
+        socials:"Dukurikire ku mbuga nkoranyambag zacu",
+        form: "Aho wanyuza igitekerezo cyawe",
+        title: "Tubaze icyo ushaka cyose. Twishimiye kuvugana nawe",
+        fullName: "Amazina yombi",
+        emailAddress: "Emeyili",
+        message: "Ubutumwa",
+        action: "Ohereza",
+        wait:"Tegereza...",
+        success: "Ubutumwa bwoherejwe neza!",
+        sendErrror: "Habayemo akabazo, ongera ugerageze.",
+    }
+};
+
+export default contactLocale;
