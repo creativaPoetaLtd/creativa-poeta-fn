@@ -9,7 +9,7 @@ import TermsPage from './pages/TermsPage.tsx';
 import FaqPage from './pages/FaqPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
 import DesignPage from './pages/Services/DesignPage.tsx';
-import ContentWrittings from './pages/Services/ContentWritting.tsx';
+import ContentWrittings from './pages/Services/ContentWrittingPage.tsx';
 import DigitalMarketings from './pages/Services/DigitalMarketing.tsx';
 import ProjectDevelopment from './pages/Services/ProjectDvpt.tsx';
 import VideoCreationsPage from './pages/Services/VideoCreationPage.tsx';

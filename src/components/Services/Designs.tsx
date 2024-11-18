@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import image2 from '../../assets/flags/image2.jpg';
 import logo from '../../assets/flags/logopoeta1.png';
 import why from '../../assets/flags/why.jpg';
-import DesignLocale from "../../i18n/Services/Design";
+import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
 import getLangFromLocalStorage from '../../../utils/Lang';
 import { FaTwitter, FaInstagram,FaLinkedinIn, FaFacebook, FaGithub } from 'react-icons/fa';
 
@@ -14,35 +14,37 @@ const lang: string = getLangFromLocalStorage();
 
 const testimonials = [
   {
-    quote: "This team’s design work has transformed our brand! The logo and colors truly represent who we are.",
+    quote:  DesignLocale[lang].quote1,
     client: "Sarah Johnson",
     role: "CEO, TechNova",
     image: "/profile.jpg",
   },
   {
-    quote: "Fantastic designs that resonate with our audience. Highly recommended!",
+    quote: DesignLocale[lang].quote2,
     client: "James Lee",
     role: "Marketing Director, BrightWave",
     image: "/delivery.png",
   },
   {
-    quote: "Their creativity and professionalism are outstanding. We've seen a great impact on our brand identity.",
+    quote: DesignLocale[lang].quote3,
     client: "Emma Brown",
     role: "Founder, GreenNest",
     image: "/profile.jpg",
   },
+
   {
-    quote: "Their creativity and professionalism are outstanding. We've seen a great impact on our brand identity.",
-    client: "Emma Brown",
-    role: "Founder, GreenNest",
-    image: "/delivery.png",
-  },
+    quote: DesignLocale[lang].quote4,
+    client: "John Doe",
+    role: "CEO, TechNova",
+    image: "/profile.jpg", 
+},
   {
-    quote: "Their creativity and professionalism are outstanding. We've seen a great impact on our brand identity.",
-    client: "Emma Brown",
-    role: "Founder, GreenNest",
+    quote: DesignLocale[lang].quote5,
+    client: "Alice Smith",
+    role: "Marketing Director, BrightWave",
     image: "/profile.jpg",
   },
+
 ];
 
 export function TestimonialSlider() {
@@ -63,7 +65,7 @@ export function TestimonialSlider() {
   };
 
   return (
-    <section className="testimonial-slider min-h-screen w-full md:w-[80%] items-center justify-center flex flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative">
+    <section className="testimonial-slider min-h-screen w-full md:w-[80%] items-center justify-center flex flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
       <h2 className="text-4xl font-bold mb-8 text-[#EEBA2B]">What Our Clients Say</h2>
 
       <div className="overflow-hidden relative w-full">
@@ -114,26 +116,26 @@ export function TestimonialSlider() {
 
 const relatedServices = [
   {
-    title: "Digital Marketing",
-    description: "Amplify your visual content reach with targeted digital strategies.",
+    title: DesignLocale[lang].title1,
+    description: DesignLocale[lang].description1,
     icon: "/digital-marketing.jpg",
     link: "/services/digital-marketing",
   },
   {
-    title: "Content Writing",
-    description: "Engage audiences with powerful words that enhance your visuals.",
+    title: DesignLocale[lang].title2,
+    description: DesignLocale[lang].description2,
     icon: "/content-writting.png",
     link: "/services/content-writing",
   },
   {
-    title: "Content Writing",
-    description: "Engage audiences with powerful words that enhance your visuals.",
+    title: DesignLocale[lang].title3,
+    description: DesignLocale[lang].description3,
     icon: "/content-writting.png",
     link: "/services/content-writing",
   },
   {
-    title: "Video Creation",
-    description: "Extend your brand identity with impactful video content.",
+    title: DesignLocale[lang].title4,
+    description: DesignLocale[lang].description4,
     icon: "/videoProd.png",
     link: "/services/video-creation",
   },
@@ -141,8 +143,8 @@ const relatedServices = [
 
 export function RelatedServices() {
   return (
-    <section className="related-services-section w-full md:w-[95%] py-16 px-8  text-center">
-      <h2 className="text-4xl font-bold text-white mb-8">Related Services</h2>
+    <section className="related-services-section w-full md:w-[95%] py-16 px-8  text-center z-10">
+      <h2 className="text-4xl font-bold text-white mb-8">{DesignLocale[lang].relatedServTitle}</h2>
       <div className="grid gap-8  laptop:grid-cols-4 md:grid-cols-2">
         {relatedServices.map((service, index) => (
           <div key={index} className="service-card p-6 bg-white text-black rounded-lg shadow-lg hover:shadow-xl transition-shadow">
@@ -162,21 +164,21 @@ export function RelatedServices() {
 
 const faqs = [
   {
-    question: "How long does it take to deliver a design project?",
-    answer: "The timeline varies based on the project scope. For most projects, we aim to deliver within 7-10 business days after the initial consultation and approval of the design brief.",
+    question: DesignLocale[lang].question1,
+    answer: DesignLocale[lang].answer1,
   },
   {
-    question: "Is it possible to get multiple proposals for selection?",
-    answer: "Yes, we typically provide 2-3 design options for clients to choose from. Additional options are available on request.",
+  question: DesignLocale[lang].question2,
+  answer: DesignLocale[lang].answer2,
   },
   {
-    question: "What formats are provided with each final design?",
-    answer: "We deliver final designs in multiple formats, including PNG, JPEG, and vector files (AI, SVG, PDF) for versatile usage across platforms.",
+    question: DesignLocale[lang].question3,
+    answer: DesignLocale[lang].answer3
   },
   {
-    question: "Do you offer printing services?",
-    answer: "Yes, we can assist with printing services. We work with trusted print vendors to ensure high-quality materials that match your brand standards.",
-  },
+    question: DesignLocale[lang].question4,
+    answer: DesignLocale[lang].answer4
+  }
 ];
 
 export function FAQSection() {
@@ -187,8 +189,8 @@ export function FAQSection() {
   };
 
   return (
-    <section className="faq-section w-full md:w-[95%] mx-auto my-12 p-8 text-gray-800  rounded-lg shadow-lg">
-      <h2 className="text-4xl font-bold text-center text-[#EEBA2B] mb-8">Frequently Asked Questions</h2>
+    <section className="faq-section w-full md:w-[95%] mx-auto my-12 p-8 text-gray-800  rounded-lg shadow-lg z-10">
+      <h2 className="text-4xl font-bold text-center text-[#EEBA2B] mb-8">{DesignLocale[lang].faqTitle}</h2>
       
       <div className="space-y-4">
         {faqs.map((faq, index) => (
@@ -220,6 +222,8 @@ const DesignGraphique = () => {
       style={{ backgroundImage: `url(${image2})` }} 
       id="design-graphique"
     >
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+
       <Link to="/">
         <div className="logo top-5 text-white text-xl absolute left-4 ml-0 p-1 md:top-3 md:left-8 md:ml-11 md:text-4xl">
           <img
@@ -230,7 +234,7 @@ const DesignGraphique = () => {
         </div>
       </Link>
  
-      <section className="min-h-fit w-[95%] m-auto h-screen py-16 md:px-2 flex flex-col md:flex-row items-center justify-between z-10">
+      <section className="min-h-fit w-[95%] mt-16 md:mt-auto m-auto h-screen py-16 md:px-2 flex flex-col md:flex-row items-center justify-between z-10">
   <div className="w-full laptop:w-1/2 space-y-6 text-white flex flex-col items-center md:items-start md:justify-between px-4 md:px-8 py-5">
     <div className="flex items-center mb-4">
       <h1 className="text-4xl font-bold text-start md:text-left">
@@ -246,7 +250,7 @@ const DesignGraphique = () => {
       // type="primary"
       className="bg-[#EEBA2B] p-4 rounded-lg border-[#EEBA2B] text-[1.2rem] hover:bg-yellow-400 text-black hover:border hover:border-[#EEBA2B] hover:text-black mt-4"
     >
-      Start a project
+      {DesignLocale[lang].action}
     </button>
     </Link>
   </div>
@@ -261,25 +265,25 @@ const DesignGraphique = () => {
 </section>
 
 
-      <section className="graphic-design-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 gap-24 text-white rounded-lg mb-12 flex flex-col md:flex-row">
+      <section className="graphic-design-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 gap-24 text-white rounded-lg mb-12 flex flex-col md:flex-row z-10">
         <div className="yellow-lines-container  hidden laptop:flex md:w-1/2 h-full">
          
           <img src="/graphic-skills.jpg" alt="" className='w-[95%] h-[90%] rounded-md' />
         </div>
         <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-[#EEBA2B] mb-6">Our graphic design skills</h2>
+          <h2 className="text-3xl font-bold text-[#EEBA2B] mb-6">{DesignLocale[lang].skillsTitle}</h2>
           <ul className="space-y-4 text-lg p-4 h-full flex flex-col justify-between">
-            <li><strong className='text-2xl' >- Logo design:</strong> Each logo we design is unique and embodies your company’s values, leaving a memorable and professional impression on your clients.</li>
-            <li><strong className='text-2xl'>- Flyers and posters:</strong> We create posters and flyers that spark interest and draw attention with the perfect balance between text and visuals.</li>
-            <li><strong className='text-2xl'>- Business cards:</strong> Our business cards are elegant and distinctive, leaving a lasting impression on professional contacts.</li>
-            <li><strong className='text-2xl'>- Visual advertising campaigns:</strong> We bring your advertising messages to life with visuals tailored to all types of media.</li>
-            <li><strong className='text-2xl'>- Illustrations and Infographics:</strong> To make your data more accessible and engaging, we create custom infographics and illustrations suited to your needs.</li>
+            <li><strong className='text-2xl' > {DesignLocale[lang].skill1} </strong> {DesignLocale[lang].skilldesc1}</li>
+            <li><strong className='text-2xl' > {DesignLocale[lang].skill2} </strong> {DesignLocale[lang].skilldesc2}</li>
+            <li><strong className='text-2xl' > {DesignLocale[lang].skill3} </strong> {DesignLocale[lang].skilldesc3}</li>
+            <li><strong className='text-2xl' > {DesignLocale[lang].skill4} </strong> {DesignLocale[lang].skilldesc4}</li>
+            <li><strong className='text-2xl' > {DesignLocale[lang].skill5} </strong> {DesignLocale[lang].skilldesc5}</li>
           </ul>
         </div>
       </section>
 
-      <section className="why-choose-us-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col">
-        <h2 className="text-4xl font-bold text-[#EEBA2B] mb-4">Why Choose Creativa Poeta for your graphic design projects?</h2>
+      <section className="why-choose-us-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
+        <h2 className="text-4xl font-bold text-[#EEBA2B] mb-4"> {DesignLocale[lang].whyTitle} </h2>
 
         <div className="flex flex-col md:flex-row w-full">
   <div className="w-full laptop:w-1/2 laptop:flex  mb-8 md:mb-0 hidden">
@@ -291,52 +295,51 @@ const DesignGraphique = () => {
   </div>
   <div className="w-full laptop:w-1/2 flex flex-col justify-center text-xl space-y-4 p-6 md:p-8  md:h-full">
     <p className="italic mt-12">
-      "We understand the importance of design in communicating your brand. Our designers work closely with you to understand your objectives and preferences, creating visuals that perfectly match your vision."
-    </p>
+    "{DesignLocale[lang].whyIntro}"    </p>
     <ul className="list-inside space-y-8">
-      <li>- 100% customized designs tailored to your brand</li>
-      <li>- Visual solutions for every platform (print and digital)</li>
-      <li>- Creative and experienced team</li>
-      <li>- Flexible revision process to ensure your satisfaction</li>
+      <li>{DesignLocale[lang].why1} </li>
+      <li>{DesignLocale[lang].why2} </li>
+      <li>{DesignLocale[lang].why3} </li>
+      <li>{DesignLocale[lang].why4} </li>
     </ul>
   </div>
 </div>
 
       </section>
-<section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col">
-  <h2 className="text-4xl font-bold text-[#EEBA2B] text-center mb-8">Who is this service for?</h2>
+<section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
+  <h2 className="text-4xl font-bold text-[#EEBA2B] text-center mb-8"> {DesignLocale[lang].whoTitle} </h2>
   
   <p className="text-lg text-center mb-8">
-    Our graphic design services are perfect for businesses and individuals looking to enhance their brand identity and communicate their message effectively. Whether you need a new logo, a flyer, or a complete visual identity, our team is here to help you create a design that stands out.
+    {DesignLocale[lang].whoIntro}
   </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
     {/* Business */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
-      <h3 className="text-xl font-semibold mb-2">Business</h3>
-      <p className="md:w-[70%]">Our graphic design services are ideal for businesses aiming to enhance their brand identity and communicate effectively.</p>
+      <h3 className="text-xl font-semibold mb-2"> {DesignLocale[lang].who1} </h3>
+      <p className="md:w-[70%]">{DesignLocale[lang].whodesc1}.</p>
     </div>
 
     {/* Content Creators */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/content.webp" alt="Content Creators Icon" className="w-36 h-24 mb-4 rounded-md"/>
-      <h3 className="text-xl font-semibold mb-2">Content Creators and Entrepreneurs</h3>
-      <p className="md:w-[70%]" >Our team of designers can help content creators and entrepreneurs create visuals that capture attention and communicate messages effectively.</p>
+      <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who2}</h3>
+      <p className="md:w-[70%]" >{DesignLocale[lang].whodesc2}</p>
     </div>
 
     {/* Individuals */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/individual.png" alt="Individuals Icon" className="w-20 h-36 mb-4"/>
-      <h3 className="text-xl font-semibold mb-2">Individuals</h3>
-      <p className="md:w-[70%]">Perfect for individuals looking to create a unique and professional brand identity that reflects their personality and style.</p>
+      <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who3}</h3>
+      <p className="md:w-[70%]">{DesignLocale[lang].whodesc3}</p>
     </div>
 
     {/* Associations */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/associations.png" alt="Associations Icon" className="w-40 h-36 mb-4"/>
-      <h3 className="text-xl font-semibold mb-2">Associations and Organizations</h3>
-      <p className="md:w-[70%]">We help associations create visuals that communicate values, engage audiences, and reflect organizational goals.</p>
+      <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who4}</h3>
+      <p className="md:w-[70%]">{DesignLocale[lang].whodesc4}</p>
     </div>
   </div>
 </section>
@@ -344,8 +347,8 @@ const DesignGraphique = () => {
 
 
 
-<section className="design-process-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg  text-white shadow-lg relative">
-  <h2 className="text-4xl font-bold text-center mb-12 text-[#EEBA2B]">Our Design Process</h2>
+<section className="design-process-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg  text-white shadow-lg relative z-10">
+  <h2 className="text-4xl font-bold text-center mb-12 text-[#EEBA2B]"> {DesignLocale[lang].processTitle} </h2>
   
   <div className="relative flex flex-col laptop:flex-row items-center space-y-16">
     {/* Step 1 - Left */}
@@ -353,8 +356,8 @@ const DesignGraphique = () => {
       <div className="lg:order-2 order-1">
         <img src="/consultancy.png" alt="Consultation Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg mb-4 lg:mb-0" />
         <div className="text-center lg:text-left">
-          <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">1. Initial Consultation</h3>
-          <p className="text-white">We discuss your needs and the style you’re aiming for.</p>
+          <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">{DesignLocale[lang].process1}</h3>
+          <p className="text-white">{DesignLocale[lang].processdesc1}</p>
         </div>
       </div>
     </div>
@@ -365,8 +368,8 @@ const DesignGraphique = () => {
     <div className="flex items-start space-x-6 lg:space-x-12 lg:flex-row-reverse flex-col lg:items-center">
       <img src="/research.png" alt="Research Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg mb-4 lg:mb-0" />
       <div className="text-center lg:text-left">
-        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">2. Creative Research</h3>
-        <p className="text-white">We analyze trends and gather inspiration to align the design with your vision.</p>
+        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">{DesignLocale[lang].process2}</h3>
+        <p className="text-white">{DesignLocale[lang].processdesc2}</p>
       </div>
     </div>
     {/* Connector Line */}
@@ -376,8 +379,8 @@ const DesignGraphique = () => {
     <div className="flex items-start space-x-6 lg:space-x-12 lg:flex-row flex-col lg:items-center">
       <img src="/concept.jpg" alt="Development Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg mb-4 lg:mb-0" />
       <div className="text-center lg:text-left">
-        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">3. Concept Development</h3>
-        <p className="text-white">We propose several visual options based on our research.</p>
+        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">{DesignLocale[lang].process3}</h3>
+        <p className="text-white">{DesignLocale[lang].processdesc3}</p>
       </div>
     </div>
     {/* Connector Line */}
@@ -388,8 +391,8 @@ const DesignGraphique = () => {
     <div className="flex items-start space-x-6 lg:space-x-12 lg:flex-row-reverse flex-col lg:items-center">
       <img src="/revision.jpg" alt="Revision Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg mb-4 lg:mb-0" />
       <div className="text-center lg:text-left">
-        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">4. Revisions and Adjustments</h3>
-        <p className="text-white">We refine the design based on your feedback.</p>
+        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">{DesignLocale[lang].process4}</h3>
+        <p className="text-white">{DesignLocale[lang].processdesc4}</p>
       </div>
     </div>
     {/* Connector Line */}
@@ -400,15 +403,15 @@ const DesignGraphique = () => {
     <div className="flex items-start space-x-6 lg:space-x-12 lg:flex-row flex-col lg:items-center">
       <img src="/delivery.png" alt="Delivery Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg bg-white mb-4 lg:mb-0" />
       <div className="text-center lg:text-left">
-        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">5. Delivery</h3>
-        <p className="text-white">The final design is provided in all required formats.</p>
+        <h3 className="text-2xl font-semibold mb-2 text-[#EEBA2B]">{DesignLocale[lang].process5}</h3>
+        <p className="text-white">{DesignLocale[lang].processdesc5}</p>
       </div>
     </div>
   </div>
 </section>
 
-<section className="portfolio-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white">
-  <h2 className="text-4xl font-bold text-[#EEBA2B] mb-8">Our Portfolio</h2>
+<section className="portfolio-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
+  <h2 className="text-4xl font-bold text-[#EEBA2B] mb-8">{DesignLocale[lang].portifolioTitle}</h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-6">
     <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -457,7 +460,7 @@ const DesignGraphique = () => {
 
   <div className="mt-12">
     <a href="/contact" className="px-6 py-3 bg-[#EEBA2B] text-black font-semibold rounded-lg hover:bg-yellow-600">
-      Like what you see? Contact us!
+    {DesignLocale[lang].ctaCaption}
     </a>
   </div>
 </section>
@@ -465,28 +468,28 @@ const DesignGraphique = () => {
 <TestimonialSlider />
 <RelatedServices />
 <FAQSection />
-<section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center">
+<section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
       
       {/* Encouragement Text */}
-      <h2 className="text-3xl font-semibold mb-4">Ready to take your brand to the next level with impactful design?</h2>
+      <h2 className="text-3xl font-semibold mb-4">{DesignLocale[lang].ctaTitle}</h2>
       <p className="text-lg mb-8 px-6 max-w-2xl mx-auto">
-        Contact us to discuss your project today and discover how we can bring your vision to life!
+      {DesignLocale[lang].ctaDescription}
       </p>
       
       <Link to="/start-project">
       <button
         className="main-cta-btn bg-[#EEBA2B] text-black font-bold py-4 px-8 rounded-lg text-2xl shadow-lg transform transition-transform duration-300 hover:scale-105"
       >
-        Elevate Your Brand with Our Designs
+        {DesignLocale[lang].ctaAction}
       </button>
       </Link>
     </section>
 
 
-    <section className="visual-elements w-full  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex flex-col items-center">
+    <section className="visual-elements w-full  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex flex-col items-center z-10">
       {/* Title */}
       <h2 className="text-4xl font-semibold text-center text-[#1e1e2f] mb-12">
-        Our Graphic Design Expertise
+      {DesignLocale[lang].expTitle}
       </h2>
       
       {/* Main Content Grid */}
@@ -495,24 +498,24 @@ const DesignGraphique = () => {
         {/* Skill Icon with Description */}
         <div className="skill-item text-center">
           <img src="/logodesign.png" alt="Logo Design" className="w-16 h-16 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">Logo Design</h3>
-          <p>Unique, memorable logos that define your brand identity.</p>
+          <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">{DesignLocale[lang].exp1}</h3>
+          <p>{DesignLocale[lang].expdesc1}</p>
         </div>
 
         <div className="skill-item text-center">
           <img src="/businessCarddesign.png" alt="Business Card Design" className="w-16 h-16 mx-auto mb-4" />
-          <h3 className="text-md font-bold text-[#EEBA2B] mb-2">Business Card Design</h3>
-          <p>Elegant business cards that leave a lasting impression.</p>
+          <h3 className="text-md font-bold text-[#EEBA2B] mb-2">{DesignLocale[lang].exp2}</h3>
+          <p>{DesignLocale[lang].expdesc2}</p>
         </div>
 
         <div className="skill-item text-center">
           <img src="/posterdesign.jpg" alt="Poster Design" className="w-16 h-16 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">Poster Design</h3>
-          <p>Visually captivating posters for promotions and events.</p>
+          <h3 className="text-xl font-bold text-[#EEBA2B] mb-2"> {DesignLocale[lang].exp3} </h3>
+          <p>{DesignLocale[lang].expdesc3}</p>
         </div>
         
         <div className="col-span-full">
-          <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-6 text-center">Our Projects</h3>
+          <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-6 text-center">{DesignLocale[lang].projTitle}</h3>
           <div className="carousel flex overflow-x-scroll space-x-4">
             <img src="/beauty.jpg" alt="Project 1" className="w-64 h-48 object-cover rounded-lg shadow-lg" />
             <img src="/logos.webp" alt="Project 2" className="w-64 h-48 object-cover rounded-lg shadow-lg" />
@@ -547,10 +550,10 @@ const DesignGraphique = () => {
 
       {/* Links to Other Services */}
       <div className="related-services mt-12 text-center">
-        <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-4">Explore More Services</h3>
+        <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-4">{DesignLocale[lang].explore}</h3>
         <div className="flex justify-center space-x-8">
-          <a href="/services/digital-marketing" className="text-[#EEBA2B] hover:underline">Digital Marketing</a>
-          <a href="/services/content-writing" className="text-[#EEBA2B] hover:underline">Content Writing</a>
+          <a href="/services/digital-marketing" className="text-[#EEBA2B] hover:underline">{DesignLocale[lang].dm}</a>
+          <a href="/services/content-writing" className="text-[#EEBA2B] hover:underline">{DesignLocale[lang].cw}</a>
         </div>
       </div>
     </section>
