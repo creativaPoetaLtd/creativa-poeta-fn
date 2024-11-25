@@ -3,8 +3,8 @@ const ServiceLocale:any = {
     en: {
         title1: 'OUR',
         title2:"SERVICES",
-        service1:'Graphic',
-        service12:"design",
+        service11:'Graphic',
+        service12:"Design",
         description1:"Striking visual creations that captivate attention and convey your message with impact",
         service21:'Content',
         service22:"Writing",

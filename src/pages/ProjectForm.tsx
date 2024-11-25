@@ -143,6 +143,33 @@ const ProjectForm = () => {
         const templateID = "template_3tn36hc";
         const publicKey = "xX4q61Mzs09zxCu_A";
 
+        // validate form data
+        if (!formData.name || !formData.email || !formData.phone || !formData.company) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        else if (formData.deliverables.length === 0) {
+            alert("Please select at least one deliverable.");
+            return;
+        }
+        else if (!formData.mainGoal || formData.audience.length === 0) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        else if (!formData.stylePreference || formData.contentElements.length === 0) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        else if (!formData.budget || !formData.timeline) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        else if (!formData.status || formData.projectPurpose.length === 0) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+
         try {
             await emailjs.send(serviceID, templateID, formData, publicKey);
             alert("Form submitted successfully!");
