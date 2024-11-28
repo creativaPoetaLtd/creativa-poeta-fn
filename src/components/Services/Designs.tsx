@@ -242,13 +242,13 @@ const DesignGraphique = () => {
         <span className="text-[#EEBA2B] text-2xl"> {DesignLocale[lang].substitle} </span>
       </h1>
     </div>
-    <p className="text-xl leading-relaxed text-start md:text-left">
+    <p className="text-md md:text-lg laptop:text-xl leading-relaxed text-start md:text-left">
       {DesignLocale[lang].description}
     </p>
     <Link to="/start-project">
     <button
       // type="primary"
-      className="bg-[#EEBA2B] p-4 rounded-lg border-[#EEBA2B] text-[1.2rem] hover:bg-yellow-400 text-black hover:border hover:border-[#EEBA2B] hover:text-black mt-4"
+      className="bg-[#EEBA2B] p-4 rounded-lg border-[#EEBA2B] text-[1.2rem] w-full hover:bg-yellow-400 text-black hover:border hover:border-[#EEBA2B] hover:text-black mt-4"
     >
       {DesignLocale[lang].action}
     </button>

@@ -17,7 +17,32 @@ module.exports = {
       "4xl": "2560px",
       landscape: { raw: "(min-height: 360px) and (orientation: landscape)" },
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        typewriter: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      animation: {
+        typewriter: 'typewriter 2s steps(30, end)',
+      },
+    },
   },
   plugins: [],
 };
+
+const styles = `
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 0.75s step-end infinite;
+}
+`;

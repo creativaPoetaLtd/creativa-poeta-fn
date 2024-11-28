@@ -12,18 +12,18 @@ const Faq = () => {
     setExpandedIndex(index === expandedIndex ? null : index);
   };
   return (
-    <section id="faq" className="faq laptop:py-9 desktop:py-9 py-14 h-fit min-h-screen w-full  flex flex-col justify-center items-center text-center relative">
+    <section id="faq" className="faq h-fit min-h-screen w-full  flex flex-col justify-center items-center text-center relative">
       <video autoPlay loop muted className="video-background">
       <source src={phonevid} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-      <div className="mt-[2%] laptop:px-10 mb-16 ">
-        <h1 className="laptop:text-4xl text-2xl font-bold text-justfy text-gray-700">
-          F.A.Q.
-        </h1>
-        <h1 className="laptop:text-4xl text-2xl font-bold text-justfy text-gray-700">
-          Questions Fréquentes
-        </h1>
+      <div className="mb-16 ">
+      <div className="w-full py-6 text-center bg-gradient-to-r from-white to-black">
+  <h1 className="text-4xl laptop:text-5xl font-bold text-[#FFE533]">
+    <span className="text-black">F.A.Q.</span> <br /> Frequently Asked Questions
+  </h1>
+</div>
+
         <div
           className={`grid laptop:grid-cols-4 tablet:grid-cols-3 px-1 laptop:gap-8 grid-cols-2 mt-[3%] gap-3 sm:grid-cols-2`}
         >

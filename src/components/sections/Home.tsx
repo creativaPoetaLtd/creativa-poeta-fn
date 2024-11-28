@@ -136,6 +136,11 @@ const Home = () => {
   const handleTouchEnd = () => {
     setTouchStartX(null);
   };
+
+   // handle navigate to about section with id about
+   const handleNavigateToAbout = () => {
+    window.location.href = "/#about";
+  }
   const currentBackground = backgrounds[currentIndex];
 //naviga to /start-project page
 
@@ -163,7 +168,7 @@ const handleStartProject = () => {
         animation: "slideAnimation 0.9s ease-in-out",
         animationName: "slideAnimation",
       }}>
-      <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5  text-white laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
+      <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5  text-red-700 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
         <img
           src={logopoeta1}
           alt="logo"
@@ -196,11 +201,12 @@ const handleStartProject = () => {
                 {" "}
                 {HomeLocale[lang].action1}{" "}
               </button>
-              <a href="#about">
-              <button className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
+              
+              <button
+              onClick={handleNavigateToAbout}
+               className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
                 {HomeLocale[lang].action2}
               </button>
-              </a>
             </div>
             <SlideLeft
               backgrounds={backgrounds}
