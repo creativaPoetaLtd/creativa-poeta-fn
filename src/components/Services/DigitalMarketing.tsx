@@ -256,7 +256,7 @@ const DiditalMarketing = () => {
         <span className="text-[#EEBA2B] text-2xl">Strategic solutions to boost your online visibility and drive conversions  </span>
       </h1>
     </div>
-    <p className="text-xl leading-relaxed text-start md:text-left">
+    <p className="text-xl leading-relaxed text-justify md:text-left">
     In today's digital landscape, a well-crafted marketing strategy is key to reaching and engaging your audience. Our Digital Marketing service provides a personalized approach to help your brand stand out online, generate qualified traffic, and convert visitors into loyal customers. From social media campaigns to SEO and beyond, we equip you with the tools and tactics needed for sustained success.
     </p>
     <Link to="/start-project">

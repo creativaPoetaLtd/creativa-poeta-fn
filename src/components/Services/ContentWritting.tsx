@@ -266,7 +266,7 @@ const ContentWritting = () => {
               </span>
             </h1>
           </div>
-          <p className="text-xl leading-relaxed text-start md:text-left">
+          <p className="text-xl leading-relaxed text-justify md:text-left">
             The power of words should never be underestimated. Our passionate
             writers create customized content that aligns with your brand and
             values, engaging and informing your audience. Whether it's blog

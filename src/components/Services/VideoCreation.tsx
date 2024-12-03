@@ -273,7 +273,7 @@ const VideoCreation = () => {
         <span className="text-[#EEBA2B] text-2xl">Focuses on end-to-end video creation, including scripting, filming, production, and piecing together multiple video clips to form a cohesive, engaging story.   </span>
       </h1>
     </div>
-    <p className="text-xl leading-relaxed text-start md:text-left">
+    <p className="text-xl leading-relaxed text-justify md:text-left">
       Our Video Creation service is designed to help you tell your story in a visually compelling way. Whether you're looking to create a promotional video, a product demo, or a brand story, we have the expertise to bring your vision to life. Our team of videographers, editors, and producers work together to deliver high-quality videos that engage, inform, and inspire your audience.
       Our Montage service focuses on piecing together multiple video clips to form a cohesive, engaging story. We work with you to select the best footage, add music and effects, and create a final product that captures the essence of your message. Whether you're looking to create a highlight reel, a recap video, or a social media montage, we have the skills and creativity to make it happen.
     </p>

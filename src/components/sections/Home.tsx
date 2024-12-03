@@ -195,19 +195,19 @@ const handleStartProject = () => {
               </p>
             </div>
             <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-0 w-full space-y-4 laptop:space-y-0 tablet:space-y-0">
-              <button
-               onClick={handleStartProject}
-               className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
-                {" "}
-                {HomeLocale[lang].action1}{" "}
-              </button>
-              
-              <button
-              onClick={handleNavigateToAbout}
-               className="hover:bg-white hover:text-black text-white px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
-                {HomeLocale[lang].action2}
-              </button>
-            </div>
+  <button
+    onClick={handleStartProject}
+    className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
+    {HomeLocale[lang].action1}
+  </button>
+
+  <button
+    onClick={handleNavigateToAbout}
+    className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
+    {HomeLocale[lang].action2}
+  </button>
+</div>
+
             <SlideLeft
               backgrounds={backgrounds}
               currentIndex={currentIndex}

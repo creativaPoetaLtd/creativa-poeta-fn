@@ -3,10 +3,16 @@ import emailjs from "@emailjs/browser";
 import { Link } from 'react-router-dom';
 import logo from '../assets/flags/logopoeta1.png';
 import Typewriter from '../utils/TypeWritter';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import image8 from '../assets/flags/image8.jpg';
+
 
 const ProjectForm = () => {
     const [step, setStep] = useState(1);
     const [showOptions, setShowOptions] = useState(false);
+    const [showError, setShowError] = useState(false); // New state for validation
+const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -32,10 +38,59 @@ const ProjectForm = () => {
     }, [step]);
 
     const handleNextStep = () => {
-        setStep((prevStep) => prevStep + 1);
-        setShowOptions(false);
-    }
+        let isValid = true;
     
+        switch (step) {
+            case 1:
+                if (!formData.projectType) isValid = false;
+                break;
+            case 2:
+                if (formData.deliverables.length === 0) isValid = false; // Validate deliverables
+                break;
+            case 3:
+                if (!formData.mainGoal) isValid = false; // Validate main goal
+                break;
+            case 4:
+                if (formData.audience.length === 0) isValid = false; // Validate audience
+                break;
+            case 5:
+                if (!formData.stylePreference) isValid = false; // Validate style preference
+                break;
+            case 6:
+                if (formData.contentElements.length === 0) isValid = false; // Validate content elements
+                break;
+            case 7:
+                if (!formData.budget) isValid = false; // Validate budget
+                break;
+            case 8:
+                if (!formData.timeline) isValid = false; // Validate timeline
+                break;
+            case 9:
+                if (!formData.status) isValid = false; // Validate status
+                break;
+            case 10:
+                if (formData.projectPurpose.length === 0) isValid = false; // Validate project purpose
+                break;
+                // additional information form case
+            case 11:
+                if (!formData.name || !formData.email || !formData.phone || !formData.company) isValid = false;
+                break;
+            default:
+                break;
+
+        }
+    
+        if (!isValid) {
+            setShowError(true); // Show error message
+            return;
+        }
+    
+        // Proceed if validation passes
+        setStep((prevStep) => prevStep + 1);
+        setShowError(false); // Reset error state
+    };
+
+    const isNextDisabled = step === 1 && !formData.projectType;
     const handlePrevStep = () => setStep((prevStep) => prevStep - 1);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -55,16 +110,31 @@ const ProjectForm = () => {
             }));
         }
     };
-
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
+    
+        // Validate if all required fields are filled
+        const isValid = formData.name &&
+                        formData.email &&
+                        formData.phone &&
+                        formData.company &&
+                        formData.additionalInfo;
+    
+        if (!isValid) {
+            setShowError(true);  
+            return;  
+        }
+    
+        setShowError(false);  
+    
         const serviceID = "service_9qlvez4";
         const templateID = "template_3tn36hc";
         const publicKey = "xX4q61Mzs09zxCu_A";
-
+    
         try {
-            await emailjs.send(serviceID, templateID, formData, publicKey);
-            alert("Form submitted successfully!");
+            await emailjs.send(serviceID, templateID, formData, publicKey);     
+            toast.success("Form submitted successfully!");
+            
             setFormData({
                 name: '',
                 email: '',
@@ -83,6 +153,7 @@ const ProjectForm = () => {
                 additionalInfo: ''
             });
             setStep(1);
+            navigate('/thank-you');
         } catch (error) {
             if (error instanceof Error) {
                 alert("Error sending email: " + error.message);
@@ -91,6 +162,7 @@ const ProjectForm = () => {
             }
         }
     };
+    
 
     const options = {
         projectType: ["Graphic Design", "Content Writing", "Video Creation and Editing", "Digital Marketing", "Advertising Design", "Website Creation", "Digital Assistance"],
@@ -118,15 +190,15 @@ const ProjectForm = () => {
           case 1:
     return (
         <>
-         <h1 className="laptop:text-5xl text-3xl font-bold mx-auto items-center justify-center self-center flex  text-[#806829]">
-         <b className="text-black mr-6">Get</b>Started
+         <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex  text-[#806829]">
+         Get Started
         </h1>
-      <div className="w-full max-w-screen-sm mx-auto px-4">
+      <div className="w-full max-w-screen-sm mx-auto">
       <Typewriter 
                     text="What type of project would you like to undertake?"
                     className="mb-2"
                 />
-</div>
+       </div>
 
             {showOptions && (
                 <div className="space-y-2">
@@ -145,19 +217,26 @@ const ProjectForm = () => {
                     ))}
                 </div>
             )}
+            {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a project type to proceed.
+                            </p>
+                        )}
             <div className="flex justify-end mt-6">
-                <button 
-                    type="button" 
-                    onClick={handleNextStep} 
-                    disabled={!formData.projectType}
-                    className={`px-6 py-2 ${formData.projectType ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
-                >
-                    Next
-                </button>
+            <button 
+  type="button" 
+  onClick={handleNextStep} 
+//   disabled={isNextDisabled}
+  className={`px-6 py-2 ${isNextDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#EEBA2B] hover:bg-[#8b6e1c]'} font-semibold rounded-md`}
+>
+  Next
+</button>
+
             </div>
         </>
     );
-            case 2:
+           
+    case 2:
                 return (
                     <>
                         <Typewriter
@@ -181,6 +260,11 @@ const ProjectForm = () => {
                                 ))}
                             </div>
                         )}
+                         {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a deliverable to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -192,7 +276,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={formData.deliverables.length === 0}
+                                // disabled={formData.deliverables.length === 0}
                                 className={`px-6 py-2 ${formData.deliverables.length > 0 ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -220,6 +304,11 @@ const ProjectForm = () => {
                                 ))}
                             </select>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a main goal to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -231,7 +320,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={!formData.mainGoal}
+                                // disabled={!formData.mainGoal}
                                 className={`px-6 py-2 ${formData.mainGoal ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -264,6 +353,11 @@ const ProjectForm = () => {
                                 ))}
                             </div>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select audience to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -275,7 +369,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={formData.audience.length === 0}
+                                // disabled={formData.audience.length === 0}
                                 className={`px-6 py-2 ${formData.audience.length > 0 ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -304,6 +398,11 @@ const ProjectForm = () => {
                                 ))}
                             </select>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select prefered styles to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -315,7 +414,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={!formData.stylePreference}
+                                // disabled={!formData.stylePreference}
                                 className={`px-6 py-2 ${formData.stylePreference ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -347,6 +446,11 @@ const ProjectForm = () => {
                                 ))}
                             </div>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select content elements to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -358,7 +462,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={formData.contentElements.length === 0}
+                                // disabled={formData.contentElements.length === 0}
                                 className={`px-6 py-2 ${formData.contentElements.length > 0 ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -387,6 +491,11 @@ const ProjectForm = () => {
                             ))}
                         </select>
                     )}
+                      {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a budget to proceed.
+                            </p>
+                        )}
                     <div className="flex justify-between mt-6">
                         <button 
                             type="button" 
@@ -398,7 +507,7 @@ const ProjectForm = () => {
                         <button 
                             type="button" 
                             onClick={handleNextStep} 
-                            disabled={!formData.budget}
+                            // disabled={!formData.budget}
                             className={`px-6 py-2 ${formData.budget ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                         >
                             Next
@@ -427,6 +536,11 @@ const ProjectForm = () => {
                                 ))}
                             </select>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a timeline to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -438,7 +552,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={!formData.timeline}
+                                // disabled={!formData.timeline}
                                 className={`px-6 py-2 ${formData.timeline ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -466,6 +580,11 @@ const ProjectForm = () => {
                                 ))}
                             </select>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a status to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -477,7 +596,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={!formData.status}
+                                // disabled={!formData.status}
                                 className={`px-6 py-2 ${formData.status ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -510,6 +629,11 @@ const ProjectForm = () => {
                                 ))}
                             </div>
                         )}
+                          {showError && (
+                            <p className="text-red-500 text-sm mt-2">
+                                Please select a project purpose to proceed.
+                            </p>
+                        )}
                         <div className="flex justify-between mt-6">
                             <button 
                                 type="button" 
@@ -521,7 +645,7 @@ const ProjectForm = () => {
                             <button 
                                 type="button" 
                                 onClick={handleNextStep} 
-                                disabled={formData.projectPurpose.length === 0}
+                                // disabled={formData.projectPurpose.length === 0}
                                 className={`px-6 py-2 ${formData.projectPurpose.length > 0 ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
                             >
                                 Next
@@ -529,85 +653,100 @@ const ProjectForm = () => {
                         </div>
                     </>
                 );
-                case 11: 
-                return (
-                    <>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            placeholder="Enter your name" 
-                            onChange={handleChange} 
-                            value={formData.name} 
-                            className="w-full p-3 border rounded-md mb-4" 
-                        />
-                        <input 
-                            type="email" 
-                            name="email" 
-                            placeholder="Enter your email" 
-                            onChange={handleChange} 
-                            value={formData.email} 
-                            className="w-full p-3 border rounded-md mb-4" 
-                        />
+                case 11:
+                    return (
+                        <>
+                            {/* Error Message */}
+                            {showError && (
+                                <p className="text-red-500 text-sm mb-4">
+                                    Please fill out all fields correctly before submitting.
+                                </p>
+                            )}
+                
+                            {/* Form Inputs */}
+                            <input 
+                                type="text" 
+                                name="name" 
+                                placeholder="Enter your name" 
+                                onChange={handleChange} 
+                                value={formData.name} 
+                                className="w-full p-3 border rounded-md mb-4" 
+                            />
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Enter your email" 
+                                onChange={handleChange} 
+                                value={formData.email} 
+                                className="w-full p-3 border rounded-md mb-4" 
+                            />
+                            <input 
+                                type="text" 
+                                name="phone" 
+                                placeholder="Enter your phone number" 
+                                onChange={handleChange} 
+                                value={formData.phone} 
+                                className="w-full p-3 border rounded-md mb-4"
+                            />
+                            <input 
+                                type="text" 
+                                name="company" 
+                                placeholder="Enter your company name" 
+                                onChange={handleChange} 
+                                value={formData.company} 
+                                className="w-full p-3 border rounded-md mb-4"
+                            />
+                            <textarea 
+                                name="additionalInfo" 
+                                placeholder="Additional information" 
+                                onChange={handleChange} 
+                                value={formData.additionalInfo} 
+                                className="w-full p-3 border rounded-md mb-4"
+                            />
+                            
+                            {/* Navigation Buttons */}
+                            <div className="flex justify-between mt-6">
+                                <button 
+                                    type="button" 
+                                    onClick={handlePrevStep} 
+                                    className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
+                                >
+                                    Back
+                                </button>
+                                <button 
+                                    type="button" 
+                                    onClick={handleSubmit} 
+                                    // disabled={formData.name === '' || formData.email === '' || formData.phone === '' || formData.company === '' || formData.additionalInfo === ''}  // Disable if any field is empty
+                                    className={`px-6 py-2 ${formData.name && formData.email && formData.phone && formData.company && formData.additionalInfo ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </>
+                    );                              
 
-                        <input 
-                            type="text" 
-                            name="phone" 
-                            placeholder="Enter your phone number" 
-                            onChange={handleChange} 
-                            value={formData.phone} 
-                            className="w-full p-3 border rounded-md mb-4"
-                        />
-                        <input 
-                            type="text" 
-                            name="company" 
-                            placeholder="Enter your company name" 
-                            onChange={handleChange} 
-                            value={formData.company} 
-                            className="w-full p-3 border rounded-md mb-4"
-                        />
-                        <textarea 
-                            name="additionalInfo" 
-                            placeholder="Additional information" 
-                            onChange={handleChange} 
-                            value={formData.additionalInfo} 
-                            className="w-full p-3 border rounded-md mb-4"
-                        />
-                        
-                        <div className="flex justify-between mt-6">
-                            <button 
-                                type="button" 
-                                onClick={handlePrevStep} 
-                                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-                            >
-                                Back
-                            </button>
-                            <button 
-                                type="submit" 
-                                className="px-6 py-2 bg-[#EEBA2B] font-semibold rounded-md hover:bg-[#8b6e1c]"
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    </>
-                );
             default:
                 return null;
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#24303E] py-12 px-4 sm:px-6 lg:px-8">
-            <Link to="/">
+        <div className="min-h-screen flex items-center justify-center bg-[#24303E] py-12 px-4 sm:px-6 lg:px-8"
+        style={{
+            backgroundImage: `url(${image8})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+        }}
+        >
+                        <div className="absolute inset-0 bg-black opacity-50"></div> 
+            <Link to="/" className=''>
                 <div className="absolute top-5 left-4 text-white">
                     <img src={logo} alt="logo" className="h-[50px]" />
                 </div>
             </Link>
-            <div className="md:max-w-5xl max-w-7xl w-full p-10">
-                <form onSubmit={handleSubmit} className="space-y-8">
-                    <h2 className="text-3xl font-bold text-center text-white mb-10">
-                        Step {step}
-                    </h2>
-
+            <div className="md:max-w-5xl max-w-7xl w-full md:p-10 p-6 relative bg-black rounded-2xl">
+                <form onSubmit={handleSubmit} className="space-y-8 w-full">
                     {renderStep()}
                 </form>
             </div>

@@ -1,8 +1,7 @@
 
 const AboutLocale: any = {
   en: {
-    title2: "WE ARE",
-    title1:"WHO",
+    title1:"WHO WE ARE",
     decription:
       "Passionate about artistic expression and inspiring creation, we are a company comprised of experienced designers, writers, and web developers who offer you unique creative solutions. Our main goal is to understand your needs in order to create outstanding results. Through our creativity and excellence-focused approach, we captivate attention and leave a lasting impression. Feel free to contact us today to discuss your projects and discover how we can help you achieve your creative goals.",
     action: "CONTACT OUR TEAM",
