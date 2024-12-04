@@ -183,6 +183,7 @@ function NavBar() {
                 >
                   { NavLocale[lang]?.getStarted}
                 </Link>
+                
                 <Link
                   to="/FAQ"
                   onClick={toggleSidebar}

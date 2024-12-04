@@ -10,13 +10,14 @@ const Services = () => {
       id="services"
       className=" mainn justify-center  h-fit min-h-screen mt-0 flex flex-col bg-slate-800 items-center relative">
       <div className="pb-8 w-full flex felx-col flex-col space-y-7">
-        <div className="w-full py-6 text-center bg-gradient-to-r from-white to-black">
-          <h1 className="text-4xl laptop:text-5xl font-bold text-[#FFE533]">
-            <span className="text-black">{ServiceLocale[lang].title1}</span>{" "}
-            <br />
-            {ServiceLocale[lang].title2}
-          </h1>
-        </div>
+  <div className="w-full py-6 text-center bg-gradient-to-r from-white to-transparent">
+  <h1 className="text-4xl laptop:text-5xl font-bold text-[#FFE533] ">
+    <span className="text-black">{ServiceLocale[lang].title1}</span>
+    <br />
+    {ServiceLocale[lang].title2}
+  </h1>
+</div>
+
         <div className="w-full  grid laptop:grid-cols-2  laptop:gap-20 desktop:gap-20 tablet:gap-12 gap-10 desktop:grid-cols-2 tablet:grid-cols-1 grid-cols-1 laptop:p-28 desktop:p-28 tablet:p-8 p-4 ">
           {blogData.map((blog) => (
             <Link

@@ -18,7 +18,7 @@ const Faq = () => {
       Your browser does not support the video tag.
     </video>
       <div className="mb-16 ">
-      <div className="w-full py-6 text-center bg-gradient-to-r from-white to-black">
+      <div className="w-full py-6 text-center bg-gradient-to-r from-white to-transparent">
   <h1 className="text-4xl laptop:text-5xl font-bold text-[#FFE533]">
     <span className="text-black">F.A.Q.</span> <br /> Frequently Asked Questions
   </h1>

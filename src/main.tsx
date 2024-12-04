@@ -20,6 +20,7 @@ import ScrollToTop from './ScrollToTop.tsx';
 import ProjectFormPage from './pages/ProjectFormPage.tsx';
 import JobsPages from './pages/JobsPages.tsx';
 import LeaveInfoPage from './pages/LeaveInfoPage.tsx';
+import ThankYouPage from './pages/ThankYouPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -41,6 +42,7 @@ ReactDOM.render(
         <Route path="/career" element={<JobsPages />} />
         <Route path="/start-project" element={<ProjectFormPage />} />
         <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </Router>
     <ToastContainer />

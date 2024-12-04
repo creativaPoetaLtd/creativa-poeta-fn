@@ -257,7 +257,7 @@ const DiditalMarketing = () => {
         <span className="text-[#EEBA2B] text-2xl">Engaging, responsive websites that represent your brand and connect with your audience</span>
       </h1>
     </div>
-    <p className="text-xl leading-relaxed text-start md:text-left">
+    <p className="text-xl leading-relaxed text-justify md:text-left">
     Your website is often the first interaction customers have with your brand. Our Website Creation service is dedicated to building websites that reflect your brand’s personality, are visually appealing, and deliver an outstanding user experience. From simple landing pages to complex e-commerce sites, we develop websites tailored to your goals and optimized for all devices.</p>
     <Link to="/start-project">
     <button

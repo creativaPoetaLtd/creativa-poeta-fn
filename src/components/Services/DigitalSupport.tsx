@@ -242,7 +242,7 @@ const DiditalMarketing = () => {
               </span>
             </h1>
           </div>
-          <p className="text-xl leading-relaxed text-start md:text-left">
+          <p className="text-xl leading-relaxed text-justify md:text-left">
             In today’s fast-paced digital world, downtime is not an option. Our
             Digital Support Services are designed to help businesses maintain
             seamless operations across their websites, apps, and other digital

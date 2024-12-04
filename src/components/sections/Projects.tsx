@@ -3,7 +3,7 @@ const Projects = () => {
     <section
       id="projects"
       className="projects desktop:flex flex-col h-screen max-h-fit  w-full bg-red-600">
-      <div className="w-full min-w-screen p-3 backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-black">
+      <div className="w-full min-w-screen p-3 backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
         <h1 className="laptop:text-5xl desktop:text-5xl tablet:text-5xl text-2xl font-bold mx-auto text-[#EEBA2B]">
           <b className="text-black">NOS</b>
           <br />

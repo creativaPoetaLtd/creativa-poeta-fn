@@ -91,7 +91,7 @@ const Contact = () => {
           <div className="container flex  flex-1 px-6 py-12 mx-auto">
             <div className="flex w-full justify-between desktop:flex-row laptop:flex-row tablet:flex-col flex-col">
               <div className="text-white w-full my-auto desktop:w-[50%] laptop:w-1/2 tablet:w-full">
-                <h1 className="text-5xl font-bold capitalize lg:text-3xl">
+                <h1 className="text-3xl font-bold capitalize mt-16">
                   Creativa Poeta
                 </h1>
 

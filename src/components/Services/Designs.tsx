@@ -8,6 +8,7 @@ import why from '../../assets/flags/why.jpg';
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
 import getLangFromLocalStorage from '../../../utils/Lang';
 import { FaTwitter, FaInstagram,FaLinkedinIn, FaFacebook, FaGithub } from 'react-icons/fa';
+import { handleNavigate } from "./AdvertisingDesign";
 
 const lang: string = getLangFromLocalStorage();
 
@@ -66,7 +67,7 @@ export function TestimonialSlider() {
 
   return (
     <section className="testimonial-slider min-h-screen w-full md:w-[80%] items-center justify-center flex flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
-      <h2 className="text-4xl font-bold mb-8 text-[#EEBA2B]">What Our Clients Say</h2>
+      <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">What Our Clients Say</h2>
 
       <div className="overflow-hidden relative w-full">
         <div
@@ -144,7 +145,7 @@ const relatedServices = [
 export function RelatedServices() {
   return (
     <section className="related-services-section w-full md:w-[95%] py-16 px-8  text-center z-10">
-      <h2 className="text-4xl font-bold text-white mb-8">{DesignLocale[lang].relatedServTitle}</h2>
+      <h2 className="text-2xl text-[#EEBA2B]  font-bold mb-8">{DesignLocale[lang].relatedServTitle}</h2>
       <div className="grid gap-8  laptop:grid-cols-4 md:grid-cols-2">
         {relatedServices.map((service, index) => (
           <div key={index} className="service-card p-6 bg-white text-black rounded-lg shadow-lg hover:shadow-xl transition-shadow">
@@ -190,14 +191,14 @@ export function FAQSection() {
 
   return (
     <section className="faq-section w-full md:w-[95%] mx-auto my-12 p-8 text-gray-800  rounded-lg shadow-lg z-10">
-      <h2 className="text-4xl font-bold text-center text-[#EEBA2B] mb-8">{DesignLocale[lang].faqTitle}</h2>
+      <h2 className="text-2xl font-bold text-center text-[#EEBA2B] mb-8">{DesignLocale[lang].faqTitle}</h2>
       
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-gray-300 pb-4">
             <button
               onClick={() => toggleFAQ(index)}
-              className="flex items-center justify-between w-full text-left text-lg text-white font-bold focus:outline-none"
+              className="flex items-center justify-between w-full text-left text-md md:text-lg text-white font-bold focus:outline-none"
             >
               {faq.question}
               <span className="text-2xl text-[#EEBA2B]">
@@ -207,7 +208,7 @@ export function FAQSection() {
             <div
               className={`mt-2 overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-screen' : 'max-h-0'}`}
             >
-              <p className="text-gray-100 mt-2">{faq.answer}</p>
+              <p className="text-gray-100 mt-2 text-md md:text-lg">{faq.answer}</p>
             </div>
           </div>
         ))}
@@ -234,69 +235,75 @@ const DesignGraphique = () => {
         </div>
       </Link>
  
-      <section className="min-h-fit w-[95%] mt-16 md:mt-auto m-auto h-screen py-16 md:px-2 flex flex-col md:flex-row items-center justify-between z-10">
-  <div className="w-full laptop:w-1/2 space-y-6 text-white flex flex-col items-center md:items-start md:justify-between px-4 md:px-8 py-5">
-    <div className="flex items-center mb-4">
-      <h1 className="text-4xl font-bold text-start md:text-left">
-        {DesignLocale[lang].title} <br />
-        <span className="text-[#EEBA2B] text-2xl"> {DesignLocale[lang].substitle} </span>
-      </h1>
-    </div>
-    <p className="text-md md:text-lg laptop:text-xl leading-relaxed text-start md:text-left">
-      {DesignLocale[lang].description}
-    </p>
-    <Link to="/start-project">
-    <button
-      // type="primary"
-      className="bg-[#EEBA2B] p-4 rounded-lg border-[#EEBA2B] text-[1.2rem] w-full hover:bg-yellow-400 text-black hover:border hover:border-[#EEBA2B] hover:text-black mt-4"
-    >
-      {DesignLocale[lang].action}
-    </button>
-    </Link>
-  </div>
+<section className="min-h-fit h-screen justify-center w-[95%] mt-16 m-auto py-16 px-4 flex flex-col items-center space-y-8">
+        <div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8 z-10">
+          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start space-y-4">
+          
+              <div className="flex flex-col items-center md:items-start text-white">
+              <h1 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+              {DesignLocale[lang].title}
+                <div className="bg-yellow-400 h-1 mt-2"></div>
+              </h1>
+              <span className="text-[#EEBA2B] text-lg md:text-xl text-center mt-4 md:text-left">
+              {DesignLocale[lang].subtitle}
+              </span>
+            </div>
+            <p className="text-sm md:text-lg text-justify md:text-left leading-relaxed text-white">
+            {DesignLocale[lang].description}
+            </p>
+          </div>
 
-  <div className="hidden items-center justify-center laptop:flex w-full laptop:w-1/2 mt-8 md:mt-0">
-    <img
-      src="/serv.png"
-      alt="Web Marketing Strategy"
-      className="object-cover rounded-lg"
-    />
-  </div>
-</section>
+          <div className="w-full md:w-1/2 flex items-center justify-center">
+            <img
+              src="/serv.png"
+              alt="Advertising Design"
+              className="object-contain rounded-lg max-w-full h-auto shadow-md"
+            />
+          </div>
+        </div>
 
+        <div className="w-full flex justify-center px-10 z-10">
+          <button
+            onClick={handleNavigate}
+            className="bg-[#EEBA2B] px-6 py-3 rounded-lg border border-[#EEBA2B] text-lg font-semibold hover:bg-yellow-400 hover:text-black transition-all">
+            {DesignLocale[lang].action}
+          </button>
+        </div>
+      </section>
+      
 
-      <section className="graphic-design-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 gap-24 text-white rounded-lg mb-12 flex flex-col md:flex-row z-10">
-        <div className="yellow-lines-container  hidden laptop:flex md:w-1/2 h-full">
+      <section className="graphic-design-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 gap-24 text-white rounded-lg mb-12 flex flex-col-reverse md:flex-row z-10">
+        <div className="yellow-lines-container laptop:flex md:w-1/2 h-full">
          
           <img src="/graphic-skills.jpg" alt="" className='w-[95%] h-[90%] rounded-md' />
         </div>
         <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-[#EEBA2B] mb-6">{DesignLocale[lang].skillsTitle}</h2>
+          <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">{DesignLocale[lang].skillsTitle}</h2>
           <ul className="space-y-4 text-lg p-4 h-full flex flex-col justify-between">
-            <li><strong className='text-2xl' > {DesignLocale[lang].skill1} </strong> {DesignLocale[lang].skilldesc1}</li>
-            <li><strong className='text-2xl' > {DesignLocale[lang].skill2} </strong> {DesignLocale[lang].skilldesc2}</li>
-            <li><strong className='text-2xl' > {DesignLocale[lang].skill3} </strong> {DesignLocale[lang].skilldesc3}</li>
-            <li><strong className='text-2xl' > {DesignLocale[lang].skill4} </strong> {DesignLocale[lang].skilldesc4}</li>
-            <li><strong className='text-2xl' > {DesignLocale[lang].skill5} </strong> {DesignLocale[lang].skilldesc5}</li>
+            <li><strong className='text-md md:text-lg laptop:text-xl' > {DesignLocale[lang].skill1} </strong> {DesignLocale[lang].skilldesc1}</li>
+            <li><strong className='text-md md:text-lg laptop:text-xl' > {DesignLocale[lang].skill2} </strong> {DesignLocale[lang].skilldesc2}</li>
+            <li><strong className='text-md md:text-lg laptop:text-xl' > {DesignLocale[lang].skill3} </strong> {DesignLocale[lang].skilldesc3}</li>
+            <li><strong className='text-md md:text-lg laptop:text-xl' > {DesignLocale[lang].skill4} </strong> {DesignLocale[lang].skilldesc4}</li>
+            <li><strong className='text-md md:text-lg laptop:text-xl' > {DesignLocale[lang].skill5} </strong> {DesignLocale[lang].skilldesc5}</li>
           </ul>
         </div>
       </section>
 
       <section className="why-choose-us-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
-        <h2 className="text-4xl font-bold text-[#EEBA2B] mb-4"> {DesignLocale[lang].whyTitle} </h2>
+        <h2 className="text-2xl font-bold text-[#EEBA2B] mb-4"> {DesignLocale[lang].whyTitle} </h2>
 
         <div className="flex flex-col md:flex-row w-full">
-  <div className="w-full laptop:w-1/2 laptop:flex  mb-8 md:mb-0 hidden">
+  <div className="w-full laptop:w-1/2 laptop:flex mb-8 md:mb-0 ">
     <img
       src={why}
       alt="Creative workspace"
-      className="w-[90%] items-start justify-start h-[90%] object-cover rounded-lg hidden md:block"
+      className="w-[90%] items-start justify-start h-[90%] object-cover rounded-lg md:block"
     />
   </div>
-  <div className="w-full laptop:w-1/2 flex flex-col justify-center text-xl space-y-4 p-6 md:p-8  md:h-full">
-    <p className="italic mt-12">
+  <div className="w-full laptop:w-1/2 flex flex-col justify-center space-y-4 py-6 md:p-8  md:h-full">
+    <p className="italic mt-12 text-md md:text-lg">
     "{DesignLocale[lang].whyIntro}"    </p>
-    <ul className="list-inside space-y-8">
+    <ul className="list-inside space-y-8 text-md md:text-lg laptop:text-xl ">
       <li>{DesignLocale[lang].why1} </li>
       <li>{DesignLocale[lang].why2} </li>
       <li>{DesignLocale[lang].why3} </li>
@@ -306,36 +313,33 @@ const DesignGraphique = () => {
 </div>
 
       </section>
+      
 <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
-  <h2 className="text-4xl font-bold text-[#EEBA2B] text-center mb-8"> {DesignLocale[lang].whoTitle} </h2>
+  <h2 className="text-2xl font-bold text-[#EEBA2B] text-center mb-8"> {DesignLocale[lang].whoTitle} </h2>
   
-  <p className="text-lg text-center mb-8">
+  <p className="text-md md:text-lg laptop:text-xl text-center mb-8">
     {DesignLocale[lang].whoIntro}
   </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
-    {/* Business */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
       <h3 className="text-xl font-semibold mb-2"> {DesignLocale[lang].who1} </h3>
       <p className="md:w-[70%]">{DesignLocale[lang].whodesc1}.</p>
     </div>
 
-    {/* Content Creators */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/content.webp" alt="Content Creators Icon" className="w-36 h-24 mb-4 rounded-md"/>
       <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who2}</h3>
       <p className="md:w-[70%]" >{DesignLocale[lang].whodesc2}</p>
     </div>
 
-    {/* Individuals */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/individual.png" alt="Individuals Icon" className="w-20 h-36 mb-4"/>
       <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who3}</h3>
       <p className="md:w-[70%]">{DesignLocale[lang].whodesc3}</p>
     </div>
 
-    {/* Associations */}
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img src="/associations.png" alt="Associations Icon" className="w-40 h-36 mb-4"/>
       <h3 className="text-xl font-semibold mb-2">{DesignLocale[lang].who4}</h3>
@@ -348,10 +352,9 @@ const DesignGraphique = () => {
 
 
 <section className="design-process-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg  text-white shadow-lg relative z-10">
-  <h2 className="text-4xl font-bold text-center mb-12 text-[#EEBA2B]"> {DesignLocale[lang].processTitle} </h2>
+  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]"> {DesignLocale[lang].processTitle} </h2>
   
   <div className="relative flex flex-col laptop:flex-row items-center space-y-16">
-    {/* Step 1 - Left */}
     <div className="flex items-start space-x-6 lg:space-x-12 lg:flex-row flex-col lg:items-center">
       <div className="lg:order-2 order-1">
         <img src="/consultancy.png" alt="Consultation Icon" className="w-36 h-36 mx-auto lg:mx-0 rounded-full shadow-lg mb-4 lg:mb-0" />
@@ -411,7 +414,7 @@ const DesignGraphique = () => {
 </section>
 
 <section className="portfolio-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
-  <h2 className="text-4xl font-bold text-[#EEBA2B] mb-8">{DesignLocale[lang].portifolioTitle}</h2>
+  <h2 className="text-2xl font-bold text-[#EEBA2B] mb-8">{DesignLocale[lang].portifolioTitle}</h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-6">
     <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -471,14 +474,14 @@ const DesignGraphique = () => {
 <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
       
       {/* Encouragement Text */}
-      <h2 className="text-3xl font-semibold mb-4">{DesignLocale[lang].ctaTitle}</h2>
+      <h2 className="text-2xl font-semibold mb-4">{DesignLocale[lang].ctaTitle}</h2>
       <p className="text-lg mb-8 px-6 max-w-2xl mx-auto">
       {DesignLocale[lang].ctaDescription}
       </p>
       
       <Link to="/start-project">
       <button
-        className="main-cta-btn bg-[#EEBA2B] text-black font-bold py-4 px-8 rounded-lg text-2xl shadow-lg transform transition-transform duration-300 hover:scale-105"
+        className="main-cta-btn bg-[#EEBA2B] text-black font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
       >
         {DesignLocale[lang].ctaAction}
       </button>
@@ -487,15 +490,12 @@ const DesignGraphique = () => {
 
 
     <section className="visual-elements w-full  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex flex-col items-center z-10">
-      {/* Title */}
-      <h2 className="text-4xl font-semibold text-center text-[#1e1e2f] mb-12">
+      <h2 className="text-2xl font-semibold text-center text-[#EEBA2B]  mb-12">
       {DesignLocale[lang].expTitle}
       </h2>
       
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
         
-        {/* Skill Icon with Description */}
         <div className="skill-item text-center">
           <img src="/logodesign.png" alt="Logo Design" className="w-16 h-16 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">{DesignLocale[lang].exp1}</h3>
@@ -528,7 +528,6 @@ const DesignGraphique = () => {
         
       </div>
 
-      {/* Social Sharing */}
       <div className="social-sharing flex space-x-4 mt-8">
         <button className="text-black hover:text-[#EEBA2B]">
          <FaFacebook className="text-2xl" />

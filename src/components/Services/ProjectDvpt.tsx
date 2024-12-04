@@ -270,7 +270,7 @@ const ProjectDevelopment = () => {
       <section className="min-h-fit w-[95%] mt-16 md:mt-auto m-auto h-screen py-16 md:px-2 flex flex-col md:flex-row items-center justify-between z-10">
   <div className="w-full laptop:w-1/2 space-y-6 text-white flex flex-col items-center md:items-start md:justify-between px-4 md:px-8 py-5">
     <div className="flex items-center mb-4">
-      <h1 className="text-4xl font-bold text-start md:text-left">
+      <h1 className="text-4xl font-bold text-justify md:text-left">
       Project Development <br />
         <span className="text-[#EEBA2B] text-2xl"> Tailored advice and strategies to guide you from concept to completion </span>
       </h1>
