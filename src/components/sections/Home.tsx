@@ -168,7 +168,7 @@ const handleStartProject = () => {
         animation: "slideAnimation 0.9s ease-in-out",
         animationName: "slideAnimation",
       }}>
-      <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5  text-red-700 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
+      <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
         <img
           src={logopoeta1}
           alt="logo"

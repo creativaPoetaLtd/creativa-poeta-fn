@@ -233,7 +233,7 @@ const JobPage = () => {
     };
 
     return (
-        <div className="job-page grid grid-cols-1 md:grid-cols-3 gap-6 h-screen mt-24 p-6 bg-gradient-to-br from-gray-100 to-gray-300">
+        <div className="job-page grid grid-cols-1 md:grid-cols-3 gap-6 h-screen mt-24 p-2 md:p-6  bg-gradient-to-br from-gray-100 to-gray-300">
 
             {jobData.length === 0 ? (
 <div className="col-span-3 flex flex-col items-center justify-center text-center rounded-lg p-10">
@@ -267,7 +267,7 @@ const JobPage = () => {
                         </div>
                     </div>
 
-                    <div className="col-span-2 bg-white rounded-lg shadow-lg p-6 overflow-y-auto">
+                    <div className="col-span-2 bg-white rounded-lg shadow-lg p-2 overflow-y-auto">
                         {selectedJob ? (
                             <JobDetails job={selectedJob} />
                         ) : (

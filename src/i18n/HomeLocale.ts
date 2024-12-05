@@ -5,7 +5,7 @@ const HomeLocale: any = {
         title2: 'turn your ideas into reality',
         decription2: "Tailored solutions that captivate your audience and set you apart from the competition",
         action1: "START A PROJECT",
-        action2: "About us",
+        action2: "ABOUT US",
         scroll:"SCROLL DOWN",
     },
     fr: {
@@ -14,7 +14,7 @@ const HomeLocale: any = {
         title2: 'transformez vos idées en réalité',
         description2: "Des solutions sur mesure qui captivent votre public et vous démarquent de la concurrence",
         action1: "DÉMARRER UN PROJET",
-        action2: "A propos",
+        action2: "A PROPOS DE NOUS",
         scroll:"FAIRE DÉFILER"
     },
     kiny: {

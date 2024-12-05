@@ -3,8 +3,8 @@ const Projects = () => {
     <section
       id="projects"
       className="projects desktop:flex flex-col h-screen max-h-fit  w-full bg-red-600">
-      <div className="w-full min-w-screen p-3 backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
-        <h1 className="laptop:text-5xl desktop:text-5xl tablet:text-5xl text-2xl font-bold mx-auto text-[#EEBA2B]">
+      <div className="w-full min-w-screen backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
+        <h1 className="laptop:text-4xl desktop:text-4xl tablet:text-3xl text-2xl font-bold mx-auto text-[#EEBA2B]">
           <b className="text-black">NOS</b>
           <br />
           DERNIERS PROJECTS
@@ -118,7 +118,7 @@ const Projects = () => {
         </div>
       </div>
 
-      <div className="laptop:h-[9%] tablet:h-[7%] phone:h-[6%] h-[5%] laptop:w-[5.57%] tablet:w-[3%] w-[4%] absolute laptop:left-0 left-0 top-0 border-r-2 border-white"></div>
+      {/* <dc iv className="laptop:h-[9%] tablet:h-[7%] phone:h-[6%] h-[5%] laptop:w-[5.57%] tablet:w-[3%] w-[4%] absolute laptop:left-0 left-0 top-0 border-r-2 border-white"></div> */}
     </section>
   );
 };

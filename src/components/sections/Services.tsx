@@ -10,8 +10,8 @@ const Services = () => {
       id="services"
       className=" mainn justify-center  h-fit min-h-screen mt-0 flex flex-col bg-slate-800 items-center relative">
       <div className="pb-8 w-full flex felx-col flex-col space-y-7">
-  <div className="w-full py-6 text-center bg-gradient-to-r from-white to-transparent">
-  <h1 className="text-4xl laptop:text-5xl font-bold text-[#FFE533] ">
+  <div className="w-full text-center bg-gradient-to-r from-white to-transparent">
+  <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-[#FFE533] ">
     <span className="text-black">{ServiceLocale[lang].title1}</span>
     <br />
     {ServiceLocale[lang].title2}
@@ -71,12 +71,12 @@ const Services = () => {
             </Link>
           ))}
         </div>
-        <div
+        {/* <div
           className="watermark absolute laptop:h-fit desktop:h-fit w-full tablet:w-[20rem] h-fit laptop:w-[14
-        rem]  rounded-sm desktop:w-[14rem] bg-blue-900  font-extrabold opacity-75 border border-blue-900 laptop:right-[.5rem] tablet:right-[1rem] desktop:right-[.5rem] laptop:top-[35rem]  desktop:top-[36rem] tablet:top-[58rem]  w-[3rem] h-[20rem]  phone:top-[69rem] phone:w-[72%] phone:right-2 xs:top-[75rem] xs:w-[14.5rem] sumsung:top-[66.4rem]  iphone:top-[66.5rem] xs:right-1 px-1">
+        rem]  rounded-sm desktop:w-[14rem] bg-blue-900  font-extrabold opacity-75 border border-blue-900 laptop:right-[.5rem] tablet:right-[1rem] desktop:right-[.5rem] laptop:top-[35rem]  desktop:top-[36rem] tablet:top-[58rem]  w-[3rem] h-[20rem]  phone:top-[69rem] phone:w-[72%] phone:right-2 xs:top-[75rem] xs:w-[14.5rem] sumsung:top-[66.4rem]  iphone:top-[66.5rem] xs:right-1 px-1"> */}
           {/* <p className="text-[#fa1138]  text-xs">SPECIALEMENT POUR YOUTUBEUR, TIKTOK, INSTAGRAM, ....</p> */}
           {/* <p className="text-[#fa1138]  text-xs">ETU/OU CREATEUR DE CONTENU</p> */}
-        </div>
+        {/* </div> */}
       </div>
       {/* <div className="laptop:h-[4%] :[h-4%] tablet:h-[3%] h-[2%] laptop:w-[10%] t w-[35%] absolute laptop:right-1/2 right-1/2 top-0 border-r-2 border-[#FFE533]"></div> */}
       {/* <div className="very-buttom laptdesktopop:h-[3%] desktop:h-[3%] tablet:h-[3%] h-[2%] laptop:block desktop:block laptop:w-[5%] w-[2%] absolute laptop:left-2 left-2 bottom-0 border-r-2 border-[#FFE533]"></div> */}

@@ -207,15 +207,15 @@ body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.about {
+/* .about {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .about {
     background-image: url('./assets/phone123.png');
     background-repeat: no-repeat;
@@ -224,7 +224,7 @@ body{
     background-attachment: fixed;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-}
+} */
   
 
 .faq {

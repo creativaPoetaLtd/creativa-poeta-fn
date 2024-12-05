@@ -52,12 +52,17 @@ const About = () => {
     onTouchMove={handleTouchMove}
     onTouchEnd={handleTouchEnd}
     style={{
-      backgroundImage: `url(${currentBackground.image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
+      backgroundImage: currentBackground.image
+        ? `url(${currentBackground.image})`
+        : "none",
       backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundAttachment: "fixed",
+      transition: "background 0.9s ease-in-out",
+      animation: "slideAnimation 0.9s ease-in-out",
+      animationName: "slideAnimation",
     }}
-    className="about h-fit min-h-screen flex flex-col justify-center items-center relative"
+    className="about h-fit min-h-screen border-t-4  border-white flex flex-col justify-center items-center relative"
   >
       <div className="main_about h-fit  laptop:py-0 desktop:py-0 tablet:py-0 phone:py-0 pb-12 min-h-screen backdrop-blur-xs flex flex-col justify-center items-center text-center relative" style={{ backgroundColor: 'rgba(245, 233, 66,0.4)' }}>
         <div className="laptop:mt-[0%]  laptop:py-0 desktop:py-0 phone:py-0 tablet:py-0 iphone:py-0 ipod:py-0 xs:py-20 tablet:mt-[0%] laptop:space-y-10 space-y-5 mt-[0rem]">
@@ -65,7 +70,7 @@ const About = () => {
             <div className="flex justify-evenly flex-col laptop:space-y-5 space-x-3">
             
               <div className="flex justify-evenly">
-                <h1 className="laptop:text-5xl tablet:text-3xl text-2xl font-bold text-slate-800 mx-0 animate-fade-in animate-bounce underline-offset-6">{AboutLocale[lang].title1}</h1>
+                <h1 className="laptop:text-4xl tablet:text-3xl text-2xl font-bold text-slate-800 mx-0 animate-fade-in animate-bounce underline-offset-6">{AboutLocale[lang].title1}</h1>
               </div>
             </div>
             {/* <div className="flex justify-evenly mx-auto h-px bg-white animate-bounce w-full">
