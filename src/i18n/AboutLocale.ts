@@ -7,7 +7,7 @@ const AboutLocale: any = {
     action: "CONTACT OUR TEAM",
   },
   fr: {
-    title1: "QUI",
+    title1: "QUI NOUS SOMMES",
     title2: "NOUS SOMMES",
     decription:
       "Passionnés par l'expression artistique et la création inspirante, nous sommes une entreprise regroupant des designers, rédacteurs et développeurs web expérimentés qui vous offrent des solutions créatives uniques. Notre objectif principal est de comprendre vos besoins afin de créer des résultats exceptionnels. Grâce à notre approche axée sur la créativité et l'excellence, nous captivons l'attention et laissons une impression durable. N'hésitez pas à nous contacter dès aujourd'hui pour discuter de vos projets et découvrir comment nous pouvons vous aider à atteindre vos objectifs créatifs",
