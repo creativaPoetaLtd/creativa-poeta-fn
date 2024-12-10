@@ -8,19 +8,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import TermsPage from './pages/TermsPage.tsx';
 import FaqPage from './pages/FaqPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
-import DesignPage from './pages/Services/DesignPage.tsx';
+import DesignPage from './pages/Services/WebAppPage.tsx';
 import ContentWrittings from './pages/Services/ContentWrittingPage.tsx';
 import DigitalMarketings from './pages/Services/DigitalMarketing.tsx';
 import ProjectDevelopment from './pages/Services/ProjectDvpt.tsx';
 import VideoCreationsPage from './pages/Services/VideoCreationPage.tsx';
 import AdvertisingDesignPage from './pages/Services/AdvertisingDesignPage.tsx';
-import WebsitePage from './pages/Services/WebsitePage.tsx';
 import DigitalSupportPage from './pages/Services/DigitalSupportPage.tsx';
 import ScrollToTop from './ScrollToTop.tsx';
 import ProjectFormPage from './pages/ProjectFormPage.tsx';
 import JobsPages from './pages/JobsPages.tsx';
 import LeaveInfoPage from './pages/LeaveInfoPage.tsx';
 import ThankYouPage from './pages/ThankYouPage.tsx';
+import WebPage from './pages/Services/WebAppPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,7 +37,7 @@ ReactDOM.render(
         <Route path="/services/project-development" element={<ProjectDevelopment />} />
         <Route path="/services/video-creation" element={<VideoCreationsPage />} />
         <Route path="/services/advertising-design" element={<AdvertisingDesignPage />} />
-        <Route path="/services/website-creation" element={<WebsitePage />} />
+        <Route path="/services/web-app" element={<WebPage />} />
         <Route path="/services/digital-support" element={<DigitalSupportPage />} />
         <Route path="/career" element={<JobsPages />} />
         <Route path="/start-project" element={<ProjectFormPage />} />
