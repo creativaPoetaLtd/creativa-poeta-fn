@@ -10,20 +10,27 @@ const Services = () => {
       id="services"
       className=" mainn justify-center  h-fit min-h-screen mt-0 flex flex-col bg-slate-800 items-center relative">
       <div className="pb-8 w-full flex felx-col flex-col space-y-7">
-  <div className="w-full text-center bg-gradient-to-r from-white to-transparent">
+  {/* <div className="w-full text-center bg-gradient-to-r from-white to-transparent">
   <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-[#FFE533] ">
     <span className="text-black">{ServiceLocale[lang].title1}</span>
     <br />
     {ServiceLocale[lang].title2}
   </h1>
-</div>
+</div> */}
+<div className="w-full min-w-screen backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
+        <h1 className="laptop:text-4xl desktop:text-4xl tablet:text-3xl text-2xl font-bold mx-auto text-justify text-[#EEBA2B]">
+          <b className="text-black">{ServiceLocale[lang].title1}</b>
+          <br />
+          {ServiceLocale[lang].title2}
+        </h1>
+      </div>
 
         <div className="w-full  grid laptop:grid-cols-2  laptop:gap-20 desktop:gap-20 tablet:gap-12 gap-10 desktop:grid-cols-2 tablet:grid-cols-1 grid-cols-1 laptop:p-28 desktop:p-28 tablet:p-8 p-4 ">
           {blogData.map((blog) => (
             <Link
               to={
                 blog.id === 1
-                  ? "/services/design"
+                  ? "/services/web-app"
                   : blog.id === 2
                   ? "/services/content-writing"
                   : blog.id == 5
@@ -56,7 +63,7 @@ const Services = () => {
 
                   <div className="flex flex-col icon w-fit p-3 laptop:h-[7rem] desktop:h-[7rem] tablet:h-[7rem] h-fit space-y-2 self-end">
                     <div className="flex w-full text-xl desktop:text-3xl tablet:text-xl laptop:text-3xl text-white flex-col justify-end self-end content">
-                      <p className="">{blog.h1}</p>
+                      <p className="text-xl">{blog.h1}</p>
                       <p className="font-bold">{blog.h2}</p>
                     </div>
                     <div className="flex w-full bg-yellow-400 h-[.5rem] content"></div>
