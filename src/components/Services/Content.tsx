@@ -184,46 +184,19 @@ export function RelatedServices() {
 
 const faqs = [
   {
-    "question": "What types of websites do you develop?",
-    "answer": "We specialize in developing various types of websites, including e-commerce platforms, corporate websites, personal blogs, portfolio sites, and custom web applications tailored to your business needs."
-  },
+    question: "How long does it take to write a blog post?",
+    answer: "The time it takes to write a blog post depends on the length and complexity of the content. On average, we can deliver a 500-word blog post within 2-3 days. Longer posts may take up to a week to complete.",},
   {
-    "question": "What technologies do you use for web development?",
-    "answer": "Our team uses modern technologies such as React, Angular, Vue.js, Node.js, Django, and Laravel. For design, we leverage tools like Tailwind CSS, Bootstrap, and Material UI, ensuring fast, responsive, and user-friendly websites."
-  },
+    question: "Do you offer proofreading services only?",
+    answer: "No, we offer a range of content writing services, including blog writing, web content creation, professional document writing, and more. Our team can assist with all your writing needs, from start to finish.",},
   {
-    "question": "Do you offer mobile app development services?",
-    "answer": "Yes, we provide mobile app development services for both iOS and Android platforms. We use tools like React Native and Flutter for cross-platform apps, and native development for highly customized experiences."
-  },
+    question: "Is it possible to request revisions on the written text?",
+    answer:
+      "Yes, we offer revisions on all written content to ensure it meets your expectations. We value your feedback and will work with you to make any necessary changes to the text.",},
   {
-    "question": "Can you integrate third-party services into the website or app?",
-    "answer": "Absolutely! We can integrate third-party services such as payment gateways (Stripe, PayPal), social media platforms, CRM systems, analytics tools, and more to enhance the functionality of your website or app."
-  },
-  {
-    "question": "How do you ensure the security of web and app projects?",
-    "answer": "We prioritize security by implementing HTTPS, data encryption, regular vulnerability scans, and secure coding practices. We also ensure compliance with industry standards like GDPR for data protection."
-  },
-  {
-    "question": "Do you provide maintenance and support after project completion?",
-    "answer": "Yes, we offer post-launch maintenance and support services, including bug fixes, updates, performance optimization, and feature enhancements to ensure your website or app stays up-to-date."
-  },
-  {
-    "question": "How long does it take to develop a website or an app?",
-    "answer": "The timeline depends on the complexity of the project. Simple websites can take 2-4 weeks, while more complex web applications or mobile apps may take 8-16 weeks or longer, depending on your requirements."
-  },
-  {
-    "question": "Can you help with SEO and performance optimization?",
-    "answer": "Yes, we offer SEO services to improve your website's visibility on search engines, and we optimize performance by improving loading speeds, implementing caching strategies, and using efficient coding practices."
-  },
-  {
-    "question": "Do you provide custom designs for websites and apps?",
-    "answer": "Absolutely! Our design team creates custom, user-centric designs tailored to your brand identity, ensuring your website or app stands out and provides a seamless user experience."
-  },
-  {
-    "question": "What is the cost of developing a website or app?",
-    "answer": "The cost varies based on project requirements, complexity, and features. Contact us with your project details for a tailored quote."
-  }
-]
+    question: "In what formats do you provide the finalized text?",
+    answer: "We can provide the finalized text in various formats, including Word documents, PDFs, and Google Docs. Let us know your preferred format, and we will deliver the content accordingly.",},
+];
 
 
 export function FAQSection() {
@@ -265,7 +238,7 @@ export function FAQSection() {
   );
 }
 
-const DesignGraphique = () => {
+const ContentWritting = () => {
   return (
     <div
       className="relative min-h-screen bg-white flex flex-col bg-transparent justify-center items-center "
@@ -284,7 +257,7 @@ const DesignGraphique = () => {
       <div className="absolute inset-0 bg-black bg-opacity-70 z-0"></div>
 
       <Link to="/">
-        <div className="logo top-5 text-white text-xl absolute left-4 ml-0 p-1 md:top-3 md:left-8 md:ml-11 md:text-4xl">
+        <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl">
           <img
             src={logo}
             alt="logo"
@@ -293,25 +266,24 @@ const DesignGraphique = () => {
         </div>
       </Link>
 
-  <section className="min-h-fit h-screen justify-center w-[95%] mt-24 m-auto  px-4 flex flex-col items-center space-y-8 relative">
+  <section className="min-h-fit h-screen justify-center w-[95%] mt-28 md:mt-0 m-auto  px-4 flex flex-col items-center space-y-8 relative">
   <div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8 z-10">
     <div className="w-full md:w-1/2 flex flex-col items-start space-y-4 px-2 md:px-0">
       <div className="flex flex-col space-y-2 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-3xl md:text-4xl font-bold">
-          Web & app development
+          <h1 className="text-2xl md:text-4xl font-bold">
+          Content writing & creation
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <span className="text-[#EEBA2B] text-justify text-lg md:text-xl italic">
-        Innovative digital solutions, tailored for your needs.
+        Words and creativity that make an impact
         </span>
       </div>
 
       <div className="flex flex-col space-y-4 w-full">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        In the ever-evolving digital landscape, a robust and engaging online presence is essential. At Creativa Poeta, we transform your ideas into digital realities by crafting modern websites, powerful applications, and custom software solutions designed to elevate your business.
-        </p>
+        Effective communication is at the heart of every successful brand. At Creativa Poeta, we craft compelling content that informs, inspires, and persuades. From polished professional writing to engaging creative pieces, we ensure your message connects with your audience.        </p>
 
         <button
           onClick={handleNavigate}
@@ -323,19 +295,91 @@ const DesignGraphique = () => {
 
     <div className="w-full md:w-1/2 flex items-center justify-center">
       <img
-        src="/serv.png"
+        src="/content.webp"
         alt="Advertising Design"
-        className="object-contain rounded-lg max-w-full h-auto shadow-md"
+        className="object-contain rounded-lg max-w-[80%] h-auto shadow-md"
       />
     </div>
   </div>
 </section>
 
+<section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
+    
+    <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
+    Services offered
+    </h2>
+
+    <p className="text-md md:text-lg text-center mb-8">
+    Our Content Writing & Creation services include but not limited to:
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-black">
+      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+      <img
+          src="/webdev.jpeg"
+          alt="Content Creators Icon"
+          className="w-36 h-24 mb-4 rounded-md"
+        />        <h3 className="text-xl font-semibold mb-2">
+       Professional writing
+        </h3>
+        <p className="md:w-[70%] text-center">Copywriting for ads and marketing materials, Technical documentation, reports, and manuals, and Ghostwriting services for books, speeches, or articles.
+       </p>
+      </div>
+
+      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+        <img
+          src="/app.jpeg"
+          alt="Content Creators Icon"
+          className="w-36 h-24 mb-4 rounded-md"
+        />
+        <h3 className="text-xl font-semibold mb-2">
+        Creative writing
+        </h3>
+        <p className="md:w-[70%] text-center">Blog posts, storytelling, poetry, and creative articles, Social media captions and creative campaigns, and Scripts for videos, podcasts, and presentations
+</p>
+      </div>
+
+      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+      <img
+          src="/software.jpeg"
+          alt="Content Creators Icon"
+          className="w-36 h-24 mb-4 rounded-md"
+        />
+        <h3 className="text-xl font-semibold mb-2">
+        Editing and proofreading
+        </h3>
+        <p className="md:w-[70%] text-center">Comprehensive review and refinement of documents for clarity, grammar, and structure.</p>
+      </div>
+
+      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+      <img
+          src="/UI.jpeg"
+          alt="Content Creators Icon"
+          className="w-36 h-24 mb-4 rounded-md"
+        />
+        <h3 className="text-xl font-semibold mb-2">
+      SEO content writing
+        </h3>
+        <p className="md:w-[70%] text-center">Crafting keyword-optimized articles and web pages to improve visibility and drive organic traffic.</p>
+      </div>
+      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+      <img
+          src="/UI.jpeg"
+          alt="Content Creators Icon"
+          className="w-36 h-24 mb-4 rounded-md"
+        />
+        <h3 className="text-xl font-semibold mb-2">
+        Resume and cover letter services
+        </h3>
+        <p className="md:w-[70%] text-center">	Writing tailored CVs, cover letters, and LinkedIn profiles to highlight skills and experience effectively.</p>
+      </div>
+    </div>
+  </section>
 
 
-<section className="relative w-[92%] min-h-screen flex items-center justify-center bg-white rounded-md">
+<section className="relative w-[89%] md:w-[93%] min-h-screen flex items-center justify-center bg-white rounded-md">
   {/* Container */}
-  <div className="relative w-[100%] max-w-4xl p-8 flex flex-col md:flex-row items-center gap-12">
+  <div className="relative md:w-[70%] p-8 flex flex-col md:flex-row items-center gap-12">
     {/* Left side - Main circle */}
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
@@ -351,27 +395,27 @@ const DesignGraphique = () => {
       {[
         {
           number: "1",
-          text: "Expertise in major social media platforms and their algorithms",
+          text: "	Expertise in a variety of writing styles (formal, creative, technical).",
           bgColor: "bg-[#E265FF]",
         },
         {
           number: "2",
-          text: "Proficiency in SEO tools and techniques for optimized content",
+          text: "In-depth knowledge of SEO practices to optimize content for search engines.",
           bgColor: "bg-[#8B3DFF]",
         },
         {
           number: "3",
-          text: "Skills in crafting and managing ad campaigns for maximum ROI",
+          text: "Advanced editing and proofreading skills to ensure precision and clarity.",
           bgColor: "bg-[#3DB9FF]",
         },
         {
           number: "4",
-          text: "Knowledge of CMS platforms and e-commerce tools",
+          text: "Creativity in storytelling to make brands relatable and memorable.",
           bgColor: "bg-[#FFA53D]",
         },
         {
           number: "5",
-          text: "Ability to analyze and adapt strategies based on performance metrics",
+          text: "	Familiarity with tools like Grammarly, Hemingway, and Surfer SEO.",
           bgColor: "bg-[#76C56F]",
         },
       ].map(({ number, text, bgColor }, index) => (
@@ -393,218 +437,173 @@ const DesignGraphique = () => {
 </section>
 
       
-      <section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse md:flex-row z-10">
-        <div className="yellow-lines-container laptop:flex md:w-1/2 h-full">
-          <img
-            src="/graphic-skills.jpg"
-            alt=""
-            className=" w-[100%] md:w-[70%] md:h-[22rem] rounded-md"
-          />
-        </div>
-        <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-          <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-          Why choose Creativa Poeta?
-          </h2>
-          <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
-            <li>
-              <strong className="text-md md:text-lg">
-                Tailored solutions
-                              </strong>
-               Every project is uniquely designed to meet your specific business needs
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
-                Experienced team
-              </strong>
-              Our developers and designers are skilled in the latest technologies and trends.
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
-                
-                	Comprehensive support
-              </strong>
-              From ideation to deployment, we provide full support throughout the development lifecycle.
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
-                
-                Customer-centric approach
-              </strong>
-              Your satisfaction is our priority, and we ensure your vision becomes a reality.
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
-                
-                Scalable and future-ready
-              </strong>
-              We build solutions that grow with your business and adapt to future needs.
-            </li>
-          </ul>
-        </div>
-      </section>
+<section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse md:flex-row z-10">
+  <div className="yellow-lines-container laptop:flex md:w-1/2 h-full">
+    <img
+      src="/graphic-skills.jpg"
+      alt=""
+      className=" w-[100%] md:w-[70%] md:h-[22rem] rounded-md"
+    />
+  </div>
+  <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
+    <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
+      Why choose Creativa Poeta?
+    </h2>
+    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
+      <li>
+        <strong className="text-md md:text-lg">Tailored Solutions</strong>
+        Every piece of content is uniquely crafted to resonate with your target audience and align with your brand's goals. We ensure your voice stands out in a crowded digital space.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">Experienced Team</strong>
+        Our team of skilled writers and creators bring years of experience across various industries, leveraging the latest trends and techniques to deliver high-quality content.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">Creative Excellence</strong>
+        At Creativa Poeta, creativity is at the heart of what we do. From compelling copywriting to engaging visual content, we turn ideas into impactful stories.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">Comprehensive Support</strong>
+        From brainstorming to final delivery, we partner with you at every stage of the content creation process to ensure your vision is fully realized.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">Customer-Centric Approach</strong>
+        Your satisfaction drives us. We take the time to understand your unique requirements, ensuring the content we create speaks directly to your audience and reflects your brand values.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">SEO-Optimized Content</strong>
+        Our content is not only engaging but also strategically optimized for search engines to boost your online visibility and drive traffic to your platforms.
+      </li>
+      <li>
+        <strong className="text-md md:text-lg">Scalable and Future-Ready</strong>
+        We produce content that evolves with your brand, ensuring it remains relevant and effective as your business grows.
+      </li>
+    </ul>
+  </div>
+</section>
 
 
-      <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
-    
-        <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-          {" "}
-          Who are these services for?{" "}
-        </h2>
-
-        <p className="text-md md:text-lg text-center mb-8">
-        Our web & app development services cater to:
-        </p>
-
-        <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
-            <h3 className="text-xl font-semibold mb-2">
-              {" "}
-              Startups{" "}
-            </h3>
-            <p className="md:w-[70%] text-center">Launch your brand with a dynamic online presence.</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/content.webp"
-              alt="Content Creators Icon"
-              className="w-36 h-24 mb-4 rounded-md"
-            />
-            <h3 className="text-xl font-semibold mb-2">
-            Small to Medium Enterprises (SMEs)
-            </h3>
-            <p className="md:w-[70%] text-center">Upgrade your digital tools to enhance operations and customer engagement.</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/individual.png"
-              alt="Individuals Icon"
-              className="w-20 h-36 mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">
-            Enterprises
-            </h3>
-            <p className="md:w-[70%] text-center">Streamline processes with custom software and advanced applications.</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/associations.png"
-              alt="Associations Icon"
-              className="w-40 h-36 mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">
-            	Freelancers and Creatives 
-            </h3>
-            <p className="md:w-[70%] text-center">Showcase your work with an impressive portfolio site or application.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="web-development-process-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-white shadow-lg relative z-10">
-  <h2 className="text-2xl font-bold text-center mb-8 text-[#EEBA2B]">
-    Process Workflow
+<section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
+  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
+    Who are these services for?
   </h2>
 
-  <div className="relative flex flex-col laptop:flex-row items-center space-y-8 md:space-y-12">
-    {/* Step 1 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
-      <div>
-        <img
-          src="/consultancy.png"
-          alt="Consultation Icon"
-          className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-        />
-        <div className="text-center lg:text-left">
-          <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-            Consultation
-          </h3>
-          <p className="text-white text-sm md:text-md">
-            Understanding your requirements, vision, and goals.
-          </p>
-        </div>
-      </div>
-    </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
+  <p className="text-md md:text-lg text-center mb-8">
+    Our content writing and creation services are designed for:
+  </p>
 
-    {/* Step 2 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row-reverse lg:items-center">
-      <img
-        src="/research.png"
-        alt="Research Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-      />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Planning
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Developing a comprehensive strategy and timeline for your project.
-        </p>
-      </div>
+  <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
+    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
+      <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
+      <h3 className="text-xl font-semibold mb-2">
+        Startups
+      </h3>
+      <p className="md:w-[70%] text-center">Boost your brand with engaging blogs, social media content, and persuasive copywriting.</p>
     </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
 
-    {/* Step 3 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
+    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
-        src="/concept.jpg"
-        alt="Development Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
+        src="/content.webp"
+        alt="Content Creators Icon"
+        className="w-36 h-24 mb-4 rounded-md"
       />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Design
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Creating wireframes, mockups, and user-friendly interfaces.
-        </p>
-      </div>
+      <h3 className="text-xl font-semibold mb-2">
+        Small to Medium Enterprises (SMEs)
+      </h3>
+      <p className="md:w-[70%] text-center">Enhance your marketing strategy with tailored content that speaks directly to your audience.</p>
     </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
 
-    {/* Step 4 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row-reverse lg:items-center">
+    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
-        src="/revision.jpg"
-        alt="Revision Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
+        src="/individual.png"
+        alt="Individuals Icon"
+        className="w-24 h-24 mb-4 rounded-md"
       />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Development
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Building websites, applications, or software using cutting-edge technologies.
-        </p>
-      </div>
+      <h3 className="text-xl font-semibold mb-2">
+        Enterprises
+      </h3>
+      <p className="md:w-[70%] text-center">Drive results with professionally crafted content for campaigns, reports, and internal communications.</p>
     </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
 
-    {/* Step 5 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
+    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
-        src="/delivery.png"
-        alt="Delivery Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg bg-white mb-2"
+        src="/associations.png"
+        alt="Associations Icon"
+        className="w-32 h-24 mb-4 rounded-md"
       />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Testing
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Ensuring performance, security, and compatibility across devices.
-        </p>
-      </div>
+      <h3 className="text-xl font-semibold mb-2">
+        Freelancers and Creatives
+      </h3>
+      <p className="md:w-[70%] text-center">Create a standout portfolio or personal blog to showcase your skills and expertise.</p>
     </div>
   </div>
 </section>
+
+
+<section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
+  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
+    Process Workflow
+  </h2>
+  
+  <div className="flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0 md:space-x-4">
+    {/* Step 1 */}
+    <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+        1
+      </div>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Discovery</h3>
+      <p className="text-sm">
+        Analyzing your target audience, goals, and unique content needs.
+      </p>
+    </div>
+
+    {/* Step 2 */}
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+        2
+      </div>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Strategy</h3>
+      <p className="text-sm">
+        Crafting a content plan tailored to your objectives and audience.
+      </p>
+    </div>
+
+    {/* Step 3 */}
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+        3
+      </div>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Creation</h3>
+      <p className="text-sm">
+        Writing, designing, and curating content that aligns with your brand's voice.
+      </p>
+    </div>
+
+    {/* Step 4 */}
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+        4
+      </div>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Review & Feedback</h3>
+      <p className="text-sm">
+        Collaborating with you to refine and finalize the content for your approval.
+      </p>
+    </div>
+
+    {/* Step 5 */}
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+        5
+      </div>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Delivery & Optimization</h3>
+      <p className="text-sm">
+        Delivering polished content and offering insights for ongoing improvement.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
       <section className="portfolio-section hidden w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
         <h2 className="text-2xl font-bold text-[#EEBA2B] mb-8">
@@ -701,19 +700,20 @@ const DesignGraphique = () => {
       <RelatedServices />
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
-        <h2 className="text-xl text-justify font-semibold mb-4">
-        Ready to bring your digital vision to life? 
-        </h2>
-        <p className="text-md md:text-lg text-center mb-8 px-6 max-w-2xl mx-auto">
-        Contact us today and let’s build something extraordinary together.
-        </p>
+  <h2 className="text-xl font-semibold p-4 mb-4">
+    Ready to share your story with the world?
+  </h2>
+  <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
+    Reach out to us today, and let’s create compelling content that resonates with your audience.
+  </p>
 
-          <button
-            onClick={handleNavigate}  
-           className="main-cta-btn bg-[#EEBA2B] text-black font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-            Digitize your idea with us
-          </button>
-      </section>
+  <button
+    onClick={handleNavigate}
+    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+    Start your content journey with us
+  </button>
+</section>
+
 
       <section className="visual-elements w-[95%] hidden  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex-col items-center z-10">
         <h2 className="text-2xl font-semibold text-center text-[#EEBA2B]  mb-12">
@@ -838,4 +838,4 @@ const DesignGraphique = () => {
   );
 };
 
-export default DesignGraphique;
+export default ContentWritting;
