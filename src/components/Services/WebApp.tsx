@@ -284,7 +284,7 @@ const WebApp = () => {
       <div className="absolute inset-0 bg-black bg-opacity-70 z-0"></div>
 
       <Link to="/">
-        <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl">
+        <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl z-20">
           <img
             src={logo}
             alt="logo"
@@ -562,108 +562,69 @@ const WebApp = () => {
         </div>
       </section>
 
-      <section className="web-development-process-section w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-white shadow-lg relative z-10">
-  <h2 className="text-2xl font-bold text-center mb-8 text-[#EEBA2B]">
+      <section className="web-development-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
+  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
     Process Workflow
   </h2>
-
-  <div className="relative flex flex-col laptop:flex-row items-center space-y-8 md:space-y-12">
+  
+  <div className="flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0 md:space-x-4">
     {/* Step 1 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
-      <div>
-        <img
-          src="/consultancy.png"
-          alt="Consultation Icon"
-          className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-        />
-        <div className="text-center lg:text-left">
-          <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-            Consultation
-          </h3>
-          <p className="text-white text-sm md:text-md">
-            Understanding your requirements, vision, and goals.
-          </p>
-        </div>
+     
+      <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
+        1
       </div>
-    </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
-
-    {/* Step 2 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row-reverse lg:items-center">
-      <img
-        src="/research.png"
-        alt="Research Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-      />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Planning
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Developing a comprehensive strategy and timeline for your project.
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Consultation</h3>
+        <p className="text-sm">
+          Understanding your requirements, vision, and goals.
         </p>
       </div>
-    </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
-
-    {/* Step 3 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
-      <img
-        src="/concept.jpg"
-        alt="Development Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-      />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Design
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Creating wireframes, mockups, and user-friendly interfaces.
+    {/* Step 1 */}
+     
+      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
+        2
+      </div>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Planning</h3>
+        <p className="text-sm">
+        Developing a comprehensive strategy and timeline for your project.
         </p>
       </div>
-    </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
-
-    {/* Step 4 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row-reverse lg:items-center">
-      <img
-        src="/revision.jpg"
-        alt="Revision Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg mb-2"
-      />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Development
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Building websites, applications, or software using cutting-edge technologies.
-        </p>
+    {/* Step 1 */}
+     
+      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
+        3
       </div>
-    </div>
-    {/* Connector */}
-    <div className="laptop:w-48 laptop:h-1 w-1 h-12 bg-[#EEBA2B]"></div>
-
-    {/* Step 5 */}
-    <div className="flex items-start space-x-4 md:space-x-8 flex-col lg:flex-row lg:items-center">
-      <img
-        src="/delivery.png"
-        alt="Delivery Icon"
-        className="w-28 h-28 mx-auto lg:mx-0 rounded-full shadow-lg bg-white mb-2"
-      />
-      <div className="text-center lg:text-left">
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#EEBA2B]">
-          Testing
-        </h3>
-        <p className="text-white text-sm md:text-md">
-          Ensuring performance, security, and compatibility across devices.
-        </p>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Design</h3>
+        <p className="text-sm">
+         Creating wireframes, mockups, and user-friendly interfaces.        </p>
       </div>
-    </div>
+    {/* Step 1 */}
+     
+      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
+        4
+      </div>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Development</h3>
+        <p className="text-sm">
+         Building websites, applications, or software using cutting-edge technologies.        </p>
+      </div>
+    {/* Step 1 */}
+     
+      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
+        5
+      </div>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Testing</h3>
+        <p className="text-sm">
+         Ensuring performance, security, and compatibility across devices.        </p>
+      </div>
+
+
   </div>
 </section>
+
 
       <section className="portfolio-section hidden w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
         <h2 className="text-2xl font-bold text-[#EEBA2B] mb-8">
@@ -769,7 +730,7 @@ const WebApp = () => {
 
           <button
             onClick={handleNavigate}  
-           className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+           className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
             Digitize your idea with us
           </button>
       </section>

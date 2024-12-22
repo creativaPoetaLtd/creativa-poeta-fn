@@ -12,7 +12,7 @@ const ProjectForm = () => {
     const [step, setStep] = useState(1);
     const [showOptions, setShowOptions] = useState(false);
     const [showError, setShowError] = useState(false); // New state for validation
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -110,6 +110,7 @@ const navigate = useNavigate();
             }));
         }
     };
+    
     const handleSubmit = async (e: any) => {
         e.preventDefault();
     
@@ -127,9 +128,9 @@ const navigate = useNavigate();
     
         setShowError(false);  
     
-        const serviceID = "service_9qlvez4";
-        const templateID = "template_3tn36hc";
-        const publicKey = "xX4q61Mzs09zxCu_A";
+        const serviceID = "service_l3behim";
+        const templateID = "template_eeu5gqf";
+        const publicKey = "IyTvafQS4Xo3-QeKc";
     
         try {
             await emailjs.send(serviceID, templateID, formData, publicKey);     

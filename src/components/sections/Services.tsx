@@ -4,90 +4,78 @@ import getLangFromLocalStorage from "../../../utils/Lang";
 import { Link } from "react-router-dom";
 
 const lang: any = getLangFromLocalStorage();
+
 const Services = () => {
   return (
     <section
       id="services"
-      className=" mainn justify-center  h-fit min-h-screen mt-0 flex flex-col bg-slate-800 items-center relative">
-      <div className="pb-8 w-full flex felx-col flex-col space-y-7">
-  {/* <div className="w-full text-center bg-gradient-to-r from-white to-transparent">
-  <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-[#FFE533] ">
-    <span className="text-black">{ServiceLocale[lang].title1}</span>
-    <br />
-    {ServiceLocale[lang].title2}
-  </h1>
-</div> */}
-<div className="w-full min-w-screen backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
-        <h1 className="laptop:text-4xl desktop:text-4xl tablet:text-3xl text-2xl font-bold mx-auto text-justify text-[#EEBA2B]">
+      className="mainn h-fit min-h-screen flex flex-col items-center bg-slate-800 relative">
+      {/* Title Section */}
+      <div className="w-full backdrop-blur-lg bg-gradient-to-r from-white to-transparent flex flex-col items-center py-3">
+        <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-justify text-[#EEBA2B]">
           <b className="text-black">{ServiceLocale[lang].title1}</b>
           <br />
           {ServiceLocale[lang].title2}
         </h1>
       </div>
 
-        <div className="w-full  grid laptop:grid-cols-2  laptop:gap-20 desktop:gap-20 tablet:gap-12 gap-10 desktop:grid-cols-2 tablet:grid-cols-1 grid-cols-1 laptop:p-28 desktop:p-28 tablet:p-8 p-4 ">
-          {blogData.map((blog) => (
-            <Link
-              to={
-                blog.id === 1
-                  ? "/services/web-app"
-                  : blog.id === 2
-                  ? "/services/content-writing"
-                  : blog.id == 5
-                  ? "/services/digital-marketing"
-                  : blog.id == 3
-                  ? "/services/project-development"
-                  : blog.id == 4
-                  ? "/services/video-creation"
-                  : blog.id == 6
-                  ? "/services/advertising-design"
-                  : blog.id == 7
-                  ? "/services/website-creation"
-                  : blog.id == 8
-                  ? "/services/digital-support"
-                  : "#"
-              }
-              key={blog.id}>
-              {" "}
-              <div className="flex laptop:text-base desktop:text-base tablet:text-base text-sm p-1 mx-auto flex-col h-fit laptop:w-[100%] desktop:w-[100%] tablet:w-[80%] w-[98%]">
-                <div className="w-[100%] flex justify-self-start h-[6rem] mt-0">
-                  <div className="flex object-contain icon w-[20%] my-auto justify-center">
-                    <img
-                      src={blog.image}
-                      alt=""
-                      height={100}
-                      width={100}
-                      className="object-contain"
-                    />
-                  </div>
-
-                  <div className="flex flex-col icon w-fit p-3 laptop:h-[7rem] desktop:h-[7rem] tablet:h-[7rem] h-fit space-y-2 self-end">
-                    <div className="flex w-full text-xl desktop:text-3xl tablet:text-xl laptop:text-3xl text-white flex-col justify-end self-end content">
-                      <p className="text-xl">{blog.h1}</p>
-                      <p className="font-bold">{blog.h2}</p>
-                    </div>
-                    <div className="flex w-full bg-yellow-400 h-[.5rem] content"></div>
-                  </div>
+      {/* Blogs Section */}
+      <div className="w-full grid laptop:grid-cols-2 desktop:grid-cols-2 tablet:grid-cols-1 grid-cols-1 gap-10 laptop:gap-20 desktop:gap-20 tablet:gap-12 p-4 laptop:p-28 desktop:p-28 tablet:p-8">
+        {blogData.map((blog) => (
+          <Link
+            to={
+              blog.id === 1
+                ? "/services/web-app"
+                : blog.id === 2
+                ? "/services/content-writing"
+                : blog.id === 5
+                ? "/services/digital-marketing"
+                : blog.id === 3
+                ? "/services/project-development"
+                : blog.id === 4
+                ? "/services/video-creation"
+                : blog.id === 6
+                ? "/services/advertising-design"
+                : blog.id === 7
+                ? "/services/website-creation"
+                : blog.id === 8
+                ? "/services/digital-support"
+                : "#"
+            }
+            key={blog.id}>
+            <div className="flex flex-col laptop:w-full desktop:w-full tablet:w-4/5 w-[98%] mx-auto h-fit">
+              <div className="flex items-center h-[6rem]">
+                {/* Blog Icon */}
+                <div className="w-[20%] flex justify-center items-center">
+                  <img
+                    src={blog.image}
+                    alt=""
+                    height={100}
+                    width={100}
+                    className="object-contain"
+                  />
                 </div>
-                <div className="w-full flex justify-self-start mt-0 p-1">
-                  <p className="text-white pl-[22%] laptop:text-xl desktop:text-xl tablet:text-xl text-sm">
-                    {blog.description}
-                  </p>
+                {/* Blog Details */}
+                <div className="flex flex-col w-fit p-3 h-[7rem] space-y-2">
+                  <div className="flex flex-col text-xl laptop:text-3xl text-white">
+                    <p>{blog.h1}</p>
+                    <p className="font-bold">{blog.h2}</p>
+                  </div>
+                  <div className="w-full bg-yellow-400 h-[0.5rem]"></div>
                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
-        {/* <div
-          className="watermark absolute laptop:h-fit desktop:h-fit w-full tablet:w-[20rem] h-fit laptop:w-[14
-        rem]  rounded-sm desktop:w-[14rem] bg-blue-900  font-extrabold opacity-75 border border-blue-900 laptop:right-[.5rem] tablet:right-[1rem] desktop:right-[.5rem] laptop:top-[35rem]  desktop:top-[36rem] tablet:top-[58rem]  w-[3rem] h-[20rem]  phone:top-[69rem] phone:w-[72%] phone:right-2 xs:top-[75rem] xs:w-[14.5rem] sumsung:top-[66.4rem]  iphone:top-[66.5rem] xs:right-1 px-1"> */}
-          {/* <p className="text-[#fa1138]  text-xs">SPECIALEMENT POUR YOUTUBEUR, TIKTOK, INSTAGRAM, ....</p> */}
-          {/* <p className="text-[#fa1138]  text-xs">ETU/OU CREATEUR DE CONTENU</p> */}
-        {/* </div> */}
+              {/* Blog Description */}
+              <div className="w-full mt-2 p-1">
+                <p className="text-sm laptop:text-xl text-white pl-[22%]">
+                  {blog.description}
+                </p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
-      {/* <div className="laptop:h-[4%] :[h-4%] tablet:h-[3%] h-[2%] laptop:w-[10%] t w-[35%] absolute laptop:right-1/2 right-1/2 top-0 border-r-2 border-[#FFE533]"></div> */}
-      {/* <div className="very-buttom laptdesktopop:h-[3%] desktop:h-[3%] tablet:h-[3%] h-[2%] laptop:block desktop:block laptop:w-[5%] w-[2%] absolute laptop:left-2 left-2 bottom-0 border-r-2 border-[#FFE533]"></div> */}
     </section>
   );
 };
+
 export default Services;

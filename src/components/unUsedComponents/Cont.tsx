@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import {FiPhone} from 'react-icons/fi';
 import getLangFromLocalStorage from "../../../utils/Lang";
 import FooterLocale from "../../i18n/FooterLocale";
+import emailjs from '@emailjs/browser'; 
 
 const lang:any = getLangFromLocalStorage();
 const Cont = () => {
@@ -16,78 +17,55 @@ const Cont = () => {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmailChange = (e: { target: { value: string; }; }) => {
-    setEmail(e.target.value);
-  };
-
-  const handleNameChange = (e: { target: { value: string; }; }) => {
-    setName(e.target.value);
-  };
-
-  const handleMessageChange = (e: { target: { value: string; }; }) => {
-    setMessage(e.target.value);
-  };
+  const handleEmailChange = (e: { target: { value: string; }; }) => setEmail(e.target.value);
+  const handleNameChange = (e: { target: { value: string; }; }) => setName(e.target.value);
+  const handleMessageChange = (e: { target: { value: string; }; }) => setMessage(e.target.value);
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    setIsLoading(true);
     e.preventDefault();
-  
+
     // Check if any field is empty or if the email is invalid
     if (!email || !name || !message) {
-      toast.error('Veuillez remplir tous les champs.', {
-        theme: 'colored',
-      });
-      setIsLoading(false);
+      toast.error('Veuillez remplir tous les champs.', { theme: 'colored' });
       return;
     }
-  
-    // Email validation using regular expression
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      toast.error('Veuillez saisir une adresse e-mail valide.', {
-        theme: 'colored',
-      });
-      setIsLoading(false);
+      toast.error('Veuillez saisir une adresse e-mail valide.', { theme: 'colored' });
       return;
     }
-  
-    try {
-      const response = await fetch('https://blue-angry-gorilla.cyclic.app/users/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, name, message }),
-      });
-  
-      const data = await response.json();
-  
-      if (data.error) {
-        alert(data.error);
+
+    setIsLoading(true);
+
+    const templateParams = {
+      to_name: "Admin",  
+      from_name: name,
+      email,
+      message,
+    };
+
+    emailjs
+      .send(
+        'service_l3behim',  
+        'template_qvmp7fm', 
+        templateParams,
+        'IyTvafQS4Xo3-QeKc'  
+      )
+      .then(() => {
         setIsLoading(false);
-        return;
-      }
-  
-      setIsLoading(false);
-      setEmail('');
-      setName('');
-      setMessage('');
-      toast.success(data.message, {
-        theme: 'colored',
+        setEmail('');
+        setName('');
+        setMessage('');
+        toast.success('Message envoyé avec succès!', { theme: 'colored' });
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error('Erreur réseau. Veuillez réessayer plus tard.', { theme: 'colored' });
       });
-    } catch (error) {
-      toast.error('Erreur réseau. Veuillez réessayer plus tard.', {
-        theme: 'colored',
-      });
-      setIsLoading(false);
-    }
   };
-  
 
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
+  const handleClosePopup = () => setShowPopup(false);
 
     return (
       <><section id='contact' className='contacnt w-full laptop:px-10 desktop:px-10 px-0 justify-center h-fit min-h-screen mt-0 text-white flex flex-col  relative'>

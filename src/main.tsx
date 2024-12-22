@@ -21,6 +21,8 @@ import JobsPages from './pages/JobsPages.tsx';
 import LeaveInfoPage from './pages/LeaveInfoPage.tsx';
 import ThankYouPage from './pages/ThankYouPage.tsx';
 import WebPage from './pages/Services/WebAppPage.tsx';
+import ContentPage from './pages/Services/ContentPage.tsx';
+import GetBackToYou from './components/getBackToYou.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,7 +34,7 @@ ReactDOM.render(
         <Route path="/FAQ" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/services/design" element={<DesignPage />} />
-        <Route path="/services/content-writing" element={<ContentWrittings />} />
+        <Route path="/services/content-writing" element={<ContentPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketings />} />
         <Route path="/services/project-development" element={<ProjectDevelopment />} />
         <Route path="/services/video-creation" element={<VideoCreationsPage />} />
@@ -43,6 +45,8 @@ ReactDOM.render(
         <Route path="/start-project" element={<ProjectFormPage />} />
         <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
+        
       </Routes>
     </Router>
     <ToastContainer />
