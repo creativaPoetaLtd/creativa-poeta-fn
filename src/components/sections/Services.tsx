@@ -31,7 +31,7 @@ const Services = () => {
                 : blog.id === 5
                 ? "/services/digital-marketing"
                 : blog.id === 3
-                ? "/services/project-development"
+                ? "/services/graphic-design"
                 : blog.id === 4
                 ? "/services/video-creation"
                 : blog.id === 6

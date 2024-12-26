@@ -9,7 +9,6 @@ import TermsPage from './pages/TermsPage.tsx';
 import FaqPage from './pages/FaqPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
 import DesignPage from './pages/Services/WebAppPage.tsx';
-import ContentWrittings from './pages/Services/ContentWrittingPage.tsx';
 import DigitalMarketings from './pages/Services/DigitalMarketing.tsx';
 import ProjectDevelopment from './pages/Services/ProjectDvpt.tsx';
 import VideoCreationsPage from './pages/Services/VideoCreationPage.tsx';
@@ -33,7 +32,7 @@ ReactDOM.render(
         <Route path="/terms-and-conditions" element={<TermsPage />} />
         <Route path="/FAQ" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/services/design" element={<DesignPage />} />
+        <Route path="/services/graphic-design" element={<DesignPage />} />
         <Route path="/services/content-writing" element={<ContentPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketings />} />
         <Route path="/services/project-development" element={<ProjectDevelopment />} />

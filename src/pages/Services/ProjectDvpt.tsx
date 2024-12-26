@@ -1,5 +1,5 @@
 
-import ProjectDevelopmentComponent from "../../components/Services/ProjectDvpt";
+import ProjectDevelopmentComponent from "../../components/Services/GraphicDesign";
 import NavBar from "../../components/NavBars/NavBar";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";
