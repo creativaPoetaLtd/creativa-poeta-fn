@@ -1,15 +1,15 @@
 
-import WebApp from "../../components/Services/WebApp";
+import GraphicDesign from "../../components/Services/GraphicDesign";
 import NavBar from "../../components/NavBars/NavBar";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";
-const WebPage = () => {
+const DesignPage = () => {
     return (
         <div className="App w-full flex flex-col snap-x scroll-smooth">
             <div className="w-full ml-6 right-2 left flex justify-end">
                 <NavBar />
             </div>
-            <WebApp />
+            <GraphicDesign />
             <div className="w-full flex flex-col scroll-smooth snap-x">
                 <Footer />
                 <MainFooter />
@@ -18,4 +18,4 @@ const WebPage = () => {
     )
 }
 
-export default WebPage;
+export default DesignPage;

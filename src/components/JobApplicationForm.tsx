@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const JobApplicationForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<number>(1);
   const [showError, setShowError] = useState(false); // New state for validation
   const navigate = useNavigate();
   interface FormData {
@@ -92,9 +92,12 @@ const JobApplicationForm = () => {
     setShowError(false);
   };
 
-  const isNextDisabled =
-    step === 1 && (!formData.fullName || !formData.email || !formData.phone);
-  const handlePrevStep = () => setStep((prev) => prev - 1);
+  // handlePrevStep function
+  const handlePrevStep = () => {
+    setStep((prev) => prev - 1);
+    setShowError(false);
+  }
+
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -299,10 +302,7 @@ const JobApplicationForm = () => {
             <button
               type="button"
               onClick={handlePrevStep}
-              disabled={step === 2}
-              className={`px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition ${
-                step === 2 && "opacity-50 cursor-not-allowed"
-              }`}>
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
               Back
             </button>
 
@@ -442,13 +442,10 @@ const JobApplicationForm = () => {
             </div>
           </div>
           <div className="flex justify-between">
-            <button
+          <button
               type="button"
               onClick={handlePrevStep}
-              disabled={step === 3}
-              className={`px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition ${
-                step === 3 && "opacity-50 cursor-not-allowed"
-              }`}>
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
               Back
             </button>
 
@@ -490,16 +487,12 @@ const JobApplicationForm = () => {
             )}
           </div>
           <div className="flex justify-between">
-            <button
+          <button
               type="button"
               onClick={handlePrevStep}
-              disabled={step === 4}
-              className={`px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition ${
-                step === 4 && "opacity-50 cursor-not-allowed"
-              }`}>
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
               Back
             </button>
-
             <button
               type="button"
               onClick={handleSubmit}

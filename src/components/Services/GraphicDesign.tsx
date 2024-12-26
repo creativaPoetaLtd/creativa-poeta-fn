@@ -184,18 +184,85 @@ export function RelatedServices() {
 
 const faqs = [
   {
-    question: "How long does it take to write a blog post?",
-    answer: "The time it takes to write a blog post depends on the length and complexity of the content. On average, we can deliver a 500-word blog post within 2-3 days. Longer posts may take up to a week to complete.",},
+    question: "What types of graphic design services do you offer?",
+    answer: "We provide a wide range of services, including logo design, branding, marketing materials, web design, social media graphics, and custom illustrations tailored to your needs.",
+  },
   {
-    question: "Do you offer proofreading services only?",
-    answer: "No, we offer a range of content writing services, including blog writing, web content creation, professional document writing, and more. Our team can assist with all your writing needs, from start to finish.",},
+    question: "How long does it take to complete a design project?",
+    answer: "The timeline depends on the complexity of the project. For example, logo design typically takes 3-5 business days, while larger projects like branding or web design may take 2-4 weeks.",
+  },
   {
-    question: "Is it possible to request revisions on the written text?",
-    answer:
-      "Yes, we offer revisions on all written content to ensure it meets your expectations. We value your feedback and will work with you to make any necessary changes to the text.",},
+    question: "How many revisions are included in the design process?",
+    answer: "Our packages include up to 3 rounds of revisions to ensure the final design meets your expectations. Additional revisions can be accommodated at an extra cost.",
+  },
   {
-    question: "In what formats do you provide the finalized text?",
-    answer: "We can provide the finalized text in various formats, including Word documents, PDFs, and Google Docs. Let us know your preferred format, and we will deliver the content accordingly.",},
+    question: "What file formats will I receive for my design?",
+    answer: "We deliver final designs in various formats such as PNG, JPEG, PDF, and vector files (AI, EPS, or SVG), ensuring they are ready for both print and digital use.",
+  },
+  {
+    question: "Do you provide design templates or original custom designs?",
+    answer: "We specialize in creating original custom designs tailored to your brand. However, we can also work with templates if specified.",
+  },
+  {
+    question: "Can I request a rush order for my project?",
+    answer: "Yes, we offer expedited services for an additional fee. Rush timelines depend on the scope of the project and our availability.",
+  },
+  {
+    question: "Do you provide branding packages?",
+    answer: "Yes, we offer comprehensive branding packages that include logo design, brand guidelines, typography, color palettes, and visual assets.",
+  },
+  {
+    question: "Can you redesign or refresh an existing logo?",
+    answer: "Absolutely! We can work on improving your existing logo while retaining its core identity or create an entirely new look if desired.",
+  },
+  {
+    question: "Do you offer consultations before starting a project?",
+    answer: "Yes, we offer free initial consultations to discuss your project requirements, goals, and expectations before starting the design process.",
+  },
+  {
+    question: "What if I don’t like the initial concepts you provide?",
+    answer: "We always aim to understand your vision and preferences beforehand. However, if you’re not satisfied with the initial concepts, we will refine the designs or create new options based on your feedback.",
+  },
+  {
+    question: "Do you work with businesses of all sizes?",
+    answer: "Yes, we collaborate with startups, small businesses, enterprises, and individuals to meet their unique design needs.",
+  },
+  {
+    question: "Can you design for both print and digital media?",
+    answer: "Yes, we create designs optimized for both print materials (e.g., brochures, flyers) and digital platforms (e.g., social media, websites).",
+  },
+  {
+    question: "Do you offer social media design packages?",
+    answer: "Yes, we can create cohesive social media assets, including posts, banners, story templates, and profile graphics, tailored to your brand.",
+  },
+  {
+    question: "How do you ensure the designs align with my brand identity?",
+    answer: "We begin with an in-depth discovery phase to understand your brand’s values, audience, and goals, ensuring that all designs align with your identity.",
+  },
+  {
+    question: "What tools do you use for graphic design?",
+    answer: "We use industry-standard tools like Adobe Photoshop, Illustrator, InDesign, and Figma to deliver high-quality designs.",
+  },
+  {
+    question: "Do you retain the copyright for the designs you create?",
+    answer: "Once the project is completed and the payment is finalized, the copyright for the designs is transferred to you.",
+  },
+  {
+    question: "What is your payment structure for projects?",
+    answer: "We typically require a 50% deposit upfront and the remaining balance upon project completion. For large projects, we can arrange milestone-based payments.",
+  },
+  {
+    question: "Can you work with my existing brand assets?",
+    answer: "Yes, we can incorporate your existing brand assets, such as logos, fonts, and imagery, into new designs to maintain consistency.",
+  },
+  {
+    question: "Do you offer support after the project is completed?",
+    answer: "Yes, we provide post-project support for a limited time to ensure your designs are implemented successfully. Extended support can be arranged if needed.",
+  },
+  {
+    question: "Can you handle bulk design projects for campaigns or events?",
+    answer: "Yes, we are equipped to handle bulk projects, including campaign visuals, event materials, and other large-scale requirements."
+  },
 ];
 
 
@@ -238,7 +305,7 @@ export function FAQSection() {
   );
 }
 
-const ContentWritting = () => {
+const GraphicDesign = () => {
   return (
     <div
       className="relative min-h-screen bg-white flex flex-col bg-transparent justify-center items-center "
@@ -272,18 +339,18 @@ const ContentWritting = () => {
       <div className="flex flex-col space-y-2 text-white w-full">
         <div className="w-fit">
           <h1 className="text-2xl md:text-4xl font-bold">
-          Content writing & creation
+          Graphic Design & Visual Communication
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <span className="text-[#EEBA2B] text-justify text-lg md:text-xl italic">
-        Words and creativity that make an impact
+        Bringing your ideas to life with impactful visuals.
         </span>
       </div>
 
       <div className="flex flex-col space-y-4 w-full">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        Effective communication is at the heart of every successful brand. At Creativa Poeta, we craft compelling content that informs, inspires, and persuades. From polished professional writing to engaging creative pieces, we ensure your message connects with your audience.        </p>
+        A picture is worth a thousand words, and at Creativa Poeta, we ensure those words are memorable. From captivating graphics to dynamic videos, we craft designs that leave a lasting impression, communicate your message effectively, and elevate your brand's identity.     </p>
 
         <button
           onClick={handleNavigate}
@@ -295,9 +362,9 @@ const ContentWritting = () => {
 
     <div className="w-full md:w-1/2 flex items-center justify-center">
       <img
-        src="/content.webp"
+        src="/graph.jpeg"
         alt="Advertising Design"
-        className="object-contain rounded-lg max-w-[80%] h-auto shadow-md"
+        className="object-contain rounded-lg md:max-w-[80%] max-w-[100%] h-auto shadow-md"
       />
     </div>
   </div>
@@ -310,19 +377,20 @@ const ContentWritting = () => {
     </h2>
 
     <p className="text-md md:text-lg text-center mb-8">
-    Our Content Writing & Creation services include but not limited to:
+    Our Graphic design and visual communication services include:
     </p>
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-black">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-black">
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
           src="/webdev.jpeg"
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />        <h3 className="text-xl font-semibold mb-2">
-       Professional writing
+      Graphic design
         </h3>
-        <p className="md:w-[70%] text-center">Copywriting for ads and marketing materials, Technical documentation, reports, and manuals, and Ghostwriting services for books, speeches, or articles.
+        <p className="md:w-[70%] text-center">
+        Creation of logos, business cards, brochures, and posters,Design of infographics, social media visuals, and digital advertisements.
        </p>
       </div>
 
@@ -333,9 +401,9 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Creative writing
+        Advertising Design
         </h3>
-        <p className="md:w-[70%] text-center">Blog posts, storytelling, poetry, and creative articles, Social media captions and creative campaigns, and Scripts for videos, podcasts, and presentations
+        <p className="md:w-[70%] text-center">o	Conceptualizing and designing materials for marketing campaigns, and Customizing visuals for online and offline promotions.
 </p>
       </div>
 
@@ -346,9 +414,9 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Editing and proofreading
+        Video creation and animation
         </h3>
-        <p className="md:w-[70%] text-center">Comprehensive review and refinement of documents for clarity, grammar, and structure.</p>
+        <p className="md:w-[70%] text-center">	Producing short promotional videos and animations, and Designing videos for social media engagement and branding</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -358,35 +426,11 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-      SEO content writing
+        UI/UX visual design
         </h3>
-        <p className="md:w-[70%] text-center">Crafting keyword-optimized articles and web pages to improve visibility and drive organic traffic.</p>
-      </div>
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/UI.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-        Resume and cover letter services
-        </h3>
-        <p className="md:w-[70%] text-center">	Writing tailored CVs, cover letters, and LinkedIn profiles to highlight skills and experience effectively.</p>
-      </div>
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/consult.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-        Content Strategy and Consulting        </h3>
-        <p className="md:w-[70%] text-center">	
-        Developing content calendars, auditing existing content, and creating long-term strategies to align with business goals.
-        </p>
+        <p className="md:w-[70%] text-center">Designing intuitive and attractive interfaces for websites and applications, and Creating wireframes and prototypes for digital platforms. </p>
       </div>
     </div>
-    {/* other writting service */}
     
   </section>
 
@@ -409,27 +453,27 @@ const ContentWritting = () => {
       {[
         {
           number: "1",
-          text: "	Expertise in a variety of writing styles (formal, creative, technical).",
+          text: "	Mastery of design tools like Adobe Creative Suite, Canva, and Figma",
           bgColor: "bg-[#E265FF]",
         },
         {
           number: "2",
-          text: "In-depth knowledge of SEO practices to optimize content for search engines.",
+          text: "Strong understanding of branding and visual storytelling.",
           bgColor: "bg-[#8B3DFF]",
         },
         {
           number: "3",
-          text: "Advanced editing and proofreading skills to ensure precision and clarity.",
+          text: "Proficiency in creating motion graphics and short animations.",
           bgColor: "bg-[#3DB9FF]",
         },
         {
           number: "4",
-          text: "Creativity in storytelling to make brands relatable and memorable.",
+          text: "Expertise in crafting designs optimized for both print and digital media.",
           bgColor: "bg-[#FFA53D]",
         },
         {
           number: "5",
-          text: "	Familiarity with tools like Grammarly, Hemingway, and Surfer SEO.",
+          text: "Commitment to responsive and accessible design principles.",
           bgColor: "bg-[#76C56F]",
         },
       ].map(({ number, text, bgColor }, index) => (
@@ -465,32 +509,32 @@ const ContentWritting = () => {
     </h2>
     <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
       <li>
-        <strong className="text-md md:text-lg">Tailored Solutions: </strong>
-        Every piece of content is uniquely crafted to resonate with your target audience and align with your brand's goals. We ensure your voice stands out in a crowded digital space.
+        <strong className="text-md md:text-lg">Customized Designs: </strong>
+        We create unique, visually stunning designs tailored to reflect your brand identity and effectively communicate your message to your audience.
       </li>
       <li>
-        <strong className="text-md md:text-lg">Experienced Team: </strong>
-        Our team of skilled writers and creators bring years of experience across various industries, leveraging the latest trends and techniques to deliver high-quality content.
+        <strong className="text-md md:text-lg">Expertise Across Mediums: </strong>
+        Our team specializes in various forms of visual communication, from logos and branding to digital illustrations, print media, and web graphics.
       </li>
       <li>
-        <strong className="text-md md:text-lg">Creative Excellence: </strong>
-        At Creativa Poeta, creativity is at the heart of what we do. From compelling copywriting to engaging visual content, we turn ideas into impactful stories.
+        <strong className="text-md md:text-lg">Innovative Creativity: </strong>
+        At Creativa Poeta, innovation meets artistry. We bring fresh ideas and modern design techniques to make your visuals stand out in a competitive market.
       </li>
       <li>
-        <strong className="text-md md:text-lg">Comprehensive Support: </strong>
-        From brainstorming to final delivery, we partner with you at every stage of the content creation process to ensure your vision is fully realized.
+        <strong className="text-md md:text-lg">Attention to Detail: </strong>
+        Every element, from color palettes to typography, is meticulously crafted to ensure harmony and consistency across all your design assets.
       </li>
       <li>
-        <strong className="text-md md:text-lg">Customer-Centric Approach: </strong>
-        Your satisfaction drives us. We take the time to understand your unique requirements, ensuring the content we create speaks directly to your audience and reflects your brand values.
+        <strong className="text-md md:text-lg">Collaborative Process: </strong>
+        We value your input throughout the design process, ensuring the final product aligns perfectly with your vision and business objectives.
       </li>
       <li>
-        <strong className="text-md md:text-lg">SEO-Optimized Content: </strong>
-        Our content is not only engaging but also strategically optimized for search engines to boost your online visibility and drive traffic to your platforms.
+        <strong className="text-md md:text-lg">Brand-Focused Solutions: </strong>
+        Our designs not only captivate visually but also resonate with your brand’s story, strengthening your identity and appeal.
       </li>
       <li>
-        <strong className="text-md md:text-lg">Scalable and Future-Ready: </strong>
-        We produce content that evolves with your brand, ensuring it remains relevant and effective as your business grows.
+        <strong className="text-md md:text-lg">Future-Ready Visuals:</strong>
+        We create scalable designs that remain impactful and adaptable as your brand grows and evolves in the dynamic digital landscape.
       </li>
     </ul>
   </div>
@@ -503,7 +547,7 @@ const ContentWritting = () => {
   </h2>
 
   <p className="text-md md:text-lg text-center mb-8">
-    Our content writing and creation services are designed for:
+  Our graphic design and visual communication services are perfect for:
   </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
@@ -512,7 +556,8 @@ const ContentWritting = () => {
       <h3 className="text-xl font-semibold mb-2">
         Startups
       </h3>
-      <p className="md:w-[70%] text-center">Boost your brand with engaging blogs, social media content, and persuasive copywriting.</p>
+      <p className="md:w-[70%] text-center">Establish a strong visual identity with bespoke logos, branding, and marketing materials.
+      </p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -524,7 +569,9 @@ const ContentWritting = () => {
       <h3 className="text-xl font-semibold mb-2">
         Small to Medium Enterprises (SMEs)
       </h3>
-      <p className="md:w-[70%] text-center">Enhance your marketing strategy with tailored content that speaks directly to your audience.</p>
+      <p className="md:w-[70%] text-center">
+      Elevate your brand with professional graphics, promotional content, and engaging visual storytelling.
+      </p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -534,10 +581,12 @@ const ContentWritting = () => {
         className="w-24 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Enterprises
+        Corporations
       </h3>
-      <p className="md:w-[70%] text-center">Drive results with professionally crafted content for campaigns, reports, and internal communications.</p>
-    </div>
+      <p className="md:w-[70%] text-center">
+      Enhance your corporate communications with polished presentations, reports, and visuals.
+      </p>
+      </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -548,15 +597,17 @@ const ContentWritting = () => {
       <h3 className="text-xl font-semibold mb-2">
         Freelancers and Creatives
       </h3>
-      <p className="md:w-[70%] text-center">Create a standout portfolio or personal blog to showcase your skills and expertise.</p>
-    </div>
+      <p className="md:w-[70%] text-center">
+      Build a standout personal brand with eye-catching graphics for portfolios, social media, and more.
+      </p>
+      </div>
   </div>
 </section>
 
 
 <section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Process Workflow
+    Design Process Workflow
   </h2>
   
   <div className="flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0 md:space-x-4">
@@ -567,7 +618,7 @@ const ContentWritting = () => {
       </div>
       <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Discovery</h3>
       <p className="text-sm">
-        Analyzing your target audience, goals, and unique content needs.
+        Understanding your vision, objectives, and brand identity to establish a foundation for the project.
       </p>
     </div>
 
@@ -576,9 +627,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         2
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Strategy</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Concept Development</h3>
       <p className="text-sm">
-        Crafting a content plan tailored to your objectives and audience.
+        Brainstorming and drafting initial concepts that align with your goals and resonate with your audience.
       </p>
     </div>
 
@@ -587,9 +638,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         3
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Creation</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Design Execution</h3>
       <p className="text-sm">
-        Writing, designing, and curating content that aligns with your brand's voice.
+        Creating visually stunning designs and refining them to match your unique style and needs.
       </p>
     </div>
 
@@ -598,9 +649,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         4
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Review & Feedback</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Feedback & Iteration</h3>
       <p className="text-sm">
-        Collaborating with you to refine and finalize the content for your approval.
+        Collaborating with you to refine designs and ensure they align perfectly with your vision.
       </p>
     </div>
 
@@ -609,9 +660,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         5
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Delivery & Optimization</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Final Delivery</h3>
       <p className="text-sm">
-        Delivering polished content and offering insights for ongoing improvement.
+        Providing the final designs in all necessary formats and offering ongoing support for optimization.
       </p>
     </div>
   </div>
@@ -715,17 +766,17 @@ const ContentWritting = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
   <h2 className="text-xl font-semibold p-4 mb-4">
-    Ready to share your story with the world?
+  Ready to elevate your brand with stunning designs?
   </h2>
   <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-    Reach out to us today, and let’s create compelling content that resonates with your audience.
+  Get in touch with us today, and let’s craft visuals that captivate your audience and set your brand apart.
   </p>
 
   <button
     onClick={handleNavigate}
     className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    Start your content journey with us
-  </button>
+    Start your design journey with us
+    </button>
 </section>
 
 
@@ -852,4 +903,4 @@ const ContentWritting = () => {
   );
 };
 
-export default ContentWritting;
+export default GraphicDesign;
