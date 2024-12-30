@@ -13,7 +13,7 @@ import {
   FaFacebook,
   FaGithub,
 } from "react-icons/fa";
-import { handleNavigate } from "./AdvertisingDesign";
+import { handleNavigate } from "./DigitalMarketing";
 
 
 const lang: string = getLangFromLocalStorage();
@@ -303,13 +303,13 @@ const WebApp = () => {
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
-        <span className="text-[#EEBA2B] text-justify text-lg md:text-xl italic">
+        <span className="text-[#EEBA2B] text-center text-lg md:text-xl italic">
         Innovative digital solutions, tailored for your needs.
         </span>
       </div>
 
       <div className="flex flex-col space-y-4 w-full">
-        <p className="text-md md:text-lg text-justify leading-relaxed text-white">
+        <p className="text-md md:text-lg text-center leading-relaxed text-white">
         In the ever-evolving digital landscape, a robust and engaging online presence is essential. At Creativa Poeta, we transform your ideas into digital realities by crafting modern websites, powerful applications, and custom software solutions designed to elevate your business.
         </p>
 
@@ -464,7 +464,7 @@ const WebApp = () => {
           <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
           Why choose Creativa Poeta?
           </h2>
-          <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
+          <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center justify-between">
             <li>
               <strong className="text-md md:text-lg">
                 Tailored solutions

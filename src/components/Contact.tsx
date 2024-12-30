@@ -6,6 +6,7 @@ import logo from "../assets/flags/logopoeta1.png";
 import contactLocale from "../i18n/contactLocale";
 import getLangFromLocalStorage from "../../utils/Lang";
 import { FaArrowRight } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 
 
@@ -34,14 +35,14 @@ const Contact = () => {
     setIsLoading(true);
 
     if (!email || !name || !message) {
-      alert(`${contactLocale[lang]?.validation}`);
+      toast.error(`${contactLocale[lang]?.validation}`);
       setIsLoading(false);
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert(`${contactLocale[lang]?.email}`);
+      toast.error(`${contactLocale[lang]?.email}`);
       setIsLoading(false);
       return;
     }
@@ -66,9 +67,9 @@ const Contact = () => {
       setEmail("");
       setName("");
       setMessage("");
-      alert(`${contactLocale[lang]?.success}`);
+      toast.success(`${contactLocale[lang]?.success}`);
     } catch (error) {
-      alert(`${contactLocale[lang]?.sendErrror}`);
+      toast.success(`${contactLocale[lang]?.sendErrror}`);
     } finally {
       setIsLoading(false);
     }

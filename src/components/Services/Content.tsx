@@ -13,7 +13,7 @@ import {
   FaFacebook,
   FaGithub,
 } from "react-icons/fa";
-import { handleNavigate } from "./AdvertisingDesign";
+import { handleNavigate } from "./DigitalMarketing";
 
 
 const lang: string = getLangFromLocalStorage();
@@ -276,13 +276,13 @@ const ContentWritting = () => {
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
-        <span className="text-[#EEBA2B] text-justify text-lg md:text-xl italic">
+        <span className="text-[#EEBA2B] text-center text-lg md:text-xl italic">
         Words and creativity that make an impact
         </span>
       </div>
 
       <div className="flex flex-col space-y-4 w-full">
-        <p className="text-md md:text-lg text-justify leading-relaxed text-white">
+        <p className="text-md md:text-lg text-center leading-relaxed text-white">
         Effective communication is at the heart of every successful brand. At Creativa Poeta, we craft compelling content that informs, inspires, and persuades. From polished professional writing to engaging creative pieces, we ensure your message connects with your audience.        </p>
 
         <button
@@ -463,7 +463,7 @@ const ContentWritting = () => {
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
       Why choose Creativa Poeta?
     </h2>
-    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
+    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center justify-between">
       <li>
         <strong className="text-md md:text-lg">Tailored Solutions: </strong>
         Every piece of content is uniquely crafted to resonate with your target audience and align with your brand's goals. We ensure your voice stands out in a crowded digital space.
