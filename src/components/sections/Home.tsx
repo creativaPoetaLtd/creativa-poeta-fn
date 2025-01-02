@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineDown, AiOutlineTwitter } from "react-icons/ai";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import image8 from "../../assets/flags/image8.jpg";
 import image2 from "../../assets/flags/image2.jpg";
@@ -240,6 +240,7 @@ const handleStartProject = () => {
                 </span>
                 <AiOutlineTwitter />
               </div>
+              <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "Facebook" ? "animate-icon-active" : ""
@@ -254,6 +255,8 @@ const handleStartProject = () => {
                 </span>
                 <FaFacebookF />
               </div>
+              </a>
+              <a href="https://www.instagram.com/creativapoeta_/">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "Instagram" ? "animate-icon-active" : ""
@@ -264,10 +267,30 @@ const handleStartProject = () => {
                   className={`absolute -right-28 text-[#FFFF00] ${
                     hoveredIcon === "Instagram" ? "block" : "hidden"
                   }`}>
-                  Instagram
+                 Instagram
+                  
                 </span>
                 <FaInstagram />
               </div>
+              </a>
+              <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
+              <div
+                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                  hoveredIcon === "Tick Tok" ? "animate-icon-active" : ""
+                }`}
+                onMouseEnter={() => handleIconHover("Tick Tok")}
+                onMouseLeave={() => handleIconHover("")}>
+                <span
+                  className={`absolute -right-28 text-[#FFFF00] ${
+                    hoveredIcon === "Tick Tok" ? "block" : "hidden"
+                  }`}>
+                 TickTok
+                  
+                </span>
+                <FaTiktok />
+              </div>
+              </a>
+              <a href="https://www.linkedin.com/company/105066709/">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "LinkedIn" ? "animate-icon-active" : ""
@@ -282,6 +305,8 @@ const handleStartProject = () => {
                 </span>
                 <FaLinkedinIn />
               </div>
+              </a>
+              <a href="mailto:creativapoeta@gmail.com">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "Mail" ? "animate-icon-active" : ""
@@ -296,6 +321,7 @@ const handleStartProject = () => {
                 </span>
                 <HiOutlineMail />
               </div>
+              </a>
             </div>
           </div>
         </div>

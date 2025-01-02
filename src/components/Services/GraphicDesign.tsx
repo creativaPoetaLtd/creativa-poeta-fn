@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteLeft, FaTiktok } from "react-icons/fa";
 import { IoBusinessOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
@@ -70,7 +70,7 @@ export function TestimonialSlider() {
   };
 
   return (
-    <section className="testimonial-slider hidden min-h-screen w-full md:w-[80%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
+    <section className="testimonial-slider hidden min-h-screen w-full md:w-[95%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
       <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">
         What Our Clients Say
       </h2>
@@ -333,25 +333,24 @@ const GraphicDesign = () => {
         </div>
       </Link>
 
-  <section className="min-h-fit h-screen justify-center w-[95%] mt-28 md:mt-24 m-auto  px-4 flex flex-col items-center space-y-8 relative">
-  <div className="flex flex-col md:gap-10  laptop:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8 z-10">
-    <div className="w-full flex flex-col items-start space-y-4 px-2 md:px-0">
-      <div className="flex flex-col space-y-2 text-white w-full">
+<section className="min-h-fit h-screen justify-center  w-[95%] mt-28 md:mt-16 m-auto  px-4 flex flex-col items-center relative">
+  <div className="flex flex-col md:gap-10 laptop:flex-row items-center justify-between w-full space-y-8 md:space-y-0 laptop:space-x-8 z-10">
+    <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
+      <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
           <h1 className="text-2xl md:text-4xl font-bold">
           Graphic Design & Visual Communication
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
-        <span className="text-[#EEBA2B] text-center text-lg md:text-xl italic">
+        <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
         Bringing your ideas to life with impactful visuals.
-        </span>
+        </p>
       </div>
 
-      <div className="flex flex-col space-y-4 w-full">
-        <p className="text-md md:text-lg text-center leading-relaxed text-white">
+      <div className="flex flex-col space-y-24 w-full mt-12">
+        <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         A picture is worth a thousand words, and at Creativa Poeta, we ensure those words are memorable. From captivating graphics to dynamic videos, we craft designs that leave a lasting impression, communicate your message effectively, and elevate your brand's identity.     </p>
-
         <button
           onClick={handleNavigate}
           className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
@@ -360,11 +359,11 @@ const GraphicDesign = () => {
       </div>
     </div>
 
-    <div className="w-full flex items-center justify-center ">
+    <div className="laptop:w-[45%] w-full h-ful md:height-[2rem] flex items-center justify-center">
       <img
-        src="/graph.jpeg"
-        alt="Advertising Design"
-        className="object-contain rounded-lg w-full h-full shadow-md"
+        src="/graph.webp"
+        alt="Graphic design"
+        className="object-contain rounded-lg shadow-md"
       />
     </div>
     
@@ -436,7 +435,7 @@ const GraphicDesign = () => {
   </section>
 
 
-<section className="relative w-[89%] md:w-[93%] min-h-screen flex items-center justify-center bg-white rounded-md">
+<section className="relative w-[89%] md:w-[87%] laptop:w-[92%]  min-h-screen flex items-center justify-center bg-white rounded-md">
   {/* Container */}
   <div className="relative md:w-[70%] p-8 flex flex-col laptop:flex-row items-center gap-12">
     {/* Left side - Main circle */}
@@ -775,7 +774,7 @@ const GraphicDesign = () => {
 
   <button
     onClick={handleNavigate}
-    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
     Start your design journey with us
     </button>
 </section>
@@ -864,15 +863,26 @@ const GraphicDesign = () => {
         </div>
 
         <div className="social-sharing flex space-x-4 mt-8">
+        <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaFacebook className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.instagram.com/creativapoeta_/">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaInstagram className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
+          <button className="text-black hover:text-[#EEBA2B]">
+          <FaTiktok className="text-2xl" />
+          </button>
+          </a>
+          <a href="https://www.linkedin.com/company/105066709/">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaLinkedinIn className="text-2xl" />
           </button>
+          </a>
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>

@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import TermsPage from './pages/TermsPage.tsx';
 import FaqPage from './pages/FaqPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
-import DesignPage from './pages/Services/WebAppPage.tsx';
 import ScrollToTop from './ScrollToTop.tsx';
 import ProjectFormPage from './pages/ProjectFormPage.tsx';
 import JobsPages from './pages/JobsPages.tsx';
@@ -18,6 +17,7 @@ import WebPage from './pages/Services/WebAppPage.tsx';
 import ContentPage from './pages/Services/ContentPage.tsx';
 import GetBackToYou from './components/getBackToYou.tsx';
 import DigitalMarketingPage from './pages/Services/DigitalMarketing.tsx';
+import GraphicDesignPage from './pages/Services/GraphicDesignPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,7 +37,7 @@ ReactDOM.render(
         {/* Valid servicessss */}
         <Route path="/services/web-app" element={<WebPage />} />
         <Route path="/services/content-writing" element={<ContentPage />} />
-        <Route path="/services/graphic-design" element={<DesignPage />} />
+        <Route path="/services/graphic-design" element={<GraphicDesignPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
         
       </Routes>

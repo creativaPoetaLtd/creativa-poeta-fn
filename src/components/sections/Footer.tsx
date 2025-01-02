@@ -52,7 +52,7 @@ function Footer() {
           <h1 className='logo text-4xl text-[#EEBA2B] flex laptop:mx-0 tablet:mx-0 laptop:justify-start tablet:justify-start text-left laptop:items-start tablet:items-start float-left justify-start items-start'>
           <img src={logopoeta1} alt="logo" className="laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] laptop:h-[100%] desktop:h-[100%] h-[100%] w-[50%]"/>
           </h1>
-          <p className='flex justify-start text-center  items-start pr-7 float-left mt-3 text-slate-400'>
+          <p className='flex justify-start text-start  items-start pr-7 float-left mt-3 text-slate-400'>
              {FooterLocale[lang].desc}          
              </p>
           <div className='flex desktop:flex-row laptop:flex-row tablet:flex-row flex-col w-full justify-start items-start float-left laptop:mt-3 desktop:mt-3 tablet:mt-3 mt-3 h-fit'>
