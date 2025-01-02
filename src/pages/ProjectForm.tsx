@@ -157,9 +157,9 @@ const ProjectForm = () => {
             navigate('/thank-you');
         } catch (error) {
             if (error instanceof Error) {
-                alert("Error sending email: " + error.message);
+                toast.error("Error sending email: " + error.message);
             } else {
-                alert("An unknown error occurred.");
+                toast.error("An unknown error occurred.");
             }
         }
     };

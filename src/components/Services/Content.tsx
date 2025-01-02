@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteLeft, FaTiktok } from "react-icons/fa";
 import { IoBusinessOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
@@ -13,7 +13,7 @@ import {
   FaFacebook,
   FaGithub,
 } from "react-icons/fa";
-import { handleNavigate } from "./AdvertisingDesign";
+import { handleNavigate } from "./DigitalMarketing";
 
 
 const lang: string = getLangFromLocalStorage();
@@ -266,25 +266,25 @@ const ContentWritting = () => {
         </div>
       </Link>
 
-  <section className="min-h-fit h-screen justify-center w-[95%] mt-28 md:mt-0 m-auto  px-4 flex flex-col items-center space-y-8 relative">
-  <div className="flex flex-col md:flex-row items-center justify-between w-full space-y-8 md:space-y-0 md:space-x-8 z-10">
-    <div className="w-full md:w-1/2 flex flex-col items-start space-y-4 px-2 md:px-0">
-      <div className="flex flex-col space-y-2 text-white w-full">
+
+<section className="min-h-fit h-screen justify-center  w-[95%] mt-28 md:mt-16 m-auto  px-4 flex flex-col items-center relative">
+  <div className="flex flex-col md:gap-10 laptop:flex-row items-center justify-between w-full space-y-8 md:space-y-0 laptop:space-x-8 z-10">
+    <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
+      <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
           <h1 className="text-2xl md:text-4xl font-bold">
           Content writing & creation
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
-        <span className="text-[#EEBA2B] text-justify text-lg md:text-xl italic">
+        <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
         Words and creativity that make an impact
-        </span>
+        </p>
       </div>
 
-      <div className="flex flex-col space-y-4 w-full">
+      <div className="flex flex-col space-y-24 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         Effective communication is at the heart of every successful brand. At Creativa Poeta, we craft compelling content that informs, inspires, and persuades. From polished professional writing to engaging creative pieces, we ensure your message connects with your audience.        </p>
-
         <button
           onClick={handleNavigate}
           className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
@@ -293,13 +293,14 @@ const ContentWritting = () => {
       </div>
     </div>
 
-    <div className="w-full md:w-1/2 flex items-center justify-center">
+    <div className="laptop:w-[45%] w-full h-ful md:height-[2rem] flex items-center justify-center">
       <img
-        src="/content.webp"
-        alt="Advertising Design"
-        className="object-contain rounded-lg max-w-[80%] h-auto shadow-md"
+        src="/content.jpg"
+        alt="Content writting"
+        className="object-contain rounded-lg shadow-md"
       />
     </div>
+    
   </div>
 </section>
 
@@ -313,7 +314,7 @@ const ContentWritting = () => {
     Our Content Writing & Creation services include but not limited to:
     </p>
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-black">
+    <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-8 text-black">
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
           src="/webdev.jpeg"
@@ -391,9 +392,9 @@ const ContentWritting = () => {
   </section>
 
 
-<section className="relative w-[89%] md:w-[93%] min-h-screen flex items-center justify-center bg-white rounded-md">
+<section className="relative w-[89%] md:w-[87%] laptop:w-[92%] min-h-screen flex items-center justify-center bg-white rounded-md">
   {/* Container */}
-  <div className="relative md:w-[70%] p-8 flex flex-col md:flex-row items-center gap-12">
+  <div className="relative md:w-[70%] p-8 flex flex-col laptop:flex-row items-center gap-12">
     {/* Left side - Main circle */}
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
@@ -451,8 +452,8 @@ const ContentWritting = () => {
 </section>
 
       
-<section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse md:flex-row z-10">
-  <div className="yellow-lines-container laptop:flex md:w-1/2 h-full">
+<section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse laptop:flex-row z-10">
+<div className="yellow-lines-container laptop:flex laptop:w-1/2 h-full">
     <img
       src="/content-why.webp"
       alt=""
@@ -463,7 +464,7 @@ const ContentWritting = () => {
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
       Why choose Creativa Poeta?
     </h2>
-    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-justify justify-between">
+    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
       <li>
         <strong className="text-md md:text-lg">Tailored Solutions: </strong>
         Every piece of content is uniquely crafted to resonate with your target audience and align with your brand's goals. We ensure your voice stands out in a crowded digital space.
@@ -559,7 +560,7 @@ const ContentWritting = () => {
     Process Workflow
   </h2>
   
-  <div className="flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0 md:space-x-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
     {/* Step 1 */}
     <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
@@ -723,7 +724,7 @@ const ContentWritting = () => {
 
   <button
     onClick={handleNavigate}
-    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
     Start your content journey with us
   </button>
 </section>
@@ -812,21 +813,34 @@ const ContentWritting = () => {
         </div>
 
         <div className="social-sharing flex space-x-4 mt-8">
+          <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaFacebook className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaInstagram className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.instagram.com/creativapoeta_/">
+          <button className="text-black hover:text-[#EEBA2B]">
+          <FaTiktok className="text-2xl" />
+          </button>
+          </a>
+          <a href="https://www.linkedin.com/company/105066709/">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaLinkedinIn className="text-2xl" />
           </button>
+          </a>
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>
+          <a href="https://github.com/creativaPoetaLtd">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaGithub className="text-2xl" />
           </button>
+          </a>
         </div>
 
         {/* Links to Other Services */}

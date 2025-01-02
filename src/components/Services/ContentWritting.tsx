@@ -266,7 +266,7 @@ const ContentWritting = () => {
               </span>
             </h1>
           </div>
-          <p className="text-xl leading-relaxed text-justify md:text-left">
+          <p className="text-xl leading-relaxed text-center md:text-left">
             The power of words should never be underestimated. Our passionate
             writers create customized content that aligns with your brand and
             values, engaging and informing your audience. Whether it's blog
@@ -742,15 +742,21 @@ const ContentWritting = () => {
 
         {/* Social Sharing */}
         <div className="social-sharing flex space-x-4 mt-8">
+        <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaFacebook className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.instagram.com/creativapoeta_/">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaInstagram className="text-2xl" />
           </button>
+          </a>
+          <a href="https://www.linkedin.com/company/105066709/">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaLinkedinIn className="text-2xl" />
           </button>
+          </a>
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>

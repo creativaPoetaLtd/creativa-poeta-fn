@@ -1,15 +1,15 @@
 
-import ProjectDevelopmentComponent from "../../components/Services/GraphicDesign";
 import NavBar from "../../components/NavBars/NavBar";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";
-const ProjectDevelopment = () => {
+import GraphicDesign from "../../components/Services/GraphicDesign";
+const GraphicDesignPage = () => {
     return (
         <div className="App w-full flex flex-col snap-x scroll-smooth">
             <div className="w-full ml-6 right-2 left flex justify-end">
                 <NavBar />
             </div>
-            <ProjectDevelopmentComponent/>
+            <GraphicDesign />
             <div className="w-full flex flex-col scroll-smooth snap-x">
                 <Footer />
                 <MainFooter />
@@ -18,4 +18,4 @@ const ProjectDevelopment = () => {
     )
 }
 
-export default ProjectDevelopment;
+export default GraphicDesignPage;

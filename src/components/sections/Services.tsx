@@ -12,7 +12,7 @@ const Services = () => {
       className="mainn h-fit min-h-screen flex flex-col items-center bg-slate-800 relative">
       {/* Title Section */}
       <div className="w-full backdrop-blur-lg bg-gradient-to-r from-white to-transparent flex flex-col items-center py-3">
-        <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-justify text-[#EEBA2B]">
+        <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-center text-[#EEBA2B]">
           <b className="text-black">{ServiceLocale[lang].title1}</b>
           <br />
           {ServiceLocale[lang].title2}
@@ -28,18 +28,10 @@ const Services = () => {
                 ? "/services/web-app"
                 : blog.id === 2
                 ? "/services/content-writing"
-                : blog.id === 5
-                ? "/services/digital-marketing"
                 : blog.id === 3
                 ? "/services/graphic-design"
                 : blog.id === 4
-                ? "/services/video-creation"
-                : blog.id === 6
-                ? "/services/advertising-design"
-                : blog.id === 7
-                ? "/services/website-creation"
-                : blog.id === 8
-                ? "/services/digital-support"
+                ? "/services/digital-marketing"
                 : "#"
             }
             key={blog.id}>

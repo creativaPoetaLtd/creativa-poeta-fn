@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import Popup from "../unUsedComponents/MailConfirm";
 import { useState } from "react";
@@ -144,16 +144,19 @@ const Contact = () => {
                     <p className="text-gray-500">+1 234 56 78</p>
                   </div>
                   <div className="flex space-x-4  bottom-0 text-xl pb-4">
-                    <a href="#facebook" className="text-white">
+                    <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#" className="text-white">
                       <FaFacebook />
                     </a>
                     <a href="#twitter" className="text-white">
                       <FaTwitter />
                     </a>
-                    <a href="#instagram" className="text-white">
+                    <a href="https://www.instagram.com/creativapoeta_/" className="text-white">
                       <FaInstagram />
                     </a>
-                    <a href="#linkedin" className="text-white">
+                    <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1" className="text-white">
+                    <FaTiktok />
+                    </a>
+                    <a href="https://www.linkedin.com/company/105066709/" className="text-white">
                       <FaLinkedin />
                     </a>
                     <a href="#mail" className="text-white">
