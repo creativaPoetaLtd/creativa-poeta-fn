@@ -2,7 +2,6 @@ import {useState } from "react";
 import { useLocation } from "react-router-dom";
 import BurgerButton from "./BurgerButton";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTimes, FaTwitter } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
 import logoBurger from '../../assets/flags/logoBurger.png'
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -94,7 +93,7 @@ function NavBar() {
                   {servicesSubMenuVisible && (
                     <div className="pl-6 flex text-md flex-col mt-3 space-y-2">
                       <a
-                        href="#services"
+                        href="/services/graphic-design"
                         onClick={toggleSidebar}
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
@@ -102,7 +101,7 @@ function NavBar() {
                         {NavLocale[lang]?.subservice1}
                       </a>
                       <a
-                        href="#services"
+                        href="/services/content-writing"
                         onClick={toggleSidebar}
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
@@ -110,7 +109,7 @@ function NavBar() {
                         {NavLocale[lang]?.subservice2}
                       </a>
                       <a
-                        href="#services"
+                        href="/services/digital-marketing"
                         onClick={toggleSidebar}
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
@@ -118,53 +117,13 @@ function NavBar() {
                         {NavLocale[lang]?.subservice3}
                       </a>
                       <a
-                        href="#services"
+                        href="/services/web-app"
                         onClick={toggleSidebar}
                         className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
                           }`}
                       >
                         {NavLocale[lang]?.subservice4}
                       </a>
-                      <a
-                        href="#services"
-                        onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                          }`}
-                      >
-                        {NavLocale[lang]?.subservice5}
-                      </a>
-                      <a
-                        href="#services"
-                        onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                          }`}
-                      >
-                        {NavLocale[lang]?.subservice6}
-                      </a>
-                      <a
-                        href="#services"
-                        onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                          }`}
-                      >
-                        {NavLocale[lang]?.subservice7}
-                      </a>
-                      <a
-                        href="#services"
-                        onClick={toggleSidebar} 
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                          }`}
-                      >
-                        {NavLocale[lang]?.subservice9}
-                      </a>
-                      <a
-                        href="#services"
-                        onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                          }`}
-                      >
-                        {NavLocale[lang]?.subservice8}
-                         </a>
                     </div>
                   )}
                 </div>
@@ -183,15 +142,6 @@ function NavBar() {
                 >
                   { NavLocale[lang]?.getStarted}
                 </Link>
-                
-                <Link
-                  to="/FAQ"
-                  onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  {NavLocale[lang]?.faq}
-                </Link>
-
                 <Link
                   to="/contact"
                   onClick={toggleSidebar}
@@ -211,7 +161,7 @@ function NavBar() {
                 <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#" className="text-white">
                   <FaFacebook />
                 </a>
-                <a href="#twitter" className="text-white">
+                <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09" className="text-white">
                   <FaTwitter />
                 </a>
                 <a href="https://www.instagram.com/creativapoeta_/" className="text-white">
@@ -223,9 +173,7 @@ function NavBar() {
                 <a href="https://www.linkedin.com/company/105066709/" className="text-white">
                   <FaLinkedin />
                 </a>
-                <a href="#mail" className="text-white">
-                  <HiOutlineMail />
-                </a>
+              
               </div>
             </div>
           </nav>

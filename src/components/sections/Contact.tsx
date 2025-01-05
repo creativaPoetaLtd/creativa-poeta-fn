@@ -1,5 +1,4 @@
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
 import Popup from "../unUsedComponents/MailConfirm";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -147,7 +146,7 @@ const Contact = () => {
                     <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#" className="text-white">
                       <FaFacebook />
                     </a>
-                    <a href="#twitter" className="text-white">
+                    <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09" className="text-white">
                       <FaTwitter />
                     </a>
                     <a href="https://www.instagram.com/creativapoeta_/" className="text-white">
@@ -158,9 +157,6 @@ const Contact = () => {
                     </a>
                     <a href="https://www.linkedin.com/company/105066709/" className="text-white">
                       <FaLinkedin />
-                    </a>
-                    <a href="#mail" className="text-white">
-                      <HiOutlineMail />
                     </a>
 
                   </div>

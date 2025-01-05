@@ -110,7 +110,7 @@ const Contact = () => {
                   <div className="flex mt-4 -mx-1.5 ">
                     <a
                       className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500"
-                      href="#">
+                      href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
                       <svg
                         className="w-10 h-10 fill-current"
                         viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ const Contact = () => {
 
                     <a
                       className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500"
-                      href="#">
+                      href="https://www.linkedin.com/company/105066709/">
                       <svg
                         className="w-8 h-8"
                         viewBox="0 0 24 24"
@@ -145,7 +145,7 @@ const Contact = () => {
 
                     <a
                       className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500"
-                      href="#">
+                      href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr">
                       <svg
                         className="w-8 h-8"
                         viewBox="0 0 24 24"
@@ -160,7 +160,7 @@ const Contact = () => {
 
                     <a
                       className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500"
-                      href="#">
+                      href="https://www.instagram.com/creativapoeta_/">
                       <svg
                         className="w-8 h-8"
                         viewBox="0 0 24 24"
@@ -178,7 +178,7 @@ const Contact = () => {
 
               <div className="mt-8 w-full desktop:w-[46%] laptop:w-[46%] tablet:w-full">
                 <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-black shadow-2xl rounded-xl ">
-                  <h1 className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+                  <h1 className="text-2xl font-medium text-white dark:text-gray-200">
                     {contactLocale[lang]?.form}
                   </h1>
 
@@ -197,12 +197,12 @@ const Contact = () => {
                         name="name"
                         value={name}
                         onChange={handleNameChange}
-                        className="block w-full px-5 py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
+                        className="block w-full px-5  py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
                       />
                     </div>
 
                     <div className="flex-1 mt-6">
-                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                      <label className="block mb-2 text-sm text-white dark:text-gray-200">
                         {contactLocale[lang]?.emailAddress}
                       </label>
                       <input
@@ -210,16 +210,16 @@ const Contact = () => {
                         placeholder="johndoe@example.com"
                         value={email}
                         onChange={handleEmailChange}
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 bg-black border border-yellow-200 rounded-md "
+                        className="block w-full px-5 py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
                       />
                     </div>
 
                     <div className="w-full mt-6">
-                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                      <label className="block mb-2 text-sm text-white dark:text-gray-200">
                         {contactLocale[lang]?.message}
                       </label>
                       <textarea
-                        className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-black border border-yellow-200 rounded-md md:h-48 "
+                        className="block w-full h-32 px-5 py-3 mt-2 text-white placeholder-gray-400 bg-black border border-yellow-200 rounded-md md:h-48 "
                         placeholder="Message"
                         value={message}
                         onChange={handleMessageChange}
