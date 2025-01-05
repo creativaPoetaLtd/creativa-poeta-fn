@@ -66,7 +66,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     
       className={` font-bold z-30 text-3xl  md:text-4xl   text-white flex space-x-3 justify-center m-auto text-center items-center p-1 md:p-1 fixed top-5 right-4`}
     > 
-  <div className="localizationButtonSwitcher flex justify-start">
+  <div className="localizationButtonSwitcher justify-start hidden">
             <Dropdown overlay={langMenu} trigger={["click"]} >
               <button className="currentLocal flex items-center space-x-2">
                 <img

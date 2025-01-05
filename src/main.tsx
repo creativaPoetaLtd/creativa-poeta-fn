@@ -6,7 +6,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TermsPage from './pages/TermsPage.tsx';
-import FaqPage from './pages/FaqPage.tsx';
 import ContactPage from './pages/ContactPage.tsx';
 import ScrollToTop from './ScrollToTop.tsx';
 import ProjectFormPage from './pages/ProjectFormPage.tsx';
@@ -26,7 +25,6 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
-        <Route path="/FAQ" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/career" element={<JobsPages />} />
         <Route path="/start-project" element={<ProjectFormPage />} />

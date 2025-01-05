@@ -5,9 +5,9 @@ import { Job } from '../types/types';
 import { FaClipboardList } from 'react-icons/fa';
 
 
-
 const JobPage = () => {
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For toggling the job list sidebar
 
     const jobData: Job[] = [
         {
@@ -230,34 +230,36 @@ const JobPage = () => {
 
     const handleJobSelect = (job: Job) => {
         setSelectedJob(job);
+        setIsSidebarOpen(false); // Close sidebar when a job is selected (on mobile/tablet)
     };
 
+
     return (
-        <div className="job-page grid grid-cols-1 md:grid-cols-3 gap-6 h-screen mt-24 p-2 md:p-6 bg-gradient-to-br from-gray-100 to-gray-300">
-            {jobData.length === 0 ? (
-                <div className="col-span-3 flex flex-col items-center justify-center text-center rounded-lg p-10">
-                    <p className="text-3xl font-semibold text-gray-700 mb-6">
-                        No jobs available at the moment
-                    </p>
-                    <p className="text-gray-500 mb-8">
-                        We're constantly adding new opportunities. If you'd like to stay updated, please submit your info below.
-                    </p>
-                    <button className="inline-block px-6 py-3 bg-[#EEBA2B] text-white font-semibold rounded-lg shadow-lg hover:bg-yellow-400">
-                        Submit Your Info
-                    </button>
-                </div>
-            ) : (
-                <>
-                    <div className="col-span-1 bg-white rounded-lg shadow-md p-4 flex flex-col h-[calc(100vh-8rem)]">
-                        <h2 className="text-2xl font-bold text-black mb-4">Open Jobs</h2>
-                        
-                        {/* Scrollable container with explicit height */}
-                        <div className="flex-1 overflow-y-auto min-h-0">
+        <div className="job-page flex flex-col h-screen mt-24 bg-gradient-to-br from-gray-100 to-gray-300">
+            {/* Header with toggle button */}
+            <header className="md:hidden flex justify-between items-center p-4 bg-white shadow-md">
+                <h1 className="text-xl font-bold text-gray-800">Job Portal</h1>
+                <button
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    className="px-4 py-3 mt-6 text-md font-bold tracking-wide bg-yellow-500 text-black rounded-md hover:bg-yellow-400"
+                >
+                    Job List
+                </button>
+            </header>
+    
+            <div className="flex-1 flex overflow-hidden">
+                {/* Sidebar */}
+                <aside
+                    className={`absolute md:static z-10 top-0 left-0 h-full bg-white shadow-md transform ${
+                        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } md:translate-x-0 transition-transform duration-300 md:w-1/3 lg:w-1/4`}
+                >
+                    <div className="flex flex-col h-full">
+                        <h2 className="text-2xl font-bold text-black p-4 border-b">Open Jobs</h2>
+                        <div className="flex-1 overflow-y-auto p-4">
                             <JobList jobs={jobData} onJobSelect={handleJobSelect} />
                         </div>
-                        
-                        {/* Footer with link - now using sticky positioning */}
-                        <div className="sticky bottom-0 left-0 right-0 mt-4 pt-4 bg-white border-t">
+                        <div className="p-4 border-t">
                             <a
                                 href="/form-to-leave-info"
                                 className="block text-blue-600 hover:underline font-medium text-center"
@@ -266,21 +268,23 @@ const JobPage = () => {
                             </a>
                         </div>
                     </div>
-
-                    <div className="col-span-2 bg-white rounded-lg shadow-lg p-2 h-[calc(100vh-8rem)] overflow-y-auto">
-                        {selectedJob ? (
-                            <JobDetails job={selectedJob} />
-                        ) : (
-                            <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                                <FaClipboardList className="text-6xl mb-4" />
-                                <p className="text-lg font-medium">Select a job to view details</p>
-                            </div>
-                        )}
-                    </div>
-                </>
-            )}
+                </aside>
+    
+                {/* Job Details */}
+                <main className="flex-1 bg-white rounded-lg shadow-lg p-4 overflow-y-auto md:w-2/3 lg:w-3/4">
+                    {selectedJob ? (
+                        <JobDetails job={selectedJob} />
+                    ) : (
+                        <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                            <FaClipboardList className="text-6xl mb-4" />
+                            <p className="text-lg font-medium">Select a job to view details</p>
+                        </div>
+                    )}
+                </main>
+            </div>
         </div>
     );
-};
+}    
+
 
 export default JobPage;

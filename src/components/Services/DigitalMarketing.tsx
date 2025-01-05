@@ -11,7 +11,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaFacebook,
-  FaGithub,
 } from "react-icons/fa";
 
 export const handleNavigate = () => {
@@ -343,7 +342,7 @@ const DigitalMarketings = () => {
     <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-2xl md:text-4xl font-bold">
+          <h1 className="text-xl md:text-3xl font-bold">
           Digital marketing & social media
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
@@ -353,13 +352,13 @@ const DigitalMarketings = () => {
         </p>
       </div>
 
-      <div className="flex flex-col space-y-24 w-full mt-12">
+      <div className="flex flex-col space-y-10 laptop:space-y-16  w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         In a fast-paced digital world, standing out is essential. At Creativa Poeta, we specialize in helping brands enhance their online presence, connect with their audience, and achieve measurable results. From social media management to crafting impactful digital strategies, we transform your vision into a digital reality.
-</p>
+    </p>
         <button
           onClick={handleNavigate}
-          className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
+          className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold p-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
           {DesignLocale[lang].action}
         </button>
       </div>
@@ -630,9 +629,9 @@ const DigitalMarketings = () => {
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
   Process workflow  </h2>
   
-  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-6 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
     {/* Step 1 */}
-    <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
+    <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         1
       </div>
@@ -642,8 +641,8 @@ const DigitalMarketings = () => {
     </div>
 
     {/* Step 2 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
+      <div className="w-10 h-10  flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         2
       </div>
       <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Strategy development</h3>
@@ -652,7 +651,7 @@ const DigitalMarketings = () => {
     </div>
 
     {/* Step 3 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         3
       </div>
@@ -662,7 +661,7 @@ const DigitalMarketings = () => {
     </div>
 
     {/* Step 4 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         4
       </div>
@@ -672,7 +671,7 @@ const DigitalMarketings = () => {
     </div>
 
     {/* Step 5 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         5
       </div>
@@ -681,7 +680,7 @@ const DigitalMarketings = () => {
        Monitoring campaign results and providing actionable insights.      </p>
     </div>
     {/* Step 6 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
+    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         6
       </div>
@@ -906,14 +905,12 @@ const DigitalMarketings = () => {
             <FaLinkedinIn className="text-2xl" />
           </button>
           </a>
+          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>
-          <a href="https://github.com/creativaPoetaLtd">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaGithub className="text-2xl" />
-          </button>
           </a>
+         
         </div>
 
         {/* Links to Other Services */}

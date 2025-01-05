@@ -10,7 +10,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaFacebook,
-  FaGithub,
 } from "react-icons/fa";
 
 
@@ -757,12 +756,12 @@ const ContentWritting = () => {
             <FaLinkedinIn className="text-2xl" />
           </button>
           </a>
+          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaGithub className="text-2xl" />
-          </button>
+          </a>
+         
         </div>
 
         {/* Links to Other Services */}

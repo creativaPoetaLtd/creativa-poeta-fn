@@ -11,7 +11,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaFacebook,
-  FaGithub,
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 
@@ -338,7 +337,7 @@ const GraphicDesign = () => {
     <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-2xl md:text-4xl font-bold">
+          <h1 className="text-xl md:text-3xl font-bold">
           Graphic Design & Visual Communication
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
@@ -348,7 +347,7 @@ const GraphicDesign = () => {
         </p>
       </div>
 
-      <div className="flex flex-col space-y-24 w-full mt-12">
+      <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         A picture is worth a thousand words, and at Creativa Poeta, we ensure those words are memorable. From captivating graphics to dynamic videos, we craft designs that leave a lasting impression, communicate your message effectively, and elevate your brand's identity.     </p>
         <button
@@ -610,7 +609,7 @@ const GraphicDesign = () => {
     Design Process Workflow
   </h2>
   
-  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 justify-between items-center gap-8 space-y-12 md:space-y-0 md:space-x-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 justify-between items-center gap-8 space-y-12 md:space-y-0 md:space-x-4">
     {/* Step 1 */}
     <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
@@ -651,7 +650,7 @@ const GraphicDesign = () => {
       </div>
       <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Feedback & Iteration</h3>
       <p className="text-sm">
-        Collaborating with you to refine designs and ensure they align perfectly with your vision.
+        Collaborating with you to refine designs and ensure they align perfectly with your vision and expectations. 
       </p>
     </div>
 
@@ -883,12 +882,12 @@ const GraphicDesign = () => {
             <FaLinkedinIn className="text-2xl" />
           </button>
           </a>
+          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaGithub className="text-2xl" />
-          </button>
+          </a>
+      
         </div>
 
         {/* Links to Other Services */}

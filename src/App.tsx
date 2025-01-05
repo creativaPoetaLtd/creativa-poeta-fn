@@ -3,7 +3,6 @@ import About from './components/sections/About';
 import NavBar from './components/NavBars/NavBar';
 import Faq from './components/sections/Faq';
 import Services from './components/sections/Services';
-import Projects from './components/sections/Projects';
 import Footer from './components/sections/Footer';
 import MainFooter from './components/sections/MainFooter';
 const App = () => {
@@ -17,7 +16,7 @@ const App = () => {
         <Home />
         <About />
         <Services />
-        <Projects />
+        {/* <Projects /> */}
         <Faq />
         <Footer />
         <MainFooter />

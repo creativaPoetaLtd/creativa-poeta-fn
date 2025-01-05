@@ -11,7 +11,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaFacebook,
-  FaGithub,
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 
@@ -298,7 +297,7 @@ const WebApp = () => {
     <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-2xl md:text-4xl font-bold">
+          <h1 className="text-xl md:text-3xl font-bold">
           Web & app development
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
@@ -308,7 +307,7 @@ const WebApp = () => {
         </p>
       </div>
 
-      <div className="flex flex-col space-y-24 w-full mt-12">
+      <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         In the ever-evolving digital landscape, a robust and engaging online presence is essential. At Creativa Poeta, we transform your ideas into digital realities by crafting modern websites, powerful applications, and custom software solutions designed to elevate your business.
 </p>
@@ -567,7 +566,7 @@ const WebApp = () => {
     Process Workflow
   </h2>
   
-  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
     {/* Step 1 */}
      
       <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
@@ -838,12 +837,12 @@ const WebApp = () => {
             <FaLinkedinIn className="text-2xl" />
           </button>
           </a>
+          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
           <button className="text-black hover:text-[#EEBA2B]">
             <FaTwitter className="text-2xl" />
           </button>
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaGithub className="text-2xl" />
-          </button>
+          </a>
+          
         </div>
 
         {/* Links to Other Services */}

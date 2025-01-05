@@ -19,7 +19,7 @@ const ProjectForm = () => {
         email: '',
         phone: '',
         company: '',
-        projectType: '' as keyof typeof options.deliverables,
+        projectType: '' as keyof typeof options.deliverables | 'Other',
         deliverables: [] as string[],
         mainGoal: '',
         audience: [] as string[],
@@ -39,6 +39,12 @@ const ProjectForm = () => {
 
     const handleNextStep = () => {
         let isValid = true;
+          // Special handling for "Other" project type in step 1
+    if (step === 1 && formData.projectType === "Other") {
+        setStep(11); // Skip to the last step
+        setShowError(false);
+        return;
+    }
     
         switch (step) {
             case 1:
@@ -141,7 +147,7 @@ const ProjectForm = () => {
                 email: '',
                 phone: '',
                 company: '',
-                projectType: 'Graphic Design',
+                projectType: 'Graphic Design and Visual Communication',
                 deliverables: [],
                 mainGoal: '',
                 audience: [],
@@ -166,16 +172,55 @@ const ProjectForm = () => {
     
 
     const options = {
-        projectType: ["Graphic Design", "Content Writing", "Video Creation and Editing", "Digital Marketing", "Advertising Design", "Website Creation", "Digital Assistance"],
+        projectType: ["Graphic Design and Visual Communication", "Content Writing and Creation", "Digital Marketing and Social Media", "Web and App Development", "Other"],
         deliverables: {
-            "Graphic Design": ["Logo", "Poster or flyer", "Visual advertisement"],
-            "Content Writing": ["Blog post", "Social media content"],
-            "Video Creation and Editing": ["Promotional video", "Tutorial video"],
-            "Digital Marketing": ["Marketing strategy", "SEO content"],
-            "Advertising Design": ["Banner ads", "Brochures"],
-            "Website Creation": ["Complete website", "Landing page"],
-            "Digital Assistance": ["Digital assistance", "advice or consultation", "Technical support", "Other"]
-        },
+            "Graphic Design and Visual Communication": [
+                "Logo Design",
+                "Brand Identity Package (logos, business cards, letterheads)",
+                "Custom Illustrations",
+                "Infographics",
+                "Social Media Templates",
+                "Marketing Collaterals (posters, flyers, brochures)",
+                "Digital Ads Graphics",
+                "Product Packaging Design",
+                "Presentation Design"
+            ],
+            "Content Writing and Creation": [
+                "SEO-Optimized Blog Posts",
+                "Website Copy",
+                "Social Media Captions and Content",
+                "White Papers and Case Studies",
+                "Email Marketing Campaign Content",
+                "E-books and Guides",
+                "Press Releases",
+                "Video Scriptwriting",
+                "Product Descriptions"
+            ],
+            "Digital Marketing and Social Media": [
+                "Comprehensive Marketing Strategy Plan",
+                "Search Engine Optimization (SEO) Audits and Reports",
+                "Google Ads Campaign Setup and Management",
+                "Social Media Strategy and Management",
+                "Content Calendar for Social Platforms",
+                "Email Marketing Campaigns",
+                "Performance Analytics and Reports",
+                "Brand Campaign Development",
+                "Influencer Marketing Collaboration Plan"
+            ],
+            "Web and App Development": [
+                "Fully Responsive Website",
+                "Custom Landing Page Design",
+                "E-commerce Website Development",
+                "Web Application Development",
+                "Mobile App Development (iOS and Android)",
+                "User Interface (UI) Design",
+                "User Experience (UX) Prototyping",
+                "Backend and Database Integration",
+                "Website Performance Optimization",
+                "Maintenance and Support Plans"
+            ],
+            "Other": []
+        },        
         mainGoals: ["Increase brand visibility", "Attract new clients", "Build a visual identity", "Increase sales", "Promote a new offering", "Educate or inform the public"],
         audience: ["General public", "Professionals", "Young adults", "Local community", "International market"],
         stylePreferences: ["Formal and professional", "Creative and original", "Minimalistic and modern", "Warm and engaging", "Casual and relaxed", "Innovative and high-tech"],
@@ -732,27 +777,32 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#24303E] py-12 px-4 sm:px-6 lg:px-8"
-        style={{
+        <div
+          className="min-h-screen flex items-center justify-center bg-[#24303E] py-12 px-4 sm:px-6 lg:px-8"
+          style={{
             backgroundImage: `url(${image8})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-        }}
+          }}
         >
-                        <div className="absolute inset-0 bg-black opacity-50"></div> 
-            <Link to="/" className=''>
-                <div className="absolute top-5 left-4 text-white">
-                    <img src={logo} alt="logo" className="h-[50px]" />
-                </div>
-            </Link>
-            <div className="md:max-w-5xl max-w-7xl w-full md:p-10 p-6 relative bg-black rounded-2xl">
-                <form onSubmit={handleSubmit} className="space-y-8 w-full">
-                    {renderStep()}
-                </form>
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <Link to="/" className="">
+            <div className="absolute top-5 left-4 text-white">
+              <img src={logo} alt="logo" className="h-[50px]" />
             </div>
+          </Link>
+          <div className="md:max-w-5xl max-w-7xl w-full md:p-10 p-6 relative bg-black rounded-2xl">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 w-full"
+              style={{ height: "500px" }} 
+            >
+              {renderStep()}
+            </form>
+          </div>
         </div>
-    );
-};
+      );
+      };
 
 export default ProjectForm;

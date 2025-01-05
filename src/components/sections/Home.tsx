@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineDown, AiOutlineTwitter } from "react-icons/ai";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
 import image8 from "../../assets/flags/image8.jpg";
 import image2 from "../../assets/flags/image2.jpg";
 import BackgroundCircles from "../buttons/BackgroundCircles";
@@ -226,6 +225,7 @@ const handleStartProject = () => {
           </div>
           <div className="laptop:block tablet:block hidden absolute right-60 ">
             <div className="flex flex-col space-y-5 animate-pulse hover:animate-none py-20">
+             <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "Twitter" ? "animate-icon-active" : ""
@@ -240,7 +240,8 @@ const handleStartProject = () => {
                 </span>
                 <AiOutlineTwitter />
               </div>
-              <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
+              </a>
+              <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr">
               <div
                 className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
                   hoveredIcon === "Facebook" ? "animate-icon-active" : ""
@@ -306,22 +307,7 @@ const handleStartProject = () => {
                 <FaLinkedinIn />
               </div>
               </a>
-              <a href="mailto:creativapoeta@gmail.com">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "Mail" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("Mail")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-16 text-[#FFFF00] ${
-                    hoveredIcon === "Mail" ? "block" : "hidden"
-                  }`}>
-                  Mail
-                </span>
-                <HiOutlineMail />
-              </div>
-              </a>
+           
             </div>
           </div>
         </div>
