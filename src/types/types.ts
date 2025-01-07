@@ -3,11 +3,11 @@ export interface Job {
     title: string;
     company: string;
     location: string;
-    salary: string;
+    // salary: string;
     description: string;
     responsibilities: string[];
     requirements: string[];
-    skills: string[];
+    // skills: string[];
     benefits: string[];
-    applicationInstructions: string;
+    applicationInstructions: string | React.ReactNode;
 }
