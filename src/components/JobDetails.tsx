@@ -1,5 +1,5 @@
 import { Job } from "../types/types";
-import { FaBriefcase, FaMapMarkerAlt, FaDollarSign, FaCheckCircle, FaClipboardList, FaListAlt, FaLightbulb } from "react-icons/fa";
+import { FaBriefcase, FaMapMarkerAlt, FaCheckCircle, FaClipboardList, FaListAlt, } from "react-icons/fa";
 
 const JobDetails = ({ job }: { job: Job }) => {
     return (
@@ -12,9 +12,7 @@ const JobDetails = ({ job }: { job: Job }) => {
             <p className="text-md text-gray-600 flex items-center mb-4">
                 <FaMapMarkerAlt className="mr-2 text-[#EEBA2B]" /> {job.location}
             </p>
-            <p className="text-lg font-semibold text-green-700 flex items-center mb-6">
-                <FaDollarSign className="mr-2 text-green-500" /> {job.salary}
-            </p>
+           
 
             {/* Job Description */}
             <div className="bg-white rounded-lg p-4 shadow-md mb-6">
@@ -46,17 +44,7 @@ const JobDetails = ({ job }: { job: Job }) => {
                 </ul>
             </div>
 
-            {/* Skills */}
-            <div className="bg-white rounded-lg p-4 shadow-md mb-6">
-                <h3 className="text-xl font-semibold text-[#EEBA2B] flex items-center mb-2">
-                    <FaLightbulb className="mr-2 text-[#EEBA2B]" /> Key Skills
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 text-sm">
-                    {job.skills.map((skill, index) => (
-                        <li key={index} className="mb-1">{skill}</li>
-                    ))}
-                </ul>
-            </div>
+          
 
             {/* Benefits & Perks */}
             <div className="bg-white rounded-lg p-4 shadow-md mb-6">
@@ -72,14 +60,10 @@ const JobDetails = ({ job }: { job: Job }) => {
 
             {/* Application Instructions */}
             <div className="bg-white rounded-lg p-4 shadow-md mb-6">
-                <h3 className="text-xl font-semibold text-[#EEBA2B] mb-2">Application Instructions</h3>
+                <h3 className="text-xl font-semibold text-[#EEBA2B] mb-2">How to Apply?</h3>
                 <p className="text-gray-700 text-sm">{job.applicationInstructions}</p>
             </div>
 
-            {/* Apply Button */}
-            <button className="w-full mt-6 px-6 py-3 bg-[#EEBA2B] text-white font-bold rounded-lg shadow-lg hover:bg-[#EEBA2B] transition-all duration-200 ease-in-out">
-                Apply Now
-            </button>
         </div>
     );
 };

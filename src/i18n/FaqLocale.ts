@@ -53,8 +53,6 @@ const FaqLocale: any = {
         description10:"Yes, in addition to creation, writing, and video editing, we offer marketing services to increase the visibility of your creations. We develop custom strategies to reach your target audience and maximize the impact of your content.",
         title11:"How can I see examples of your previous work?",
         description11:"We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
-        title12:"What payment methods does Creativa Poeta accept?",
-        description12:"We accept several common payment methods, including bank transfers, credit card payments, and other secure online payment methods. We will ensure you have convenient payment options."
     },
     kiny:{
         h1:"F.A.Q.",

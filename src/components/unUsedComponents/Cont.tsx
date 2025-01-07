@@ -2,7 +2,6 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaRegEnvelope, FaTiktok, FaTwitter
 import Popup from "./MailConfirm";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import {FiPhone} from 'react-icons/fi';
 import getLangFromLocalStorage from "../../../utils/Lang";
 import FooterLocale from "../../i18n/FooterLocale";
 import emailjs from '@emailjs/browser'; 
@@ -107,10 +106,6 @@ const Cont = () => {
               </div>
               <div className="flex flex-col basis-full backdrop-blur-2xl h-full text-gray-500">
                 <div className="contactInfo  flex flex-col j laptop:justify-normal desktop:justify-normal  text-gray-500">
-                  <div className="text-2xl  text-[#EEBA2B] flex space-x-4">
-                    <FiPhone className="text-2xl text  text-[#EEBA2B] flex " />
-                    <h1 className="laptop:text-2xl desktop:text-xl text-xl">+32 479 08 99 25</h1>
-                  </div>
                   <div className="text-2xl mt-2  text-[#EEBA2B] flex space-x-4 ">
                   <FaRegEnvelope className="text-2xl  text-[#EEBA2B] flex my-auto justify-center text-center items-center " />
                   <h1 className="laptop:text-2xl desktop:text-xl text-xl ">contact@creativapoeta.com</h1>
