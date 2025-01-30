@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import image8 from "../assets/flags/image8.jpg";
-import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import logo from "../assets/flags/logopoeta1.png"; 
 import contactLocale from "../i18n/contactLocale";
 import getLangFromLocalStorage from "../../utils/Lang";
 import { FaArrowRight } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { contactUs } from "../APIs/Contact";
 
 
 
@@ -33,47 +33,42 @@ const Contact = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     if (!email || !name || !message) {
       toast.error(`${contactLocale[lang]?.validation}`);
       setIsLoading(false);
       return;
     }
-
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error(`${contactLocale[lang]?.email}`);
       setIsLoading(false);
       return;
     }
-
+  
     try {
-      // EmailJS configuration
-      const serviceID = "service_9qlvez4"; 
-      const templateID = "template_8h5wiim"; 
-      const publicKey = "xX4q61Mzs09zxCu_A";
-
-      const templateParams = {
-        from_name: name,
-        from_email: email,
-        message: message,
-        reply_to: email,
-      };
-
-      // Send email via EmailJS
-      await emailjs.send(serviceID, templateID, templateParams, publicKey);
-
-      // Reset the form fields after success
-      setEmail("");
-      setName("");
-      setMessage("");
-      toast.success(`${contactLocale[lang]?.success}`);
-    } catch (error) {
-      toast.success(`${contactLocale[lang]?.sendErrror}`);
+      const response = await contactUs
+      ({
+        fullName: name,
+        email,
+        message,
+      });
+      if (response.message) {
+        toast.success(response.message );
+        setEmail("");
+        setName("");
+        setMessage("");
+      } else {
+        throw new Error(response.message || "Something went wrong!");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "An error occurred. Please try again later.");
     } finally {
       setIsLoading(false);
     }
   };
+  
   return (
     <>
       <section
