@@ -109,8 +109,7 @@ const JobPage = () => {
         <h1 className="text-xl font-bold text-gray-800">Job Portal</h1>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="px-4 py-3 mt-6 text-md font-bold tracking-wide bg-yellow-500 text-black rounded-md hover:bg-yellow-400"
-        >
+          className="px-4 py-3 mt-6 text-md font-bold tracking-wide bg-yellow-500 text-black rounded-md hover:bg-yellow-400">
           Job List
         </button>
       </header>
@@ -119,14 +118,21 @@ const JobPage = () => {
         <aside
           className={`absolute md:static z-10 top-0 left-0 h-full bg-white shadow-md transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0 transition-transform duration-300 md:w-1/3 lg:w-1/4`}
-        >
+          } md:translate-x-0 transition-transform duration-300 md:w-1/3 lg:w-1/4`}>
           <div className="flex flex-col h-full">
             <h2 className="text-2xl font-bold text-black p-4 border-b">
               Open Jobs
             </h2>
             <div className="flex-1 overflow-y-auto p-4">
               <JobList jobs={jobData} onJobSelect={handleJobSelect} />
+            </div>
+            <div className="p-4 border-t">
+              <a
+                href="/form-to-leave-info"
+                className="block text-blue-600 hover:underline font-medium text-center">
+                Didn't see a suitable job? Submit your info here for future
+                recommendations!
+              </a>
             </div>
           </div>
         </aside>
@@ -138,7 +144,9 @@ const JobPage = () => {
                 ...selectedJob,
                 applicationInstructions: (
                   <p>
-                    {highlightEmail(String(selectedJob.applicationInstructions || ""))}
+                    {highlightEmail(
+                      String(selectedJob.applicationInstructions || "")
+                    )}
                   </p>
                 ),
               }}
@@ -146,7 +154,9 @@ const JobPage = () => {
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-gray-500">
               <FaClipboardList className="text-6xl mb-4" />
-              <p className="text-lg font-medium">Select a job to view details</p>
+              <p className="text-lg font-medium">
+                Select a job to view details
+              </p>
             </div>
           )}
         </main>

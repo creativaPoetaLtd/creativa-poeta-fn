@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import emailjs from "@emailjs/browser";
 import { Link } from 'react-router-dom';
 import logo from '../assets/flags/logopoeta1.png';
 import Typewriter from '../utils/TypeWritter';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import image8 from '../assets/flags/image8.jpg';
+import { projectForm } from '../APIs/projectForm';
 
 
 const ProjectForm = () => {
@@ -117,31 +117,54 @@ const ProjectForm = () => {
         }
     };
     
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
     
-        // Validate if all required fields are filled
-        const isValid = formData.name &&
-                        formData.email &&
-                        formData.phone &&
-                        formData.company &&
-                        formData.additionalInfo;
-    
-        if (!isValid) {
-            setShowError(true);  
-            return;  
+        // Validate required fields based on backend requirements
+        if (!formData.name || 
+            !formData.email || 
+            !formData.phone || 
+            !formData.projectType || 
+            !formData.deliverables.length || 
+            !formData.audience.length || 
+            !formData.contentElements.length || 
+            !formData.projectPurpose.length || 
+            !formData.mainGoal || 
+            !formData.stylePreference || 
+            !formData.budget || 
+            !formData.status) {
+            setShowError(true);
+            toast.error("Please fill in all required fields");
+            return;
         }
     
-        setShowError(false);  
-    
-        const serviceID = "service_l3behim";
-        const templateID = "template_eeu5gqf";
-        const publicKey = "IyTvafQS4Xo3-QeKc";
-    
         try {
-            await emailjs.send(serviceID, templateID, formData, publicKey);     
-            toast.success("Form submitted successfully!");
+            const data:any = {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                company: formData.company,
+                projectType: formData.projectType,
+                deliverables: formData.deliverables,
+                mainGoal: formData.mainGoal,
+                audience: formData.audience,
+                stylePreference: formData.stylePreference,
+                contentElements: formData.contentElements,
+                budget: formData.budget,
+                timeline: formData.timeline,
+                status: formData.status,
+                projectPurpose: formData.projectPurpose,
+                additionalInfo: formData.additionalInfo
+            }
+            const response = await projectForm (data);
+
+            if (!response.message) {
+                throw new Error(data.message || 'Something went wrong');
+            }
+
+            toast.success(response.message);
             
+            // Reset form
             setFormData({
                 name: '',
                 email: '',
@@ -159,14 +182,13 @@ const ProjectForm = () => {
                 projectPurpose: [],
                 additionalInfo: ''
             });
+            
             setStep(1);
             navigate('/thank-you');
+            
         } catch (error) {
-            if (error instanceof Error) {
-                toast.error("Error sending email: " + error.message);
-            } else {
-                toast.error("An unknown error occurred.");
-            }
+            console.error('Error submitting form:', error);
+            toast.error(error instanceof Error ? error.message : 'Failed to submit form');
         }
     };
     

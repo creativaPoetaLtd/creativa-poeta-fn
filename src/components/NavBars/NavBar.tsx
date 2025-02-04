@@ -129,6 +129,13 @@ function NavBar() {
                 </div>
 
                 <Link
+                  to="/blogs"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
+                >
+                 Blogs
+                </Link>
+                <Link
                   to="/career"
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}

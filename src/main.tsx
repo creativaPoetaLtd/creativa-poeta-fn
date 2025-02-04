@@ -17,6 +17,8 @@ import ContentPage from './pages/Services/ContentPage.tsx';
 import GetBackToYou from './components/getBackToYou.tsx';
 import DigitalMarketingPage from './pages/Services/DigitalMarketing.tsx';
 import GraphicDesignPage from './pages/Services/GraphicDesignPage.tsx';
+import Dashboard from './Dashboard/Dashboard.tsx';
+import BlogsPage from './pages/BlogsPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,13 +33,21 @@ ReactDOM.render(
         <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
+        <Route path="/Blogs" element={<BlogsPage />} />
+
 
         {/* Valid servicessss */}
         <Route path="/services/web-app" element={<WebPage />} />
         <Route path="/services/content-writing" element={<ContentPage />} />
         <Route path="/services/graphic-design" element={<GraphicDesignPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-        
+
+        {/* Dashboard routes */}
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+      </Routes>
+      <Routes>
+        <Route path="dashboard/" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
       </Routes>
     </Router>
     <ToastContainer />

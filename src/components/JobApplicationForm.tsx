@@ -1,28 +1,30 @@
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { ApplyJob } from "../APIs/JobApi";
+
+interface FormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  linkedin: string;
+  currentJobTitle: string;
+  yearsOfExperience: string;
+  desiredJobTitles: string;
+  skills: string[];
+  education: string;
+  certifications: string;
+  languages: string;
+  references: string;
+  preferredLocation: string;
+  additionalComments: string;
+}
 
 const JobApplicationForm = () => {
   const [step, setStep] = useState<number>(1);
-  const [showError, setShowError] = useState(false); // New state for validation
+  const [showError, setShowError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  interface FormData {
-    fullName: string;
-    email: string;
-    phone: string;
-    linkedin: string;
-    currentJobTitle: string;
-    yearsOfExperience: string;
-    desiredJobTitles: string;
-    skills: string[];
-    education: string;
-    certifications: string;
-    languages: string;
-    references: string;
-    preferredLocation: string;
-    additionalComments: string;
-  }
 
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -41,133 +43,106 @@ const JobApplicationForm = () => {
     additionalComments: "",
   });
 
-  const handleNextStepp = () => {
-    let isValid = true;
-    switch (step) {
+  const validateStep = (currentStep: number): boolean => {
+    switch (currentStep) {
       case 1:
-        if (
-          !formData.fullName ||
-          !formData.email ||
-          !formData.phone ||
-          !formData.linkedin
-        ) {
-          isValid = false;
-        }
-        break;
+        return !!(formData.fullName && formData.email && formData.phone);
       case 2:
-        if (
-          !formData.currentJobTitle ||
-          !formData.yearsOfExperience ||
-          !formData.desiredJobTitles
-        ) {
-          isValid = false;
-        }
-        break;
+        return !!(formData.currentJobTitle && formData.yearsOfExperience && formData.desiredJobTitles);
       case 3:
-        if (
-          !formData.skills.length ||
-          !formData.education ||
-          !formData.languages ||
-          !formData.references ||
-          !formData.certifications
-        ) {
-          isValid = false;
-        }
-        break;
+        return !!(formData.skills.length && formData.education && formData.languages);
       case 4:
-        if (!formData.preferredLocation || !formData.additionalComments) {
-          isValid = false;
-        }
-        break;
+        return !!(formData.preferredLocation && formData.additionalComments);
       default:
-        break;
+        return false;
     }
+  };
 
-    if (!isValid) {
+  const handleNextStep = () => {
+    if (!validateStep(step)) {
       setShowError(true);
       return;
     }
-
     setStep((prev) => prev + 1);
     setShowError(false);
   };
 
-  // handlePrevStep function
   const handlePrevStep = () => {
     setStep((prev) => prev - 1);
     setShowError(false);
-  }
-
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
-      const checked = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        skills: checked.checked
-          ? [...prev.skills, checked.value]
-          : prev.skills.filter((skill) => skill !== checked.value),
-      }));
-    }
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    
+    if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
+      const checked = e.target.checked;
+      setFormData((prev) => ({
+        ...prev,
+        skills: checked
+          ? [...prev.skills, value]
+          : prev.skills.filter((skill) => skill !== value),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
 
-    const isValid = Object.values(formData).every((val) => val);
-    if (!isValid) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateStep(4)) {
       setShowError(true);
       return;
     }
 
-    setShowError(false);
-
-    const serviceID = "service_l3behim";
-    const templateID = "template_0qon1ew";
-    const publicKey = "IyTvafQS4Xo3-QeKc";
+    setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        serviceID,
-        templateID,
-        { ...formData } as Record<string, unknown>,
-        publicKey
-      );
-      toast.success("Your application has been submitted successfully!");
-      navigate("/thank-you-for-applying");
-      // Reset form data
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        linkedin: "",
-        currentJobTitle: "",
-        yearsOfExperience: "",
-        desiredJobTitles: "",
-        skills: [],
-        education: "",
-        certifications: "",
-        languages: "",
-        references: "",
-        preferredLocation: "",
-        additionalComments: "",
-      });
-      setStep(1);
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error("Error sending email: " + error.message);
+      const response = await ApplyJob(formData);
+      
+      if (response?.message) {
+        toast.success(response.message);
+        navigate("/thank-you-for-applying");
+        
+        // Reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          linkedin: "",
+          currentJobTitle: "",
+          yearsOfExperience: "",
+          desiredJobTitles: "",
+          skills: [],
+          education: "",
+          certifications: "",
+          languages: "",
+          references: "",
+          preferredLocation: "",
+          additionalComments: "",
+        });
+        setStep(1);
+      } else if (response?.response?.data?.message) {
+        // Handle backend validation errors
+        toast.error(response.response.data.message);
       } else {
-        toast.error("An unknown error occurred.");
+        throw new Error("Something went wrong");
       }
+    } catch (error) {
+      console.error('Application submission error:', error);
+      if (error instanceof Error) {
+        toast.error(`Error submitting application: ${error.message}`);
+      } else {
+        toast.error("An unexpected error occurred while submitting your application.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -250,7 +225,7 @@ const JobApplicationForm = () => {
 
             <button
               type="button"
-              onClick={handleNextStepp}
+              onClick={handleNextStep}
               className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
               Next
             </button>
@@ -308,7 +283,7 @@ const JobApplicationForm = () => {
 
             <button
               type="button"
-              onClick={handleNextStepp}
+              onClick={handleNextStep}
               className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
               Next
             </button>
@@ -451,7 +426,7 @@ const JobApplicationForm = () => {
 
             <button
               type="button"
-              onClick={handleNextStepp}
+              onClick={handleNextStep}
               className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
               Next
             </button>
@@ -494,13 +469,17 @@ const JobApplicationForm = () => {
               Back
             </button>
             <button
-              type="button"
-              onClick={handleSubmit}
-              className={`px-6 py-2 ${
-                formData.additionalComments && formData.preferredLocation
-              } ? 'bg-[#EEBA2B] hover:bg-[#8b6e1c]' : 'bg-gray-400 cursor-not-allowed'} font-semibold rounded-md`}>
-              Submit
-            </button>
+      type="button"
+      onClick={handleSubmit}
+      disabled={isSubmitting}
+      className={`px-6 py-2 ${
+        isSubmitting 
+          ? 'bg-gray-400 cursor-not-allowed' 
+          : 'bg-[#EEBA2B] hover:bg-yellow-400'
+      } text-white rounded-lg transition`}
+    >
+      {isSubmitting ? 'Submitting...' : 'Submit'}
+    </button>
           </div>
         </div>
       )}
