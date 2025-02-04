@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import FooterLocale from "../../i18n/FooterLocale";
-import emailjs from '@emailjs/browser'; 
+import { contactUs } from "../../APIs/Contact";
 
 const lang:any = getLangFromLocalStorage();
 const Cont = () => {
@@ -19,50 +19,49 @@ const Cont = () => {
   const handleNameChange = (e: { target: { value: string; }; }) => setName(e.target.value);
   const handleMessageChange = (e: { target: { value: string; }; }) => setMessage(e.target.value);
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
-    // Check if any field is empty or if the email is invalid
+  
     if (!email || !name || !message) {
       toast.error('Veuillez remplir tous les champs.', { theme: 'colored' });
       return;
     }
-
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error('Veuillez saisir une adresse e-mail valide.', { theme: 'colored' });
       return;
     }
-
+  
     setIsLoading(true);
-
-    const templateParams = {
-      to_name: "Admin",  
-      from_name: name,
+  
+    const formData = {
+      fullName: name,
       email,
       message,
     };
-
-    emailjs
-      .send(
-        'service_l3behim',  
-        'template_qvmp7fm', 
-        templateParams,
-        'IyTvafQS4Xo3-QeKc'  
-      )
-      .then(() => {
-        setIsLoading(false);
+    try {
+      const response = await contactUs(formData);
+      console.log('Raw API Response:', response);
+    
+      if (response?.message) { // Instead of response.success
         setEmail('');
         setName('');
         setMessage('');
-        toast.success('Message envoyé avec succès!', { theme: 'colored' });
-      })
-      .catch(() => {
-        setIsLoading(false);
-        toast.error('Erreur réseau. Veuillez réessayer plus tard.', { theme: 'colored' });
-      });
+        toast.success(response.message, { theme: 'colored' });
+      } else {
+        console.warn('⚠️ Unexpected response format:', response);
+        throw new Error('Something went wrong');
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again later.', { theme: 'colored' });
+    } finally {
+      setIsLoading(false);
+    }
+    
+ 
   };
-
+  
   const handleClosePopup = () => setShowPopup(false);
 
     return (
