@@ -19,11 +19,12 @@ import DigitalMarketingPage from './pages/Services/DigitalMarketing.tsx';
 import GraphicDesignPage from './pages/Services/GraphicDesignPage.tsx';
 import Dashboard from './Dashboard/Dashboard.tsx';
 import BlogsPage from './pages/BlogsPage.tsx';
+import SingleBlogPage from './pages/SingleBlogPage.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ScrollToTop /> {/* This will ensure every page starts from the top on navigation */}
+      <ScrollToTop /> 
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
@@ -34,15 +35,14 @@ ReactDOM.render(
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
         <Route path="/Blogs" element={<BlogsPage />} />
-
-
+        <Route path="/single-blog" element={<SingleBlogPage />} />
+        
         {/* Valid servicessss */}
         <Route path="/services/web-app" element={<WebPage />} />
         <Route path="/services/content-writing" element={<ContentPage />} />
         <Route path="/services/graphic-design" element={<GraphicDesignPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
 
-        {/* Dashboard routes */}
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>
       <Routes>

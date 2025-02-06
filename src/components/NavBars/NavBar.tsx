@@ -135,6 +135,14 @@ function NavBar() {
                 >
                  Blogs
                 </Link>
+
+                <Link
+                  to="/single-blog"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
+                >
+                 Single Blog
+                </Link>
                 <Link
                   to="/career"
                   onClick={toggleSidebar}
