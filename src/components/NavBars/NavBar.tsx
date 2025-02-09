@@ -164,6 +164,20 @@ function NavBar() {
                 >
                   {NavLocale[lang]?.contacts}
                 </Link>
+                <Link
+                  to="/register"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
+                >
+                  Signup
+                </Link>
+                <Link
+                  to="/login"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
+                >
+                  Login
+                </Link>
               </div>
     
               <p className="text-white">

@@ -20,6 +20,8 @@ import GraphicDesignPage from './pages/Services/GraphicDesignPage.tsx';
 import Dashboard from './Dashboard/Dashboard.tsx';
 import BlogsPage from './pages/BlogsPage.tsx';
 import SingleBlogPage from './pages/SingleBlogPage.tsx';
+import Signup from './components/Signup.tsx';
+import Login from './components/Login.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,8 +36,11 @@ ReactDOM.render(
         <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
-        <Route path="/Blogs" element={<BlogsPage />} />
-        <Route path="/single-blog" element={<SingleBlogPage />} />
+        <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blogs/:id" element={<SingleBlogPage />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+
         
         {/* Valid servicessss */}
         <Route path="/services/web-app" element={<WebPage />} />
