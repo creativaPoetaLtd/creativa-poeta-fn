@@ -18,11 +18,15 @@ import GetBackToYou from './components/getBackToYou.tsx';
 import DigitalMarketingPage from './pages/Services/DigitalMarketing.tsx';
 import GraphicDesignPage from './pages/Services/GraphicDesignPage.tsx';
 import Dashboard from './Dashboard/Dashboard.tsx';
+import BlogsPage from './pages/BlogsPage.tsx';
+import SingleBlogPage from './pages/SingleBlogPage.tsx';
+import Signup from './components/Signup.tsx';
+import Login from './components/Login.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ScrollToTop /> {/* This will ensure every page starts from the top on navigation */}
+      <ScrollToTop /> 
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
@@ -32,14 +36,18 @@ ReactDOM.render(
         <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
         <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
+        <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blogs/:id" element={<SingleBlogPage />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
 
+        
         {/* Valid servicessss */}
         <Route path="/services/web-app" element={<WebPage />} />
         <Route path="/services/content-writing" element={<ContentPage />} />
         <Route path="/services/graphic-design" element={<GraphicDesignPage />} />
         <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
 
-        {/* Dashboard routes */}
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>
       <Routes>

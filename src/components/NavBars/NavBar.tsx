@@ -129,6 +129,21 @@ function NavBar() {
                 </div>
 
                 <Link
+                  to="/blogs"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
+                >
+                 Blogs
+                </Link>
+
+                <Link
+                  to="/single-blog"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
+                >
+                 Single Blog
+                </Link>
+                <Link
                   to="/career"
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
@@ -148,6 +163,20 @@ function NavBar() {
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
                 >
                   {NavLocale[lang]?.contacts}
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
+                >
+                  Signup
+                </Link>
+                <Link
+                  to="/login"
+                  onClick={toggleSidebar}
+                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
+                >
+                  Login
                 </Link>
               </div>
     
