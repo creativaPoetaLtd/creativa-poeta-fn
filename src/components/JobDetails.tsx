@@ -1,7 +1,8 @@
-import { Job } from "../types/types";
+import { Job } from "../types/types"; // Ensure this matches the central Job type
 import { FaBriefcase, FaMapMarkerAlt, FaCheckCircle, FaClipboardList, FaListAlt, } from "react-icons/fa";
 
 const JobDetails = ({ job }: { job: Job }) => {
+    console.log("Job received in JobDetails:", job); // Add this line
     return (
         <div className="job-details p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg shadow-2xl max-w-4xl mx-auto my-6">
             {/* Job Title, Company, and Location */}
@@ -61,7 +62,7 @@ const JobDetails = ({ job }: { job: Job }) => {
             {/* Application Instructions */}
             <div className="bg-white rounded-lg p-4 shadow-md mb-6">
                 <h3 className="text-xl font-semibold text-[#EEBA2B] mb-2">How to Apply?</h3>
-                <p className="text-gray-700 text-sm">{job.applicationInstructions}</p>
+                <p className="text-gray-700 text-sm">{job.howToApply}</p>
             </div>
 
         </div>

@@ -1,56 +1,73 @@
 import React, { useEffect, useState } from "react";
-import {
-  FaUser,
-  FaThumbsUp,
-  FaComment,
-  // FaFacebook,
-  // FaTwitter,
-  // FaLinkedin,
-} from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import parse from "html-react-parser"; // Import the library
+import parse from "html-react-parser";
 import { toast } from "react-toastify";
+import { User, Heart, MessageSquare, Calendar, Clock, Send } from "lucide-react";
 
 const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
 
+interface Blog {
+  image: string;
+  title: string;
+  author: {
+    name: string;
+  };
+  createdAt: string;
+  content: string;
+  likes: string[];
+  comments: Comment[];
+}
+
 const BlogPost = () => {
-  const { id } = useParams(); // Get the blog ID from the URL
-  const [blog, setBlog] = useState<any>(null);
+  const { id } = useParams();
+  const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState<{ text: string; createdAt: string; user?: { name: string } }[]>([]);
+  interface Comment {
+    _id: string;
+    user: {
+      name: string;
+    };
+    text: string;
+    createdAt: string;
+  }
+  
+  const [comments, setComments] = useState<Comment[]>([]);
   const [likes, setLikes] = useState(0);
   const [userLiked, setUserLiked] = useState(false);
 
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
+        setLoading(true);
         const response = await fetch(`${API_URL}/${id}`);
         if (!response.ok) throw new Error("Failed to fetch blog post");
         const data = await response.json();
-  
         setBlog(data.blog);
         setLikes(data.blog.likes.length || 0);
-        setComments(data.blog.comments || []); 
-  
-        const userId = localStorage.getItem("userId"); 
+        setComments(data.blog.comments || []);
+        const userId = localStorage.getItem("userId");
         setUserLiked(data.blog.likes.includes(userId));
       } catch (err) {
-        setError((err as Error).message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchBlog();
   }, [id]);
-  
+
   const handleLike = async () => {
     if (!token) {
-      alert("You must be logged in to like this post.");
+      toast.error("Please login to like this post");
       return;
     }
 
@@ -58,25 +75,36 @@ const BlogPost = () => {
       const response = await fetch(`${API_URL}/${id}/like`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-
-      if (!response.ok) throw new Error("Failed to toggle like");
-
+      if (!response.ok) throw new Error("Failed to like post");
       const data = await response.json();
       setLikes(data.likes);
       setUserLiked(!userLiked);
     } catch (err) {
-      console.error("Error liking blog:", err);
+      if (err instanceof Error) {
+        if (err instanceof Error) {
+          toast.error(err.message);
+        } else {
+          toast.error("An unknown error occurred");
+        }
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
 
-  const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  interface CommentResponse {
+    comments: Comment[];
+  }
+
+  interface CommentSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleCommentSubmit = async (e: CommentSubmitEvent) => {
     e.preventDefault();
     if (!token) {
-      toast.error("You must be logged in to comment.");
+      toast.error("Please login to comment");
       return;
     }
     if (!comment.trim()) return;
@@ -90,97 +118,140 @@ const BlogPost = () => {
         },
         body: JSON.stringify({ text: comment }),
       });
-
       if (!response.ok) throw new Error("Failed to post comment");
-
-      const data = await response.json();
-      setComments(data.comments); // Update comments from API response
-      setComment(""); // Clear input
+      const data: CommentResponse = await response.json();
+      setComments(data.comments);
+      setComment("");
+      toast.success("Comment posted successfully!");
     } catch (err) {
-      console.error("Error posting comment:", err);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
-  if (loading) return <div className="text-center py-10">Loading...</div>;
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-red-500 text-xl">{error}</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-[80%] mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="p-6 border-b">
-          <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
-
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-              <FaUser className="w-6 h-6 text-gray-500" />
-            </div>
-            <div>
-              <div className="font-medium">{blog.author || "Unknown Author"}</div>
-              <div className="text-sm text-gray-500">
-                Published on {new Date(blog.createdAt).toLocaleDateString()}
+    <div className="min-h-screen bg-gray-50 py-12">
+      <article className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* Hero Section */}
+        <div className="relative h-96">
+          <img
+            src={blog?.image || ""}
+            alt={blog?.title || ""}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+            <h1 className="text-4xl font-bold mb-4">{blog?.title || ""}</h1>
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-2">
+                <User className="w-5 h-5" />
+                <span>{blog?.author?.name || ""}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Calendar className="w-5 h-5" />
+                <span>{blog ? new Date(blog.createdAt).toLocaleDateString() : ""}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="w-5 h-5" />
+                <span>5 min read</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="p-6">
-          {blog.image && (
-            <img src={blog.image} alt={blog.title} className="w-full h-80 object-cover mb-4 rounded-lg" />
-          )}
-          <div className="prose max-w-none">{parse(blog.content)}</div>
+        {/* Content Section */}
+        <div className="p-8">
+          <div className="prose prose-lg max-w-none">
+            {blog && parse(blog.content)}
+          </div>
         </div>
 
-        <div className="p-6 border-t">
-          <div className="flex items-center space-x-4 mb-6">
-            <button 
+        {/* Engagement Section */}
+        <div className="border-t border-gray-100 p-8">
+          <div className="flex items-center justify-between mb-8">
+            <button
               onClick={handleLike}
-              className={`flex items-center gap-2 px-3 py-1 rounded-md ${userLiked ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-full transition-all ${
+                userLiked
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200"
+              }`}
             >
-              <FaThumbsUp className="w-4 h-4" />
+              <Heart className={`w-5 h-5 ${userLiked ? "fill-current" : ""}`} />
               <span>{likes} Likes</span>
             </button>
-            <button className="flex items-center gap-2 px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md">
-              <FaComment className="w-4 h-4" />
+            <div className="flex items-center space-x-2">
+              <MessageSquare className="w-5 h-5" />
               <span>{comments.length} Comments</span>
-            </button>
+            </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Comments</h3>
-            <form onSubmit={handleCommentSubmit} className="mb-6">
+          {/* Comments Section */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold">Comments</h3>
+            
+            {/* Comment Form */}
+            <form onSubmit={handleCommentSubmit} className="space-y-4">
               <textarea
-                className="w-full p-3 border rounded-lg mb-2"
-                rows={3}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="Write a comment..."
+                placeholder="Share your thoughts..."
+                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                rows={4}
               />
-              <button 
+              <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
               >
-                Post Comment
+                <Send className="w-5 h-5" />
+                <span>Post Comment</span>
               </button>
             </form>
 
-            <div className="space-y-4">
-              {comments.map((comment, index) => (
-                <div key={index} className="p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                      <FaUser className="w-4 h-4 text-gray-500" />
+            {/* Comments List */}
+            <div className="space-y-6">
+              {comments.map((comment) => (
+                <div
+                  key={comment._id}
+                  className="bg-gray-50 rounded-lg p-6 space-y-3"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <User className="w-6 h-6 text-blue-600" />
                     </div>
-                    <div className="font-medium">{comment.user?.name || "Anonymous"}</div>
-                    <div className="text-sm text-gray-500">
-                      {comment.createdAt && new Date(comment.createdAt).toLocaleString()}
+                    <div>
+                      <h4 className="font-semibold">{comment.user.name}</h4>
+                      <p className="text-sm text-gray-500">
+                        {new Date(comment.createdAt).toLocaleDateString()}
+                      </p>
                     </div>
                   </div>
-                  <p className="text-gray-700">{comment.text}</p>
+                  <p className="text-gray-700 pl-13">{comment.text}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </div>
   );
 };

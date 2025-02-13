@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import BurgerButton from "./BurgerButton";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTimes, FaTwitter } from "react-icons/fa";
@@ -6,30 +6,35 @@ import logoBurger from '../../assets/flags/logoBurger.png'
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import NavLocale from "../../i18n/NavLocale";
-import  getLangFromLocalStorage  from "../../../utils/Lang";
+import getLangFromLocalStorage from "../../../utils/Lang";
 
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [servicesSubMenuVisible, setServicesSubMenuVisible] = useState(false);
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    toggleSidebar();
+  };
 
   console.log();
-  
-  
-  const lang:any = getLangFromLocalStorage();
+
+  const lang: any = getLangFromLocalStorage();
 
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
- 
+
   const toggleServicesSubMenu = () => {
     setServicesSubMenuVisible(!servicesSubMenuVisible);
   };
-
-
-
 
   const location = useLocation();
 
@@ -52,7 +57,7 @@ function NavBar() {
             >
               <div className="flex text-[#EEBA2B] justify-between">
                 <p className="D">
-                {NavLocale[lang]?.navigation}
+                  {NavLocale[lang]?.navigation}
                 </p>
                 <div className=" flex mx-auto text-2xl justify-center absolute top-5 right-12 text-center text-white items-center">
                   <FaTimes onClick={toggleSidebar} />
@@ -133,15 +138,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
                 >
-                 Blogs
-                </Link>
-
-                <Link
-                  to="/single-blog"
-                  onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
-                >
-                 Single Blog
+                  Blogs
                 </Link>
                 <Link
                   to="/career"
@@ -155,7 +152,7 @@ function NavBar() {
                   onClick={toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  { NavLocale[lang]?.getStarted}
+                  {NavLocale[lang]?.getStarted}
                 </Link>
                 <Link
                   to="/contact"
@@ -165,21 +162,14 @@ function NavBar() {
                   {NavLocale[lang]?.contacts}
                 </Link>
                 <Link
-                  to="/register"
-                  onClick={toggleSidebar}
+                  to={isLoggedIn ? "/" : "/login"}
+                  onClick={isLoggedIn ? handleLogout : toggleSidebar}
                   className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
                 >
-                  Signup
-                </Link>
-                <Link
-                  to="/login"
-                  onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  Login
+                  {isLoggedIn ? "Logout" : "Login"}
                 </Link>
               </div>
-    
+
               <p className="text-white">
                 <img src={logoBurger}
                   alt="test"
@@ -197,12 +187,12 @@ function NavBar() {
                   <FaInstagram />
                 </a>
                 <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1" className="text-white">
-                <FaTiktok />
+                  <FaTiktok />
                 </a>
                 <a href="https://www.linkedin.com/company/105066709/" className="text-white">
                   <FaLinkedin />
                 </a>
-              
+
               </div>
             </div>
           </nav>
