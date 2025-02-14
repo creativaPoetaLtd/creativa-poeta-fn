@@ -1,4 +1,4 @@
-import { Job } from "../types/types";
+import { Job } from "../types/types"; // Ensure this matches the central Job type
 import { FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
 
 interface JobListProps {
@@ -7,6 +7,7 @@ interface JobListProps {
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect }) => {
+    console.log("Jobs received in JobList:", jobs); 
     return (
         <div className="job-list grid gap-4 p-4 bg-gray-50 rounded-lg shadow-inner">
             {jobs.map((job) => (

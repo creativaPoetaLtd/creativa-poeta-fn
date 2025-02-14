@@ -1,88 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import JobList from "./JobList";
 import JobDetails from "./JobDetails";
-import { Job } from "../types/types";
 import { FaClipboardList } from "react-icons/fa";
 
+export interface Job {
+  _id: string;
+  id: number;
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+  benefits: string[];
+  howToApply: string;
+  applicationInstructions: string;
+  isRemote: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const JobPage = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const jobData: Job[] = [
-    {
-      id: 1,
-      title: "Web/Graphic Designer [internship]",
-      company: "Creativa Poeta",
-      location: "Remote work",
-      description:
-        "We are looking for a motivated Web/Graphic Designer to join our growing team. This internship is ideal for someone at the beginning of their career, seeking valuable first work experience. The position could evolve into a permanent role. The internship is paid.",
-      responsibilities: [
-        "Design and maintain aesthetically pleasing and functional websites,",
-        "Create engaging visuals for advertising campaigns (posters, videos, animations)",
-        "Contribute to the graphic design of projects, including logo creation, flyers, and other visual media",
-        "Perform video editing and production for digital platforms",
-        "Collaborate with the team to develop and enhance our visual identity",
-        "Contribute to web or mobile app development projects",
-      ],
-      requirements: [
-        "Proficiency in graphic design tools ",
-        "Proficiency in web design tools ",
-        "Familiarity with video creation and editing tools",
-        "Skills in web design and responsive design",
-        "Knowledge of web or mobile development is a plus",
-        "Creativity, autonomy, and strong organizational skills",
-        "Ability to work in a team",
-        "Willingness to learn and grow",
-        "Proficiency in French or English (both would be an advantage) and Kinyarwanda",
-      ],
+  const API_URL = "https://creativapoeta-bn.onrender.com/api/jobs";
 
-      benefits: [
-        "Opportunity to work in a dynamic and creative environment",
-        "Paid internship with the possibility of evolving into a permanent position",
-        "Flexibility with remote work options",
-        "Autonomy in project management",
-        "Opportunity to develop your skills in design, IT, and digital communication",
-      ],
-      applicationInstructions:
-        "Send us your CV, portfolio, and a brief message describing your motivation to job@creativapoeta.com. We look forward to discovering your talent and working together on exciting projects!",
-    },
-    {
-      id: 2,
-      title: "Community manager & digital content creator[Internship]",
-      company: "Creativa Poeta",
-      location: "Remote work",
-      description:
-        "We are looking for a passionate individual to manage and animate our social media platforms. This role is perfect for someone seeking their first professional experience or looking to build upon their skills in this dynamic field.",
-      responsibilities: [
-        "Manage Creativa Poeta’s social media platforms as well as those of affiliated websites (Instagram, Facebook, X, YouTube, LinkedIn, TikTok, etc.).",
-        "Manage customer interactions on a website affiliated with Creativa Poeta, serving as the main point of contact and providing first-level support (forwarding technical issues to developers if necessary).",
-        "Animate and moderate communities by creating and publishing engaging content(posts, stories, ads).",
-        "Optimize social media accounts to increase engagement and visibility.",
-        "Work on client projects by managing their social media, creating strategies, and improving their online presence",
-      ],
-      requirements: [
-        "Adequate knowledge of social media management (content creation, ads, optimizing accounts).",
-        "Proficiency in Kinyarwanda, with a good command of either French or English (both languages are a plus). ",
-        "Strong writing skills for effective online communication.",
-        "Knowledge of design tools (Photoshop, Illustrator, Canva, GIMP) and/or animation creation is a plus.",
-        "Experience with ChatGPT or other AI tools.",
-        "Autonomous, well-organized, and able to work in a team.",
-        "Adaptable to new tools and technologies.",
-      ],
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setJobs(data.jobs); 
+   
+        if (window.innerWidth >= 768 && data.jobs.length > 0) {
+          setSelectedJob(data.jobs[0]);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch jobs");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      benefits: [
-        " Opportunity to work in a dynamic and creative environment.",
-        "Ability to work on your own project (Yes, we support your personal ambitions and would be delighted to help you realize them).",
-        "Develop your skills in IT, multimedia, and digital communication.",
-        " Contribute to innovative and varied projects.",
-        " Flexibility to work remotely with full autonomy in task management.",
-        " Paid internship (not a full salary, but a benefit to compensate your time).",
-        " Potential for full-time employment at the end of the internship.",
-      ],
-      applicationInstructions:
-        "If you're passionate about digital creation, social media management, and looking to develop your skills in a stimulating environment, send your application to job@creativapoeta.com. We are excited to learn about your profile and explore this unique opportunity together.",
-    },
-  ];
+    fetchJobs();
+  }, []);
 
   const highlightEmail = (text: string) => {
     const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/;
@@ -100,8 +69,28 @@ const JobPage = () => {
 
   const handleJobSelect = (job: Job) => {
     setSelectedJob(job);
+    // @ts-ignore
+    const highlightedHowToApply = highlightEmail(job.howToApply);
     setIsSidebarOpen(false);
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-yellow-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <p>Error loading jobs: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="job-page flex flex-col h-screen mt-24 bg-gradient-to-br from-gray-100 to-gray-300">
@@ -124,7 +113,16 @@ const JobPage = () => {
               Open Jobs
             </h2>
             <div className="flex-1 overflow-y-auto p-4">
-              <JobList jobs={jobData} onJobSelect={handleJobSelect} />
+              {jobs.length > 0 ? (
+                <JobList 
+                  jobs={jobs}
+                  onJobSelect={handleJobSelect}
+                />
+              ) : (
+                <p className="text-center text-gray-500 py-4">
+                  No jobs currently available
+                </p>
+              )}
             </div>
             <div className="p-4 border-t">
               <a
@@ -139,18 +137,7 @@ const JobPage = () => {
 
         <main className="flex-1 bg-white rounded-lg shadow-lg p-4 overflow-y-auto md:w-2/3 lg:w-3/4">
           {selectedJob ? (
-            <JobDetails
-              job={{
-                ...selectedJob,
-                applicationInstructions: (
-                  <p>
-                    {highlightEmail(
-                      String(selectedJob.applicationInstructions || "")
-                    )}
-                  </p>
-                ),
-              }}
-            />
+            <JobDetails job={selectedJob} />
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-gray-500">
               <FaClipboardList className="text-6xl mb-4" />
