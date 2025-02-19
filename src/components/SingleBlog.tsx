@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { toast } from "react-toastify";
 import { User, Heart, MessageSquare, Calendar, Clock, Send } from "lucide-react";
+import { TextField } from "@mui/material";
 
 const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
 
@@ -24,11 +25,10 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [comment, setComment] = useState("");
+  const [userName, setUserName] = useState(""); // Add state for user name
   interface Comment {
     _id: string;
-    user: {
-      name: string;
-    };
+    user: string; // Change user to string
     text: string;
     createdAt: string;
   }
@@ -37,7 +37,6 @@ const BlogPost = () => {
   const [likes, setLikes] = useState(0);
   const [userLiked, setUserLiked] = useState(false);
 
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -65,35 +64,34 @@ const BlogPost = () => {
     fetchBlog();
   }, [id]);
 
-  const handleLike = async () => {
-    if (!token) {
-      toast.error("Please login to like this post");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/${id}/like`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) throw new Error("Failed to like post");
-      const data = await response.json();
-      setLikes(data.likes);
-      setUserLiked(!userLiked);
-    } catch (err) {
-      if (err instanceof Error) {
-        if (err instanceof Error) {
-          toast.error(err.message);
-        } else {
-          toast.error("An unknown error occurred");
-        }
-      } else {
-        toast.error("An unknown error occurred");
+  const handleLike = () => {
+    const likedPosts = JSON.parse(localStorage.getItem("likedPosts") || "{}");
+    const postId = id;
+  
+    if (postId && likedPosts[postId]) {
+      // If already liked, remove like
+      delete likedPosts[postId];
+      setLikes((prev) => prev - 1);
+      setUserLiked(false);
+    } else {
+      // Otherwise, add like
+      if (postId) {
+        likedPosts[postId] = true;
+        setLikes((prev) => prev + 1);
+        setUserLiked(true);
       }
     }
+  
+    localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
   };
+  
+  useEffect(() => {
+    const likedPosts = JSON.parse(localStorage.getItem("likedPosts") || "{}");
+    if (id && likedPosts[id]) {
+      setUserLiked(true);
+    }
+  }, [id]);
+  
 
   interface CommentResponse {
     comments: Comment[];
@@ -103,26 +101,24 @@ const BlogPost = () => {
 
   const handleCommentSubmit = async (e: CommentSubmitEvent) => {
     e.preventDefault();
-    if (!token) {
-      toast.error("Please login to comment");
+    if (!userName.trim() || !comment.trim()) {
+      toast.error("User name and comment text are required.");
       return;
     }
-    if (!comment.trim()) return;
 
     try {
       const response = await fetch(`${API_URL}/${id}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ text: comment }),
+        body: JSON.stringify({ userName, text: comment }), 
       });
       if (!response.ok) throw new Error("Failed to post comment");
       const data: CommentResponse = await response.json();
-      setComments(data.comments);
+      setComments(data.comments); 
+      setUserName(""); 
       setComment("");
-      toast.success("Comment posted successfully!");
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);
@@ -187,13 +183,13 @@ const BlogPost = () => {
 
         {/* Engagement Section */}
         <div className="border-t border-gray-100 p-8">
-          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-8">
             <button
               onClick={handleLike}
               className={`flex items-center space-x-2 px-6 py-3 rounded-full transition-all ${
-                userLiked
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
+              userLiked
+                ? "bg-blue-600 text-white"
+                : "bg-gray-100 hover:bg-gray-200"
               }`}
             >
               <Heart className={`w-5 h-5 ${userLiked ? "fill-current" : ""}`} />
@@ -203,7 +199,7 @@ const BlogPost = () => {
               <MessageSquare className="w-5 h-5" />
               <span>{comments.length} Comments</span>
             </div>
-          </div>
+            </div>
 
           {/* Comments Section */}
           <div className="space-y-8">
@@ -211,6 +207,13 @@ const BlogPost = () => {
             
             {/* Comment Form */}
             <form onSubmit={handleCommentSubmit} className="space-y-4">
+              <TextField
+                fullWidth
+                label="Your Name"
+                variant="outlined"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -229,7 +232,7 @@ const BlogPost = () => {
 
             {/* Comments List */}
             <div className="space-y-6">
-              {comments.map((comment) => (
+              {comments.slice().reverse().map((comment) => ( 
                 <div
                   key={comment._id}
                   className="bg-gray-50 rounded-lg p-6 space-y-3"
@@ -239,7 +242,7 @@ const BlogPost = () => {
                       <User className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">{comment.user.name}</h4>
+                      <h4 className="font-semibold">{comment.user}</h4> {/* Display user name */}
                       <p className="text-sm text-gray-500">
                         {new Date(comment.createdAt).toLocaleDateString()}
                       </p>

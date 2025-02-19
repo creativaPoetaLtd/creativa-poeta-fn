@@ -31,7 +31,7 @@ const Signup: React.FC = () => {
       });
 
       setMessage(response.data.message || "Signup successful!");
-      navigate("/login");
+      navigate("/loginoouxh9ij");
 
     } catch (err: any) {
       setError(err.response?.data?.error || "Something went wrong. Please try again.");
@@ -111,7 +111,7 @@ const Signup: React.FC = () => {
             Already have an account? 
             <span 
               style={{ color: "#1976D2", cursor: "pointer" }} 
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/loginoouxh9ij")}
             >
               Login
             </span>

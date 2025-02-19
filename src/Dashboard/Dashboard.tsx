@@ -27,7 +27,7 @@ import {
     const handleLogout = () => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      navigate('/login');
+      navigate('/loginoouxh9ij');
     };
     return (
       <Box sx={{ display: "flex" }}>

@@ -161,13 +161,6 @@ function NavBar() {
                 >
                   {NavLocale[lang]?.contacts}
                 </Link>
-                <Link
-                  to={isLoggedIn ? "/" : "/login"}
-                  onClick={isLoggedIn ? handleLogout : toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  {isLoggedIn ? "Logout" : "Login"}
-                </Link>
               </div>
 
               <p className="text-white">

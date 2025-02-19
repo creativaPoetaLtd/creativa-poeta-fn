@@ -39,7 +39,7 @@ ReactDOM.render(
         <Route path="/blogs" element={<BlogsPage />} />
         <Route path="/blogs/:id" element={<SingleBlogPage />} />
         <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/loginoouxh9ij" element={<Login />} />
 
         
         {/* Valid servicessss */}
