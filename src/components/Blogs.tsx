@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Calendar, MessageCircle, Heart, User, ArrowRight } from "lucide-react";
 
-const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
+const API_URL = "http://localhost:5000/api/blogs";
 
 const BlogGrid = () => {
   const [loading, setLoading] = useState(true);

@@ -1,0 +1,578 @@
+/* Custom styling for radio buttons and checkboxes */
+
+/* Radio button styling */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+input[type="radio"]:hover {
+  border-color: #eeba2b;
+}
+
+input[type="radio"]:checked {
+  border-color: #eeba2b;
+  background-color: white;
+}
+
+input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #eeba2b;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #eeba2b;
+}
+
+input[type="checkbox"]:checked {
+  border-color: #eeba2b;
+  background-color: #eeba2b;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Focus states for accessibility */
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.3);
+}
+
+/* Label styling to ensure proper alignment */
+label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Enhanced Select dropdown styling */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px 35px 10px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  background-color: #fafbfc;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #2c3e50;
+}
+
+select:hover {
+  border-color: #eeba2b;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EEBA2B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  box-shadow: 0 4px 12px rgba(238, 186, 43, 0.15);
+  transform: translateY(-1px);
+}
+
+select:focus {
+  border-color: #eeba2b;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(238, 186, 43, 0.15),
+    0 4px 12px rgba(238, 186, 43, 0.1);
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EEBA2B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  transform: translateY(-1px);
+}
+
+/* Selected state styling */
+select:valid:not(:placeholder-shown) {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Beautiful option styling */
+select option {
+  padding: 10px 12px;
+  background-color: white;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+select option:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(238, 186, 43, 0.1) 0%,
+    rgba(238, 186, 43, 0.05) 100%
+  );
+  color: #eeba2b;
+  font-weight: 600;
+}
+
+select option:checked,
+select option:focus,
+select option[selected] {
+  background: linear-gradient(135deg, #eeba2b 0%, #d4a625 100%) !important;
+  color: white !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Force override browser defaults for all browsers */
+select option:not(:checked) {
+  background-color: white !important;
+  color: #2c3e50 !important;
+}
+
+/* Firefox specific overrides */
+@-moz-document url-prefix() {
+  select option {
+    background-color: white !important;
+    color: #2c3e50 !important;
+  }
+
+  select option:hover {
+    background-color: rgba(238, 186, 43, 0.1) !important;
+    color: #eeba2b !important;
+  }
+
+  select option:checked {
+    background-color: #eeba2b !important;
+    color: white !important;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+select::-webkit-scrollbar {
+  width: 10px;
+}
+
+select::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin: 4px;
+}
+
+select::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #eeba2b 0%, #d4a625 100%);
+  border-radius: 6px;
+  border: 2px solid #f8f9fa;
+}
+
+select::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #d4a625 0%, #b8921f 100%);
+}
+
+/* Disabled state */
+select:disabled {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Invalid state */
+select:invalid {
+  border-color: #e74c3c;
+}
+
+/* Text input and textarea styling for consistency - Only apply to form containers, not Material-UI */
+.project-form input[type="text"],
+.project-form input[type="email"],
+.project-form textarea,
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea,
+.job-application-form input[type="text"],
+.job-application-form input[type="email"],
+.job-application-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  resize: vertical;
+  color: #9ca3af;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+}
+
+.project-form input[type="text"]:hover,
+.project-form input[type="email"]:hover,
+.project-form textarea:hover,
+.contact-form input[type="text"]:hover,
+.contact-form input[type="email"]:hover,
+.contact-form textarea:hover,
+.job-application-form input[type="text"]:hover,
+.job-application-form input[type="email"]:hover,
+.job-application-form textarea:hover {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(238, 186, 43, 0.15);
+  transform: translateY(-1px);
+  color: #9ca3af;
+}
+
+.project-form input[type="text"]:focus,
+.project-form input[type="email"]:focus,
+.project-form textarea:focus,
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus,
+.job-application-form input[type="text"]:focus,
+.job-application-form input[type="email"]:focus,
+.job-application-form textarea:focus {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(238, 186, 43, 0.15),
+    0 4px 12px rgba(238, 186, 43, 0.1);
+  transform: translateY(-1px);
+  color: #2c3e50;
+}
+
+.project-form input[type="text"]:disabled,
+.project-form input[type="email"]:disabled,
+.project-form textarea:disabled,
+.contact-form input[type="text"]:disabled,
+.contact-form input[type="email"]:disabled,
+.contact-form textarea:disabled,
+.job-application-form input[type="text"]:disabled,
+.job-application-form input[type="email"]:disabled,
+.job-application-form textarea:disabled {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Enhanced placeholder styling - Only for specific forms */
+.project-form input::placeholder,
+.project-form textarea::placeholder,
+.contact-form input::placeholder,
+.contact-form textarea::placeholder,
+.job-application-form input::placeholder,
+.job-application-form textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+  font-weight: 400;
+}
+
+.project-form input:focus::placeholder,
+.project-form textarea:focus::placeholder,
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder,
+.job-application-form input:focus::placeholder,
+.job-application-form textarea:focus::placeholder {
+  color: #d1d5db;
+}
+
+/* Additional modern touches - Only for specific forms */
+.project-form select,
+.project-form input[type="text"],
+.project-form input[type="email"],
+.project-form textarea,
+.contact-form select,
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea,
+.job-application-form select,
+.job-application-form input[type="text"],
+.job-application-form input[type="email"],
+.job-application-form textarea {
+  background-clip: padding-box;
+}
+
+/* Smooth animations for better UX - Only for specific forms */
+@keyframes subtle-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.project-form select:active,
+.project-form input[type="text"]:active,
+.project-form input[type="email"]:active,
+.project-form textarea:active,
+.contact-form select:active,
+.contact-form input[type="text"]:active,
+.contact-form input[type="email"]:active,
+.contact-form textarea:active,
+.job-application-form select:active,
+.job-application-form input[type="text"]:active,
+.job-application-form input[type="email"]:active,
+.job-application-form textarea:active {
+  animation: subtle-bounce 0.3s ease;
+}
+
+/* Custom Select Component Styling */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  padding: 10px 35px 10px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-select-trigger:hover {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(238, 186, 43, 0.15);
+  transform: translateY(-1px);
+}
+
+.custom-select-trigger.open {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(238, 186, 43, 0.15),
+    0 4px 12px rgba(238, 186, 43, 0.1);
+  transform: translateY(-1px);
+}
+
+.custom-select-trigger.has-value {
+  border-color: #eeba2b;
+  background-color: #ffffff;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.custom-select-value {
+  flex: 1;
+  text-align: left;
+}
+
+.custom-select-trigger:not(.has-value) .custom-select-value {
+  color: #9ca3af;
+}
+
+.custom-select-arrow {
+  display: flex;
+  align-items: center;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.custom-select-trigger:hover .custom-select-arrow,
+.custom-select-trigger.open .custom-select-arrow {
+  color: #eeba2b;
+}
+
+.custom-select-trigger.open .custom-select-arrow svg {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #eeba2b;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  animation: dropdown-appear 0.2s ease-out;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-select-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.custom-select-option:last-child {
+  border-bottom: none;
+}
+
+.custom-select-option:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(238, 186, 43, 0.1) 0%,
+    rgba(238, 186, 43, 0.05) 100%
+  );
+  color: #eeba2b;
+  font-weight: 600;
+  transform: translateX(4px);
+}
+
+.custom-select-option.selected {
+  background: linear-gradient(135deg, #eeba2b 0%, #d4a625 100%);
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select-option.selected:hover {
+  background: linear-gradient(135deg, #d4a625 0%, #b8921f 100%);
+  transform: translateX(4px);
+}
+
+/* Custom scrollbar for options */
+.custom-select-options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-select-options::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #eeba2b 0%, #d4a625 100%);
+  border-radius: 4px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #d4a625 0%, #b8921f 100%);
+}
+
+/* Comment Form Specific Styling - Override global styles */
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+  /* Reset any inherited styles and apply clean modern styling */
+  all: unset;
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-family: inherit;
+  color: #374151;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  display: block;
+  line-height: 1.5;
+}
+
+.comment-form input[type="text"]:hover,
+.comment-form input[type="email"]:hover,
+.comment-form textarea:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form textarea:focus {
+  border-color: #eeba2b;
+  box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.1);
+  outline: none;
+}
+
+.comment-form input[type="text"]::placeholder,
+.comment-form input[type="email"]::placeholder,
+.comment-form textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Ensure comment form inputs don't inherit unwanted styles */
+.comment-form input,
+.comment-form textarea {
+  margin-bottom: 0 !important;
+  transform: none !important;
+  animation: none !important;
+}
