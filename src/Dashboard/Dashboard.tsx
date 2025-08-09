@@ -14,7 +14,6 @@ import {
   MenuItem,
   Avatar,
   Divider,
-  Paper,
   useTheme,
   alpha,
   Breadcrumbs,

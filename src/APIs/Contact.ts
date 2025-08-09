@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api/contact";
+const BASE_URL = "https://creativapoeta-bn.onrender.com/api/contact";
 
 // Public endpoint for contact form submission
 export const contactUs = async (data: any) => {

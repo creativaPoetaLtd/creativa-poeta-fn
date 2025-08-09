@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, useTheme } from "@mui/material";
+import { Box, Grid, Paper } from "@mui/material";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://creativapoeta-bn.onrender.com";
 
 export async function CreateBlog(formData: FormData) {
   const token = localStorage.getItem("token"); // Ensure token is retrieved

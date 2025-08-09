@@ -8,8 +8,10 @@ Updated the Contact API configuration to use the local development server instea
 
 ### **File**: `/src/APIs/Contact.ts`
 
+https://creativapoeta-bn.onrender.com
+
 - **Before**: `const BASE_URL = "https://creativapoeta-bn.onrender.com/api/contact";`
-- **After**: `const BASE_URL = "http://localhost:5000/api/contact";`
+- **After**: `const BASE_URL = "/api/contact";`
 
 ## 🎯 Benefits
 
@@ -20,7 +22,7 @@ Updated the Contact API configuration to use the local development server instea
 
 ## 🔧 Technical Details
 
-- **Local Backend Server**: Assumes backend is running on `http://localhost:5000`
+- **Local Backend Server**: Assumes backend is running on `https://creativapoeta-bn.onrender.com`
 - **API Endpoints**: All contact management endpoints now point to local server:
   - `POST /api/contact/send` - Submit contact form
   - `GET /api/contact` - Get all queries (admin)
@@ -52,7 +54,7 @@ npm start
 
 - **Port**: 5000
 - **Protocol**: HTTP (not HTTPS for local development)
-- **Base URL**: `http://localhost:5000`
+- **Base URL**: `https://creativapoeta-bn.onrender.com`
 
 ## 🚀 Production Deployment
 
@@ -67,7 +69,8 @@ npm start
 2. **Or Use Environment Variables** for better configuration management:
    ```typescript
    const BASE_URL =
-     process.env.VITE_API_URL || "http://localhost:5000/api/contact";
+     process.env.VITE_API_URL ||
+     "https://creativapoeta-bn.onrender.com/api/contact";
    ```
 
 ## ✅ Status
@@ -75,7 +78,7 @@ npm start
 - ✅ **API Updated**: Contact API now uses local development server
 - ✅ **No Compilation Errors**: All components compile successfully
 - ✅ **Frontend Running**: Development server active at `http://localhost:5176/`
-- ⏳ **Backend Required**: Ensure backend server is running on `http://localhost:5000`
+- ⏳ **Backend Required**: Ensure backend server is running on `https://creativapoeta-bn.onrender.com`
 
 ## 🔄 Next Steps
 

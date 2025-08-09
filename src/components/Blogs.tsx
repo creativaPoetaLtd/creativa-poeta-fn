@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Calendar, MessageCircle, Heart, User, ArrowRight } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/blogs";
+const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
 
 const BlogGrid = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const BlogGrid = () => {
         setLoading(false);
       }
     };
-    
+
     fetchBlogs();
   }, []);
 
@@ -50,10 +50,10 @@ const BlogGrid = () => {
   }
 
   const formatDate: FormatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -63,10 +63,10 @@ const BlogGrid = () => {
   }
 
   const getPlainTextExcerpt: GetPlainTextExcerpt = (htmlContent) => {
-    const div = document.createElement('div');
+    const div = document.createElement("div");
     div.innerHTML = htmlContent;
     const text = div.textContent || div.innerText;
-    return text.slice(0, 150) + '...';
+    return text.slice(0, 150) + "...";
   };
 
   const BlogCard = ({ blog }: { blog: Blog }) => (
@@ -120,7 +120,7 @@ const BlogGrid = () => {
               <span>{blog.comments.length}</span>
             </div>
           </div>
-          
+
           {/* Read More Button */}
           <button
             onClick={() => navigate(`/blogs/${blog._id}`)}
@@ -139,12 +139,9 @@ const BlogGrid = () => {
       <div className="max-w-7xl mx-auto px-4 py-16 ">
         {/* Page Title */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            Latest Blogs
-          </h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Latest Blogs</h1>
           <div className="flex justify-center items-center space-x-2">
             <div className="h-1 bg-yellow-500 rounded-full" />
-           
           </div>
         </div>
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
   Button,
   TextField,
@@ -17,7 +15,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Chip,
   IconButton,
   Tooltip,
   Select,
@@ -26,27 +23,16 @@ import {
   InputLabel,
   Pagination,
   Grid,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Alert,
   CircularProgress,
 } from "@mui/material";
-import {
-  Visibility,
-  Reply,
-  Edit,
-  Delete,
-  ExpandMore,
-  Refresh,
-} from "@mui/icons-material";
+import { Visibility, Reply, Delete, Refresh } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import {
   getProjects,
   updateProjectStatus,
   replyToProject,
   deleteProject,
-  getProjectById,
 } from "../../APIs/projectForm";
 
 interface ProjectRequest {
@@ -182,21 +168,6 @@ const ProjectManagement: React.FC = () => {
           error instanceof Error ? error.message : "Failed to delete project"
         );
       }
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "pending":
-        return "warning";
-      case "in-review":
-        return "info";
-      case "replied":
-        return "success";
-      case "completed":
-        return "primary";
-      default:
-        return "default";
     }
   };
 
@@ -348,7 +319,7 @@ const ProjectManagement: React.FC = () => {
             <Pagination
               count={pagination.totalPages}
               page={pagination.currentPage}
-              onChange={(event, page) => setCurrentPage(page)}
+              onChange={(_, page) => setCurrentPage(page)}
               color="primary"
               sx={{
                 "& .MuiPaginationItem-root.Mui-selected": {
