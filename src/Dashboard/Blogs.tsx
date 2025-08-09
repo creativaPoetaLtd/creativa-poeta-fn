@@ -14,6 +14,7 @@ import {
   Person,
   CalendarToday,
   Visibility,
+  Delete,
 } from "@mui/icons-material";
 import AddBlogModal from "./AddBlog";
 import EditBlogModal from "./EditBlog";
@@ -24,6 +25,7 @@ import {
   DataTable,
   StatusChip,
   ActionButton,
+  MenuAction,
 } from "./components/DashboardComponents";
 
 const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
@@ -142,11 +144,6 @@ export default function Blogs() {
     // TODO: Implement delete blog functionality
   };
 
-  const handleView = (id: string) => {
-    console.log("View blog:", id);
-    // TODO: Implement view blog functionality
-  };
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
@@ -248,6 +245,7 @@ export default function Blogs() {
       {/* Blogs Table */}
       <DataTable
         headers={["Title", "Author", "Date", "Status"]}
+        hiddenFields={["id"]}
         rows={filteredBlogs.map((blog) => ({
           id: blog._id,
           title: (
@@ -287,12 +285,27 @@ export default function Blogs() {
             />
           ),
         }))}
-        onView={handleView}
-        onEdit={(id) => {
-          const blog = blogs.find((b) => b._id === id);
-          if (blog) handleEditOpen(blog);
+        customActions={(row) => {
+          const blog = blogs.find((b) => b._id === row.id);
+          if (!blog) return null;
+
+          return (
+            <>
+              <MenuAction
+                icon={<Edit />}
+                label="Edit"
+                onClick={() => handleEditOpen(blog)}
+                color="#EEBA2B"
+              />
+              <MenuAction
+                icon={<Delete />}
+                label="Delete"
+                onClick={() => handleDelete(blog._id)}
+                color="#ef4444"
+              />
+            </>
+          );
         }}
-        onDelete={handleDelete}
         emptyMessage="No blogs found"
       />
 

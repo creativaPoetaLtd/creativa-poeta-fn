@@ -15,6 +15,8 @@ import {
   PersonOff,
   Email,
   Badge,
+  Edit,
+  Delete,
 } from "@mui/icons-material";
 import {
   DashboardCard,
@@ -22,6 +24,7 @@ import {
   DataTable,
   StatusChip,
   ActionButton,
+  MenuAction,
 } from "./components/DashboardComponents";
 
 // Sample Users Data
@@ -191,6 +194,7 @@ export default function Users() {
       {/* Users Table */}
       <DataTable
         headers={["Name", "Email", "Role", "Status"]}
+        hiddenFields={["id"]}
         rows={filteredUsers.map((user) => ({
           id: user.id.toString(),
           name: (
@@ -227,8 +231,24 @@ export default function Users() {
           ),
         }))}
         onView={handleViewUser}
-        onEdit={handleEditUser}
-        onDelete={handleDeleteUser}
+        customActions={(row) => {
+          return (
+            <>
+              <MenuAction
+                icon={<Edit />}
+                label="Edit"
+                onClick={() => handleEditUser(row.id)}
+                color="#EEBA2B"
+              />
+              <MenuAction
+                icon={<Delete />}
+                label="Delete"
+                onClick={() => handleDeleteUser(row.id)}
+                color="#ef4444"
+              />
+            </>
+          );
+        }}
         emptyMessage="No users found"
       />
     </Box>

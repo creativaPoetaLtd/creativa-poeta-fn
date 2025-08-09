@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Box, TextField } from "@mui/material";
-import { LocationOn, Business, Work, Schedule } from "@mui/icons-material";
+import {
+  LocationOn,
+  Business,
+  Work,
+  Schedule,
+  Edit,
+  Delete,
+} from "@mui/icons-material";
 import {
   DashboardCard,
   PageHeader,
   DataTable,
   StatusChip,
   ActionButton,
+  MenuAction,
 } from "./components/DashboardComponents";
 import AddJobModal from "./CreateJob";
 import EditJobModal from "./EditJob";
@@ -271,9 +279,26 @@ export default function Jobs() {
       {/* Jobs Table */}
       <DataTable
         headers={tableHeaders}
+        hiddenFields={["id"]}
         rows={tableRows}
-        onEdit={handleEditJob}
-        onDelete={handleDeleteJob}
+        customActions={(row) => {
+          return (
+            <>
+              <MenuAction
+                icon={<Edit />}
+                label="Edit"
+                onClick={() => handleEditJob(row.id)}
+                color="#EEBA2B"
+              />
+              <MenuAction
+                icon={<Delete />}
+                label="Delete"
+                onClick={() => handleDeleteJob(row.id)}
+                color="#ef4444"
+              />
+            </>
+          );
+        }}
         emptyMessage="No jobs found"
       />
 

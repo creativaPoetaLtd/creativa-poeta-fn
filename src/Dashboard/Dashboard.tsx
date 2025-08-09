@@ -237,7 +237,7 @@ export default function Dashboard() {
             borderTop: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <Paper
+          {/* <Paper
             sx={{
               p: 2,
               backgroundColor: alpha("#EEBA2B", 0.1),
@@ -256,7 +256,7 @@ export default function Dashboard() {
             >
               Use keyboard shortcuts for faster navigation
             </Typography>
-          </Paper>
+          </Paper> */}
         </Box>
       </Drawer>
 
@@ -360,9 +360,9 @@ export default function Dashboard() {
                     fontSize: "0.9rem",
                   }}
                 >
-                  A
+                  P
                 </Avatar>
-                Admin Portal
+                Profile
               </Button>
 
               <Menu
@@ -397,13 +397,13 @@ export default function Dashboard() {
               >
                 <MenuItem onClick={handleHomeNavigation}>
                   <HomeIcon sx={{ mr: 2, color: "#EEBA2B" }} />
-                  Go to Homepage
+                  Landing Page
                 </MenuItem>
                 <MenuItem
                   onClick={() => navigate("/secure-admin-dashboard-2024")}
                 >
                   <DashboardIcon sx={{ mr: 2, color: "#EEBA2B" }} />
-                  Dashboard Home
+                  Analytics
                 </MenuItem>
                 <Divider sx={{ my: 1 }} />
                 <MenuItem onClick={handleLogout} sx={{ color: "error.main" }}>

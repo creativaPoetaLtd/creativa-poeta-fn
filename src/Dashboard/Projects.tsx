@@ -33,6 +33,7 @@ import {
   Assignment,
   Reply,
   Refresh,
+  Delete,
 } from "@mui/icons-material";
 import {
   DashboardCard,
@@ -40,6 +41,7 @@ import {
   DataTable,
   StatusChip,
   ActionButton,
+  MenuAction,
 } from "./components/DashboardComponents";
 import {
   getProjects,
@@ -360,24 +362,26 @@ export default function Projects() {
     if (project) handleView(project);
   };
 
-  const handleDeleteProject = (id: string) => {
-    handleDelete(id);
-  };
-
   const customActions = (row: any) => {
     const project = projects.find((p) => p._id === row.id);
     if (!project) return null;
 
     return (
-      <ActionButton
-        variant="secondary"
-        size="small"
-        startIcon={<Reply />}
-        onClick={() => handleReply(project)}
-        disabled={project.isReplied}
-      >
-        {project.isReplied ? "Replied" : "Reply"}
-      </ActionButton>
+      <>
+        <MenuAction
+          icon={<Reply />}
+          label={project.isReplied ? "Replied" : "Reply"}
+          onClick={() => handleReply(project)}
+          disabled={project.isReplied}
+          color="#EEBA2B"
+        />
+        <MenuAction
+          icon={<Delete />}
+          label="Delete"
+          onClick={() => handleDelete(project._id)}
+          color="#ef4444"
+        />
+      </>
     );
   };
 
@@ -507,9 +511,9 @@ export default function Projects() {
       {/* Projects Table */}
       <DataTable
         headers={tableHeaders}
+        hiddenFields={["id"]}
         rows={tableRows}
         onView={handleViewProject}
-        onDelete={handleDeleteProject}
         customActions={customActions}
         emptyMessage="No projects found"
       />

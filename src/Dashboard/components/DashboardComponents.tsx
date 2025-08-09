@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -15,18 +15,20 @@ import {
   TableRow,
   Paper,
   alpha,
-  useTheme,
-  Avatar,
   Divider,
   LinearProgress,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import {
   Edit,
   Delete,
   Visibility,
-  MoreVert,
   TrendingUp,
   TrendingDown,
+  MoreVert,
 } from "@mui/icons-material";
 
 // Standardized Dashboard Card Component
@@ -51,8 +53,6 @@ export const DashboardCard: React.FC<{
   onClick,
   children,
 }) => {
-  const theme = useTheme();
-
   return (
     <Card
       sx={{
@@ -196,6 +196,116 @@ export const PageHeader: React.FC<{
   );
 };
 
+// Menu Action Component for custom actions in the dropdown
+export const MenuAction: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  color?: string;
+}> = ({ icon, label, onClick, disabled = false, color = "#64748b" }) => {
+  return (
+    <MenuItem onClick={onClick} disabled={disabled}>
+      <ListItemIcon>
+        {React.cloneElement(icon as React.ReactElement, {
+          fontSize: "small",
+          sx: { color: disabled ? "#94a3b8" : color },
+        })}
+      </ListItemIcon>
+      <ListItemText sx={{ color: disabled ? "#94a3b8" : "inherit" }}>
+        {label}
+      </ListItemText>
+    </MenuItem>
+  );
+};
+
+// Action Menu Component for 3-dot menu
+const ActionMenu: React.FC<{
+  row: any;
+  onView?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  customActions?: (row: any) => React.ReactNode;
+}> = ({ row, onView, onEdit, onDelete, customActions }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleAction = (action: () => void) => {
+    action();
+    handleClose();
+  };
+
+  return (
+    <>
+      <IconButton
+        size="small"
+        onClick={handleClick}
+        sx={{
+          color: "#64748b",
+          "&:hover": {
+            backgroundColor: alpha("#EEBA2B", 0.1),
+            color: "#EEBA2B",
+          },
+        }}
+      >
+        <MoreVert fontSize="small" />
+      </IconButton>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+            border: "1px solid #e2e8f0",
+            minWidth: 150,
+          },
+        }}
+      >
+        {onView && (
+          <MenuItem onClick={() => handleAction(() => onView(row.id))}>
+            <ListItemIcon>
+              <Visibility fontSize="small" sx={{ color: "#6366f1" }} />
+            </ListItemIcon>
+            <ListItemText>View</ListItemText>
+          </MenuItem>
+        )}
+        {onEdit && (
+          <MenuItem onClick={() => handleAction(() => onEdit(row.id))}>
+            <ListItemIcon>
+              <Edit fontSize="small" sx={{ color: "#EEBA2B" }} />
+            </ListItemIcon>
+            <ListItemText>Edit</ListItemText>
+          </MenuItem>
+        )}
+        {customActions && <Box>{customActions(row)}</Box>}
+        {onDelete && !customActions && (
+          <>
+            <Divider />
+            <MenuItem onClick={() => handleAction(() => onDelete(row.id))}>
+              <ListItemIcon>
+                <Delete fontSize="small" sx={{ color: "#ef4444" }} />
+              </ListItemIcon>
+              <ListItemText sx={{ color: "#ef4444" }}>Delete</ListItemText>
+            </MenuItem>
+          </>
+        )}
+      </Menu>
+    </>
+  );
+};
+
 // Standardized Data Table Component
 export const DataTable: React.FC<{
   headers: string[];
@@ -205,6 +315,7 @@ export const DataTable: React.FC<{
   onView?: (id: string) => void;
   customActions?: (row: any) => React.ReactNode;
   emptyMessage?: string;
+  hiddenFields?: string[];
 }> = ({
   headers,
   rows,
@@ -213,6 +324,7 @@ export const DataTable: React.FC<{
   onView,
   customActions,
   emptyMessage = "No data available",
+  hiddenFields = [],
 }) => {
   return (
     <Paper
@@ -281,61 +393,25 @@ export const DataTable: React.FC<{
                     },
                   }}
                 >
-                  {Object.values(row).map((cell: any, cellIndex) => (
-                    <TableCell
-                      key={cellIndex}
-                      sx={{ borderBottom: "1px solid #e2e8f0" }}
-                    >
-                      {cell}
-                    </TableCell>
-                  ))}
+                  {Object.entries(row)
+                    .filter(([key]) => !hiddenFields.includes(key))
+                    .map(([, cell], cellIndex) => (
+                      <TableCell
+                        key={cellIndex}
+                        sx={{ borderBottom: "1px solid #e2e8f0" }}
+                      >
+                        {cell as React.ReactNode}
+                      </TableCell>
+                    ))}
                   {(onEdit || onDelete || onView || customActions) && (
                     <TableCell sx={{ borderBottom: "1px solid #e2e8f0" }}>
-                      <Box sx={{ display: "flex", gap: 1 }}>
-                        {onView && (
-                          <IconButton
-                            size="small"
-                            onClick={() => onView(row.id)}
-                            sx={{
-                              color: "#6366f1",
-                              "&:hover": {
-                                backgroundColor: alpha("#6366f1", 0.1),
-                              },
-                            }}
-                          >
-                            <Visibility fontSize="small" />
-                          </IconButton>
-                        )}
-                        {onEdit && (
-                          <IconButton
-                            size="small"
-                            onClick={() => onEdit(row.id)}
-                            sx={{
-                              color: "#EEBA2B",
-                              "&:hover": {
-                                backgroundColor: alpha("#EEBA2B", 0.1),
-                              },
-                            }}
-                          >
-                            <Edit fontSize="small" />
-                          </IconButton>
-                        )}
-                        {onDelete && (
-                          <IconButton
-                            size="small"
-                            onClick={() => onDelete(row.id)}
-                            sx={{
-                              color: "#ef4444",
-                              "&:hover": {
-                                backgroundColor: alpha("#ef4444", 0.1),
-                              },
-                            }}
-                          >
-                            <Delete fontSize="small" />
-                          </IconButton>
-                        )}
-                        {customActions && customActions(row)}
-                      </Box>
+                      <ActionMenu
+                        row={row}
+                        onView={onView}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                        customActions={customActions}
+                      />
                     </TableCell>
                   )}
                 </TableRow>

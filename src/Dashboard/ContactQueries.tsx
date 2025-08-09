@@ -43,6 +43,7 @@ import {
   DataTable,
   StatusChip,
   ActionButton,
+  MenuAction,
 } from "./components/DashboardComponents";
 
 interface ContactQuery {
@@ -283,6 +284,7 @@ const ContactQueries: React.FC = () => {
       {/* Queries Table */}
       <DataTable
         headers={["Name", "Email", "Status", "Submitted"]}
+        hiddenFields={["id"]}
         rows={
           loading
             ? []
@@ -327,30 +329,28 @@ const ContactQueries: React.FC = () => {
               }))
         }
         onView={(id) => handleViewQuery(id)}
-        customActions={(row) => (
-          <>
-            <ActionButton
-              variant="primary"
-              size="small"
-              onClick={() =>
-                handleReplyClick(queries.find((q) => q._id === row.id)!)
-              }
-              startIcon={<Reply />}
-            >
-              Reply
-            </ActionButton>
-            <ActionButton
-              variant="danger"
-              size="small"
-              onClick={() =>
-                handleDeleteClick(queries.find((q) => q._id === row.id)!)
-              }
-              startIcon={<Delete />}
-            >
-              Delete
-            </ActionButton>
-          </>
-        )}
+        customActions={(row) => {
+          const query = queries.find((q) => q._id === row.id);
+          const isReplied = query?.status === "replied" || query?.isReplied;
+
+          return (
+            <>
+              <MenuAction
+                icon={<Reply />}
+                label={isReplied ? "Replied" : "Reply"}
+                onClick={() => handleReplyClick(query!)}
+                disabled={isReplied}
+                color="#EEBA2B"
+              />
+              <MenuAction
+                icon={<Delete />}
+                label="Delete"
+                onClick={() => handleDeleteClick(query!)}
+                color="#ef4444"
+              />
+            </>
+          );
+        }}
         emptyMessage={loading ? "Loading..." : "No contact queries found"}
       />
 
