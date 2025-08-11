@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { toast } from "react-toastify";
-import { User, Heart, MessageSquare, Calendar, Clock, Send } from "lucide-react";
-
-const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
+import { User, MessageSquare, Send } from "lucide-react";
+import { fetchSingleBlog, addCommentToBlog } from "../APIs/Blogs";
+import "../styles/custom-inputs.css";
 
 interface Blog {
   image: string;
@@ -14,8 +14,15 @@ interface Blog {
   };
   createdAt: string;
   content: string;
-  likes: string[];
   comments: Comment[];
+}
+
+interface Comment {
+  _id: string;
+  name: string;
+  email: string;
+  text: string;
+  createdAt: string;
 }
 
 const BlogPost = () => {
@@ -23,34 +30,19 @@ const BlogPost = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [comment, setComment] = useState("");
-  interface Comment {
-    _id: string;
-    user: {
-      name: string;
-    };
-    text: string;
-    createdAt: string;
-  }
-  
+  const [commentText, setCommentText] = useState("");
+  const [commentName, setCommentName] = useState("");
+  const [commentEmail, setCommentEmail] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
-  const [likes, setLikes] = useState(0);
-  const [userLiked, setUserLiked] = useState(false);
-
-  const token = localStorage.getItem("token");
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${API_URL}/${id}`);
-        if (!response.ok) throw new Error("Failed to fetch blog post");
-        const data = await response.json();
+        const data = await fetchSingleBlog(id!);
         setBlog(data.blog);
-        setLikes(data.blog.likes.length || 0);
         setComments(data.blog.comments || []);
-        const userId = localStorage.getItem("userId");
-        setUserLiked(data.blog.likes.includes(userId));
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -62,66 +54,58 @@ const BlogPost = () => {
       }
     };
 
-    fetchBlog();
+    if (id) {
+      fetchBlog();
+    }
   }, [id]);
 
-  const handleLike = async () => {
-    if (!token) {
-      toast.error("Please login to like this post");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_URL}/${id}/like`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) throw new Error("Failed to like post");
-      const data = await response.json();
-      setLikes(data.likes);
-      setUserLiked(!userLiked);
-    } catch (err) {
-      if (err instanceof Error) {
-        if (err instanceof Error) {
-          toast.error(err.message);
-        } else {
-          toast.error("An unknown error occurred");
-        }
-      } else {
-        toast.error("An unknown error occurred");
-      }
-    }
-  };
-
-  interface CommentResponse {
-    comments: Comment[];
-  }
-
-  interface CommentSubmitEvent extends React.FormEvent<HTMLFormElement> {}
-
-  const handleCommentSubmit = async (e: CommentSubmitEvent) => {
+  const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!token) {
-      toast.error("Please login to comment");
+
+    if (!commentName.trim() || !commentEmail.trim() || !commentText.trim()) {
+      toast.error("Please fill in all fields");
       return;
     }
-    if (!comment.trim()) return;
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(commentEmail)) {
+      toast.error("Please provide a valid email address");
+      return;
+    }
+
+    if (commentName.trim().length < 2) {
+      toast.error("Name must be at least 2 characters long");
+      return;
+    }
+
+    if (commentText.trim().length < 5) {
+      toast.error("Comment must be at least 5 characters long");
+      return;
+    }
+
+    if (commentText.trim().length > 1000) {
+      toast.error("Comment must not exceed 1000 characters");
+      return;
+    }
+
+    setIsSubmittingComment(true);
 
     try {
-      const response = await fetch(`${API_URL}/${id}/comment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ text: comment }),
+      await addCommentToBlog(id!, {
+        name: commentName.trim(),
+        email: commentEmail.trim(),
+        text: commentText.trim(),
       });
-      if (!response.ok) throw new Error("Failed to post comment");
-      const data: CommentResponse = await response.json();
-      setComments(data.comments);
-      setComment("");
+
+      // Refresh the blog to get updated comments
+      const blogData = await fetchSingleBlog(id!);
+      setComments(blogData.blog.comments || []);
+
+      // Clear form
+      setCommentText("");
+      setCommentName("");
+      setCommentEmail("");
       toast.success("Comment posted successfully!");
     } catch (err) {
       if (err instanceof Error) {
@@ -129,6 +113,8 @@ const BlogPost = () => {
       } else {
         toast.error("An unknown error occurred");
       }
+    } finally {
+      setIsSubmittingComment(false);
     }
   };
 
@@ -160,19 +146,16 @@ const BlogPost = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <h1 className="text-4xl font-bold mb-4">{blog?.title || ""}</h1>
+            <h1 className="text-4xl font-bold mb-4">{blog?.title}</h1>
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <User className="w-5 h-5" />
-                <span>{blog?.author?.name || ""}</span>
+                <span>{blog?.author.name}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Calendar className="w-5 h-5" />
-                <span>{blog ? new Date(blog.createdAt).toLocaleDateString() : ""}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock className="w-5 h-5" />
-                <span>5 min read</span>
+                <span>
+                  {new Date(blog?.createdAt || "").toLocaleDateString()}
+                </span>
               </div>
             </div>
           </div>
@@ -185,45 +168,60 @@ const BlogPost = () => {
           </div>
         </div>
 
-        {/* Engagement Section */}
+        {/* Comments Section */}
         <div className="border-t border-gray-100 p-8">
           <div className="flex items-center justify-between mb-8">
-            <button
-              onClick={handleLike}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-full transition-all ${
-                userLiked
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-            >
-              <Heart className={`w-5 h-5 ${userLiked ? "fill-current" : ""}`} />
-              <span>{likes} Likes</span>
-            </button>
             <div className="flex items-center space-x-2">
               <MessageSquare className="w-5 h-5" />
               <span>{comments.length} Comments</span>
             </div>
           </div>
 
-          {/* Comments Section */}
           <div className="space-y-8">
             <h3 className="text-2xl font-bold">Comments</h3>
-            
+
             {/* Comment Form */}
-            <form onSubmit={handleCommentSubmit} className="space-y-4">
+            <form
+              onSubmit={handleCommentSubmit}
+              className="comment-form space-y-4"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  name="name"
+                  value={commentName}
+                  onChange={(e) => setCommentName(e.target.value)}
+                  placeholder="Your name"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EEBA2B] focus:border-transparent transition-all duration-200"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={commentEmail}
+                  onChange={(e) => setCommentEmail(e.target.value)}
+                  placeholder="Your email"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EEBA2B] focus:border-transparent transition-all duration-200"
+                />
+              </div>
               <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
                 placeholder="Share your thoughts..."
-                className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                 rows={4}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EEBA2B] focus:border-transparent transition-all duration-200 resize-vertical"
               />
               <button
                 type="submit"
-                className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+                disabled={isSubmittingComment}
+                className="flex items-center space-x-2 px-6 py-3 bg-[#EEBA2B] text-white rounded-full hover:bg-[#d4a625] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />
-                <span>Post Comment</span>
+                <span>
+                  {isSubmittingComment ? "Posting..." : "Post Comment"}
+                </span>
               </button>
             </form>
 
@@ -235,11 +233,11 @@ const BlogPost = () => {
                   className="bg-gray-50 rounded-lg p-6 space-y-3"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <User className="w-6 h-6 text-blue-600" />
+                    <div className="w-10 h-10 bg-[#EEBA2B] rounded-full flex items-center justify-center">
+                      <User className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">{comment.user.name}</h4>
+                      <h4 className="font-semibold">{comment.name}</h4>
                       <p className="text-sm text-gray-500">
                         {new Date(comment.createdAt).toLocaleDateString()}
                       </p>

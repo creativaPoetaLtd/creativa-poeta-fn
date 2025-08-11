@@ -48,9 +48,17 @@ const JobApplicationForm = () => {
       case 1:
         return !!(formData.fullName && formData.email && formData.phone);
       case 2:
-        return !!(formData.currentJobTitle && formData.yearsOfExperience && formData.desiredJobTitles);
+        return !!(
+          formData.currentJobTitle &&
+          formData.yearsOfExperience &&
+          formData.desiredJobTitles
+        );
       case 3:
-        return !!(formData.skills.length && formData.education && formData.languages);
+        return !!(
+          formData.skills.length &&
+          formData.education &&
+          formData.languages
+        );
       case 4:
         return !!(formData.preferredLocation && formData.additionalComments);
       default:
@@ -73,10 +81,12 @@ const JobApplicationForm = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
-    
+
     if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
       const checked = e.target.checked;
       setFormData((prev) => ({
@@ -95,7 +105,7 @@ const JobApplicationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateStep(4)) {
       setShowError(true);
       return;
@@ -105,11 +115,11 @@ const JobApplicationForm = () => {
 
     try {
       const response = await ApplyJob(formData);
-      
+
       if (response?.message) {
         toast.success(response.message);
         navigate("/thank-you-for-applying");
-        
+
         // Reset form
         setFormData({
           fullName: "",
@@ -135,11 +145,13 @@ const JobApplicationForm = () => {
         throw new Error("Something went wrong");
       }
     } catch (error) {
-      console.error('Application submission error:', error);
+      console.error("Application submission error:", error);
       if (error instanceof Error) {
         toast.error(`Error submitting application: ${error.message}`);
       } else {
-        toast.error("An unexpected error occurred while submitting your application.");
+        toast.error(
+          "An unexpected error occurred while submitting your application."
+        );
       }
     } finally {
       setIsSubmitting(false);
@@ -150,7 +162,8 @@ const JobApplicationForm = () => {
     <form
       encType="multipart/form-data"
       method="post"
-      className="w-full md:w-[80%] laptop:w-[50%] h-fit mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 space-y-6">
+      className="job-application-form w-full md:w-[80%] laptop:w-[50%] h-fit mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 space-y-6"
+    >
       <div className="flex justify-between items-center mb-6">
         <div className="text-gray-600">Step {step} of 4</div>
         <div className="flex space-x-1">
@@ -219,14 +232,16 @@ const JobApplicationForm = () => {
               disabled={step === 1}
               className={`px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition ${
                 step === 1 && "opacity-50 cursor-not-allowed"
-              }`}>
+              }`}
+            >
               Back
             </button>
 
             <button
               type="button"
               onClick={handleNextStep}
-              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
+              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition"
+            >
               Next
             </button>
           </div>
@@ -252,7 +267,8 @@ const JobApplicationForm = () => {
             <select
               onChange={handleChange}
               name="yearsOfExperience"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EEBA2B]">
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#EEBA2B]"
+            >
               <option value="">Years of Experience</option>
               <option>0-1 Years</option>
               <option>1-3 Years</option>
@@ -277,14 +293,16 @@ const JobApplicationForm = () => {
             <button
               type="button"
               onClick={handlePrevStep}
-              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition"
+            >
               Back
             </button>
 
             <button
               type="button"
               onClick={handleNextStep}
-              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
+              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition"
+            >
               Next
             </button>
           </div>
@@ -417,17 +435,19 @@ const JobApplicationForm = () => {
             </div>
           </div>
           <div className="flex justify-between">
-          <button
+            <button
               type="button"
               onClick={handlePrevStep}
-              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition"
+            >
               Back
             </button>
 
             <button
               type="button"
               onClick={handleNextStep}
-              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition">
+              className="px-4 py-2 bg-[#EEBA2B] text-white rounded-lg hover:bg-yellow-400 transition"
+            >
               Next
             </button>
           </div>
@@ -462,24 +482,25 @@ const JobApplicationForm = () => {
             )}
           </div>
           <div className="flex justify-between">
-          <button
+            <button
               type="button"
               onClick={handlePrevStep}
-              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition">
+              className="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg hover:bg-gray-400 transition"
+            >
               Back
             </button>
             <button
-      type="button"
-      onClick={handleSubmit}
-      disabled={isSubmitting}
-      className={`px-6 py-2 ${
-        isSubmitting 
-          ? 'bg-gray-400 cursor-not-allowed' 
-          : 'bg-[#EEBA2B] hover:bg-yellow-400'
-      } text-white rounded-lg transition`}
-    >
-      {isSubmitting ? 'Submitting...' : 'Submit'}
-    </button>
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className={`px-6 py-2 ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#EEBA2B] hover:bg-yellow-400"
+              } text-white rounded-lg transition`}
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
           </div>
         </div>
       )}
