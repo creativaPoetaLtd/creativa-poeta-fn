@@ -18,7 +18,7 @@ const backgrounds = [
   {
     image: image8,
     content: {
-      title: HomeLocale[lang].ttile1,
+      title: HomeLocale[lang].title1,
       description: HomeLocale[lang].description1,
     },
   },

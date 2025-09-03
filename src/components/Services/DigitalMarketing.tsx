@@ -6,7 +6,7 @@ import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
-import {
+import{
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
@@ -71,6 +71,8 @@ export function TestimonialSlider() {
     setCurrentIndex(index);
   };
 
+
+  
   return (
     <section className="testimonial-slider hidden min-h-screen w-full md:w-[80%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
       <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">

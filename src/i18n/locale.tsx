@@ -40,12 +40,33 @@ const translationFr = {
     our_services: 'Nos services',
     read_more: 'Lire la suite',
 }
+const translationNl = {
+  home: 'Huis',
+  about: 'Over ons',
+  contact: 'Neem contact met ons op',
+  services: 'Diensten',
+  welcome: 'WELKOM BIJ CREATIVA POETA',
+  home_content: 'Wij zijn een creatieve groep mensen die invloedrijke merken en digitale ervaringen ontwerpen.',
+  start_a_project: 'BEGIN EEN PROJECT',
+  more_about_us: 'MEER OVER ONS',
+  hello_there: 'HALLO DAAR',
+  we_are_creativa_poeta: 'WIJ ZIJN CREATIVA POETA',
+  about_us_content: 'Gepassioneerd door artistieke expressie en inspirerende creatie, zijn wij een bedrijf van ervaren ontwerpers, copywriters en webontwikkelaars die u unieke creatieve oplossingen bieden. Ons belangrijkste doel is om uw behoeften te begrijpen om uitzonderlijke resultaten te creëren. Met onze aanpak van creativiteit en excellentie trekken we de aandacht en laten we een blijvende indruk achter. Neem vandaag nog contact met ons op om uw projecten te bespreken en te ontdekken hoe we u kunnen helpen uw creatieve doelen te bereiken.',
+  awards_received: 'Ontvangen prijzen',
+  happy_clients: 'Tevreden klanten',
+  complited_projects: 'Voltooide projecten',
+  our_services: 'Onze diensten',
+  read_more: 'Lees meer',
+};
+
+
 
 
 i18n.use(initReactI18next).init({
     resources: {
       en: { translation: translationEn },
       fr: { translation: translationFr },
+       nl: { translation: translationNl },
     },
     lng: 'en',
     fallbackLng: 'en',

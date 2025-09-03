@@ -46,7 +46,29 @@ const ServiceLocale:any = {
         service41:'Gukora, guhindura amashusho',
         service42:'ndetse na montage',
         description4:"Ushaka kuba umunyamakuru cyangwa ushyira video zawe ku mbuga nkoranyambaga zirimo nka YouTube, TikTok, Instagram, Facebook, n'ibindi? tugukorera amashusho y'ibitangaza tugagufasha kugaragara neza ku mbuga nkoranyambaga neza cyane nko (kuri youtubeur, tiktok, Instagram, ... bikaba bigufasha no kubona abantu benshi bareba ama video yawe)",
-    }
+    },
+
+
+
+
+
+      nl: {
+    title1: 'ONZE',
+    title2: 'DIENSTEN',
+    service11: 'Web & App',
+    service12: 'Ontwikkeling',
+    description1: 'Transformeer je ideeën in krachtige digitale oplossingen: websites, interactieve apps en maatwerksoftware op maat van jouw behoeften.',
+    service21: 'Content',
+    service22: 'Schrijven & Creatie',
+    description2: 'Zorgvuldig gekozen woorden die jouw verhaal vertellen en je publiek op een boeiende manier betrekken.',
+    service31: 'Grafisch ontwerp &',
+    service32: 'Visuele communicatie',
+    description3: 'Breng je ideeën tot leven met gedenkwaardige visuele creaties: graphics, advertenties, digitale video’s en boeiende animaties.',
+    service41: 'Digitale marketing &',
+    service42: 'Social media',
+    description4: 'Vergroot je online aanwezigheid, verhoog je zichtbaarheid, betrek je publiek en maximaliseer je omzet met een complete digitale strategie: social media, content, SEO en e-commerce.'
+}
+
 }
 
 export default ServiceLocale;
