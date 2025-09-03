@@ -14,7 +14,7 @@ const About = () => {
   ];
 
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
-
+   
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
@@ -77,7 +77,7 @@ const About = () => {
             </div> */}
           </div>
           <div className="flex justify-evenly laptop:px-40 px-4">
-            <h1 className="laptop:text-2xl leading-relaxed tablet:text-2xl text-slate-80 mx-0 animate-fade-in animate-bounce underline-offset-6 text- text-center justify-evenly">{AboutLocale[lang].decription}</h1>
+            <h1 className="laptop:text-2xl leading-relaxed tablet:text-2xl text-slate-80 mx-0 animate-fade-in animate-bounce underline-offset-6 text- text-center justify-evenly">{AboutLocale[lang].description}</h1>
           </div>
         </div>
         <div className="very-top laptop:h-[13%] tablet:h-[13%] phone:h-[10%] h-[8%] laptop:w-[10%] w-[35%] absolute laptop:right-20 right-11 top-0 border-r-2 border-neutral-100">

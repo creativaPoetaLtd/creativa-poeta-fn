@@ -47,7 +47,24 @@ const contactLocale: any = {
         wait:"Tegereza...",
         success: "Ubutumwa bwoherejwe neza!",
         sendErrror: "Habayemo akabazo, ongera ugerageze.",
-    }
+
+    },
+      nl: {
+    validation: "Vul alstublieft alle velden in.",
+    email: "Voer een geldig e-mailadres in.",
+    intro: "Wij zijn er om u te helpen, uw ideeën om te zetten in frisse producten en al uw vragen te beantwoorden. Wilt u contact met ons opnemen? Wij horen graag van u. Stel ons alles en wij nemen zo snel mogelijk contact met u op.",
+    cta: "Neem contact op",
+    socials: "Volg ons op sociale media",
+    form: "Contactformulier",
+    title: "Stel ons alles en wij horen graag van u",
+    fullName: "Volledige naam",
+    emailAddress: "E-mailadres",
+    message: "Bericht",
+    action: "Verzenden",
+    wait: "even geduld...",
+    success: "Bericht succesvol verzonden!",
+    sendErrror: "Netwerkfout. Probeer het later opnieuw.",
+  }
 };
 
 export default contactLocale;

@@ -20,6 +20,12 @@ const AboutLocale: any = {
       "Abakunda kwerekana ubuhanga mu by’ubugeni no guhanga ibihangano biteye ishema, turi ikigo kigizwe n’abanyabugeni, abanditsi n’abatekinisiye ba web bafite uburambe, tubaha ibisubizo byihariye kandi bishya mu by'ubuhanzi. Intego yacu nyamukuru ni ukumenya ibyo mukeneye kugirango duhe ibisubizo bidasanzwe. Kubera uburyo dushyira imbere ubuhanzi no gukora neza, dukurura abantu kandi tugasigira abandi ishusho ihoraho. Ntutindiganye kutwandikira uyu munsi kugirango tuganire ku mishinga yawe no kumenya uko twagufasha kugera ku ntego zawe mu bijyanye n'ubuhanzi.",
     action: "VUGANA N'ABAKOZI BACU",
   },
+    nl: {
+    title1: "WIE WIJ ZIJN",
+    description:
+      "Gepassioneerd door artistieke expressie en inspirerende creatie, zijn wij een team van ervaren ontwerpers, schrijvers en webontwikkelaars die u unieke creatieve oplossingen bieden. Ons belangrijkste doel is om uw behoeften te begrijpen en uitzonderlijke resultaten te creëren. Met onze creativiteit en focus op excellentie trekken we de aandacht en laten we een blijvende indruk achter. Neem vandaag nog contact met ons op om uw projecten te bespreken en te ontdekken hoe wij u kunnen helpen uw creatieve doelen te bereiken.",
+    action: "CONTACTEER ONS TEAM",
+  },
 };
 
 export default AboutLocale;
