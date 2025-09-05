@@ -1,13 +1,16 @@
+import ProjectsLocale from "../../i18n/ProjectsLocale";
+import getLangFromLocalStorage from "../../../utils/Lang";
 const Projects = () => {
+   const lang = getLangFromLocalStorage();
   return (
     <section
       id="projects"
       className="projects desktop:flex flex-col h-screen max-h-fit  w-full bg-red-600">
       <div className="w-full min-w-screen backdrop-blur-xs backdrop-blur-lg flex flex-col space-y-7 bg-gradient-to-r from-white to-transparent">
         <h1 className="laptop:text-4xl desktop:text-4xl tablet:text-3xl text-2xl font-bold mx-auto text-[#EEBA2B]">
-          <b className="text-black">NOS</b>
+          <b className="text-black">  {ProjectsLocale[lang]?.headingPart1 ?? ProjectsLocale["en"].headingPart1}</b>
           <br />
-          DERNIERS PROJECTS
+          {ProjectsLocale[lang]?.headingPart2 ?? ProjectsLocale["en"].headingPart2}
         </h1>
       </div>
 
@@ -26,7 +29,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+              {ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
 
@@ -42,7 +45,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+              {/* View Demo */} {ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
         </div>
@@ -61,7 +64,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+               {ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
 
@@ -77,7 +80,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+              {/* View Demo */}{ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
         </div>
@@ -96,7 +99,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+              {/* View Demo */}     {ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
 
@@ -112,7 +115,7 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-yellow-400 hover:text-yellow-500 transition-opacity duration-300 ease-in-out">
-              View Demo
+              {/* View Demo */}      {ProjectsLocale[lang]?.viewDemo ?? ProjectsLocale["en"].viewDemo}
             </a>
           </div>
         </div>

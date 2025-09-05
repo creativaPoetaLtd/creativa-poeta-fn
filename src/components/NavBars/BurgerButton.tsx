@@ -27,15 +27,25 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
 
   // Removed duplicate toggleSidebar function
   const handleLanguageChange = (lang: string) => {
-    setSelectedLang(lang === "English" ? "en" : lang === "French" ? "fr" : "kiny");
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(
-        "selectedLang",
-        lang === "English" ? "en" : lang === "French" ? "fr" : "kiny"
-      );
-      window.location.reload();
-    }
-  };
+  const selected =
+    lang === "English"
+      ? "en"
+      : lang === "French"
+      ? "fr"
+      : lang === "Kinyarwanda"
+      ? "kiny"
+      : lang === "Dutch"
+      ? "nl"
+      : "en"; // fallback to English if not recognized
+
+  setSelectedLang(selected);
+
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem("selectedLang", selected);
+    window.location.reload();
+  }
+};
+
   const langMenu = (
     <Menu onClick={({ key }) => handleLanguageChange(key)}
     style={{ backgroundColor: "rgba(0, 0, 0, 0)",
@@ -58,6 +68,12 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
             <img src="/fr.png" alt="flag" className="w-6 h-4" />
           </div>
         </Menu.Item>
+        <Menu.Item key="Dutch">
+  <div className="flagAndLang flex items-center space-x-2">
+    <img src="/nll.jpg" alt="flag" className="w-6 h-4" />
+  </div>
+</Menu.Item>
+
     </Menu>
   );
   return (
@@ -66,7 +82,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     
       className={` font-bold z-30 text-3xl  md:text-4xl   text-white flex space-x-3 justify-center m-auto text-center items-center p-1 md:p-1 fixed top-5 right-4`}
     > 
-  <div className="localizationButtonSwitcher justify-start hidden">
+  <div className="localizationButtonSwitcher justify-start ">
             <Dropdown overlay={langMenu} trigger={["click"]} >
               <button className="currentLocal flex items-center space-x-2">
                 <img

@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import NavLocale from "../../i18n/NavLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import { useAuth } from "../../contexts/AuthContext";
+import BurgerButton from "./BurgerButton";
 
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -61,7 +62,7 @@ function NavBar() {
 
   const handleAdminDashboard = () => {
     navigate("/secure-admin-dashboard-2024");
-    setAdminDropdownVisible(false);
+    setAdminDropdownVisible(false); 
   };
 
   const toggleAdminDropdown = () => {
@@ -275,6 +276,11 @@ function NavBar() {
                 >
                   {NavLocale[lang]?.contacts}
                 </Link>
+                {/* <Link> */}
+                <BurgerButton sidebarVisible={false} toggleSidebar={function (): void {
+                    throw new Error("Function not implemented.");
+                  } }/>
+                {/* </Link> */}
 
                 {/* Admin Dashboard Access - Moved to dropdown */}
                 {/* Admin options now available in the top-right admin dropdown */}

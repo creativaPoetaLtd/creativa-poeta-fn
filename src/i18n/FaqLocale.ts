@@ -81,7 +81,37 @@ const FaqLocale: any = {
         description11:"Dufite agace kuri website yacu kakugeza ku byo twakozeho, ibihembo twatsindiye. NIba hari icyo ukeneye twandikire.",
         title12:"Mukoresha ubuhe buryo mu kwishyura?",
         description12:"Hari uburyo bwinshi nk'ama banks, amakarita(credit cards), n'ubundi buryo bwo kuri murandasi bwizewe. Tugerageza gukoresha uburyo bunogeye buri wese."
+    },
+ 
+        nl: {
+        h1: "F.A.Q.",
+        h2: " Veelgestelde Vragen",
+        title1: "Wat zijn de voordelen van Creativa Poeta gebruiken in plaats van het zelf doen?",
+        description1: "Met Creativa Poeta profiteert u van gespecialiseerde expertise, creatieve maatwerkoplossingen, tijdsbesparing, professionele resultaten en nauwe samenwerking om uw creatieve doelen effectief en indrukwekkend te bereiken.",
+        title2: " Hoe lang duurt het project en wanneer kunnen we resultaten verwachten?",
+        description2: "De duur van het project hangt af van de complexiteit en de omvang van de gevraagde diensten. We werken efficiënt om de afgesproken deadlines te halen. De resultaten kunnen variëren afhankelijk van het type project, maar we gebruiken prestatie-indicatoren om voortgang en succes te meten.",
+        title3: "Hoe kan ik een bestelling plaatsen bij Creativa Poeta?",
+        description3: "Een bestelling plaatsen bij Creativa Poeta is eenvoudig. Neem contact met ons op via onze website, e-mail of telefoon. We bespreken uw wensen, maken een offerte en stellen een persoonlijk plan op voor uw project.",
+        title4: "Kunt u werken aan urgente projecten?",
+        description4: "Ja, we begrijpen dat tijd soms cruciaal is. We bieden snelle diensten voor urgente projecten. Neem contact met ons op om uw specifieke deadlines te bespreken.",
+        title5: "Voor welke soorten bedrijven of individuen werkt u?",
+        description5: "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
+        title6: "Wat zijn uw tarieven?",
+        description6: "Onze tarieven variëren afhankelijk van de complexiteit van elk project. We bieden persoonlijke offertes die zijn afgestemd op uw specifieke behoeften. Neem contact met ons op voor een gratis offerte.",
+        title7: "Hoe garandeert u de kwaliteit van uw creaties?",
+        description7: "We hebben een speciaal kwaliteitsteam dat ervoor zorgt dat elke creatie aan onze hoge normen voldoet. Bovendien vragen we regelmatig feedback van onze klanten om continu te verbeteren.",
+        title8: "Kan ik revisies aanvragen voor de creaties die u levert?",
+        description8: "Absoluut, we moedigen revisies aan om ervoor te zorgen dat u 100% tevreden bent. Uw tevredenheid is onze prioriteit, en we brengen de nodige aanpassingen aan om aan uw verwachtingen te voldoen.",
+        title9: "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
+        description9: "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
+        title10: "Biedt u marketingdiensten aan om de creaties die u maakt te promoten?",
+        description10: "Ja, naast creatie, schrijven en video-editing, bieden we marketingdiensten om de zichtbaarheid van uw creaties te vergroten. We ontwikkelen strategieën op maat om uw doelgroep te bereiken en de impact van uw content te maximaliseren.",
+        title11: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
+        description11: "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
+        title12: "Welke betaalmethoden accepteert Creativa Poeta?",
+        description12: "We accepteren verschillende gangbare betaalmethoden, waaronder bankoverschrijvingen, creditcards en andere veilige online betalingsopties. We zorgen ervoor dat u altijd een gemakkelijke betalingsmethode hebt."
     }
+
 }
 
 export default FaqLocale;

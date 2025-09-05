@@ -59,7 +59,34 @@ const NavLocale: any = {
           subservice7:"Gukora ama websites",
           subservice8:"Ubundi bufasha ku ikoranabuhanga",
           subservice9:"Gushyira website kuri interneti",
+     },
+
+ nl: {
+          navigation: "Navigatie",
+          about: "Over ons",
+          pargraph1: "Dit is een paragraaf",
+          Projects: "Onze Projecten",
+          services: "Diensten",
+          faq: "FAQ",
+          contacts: "Contacten",
+          home: "Home",
+          career: "Carrière",
+          getStarted: "Begin",
+          subservice1:"Grafisch ontwerp en visuele communicatie",
+          subservice2:"Content schrijven en creëren",
+          subservice3:"Digitale marketing en sociale media",
+          subservice4:"Website- en app-ontwikkeling",
+          subservice5:"Digitale marketing",
+          subservice6:"Advertentieontwerp",
+          subservice7:"Websitecreatie",
+          subservice8:"Technologische ondersteuning",
+          subservice9:"Website hosting",
      }
+
+
+
+
+
 };
 
 export default NavLocale;
