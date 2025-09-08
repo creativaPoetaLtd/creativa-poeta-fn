@@ -16,8 +16,8 @@
 
 
   kiny: {
-    legalMentions: "Amategeko n’Amabwiriza",
-    terms: "Amategeko n’Amabwiriza y’Ibyo Dukora",
+    legalMentions: "Ibitekerezo byemewe n'amategeko",
+    terms: "Amategeko n’Amabwiriza ",
     cookies: "Amabwiriza n’Ubwirinzi bw’Amakuru",
     copyright: "© 2023 Creativa Poeta. Uburenganzira bwose burabitswe."
   },

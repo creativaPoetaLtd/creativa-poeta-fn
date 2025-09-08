@@ -5,6 +5,7 @@ import Faq from './components/sections/Faq';
 import Services from './components/sections/Services';
 import Footer from './components/sections/Footer';
 import MainFooter from './components/sections/MainFooter';
+// import Projects from './components/sections/Projects'
 const App = () => {
   return (
 
@@ -16,7 +17,7 @@ const App = () => {
         <Home />
         <About />
         <Services />
-        {/* <Projects /> */}
+         {/* <Projects /> */}
         <Faq />
         <Footer />
         <MainFooter />
