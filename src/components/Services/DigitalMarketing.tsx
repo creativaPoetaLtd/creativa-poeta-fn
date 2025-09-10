@@ -423,7 +423,7 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        	Search Engine Optimization (SEO)
+            	Search Engine Optimization (SEO)
         </h3>
         <p className="md:w-[70%] text-center">	
         Improving search engine rankings to drive organic traffic and enhance brand discoverability.
