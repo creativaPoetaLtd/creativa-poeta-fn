@@ -282,7 +282,7 @@ const DesignLocale: any = {
     serviceTitle4: "Travailleurs indépendants et créatifs",
     serviceText4: "Présentez vos travaux avec un site ou une application de portfolio impressionnant.",
      processTitle: "Flux de Travail",
-
+      
     step1Title: "Consultation",
     step1Text: "Compréhension de vos besoins, vision et objectifs.",
 
@@ -328,6 +328,7 @@ const DesignLocale: any = {
         quote5: "Logo yacu yacu yacu ni nziza! Ni iyo dukeneye. Murakoze!",
         title1: "Ikoranabuhanga rya cyane",
         description1: "Gucyura ibikorwa byawe by'ibikorwa n'ibikorwa n'ibikorwa by'ibikorwa.",
+
         title2: "Guharira Ibindi",
         description2: "Gufasha abantu n'ibyo bintu byiza bya design.",
         title3: "Guharira Ibindi",
@@ -421,7 +422,7 @@ const DesignLocale: any = {
     step5Title: "Kugerageza",
     step5Text: "Kwemeza imikorere, umutekano, n’ubushobozi ku bikoresho byose.",     
       contactTitle: "Twandikire uyu munsi twubake ikintu kidasanzwe hamwe.",
-    contactText:"Witeguye guhindura icyerekezo cyawe cya dijitali kikaba impamo?",
+    contactText:"Witeguye guhindura icyerekezo cyawe cya dijitali(digital) kikaba impamo?",
 
 
        services: [
