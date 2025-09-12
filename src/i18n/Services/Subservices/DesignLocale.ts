@@ -281,7 +281,7 @@ const DesignLocale: any = {
 
     serviceTitle4: "Travailleurs indépendants et créatifs",
     serviceText4: "Présentez vos travaux avec un site ou une application de portfolio impressionnant.",
-    processTitle: "Flux de Travail",
+    // processTitle: "Flux de Travail",
       
     step1Title: "Consultation",
     step1Text: "Compréhension de vos besoins, vision et objectifs.",
