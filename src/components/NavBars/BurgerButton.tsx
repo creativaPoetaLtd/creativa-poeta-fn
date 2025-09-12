@@ -83,15 +83,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
    
 
       {/* Menu Button */}
-      <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-2 px-2 rounded-md">
-        <p className="menu text-[#FFFF00] text-base font-thin">MENU</p>
-        {sidebarVisible ? (
-          <FaTimes onClick={toggleSidebar} />
-        ) : (
-          <LiaBarsSolid onClick={toggleSidebar} />
-        )}
-      </div>
-        <div className="localizationButtonSwitcher justify-start ">
+      <div className="localizationButtonSwitcher justify-start ">
   <Dropdown overlay={langMenu} trigger={["click"]}>
     <button className="currentLocal flex items-center space-x-2">
       <img
@@ -113,6 +105,15 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     </button>
   </Dropdown>
 </div>
+      <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-2 px-2 rounded-md">
+        <p className="menu text-[#FFFF00] text-base font-thin">MENU</p>
+        {sidebarVisible ? (
+          <FaTimes onClick={toggleSidebar} />
+        ) : (
+          <LiaBarsSolid onClick={toggleSidebar} />
+        )}
+      </div>
+        
 
     </div>
   );

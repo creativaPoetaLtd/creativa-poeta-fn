@@ -13,8 +13,6 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
-
-
 const lang: string = getLangFromLocalStorage();
 
 const testimonials = [
@@ -222,8 +220,7 @@ const faqs = [
     "question": "What is the cost of developing a website or app?",
     "answer": "The cost varies based on project requirements, complexity, and features. Contact us with your project details for a tailored quote."
   }
-]
-
+];
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -297,19 +294,25 @@ const WebApp = () => {
     <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-xl md:text-3xl font-bold">
+          {/* <h1 className="text-xl md:text-3xl font-bold">
           Web & app development
-          </h1>
+          </h1> */}
+          <h1>{DesignLocale[lang].webAppTitle}</h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
-        <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
+        {/* <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
         Innovative digital solutions, tailored for your needs.
-        </p>
+        </p> */}
+        <p>{DesignLocale[lang].webAppSubtitle}</p>
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
-        <p className="text-md md:text-lg text-justify leading-relaxed text-white">
+        {/* <p className="text-md md:text-lg text-justify leading-relaxed text-white">
         In the ever-evolving digital landscape, a robust and engaging online presence is essential. At Creativa Poeta, we transform your ideas into digital realities by crafting modern websites, powerful applications, and custom software solutions designed to elevate your business.
+</p> */}
+       
+       <p className="text-md md:text-lg text-justify leading-relaxed text-white">
+  {DesignLocale[lang].webAppIntro}
 </p>
         <button
           onClick={handleNavigate}
@@ -332,13 +335,14 @@ const WebApp = () => {
 
 <section className="service-type-section mb-8 text-white w-full md:w-[92%] max-w-screen-lg mx-auto mt-12 p-6 md:p-0 laptop:p-8 rounded-lg flex flex-col z-10">
     
-    <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
+    {/* <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
     Services offered
-    </h2>
-
-    <p className="text-md md:text-lg text-center mb-8">
+    </h2> */}
+    <h2>{DesignLocale[lang].servicesOfferedWebApp}</h2>
+    {/* <p className="text-md md:text-lg text-center mb-8">
     Our web & app development includes the following services:
-    </p>
+    </p> */}
+    <p>{DesignLocale[lang].servicesDescWebApp}</p>
 
     <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -346,10 +350,19 @@ const WebApp = () => {
           src="/webdev.jpeg"
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
-        />        <h3 className="text-xl font-semibold mb-2">
-        Web development
-        </h3>
-        <p className="md:w-[70%] text-center">Development and maintenance of showcase websites, e-commerce platforms, and web applications.</p>
+          />    
+         
+             {/* <h3 className="text-xl font-semibold mb-2">
+          Web development
+          </h3>
+          <p className="md:w-[70%] text-center">Development and maintenance of showcase websites, e-commerce platforms, and web applications.</p>  */}
+       <h3 className="text-xl font-semibold mb-2">
+      {DesignLocale[lang].webDevTitle}
+    </h3>
+    <p className="md:w-[70%] text-center">
+      {DesignLocale[lang].webDevDesc}
+    </p>
+     
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -358,10 +371,17 @@ const WebApp = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />
-        <h3 className="text-xl font-semibold mb-2">
-        	App development
+        {/* <h3 className="text-xl font-semibold mb-2">
+        App development
         </h3>
-        <p className="md:w-[70%] text-center">Creation of interactive mobile and web applications that deliver seamless user experiences.</p>
+        <p className="md:w-[70%] text-center">Creation of interactive mobile and web applications that deliver seamless user experiences.</p> */}
+     <h3 className="text-xl font-semibold mb-2">
+      {DesignLocale[lang].appDevTitle}
+    </h3>
+    <p className="md:w-[70%] text-center">
+      {DesignLocale[lang].appDevDesc}
+    </p>
+    
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -370,10 +390,18 @@ const WebApp = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />
-        <h3 className="text-xl font-semibold mb-2">
+        {/* <h3 className="text-xl font-semibold mb-2">
         Software development
         </h3>
-        <p className="md:w-[70%] text-center">Tailored software solutions such as ERP, CRM, and internal systems (e.g., intranets, project management tools).</p>
+        <p className="md:w-[70%] text-center">Tailored software solutions such as ERP, CRM, and internal systems (e.g., intranets, project management tools).</p> */}
+       <h3 className="text-xl font-semibold mb-2">
+      {DesignLocale[lang].softwareDevTitle}
+    </h3>
+    <p className="md:w-[70%] text-center">
+      {DesignLocale[lang].softwareDevDesc}
+    </p>
+      
+      
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -382,10 +410,17 @@ const WebApp = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />
-        <h3 className="text-xl font-semibold mb-2">
+        {/* <h3 className="text-xl font-semibold mb-2">
         Web/App design (UI/UX)
         </h3>
-        <p className="md:w-[70%] text-center">Designing intuitive and visually appealing interfaces for websites and applications.</p>
+        <p className="md:w-[70%] text-center">Designing intuitive and visually appealing interfaces for websites and applications.</p> */}
+        <h3 className="text-xl font-semibold mb-2">
+      {DesignLocale[lang].uiUxTitle}
+    </h3>
+    <p className="md:w-[70%] text-center">
+      {DesignLocale[lang].uiUxDesc}
+    </p>
+      
       </div>
     </div>
   </section>
@@ -398,8 +433,14 @@ const WebApp = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2>
+          {/* <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2> */}
+            <h2 className="font-bold text-xl md:text-3xl leading-tight">
+        {DesignLocale[lang].keyCompTitle1}
+      </h2>
+          {/* <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2> */}
+           <h2 className="font-bold text-xl md:text-3xl leading-tight">
+        {DesignLocale[lang].keyCompTitle2}
+      </h2>
         </div>
       </div>
     </div>
@@ -407,31 +448,37 @@ const WebApp = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        {
-          number: "1",
-          text: "Expertise in major social media platforms and their algorithms",
-          bgColor: "bg-[#E265FF]",
-        },
-        {
-          number: "2",
-          text: "Proficiency in SEO tools and techniques for optimized content",
-          bgColor: "bg-[#8B3DFF]",
-        },
-        {
-          number: "3",
-          text: "Skills in crafting and managing ad campaigns for maximum ROI",
-          bgColor: "bg-[#3DB9FF]",
-        },
-        {
-          number: "4",
-          text: "Knowledge of CMS platforms and e-commerce tools",
-          bgColor: "bg-[#FFA53D]",
-        },
-        {
-          number: "5",
-          text: "Ability to analyze and adapt strategies based on performance metrics",
-          bgColor: "bg-[#76C56F]",
-        },
+        // {
+        //   number: "1",
+        //   text: "Expertise in major social media platforms and their algorithms",
+        //   bgColor: "bg-[#E265FF]",
+        // },
+        // {
+        //   number: "2",
+        //   text: "Proficiency in SEO tools and techniques for optimized content",
+        //   bgColor: "bg-[#8B3DFF]",
+        // },
+        // {
+        //   number: "3",
+        //   text: "Skills in crafting and managing ad campaigns for maximum ROI",
+        //   bgColor: "bg-[#3DB9FF]",
+        // },
+        // {
+        //   number: "4",
+        //   text: "Knowledge of CMS platforms and e-commerce tools",
+        //   bgColor: "bg-[#FFA53D]",
+        // },
+        // {
+        //   number: "5",
+        //   text: "Ability to analyze and adapt strategies based on performance metrics",
+        //   bgColor: "bg-[#76C56F]",
+        // },
+
+         { number: "1", text: DesignLocale[lang].comp1, bgColor: "bg-[#E265FF]" },
+    { number: "2", text: DesignLocale[lang].comp2, bgColor: "bg-[#8B3DFF]" },
+    { number: "3", text: DesignLocale[lang].comp3, bgColor: "bg-[#3DB9FF]" },
+    { number: "4", text: DesignLocale[lang].comp4, bgColor: "bg-[#FFA53D]" },
+    { number: "5", text: DesignLocale[lang].comp5, bgColor: "bg-[#76C56F]" },
       ].map(({ number, text, bgColor }, index) => (
         <div key={index} className="flex items-center gap-4">
           {/* Circle */}
@@ -460,43 +507,67 @@ const WebApp = () => {
           />
         </div>
         <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-          <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
+        <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
+  {DesignLocale[lang].whyChooseTitle}
+</h2>
+          {/* <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
           Why choose Creativa Poeta?
-          </h2>
+          </h2> */}
           <ul className="space-y-4 md:space-x-0 list-disc p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
-            <li>
-              <strong className="text-md md:text-lg">
+            {/* <li>
+              <strong className="text-md md:text-lg mr-3">
                 Tailored solutions
                               </strong>
                Every project is uniquely designed to meet your specific business needs
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
+            </li> */}
+              <li>
+    <strong className=" text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong1}</strong>
+    {DesignLocale[lang].whyChooseText1}
+  </li>
+            {/* <li>
+              <strong className="text-md md:text-lg mr-3">
                 Experienced team
               </strong>
               Our developers and designers are skilled in the latest technologies and trends.
-            </li>
+            </li> */}
             <li>
-              <strong className="text-md md:text-lg">
+    <strong className="text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong2}</strong>
+    {DesignLocale[lang].whyChooseText2}
+  </li>
+            {/* <li>
+              <strong className="text-md md:text-lg mr-3">
                 
-                	Comprehensive support
+                Comprehensive support
               </strong>
               From ideation to deployment, we provide full support throughout the development lifecycle.
-            </li>
-            <li>
-              <strong className="text-md md:text-lg">
+            </li> */}
+           <li>
+    <strong className=" text-md md-text-lg mr-3">{DesignLocale[lang].whyChooseStrong3}</strong>
+    {DesignLocale[lang].whyChooseText3}
+  </li>
+            {/* <li>
+              <strong className="text-md md:text-lg mr-3">
                 
                 Customer-centric approach
               </strong>
               Your satisfaction is our priority, and we ensure your vision becomes a reality.
-            </li>
+            </li> */}
             <li>
-              <strong className="text-md md:text-lg">
+    <strong className="text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong4}</strong>
+    {DesignLocale[lang].whyChooseText4}
+  </li>
+
+            {/* <li>
+              <strong className="text-md md:text-lg mr-3">
                 
                 Scalable and future-ready
               </strong>
               We build solutions that grow with your business and adapt to future needs.
-            </li>
+            </li> */}
+             <li>
+    <strong className=" text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong5}</strong>
+    {DesignLocale[lang].whyChooseText5}
+  </li>
           </ul>
         </div>
       </section>
@@ -727,11 +798,12 @@ const WebApp = () => {
         Contact us today and let’s build something extraordinary together.
         </p>
 
-          <button
+          {/* <button
             onClick={handleNavigate}  
            className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
             Digitize your idea with us
-          </button>
+          </button> */}
+          <button>{DesignLocale[lang].ctaButtonWebApp}</button>
       </section>
 
       <section className="visual-elements w-[95%] hidden  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex-col items-center z-10">

@@ -344,14 +344,16 @@ const DigitalMarketings = () => {
     <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
-          <h1 className="text-xl md:text-3xl font-bold">
+           <h1 className="text-xl md:text-3xl font-bold">
           Digital marketing & social media
           </h1>
+           <h1>{DesignLocale[lang].title1}</h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
         Engage, inspire, and grow your digital presence
-        </p>
+        </p> 
+            
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16  w-full mt-12">
