@@ -116,8 +116,42 @@ const DesignLocale: any = {
     whyChooseText4: "Your satisfaction is our priority, and we ensure your vision becomes a reality.",
     whyChooseStrong5: "Scalable and future-ready",
     whyChooseText5: "We build solutions that grow with your business and adapt to future needs.",
+     whoForTitle: "Who are these services for?",
+    whoForIntro: "Our web & app development services cater to:",
 
-    },
+      serviceTitle1: "Startups",
+    serviceText1: "Launch your brand with a dynamic online presence.",
+
+    serviceTitle2: "Small to Medium Enterprises (SMEs)",
+    serviceText2: "Upgrade your digital tools to enhance operations and customer engagement.",
+
+    serviceTitle3: "Enterprises",
+    serviceText3: "Streamline processes with custom software and advanced applications.",
+
+    serviceTitle4: "Freelancers and Creatives",
+    serviceText4: "Showcase your work with an impressive portfolio site or application.",
+
+      processTitle: "Process Workflow",
+    step1Title: "Consultation",
+    step1Text: "Understanding your requirements, vision, and goals.",   
+
+    step2Title: "Planning",
+    step2Text: "Developing a comprehensive strategy and timeline for your project.",
+
+    step3Title: "Design",
+    step3Text: "Creating wireframes, mockups, and user-friendly interfaces.",
+
+    step4Title: "Development",
+    step4Text: "Building websites, applications, or software using cutting-edge technologies.",
+
+    step5Title: "Testing",
+    step5Text: "Ensuring performance, security, and compatibility across devices.",
+
+     contactTitle: "Ready to bring your digital vision to life?",
+    contactText: "Contact us today and let’s build something extraordinary together.",
+  },
+
+    
     fr:{
         quote1: "Le travail de design de cette équipe a transformé notre marque! Le logo et les couleurs représentent vraiment qui nous sommes.",
         quote2: "Des designs fantastiques qui résonnent avec notre public. Hautement recommandé!",
@@ -234,6 +268,39 @@ const DesignLocale: any = {
     whyChooseText4: "Votre satisfaction est notre priorité, et nous veillons à concrétiser votre vision.",
     whyChooseStrong5: "Évolutif et prêt pour l’avenir",
     whyChooseText5: "Nous créons des solutions qui évoluent avec votre entreprise et s’adaptent aux besoins futurs.",
+      whoForTitle: "À qui s’adressent ces services ?",
+    whoForIntro: "Nos services de développement web et application s’adressent à :",
+    serviceTitle1: "Startups",
+    serviceText1: "Lancez votre marque avec une présence en ligne dynamique.",
+
+    serviceTitle2: "Petites et Moyennes Entreprises (PME)",
+    serviceText2: "Améliorez vos outils numériques pour optimiser les opérations et l’engagement des clients.",
+
+    serviceTitle3: "Grandes Entreprises",
+    serviceText3: "Rationalisez vos processus grâce à des logiciels personnalisés et des applications avancées.",
+
+    serviceTitle4: "Travailleurs indépendants et créatifs",
+    serviceText4: "Présentez vos travaux avec un site ou une application de portfolio impressionnant.",
+     processTitle: "Flux de Travail",
+
+    step1Title: "Consultation",
+    step1Text: "Compréhension de vos besoins, vision et objectifs.",
+
+    step2Title: "Planification",
+    step2Text: "Développement d’une stratégie complète et d’un calendrier pour votre projet.",
+
+    step3Title: "Conception",
+    step3Text: "Création de wireframes, maquettes et interfaces conviviales.",
+
+    step4Title: "Développement",
+    step4Text: "Construction de sites web, applications ou logiciels avec les technologies de pointe.",
+
+    step5Title: "Test",
+    step5Text: "Assurer la performance, la sécurité et la compatibilité sur tous les appareils.",
+
+     contactTitle: "Prêt à donner vie à votre vision numérique ?",
+    contactText: "Contactez-nous dès aujourd’hui et construisons ensemble quelque chose d’extraordinaire.",
+
   },
 
        services: [
@@ -251,7 +318,7 @@ const DesignLocale: any = {
       },
     ],
 
-    
+
     
     kiny:{
         quote1: "Ekipa ya design iyi yafashije ubushobozi bwacu! Logo na ibicuruzwa byose byumvikana cyane n'ubwacu.",
@@ -324,8 +391,37 @@ const DesignLocale: any = {
     whyChooseText4: "Kunyurwa kwawe nibyo dushyira imbere, kandi dukora ibishoboka byose ngo icyifuzo cyawe gishyirwe mu bikorwa.",
     whyChooseStrong5: "Gukomeza no kwitegura ejo hazaza",
     whyChooseText5: "Twubaka ibisubizo bikura mu bucuruzi bwawe kandi bigahuza n'ibikenewe mu gihe kizaza",
-    
+        whoForTitle: "Ubufasha(Service)bugenewe bande?",
+    whoForIntro: "Ubufasha(Service) bwacu bwo gukora imbuga(Web) na porogaramu(App) zigenewe: ",
+      serviceTitle1: "Amashoramari mato",
+    serviceText1: "Tangiza izina ryawe ukoresheje urubuga rukomeye kandi rujyanye n’igihe.",
 
+    serviceTitle2: "Ibigo bito n’ibiciriritse",
+    serviceText2: "Komeza ikoreshwa ry’ikoranabuhanga ryawe kugira ngo worohereze imirimo no kongera uburyo ugera ku bakiriya.",
+
+    serviceTitle3: "Ibigo binini",
+    serviceText3: "Tegura imikorere neza ukoresheje porogaramu zihariye n’udushya tw’ikoranabuhanga.",
+
+    serviceTitle4: "Abikorera ku giti cyabo n’abahanzi",
+    serviceText4: "Erekana imirimo yawe ukoresheje urubuga cyangwa porogaramu yerekana ubuhanga bwawe.",
+      processTitle: "Uko Umushinga Utegurwa",
+
+    step1Title: "Kuganira ku mushinga",
+    step1Text: "Kumva ibyo ukeneye, icyerekezo cyawe, n’intego zawe.",
+
+    step2Title: "Gahunda",
+    step2Text: "Guteza imbere gahunda yuzuye hamwe n’igihe cyo kurangiza umushinga wawe.",
+
+    step3Title: "Igishushanyo",
+    step3Text: "Gukora ibishushanyo (wireframes), mockups, n’interineti zorohereza abakoresha.",
+
+    step4Title: "Iterambere",
+    step4Text: "Kubaka imbuga, porogaramu cyangwa software ukoresheje ikoranabuhanga rigezweho.",
+
+    step5Title: "Kugerageza",
+    step5Text: "Kwemeza imikorere, umutekano, n’ubushobozi ku bikoresho byose.",     
+      contactTitle: "Twandikire uyu munsi twubake ikintu kidasanzwe hamwe.",
+    contactText:"Witeguye guhindura icyerekezo cyawe cya dijitali kikaba impamo?",
 
 
        services: [
@@ -460,6 +556,37 @@ const DesignLocale: any = {
     whyChooseText4: "Uw tevredenheid is onze prioriteit en wij zorgen ervoor dat uw visie werkelijkheid wordt.",
     whyChooseStrong5: "Schaalbaar en toekomstbestendig",
     whyChooseText5: "Wij bouwen oplossingen die meegroeien met uw bedrijf en zich aanpassen aan toekomstige behoeften.",
+       whoForTitle: "Voor wie zijn deze diensten bedoeld?",
+    whoForIntro: "Onze web- en app-ontwikkelingsdiensten zijn bedoeld voor:",
+    serviceTitle1: "Startups",
+    serviceText1: "Lanceer uw merk met een dynamische online aanwezigheid.",
+
+    serviceTitle2: "Kleine en Middelgrote Ondernemingen (KMO’s / MKB)",
+    serviceText2: "Upgrade uw digitale tools om bedrijfsvoering en klantbetrokkenheid te verbeteren.",
+
+    serviceTitle3: "Grote Ondernemingen",
+    serviceText3: "Stroomlijn processen met maatwerksoftware en geavanceerde toepassingen.",
+
+    serviceTitle4: "Freelancers en Creatieven",
+    serviceText4: "Toon uw werk met een indrukwekkende portfolio website of applicatie.",
+         processTitle: "Procesworkflow",
+
+    step1Title: "Consultatie",
+    step1Text: "Uw vereisten, visie en doelen begrijpen.",
+
+    step2Title: "Planning",
+    step2Text: "Ontwikkelen van een uitgebreide strategie en tijdlijn voor uw project.",
+
+    step3Title: "Ontwerp",
+    step3Text: "Maken van wireframes, mockups en gebruiksvriendelijke interfaces.",
+
+    step4Title: "Ontwikkeling",
+    step4Text: "Bouwen van websites, applicaties of software met geavanceerde technologieën.",
+
+    step5Title: "Testen",
+    step5Text: "Zorgen voor prestaties, beveiliging en compatibiliteit op alle apparaten.",
+      contactTitle: "Klaar om uw digitale visie tot leven te brengen?",
+    contactText: "Neem vandaag nog contact met ons op en laten we samen iets buitengewoons creëren.",
 
       services: [
       {

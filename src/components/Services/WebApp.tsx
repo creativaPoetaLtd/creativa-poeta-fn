@@ -577,11 +577,14 @@ const WebApp = () => {
     
         <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
           {" "}
-          Who are these services for?{" "}
+          {/* Who are these services for? */}
+           {DesignLocale[lang].whoForTitle}
+          {" "}
         </h2>
 
         <p className="text-md md:text-lg text-center mb-8">
-        Our web & app development services cater to:
+        {/* Our web & app development services cater to: */}
+        {DesignLocale[lang].whoForIntro}
         </p>
 
         <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
@@ -589,9 +592,11 @@ const WebApp = () => {
             <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
             <h3 className="text-xl font-semibold mb-2">
               {" "}
-              Startups{" "}
+              {/* Startups */}
+              {DesignLocale[lang].serviceTitle1}
+              {" "}
             </h3>
-            <p className="md:w-[70%] text-center">Launch your brand with a dynamic online presence.</p>
+            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText1}</p>
           </div>
 
           <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -601,9 +606,10 @@ const WebApp = () => {
               className="w-36 h-24 mb-4 rounded-md"
             />
             <h3 className="text-xl font-semibold mb-2">
-            Small to Medium Enterprises (SMEs)
+            {/* Small to Medium Enterprises (SMEs) */}
+            {DesignLocale[lang].serviceTitle2}
             </h3>
-            <p className="md:w-[70%] text-center">Upgrade your digital tools to enhance operations and customer engagement.</p>
+            <p className="md:w-[70%] text-center"> {DesignLocale[lang].serviceText2}</p>
           </div>
 
           <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -613,9 +619,10 @@ const WebApp = () => {
               className="w-24 h-24 mb-4 rounded-md"
               />
             <h3 className="text-xl font-semibold mb-2">
-            Enterprises
+            {/* Enterprises */}
+            {DesignLocale[lang].serviceTitle3}
             </h3>
-            <p className="md:w-[70%] text-center">Streamline processes with custom software and advanced applications.</p>
+            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText3}</p>
           </div>
 
           <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -625,16 +632,17 @@ const WebApp = () => {
               className="w-32 h-24 mb-4 rounded-md"
               />
             <h3 className="text-xl font-semibold mb-2">
-            	Freelancers and Creatives 
+            	{/* Freelancers and Creatives  */}
+              {DesignLocale[lang].serviceTitle4}
             </h3>
-            <p className="md:w-[70%] text-center">Showcase your work with an impressive portfolio site or application.</p>
+            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText4}</p>
           </div>
         </div>
       </section>
 
       <section className="web-development-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Process Workflow
+    {/* Process Workflow */} {DesignLocale[lang].processTitle}
   </h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
@@ -644,9 +652,9 @@ const WebApp = () => {
       <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
         1
       </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Consultation</h3>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full"> {DesignLocale[lang].step1Title}</h3>
         <p className="text-sm">
-          Understanding your requirements, vision, and goals.
+          {DesignLocale[lang].step1Text}
         </p>
       </div>
     {/* Step 1 */}
@@ -655,9 +663,9 @@ const WebApp = () => {
       <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
         2
       </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Planning</h3>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full"> {DesignLocale[lang].step2Title}</h3>
         <p className="text-sm">
-        Developing a comprehensive strategy and timeline for your project.
+        {DesignLocale[lang].step2Text}
         </p>
       </div>
     {/* Step 1 */}
@@ -666,9 +674,9 @@ const WebApp = () => {
       <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
         3
       </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Design</h3>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step3Title}</h3>
         <p className="text-sm">
-         Creating wireframes, mockups, and user-friendly interfaces.        </p>
+              {DesignLocale[lang].step3Text}</p>
       </div>
     {/* Step 1 */}
      
@@ -676,9 +684,9 @@ const WebApp = () => {
       <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
         4
       </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Development</h3>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step4Title}</h3>
         <p className="text-sm">
-         Building websites, applications, or software using cutting-edge technologies.        </p>
+         {DesignLocale[lang].step4Text}</p>
       </div>
     {/* Step 1 */}
      
@@ -686,12 +694,10 @@ const WebApp = () => {
       <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
         5
       </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">Testing</h3>
+        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step5Title}</h3>
         <p className="text-sm">
-         Ensuring performance, security, and compatibility across devices.        </p>
+         {DesignLocale[lang].step5Text}</p>
       </div>
-
-
   </div>
 </section>
 
@@ -792,11 +798,11 @@ const WebApp = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
         <h2 className="text-xl font-semibold p-4 mb-4">
-        Ready to bring your digital vision to life? 
+       {DesignLocale[lang]?.contactTitle || DesignLocale.en.contactTitle} 
         </h2>
         <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-        Contact us today and let’s build something extraordinary together.
-        </p>
+         {DesignLocale[lang]?.contactText || DesignLocale.en.contactText}
+        </p> 
 
           {/* <button
             onClick={handleNavigate}  
