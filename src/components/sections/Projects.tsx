@@ -12,7 +12,7 @@ const Projects = () => {
           <br />
           {ProjectsLocale[lang]?.headingPart2 ?? ProjectsLocale["en"].headingPart2}
         </h1>
-      </div>
+      </div> 
 
       <div className="projects desktop:flex laptop:flex tablet:grid tablet:grid-cols-2 phone:grid-cols-1 grid-cols-1 desktop:flex-row laptop:flex-row max-h-screen overflow-y-auto laptop:px-28 desktop:px-28 tablet:px-8 px-4 w-full laptop:space-x-8 desktop:space-x-8 tablet:space-x-2 space-x-0 bg-gray-500">
         {/* Column 1 */}
