@@ -131,7 +131,7 @@ const DesignLocale: any = {
     serviceTitle4: "Freelancers and Creatives",
     serviceText4: "Showcase your work with an impressive portfolio site or application.",
 
-      processTitle: "Process Workflow",
+      processTitle1: "Process Workflow",
     step1Title: "Consultation",
     step1Text: "Understanding your requirements, vision, and goals.",   
 
@@ -281,7 +281,7 @@ const DesignLocale: any = {
 
     serviceTitle4: "Travailleurs indépendants et créatifs",
     serviceText4: "Présentez vos travaux avec un site ou une application de portfolio impressionnant.",
-    // processTitle: "Flux de Travail",
+  processTitle1: "Flux de Travail",
       
     step1Title: "Consultation",
     step1Text: "Compréhension de vos besoins, vision et objectifs.",
@@ -358,24 +358,24 @@ const DesignLocale: any = {
         skilldesc4: "Ibindi byiza bya design.",
         skill5: "Ibindi byiza bya design:",
         skilldesc5: "Ibindi byiza bya design.",
-        webAppTitle: "Iterambere rya Web na App",
+        webAppTitle: "Kubaka no Gukora Imbuga za Interneti na Porogaramu",
   webAppSubtitle: "Ibisubizo bishya by’ikoranabuhanga, bijyanye n’ibyo ukeneye.",
   servicesOfferedWebApp: "Serivisi zitangwa",
-  servicesDescWebApp: "Serivisi zacu za web na app zirimo izi zikurikira:",
+  servicesDescWebApp: "Serivisi zacu z'imbuga na Porogaramu zirimo izi zikurikira:",
   whyChooseTitleWebApp: "Kuki wahitamo Creativa Poeta?",
   whoForTitleWebApp: "Ni bande izi serivisi zigenewe?",
-  ctaButtonWebApp: "Hindura igitekerezo cyawe mu ikoranabuhanga",
-   webAppIntro: "Mu isi y'ikoranabuhanga ihora ihinduka, kugira urubuga rukomeye kandi rukurura ni ingenzi. Muri Creativa Poeta, duhindura ibitekerezo byawe tukabigira ukuri binyuze mu gukora imbuga igezweho, porogaramu zikomeye, hamwe na software idasanzwe yagenewe guteza imbere ubucuruzi bwawe.",
-      webDevTitle: "Iterambere rya Web",
-    webDevDesc: "Iterambere no kubungabunga imbuga za internet, urubuga rw’ubucuruzi, n’ubushobozi bwa web.",
-    appDevTitle: "Iterambere rya Porogaramu",
+  ctaButtonWebApp: "Hamwe natwe igitekerezo cyawe gishyirwe mu ikoranabuhanga",
+   webAppIntro: "Mu buryo bugezweho kandi buteye imbere mu ikoranabuhanga kuba ku muronko ukomeye ni ngombwa, Muri Creativa Poeta, duhindura ibitekerezo byawe tukabigira ukuri binyuze mu gukora imbuga zigezweho, porogaramu zikomeye kandi zidasanzwe zigenewe guteza imbere ubucuruzi bwawe.",
+      webDevTitle: "Kubaka/Gukora Urubuga rwa Interineti",
+    webDevDesc: "Kubaka no kubungabunga imbuga za interineti, urubuga rw’ubucuruzi, n’ubushobozi bwa web.",
+    appDevTitle: "Gukora Poragaramu(app)",
     appDevDesc: "Gukora porogaramu z’imikorere ya telefoni na web zigendanwa.",
-    softwareDevTitle: "Iterambere rya Software",
-    softwareDevDesc: "Ibisubizo bya software byihariye nka ERP, CRM, n’ibindi bisystemu by’imbere mu kigo.",
-    uiUxTitle: "Igishushanyo cya Web/App (UI/UX)",
-    uiUxDesc: "Gushushanya intera zisobanutse kandi zishimisha ku mbuga za internet n’porogaramu.",
-    keyCompTitle1: "UBUSHOBOZI",
-    keyCompTitle2: "BW'INGENZI",
+    softwareDevTitle: "Gukora Porogaramu za Mudasobwa(Software)",
+    softwareDevDesc: "Ibisubizo bya Porogaramu za mudasobwa byihariye nka ERP, CRM, n’ibindi bya system",
+    uiUxTitle: "Igishushanyo cy'urubuga rwa Interineti na Porogaramu (UI/UX)",
+    uiUxDesc: "Gushushanya intera zisobanutse  ku mbuga za interineti na porogaramu.",
+    keyCompTitle1: "UBUMENYI",
+    keyCompTitle2: "NGOMBWA BW'INGENZI",
       comp1: "Ubumenyi mu mbuga nkoranyambaga zikomeye n’imikorere yazo",
     comp2: "Ubushobozi mu bikoresho bya SEO n’uburyo bwo kunoza ibikubiye mu mbuga",
     comp3: "Ubumenyi mu gukora no kugenzura kwamamaza kugira ngo byunguke cyane",
@@ -394,18 +394,18 @@ const DesignLocale: any = {
     whyChooseText5: "Twubaka ibisubizo bikura mu bucuruzi bwawe kandi bigahuza n'ibikenewe mu gihe kizaza",
         whoForTitle: "Ubufasha(Service)bugenewe bande?",
     whoForIntro: "Ubufasha(Service) bwacu bwo gukora imbuga(Web) na porogaramu(App) zigenewe: ",
-      serviceTitle1: "Amashoramari mato",
+      serviceTitle1: "Ama Societe(Company) mashya atangiye",
     serviceText1: "Tangiza izina ryawe ukoresheje urubuga rukomeye kandi rujyanye n’igihe.",
 
     serviceTitle2: "Ibigo bito n’ibiciriritse",
     serviceText2: "Komeza ikoreshwa ry’ikoranabuhanga ryawe kugira ngo worohereze imirimo no kongera uburyo ugera ku bakiriya.",
 
     serviceTitle3: "Ibigo binini",
-    serviceText3: "Tegura imikorere neza ukoresheje porogaramu zihariye n’udushya tw’ikoranabuhanga.",
+    serviceText3: "Tegura imikorere neza ukoresheje porogaramu zihariye z'ifite udushya kandi zigezweho.",
 
     serviceTitle4: "Abikorera ku giti cyabo n’abahanzi",
     serviceText4: "Erekana imirimo yawe ukoresheje urubuga cyangwa porogaramu yerekana ubuhanga bwawe.",
-      processTitle: "Uko Umushinga Utegurwa",
+      processTitle1: "Uko Umushinga Utegurwa",
 
     step1Title: "Kuganira ku mushinga",
     step1Text: "Kumva ibyo ukeneye, icyerekezo cyawe, n’intego zawe.",
@@ -413,29 +413,30 @@ const DesignLocale: any = {
     step2Title: "Gahunda",
     step2Text: "Guteza imbere gahunda yuzuye hamwe n’igihe cyo kurangiza umushinga wawe.",
 
-    step3Title: "Igishushanyo",
+    step3Title: "Igishushanyo mbonera",
     step3Text: "Gukora ibishushanyo (wireframes), mockups, n’interineti zorohereza abakoresha.",
 
-    step4Title: "Iterambere",
+    step4Title: "Kubaka no Gukora",
     step4Text: "Kubaka imbuga, porogaramu cyangwa software ukoresheje ikoranabuhanga rigezweho.",
 
-    step5Title: "Kugerageza",
+    step5Title: "Kugerageza ibyo W'ubatse",
     step5Text: "Kwemeza imikorere, umutekano, n’ubushobozi ku bikoresho byose.",     
-      contactTitle: "Twandikire uyu munsi twubake ikintu kidasanzwe hamwe.",
-    contactText:"Witeguye guhindura icyerekezo cyawe cya dijitali(digital) kikaba impamo?",
+      contactTitle: "Witeguye guhindura icyerekezo cyawe cya dijitali(digital) kikaba impamo?",
+    contactText:"Twandikire uyu munsi twubake ikintu kidasanzwe hamwe.",
+    
 
 
        services: [
       {
-        title: "Iterambere rya Web",
+        title: "kubaka no gukora urubuga rwa Interineti",
         desc: "Iterambere no kubungabunga urubuga rw’amashusho, imbuga z’ubucuruzi kuri interineti, n’imishinga ya porogaramu za web.",
       },
       {
-        title: "Iterambere rya App",
+        title: "Kubaka no gukora Porogaramu",
         desc: "Gushushanya no gukora porogaramu zikorera kuri Android na iOS.",
       },
       {
-        title: "Igishushanyo cya UI/UX",
+        title: "Igishushanyo cya Porogaramu n'urubuga(UI/UX)",
         desc: "Kurema uburambe bworoshye gukoresha kandi bugaragara neza kuri digital.",
       },
     ],
@@ -570,7 +571,7 @@ const DesignLocale: any = {
 
     serviceTitle4: "Freelancers en Creatieven",
     serviceText4: "Toon uw werk met een indrukwekkende portfolio website of applicatie.",
-         processTitle: "Procesworkflow",
+         processTitle1: "Procesworkflow",
 
     step1Title: "Consultatie",
     step1Text: "Uw vereisten, visie en doelen begrijpen.",

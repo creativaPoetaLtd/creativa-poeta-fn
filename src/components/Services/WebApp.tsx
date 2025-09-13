@@ -632,7 +632,7 @@ const WebApp = () => {
               className="w-32 h-24 mb-4 rounded-md"
               />
             <h3 className="text-xl font-semibold mb-2">
-            	{/* Freelancers and Creatives  */}
+            {/* Freelancers and Creatives  */}
               {DesignLocale[lang].serviceTitle4}
             </h3>
             <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText4}</p>
@@ -642,7 +642,7 @@ const WebApp = () => {
 
       <section className="web-development-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    {/* Process Workflow */} {DesignLocale[lang].processTitle}
+    {/* Process Workflow */} {DesignLocale[lang].processTitle1}
   </h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
