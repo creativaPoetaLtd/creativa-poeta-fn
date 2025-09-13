@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
+// import FaqLocale from "../../i18n/FaqLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import {
   FaTwitter,
@@ -14,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 const lang: string = getLangFromLocalStorage();
+//  const faqs = FaqLocale[lang];
 
 const testimonials = [
   {

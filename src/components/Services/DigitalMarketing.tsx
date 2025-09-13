@@ -266,7 +266,7 @@ const faqs = [
   {
     question: "Do you offer training for in-house teams?",
     answer: "Yes, we provide training sessions to equip your team with the skills needed to manage digital marketing and social media efforts effectively.",
-  },
+  }, 
 ];
 
 
