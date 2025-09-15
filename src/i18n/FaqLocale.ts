@@ -53,6 +53,7 @@ const FaqLocale: any = {
         description10:"Yes, in addition to creation, writing, and video editing, we offer marketing services to increase the visibility of your creations. We develop custom strategies to reach your target audience and maximize the impact of your content.",
         title11:"How can I see examples of your previous work?",
         description11:"We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
+        
     },
     kiny:{
         h1:"F.A.Q.",

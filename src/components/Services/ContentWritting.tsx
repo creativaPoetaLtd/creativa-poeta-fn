@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ContentWritingLocale from "../../i18n/ContentWritingLocale";
+import ContentWritingLocale from "../../i18n/ContentWrittingLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 
 const ContentWritting = () => {

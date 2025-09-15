@@ -52,7 +52,7 @@ const NavLocale: any = {
           getStarted: "Tangira",
           subservice1:"Gushushanya",
           subservice2:"Gukora inkuru",
-          subservice3:"Développement de projets",
+          subservice3:"Kwamamaza hakoreshejwe ikoranabuhanga n’imbuga nkoranyambaga",
           subservice4:"Gukora no guhindura ama video ndetse na montage",
           subservice5:"Kwamamaza",
           subservice6:"Gukora ibikoresho byo kwamamaza",

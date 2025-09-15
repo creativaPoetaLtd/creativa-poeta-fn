@@ -11,7 +11,7 @@ import {
   FaSignOutAlt,
   FaTachometerAlt,
   FaChevronDown,
-  FaBars,
+  // FaBars,
 } from "react-icons/fa";
 import logoBurger from "../../assets/flags/logoBurger.png";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -29,7 +29,6 @@ function NavBar() {
   const navigate = useNavigate();
   const adminDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close admin dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -46,15 +45,6 @@ function NavBar() {
     };
   }, []);
 
-  // Commented out since login link is removed for security
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Commented out since login functionality is removed from public navigation
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   setIsLoggedIn(!!token);
-  // }, []);
-
   const handleLogout = () => {
     logout();
     setAdminDropdownVisible(false);
@@ -62,14 +52,12 @@ function NavBar() {
 
   const handleAdminDashboard = () => {
     navigate("/secure-admin-dashboard-2024");
-    setAdminDropdownVisible(false); 
+    setAdminDropdownVisible(false);
   };
 
   const toggleAdminDropdown = () => {
     setAdminDropdownVisible(!adminDropdownVisible);
   };
-
-  console.log();
 
   const lang: any = getLangFromLocalStorage();
 
@@ -85,7 +73,7 @@ function NavBar() {
 
   return (
     <>
-      {/* Navigation Header - Admin Profile + Menu in Flex Container */}
+      {/* Navigation Header */}
       <div className="fixed top-5 right-4 z-50 flex items-center space-x-4">
         {/* Admin Profile Dropdown */}
         {isAuthenticated && (
@@ -104,7 +92,6 @@ function NavBar() {
               />
             </button>
 
-            {/* Admin Dropdown Menu */}
             {adminDropdownVisible && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-60">
                 <button
@@ -127,18 +114,14 @@ function NavBar() {
           </div>
         )}
 
-        {/* Custom Menu Button to replace BurgerButton positioning */}
-        <div className="font-bold z-30 text-3xl md:text-4xl text-white flex space-x-3 justify-center text-center items-center p-1 md:p-1">
-          <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-2 px-2 rounded-md">
-            <p className="menu text-[#FFFF00] text-base font-thin">MENU</p>
-            {sidebarVisible ? (
-              <FaTimes onClick={toggleSidebar} />
-            ) : (
-              <FaBars onClick={toggleSidebar} className="cursor-pointer" />
-            )}
-          </div>
-        </div>
+        {/* ✅ BurgerButton (flags + menu) always visible */}
+        <BurgerButton
+          sidebarVisible={sidebarVisible}
+          toggleSidebar={toggleSidebar}
+        />
       </div>
+
+      {/* Sidebar */}
       <div
         className={`mx-auto z-50 fixed w-[65%] laptop:w-[20%] desktop:w-[20%] tablet:w-[45%] float-right justify-end bg-black shadow-sm sidebar ${
           sidebarVisible ? "visible" : "sidebar-closing"
@@ -153,8 +136,7 @@ function NavBar() {
               style={{ maxHeight: "80vh", overflowY: "auto" }}
             >
               <div className="flex text-[#EEBA2B] justify-between">
-                <p className="D">{NavLocale[lang]?.navigation}</p>
-                <div className=" flex mx-auto text-2xl justify-center absolute top-5 right-12 text-center text-white items-center">
+                <div className="flex mx-auto text-2xl justify-center absolute top-5 right-12 text-center text-white items-center">
                   <FaTimes onClick={toggleSidebar} />
                 </div>
               </div>
@@ -162,7 +144,7 @@ function NavBar() {
                 <a
                   href="/"
                   onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white mt-12 text-xl hover:text-[#EEBA2B] ${
+                  className={`overflow-y-auto rounded text-white mt-12 text-xl hover:text-[#EEBA2B] ${
                     location.hash === "#home" ? "text-[#EEBA2B]" : ""
                   }`}
                 >
@@ -171,7 +153,7 @@ function NavBar() {
                 <a
                   href="#about"
                   onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
+                  className={`overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
                     location.hash === "#about" ? "text-[#EEBA2B]" : ""
                   }`}
                 >
@@ -180,16 +162,17 @@ function NavBar() {
                 <a
                   href="#projects"
                   onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
+                  className={`overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
                     location.hash === "#parteners" ? "text-[#EEBA2B]" : ""
                   }`}
                 >
                   {NavLocale[lang]?.Projects}
                 </a>
+
                 <div onClick={toggleServicesSubMenu}>
                   <div className="flex my-auto justify-between">
                     <p
-                      className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] cursor-pointer ${
+                      className={`overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] cursor-pointer ${
                         location.hash === "#services" ? "text-[#EEBA2B]" : ""
                       }`}
                     >
@@ -206,36 +189,28 @@ function NavBar() {
                       <a
                         href="/services/graphic-design"
                         onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${
-                          location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                        }`}
+                        className="overflow-y-auto rounded text-white hover:text-[#EEBA2B]"
                       >
                         {NavLocale[lang]?.subservice1}
                       </a>
                       <a
                         href="/services/content-writing"
                         onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${
-                          location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                        }`}
+                        className="overflow-y-auto rounded text-white hover:text-[#EEBA2B]"
                       >
                         {NavLocale[lang]?.subservice2}
                       </a>
                       <a
                         href="/services/digital-marketing"
                         onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${
-                          location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                        }`}
+                        className="overflow-y-auto rounded text-white hover:text-[#EEBA2B]"
                       >
                         {NavLocale[lang]?.subservice3}
                       </a>
                       <a
                         href="/services/web-app"
                         onClick={toggleSidebar}
-                        className={` overflow-y-auto rounded text-white  hover:text-[#EEBA2B] ${
-                          location.hash === "#services" ? "text-[#EEBA2B]" : ""
-                        }`}
+                        className="overflow-y-auto rounded text-white hover:text-[#EEBA2B]"
                       >
                         {NavLocale[lang]?.subservice4}
                       </a>
@@ -243,56 +218,22 @@ function NavBar() {
                   )}
                 </div>
 
-                {/* Admin-only links - commented out for security */}
-                {/* <Link
-                  to="/blogs"
-                  onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  Blogs
-                </Link> */}
-                {/* <Link
-                  to="/career"
-                  onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#faq" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  {NavLocale[lang]?.career}
-                </Link> */}
                 <Link
                   to="/start-project"
                   onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
-                    location.hash === "#faq" ? "text-[#EEBA2B]" : ""
-                  }`}
+                  className="overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B]"
                 >
                   {NavLocale[lang]?.getStarted}
                 </Link>
                 <Link
                   to="/contact"
                   onClick={toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${
-                    location.hash === "#contact" ? "text-[#EEBA2B]" : ""
-                  }`}
+                  className="overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B]"
                 >
                   {NavLocale[lang]?.contacts}
                 </Link>
-                {/* <Link> */}
-                <BurgerButton sidebarVisible={false} toggleSidebar={function (): void {
-                    throw new Error("Function not implemented.");
-                  } }/>
-                {/* </Link> */}
 
-                {/* Admin Dashboard Access - Moved to dropdown */}
-                {/* Admin options now available in the top-right admin dropdown */}
-
-                {/* Admin login - commented out for security */}
-                {/* <Link
-                  to={isLoggedIn ? "/" : "/login"}
-                  onClick={isLoggedIn ? handleLogout : toggleSidebar}
-                  className={` overflow-y-auto rounded text-white text-xl hover:text-[#EEBA2B] ${location.hash === "#contact" ? "text-[#EEBA2B]" : ""}`}
-                >
-                  {isLoggedIn ? "Logout" : "Login"}
-                </Link> */}
+                {/* ❌ Removed BurgerButton from inside sidebar */}
               </div>
 
               <p className="text-white">
