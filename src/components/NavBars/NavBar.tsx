@@ -11,7 +11,7 @@ import {
   FaSignOutAlt,
   FaTachometerAlt,
   FaChevronDown,
-  FaBars,
+  // FaBars,
 } from "react-icons/fa";
 import logoBurger from "../../assets/flags/logoBurger.png";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
