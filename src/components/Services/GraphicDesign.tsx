@@ -19,7 +19,7 @@ const lang: string = getLangFromLocalStorage();
 
 const testimonials = [
   {
-    quote: DesignLocale[lang].quote1,
+    quote: DesignLocale[lang].quote1, 
     client: "Sarah Johnson",
     role: "CEO, TechNova",
     image: "/profile.jpg",

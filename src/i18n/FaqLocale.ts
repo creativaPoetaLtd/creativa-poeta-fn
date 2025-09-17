@@ -1,7 +1,7 @@
 
 const FaqLocale: any = {
     fr:{
-        h1:"F.A.Q.",
+        h1:"F.A.Q.",  
         h2:" Questions Fréquentes",
         title1:"Quels sont les avantages de faire appel à Creativa Poeta plutôt que de réaliser les tâches moi-même ?",
         description1:"Faire appel à Creativa Poeta vous permet de bénéficier d'une expertise spécialisée, de solutions créatives personnalisées, d'un gain de temps, de résultats professionnels et d'une collaboration étroite pour atteindre vos objectifs créatifs de manière efficace et impressionnante",

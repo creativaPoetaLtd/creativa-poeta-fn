@@ -24,7 +24,7 @@ const Contact = () => {
       ? window.localStorage.getItem("selectedLang") || "en"
       : "en";
 
-  const t = contactLocale[lang] ?? contactLocale["en"]; // ✅ safe fallback
+  const t = contactLocale[lang] ?? contactLocale["en"]; 
 
   const handleEmailChange = (e: { target: { value: string } }) => {
     setEmail(e.target.value);
