@@ -6,6 +6,8 @@ import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
+import GraphicLocale from "../../i18n/GraphicLocale"
+
 import {
   FaTwitter,
   FaInstagram,
@@ -14,9 +16,8 @@ import {
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 
-
-const lang: string = getLangFromLocalStorage();
-
+// const lang: string = getLangFromLocalStorage();
+const lang: keyof typeof GraphicLocale = getLangFromLocalStorage() as keyof typeof GraphicLocale;
 const testimonials = [
   {
     quote: DesignLocale[lang].quote1, 
@@ -338,18 +339,20 @@ const GraphicDesign = () => {
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
           <h1 className="text-xl md:text-3xl font-bold">
-          Graphic Design & Visual Communication
+          {/* {GraphicLocale[lang].header1} */}
+          {GraphicLocale[lang]?.header1 || GraphicLocale.en.header1}
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        Bringing your ideas to life with impactful visuals.
+         {GraphicLocale[lang]?.paragraph1 || GraphicLocale.en.paragraph1}
         </p>
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        A picture is worth a thousand words, and at Creativa Poeta, we ensure those words are memorable. From captivating graphics to dynamic videos, we craft designs that leave a lasting impression, communicate your message effectively, and elevate your brand's identity.     </p>
+         {GraphicLocale[lang]?.paragraph2 || GraphicLocale.en.paragraph2}
+           </p>
         <button
           onClick={handleNavigate}
           className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
@@ -372,11 +375,11 @@ const GraphicDesign = () => {
 <section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
     
     <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Services offered
+     {GraphicLocale[lang]?.header2 || GraphicLocale.en.header2}
     </h2>
 
     <p className="text-md md:text-lg text-center mb-8">
-    Our Graphic design and visual communication services include:
+    {GraphicLocale[lang]?.paragraph3 || GraphicLocale.en.paragraph3}
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 gap-8 text-black">
@@ -386,10 +389,10 @@ const GraphicDesign = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />        <h3 className="text-xl font-semibold mb-2">
-      Graphic design
+      {GraphicLocale[lang]?.header3 || GraphicLocale.en.header3}
         </h3>
         <p className="md:w-[70%] text-center">
-        Creation of logos, business cards, brochures, and posters,Design of infographics, social media visuals, and digital advertisements.
+       {GraphicLocale[lang]?.paragraph4 || GraphicLocale.en.paragraph4}
        </p>
       </div>
 
@@ -400,9 +403,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Advertising Design
+        {GraphicLocale[lang]?.header4 || GraphicLocale.en.header4}
         </h3>
-        <p className="md:w-[70%] text-center">o	Conceptualizing and designing materials for marketing campaigns, and Customizing visuals for online and offline promotions.
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph5 || GraphicLocale.en.paragraph5}
 </p>
       </div>
 
@@ -413,9 +416,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Video creation and animation
+        {GraphicLocale[lang]?.header5 || GraphicLocale.en.header5}
         </h3>
-        <p className="md:w-[70%] text-center">	Producing short promotional videos and animations, and Designing videos for social media engagement and branding</p>
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph6 || GraphicLocale.en.paragraph6}</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -425,9 +428,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        UI/UX visual design
+        {GraphicLocale[lang]?.header6 || GraphicLocale.en.header6}
         </h3>
-        <p className="md:w-[70%] text-center">Designing intuitive and attractive interfaces for websites and applications, and Creating wireframes and prototypes for digital platforms. </p>
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph7|| GraphicLocale.en.paragraph7} </p>
       </div>
     </div>
     
@@ -441,8 +444,8 @@ const GraphicDesign = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{GraphicLocale[lang]?.header7|| GraphicLocale.en.header7} </h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{GraphicLocale[lang]?.header8|| GraphicLocale.en.header8}</h2>
         </div>
       </div>
     </div>
@@ -450,31 +453,11 @@ const GraphicDesign = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        {
-          number: "1",
-          text: "	Mastery of design tools like Adobe Creative Suite, Canva, and Figma",
-          bgColor: "bg-[#E265FF]",
-        },
-        {
-          number: "2",
-          text: "Strong understanding of branding and visual storytelling.",
-          bgColor: "bg-[#8B3DFF]",
-        },
-        {
-          number: "3",
-          text: "Proficiency in creating motion graphics and short animations.",
-          bgColor: "bg-[#3DB9FF]",
-        },
-        {
-          number: "4",
-          text: "Expertise in crafting designs optimized for both print and digital media.",
-          bgColor: "bg-[#FFA53D]",
-        },
-        {
-          number: "5",
-          text: "Commitment to responsive and accessible design principles.",
-          bgColor: "bg-[#76C56F]",
-        },
+        { number: "1", text: GraphicLocale[lang].comp1 || GraphicLocale.en.comp1, bgColor: "bg-[#E265FF]" },
+    { number: "2", text: GraphicLocale[lang].comp2 || GraphicLocale.en.comp2, bgColor: "bg-[#8B3DFF]" },
+    { number: "3", text:  GraphicLocale[lang].comp3 || GraphicLocale.en.comp3, bgColor: "bg-[#3DB9FF]" },
+    { number: "4", text:  GraphicLocale[lang].comp4 || GraphicLocale.en.comp4, bgColor: "bg-[#FFA53D]" },
+    { number: "5", text:  GraphicLocale[lang].comp5 || GraphicLocale.en.comp5, bgColor: "bg-[#76C56F]" },
       ].map(({ number, text, bgColor }, index) => (
         <div key={index} className="flex items-center gap-4">
           {/* Circle */}
@@ -504,36 +487,37 @@ const GraphicDesign = () => {
   </div>
   <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-      Why choose Creativa Poeta?
+      {/* Why choose Creativa Poeta? */}
+      {GraphicLocale[lang].header9 || GraphicLocale.en.header9}
     </h2>
     <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-start justify-between">
       <li>
-        <strong className="text-md md:text-lg">Customized Designs: </strong>
-        We create unique, visually stunning designs tailored to reflect your brand identity and effectively communicate your message to your audience.
+        <strong className="text-md md:text-lg"> {GraphicLocale[lang].strong1 || GraphicLocale.en.strong1}</strong>
+        {GraphicLocale[lang].list1 || GraphicLocale.en.list1}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Expertise Across Mediums: </strong>
-        Our team specializes in various forms of visual communication, from logos and branding to digital illustrations, print media, and web graphics.
+        <strong className="text-md md:text-lg"> {GraphicLocale[lang].strong2 || GraphicLocale.en.strong2} </strong>
+        {GraphicLocale[lang].list2 || GraphicLocale.en.list2}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Innovative Creativity: </strong>
-        At Creativa Poeta, innovation meets artistry. We bring fresh ideas and modern design techniques to make your visuals stand out in a competitive market.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong3 || GraphicLocale.en.strong3} </strong>
+          {GraphicLocale[lang].list3 || GraphicLocale.en.list3}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Attention to Detail: </strong>
-        Every element, from color palettes to typography, is meticulously crafted to ensure harmony and consistency across all your design assets.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong4 || GraphicLocale.en.strong4} </strong>
+        {GraphicLocale[lang].list4 || GraphicLocale.en.list4}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Collaborative Process: </strong>
-        We value your input throughout the design process, ensuring the final product aligns perfectly with your vision and business objectives.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong5 || GraphicLocale.en.strong5} </strong>
+        {GraphicLocale[lang].list5 || GraphicLocale.en.list5}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Brand-Focused Solutions: </strong>
-        Our designs not only captivate visually but also resonate with your brand’s story, strengthening your identity and appeal.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong6 || GraphicLocale.en.strong6} </strong>
+        {GraphicLocale[lang].list6 || GraphicLocale.en.list6}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Future-Ready Visuals:</strong>
-        We create scalable designs that remain impactful and adaptable as your brand grows and evolves in the dynamic digital landscape.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong7 || GraphicLocale.en.strong7}</strong>
+        {GraphicLocale[lang].list7 || GraphicLocale.en.list7}
       </li>
     </ul>
   </div>

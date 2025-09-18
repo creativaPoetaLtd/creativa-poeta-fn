@@ -68,7 +68,15 @@ paragraph107:"Writing, designing, and curating content that aligns with your bra
 header200:"Review & Feedback",
 paragraph108:" Collaborating with you to refine and finalize the content for your approval.",
 header201:"Delivery & Optimization",
-paragraph109:"Delivering polished content and offering insights for ongoing improvement."
+paragraph109:"Delivering polished content and offering insights for ongoing improvement.",
+header202:"Creative Logo",
+paragraph110:"For Tech Startup",
+ header203:"Business card",
+ paragraph111:"For a Company",
+ header204:"Ready to share your story with the world?",
+ paragraph112:"Reach out to us today, and let’s create compelling content that resonates with your audience.",
+ button1:"Start your content journey with us"
+
 
 },
    fr: {
@@ -143,7 +151,14 @@ paragraph109:"Delivering polished content and offering insights for ongoing impr
     header200:"Révision et retour d’information",
     paragraph108:"Collaborer avec vous pour peaufiner et finaliser le contenu pour votre approbation.",
     header201:"Livraison et optimisation",
-    paragraph109:"Fournir un contenu soigné et proposer des idées pour une amélioration continue."
+    paragraph109:"Fournir un contenu soigné et proposer des idées pour une amélioration continue.",
+    header202:"Logo Créatif ",
+    paragraph110:"Startup technologique",
+    header203:"Carte de visite",
+    paragraph111:"Pour une entreprise",
+    header204:"Prêt(e) à partager votre histoire avec le monde ?",
+    paragraph112:"Contactez-nous dès aujourd’hui, et créons ensemble un contenu percutant qui résonne avec votre audience.",
+    button1:"Commencez votre voyage de contenu avec nous"
     },
 
   kiny: {
@@ -218,7 +233,14 @@ paragraph109:"Delivering polished content and offering insights for ongoing impr
     header200:"Gusuzuma & Gutanga Ibitekerezo",
     paragraph108:"Gukorana nawe kugira ngo duhindure neza kandi dusoze ibikubiyemo kugira ngo ubishyireho umukono.",
     header201:"Gutanga no kunoza",
-    paragraph109:"Gutanga ibikubiyemo byatunganyijwe neza no gutanga ibitekerezo bigamije kunoza ibikorwa ."
+    paragraph109:"Gutanga ibikubiyemo byatunganyijwe neza no gutanga ibitekerezo bigamije kunoza ibikorwa .",
+    header202:"Ikirangantego",
+    paragraph110:"Company nshya ya Technology",
+    header203:"Ikarita y’akazi",
+    paragraph111:"Ikigo",
+    header204:"Witeguye gusangiza abantu inkuru yawe ",
+    paragraph112:"Tugereho uyu munsi,  dukorere hamwe ibikorwa bihambaye bihuye abagenerwa bikorwa  bawe.",
+    button1:"Tangirana urugendo hamwe natwe "
     },
 
   nl: {
@@ -293,7 +315,14 @@ paragraph109:"Delivering polished content and offering insights for ongoing impr
      header200:"Beoordeling & feedback",
      paragraph108:"Samenwerken met u om de content te verfijnen en af te ronden voor uw goedkeuring.",
      header201:"Levering & optimalisatie",
-     paragraph109:"Geleverd gepolijst content en inzichten bieden voor voortdurende verbetering."
+     paragraph109:"Geleverd gepolijst content en inzichten bieden voor voortdurende verbetering.",
+     header202:"Creatief Logo",
+     paragraph110:"Tech-startup",
+     header203:"Visitekaartje",
+     paragraph111:"Voor een bedrijf",
+     header204:"Klaar om je verhaal met de wereld te delen?",
+     paragraph112:"Neem vandaag nog contact met ons op, en laten we samen boeiende content creëren die aansluit bij jouw publiek.",
+     button1:"Begin je contentreis met ons"
     }, 
 }
 export default ContentLocale

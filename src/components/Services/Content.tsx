@@ -617,9 +617,9 @@ const ContentWritting = () => {
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
               <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Creative Logo
+                {ContentLocale[lang].header202}
               </h3>
-              <p className="text-white text-sm">For Tech Startup</p>
+              <p className="text-white text-sm">{ContentLocale[lang].paragraph110}</p>
             </div>
           </div>
           <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -630,9 +630,9 @@ const ContentWritting = () => {
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
               <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Business card
+                {ContentLocale[lang].header203}
               </h3>
-              <p className="text-gray-300 text-sm">For a Company</p>
+              <p className="text-gray-300 text-sm">{ContentLocale[lang].paragraph111}</p>
             </div>
           </div>
           <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -699,16 +699,16 @@ const ContentWritting = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
   <h2 className="text-xl font-semibold p-4 mb-4">
-    Ready to share your story with the world?
+    {ContentLocale[lang].header204}
   </h2>
   <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-    Reach out to us today, and let’s create compelling content that resonates with your audience.
+    {ContentLocale[lang].paragraph112}
   </p>
 
   <button
     onClick={handleNavigate}
     className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    Start your content journey with us
+    {ContentLocale[lang].button1}
   </button>
 </section>
 
