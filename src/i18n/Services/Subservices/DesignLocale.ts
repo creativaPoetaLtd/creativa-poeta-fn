@@ -326,7 +326,7 @@ const DesignLocale: any = {
         quote3: "Ubuzima n'ubushobozi bwabo bugaragaza ubuzima n'ubwacu. Dukuriye uburyo bwacu bw'urukiko.",
         quote4: "Tugira icyo dukunda mu buryo bwa website yacu. Ni mubikorwa n'ubwacu.",
         quote5: "Logo yacu yacu yacu ni nziza! Ni iyo dukeneye. Murakoze!",
-        title1: "Ikoranabuhanga rya cyane",
+        title1: "Kwamamaza kuri Murandasi",
         description1: "Gucyura ibikorwa byawe by'ibikorwa n'ibikorwa n'ibikorwa by'ibikorwa.",
 
         title2: "Guharira Ibindi",
