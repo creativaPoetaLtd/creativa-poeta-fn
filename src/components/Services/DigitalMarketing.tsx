@@ -189,86 +189,25 @@ export function RelatedServices() {
 }
 
 const faqs = [
-  {
-    question: "What digital marketing services do you offer?",
-    answer: "We provide a wide range of services, including social media management, content creation, search engine optimization (SEO), pay-per-click (PPC) advertising, email marketing, and analytics reporting tailored to your business goals.",
-  },
-  {
-    question: "How do you create a social media strategy?",
-    answer: "We begin by understanding your brand, target audience, and goals. Then, we develop a customized strategy that includes content planning, posting schedules, engagement tactics, and performance tracking.",
-  },
-  {
-    question: "Which social media platforms do you manage?",
-    answer: "We manage platforms such as Facebook, Instagram, Twitter, LinkedIn, TikTok, Pinterest, and YouTube, ensuring your brand's presence is optimized for each audience.",
-  },
-  {
-    question: "How do you measure the success of digital marketing campaigns?",
-    answer: "We use metrics such as website traffic, click-through rates, engagement rates, lead conversions, and ROI to evaluate the effectiveness of campaigns and adjust strategies accordingly.",
-  },
-  {
-    question: "Can you help with creating content for social media?",
-    answer: "Yes, we create engaging and visually appealing content, including posts, graphics, videos, and captions, tailored to your brand and audience.",
-  },
-  {
-    question: "Do you offer influencer marketing services?",
-    answer: "Yes, we can connect your brand with relevant influencers, manage collaborations, and track the performance of influencer campaigns.",
-  },
-  {
-    question: "How often will you post on social media?",
-    answer: "The posting frequency depends on your strategy and goals. Typically, we post 3-5 times per week per platform, but this can be customized to meet your needs.",
-  },
-  {
-    question: "What is included in your SEO services?",
-    answer: "Our SEO services include keyword research, on-page optimization, technical SEO audits, link building, and content creation to improve your website's search engine rankings.",
-  },
-  {
-    question: "Can you run paid ads for my business?",
-    answer: "Yes, we manage PPC campaigns across platforms like Google Ads, Facebook Ads, Instagram Ads, and LinkedIn Ads to drive targeted traffic and conversions.",
-  },
-  {
-    question: "Do you provide analytics and reporting?",
-    answer: "Yes, we provide detailed monthly reports with key performance metrics and actionable insights to track progress and optimize strategies.",
-  },
-  {
-    question: "What industries do you work with?",
-    answer: "We work with businesses across various industries, including retail, e-commerce, healthcare, education, hospitality, and more.",
-  },
-  {
-    question: "Can you handle event-specific social media campaigns?",
-    answer: "Absolutely! We can create and manage event campaigns, including countdowns, live updates, and post-event content to maximize engagement.",
-  },
-  {
-    question: "How do you ensure my brand's voice is maintained?",
-    answer: "We start with a brand discovery phase to understand your tone, values, and messaging. This ensures all content aligns with your brand identity.",
-  },
-  {
-    question: "Do you offer social media account setup services?",
-    answer: "Yes, we can set up new accounts or optimize existing ones, ensuring they are fully branded and ready for engagement.",
-  },
-  {
-    question: "Can you help grow my social media followers?",
-    answer: "Yes, we use organic growth strategies, such as engaging with your audience and creating valuable content, as well as targeted ad campaigns to grow your following.",
-  },
-  {
-    question: "Do you offer packages for small businesses or startups?",
-    answer: "Yes, we provide flexible packages tailored to the needs and budgets of small businesses and startups.",
-  },
-  {
-    question: "What is your payment structure for services?",
-    answer: "We typically require an upfront payment or retainer, with flexible options for monthly or campaign-based billing.",
-  },
-  {
-    question: "Do you provide competitor analysis as part of your services?",
-    answer: "Yes, we analyze your competitors to identify trends, opportunities, and strategies to help your brand stand out.",
-  },
-  {
-    question: "Can you manage social media crisis situations?",
-    answer: "Yes, we have experience in handling crisis situations by implementing strategies to address concerns, manage feedback, and protect your brand's reputation.",
-  },
-  {
-    question: "Do you offer training for in-house teams?",
-    answer: "Yes, we provide training sessions to equip your team with the skills needed to manage digital marketing and social media efforts effectively.",
-  }, 
+ { question: DigitalLocale[lang].question1, answer: DigitalLocale[lang].answer1 },
+   { question: DigitalLocale[lang].question2, answer: DigitalLocale[lang].answer2 },
+   { question: DigitalLocale[lang].question3, answer: DigitalLocale[lang].answer3 },
+   { question: DigitalLocale[lang].question4, answer: DigitalLocale[lang].answer4 },
+   { question: DigitalLocale[lang].question6, answer: DigitalLocale[lang].answer5 },
+   { question: DigitalLocale[lang].question7, answer: DigitalLocale[lang].answer7 },
+   { question: DigitalLocale[lang].question8, answer: DigitalLocale[lang].answer8 },
+   { question: DigitalLocale[lang].question9, answer: DigitalLocale[lang].answer9 },
+   { question: DigitalLocale[lang].question10, answer: DigitalLocale[lang].answer10 },
+   { question: DigitalLocale[lang].question11, answer: DigitalLocale[lang].answer11 },
+   { question: DigitalLocale[lang].question12, answer: DigitalLocale[lang].answer12 },
+   { question: DigitalLocale[lang].question13, answer: DigitalLocale[lang].answer13 },
+   { question: DigitalLocale[lang].question14, answer: DigitalLocale[lang].answer14 },
+   { question: DigitalLocale[lang].question15, answer: DigitalLocale[lang].answer15 },
+   { question: DigitalLocale[lang].question16, answer: DigitalLocale[lang].answer16 },
+   { question: DigitalLocale[lang].question17, answer: DigitalLocale[lang].answer17 },
+   { question: DigitalLocale[lang].question18, answer: DigitalLocale[lang].answer18 },
+   { question: DigitalLocale[lang].question19, answer: DigitalLocale[lang].answer19 },
+   { question: DigitalLocale[lang].question20, answer: DigitalLocale[lang].answer20 },
 ];
 
 
