@@ -8,6 +8,9 @@ import image8 from "../assets/flags/image8.jpg";
 import { projectForm } from "../APIs/projectForm";
 import CustomSelect from "../components/CustomSelect";
 import "../styles/custom-inputs.css";
+import getLangFromLocalStorage from "../../utils/Lang";
+import ProjectsFormLocale from "../i18n/ProjectsFormLocale";
+const lang: keyof typeof ProjectsFormLocale = getLangFromLocalStorage() as keyof typeof ProjectsFormLocale;
 
 const ProjectForm = () => {
   const [step, setStep] = useState(1);
@@ -33,6 +36,7 @@ const ProjectForm = () => {
     additionalInfo: "",
   });
 
+   
   useEffect(() => {
     const timer = setTimeout(() => setShowOptions(true), 2000);
     return () => clearTimeout(timer);
@@ -234,11 +238,12 @@ const ProjectForm = () => {
 
   const options = {
     projectType: [
-      "Graphic Design and Visual Communication",
-      "Content Writing and Creation",
-      "Digital Marketing and Social Media",
-      "Web and App Development",
-      "Other",
+       "Graphic Design and Visual Communication",
+       "Content Writing and Creation",
+       "Digital Marketing and Social Media",
+       "Web and App Development",
+       "Other", 
+      
     ],
     deliverables: {
       "Graphic Design and Visual Communication": [
@@ -351,11 +356,11 @@ const ProjectForm = () => {
         return (
           <>
             <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex  text-[#806829]">
-              Get Started
+              {ProjectsFormLocale[lang]?.header1 || ProjectsFormLocale.en.header1}
             </h1>
             <div className="w-full max-w-screen-sm mx-auto">
               <Typewriter
-                text="What type of project would you like to undertake?"
+                text= {ProjectsFormLocale[lang]?.paragraph3 || ProjectsFormLocale.en.paragraph3}
                 className="mb-2"
               />
             </div>
@@ -379,7 +384,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a project type to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-end mt-6">
@@ -393,7 +398,7 @@ const ProjectForm = () => {
                     : "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -403,7 +408,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What deliverables are you expecting from this project?"
+              text={ProjectsFormLocale[lang]?.paragraph4 || ProjectsFormLocale.en.paragraph4}
               className="mb-2"
             />
             {showOptions && (
@@ -427,7 +432,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a deliverable to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -436,7 +441,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -457,7 +462,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is the main goal of your project?"
+              text= {ProjectsFormLocale[lang]?.paragraph2 || ProjectsFormLocale.en.paragraph2}
               className="mb-2"
             />
             {showOptions && (
@@ -471,7 +476,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a main goal to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -480,7 +485,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -492,7 +497,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
             </div>
           </>
@@ -501,7 +506,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What audience are you aiming to reach?"
+              text={ProjectsFormLocale[lang]?.paragraph5 || ProjectsFormLocale.en.paragraph5}
               className="mb-2"
             />
 
@@ -524,7 +529,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select audience to proceed.
+                {ProjectsFormLocale[lang]?.paragraph6 || ProjectsFormLocale.en.paragraph6}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -533,7 +538,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -545,7 +550,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -554,7 +559,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What style preferences do you have for this project?"
+              text= {ProjectsFormLocale[lang]?.paragraph7 || ProjectsFormLocale.en.paragraph7}
               className="mb-2"
             />
             {showOptions && (
@@ -568,7 +573,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select prefered styles to proceed.
+                {ProjectsFormLocale[lang]?.paragraph8 || ProjectsFormLocale.en.paragraph8}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -577,7 +582,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -589,7 +594,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -620,7 +625,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select content elements to proceed.
+                {ProjectsFormLocale[lang]?.paragraph9 || ProjectsFormLocale.en.paragraph9}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -629,7 +634,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -641,7 +646,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -650,7 +655,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is your budget for this project?"
+              text={ProjectsFormLocale[lang]?.paragraph10 || ProjectsFormLocale.en.paragraph10}
               className="mb-2"
             />
             {showOptions && (
@@ -664,7 +669,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a budget to proceed.
+                {ProjectsFormLocale[lang]?.paragraph11 || ProjectsFormLocale.en.paragraph11}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -673,7 +678,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -685,7 +690,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -694,22 +699,22 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is your timeline for this project?"
+              text= {ProjectsFormLocale[lang]?.paragraph12 || ProjectsFormLocale.en.paragraph12}
               className="mb-2"
             />
 
             {showOptions && (
               <CustomSelect
-                name="timeline"
+                name={ProjectsFormLocale[lang]?.paragraph13 || ProjectsFormLocale.en.paragraph13}
                 value={formData.timeline}
                 onChange={handleSelectChange}
                 options={options.timelineOptions}
-                placeholder="Select a timeline"
+                placeholder= {ProjectsFormLocale[lang]?.paragraph14 || ProjectsFormLocale.en.paragraph14}
               />
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a timeline to proceed.
+                 {ProjectsFormLocale[lang]?.paragraph15 || ProjectsFormLocale.en.paragraph15}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -718,7 +723,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -730,7 +735,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -738,19 +743,19 @@ const ProjectForm = () => {
       case 9:
         return (
           <>
-            <Typewriter text="What is your current status?" className="mb-2" />
+            <Typewriter text={ProjectsFormLocale[lang]?.paragraph16 || ProjectsFormLocale.en.paragraph16} className="mb-2" />
             {showOptions && (
               <CustomSelect
-                name="status"
+                name={ProjectsFormLocale[lang]?.paragraph17 || ProjectsFormLocale.en.paragraph17}
                 value={formData.status}
                 onChange={handleSelectChange}
                 options={options.statusOptions}
-                placeholder="Select a status"
+                placeholder={ProjectsFormLocale[lang]?.paragraph18 || ProjectsFormLocale.en.paragraph18}
               />
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a status to proceed.
+                {ProjectsFormLocale[lang]?.paragraph19 || ProjectsFormLocale.en.paragraph19}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -759,7 +764,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -771,7 +776,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -802,7 +807,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a project purpose to proceed.
+                 {ProjectsFormLocale[lang]?.paragraph20 || ProjectsFormLocale.en.paragraph20}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -811,7 +816,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                 {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -823,7 +828,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                 {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -834,42 +839,42 @@ const ProjectForm = () => {
             {/* Error Message */}
             {showError && (
               <p className="text-red-500 text-sm mb-4">
-                Please fill out all fields correctly before submitting.
+               {ProjectsFormLocale[lang]?.paragraph21 || ProjectsFormLocale.en.paragraph21}
               </p>
             )}
 
             {/* Form Inputs */}
             <input
               type="text"
-              name="name"
-              placeholder="Enter your name"
+              name={ProjectsFormLocale[lang]?.name || ProjectsFormLocale.en.name}
+              placeholder={ProjectsFormLocale[lang]?.name2 || ProjectsFormLocale.en.name2}
               onChange={handleChange}
               value={formData.name}
             />
             <input
               type="email"
-              name="email"
-              placeholder="Enter your email"
+              name={ProjectsFormLocale[lang]?.email || ProjectsFormLocale.en.email}
+              placeholder={ProjectsFormLocale[lang]?.email2 || ProjectsFormLocale.en.email2}
               onChange={handleChange}
               value={formData.email}
             />
             <input
               type="text"
-              name="phone"
-              placeholder="Enter your phone number"
+              name={ProjectsFormLocale[lang]?.phone || ProjectsFormLocale.en.phone}
+              placeholder={ProjectsFormLocale[lang]?.phone2 || ProjectsFormLocale.en.phone2}
               onChange={handleChange}
               value={formData.phone}
             />
             <input
               type="text"
-              name="company"
-              placeholder="Enter your company name"
+              name={ProjectsFormLocale[lang]?.company || ProjectsFormLocale.en.company}
+              placeholder= {ProjectsFormLocale[lang]?.company2 || ProjectsFormLocale.en.company2}
               onChange={handleChange}
               value={formData.company}
             />
             <textarea
-              name="additionalInfo"
-              placeholder="Additional information"
+              name={ProjectsFormLocale[lang]?.additionalInfo || ProjectsFormLocale.en.additionalInfo}
+              placeholder={ProjectsFormLocale[lang]?.additionalInfo2 || ProjectsFormLocale.en.additionalInfo2}
               onChange={handleChange}
               value={formData.additionalInfo}
             />
@@ -881,7 +886,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -897,7 +902,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Submit
+                 {ProjectsFormLocale[lang]?.header2 || ProjectsFormLocale.en.header2}
               </button>
             </div>
           </>

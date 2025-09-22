@@ -195,49 +195,6 @@ const faqs = [
    { question: WebappLocale[lang]?.question9 || WebappLocale.en.question9,answer: WebappLocale[lang]?.answer9 || WebappLocale.en.answer9  },
   { question: WebappLocale[lang]?.question10 || WebappLocale.en.question10,answer: WebappLocale[lang]?.answer10 || WebappLocale.en.answer10  },
 
-
-
-
-  // {
-  //   "question": "What types of websites do you develop?",
-  //   "answer": "We specialize in developing various types of websites, including e-commerce platforms, corporate websites, personal blogs, portfolio sites, and custom web applications tailored to your business needs."
-  // },
-  // {
-  //   "question": "What technologies do you use for web development?",
-  //   "answer": "Our team uses modern technologies such as React, Angular, Vue.js, Node.js, Django, and Laravel. For design, we leverage tools like Tailwind CSS, Bootstrap, and Material UI, ensuring fast, responsive, and user-friendly websites."
-  // },
-  // {
-  //   "question": "Do you offer mobile app development services?",
-  //   "answer": "Yes, we provide mobile app development services for both iOS and Android platforms. We use tools like React Native and Flutter for cross-platform apps, and native development for highly customized experiences."
-  // },
-  // {
-  //   "question": "Can you integrate third-party services into the website or app?",
-  //   "answer": "Absolutely! We can integrate third-party services such as payment gateways (Stripe, PayPal), social media platforms, CRM systems, analytics tools, and more to enhance the functionality of your website or app."
-  // },
-  // {
-  //   "question": "How do you ensure the security of web and app projects?",
-  //   "answer": "We prioritize security by implementing HTTPS, data encryption, regular vulnerability scans, and secure coding practices. We also ensure compliance with industry standards like GDPR for data protection."
-  // },
-  // {
-  //   "question": "Do you provide maintenance and support after project completion?",
-  //   "answer": "Yes, we offer post-launch maintenance and support services, including bug fixes, updates, performance optimization, and feature enhancements to ensure your website or app stays up-to-date."
-  // },
-  // {
-  //   "question": "How long does it take to develop a website or an app?",
-  //   "answer": "The timeline depends on the complexity of the project. Simple websites can take 2-4 weeks, while more complex web applications or mobile apps may take 8-16 weeks or longer, depending on your requirements."
-  // },
-  // {
-  //   "question": "Can you help with SEO and performance optimization?",
-  //   "answer": "Yes, we offer SEO services to improve your website's visibility on search engines, and we optimize performance by improving loading speeds, implementing caching strategies, and using efficient coding practices."
-  // },
-  // {
-  //   "question": "Do you provide custom designs for websites and apps?",
-  //   "answer": "Absolutely! Our design team creates custom, user-centric designs tailored to your brand identity, ensuring your website or app stands out and provides a seamless user experience."
-  // },
-  // {
-  //   "question": "What is the cost of developing a website or app?",
-  //   "answer": "The cost varies based on project requirements, complexity, and features. Contact us with your project details for a tailored quote."
-  // }
 ];
 
 export function FAQSection() {
