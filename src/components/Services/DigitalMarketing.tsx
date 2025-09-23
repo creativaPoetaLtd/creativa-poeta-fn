@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
  import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
+ import DigitalLocale from "../../i18n/Services/DigitalLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import{
   FaTwitter,
@@ -18,7 +19,8 @@ export const handleNavigate = () => {
 };
 
 
-const lang: string = getLangFromLocalStorage();
+// const lang: string = getLangFromLocalStorage();
+const lang: keyof typeof DigitalLocale = getLangFromLocalStorage() as keyof typeof DigitalLocale;
 
 const testimonials = [
   {
@@ -187,86 +189,25 @@ export function RelatedServices() {
 }
 
 const faqs = [
-  {
-    question: "What digital marketing services do you offer?",
-    answer: "We provide a wide range of services, including social media management, content creation, search engine optimization (SEO), pay-per-click (PPC) advertising, email marketing, and analytics reporting tailored to your business goals.",
-  },
-  {
-    question: "How do you create a social media strategy?",
-    answer: "We begin by understanding your brand, target audience, and goals. Then, we develop a customized strategy that includes content planning, posting schedules, engagement tactics, and performance tracking.",
-  },
-  {
-    question: "Which social media platforms do you manage?",
-    answer: "We manage platforms such as Facebook, Instagram, Twitter, LinkedIn, TikTok, Pinterest, and YouTube, ensuring your brand's presence is optimized for each audience.",
-  },
-  {
-    question: "How do you measure the success of digital marketing campaigns?",
-    answer: "We use metrics such as website traffic, click-through rates, engagement rates, lead conversions, and ROI to evaluate the effectiveness of campaigns and adjust strategies accordingly.",
-  },
-  {
-    question: "Can you help with creating content for social media?",
-    answer: "Yes, we create engaging and visually appealing content, including posts, graphics, videos, and captions, tailored to your brand and audience.",
-  },
-  {
-    question: "Do you offer influencer marketing services?",
-    answer: "Yes, we can connect your brand with relevant influencers, manage collaborations, and track the performance of influencer campaigns.",
-  },
-  {
-    question: "How often will you post on social media?",
-    answer: "The posting frequency depends on your strategy and goals. Typically, we post 3-5 times per week per platform, but this can be customized to meet your needs.",
-  },
-  {
-    question: "What is included in your SEO services?",
-    answer: "Our SEO services include keyword research, on-page optimization, technical SEO audits, link building, and content creation to improve your website's search engine rankings.",
-  },
-  {
-    question: "Can you run paid ads for my business?",
-    answer: "Yes, we manage PPC campaigns across platforms like Google Ads, Facebook Ads, Instagram Ads, and LinkedIn Ads to drive targeted traffic and conversions.",
-  },
-  {
-    question: "Do you provide analytics and reporting?",
-    answer: "Yes, we provide detailed monthly reports with key performance metrics and actionable insights to track progress and optimize strategies.",
-  },
-  {
-    question: "What industries do you work with?",
-    answer: "We work with businesses across various industries, including retail, e-commerce, healthcare, education, hospitality, and more.",
-  },
-  {
-    question: "Can you handle event-specific social media campaigns?",
-    answer: "Absolutely! We can create and manage event campaigns, including countdowns, live updates, and post-event content to maximize engagement.",
-  },
-  {
-    question: "How do you ensure my brand's voice is maintained?",
-    answer: "We start with a brand discovery phase to understand your tone, values, and messaging. This ensures all content aligns with your brand identity.",
-  },
-  {
-    question: "Do you offer social media account setup services?",
-    answer: "Yes, we can set up new accounts or optimize existing ones, ensuring they are fully branded and ready for engagement.",
-  },
-  {
-    question: "Can you help grow my social media followers?",
-    answer: "Yes, we use organic growth strategies, such as engaging with your audience and creating valuable content, as well as targeted ad campaigns to grow your following.",
-  },
-  {
-    question: "Do you offer packages for small businesses or startups?",
-    answer: "Yes, we provide flexible packages tailored to the needs and budgets of small businesses and startups.",
-  },
-  {
-    question: "What is your payment structure for services?",
-    answer: "We typically require an upfront payment or retainer, with flexible options for monthly or campaign-based billing.",
-  },
-  {
-    question: "Do you provide competitor analysis as part of your services?",
-    answer: "Yes, we analyze your competitors to identify trends, opportunities, and strategies to help your brand stand out.",
-  },
-  {
-    question: "Can you manage social media crisis situations?",
-    answer: "Yes, we have experience in handling crisis situations by implementing strategies to address concerns, manage feedback, and protect your brand's reputation.",
-  },
-  {
-    question: "Do you offer training for in-house teams?",
-    answer: "Yes, we provide training sessions to equip your team with the skills needed to manage digital marketing and social media efforts effectively.",
-  }, 
+ { question: DigitalLocale[lang].question1, answer: DigitalLocale[lang].answer1 },
+   { question: DigitalLocale[lang].question2, answer: DigitalLocale[lang].answer2 },
+   { question: DigitalLocale[lang].question3, answer: DigitalLocale[lang].answer3 },
+   { question: DigitalLocale[lang].question4, answer: DigitalLocale[lang].answer4 },
+   { question: DigitalLocale[lang].question6, answer: DigitalLocale[lang].answer5 },
+   { question: DigitalLocale[lang].question7, answer: DigitalLocale[lang].answer7 },
+   { question: DigitalLocale[lang].question8, answer: DigitalLocale[lang].answer8 },
+   { question: DigitalLocale[lang].question9, answer: DigitalLocale[lang].answer9 },
+   { question: DigitalLocale[lang].question10, answer: DigitalLocale[lang].answer10 },
+   { question: DigitalLocale[lang].question11, answer: DigitalLocale[lang].answer11 },
+   { question: DigitalLocale[lang].question12, answer: DigitalLocale[lang].answer12 },
+   { question: DigitalLocale[lang].question13, answer: DigitalLocale[lang].answer13 },
+   { question: DigitalLocale[lang].question14, answer: DigitalLocale[lang].answer14 },
+   { question: DigitalLocale[lang].question15, answer: DigitalLocale[lang].answer15 },
+   { question: DigitalLocale[lang].question16, answer: DigitalLocale[lang].answer16 },
+   { question: DigitalLocale[lang].question17, answer: DigitalLocale[lang].answer17 },
+   { question: DigitalLocale[lang].question18, answer: DigitalLocale[lang].answer18 },
+   { question: DigitalLocale[lang].question19, answer: DigitalLocale[lang].answer19 },
+   { question: DigitalLocale[lang].question20, answer: DigitalLocale[lang].answer20 },
 ];
 
 
@@ -345,20 +286,20 @@ const DigitalMarketings = () => {
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
            <h1 className="text-xl md:text-3xl font-bold">
-          Digital marketing & social media
+          {DigitalLocale[lang]?.header1 || DigitalLocale.en.header1}
           </h1>
            <h1>{DesignLocale[lang].title1}</h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        Engage, inspire, and grow your digital presence
+         {DigitalLocale[lang]?.paragraph1 || DigitalLocale.en.paragraph1}
         </p> 
             
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16  w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        In a fast-paced digital world, standing out is essential. At Creativa Poeta, we specialize in helping brands enhance their online presence, connect with their audience, and achieve measurable results. From social media management to crafting impactful digital strategies, we transform your vision into a digital reality.
+        {DigitalLocale[lang]?.paragraph2 || DigitalLocale.en.paragraph2}
     </p>
         <button
           onClick={handleNavigate}
@@ -382,11 +323,11 @@ const DigitalMarketings = () => {
 <section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
     
     <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Services offered
+    {DigitalLocale[lang]?.header2 || DigitalLocale.en.header2}
     </h2>
 
     <p className="text-md md:text-lg text-center mb-8">
-    Our Digital Marketing and Social Media services include:  
+    {DigitalLocale[lang]?.paragraph3 || DigitalLocale.en.paragraph3}
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-2 gap-8 text-black">
@@ -399,10 +340,10 @@ const DigitalMarketings = () => {
     
 
          <h3 className="text-xl font-semibold mb-2">
-      Social media management
+        {DigitalLocale[lang]?.header3 || DigitalLocale.en.header3}
         </h3>
         <p className="md:w-[70%] text-center">
-        Strategy creation, platform optimization, and ongoing community engagement to enhance your social media presence.       </p>
+        {DigitalLocale[lang]?.paragraph4 || DigitalLocale.en.paragraph4}</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -412,10 +353,10 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Content creation
+        {DigitalLocale[lang]?.header4 || DigitalLocale.en.header4}
         </h3>
         <p className="md:w-[70%] text-center">
-        Crafting high-quality text, visuals, videos, and podcasts tailored for online platforms to captivate and engage audiences.</p>
+        {DigitalLocale[lang]?.paragraph5 || DigitalLocale.en.paragraph5}</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -425,10 +366,10 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-            	Search Engine Optimization (SEO)
+            {DigitalLocale[lang]?.header5 || DigitalLocale.en.header5}
         </h3>
         <p className="md:w-[70%] text-center">	
-        Improving search engine rankings to drive organic traffic and enhance brand discoverability.
+          {DigitalLocale[lang]?.paragraph6 || DigitalLocale.en.paragraph6}
         </p>      
         </div>
 
@@ -439,10 +380,10 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Online revenue strategies
+        {DigitalLocale[lang]?.header6 || DigitalLocale.en.header6}
         </h3>
         <p className="md:w-[70%] text-center">
-        Guiding clients to establish and optimize passive income streams through tailored digital solutions.        </p>
+            {DigitalLocale[lang]?.Paragraph7 || DigitalLocale.en.paragraph7}       </p>
       </div>
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -451,10 +392,10 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        E-commerce and CMS solutions
+       {DigitalLocale[lang]?.header7 || DigitalLocale.en.header7}
         </h3>
         <p className="md:w-[70%] text-center">
-        Setting up and managing user-friendly digital platforms for seamless content management and online sales.        </p>
+                {DigitalLocale[lang]?.paragraph8 || DigitalLocale.en.paragraph8}   </p>
       </div>
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -463,10 +404,10 @@ const DigitalMarketings = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Digital advertising
+        {DigitalLocale[lang]?.header8 || DigitalLocale.en.header8}
         </h3>
         <p className="md:w-[70%] text-center">
-        Designing and executing targeted campaigns to maximize conversions across Google Ads, Facebook Ads, and other platforms.
+           {DigitalLocale[lang]?.paragraph9 || DigitalLocale.en.paragraph9} 
         </p>
       </div>
     </div>
@@ -481,8 +422,8 @@ const DigitalMarketings = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{DigitalLocale[lang]?.key || DigitalLocale.en.key}</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{DigitalLocale[lang]?.competencies || DigitalLocale.en.competencies}</h2>
         </div>
       </div>
     </div>
@@ -490,31 +431,11 @@ const DigitalMarketings = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        {
-          number: "1",
-          text: "	Expertise in major social media platforms and their algorithms.",
-          bgColor: "bg-[#E265FF]",
-        },
-        {
-          number: "2",
-          text: "Proficiency in SEO tools and techniques for optimized content.",
-          bgColor: "bg-[#8B3DFF]",
-        },
-        {
-          number: "3",
-          text: "Skills in crafting and managing ad campaigns for maximum ROI.",
-          bgColor: "bg-[#3DB9FF]",
-        },
-        {
-          number: "4",
-          text: "Knowledge of CMS platforms and e-commerce tools.",
-          bgColor: "bg-[#FFA53D]",
-        },
-        {
-          number: "5",
-          text: "Ability to analyze and adapt strategies based on performance metrics.",
-          bgColor: "bg-[#76C56F]",
-        },
+         { number: "1", text: DigitalLocale[lang].key1 || DigitalLocale.en.key1, bgColor: "bg-[#E265FF]" },
+    { number: "2", text: DigitalLocale[lang].key2 || DigitalLocale.en.key2, bgColor: "bg-[#8B3DFF]" },
+    { number: "3", text:  DigitalLocale[lang].key3 || DigitalLocale.en.key3, bgColor: "bg-[#3DB9FF]" },
+    { number: "4", text:  DigitalLocale[lang].key4 || DigitalLocale.en.key4, bgColor: "bg-[#FFA53D]" },
+    { number: "5", text:  DigitalLocale[lang].key5 || DigitalLocale.en.key5, bgColor: "bg-[#76C56F]" },
       ].map(({ number, text, bgColor }, index) => (
         <div key={index} className="flex items-center gap-4">
           {/* Circle */}
@@ -544,24 +465,24 @@ const DigitalMarketings = () => {
   </div>
   <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-      Why choose Creativa Poeta?
+      {DigitalLocale[lang]?.header9 || DigitalLocale.en.header9}
     </h2>
     <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
       <li>
-        <strong className="text-md md:text-lg">Results-driven approach: </strong>
-        We focus on delivering measurable outcomes that align with your goals.      </li>
+        <strong className="text-md md:text-lg">{DigitalLocale[lang]?.strong1 || DigitalLocale.en.strong1} </strong>
+        {DigitalLocale[lang]?.list1 || DigitalLocale.en.list1}      </li>
       <li>
-        <strong className="text-md md:text-lg">Creative expertise:  </strong>
-        Our team brings innovative ideas to every project, ensuring your brand stands out.      </li>
+        <strong className="text-md md:text-lg">{DigitalLocale[lang]?.strong2 || DigitalLocale.en.strong2}</strong>
+        {DigitalLocale[lang]?.list2 || DigitalLocale.en.list2}     </li>
       <li>
-        <strong className="text-md md:text-lg">Tailored strategies: </strong>
-         No two businesses are alike; we design marketing plans that fit your unique needs.      </li>
+        <strong className="text-md md:text-lg">{DigitalLocale[lang]?.strong3 || DigitalLocale.en.strong3} </strong>
+         {DigitalLocale[lang]?.list3 || DigitalLocale.en.list3}      </li>
       <li>
-        <strong className="text-md md:text-lg">Comprehensive support:  </strong>
-        From initial strategy to post-campaign analysis, we’re with you every step of the way.      </li>
+        <strong className="text-md md:text-lg">{DigitalLocale[lang]?.strong4 || DigitalLocale.en.strong4}</strong>
+        {DigitalLocale[lang]?.list4 || DigitalLocale.en.list4}</li>
       <li>
-        <strong className="text-md md:text-lg">Cutting-edge tools: </strong>
-         We leverage the latest tools and trends to keep your brand ahead of the competition.      </li>
+        <strong className="text-md md:text-lg">{DigitalLocale[lang]?.strong5 || DigitalLocale.en.strong5} </strong>
+        {DigitalLocale[lang]?.list5 || DigitalLocale.en.list5}</li>
     
     
     </ul>
@@ -571,20 +492,20 @@ const DigitalMarketings = () => {
 
 <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Who are these services for?
+    {DigitalLocale[lang]?.header10 || DigitalLocale.en.header10}
   </h2>
 
   <p className="text-md md:text-lg text-center mb-8">
-  Our Digital Marketing and Social Media services cater to:  </p>
+      {DigitalLocale[lang]?.paragraph10 || DigitalLocale.en.paragraph10}  </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
       <h3 className="text-xl font-semibold mb-2">
-      Entrepreneurs
+      {DigitalLocale[lang]?.header11 || DigitalLocale.en.header11}
       </h3>
-      <p className="md:w-[70%] text-center">
-    Build your online presence from the ground up.      </p>
+      <p className="md:w-[70%] text-center">{DigitalLocale[lang]?.paragraph11 || DigitalLocale.en.paragraph11} 
+       </p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -594,10 +515,10 @@ const DigitalMarketings = () => {
         className="w-36 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Small to Medium Enterprises (SMEs)
+        {DigitalLocale[lang]?.header12 || DigitalLocale.en.header12}
       </h3>
       <p className="md:w-[70%] text-center">
-      Scale your business with effective marketing campaigns.      </p>
+      {DigitalLocale[lang]?.paragraph12 || DigitalLocale.en.paragraph12} </p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -607,10 +528,10 @@ const DigitalMarketings = () => {
         className="w-24 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-          Brands
+          {DigitalLocale[lang]?.header13 || DigitalLocale.en.header13}
       </h3>
       <p className="md:w-[70%] text-center">
-      Strengthen your connection with existing customers while attracting new ones.      </p>
+      {DigitalLocale[lang]?.paragraph13 || DigitalLocale.en.paragraph13}      </p>
       </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -620,10 +541,10 @@ const DigitalMarketings = () => {
         className="w-32 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-      Nonprofits and Community Groups
+      {DigitalLocale[lang]?.header14 || DigitalLocale.en.header14}
       </h3>
       <p className="md:w-[70%] text-center">
-       Increase awareness and support for your cause.      </p>
+        {DigitalLocale[lang]?.paragraph14 || DigitalLocale.en.paragraph14}     </p>
       </div>
   </div>
 </section>
@@ -631,7 +552,7 @@ const DigitalMarketings = () => {
 
 <section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-  Process workflow  </h2>
+   {DigitalLocale[lang]?.header15 || DigitalLocale.en.header15} </h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-6 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
     {/* Step 1 */}
@@ -639,9 +560,9 @@ const DigitalMarketings = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         1
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Discovery phase </h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header16 || DigitalLocale.en.header16} </h3>
       <p className="text-sm">
-       Understanding your business, audience, and goals.      </p>
+       {DigitalLocale[lang]?.paragraph15 || DigitalLocale.en.paragraph15}      </p>
     </div>
 
     {/* Step 2 */}
@@ -649,9 +570,9 @@ const DigitalMarketings = () => {
       <div className="w-10 h-10  flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         2
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Strategy development</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header17 || DigitalLocale.en.header17} </h3>
       <p className="text-sm">
-      Creating a tailored plan, including platform selection, content ideas, and ad campaigns.      </p>
+      {DigitalLocale[lang]?.paragraph16 || DigitalLocale.en.paragraph16}     </p>
     </div>
 
     {/* Step 3 */}
@@ -659,9 +580,9 @@ const DigitalMarketings = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         3
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Content production</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header18 || DigitalLocale.en.header18}</h3>
       <p className="text-sm">
-       Designing and delivering engaging content, from visuals to videos.      </p>
+          {DigitalLocale[lang]?.paragraph17 || DigitalLocale.en.paragraph17}  </p>
     </div>
 
     {/* Step 4 */}
@@ -669,9 +590,9 @@ const DigitalMarketings = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         4
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Campaign execution:</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header19 || DigitalLocale.en.header19}</h3>
       <p className="text-sm">
-       Implementing the strategy across multiple platforms for maximum reach.      </p>
+           {DigitalLocale[lang]?.paragraph18 || DigitalLocale.en.paragraph18}  </p>
     </div>
 
     {/* Step 5 */}
@@ -679,18 +600,18 @@ const DigitalMarketings = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         5
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Performance analysis</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header20 || DigitalLocale.en.header20}</h3>
       <p className="text-sm">
-       Monitoring campaign results and providing actionable insights.      </p>
+           {DigitalLocale[lang]?.paragraph19 || DigitalLocale.en.paragraph19} </p>
     </div>
     {/* Step 6 */}
     <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col min-h-[15rem]">
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         6
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Optimization</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{DigitalLocale[lang]?.header21 || DigitalLocale.en.header21}</h3>
       <p className="text-sm">
-       Adjusting strategies to ensure continuous improvement and growth.
+        {DigitalLocale[lang]?.paragraph20 || DigitalLocale.en.paragraph20}
       </p>    </div>
   </div>
 </section>
@@ -793,15 +714,15 @@ const DigitalMarketings = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
   <h2 className="text-xl font-semibold p-4 mb-4">
-    Ready to elevate your brand with our digital marketing services?
+   {DigitalLocale[lang]?.header22 || DigitalLocale.en.header22}
   </h2>
-  <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-  Take your digital presence to the next level. Contact us today to create a winning strategy that grows your brand and drives results.  </p>
+  <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">{DigitalLocale[lang]?.paragraph21 || DigitalLocale.en.paragraph21}
+   </p>
 
   <button
     onClick={handleNavigate}
     className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    Start your marketing journey with us
+     {DigitalLocale[lang]?.header23 || DigitalLocale.en.header23}
     </button>
 </section>
 

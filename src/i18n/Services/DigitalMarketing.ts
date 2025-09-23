@@ -3,6 +3,11 @@ const DigitalMarketingLocale: any = {
         title: "Digital Marketing",
         subtitle:"Boost Your Online Presence with Strategic Solutions",
         quote1: "Your success is our mission",
+
+
+
+
+        
     },
     fr: {
         title: "Marketing Digitale",

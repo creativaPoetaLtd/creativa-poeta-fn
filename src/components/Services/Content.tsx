@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
+import ContentLocale from "../../i18n/ContentLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import {
   FaTwitter,
@@ -14,9 +15,10 @@ import {
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 
-
-const lang: string = getLangFromLocalStorage();
-
+// const lang: string = getLangFromLocalStorage();
+// const t = ContentLocale[lang] ?? ContentLocale["en"];
+const lang:any = getLangFromLocalStorage();
+ 
 const testimonials = [
   {
     quote: DesignLocale[lang].quote1,
@@ -71,7 +73,8 @@ export function TestimonialSlider() {
   return (
     <section className="testimonial-slider hidden min-h-screen w-full md:w-[80%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
       <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">
-        What Our Clients Say
+        What Our Clients Say 
+        
       </h2>
 
       <div className="overflow-hidden relative w-full">
@@ -182,19 +185,11 @@ export function RelatedServices() {
 }
 
 const faqs = [
-  {
-    question: "How long does it take to write a blog post?",
-    answer: "The time it takes to write a blog post depends on the length and complexity of the content. On average, we can deliver a 500-word blog post within 2-3 days. Longer posts may take up to a week to complete.",},
-  {
-    question: "Do you offer proofreading services only?",
-    answer: "No, we offer a range of content writing services, including blog writing, web content creation, professional document writing, and more. Our team can assist with all your writing needs, from start to finish.",},
-  {
-    question: "Is it possible to request revisions on the written text?",
-    answer:
-      "Yes, we offer revisions on all written content to ensure it meets your expectations. We value your feedback and will work with you to make any necessary changes to the text.",},
-  {
-    question: "In what formats do you provide the finalized text?",
-    answer: "We can provide the finalized text in various formats, including Word documents, PDFs, and Google Docs. Let us know your preferred format, and we will deliver the content accordingly.",},
+    { question: ContentLocale[lang].question1, answer: ContentLocale[lang].answer1 },
+   { question: ContentLocale[lang].question2, answer: ContentLocale[lang].answer2 },
+   { question: ContentLocale[lang].question3, answer: ContentLocale[lang].answer3 },
+   { question: ContentLocale[lang].question4, answer: ContentLocale[lang].answer4 },
+
 ];
 
 
@@ -272,18 +267,19 @@ const ContentWritting = () => {
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
           <h1 className="text-xl md:text-3xl font-bold">
-          Content writing & creation
+           {ContentLocale[lang].header11}  
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        Words and creativity that make an impact
+        {ContentLocale[lang].paragraph11}
         </p>
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        Effective communication is at the heart of every successful brand. At Creativa Poeta, we craft compelling content that informs, inspires, and persuades. From polished professional writing to engaging creative pieces, we ensure your message connects with your audience.        </p>
+          {ContentLocale[lang].paragraph22}
+        </p>
         <button
           onClick={handleNavigate}
           className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
@@ -306,11 +302,11 @@ const ContentWritting = () => {
 <section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
     
     <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Services offered
+    {ContentLocale[lang].service11}
     </h2>
 
     <p className="text-md md:text-lg text-center mb-8">
-    Our Content Writing & Creation services include but not limited to:
+    {ContentLocale[lang].paragraph33}
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-8 text-black">
@@ -320,9 +316,9 @@ const ContentWritting = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />        <h3 className="text-xl font-semibold mb-2">
-       Professional writing
+         {ContentLocale[lang].header22}
         </h3>
-        <p className="md:w-[70%] text-center">Copywriting for ads and marketing materials, Technical documentation, reports, and manuals, and Ghostwriting services for books, speeches, or articles.
+        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph44}
        </p>
       </div>
 
@@ -333,9 +329,10 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Creative writing
+       {ContentLocale[lang].header33}
         </h3>
-        <p className="md:w-[70%] text-center">Blog posts, storytelling, poetry, and creative articles, Social media captions and creative campaigns, and Scripts for videos, podcasts, and presentations
+        <p className="md:w-[70%] text-center">
+          {ContentLocale[lang].paragraph55}
 </p>
       </div>
 
@@ -346,9 +343,9 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Editing and proofreading
+         {ContentLocale[lang].header44}
         </h3>
-        <p className="md:w-[70%] text-center">Comprehensive review and refinement of documents for clarity, grammar, and structure.</p>
+        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph66}</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -358,9 +355,10 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-      SEO content writing
+        {ContentLocale[lang].header55}
         </h3>
-        <p className="md:w-[70%] text-center">Crafting keyword-optimized articles and web pages to improve visibility and drive organic traffic.</p>
+        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph77}</p>
+        
       </div>
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -369,9 +367,9 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Resume and cover letter services
+        {ContentLocale[lang].header66}
         </h3>
-        <p className="md:w-[70%] text-center">	Writing tailored CVs, cover letters, and LinkedIn profiles to highlight skills and experience effectively.</p>
+        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph88}</p>
       </div>
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -380,9 +378,9 @@ const ContentWritting = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Content Strategy and Consulting        </h3>
+           {ContentLocale[lang].header77} </h3>
         <p className="md:w-[70%] text-center">	
-        Developing content calendars, auditing existing content, and creating long-term strategies to align with business goals.
+         {ContentLocale[lang].paragraph99}
         </p>
       </div>
     </div>
@@ -398,8 +396,8 @@ const ContentWritting = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{ContentLocale[lang].header88}</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{ContentLocale[lang].header99}</h2>
         </div>
       </div>
     </div>
@@ -407,31 +405,17 @@ const ContentWritting = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        {
-          number: "1",
-          text: "	Expertise in a variety of writing styles (formal, creative, technical).",
-          bgColor: "bg-[#E265FF]",
-        },
-        {
-          number: "2",
-          text: "In-depth knowledge of SEO practices to optimize content for search engines.",
-          bgColor: "bg-[#8B3DFF]",
-        },
-        {
-          number: "3",
-          text: "Advanced editing and proofreading skills to ensure precision and clarity.",
-          bgColor: "bg-[#3DB9FF]",
-        },
-        {
-          number: "4",
-          text: "Creativity in storytelling to make brands relatable and memorable.",
-          bgColor: "bg-[#FFA53D]",
-        },
-        {
-          number: "5",
-          text: "	Familiarity with tools like Grammarly, Hemingway, and Surfer SEO.",
-          bgColor: "bg-[#76C56F]",
-        },
+        
+       
+             { number: "1", text: ContentLocale[lang].comp1, bgColor: "bg-[#E265FF]" },
+    { number: "2", text: ContentLocale[lang].comp2, bgColor: "bg-[#8B3DFF]" },
+    { number: "3", text: ContentLocale[lang].comp3, bgColor: "bg-[#3DB9FF]" },
+    { number: "4", text: ContentLocale[lang].comp4, bgColor: "bg-[#FFA53D]" },
+    { number: "5", text: ContentLocale[lang].comp5, bgColor: "bg-[#76C56F]" },
+
+
+
+
       ].map(({ number, text, bgColor }, index) => (
         <div key={index} className="flex items-center gap-4">
           {/* Circle */}
@@ -461,36 +445,36 @@ const ContentWritting = () => {
   </div>
   <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-      Why choose Creativa Poeta?
+       {ContentLocale[lang].header100}
     </h2>
     <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
       <li>
-        <strong className="text-md md:text-lg">Tailored Solutions: </strong>
-        Every piece of content is uniquely crafted to resonate with your target audience and align with your brand's goals. We ensure your voice stands out in a crowded digital space.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong1} </strong>
+       {ContentLocale[lang].list1}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Experienced Team: </strong>
-        Our team of skilled writers and creators bring years of experience across various industries, leveraging the latest trends and techniques to deliver high-quality content.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong2} </strong>
+         {ContentLocale[lang].list2}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Creative Excellence: </strong>
-        At Creativa Poeta, creativity is at the heart of what we do. From compelling copywriting to engaging visual content, we turn ideas into impactful stories.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong3}</strong>
+        {ContentLocale[lang].list3}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Comprehensive Support: </strong>
-        From brainstorming to final delivery, we partner with you at every stage of the content creation process to ensure your vision is fully realized.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong4}</strong>
+        {ContentLocale[lang].list4}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Customer-Centric Approach: </strong>
-        Your satisfaction drives us. We take the time to understand your unique requirements, ensuring the content we create speaks directly to your audience and reflects your brand values.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong5}</strong>
+         {ContentLocale[lang].list5}
       </li>
       <li>
-        <strong className="text-md md:text-lg">SEO-Optimized Content: </strong>
-        Our content is not only engaging but also strategically optimized for search engines to boost your online visibility and drive traffic to your platforms.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong6} </strong>
+           {ContentLocale[lang].list6}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Scalable and Future-Ready: </strong>
-        We produce content that evolves with your brand, ensuring it remains relevant and effective as your business grows.
+        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong7}</strong>
+        {ContentLocale[lang].list7}
       </li>
     </ul>
   </div>
@@ -499,20 +483,20 @@ const ContentWritting = () => {
 
 <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Who are these services for?
+     {ContentLocale[lang].header101}
   </h2>
 
   <p className="text-md md:text-lg text-center mb-8">
-    Our content writing and creation services are designed for:
+    {ContentLocale[lang].paragraph100}
   </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
       <h3 className="text-xl font-semibold mb-2">
-        Startups
+       {ContentLocale[lang].header102}
       </h3>
-      <p className="md:w-[70%] text-center">Boost your brand with engaging blogs, social media content, and persuasive copywriting.</p>
+      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph101}</p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -522,9 +506,9 @@ const ContentWritting = () => {
         className="w-36 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Small to Medium Enterprises (SMEs)
+        {ContentLocale[lang].header103}
       </h3>
-      <p className="md:w-[70%] text-center">Enhance your marketing strategy with tailored content that speaks directly to your audience.</p>
+      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph102}</p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -534,9 +518,9 @@ const ContentWritting = () => {
         className="w-24 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Enterprises
+       {ContentLocale[lang].header104}
       </h3>
-      <p className="md:w-[70%] text-center">Drive results with professionally crafted content for campaigns, reports, and internal communications.</p>
+      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph103} </p>
     </div>
 
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -546,9 +530,9 @@ const ContentWritting = () => {
         className="w-32 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Freelancers and Creatives
+       {ContentLocale[lang].header105}
       </h3>
-      <p className="md:w-[70%] text-center">Create a standout portfolio or personal blog to showcase your skills and expertise.</p>
+      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph104}</p>
     </div>
   </div>
 </section>
@@ -556,7 +540,7 @@ const ContentWritting = () => {
 
 <section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Process Workflow
+    {ContentLocale[lang].header106}
   </h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
@@ -565,9 +549,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         1
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Discovery</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header107}</h3>
       <p className="text-sm">
-        Analyzing your target audience, goals, and unique content needs.
+       {ContentLocale[lang].paragraph105}
       </p>
     </div>
 
@@ -576,9 +560,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         2
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Strategy</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header108}</h3>
       <p className="text-sm">
-        Crafting a content plan tailored to your objectives and audience.
+        {ContentLocale[lang].paragraph106}
       </p>
     </div>
 
@@ -587,9 +571,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         3
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Creation</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].heading109}</h3>
       <p className="text-sm">
-        Writing, designing, and curating content that aligns with your brand's voice.
+        {ContentLocale[lang].paragraph107}
       </p>
     </div>
 
@@ -598,9 +582,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         4
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Review & Feedback</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header200}</h3>
       <p className="text-sm">
-        Collaborating with you to refine and finalize the content for your approval.
+       {ContentLocale[lang].paragraph108}
       </p>
     </div>
 
@@ -609,9 +593,9 @@ const ContentWritting = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         5
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Delivery & Optimization</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header201}</h3>
       <p className="text-sm">
-        Delivering polished content and offering insights for ongoing improvement.
+       {ContentLocale[lang].paragraph109}
       </p>
     </div>
   </div>
@@ -633,9 +617,9 @@ const ContentWritting = () => {
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
               <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Creative Logo
+                {ContentLocale[lang].header202}
               </h3>
-              <p className="text-white text-sm">For Tech Startup</p>
+              <p className="text-white text-sm">{ContentLocale[lang].paragraph110}</p>
             </div>
           </div>
           <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -646,9 +630,9 @@ const ContentWritting = () => {
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
               <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Business card
+                {ContentLocale[lang].header203}
               </h3>
-              <p className="text-gray-300 text-sm">For a Company</p>
+              <p className="text-gray-300 text-sm">{ContentLocale[lang].paragraph111}</p>
             </div>
           </div>
           <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
@@ -715,16 +699,16 @@ const ContentWritting = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
   <h2 className="text-xl font-semibold p-4 mb-4">
-    Ready to share your story with the world?
+    {ContentLocale[lang].header204}
   </h2>
   <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-    Reach out to us today, and let’s create compelling content that resonates with your audience.
+    {ContentLocale[lang].paragraph112}
   </p>
 
   <button
     onClick={handleNavigate}
     className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    Start your content journey with us
+    {ContentLocale[lang].button1}
   </button>
 </section>
 

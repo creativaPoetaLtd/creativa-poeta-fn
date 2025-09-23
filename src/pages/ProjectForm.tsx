@@ -8,7 +8,10 @@ import image8 from "../assets/flags/image8.jpg";
 import { projectForm } from "../APIs/projectForm";
 import CustomSelect from "../components/CustomSelect";
 import "../styles/custom-inputs.css";
-
+import getLangFromLocalStorage from "../../utils/Lang";
+import ProjectsFormLocale from "../i18n/ProjectsFormLocale";
+// const lang: keyof typeof ProjectsFormLocale = getLangFromLocalStorage() as keyof typeof ProjectsFormLocale;
+const lang:any = getLangFromLocalStorage();
 const ProjectForm = () => {
   const [step, setStep] = useState(1);
   const [showOptions, setShowOptions] = useState(false);
@@ -33,6 +36,7 @@ const ProjectForm = () => {
     additionalInfo: "",
   });
 
+   
   useEffect(() => {
     const timer = setTimeout(() => setShowOptions(true), 2000);
     return () => clearTimeout(timer);
@@ -209,7 +213,7 @@ const ProjectForm = () => {
         email: "",
         phone: "",
         company: "",
-        projectType: "Graphic Design and Visual Communication",
+        projectType: ProjectsFormLocale[lang].projectType1,
         deliverables: [],
         mainGoal: "",
         audience: [],
@@ -232,118 +236,152 @@ const ProjectForm = () => {
     }
   };
 
-  const options = {
-    projectType: [
-      "Graphic Design and Visual Communication",
-      "Content Writing and Creation",
-      "Digital Marketing and Social Media",
-      "Web and App Development",
-      "Other",
+
+
+
+// 1. Type for Project Types
+type ProjectType =
+  | typeof ProjectsFormLocale["en"]["projectType1"]
+  | typeof ProjectsFormLocale["en"]["projectType2"]
+  | typeof ProjectsFormLocale["en"]["projectType3"]
+  | typeof ProjectsFormLocale["en"]["projectType4"]
+  | typeof ProjectsFormLocale["en"]["projectType5"];
+
+// 2. Type for Deliverables mapping
+type DeliverablesMap = {
+  [key in ProjectType]: string[];
+};
+
+// 3. Type for the full options object
+interface Options {
+  projectType: ProjectType[];
+  deliverables: DeliverablesMap;
+  mainGoals: string[];
+  audience: string[];
+  stylePreferences: string[];
+  contentElements: string[];
+  budgetOptions: string[];
+  timelineOptions: string[];
+  statusOptions: string[];
+  projectPurposes: string[];
+}
+
+// 4. Example of using it
+const options: Options = {
+  projectType: [
+    ProjectsFormLocale[lang].projectType1,
+    ProjectsFormLocale[lang].projectType2,
+    ProjectsFormLocale[lang].projectType3,
+    ProjectsFormLocale[lang].projectType4,
+    ProjectsFormLocale[lang].projectType5,
+  ],
+  deliverables: {
+    [ProjectsFormLocale[lang].projectType1]: [
+      ProjectsFormLocale[lang].deliverables2,
+      ProjectsFormLocale[lang].deliverables3,
+      ProjectsFormLocale[lang].deliverables4,
+      ProjectsFormLocale[lang].deliverables5,
+      ProjectsFormLocale[lang].deliverables6,
+      ProjectsFormLocale[lang].deliverables7,
+      ProjectsFormLocale[lang].deliverables8,
+      ProjectsFormLocale[lang].deliverables9,
+      ProjectsFormLocale[lang].deliverables10,
     ],
-    deliverables: {
-      "Graphic Design and Visual Communication": [
-        "Logo Design",
-        "Brand Identity Package (logos, business cards, letterheads)",
-        "Custom Illustrations",
-        "Infographics",
-        "Social Media Templates",
-        "Marketing Collaterals (posters, flyers, brochures)",
-        "Digital Ads Graphics",
-        "Product Packaging Design",
-        "Presentation Design",
-      ],
-      "Content Writing and Creation": [
-        "SEO-Optimized Blog Posts",
-        "Website Copy",
-        "Social Media Captions and Content",
-        "White Papers and Case Studies",
-        "Email Marketing Campaign Content",
-        "E-books and Guides",
-        "Press Releases",
-        "Video Scriptwriting",
-        "Product Descriptions",
-      ],
-      "Digital Marketing and Social Media": [
-        "Comprehensive Marketing Strategy Plan",
-        "Search Engine Optimization (SEO) Audits and Reports",
-        "Google Ads Campaign Setup and Management",
-        "Social Media Strategy and Management",
-        "Content Calendar for Social Platforms",
-        "Email Marketing Campaigns",
-        "Performance Analytics and Reports",
-        "Brand Campaign Development",
-        "Influencer Marketing Collaboration Plan",
-      ],
-      "Web and App Development": [
-        "Fully Responsive Website",
-        "Custom Landing Page Design",
-        "E-commerce Website Development",
-        "Web Application Development",
-        "Mobile App Development (iOS and Android)",
-        "User Interface (UI) Design",
-        "User Experience (UX) Prototyping",
-        "Backend and Database Integration",
-        "Website Performance Optimization",
-        "Maintenance and Support Plans",
-      ],
-      Other: [],
-    },
-    mainGoals: [
-      "Increase brand visibility",
-      "Attract new clients",
-      "Build a visual identity",
-      "Increase sales",
-      "Promote a new offering",
-      "Educate or inform the public",
+    [ProjectsFormLocale[lang].projectType2]: [
+      ProjectsFormLocale[lang].deliverables12,
+      ProjectsFormLocale[lang].deliverables13,
+      ProjectsFormLocale[lang].deliverables14,
+      ProjectsFormLocale[lang].deliverables15,
+      ProjectsFormLocale[lang].deliverables16,
+      ProjectsFormLocale[lang].deliverables17,
+      ProjectsFormLocale[lang].deliverables18,
+      ProjectsFormLocale[lang].deliverables19,
+      ProjectsFormLocale[lang].deliverables20,
     ],
-    audience: [
-      "General public",
-      "Professionals",
-      "Young adults",
-      "Local community",
-      "International market",
+    [ProjectsFormLocale[lang].projectType3]: [
+      ProjectsFormLocale[lang].deliverables22,
+      ProjectsFormLocale[lang].deliverables23,
+      ProjectsFormLocale[lang].deliverables24,
+      ProjectsFormLocale[lang].deliverables25,
+      ProjectsFormLocale[lang].deliverables26,
+      ProjectsFormLocale[lang].deliverables27,
+      ProjectsFormLocale[lang].deliverables28,
+      ProjectsFormLocale[lang].deliverables29,
+      ProjectsFormLocale[lang].deliverables30,
     ],
-    stylePreferences: [
-      "Formal and professional",
-      "Creative and original",
-      "Minimalistic and modern",
-      "Warm and engaging",
-      "Casual and relaxed",
-      "Innovative and high-tech",
+    [ProjectsFormLocale[lang].projectType4]: [
+      ProjectsFormLocale[lang].deliverables32,
+      ProjectsFormLocale[lang].deliverables33,
+      ProjectsFormLocale[lang].deliverables34,
+      ProjectsFormLocale[lang].deliverables35,
+      ProjectsFormLocale[lang].deliverables36,
+      ProjectsFormLocale[lang].deliverables37,
+      ProjectsFormLocale[lang].deliverables38,
+      ProjectsFormLocale[lang].deliverables39,
+      ProjectsFormLocale[lang].deliverables40,
+      ProjectsFormLocale[lang].deliverables41,
     ],
-    contentElements: [
-      "Photos",
-      "Illustrations",
-      "Videos",
-      "Explanatory text",
-      "Client testimonials",
-      "Call-to-action statements",
+    [ProjectsFormLocale[lang].projectType5]: [
+      ProjectsFormLocale[lang].deliverables42,
     ],
-    budgetOptions: [
-      "Less than €500",
-      "Between €500 and €1000",
-      "Between €1000 and €5000",
-      "More than €5000",
-    ],
-    timelineOptions: [
-      "Less than a month",
-      "1 to 3 months",
-      "3 to 6 months",
-      "More than 6 months",
-    ],
-    statusOptions: [
-      "Self-employed",
-      "Student", 
-      "Company",
-      "Non-profit",
-    ],
-    projectPurposes: [
-      "Launch a new service",
-      "Improve brand image",
-      "Generate more sales",
-      "Personal project (portfolio, CV, etc.)",
-    ],
-  };
+  },
+  mainGoals: [
+    ProjectsFormLocale[lang].mainGoals1,
+    ProjectsFormLocale[lang].mainGoals2,
+    ProjectsFormLocale[lang].mainGoals3,
+    ProjectsFormLocale[lang].mainGoals4,
+    ProjectsFormLocale[lang].mainGoals5,
+    ProjectsFormLocale[lang].mainGoals6,
+  ],
+  audience: [
+    ProjectsFormLocale[lang].audience1,
+    ProjectsFormLocale[lang].audience2,
+    ProjectsFormLocale[lang].audience3,
+    ProjectsFormLocale[lang].audience4,
+    ProjectsFormLocale[lang].audience5,
+  ],
+  stylePreferences: [
+    ProjectsFormLocale[lang].stylePreferences1,
+    ProjectsFormLocale[lang].stylePreferences2,
+    ProjectsFormLocale[lang].stylePreferences3,
+    ProjectsFormLocale[lang].stylePreferences4,
+    ProjectsFormLocale[lang].stylePreferences5,
+    ProjectsFormLocale[lang].stylePreferences6,
+  ],
+  contentElements: [
+    ProjectsFormLocale[lang].contentElements1,
+    ProjectsFormLocale[lang].contentElements2,
+    ProjectsFormLocale[lang].contentElements3,
+    ProjectsFormLocale[lang].contentElements4,
+    ProjectsFormLocale[lang].contentElements5,
+    ProjectsFormLocale[lang].contentElements6,
+  ],
+  budgetOptions: [
+    ProjectsFormLocale[lang].budgetOptions1,
+    ProjectsFormLocale[lang].budgetOptions2,
+    ProjectsFormLocale[lang].budgetOptions3,
+    ProjectsFormLocale[lang].budgetOptions4,
+  ],
+  timelineOptions: [
+    ProjectsFormLocale[lang].timelineOptions1,
+    ProjectsFormLocale[lang].timelineOptions2,
+    ProjectsFormLocale[lang].timelineOptions3,
+    ProjectsFormLocale[lang].timelineOptions4,
+  ],
+  statusOptions: [
+    ProjectsFormLocale[lang].statusOptions1,
+    ProjectsFormLocale[lang].statusOptions2,
+    ProjectsFormLocale[lang].statusOptions3,
+    ProjectsFormLocale[lang].statusOptions4,
+  ],
+  projectPurposes: [
+    ProjectsFormLocale[lang].projectPurposes1,
+    ProjectsFormLocale[lang].projectPurposes2,
+    ProjectsFormLocale[lang].projectPurposes3,
+    ProjectsFormLocale[lang].projectPurposes4,
+  ],
+};
+
 
   const renderStep = () => {
     switch (step) {
@@ -351,16 +389,16 @@ const ProjectForm = () => {
         return (
           <>
             <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex  text-[#806829]">
-              Get Started
+              {ProjectsFormLocale[lang]?.header1 || ProjectsFormLocale.en.header1}
             </h1>
             <div className="w-full max-w-screen-sm mx-auto">
               <Typewriter
-                text="What type of project would you like to undertake?"
+                text= {ProjectsFormLocale[lang]?.paragraph3 || ProjectsFormLocale.en.paragraph3}
                 className="mb-2"
               />
             </div>
 
-            {showOptions && (
+          {showOptions && (
               <div className="space-y-2">
                 {options.projectType.map((type) => (
                   <label key={type} className="block text-white">
@@ -376,10 +414,12 @@ const ProjectForm = () => {
                   </label>
                 ))}
               </div>
-            )}
+            )} 
+
+            
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a project type to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-end mt-6">
@@ -393,7 +433,7 @@ const ProjectForm = () => {
                     : "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -403,10 +443,10 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What deliverables are you expecting from this project?"
+              text={ProjectsFormLocale[lang]?.paragraph4 || ProjectsFormLocale.en.paragraph4}
               className="mb-2"
             />
-            {showOptions && (
+          {showOptions && (
               <div className="space-y-2">
                 {(options.deliverables[formData.projectType] || []).map(
                   (deliverable) => (
@@ -427,7 +467,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a deliverable to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -436,7 +476,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -448,7 +488,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -457,7 +497,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is the main goal of your project?"
+              text= {ProjectsFormLocale[lang]?.paragraph2 || ProjectsFormLocale.en.paragraph2}
               className="mb-2"
             />
             {showOptions && (
@@ -471,7 +511,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a main goal to proceed.
+                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -480,7 +520,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -492,7 +532,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
             </div>
           </>
@@ -501,7 +541,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What audience are you aiming to reach?"
+              text={ProjectsFormLocale[lang]?.paragraph5 || ProjectsFormLocale.en.paragraph5}
               className="mb-2"
             />
 
@@ -524,7 +564,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select audience to proceed.
+                {ProjectsFormLocale[lang]?.paragraph6 || ProjectsFormLocale.en.paragraph6}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -533,7 +573,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -545,7 +585,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -554,7 +594,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What style preferences do you have for this project?"
+              text= {ProjectsFormLocale[lang]?.paragraph7 || ProjectsFormLocale.en.paragraph7}
               className="mb-2"
             />
             {showOptions && (
@@ -568,7 +608,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select prefered styles to proceed.
+                {ProjectsFormLocale[lang]?.paragraph8 || ProjectsFormLocale.en.paragraph8}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -577,7 +617,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -589,7 +629,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -620,7 +660,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select content elements to proceed.
+                {ProjectsFormLocale[lang]?.paragraph9 || ProjectsFormLocale.en.paragraph9}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -629,7 +669,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -641,7 +681,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -650,7 +690,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is your budget for this project?"
+              text={ProjectsFormLocale[lang]?.paragraph10 || ProjectsFormLocale.en.paragraph10}
               className="mb-2"
             />
             {showOptions && (
@@ -664,7 +704,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a budget to proceed.
+                {ProjectsFormLocale[lang]?.paragraph11 || ProjectsFormLocale.en.paragraph11}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -673,7 +713,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -685,7 +725,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -694,7 +734,7 @@ const ProjectForm = () => {
         return (
           <>
             <Typewriter
-              text="What is your timeline for this project?"
+              text= {ProjectsFormLocale[lang]?.paragraph12 || ProjectsFormLocale.en.paragraph12}
               className="mb-2"
             />
 
@@ -704,12 +744,12 @@ const ProjectForm = () => {
                 value={formData.timeline}
                 onChange={handleSelectChange}
                 options={options.timelineOptions}
-                placeholder="Select a timeline"
+                placeholder= {ProjectsFormLocale[lang]?.paragraph14 || ProjectsFormLocale.en.paragraph14}
               />
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a timeline to proceed.
+                 {ProjectsFormLocale[lang]?.paragraph15 || ProjectsFormLocale.en.paragraph15}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -718,7 +758,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -730,7 +770,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -738,19 +778,19 @@ const ProjectForm = () => {
       case 9:
         return (
           <>
-            <Typewriter text="What is your current status?" className="mb-2" />
+            <Typewriter text={ProjectsFormLocale[lang]?.paragraph16 || ProjectsFormLocale.en.paragraph16} className="mb-2" />
             {showOptions && (
               <CustomSelect
-                name="status"
+                name= "status"
                 value={formData.status}
                 onChange={handleSelectChange}
                 options={options.statusOptions}
-                placeholder="Select a status"
+                placeholder={ProjectsFormLocale[lang]?.paragraph18 || ProjectsFormLocale.en.paragraph18}
               />
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a status to proceed.
+                {ProjectsFormLocale[lang]?.paragraph19 || ProjectsFormLocale.en.paragraph19}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -759,7 +799,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -771,7 +811,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -802,7 +842,7 @@ const ProjectForm = () => {
             )}
             {showError && (
               <p className="text-red-500 text-sm mt-2">
-                Please select a project purpose to proceed.
+                 {ProjectsFormLocale[lang]?.paragraph20 || ProjectsFormLocale.en.paragraph20}
               </p>
             )}
             <div className="flex justify-between mt-6">
@@ -811,7 +851,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                 {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -823,7 +863,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Next
+                 {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
               </button>
             </div>
           </>
@@ -834,42 +874,42 @@ const ProjectForm = () => {
             {/* Error Message */}
             {showError && (
               <p className="text-red-500 text-sm mb-4">
-                Please fill out all fields correctly before submitting.
+               {ProjectsFormLocale[lang]?.paragraph21 || ProjectsFormLocale.en.paragraph21}
               </p>
             )}
 
             {/* Form Inputs */}
             <input
               type="text"
-              name="name"
-              placeholder="Enter your name"
+              name= "name"
+              placeholder={ProjectsFormLocale[lang]?.name2 || ProjectsFormLocale.en.name2}
               onChange={handleChange}
               value={formData.name}
             />
             <input
               type="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder={ProjectsFormLocale[lang]?.email2 || ProjectsFormLocale.en.email2}
               onChange={handleChange}
               value={formData.email}
             />
             <input
               type="text"
               name="phone"
-              placeholder="Enter your phone number"
+              placeholder={ProjectsFormLocale[lang]?.phone2 || ProjectsFormLocale.en.phone2}
               onChange={handleChange}
               value={formData.phone}
             />
             <input
               type="text"
               name="company"
-              placeholder="Enter your company name"
+              placeholder= {ProjectsFormLocale[lang]?.company2 || ProjectsFormLocale.en.company2}
               onChange={handleChange}
               value={formData.company}
             />
             <textarea
               name="additionalInfo"
-              placeholder="Additional information"
+              placeholder={ProjectsFormLocale[lang]?.additionalInfo2 || ProjectsFormLocale.en.additionalInfo2}
               onChange={handleChange}
               value={formData.additionalInfo}
             />
@@ -881,7 +921,7 @@ const ProjectForm = () => {
                 onClick={handlePrevStep}
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
               >
-                Back
+                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
               </button>
               <button
                 type="button"
@@ -897,7 +937,7 @@ const ProjectForm = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-semibold rounded-md`}
               >
-                Submit
+                 {ProjectsFormLocale[lang]?.header2 || ProjectsFormLocale.en.header2}
               </button>
             </div>
           </>

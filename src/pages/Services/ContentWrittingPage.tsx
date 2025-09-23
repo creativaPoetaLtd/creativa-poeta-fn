@@ -1,5 +1,5 @@
 
-import ContentWritting from "../../components/Services/ContentWritting";
+import ContentWritting from "../../components/Services/Content";
 import NavBar from "../../components/NavBars/NavBar";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";

@@ -1,84 +1,98 @@
-// const WebAppLocale: any = {
-//   en: {
-//     testimonialsTitle: "What Our Clients Say",
-//     relatedServTitle: "Related Services",
-//     faqTitle: "Frequently Asked Questions",
-//     servicesOffered: "Services offered",
-//     servicesIntro: "Our Web & App Development services include:",
-//     whyChooseTitle: "Why choose Creativa Poeta?",
-//     whoForTitle: "Who are these services for?",
-//     processWorkflow: "Process Workflow",
-//     faq: [
-//       {
-//         question: "What types of apps do you develop?",
-//         answer: "We develop mobile apps, web applications, and custom software solutions."
-//       },
-//       {
-//         question: "Do you provide maintenance after delivery?",
-//         answer: "Yes, we provide ongoing support and maintenance for all delivered projects."
-//       }
-//     ]
-//   },
-//   rw: { // Kinyarwanda
-//     testimonialsTitle: "Ibitekerezo by’Abakiriya bacu",
-//     relatedServTitle: "Serivisi Zijyanye",
-//     faqTitle: "Ibibazo Bikunze Kubazwa",
-//     servicesOffered: "Serivisi dutanga",
-//     servicesIntro: "Serivisi zacu zo gukora porogaramu za web na telefoni zirimo:",
-//     whyChooseTitle: "Kuki wahitamo Creativa Poeta?",
-//     whoForTitle: "Ni bande izi serivisi zigenewe?",
-//     processWorkflow: "Uburyo bwo gukorana",
-//     faq: [
-//       {
-//         question: "Ni izihe porogaramu mukora?",
-//         answer: "Dukora porogaramu za telefoni, urubuga rwa internet, n’ibindi bisubizo byihariye."
-//       },
-//       {
-//         question: "Ese mutanga serivisi zo gusana nyuma yo kurangiza umushinga?",
-//         answer: "Yego, dutanga ubufasha no gusana ibikorwa byose twatanze."
-//       }
-//     ]
-//   },
-//   fr: { // French
-//     testimonialsTitle: "Ce que disent nos clients",
-//     relatedServTitle: "Services connexes",
-//     faqTitle: "Questions fréquemment posées",
-//     servicesOffered: "Services offerts",
-//     servicesIntro: "Nos services de développement Web et d’applications incluent :",
-//     whyChooseTitle: "Pourquoi choisir Creativa Poeta ?",
-//     whoForTitle: "À qui s’adressent ces services ?",
-//     processWorkflow: "Flux de processus",
-//     faq: [
-//       {
-//         question: "Quels types d’applications développez-vous ?",
-//         answer: "Nous développons des applications mobiles, des applications web et des solutions logicielles personnalisées."
-//       },
-//       {
-//         question: "Fournissez-vous une maintenance après livraison ?",
-//         answer: "Oui, nous assurons un support et une maintenance continue pour tous les projets livrés."
-//       }
-//     ]
-//   },
-//   nl: { // Dutch (Holland)
-//     testimonialsTitle: "Wat onze klanten zeggen",
-//     relatedServTitle: "Verwante diensten",
-//     faqTitle: "Veelgestelde vragen",
-//     servicesOffered: "Aangeboden diensten",
-//     servicesIntro: "Onze Web- en App-ontwikkelingsdiensten omvatten:",
-//     whyChooseTitle: "Waarom kiezen voor Creativa Poeta?",
-//     whoForTitle: "Voor wie zijn deze diensten bedoeld?",
-//     processWorkflow: "Procesworkflow",
-//     faq: [
-//       {
-//         question: "Welke soorten apps ontwikkelen jullie?",
-//         answer: "Wij ontwikkelen mobiele apps, webapplicaties en op maat gemaakte softwareoplossingen."
-//       },
-//       {
-//         question: "Bieden jullie onderhoud na de oplevering?",
-//         answer: "Ja, wij bieden doorlopende ondersteuning en onderhoud voor alle geleverde projecten."
-//       }
-//     ]
-//   }
-// };
+const WebAppLocale: any = {
+ en: {
+    faq:"Frequently Asked Questions",
+question1:"What types of websites do you develop?",
+answer1:"We specialize in developing various types of websites, including e-commerce platforms, corporate websites, personal blogs, portfolio sites, and custom web applications tailored to your business needs.",
+question2:"What technologies do you use for web development?",
+answer2:"Our team uses modern technologies such as React, Angular, Vue.js, Node.js, Django, and Laravel. For design, we leverage tools like Tailwind CSS, Bootstrap, and Material UI, ensuring fast, responsive, and user-friendly websites.",
+question3:"Do you offer mobile app development services?",
+answer3:"Yes, we provide mobile app development services for both iOS and Android platforms. We use tools like React Native and Flutter for cross-platform apps, and native development for highly customized experiences.",
+question4:"Can you integrate third-party services into the website or app?",
+answer4:"Absolutely! We can integrate third-party services such as payment gateways (Stripe, PayPal), social media platforms, CRM systems, analytics tools, and more to enhance the functionality of your website or app.",
+question5:"How do you ensure the security of web and app projects?",
+answer5:"We prioritize security by implementing HTTPS, data encryption, regular vulnerability scans, and secure coding practices. We also ensure compliance with industry standards like GDPR for data protection.",
+question6:"Do you provide maintenance and support after project completion?",
+answer6:"Yes, we offer post-launch maintenance and support services, including bug fixes, updates, performance optimization, and feature enhancements to ensure your website or app stays up-to-date.",
+question7:"How long does it take to develop a website or an app?",
+answer7:"The timeline depends on the complexity of the project. Simple websites can take 2-4 weeks, while more complex web applications or mobile apps may take 8-16 weeks or longer, depending on your requirements.",
+question8:"Can you help with SEO and performance optimization?",
+answer8:"Yes, we offer SEO services to improve your website's visibility on search engines, and we optimize performance by improving loading speeds, implementing caching strategies, and using efficient coding practices.",
+question9:"Do you provide custom designs for websites and apps?",
+answer9:"Absolutely! Our design team creates custom, user-centric designs tailored to your brand identity, ensuring your website or app stands out and provides a seamless user experience.",
+question10:"What is the cost of developing a website or app?",
+answer10:"The cost varies based on project requirements, complexity, and features. Contact us with your project details for a tailored quote.",
 
-// export default WebAppLocale;
+ },
+  kiny: { 
+    faq:"",
+question1:"Ni ubuhe bwoko bwa websites mukora?",
+answer1:"Twibanda ku gukora amoko atandukanye ya websites, harimo e-commerce, websites z’amakompanyi, blogs bwite, portfolio sites, ndetse n’imbuga zashyizweho ku buryo bwihariye ku rwego rw’ubucuruzi bwawe.",
+question2:"Ni iyihe tekinoloji mukoresha mu gukora web?",
+answer2:"Itsinda ryacu rikoresha ikoranabuhanga rigezweho nka React, Angular, Vue.js, Node.js, Django, na Laravel. Mu gishushanyo, dukoresha ibikoresho nka Tailwind CSS, Bootstrap, na Material UI kugira ngo tugire websites zihuta, zorohereza abakoresha kandi zifite responsiveness.",
+question3:"Ese mutanga serivisi zo gukora mobile apps?",
+answer3:"Yego, dutanga serivisi zo gukora mobile apps kuri iOS na Android. Dukoresha React Native na Flutter ku apps zikora kuri platforms zombi, ndetse no gukora native apps zihariye cyane.",
+question4:"Ese mushobora gushyira services z’inyongera muri website cyangwa app?",
+answer4:"Nibyo rwose! Dushobora gushyiramo payment gateways (Stripe, PayPal), social media, CRM systems, analytics tools, n’ibindi byinshi kugira ngo byongere ubushobozi bwawe.",
+question5:"Mugira gute ngo projects za web na app zibe secure?",
+answer5:"Dushyira imbere umutekano dukoresheje HTTPS, data encryption, gusuzuma ibibazo bya security buri gihe, no gukoresha coding practices zizewe. Tunubahiriza amahame nka GDPR yo kurinda amakuru.",
+question6:"Ese mutanga maintenance na support nyuma yo kurangiza project?",
+answer6:"Yego, dutanga maintenance na support nyuma yo gusohora project, harimo gukosora bugs, updates, optimization, no kongeramo features kugirango website cyangwa app bikomeze kuba bigezweho",
+question7:"Bifata igihe kingana iki gukora Urubuga(website) cyangwa porogaramu(app)?",
+answer7:"Biterwa n’uburemere bwa project. Websites zoroshye zishobora gufata ibyumweru 2–4, ariko applications zikomeye za web cyangwa mobile zishobora gufata ibyumweru 8–16 cyangwa birenze, bitewe n’ibyo ukeneye.",
+question8:"Mushobora kudufasha kuri SEO no kongera performance?",
+answer8:"Yego, dutanga SEO services kugirango dukomeze kwerekana website yawe muri search engines, kandi tugakora optimization yo kwihutisha loading, gushyiraho caching strategies, no gukoresha coding ikoze neza.",
+question9:"Mutanga design ziteguye ku buryo bwihariye bwa websites na apps?",
+answer9:"Nibyo rwose! Itsinda ryacu ry’amashushanyo rikora design zihariye zishingiye ku brand identity yawe, kugira ngo website cyangwa app yawe irusheho kugaragara kandi ikoreshwe neza.",
+question10:"Ni angahe gukora website cyangwa app bitwara?",
+answer10:"Igiciro kiterwa n’ibyo project isaba, uburemere bwayo, n’ibyo igomba gukora. Twandikire utubwire ibisobanuro bya project yawe.",
+  },
+   fr: {
+    faq:"",
+    question1:"Quels types de sites web développez-vous ?",
+answer1:"Nous sommes spécialisés dans le développement de divers types de sites web, y compris les plateformes e-commerce, les sites d’entreprise, les blogs personnels, les sites portfolio et les applications web personnalisées adaptées à vos besoins.",
+question2:"Quelles technologies utilisez-vous pour le développement web ?",
+answer2:"Notre équipe utilise des technologies modernes telles que React, Angular, Vue.js, Node.js, Django et Laravel. Pour le design, nous utilisons des outils comme Tailwind CSS, Bootstrap et Material UI, garantissant des sites rapides, réactifs et conviviaux.",
+question3:"Proposez-vous des services de développement d’applications mobiles ?",
+answer3:"Oui, nous proposons le développement d’applications mobiles pour les plateformes iOS et Android. Nous utilisons des outils comme React Native et Flutter pour les applications multiplateformes, et le développement natif pour des expériences hautement personnalisées.",
+question4:"Pouvez-vous intégrer des services tiers dans le site web ou l’application ?",
+answer4:"Absolument ! Nous pouvons intégrer des services tiers tels que des passerelles de paiement (Stripe, PayPal), des plateformes sociales, des CRM, des outils d’analytique, et plus encore pour améliorer les fonctionnalités de votre site ou application.",
+question5:"Comment assurez-vous la sécurité des projets web et app ?",
+answer5:"Nous donnons la priorité à la sécurité en mettant en œuvre HTTPS, le chiffrement des données, des scans réguliers de vulnérabilités et des pratiques de codage sécurisé. Nous garantissons également la conformité aux normes comme le RGPD pour la protection des données.",
+question6:"Fournissez-vous la maintenance et le support après la livraison du projet ?",
+answer6:"Oui, nous proposons des services de maintenance et support après lancement, incluant corrections de bugs, mises à jour, optimisation des performances et ajouts de fonctionnalités pour que votre site ou app reste à jour.",
+question7:"Combien de temps faut-il pour développer un site ou une application ?",
+answer7:"Le délai dépend de la complexité du projet. Les sites simples prennent 2 à 4 semaines, tandis que les applications web ou mobiles plus complexes peuvent prendre 8 à 16 semaines ou plus, selon vos besoins.",
+question8:"Pouvez-vous aider avec le SEO et l’optimisation des performances ?",
+answer8:"Oui, nous proposons des services SEO pour améliorer la visibilité de votre site sur les moteurs de recherche, et nous optimisons les performances en améliorant la vitesse de chargement, en mettant en place du caching et en utilisant un code efficace",
+question9:"Fournissez-vous des designs personnalisés pour les sites et applications ?",
+answer9:"Absolument ! Notre équipe de design crée des designs personnalisés et centrés sur l’utilisateur, adaptés à votre identité de marque, pour garantir que votre site ou app se démarque et offre une expérience fluide.",
+question10:"Quel est le coût du développement d’un site ou d’une application ?",
+answer10:"Le coût varie en fonction des besoins, de la complexité et des fonctionnalités du projet. Contactez-nous avec les détails de votre projet pour un devis personnalisé.",
+
+   },
+  nl: { 
+    faq:"",
+question1:"Welke soorten websites ontwikkelen jullie?",
+answer1:"Wij zijn gespecialiseerd in het ontwikkelen van verschillende soorten websites, waaronder e-commerceplatforms, bedrijfswebsites, persoonlijke blogs, portfoliosites en op maat gemaakte webapplicaties afgestemd op uw bedrijfsbehoeften.",
+question2:"Welke technologieën gebruiken jullie voor webontwikkeling?",
+answer2:"Ons team gebruikt moderne technologieën zoals React, Angular, Vue.js, Node.js, Django en Laravel. Voor design gebruiken we tools zoals Tailwind CSS, Bootstrap en Material UI, zodat websites snel, responsief en gebruiksvriendelijk zijn.",
+question3:"Bieden jullie mobiele app-ontwikkelingsdiensten aan?",
+answer3:"Ja, wij ontwikkelen mobiele apps voor zowel iOS- als Android-platforms. We gebruiken tools zoals React Native en Flutter voor cross-platform apps, en native ontwikkeling voor sterk aangepaste ervaringen.",
+question4:"Kunnen jullie externe diensten integreren in de website of app?",
+answer4:"Zeker! Wij kunnen externe diensten integreren zoals betaalgateways (Stripe, PayPal), sociale mediaplatforms, CRM-systemen, analysetools en meer om de functionaliteit van uw website of app te verbeteren",
+question5:"Hoe zorgen jullie voor de beveiliging van web- en app-projecten?",
+answer5:"Wij geven prioriteit aan beveiliging door HTTPS, data-encryptie, regelmatige kwetsbaarheidsscans en veilige codering toe te passen. Ook zorgen wij voor naleving van industriestandaarden zoals de AVG voor gegevensbescherming.",
+question6:"Bieden jullie onderhoud en ondersteuning na oplevering van het project?",
+answer6:"Ja, wij bieden onderhoud en ondersteuning na de lancering, inclusief bugfixes, updates, prestatie-optimalisatie en uitbreidingen om uw website of app actueel te houden.",
+question7:"Hoe lang duurt het om een website of app te ontwikkelen?",
+answer7:"De tijdlijn hangt af van de complexiteit van het project. Eenvoudige websites duren 2–4 weken, terwijl complexere webapplicaties of mobiele apps 8–16 weken of langer kunnen duren, afhankelijk van uw wensen.",
+question8:"Kunnen jullie helpen met SEO en prestatie-optimalisatie?",
+answer8:"Ja, wij bieden SEO-diensten om de zichtbaarheid van uw website in zoekmachines te verbeteren en optimaliseren prestaties door laadsnelheden te verbeteren, cachingstrategieën te implementeren en efficiënte codering te gebruiken.",
+question9:"Leveren jullie op maat gemaakte ontwerpen voor websites en apps?",
+answer9:"Zeker! Ons designteam maakt op maat gemaakte, gebruiksgerichte ontwerpen afgestemd op uw merkidentiteit, zodat uw website of app opvalt en een naadloze gebruikerservaring biedt.",
+question10:"Wat kost het ontwikkelen van een website of app?",
+answer10:"De kosten variëren afhankelijk van de projectvereisten, complexiteit en functies. Neem contact met ons op met uw projectdetails voor een aangepaste offerte.",
+ },
+
+}
+export default WebAppLocale;

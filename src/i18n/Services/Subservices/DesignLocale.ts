@@ -207,7 +207,7 @@ const DesignLocale: any = {
         whodesc4: "Nous aidons les associations à créer des visuels qui communiquent des valeurs, engagent les audiences et reflètent les objectifs organisationnels.",
         processTitle: "Notre Processus de Design",
         process1: "1. Consultation Initiale",
-        processdesc1: "Nous discutons de vos besoins et du style que vous visez.",
+         processdesc1: "Nous discutons de vos besoins et du style que vous visez.",
         process2: "2. Recherche Créative",
         processdesc2: "Nous analysons les tendances et rassemblons l'inspiration pour aligner le design sur votre vision.",
         process3: "3. Développement de Concept",
@@ -326,7 +326,7 @@ const DesignLocale: any = {
         quote3: "Ubuzima n'ubushobozi bwabo bugaragaza ubuzima n'ubwacu. Dukuriye uburyo bwacu bw'urukiko.",
         quote4: "Tugira icyo dukunda mu buryo bwa website yacu. Ni mubikorwa n'ubwacu.",
         quote5: "Logo yacu yacu yacu ni nziza! Ni iyo dukeneye. Murakoze!",
-        title1: "Ikoranabuhanga rya cyane",
+        title1: "Kwamamaza kuri Murandasi",
         description1: "Gucyura ibikorwa byawe by'ibikorwa n'ibikorwa n'ibikorwa by'ibikorwa.",
 
         title2: "Guharira Ibindi",

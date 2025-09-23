@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
-// import FaqLocale from "../../i18n/FaqLocale";
+import WebappLocale from "../../i18n/Services/Subservices/WebappLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import {
   FaTwitter,
@@ -14,7 +14,8 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
-const lang: string = getLangFromLocalStorage();
+// const lang: string = getLangFromLocalStorage();
+const lang: keyof typeof WebappLocale = getLangFromLocalStorage() as keyof typeof WebappLocale;
 //  const faqs = FaqLocale[lang];
 
 const testimonials = [
@@ -182,46 +183,18 @@ export function RelatedServices() {
 }
 
 const faqs = [
-  {
-    "question": "What types of websites do you develop?",
-    "answer": "We specialize in developing various types of websites, including e-commerce platforms, corporate websites, personal blogs, portfolio sites, and custom web applications tailored to your business needs."
-  },
-  {
-    "question": "What technologies do you use for web development?",
-    "answer": "Our team uses modern technologies such as React, Angular, Vue.js, Node.js, Django, and Laravel. For design, we leverage tools like Tailwind CSS, Bootstrap, and Material UI, ensuring fast, responsive, and user-friendly websites."
-  },
-  {
-    "question": "Do you offer mobile app development services?",
-    "answer": "Yes, we provide mobile app development services for both iOS and Android platforms. We use tools like React Native and Flutter for cross-platform apps, and native development for highly customized experiences."
-  },
-  {
-    "question": "Can you integrate third-party services into the website or app?",
-    "answer": "Absolutely! We can integrate third-party services such as payment gateways (Stripe, PayPal), social media platforms, CRM systems, analytics tools, and more to enhance the functionality of your website or app."
-  },
-  {
-    "question": "How do you ensure the security of web and app projects?",
-    "answer": "We prioritize security by implementing HTTPS, data encryption, regular vulnerability scans, and secure coding practices. We also ensure compliance with industry standards like GDPR for data protection."
-  },
-  {
-    "question": "Do you provide maintenance and support after project completion?",
-    "answer": "Yes, we offer post-launch maintenance and support services, including bug fixes, updates, performance optimization, and feature enhancements to ensure your website or app stays up-to-date."
-  },
-  {
-    "question": "How long does it take to develop a website or an app?",
-    "answer": "The timeline depends on the complexity of the project. Simple websites can take 2-4 weeks, while more complex web applications or mobile apps may take 8-16 weeks or longer, depending on your requirements."
-  },
-  {
-    "question": "Can you help with SEO and performance optimization?",
-    "answer": "Yes, we offer SEO services to improve your website's visibility on search engines, and we optimize performance by improving loading speeds, implementing caching strategies, and using efficient coding practices."
-  },
-  {
-    "question": "Do you provide custom designs for websites and apps?",
-    "answer": "Absolutely! Our design team creates custom, user-centric designs tailored to your brand identity, ensuring your website or app stands out and provides a seamless user experience."
-  },
-  {
-    "question": "What is the cost of developing a website or app?",
-    "answer": "The cost varies based on project requirements, complexity, and features. Contact us with your project details for a tailored quote."
-  }
+
+{ question: WebappLocale[lang]?.question1 || WebappLocale.en.question1,answer: WebappLocale[lang]?.answer1 || WebappLocale.en.answer1 },
+   { question: WebappLocale[lang]?.question2 || WebappLocale.en.question2,answer: WebappLocale[lang]?.answer2 || WebappLocale.en.answer2  },
+   { question: WebappLocale[lang]?.question3 || WebappLocale.en.question3,answer: WebappLocale[lang]?.answer3 || WebappLocale.en.answer3  },
+   { question: WebappLocale[lang]?.question4 || WebappLocale.en.question4,answer: WebappLocale[lang]?.answer4 || WebappLocale.en.answer4  },
+   { question: WebappLocale[lang]?.question5 || WebappLocale.en.question5,answer: WebappLocale[lang]?.answer5 || WebappLocale.en.answer5  },
+   { question: WebappLocale[lang]?.question6 || WebappLocale.en.question6,answer: WebappLocale[lang]?.answer6 || WebappLocale.en.answer6  },
+   { question: WebappLocale[lang]?.question7 || WebappLocale.en.question7,answer: WebappLocale[lang]?.answer7 || WebappLocale.en.answer7  },
+   { question: WebappLocale[lang]?.question8 || WebappLocale.en.question8,answer: WebappLocale[lang]?.answer8 || WebappLocale.en.answer8  },
+   { question: WebappLocale[lang]?.question9 || WebappLocale.en.question9,answer: WebappLocale[lang]?.answer9 || WebappLocale.en.answer9  },
+  { question: WebappLocale[lang]?.question10 || WebappLocale.en.question10,answer: WebappLocale[lang]?.answer10 || WebappLocale.en.answer10  },
+
 ];
 
 export function FAQSection() {
@@ -450,32 +423,6 @@ const WebApp = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        // {
-        //   number: "1",
-        //   text: "Expertise in major social media platforms and their algorithms",
-        //   bgColor: "bg-[#E265FF]",
-        // },
-        // {
-        //   number: "2",
-        //   text: "Proficiency in SEO tools and techniques for optimized content",
-        //   bgColor: "bg-[#8B3DFF]",
-        // },
-        // {
-        //   number: "3",
-        //   text: "Skills in crafting and managing ad campaigns for maximum ROI",
-        //   bgColor: "bg-[#3DB9FF]",
-        // },
-        // {
-        //   number: "4",
-        //   text: "Knowledge of CMS platforms and e-commerce tools",
-        //   bgColor: "bg-[#FFA53D]",
-        // },
-        // {
-        //   number: "5",
-        //   text: "Ability to analyze and adapt strategies based on performance metrics",
-        //   bgColor: "bg-[#76C56F]",
-        // },
-
          { number: "1", text: DesignLocale[lang].comp1, bgColor: "bg-[#E265FF]" },
     { number: "2", text: DesignLocale[lang].comp2, bgColor: "bg-[#8B3DFF]" },
     { number: "3", text: DesignLocale[lang].comp3, bgColor: "bg-[#3DB9FF]" },
@@ -512,9 +459,7 @@ const WebApp = () => {
         <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
   {DesignLocale[lang].whyChooseTitle}
 </h2>
-          {/* <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-          Why choose Creativa Poeta?
-          </h2> */}
+          
           <ul className="space-y-4 md:space-x-0 list-disc p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
             {/* <li>
               <strong className="text-md md:text-lg mr-3">
@@ -526,23 +471,11 @@ const WebApp = () => {
     <strong className=" text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong1}</strong>
     {DesignLocale[lang].whyChooseText1}
   </li>
-            {/* <li>
-              <strong className="text-md md:text-lg mr-3">
-                Experienced team
-              </strong>
-              Our developers and designers are skilled in the latest technologies and trends.
-            </li> */}
+           
             <li>
     <strong className="text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong2}</strong>
     {DesignLocale[lang].whyChooseText2}
   </li>
-            {/* <li>
-              <strong className="text-md md:text-lg mr-3">
-                
-                Comprehensive support
-              </strong>
-              From ideation to deployment, we provide full support throughout the development lifecycle.
-            </li> */}
            <li>
     <strong className=" text-md md-text-lg mr-3">{DesignLocale[lang].whyChooseStrong3}</strong>
     {DesignLocale[lang].whyChooseText3}

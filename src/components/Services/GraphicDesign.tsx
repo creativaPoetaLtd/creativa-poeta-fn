@@ -6,6 +6,8 @@ import image2 from "../../assets/flags/image2.jpg";
 import logo from "../../assets/flags/logopoeta1.png";
 import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
+import GraphicLocale from "../../i18n/GraphicLocale"
+
 import {
   FaTwitter,
   FaInstagram,
@@ -14,12 +16,11 @@ import {
 } from "react-icons/fa";
 import { handleNavigate } from "./DigitalMarketing";
 
-
-const lang: string = getLangFromLocalStorage();
-
+// const lang: string = getLangFromLocalStorage();
+const lang: keyof typeof GraphicLocale = getLangFromLocalStorage() as keyof typeof GraphicLocale;
 const testimonials = [
   {
-    quote: DesignLocale[lang].quote1,
+    quote: DesignLocale[lang].quote1, 
     client: "Sarah Johnson",
     role: "CEO, TechNova",
     image: "/profile.jpg",
@@ -182,86 +183,28 @@ export function RelatedServices() {
 }
 
 const faqs = [
-  {
-    question: "What types of graphic design services do you offer?",
-    answer: "We provide a wide range of services, including logo design, branding, marketing materials, web design, social media graphics, and custom illustrations tailored to your needs.",
-  },
-  {
-    question: "How long does it take to complete a design project?",
-    answer: "The timeline depends on the complexity of the project. For example, logo design typically takes 3-5 business days, while larger projects like branding or web design may take 2-4 weeks.",
-  },
-  {
-    question: "How many revisions are included in the design process?",
-    answer: "Our packages include up to 3 rounds of revisions to ensure the final design meets your expectations. Additional revisions can be accommodated at an extra cost.",
-  },
-  {
-    question: "What file formats will I receive for my design?",
-    answer: "We deliver final designs in various formats such as PNG, JPEG, PDF, and vector files (AI, EPS, or SVG), ensuring they are ready for both print and digital use.",
-  },
-  {
-    question: "Do you provide design templates or original custom designs?",
-    answer: "We specialize in creating original custom designs tailored to your brand. However, we can also work with templates if specified.",
-  },
-  {
-    question: "Can I request a rush order for my project?",
-    answer: "Yes, we offer expedited services for an additional fee. Rush timelines depend on the scope of the project and our availability.",
-  },
-  {
-    question: "Do you provide branding packages?",
-    answer: "Yes, we offer comprehensive branding packages that include logo design, brand guidelines, typography, color palettes, and visual assets.",
-  },
-  {
-    question: "Can you redesign or refresh an existing logo?",
-    answer: "Absolutely! We can work on improving your existing logo while retaining its core identity or create an entirely new look if desired.",
-  },
-  {
-    question: "Do you offer consultations before starting a project?",
-    answer: "Yes, we offer free initial consultations to discuss your project requirements, goals, and expectations before starting the design process.",
-  },
-  {
-    question: "What if I don’t like the initial concepts you provide?",
-    answer: "We always aim to understand your vision and preferences beforehand. However, if you’re not satisfied with the initial concepts, we will refine the designs or create new options based on your feedback.",
-  },
-  {
-    question: "Do you work with businesses of all sizes?",
-    answer: "Yes, we collaborate with startups, small businesses, enterprises, and individuals to meet their unique design needs.",
-  },
-  {
-    question: "Can you design for both print and digital media?",
-    answer: "Yes, we create designs optimized for both print materials (e.g., brochures, flyers) and digital platforms (e.g., social media, websites).",
-  },
-  {
-    question: "Do you offer social media design packages?",
-    answer: "Yes, we can create cohesive social media assets, including posts, banners, story templates, and profile graphics, tailored to your brand.",
-  },
-  {
-    question: "How do you ensure the designs align with my brand identity?",
-    answer: "We begin with an in-depth discovery phase to understand your brand’s values, audience, and goals, ensuring that all designs align with your identity.",
-  },
-  {
-    question: "What tools do you use for graphic design?",
-    answer: "We use industry-standard tools like Adobe Photoshop, Illustrator, InDesign, and Figma to deliver high-quality designs.",
-  },
-  {
-    question: "Do you retain the copyright for the designs you create?",
-    answer: "Once the project is completed and the payment is finalized, the copyright for the designs is transferred to you.",
-  },
-  {
-    question: "What is your payment structure for projects?",
-    answer: "We typically require a 50% deposit upfront and the remaining balance upon project completion. For large projects, we can arrange milestone-based payments.",
-  },
-  {
-    question: "Can you work with my existing brand assets?",
-    answer: "Yes, we can incorporate your existing brand assets, such as logos, fonts, and imagery, into new designs to maintain consistency.",
-  },
-  {
-    question: "Do you offer support after the project is completed?",
-    answer: "Yes, we provide post-project support for a limited time to ensure your designs are implemented successfully. Extended support can be arranged if needed.",
-  },
-  {
-    question: "Can you handle bulk design projects for campaigns or events?",
-    answer: "Yes, we are equipped to handle bulk projects, including campaign visuals, event materials, and other large-scale requirements."
-  },
+
+
+ { question: GraphicLocale[lang]?.question1 || GraphicLocale.en.question1,answer: GraphicLocale[lang]?.answer1 || GraphicLocale.en.answer1 },
+   { question: GraphicLocale[lang]?.question2 || GraphicLocale.en.question2,answer: GraphicLocale[lang]?.answer2 || GraphicLocale.en.answer2  },
+   { question: GraphicLocale[lang]?.question3 || GraphicLocale.en.question3,answer: GraphicLocale[lang]?.answer3 || GraphicLocale.en.answer3  },
+   { question: GraphicLocale[lang]?.question4 || GraphicLocale.en.question4,answer: GraphicLocale[lang]?.answer4 || GraphicLocale.en.answer4  },
+   { question: GraphicLocale[lang]?.question5 || GraphicLocale.en.question5,answer: GraphicLocale[lang]?.answer5 || GraphicLocale.en.answer5  },
+   { question: GraphicLocale[lang]?.question6 || GraphicLocale.en.question6,answer: GraphicLocale[lang]?.answer6 || GraphicLocale.en.answer6  },
+   { question: GraphicLocale[lang]?.question7 || GraphicLocale.en.question7,answer: GraphicLocale[lang]?.answer7 || GraphicLocale.en.answer7  },
+   { question: GraphicLocale[lang]?.question8 || GraphicLocale.en.question8,answer: GraphicLocale[lang]?.answer8 || GraphicLocale.en.answer8  },
+   { question: GraphicLocale[lang]?.question9 || GraphicLocale.en.question9,answer: GraphicLocale[lang]?.answer9 || GraphicLocale.en.answer9  },
+  { question: GraphicLocale[lang]?.question10 || GraphicLocale.en.question10,answer: GraphicLocale[lang]?.answer10 || GraphicLocale.en.answer10  },
+{ question: GraphicLocale[lang]?.question11 || GraphicLocale.en.question11,answer: GraphicLocale[lang]?.answer11 || GraphicLocale.en.answer11  },
+{ question: GraphicLocale[lang]?.question12 || GraphicLocale.en.question12,answer: GraphicLocale[lang]?.answer12 || GraphicLocale.en.answer12  },
+{ question: GraphicLocale[lang]?.question13 || GraphicLocale.en.question13,answer: GraphicLocale[lang]?.answer13 || GraphicLocale.en.answer13  },
+{ question: GraphicLocale[lang]?.question14 || GraphicLocale.en.question14,answer: GraphicLocale[lang]?.answer14 || GraphicLocale.en.answer14  },
+{ question: GraphicLocale[lang]?.question15 || GraphicLocale.en.question15,answer: GraphicLocale[lang]?.answer15 || GraphicLocale.en.answer15  },
+{ question: GraphicLocale[lang]?.question16 || GraphicLocale.en.question16,answer: GraphicLocale[lang]?.answer16 || GraphicLocale.en.answer16  },
+{ question: GraphicLocale[lang]?.question17 || GraphicLocale.en.question17,answer: GraphicLocale[lang]?.answer17 || GraphicLocale.en.answer17  },
+{ question: GraphicLocale[lang]?.question18 || GraphicLocale.en.question18,answer: GraphicLocale[lang]?.answer18 || GraphicLocale.en.answer18  },
+{ question: GraphicLocale[lang]?.question19 || GraphicLocale.en.question19,answer: GraphicLocale[lang]?.answer19 || GraphicLocale.en.answer19  },
+{ question: GraphicLocale[lang]?.question20 || GraphicLocale.en.question20,answer: GraphicLocale[lang]?.answer20 || GraphicLocale.en.answer20  },
 ];
 
 
@@ -338,18 +281,20 @@ const GraphicDesign = () => {
       <div className="flex flex-col space-y-2 gap-6 text-white w-full">
         <div className="w-fit">
           <h1 className="text-xl md:text-3xl font-bold">
-          Graphic Design & Visual Communication
+          {/* {GraphicLocale[lang].header1} */}
+          {GraphicLocale[lang]?.header1 || GraphicLocale.en.header1}
           </h1>
           <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
         </div>
         <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        Bringing your ideas to life with impactful visuals.
+         {GraphicLocale[lang]?.paragraph1 || GraphicLocale.en.paragraph1}
         </p>
       </div>
 
       <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
         <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        A picture is worth a thousand words, and at Creativa Poeta, we ensure those words are memorable. From captivating graphics to dynamic videos, we craft designs that leave a lasting impression, communicate your message effectively, and elevate your brand's identity.     </p>
+         {GraphicLocale[lang]?.paragraph2 || GraphicLocale.en.paragraph2}
+           </p>
         <button
           onClick={handleNavigate}
           className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
@@ -372,11 +317,11 @@ const GraphicDesign = () => {
 <section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
     
     <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Services offered
+     {GraphicLocale[lang]?.header2 || GraphicLocale.en.header2}
     </h2>
 
     <p className="text-md md:text-lg text-center mb-8">
-    Our Graphic design and visual communication services include:
+    {GraphicLocale[lang]?.paragraph3 || GraphicLocale.en.paragraph3}
     </p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4 gap-8 text-black">
@@ -386,10 +331,10 @@ const GraphicDesign = () => {
           alt="Content Creators Icon"
           className="w-36 h-24 mb-4 rounded-md"
         />        <h3 className="text-xl font-semibold mb-2">
-      Graphic design
+      {GraphicLocale[lang]?.header3 || GraphicLocale.en.header3}
         </h3>
         <p className="md:w-[70%] text-center">
-        Creation of logos, business cards, brochures, and posters,Design of infographics, social media visuals, and digital advertisements.
+       {GraphicLocale[lang]?.paragraph4 || GraphicLocale.en.paragraph4}
        </p>
       </div>
 
@@ -400,9 +345,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Advertising Design
+        {GraphicLocale[lang]?.header4 || GraphicLocale.en.header4}
         </h3>
-        <p className="md:w-[70%] text-center">o	Conceptualizing and designing materials for marketing campaigns, and Customizing visuals for online and offline promotions.
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph5 || GraphicLocale.en.paragraph5}
 </p>
       </div>
 
@@ -413,9 +358,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        Video creation and animation
+        {GraphicLocale[lang]?.header5 || GraphicLocale.en.header5}
         </h3>
-        <p className="md:w-[70%] text-center">	Producing short promotional videos and animations, and Designing videos for social media engagement and branding</p>
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph6 || GraphicLocale.en.paragraph6}</p>
       </div>
 
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
@@ -425,9 +370,9 @@ const GraphicDesign = () => {
           className="w-36 h-24 mb-4 rounded-md"
         />
         <h3 className="text-xl font-semibold mb-2">
-        UI/UX visual design
+        {GraphicLocale[lang]?.header6 || GraphicLocale.en.header6}
         </h3>
-        <p className="md:w-[70%] text-center">Designing intuitive and attractive interfaces for websites and applications, and Creating wireframes and prototypes for digital platforms. </p>
+        <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph7|| GraphicLocale.en.paragraph7} </p>
       </div>
     </div>
     
@@ -441,8 +386,8 @@ const GraphicDesign = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{GraphicLocale[lang]?.header7|| GraphicLocale.en.header7} </h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{GraphicLocale[lang]?.header8|| GraphicLocale.en.header8}</h2>
         </div>
       </div>
     </div>
@@ -450,31 +395,11 @@ const GraphicDesign = () => {
     {/* Right side - Competency items */}
     <div className="flex-1 space-y-6 md:space-y-8">
       {[
-        {
-          number: "1",
-          text: "	Mastery of design tools like Adobe Creative Suite, Canva, and Figma",
-          bgColor: "bg-[#E265FF]",
-        },
-        {
-          number: "2",
-          text: "Strong understanding of branding and visual storytelling.",
-          bgColor: "bg-[#8B3DFF]",
-        },
-        {
-          number: "3",
-          text: "Proficiency in creating motion graphics and short animations.",
-          bgColor: "bg-[#3DB9FF]",
-        },
-        {
-          number: "4",
-          text: "Expertise in crafting designs optimized for both print and digital media.",
-          bgColor: "bg-[#FFA53D]",
-        },
-        {
-          number: "5",
-          text: "Commitment to responsive and accessible design principles.",
-          bgColor: "bg-[#76C56F]",
-        },
+        { number: "1", text: GraphicLocale[lang].comp1 || GraphicLocale.en.comp1, bgColor: "bg-[#E265FF]" },
+    { number: "2", text: GraphicLocale[lang].comp2 || GraphicLocale.en.comp2, bgColor: "bg-[#8B3DFF]" },
+    { number: "3", text:  GraphicLocale[lang].comp3 || GraphicLocale.en.comp3, bgColor: "bg-[#3DB9FF]" },
+    { number: "4", text:  GraphicLocale[lang].comp4 || GraphicLocale.en.comp4, bgColor: "bg-[#FFA53D]" },
+    { number: "5", text:  GraphicLocale[lang].comp5 || GraphicLocale.en.comp5, bgColor: "bg-[#76C56F]" },
       ].map(({ number, text, bgColor }, index) => (
         <div key={index} className="flex items-center gap-4">
           {/* Circle */}
@@ -504,36 +429,37 @@ const GraphicDesign = () => {
   </div>
   <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
     <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-      Why choose Creativa Poeta?
+      {/* Why choose Creativa Poeta? */}
+      {GraphicLocale[lang].header9 || GraphicLocale.en.header9}
     </h2>
     <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-start justify-between">
       <li>
-        <strong className="text-md md:text-lg">Customized Designs: </strong>
-        We create unique, visually stunning designs tailored to reflect your brand identity and effectively communicate your message to your audience.
+        <strong className="text-md md:text-lg"> {GraphicLocale[lang].strong1 || GraphicLocale.en.strong1}</strong>
+        {GraphicLocale[lang].list1 || GraphicLocale.en.list1}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Expertise Across Mediums: </strong>
-        Our team specializes in various forms of visual communication, from logos and branding to digital illustrations, print media, and web graphics.
+        <strong className="text-md md:text-lg"> {GraphicLocale[lang].strong2 || GraphicLocale.en.strong2} </strong>
+        {GraphicLocale[lang].list2 || GraphicLocale.en.list2}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Innovative Creativity: </strong>
-        At Creativa Poeta, innovation meets artistry. We bring fresh ideas and modern design techniques to make your visuals stand out in a competitive market.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong3 || GraphicLocale.en.strong3} </strong>
+          {GraphicLocale[lang].list3 || GraphicLocale.en.list3}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Attention to Detail: </strong>
-        Every element, from color palettes to typography, is meticulously crafted to ensure harmony and consistency across all your design assets.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong4 || GraphicLocale.en.strong4} </strong>
+        {GraphicLocale[lang].list4 || GraphicLocale.en.list4}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Collaborative Process: </strong>
-        We value your input throughout the design process, ensuring the final product aligns perfectly with your vision and business objectives.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong5 || GraphicLocale.en.strong5} </strong>
+        {GraphicLocale[lang].list5 || GraphicLocale.en.list5}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Brand-Focused Solutions: </strong>
-        Our designs not only captivate visually but also resonate with your brand’s story, strengthening your identity and appeal.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong6 || GraphicLocale.en.strong6} </strong>
+        {GraphicLocale[lang].list6 || GraphicLocale.en.list6}
       </li>
       <li>
-        <strong className="text-md md:text-lg">Future-Ready Visuals:</strong>
-        We create scalable designs that remain impactful and adaptable as your brand grows and evolves in the dynamic digital landscape.
+        <strong className="text-md md:text-lg">{GraphicLocale[lang].strong7 || GraphicLocale.en.strong7}</strong>
+        {GraphicLocale[lang].list7 || GraphicLocale.en.list7}
       </li>
     </ul>
   </div>
@@ -542,20 +468,20 @@ const GraphicDesign = () => {
 
 <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Who are these services for?
+    {GraphicLocale[lang].header10 || GraphicLocale.en.header10}
   </h2>
 
   <p className="text-md md:text-lg text-center mb-8">
-  Our graphic design and visual communication services are perfect for:
+  {GraphicLocale[lang]?.paragraph8|| GraphicLocale.en.paragraph8} 
   </p>
 
   <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
     <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
       <h3 className="text-xl font-semibold mb-2">
-        Startups
+           {GraphicLocale[lang].header11 || GraphicLocale.en.header11}
       </h3>
-      <p className="md:w-[70%] text-center">Establish a strong visual identity with bespoke logos, branding, and marketing materials.
+      <p className="md:w-[70%] text-center">{GraphicLocale[lang]?.paragraph9|| GraphicLocale.en.paragraph9} 
       </p>
     </div>
 
@@ -566,10 +492,10 @@ const GraphicDesign = () => {
         className="w-36 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Small to Medium Enterprises (SMEs)
+        {GraphicLocale[lang]?.header12|| GraphicLocale.en.header12} 
       </h3>
       <p className="md:w-[70%] text-center">
-      Elevate your brand with professional graphics, promotional content, and engaging visual storytelling.
+      {GraphicLocale[lang]?.paragraph10|| GraphicLocale.en.paragraph10} 
       </p>
     </div>
 
@@ -580,10 +506,10 @@ const GraphicDesign = () => {
         className="w-24 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Corporations
+        {GraphicLocale[lang]?.header13|| GraphicLocale.en.header13} 
       </h3>
       <p className="md:w-[70%] text-center">
-      Enhance your corporate communications with polished presentations, reports, and visuals.
+     {GraphicLocale[lang]?.paragraph11|| GraphicLocale.en.paragraph11}
       </p>
       </div>
 
@@ -594,10 +520,10 @@ const GraphicDesign = () => {
         className="w-32 h-24 mb-4 rounded-md"
       />
       <h3 className="text-xl font-semibold mb-2">
-        Freelancers and Creatives
+         {GraphicLocale[lang]?.header14|| GraphicLocale.en.header14} 
       </h3>
       <p className="md:w-[70%] text-center">
-      Build a standout personal brand with eye-catching graphics for portfolios, social media, and more.
+      {GraphicLocale[lang]?.paragraph12|| GraphicLocale.en.paragraph12}
       </p>
       </div>
   </div>
@@ -606,7 +532,7 @@ const GraphicDesign = () => {
 
 <section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
   <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Design Process Workflow
+    {GraphicLocale[lang]?.header15|| GraphicLocale.en.header15} 
   </h2>
   
   <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 justify-between items-center gap-8 space-y-12 md:space-y-0 md:space-x-4">
@@ -615,9 +541,9 @@ const GraphicDesign = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         1
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Discovery</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{GraphicLocale[lang]?.header16|| GraphicLocale.en.header16} </h3>
       <p className="text-sm">
-        Understanding your vision, objectives, and brand identity to establish a foundation for the project.
+        {GraphicLocale[lang]?.paragraph13|| GraphicLocale.en.paragraph13}
       </p>
     </div>
 
@@ -626,9 +552,9 @@ const GraphicDesign = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         2
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Concept Development</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{GraphicLocale[lang]?.header17|| GraphicLocale.en.header17}</h3>
       <p className="text-sm">
-        Brainstorming and drafting initial concepts that align with your goals and resonate with your audience.
+          {GraphicLocale[lang]?.paragraph14|| GraphicLocale.en.paragraph14}
       </p>
     </div>
 
@@ -637,9 +563,9 @@ const GraphicDesign = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         3
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Design Execution</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{GraphicLocale[lang]?.header18|| GraphicLocale.en.header18}</h3>
       <p className="text-sm">
-        Creating visually stunning designs and refining them to match your unique style and needs.
+       {GraphicLocale[lang]?.paragraph15|| GraphicLocale.en.paragraph15}
       </p>
     </div>
 
@@ -648,9 +574,9 @@ const GraphicDesign = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         4
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Feedback & Iteration</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{GraphicLocale[lang]?.header19|| GraphicLocale.en.header19}</h3>
       <p className="text-sm">
-        Collaborating with you to refine designs and ensure they align perfectly with your vision and expectations. 
+        {GraphicLocale[lang]?.paragraph16|| GraphicLocale.en.paragraph16}
       </p>
     </div>
 
@@ -659,9 +585,9 @@ const GraphicDesign = () => {
       <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
         5
       </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">Final Delivery</h3>
+      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{GraphicLocale[lang]?.header20|| GraphicLocale.en.header20}</h3>
       <p className="text-sm">
-        Providing the final designs in all necessary formats and offering ongoing support for optimization.
+        {GraphicLocale[lang]?.paragraph17|| GraphicLocale.en.paragraph17}
       </p>
     </div>
   </div>
@@ -765,16 +691,17 @@ const GraphicDesign = () => {
       <FAQSection />
       <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
   <h2 className="text-xl font-semibold p-4 mb-4">
-  Ready to elevate your brand with stunning designs?
+   {GraphicLocale[lang]?.paragraph18|| GraphicLocale.en.paragraph18}
   </h2>
   <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-  Get in touch with us today, and let’s craft visuals that captivate your audience and set your brand apart.
+ {GraphicLocale[lang]?.paragraph19|| GraphicLocale.en.paragraph19}
   </p>
-
+  
   <button
     onClick={handleNavigate}
-    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    Start your design journey with us
+    className="main-cta-btn bg-[#EEBA2B] text-black w-[9
+    0%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
+    {GraphicLocale[lang]?.button1|| GraphicLocale.en.button1}
     </button>
 </section>
 
