@@ -506,7 +506,7 @@ const options: Options = {
                 value={formData.mainGoal}
                 onChange={handleSelectChange}
                 options={options.mainGoals}
-                placeholder="Select a goal"
+                placeholder={ProjectsFormLocale[lang]?.placeholder1 || ProjectsFormLocale.en.placeholder1}
               />
             )}
             {showError && (
@@ -603,7 +603,7 @@ const options: Options = {
                 value={formData.stylePreference}
                 onChange={handleSelectChange}
                 options={options.stylePreferences}
-                placeholder="Select a style"
+                placeholder= {ProjectsFormLocale[lang]?.placeholder2 || ProjectsFormLocale.en.placeholder2}
               />
             )}
             {showError && (
@@ -699,7 +699,7 @@ const options: Options = {
                 value={formData.budget}
                 onChange={handleSelectChange}
                 options={options.budgetOptions}
-                placeholder="Select a budget"
+                placeholder={ProjectsFormLocale[lang]?.placeholder3 || ProjectsFormLocale.en.placeholder3}
               />
             )}
             {showError && (
