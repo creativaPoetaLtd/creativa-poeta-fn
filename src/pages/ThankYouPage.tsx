@@ -27,7 +27,7 @@ const ThankYouPage = () => {
       }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div> 
-
+{/* <div></div> */}
       <div className="relative bg-white p-8 rounded-lg shadow-lg max-w-md w-[90%] md:w-full text-center z-10">
         <h1 className="text-3xl font-semibold text-gray-800 mb-4">{title}</h1>
         <p className="text-lg text-gray-600 mb-6">{message}</p>
