@@ -17,8 +17,8 @@ const AboutLocale: any = {
     title1: "ABO TURIBO",
     title2: "TURIBO",
     description:
-      "Abakunda kwerekana ubuhanga mu by’ubugeni no guhanga ibihangano biteye ishema, turi ikigo kigizwe n’abanyabugeni, abanditsi n’abatekinisiye ba web bafite uburambe, tubaha ibisubizo byihariye kandi bishya mu by'ubuhanzi. Intego yacu nyamukuru ni ukumenya ibyo mukeneye kugirango duhe ibisubizo bidasanzwe. Kubera uburyo dushyira imbere ubuhanzi no gukora neza, dukurura abantu kandi tugasigira abandi ishusho ihoraho. Ntutindiganye kutwandikira uyu munsi kugirango tuganire ku mishinga yawe no kumenya uko twagufasha kugera ku ntego zawe mu bijyanye n'ubuhanzi.",
-    action: "VUGANA N'ABAKOZI BACU",
+      "Inararibonye mu kugaragaza ibihangano,abahanga mu ikoranabuhanga no muguhanga udushya turi itsinda ry'abahanzi budushya(designer's) Abanditse ndetse naba Web developers  babigize umwuga tubafitiye ibisubizo byihariye bibagaragaza mu buryo bw'ihariye mwifuza.intego nyamukuru yacu ni ukumva neza ibyifuzo byanyu tukabafasha kubihindura impamo mu buryo bunogeye ijisho.Bitewe n'uburyo dushyira imbere umurimo unoze no guhanga udushya ,tubafasha kwigaragaza mubandi mu buryo buhoraho,mugahora muri imbere.Witinda twandikire uyu munsi tuganire ku mishinga yawe,Tukwereke uburyo wayibyaza umusaruro vuba ndetse n'uburyo wagera ku ntego n'ibyifuzo byawe ",
+    action: "TWANDIKIRE",
   },
     nl: {
     title1: "WIE WIJ ZIJN",
