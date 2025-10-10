@@ -92,7 +92,7 @@ const FooterLocale:any = {
         nom:"Amazina",
         email:"E-mail",
         message:"Ubutumwa",
-        ohereza:"Ohereza"
+        ohereza:"Ohereza",
         },
          nl: {
     desc: "Creativiteit is onze passie en ons vak. Het drijft ons. Onze missie is om jouw ideeën tot leven te brengen, je online aanwezigheid te versterken en je publiek te betrekken. Met een team van gepassioneerde experts bieden wij een reeks diensten die zijn afgestemd op jouw behoeften. Neem contact met ons op om je volgende project te starten.",
