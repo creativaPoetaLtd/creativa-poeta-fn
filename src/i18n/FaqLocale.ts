@@ -58,30 +58,46 @@ const FaqLocale: any = {
     kiny:{
         h1:"F.A.Q.",
         h2:"Ibibazo Bikunze kwibazwa",
-        title1:"Ni izihe nyungu ziri mu gukorana na creativa poeta kuruta kubyikrera ku giti cyanjye?",
-        description1:"Gukorana na creativa poeta bigufasha gukorana n'ababigize umwuga bafite uburambe kandi bazi uburyo bikorwamo ,bakagufasha gukora ibyawe wihariyemo udakoporoye kubandi,kandi bazi neza ko bizatanga umusaruro ,bigufasha kandi kudatakaza igihe,ukabona ibyo wifuza mu gihe gito,ndetse no kurasa ku ntego y'ibyo wifuza ako kanya ",
+        title1:"Ni izihe nyungu ziri mu gukorana na Creativa Poeta kuruta kubyikorera ku giti cyanjye?",
+        description1:"Gukorana na Creativa Poeta bigufasha gukorerwa n’ababigizi umwuga, bafite uburambe kandi bazi uburyo bikorwamo, bakagufasha gukora ibyawe wihariyeho udakoporoye ku bandi, kandi bazi neza ko bizatanga umusaruro.Bigufasha kandi kudatakaza igihe,ukabona ibyo wifuza mu gihe gito,ndetse no kurasa ku ntego y’ibyo wifuza ako kanya. ",
         title2:"Ni gute n'abagezaho icyifuzo cyanjye cy'umushinga?Ni gute n'abasaba gutangira gukorana namwe ?",
         description2:" Biroroshye uciye ku rubuga rwacu 'www.creativapoeta.rw' ukanda ahanditsengo'tangira umushinga' ushobora no kutwandikira kuri email cyangwa kuri website yacu.wanaduhamagara kuri telephone cyangwa ugaca ku mbuga nkoranyambaga zacu ndetse na 'watsap'.icyo gihe tuganira kubyo wifuza,tukanakubwira icyo bisaba,ubushobozi bizatwara ndetse n'igiciro cyabyo ",
         title3:"Ese umushinga turi gukoranaho umara igihe kingana gute?",
         description3:"Igihe tumara dukora k'umushinga gishobora guterwa n'ibintu bitandukanye birimo ugukomera ndetse n'ubunini bwawo cyangwa se serivisi wifuza kuzaha abakugana,tugerageza gukora uko dushoboye kugirango twubahirize igihe twavuganye.Gutangira kubona umusaruro nabyo biterwa n'ubwoko bw'umushinga ,kuri buri kiciro dushyiraho ibimenyetso bishobora kutwereka uko umushinga uhagaze ,naho ugeze wunguka",
-        title4:"Ese mushobora gukora kuri project yihutirwa?",
-        description4:"Yego turabizi ko rimwe na rimwe ,igihe gishobora kuba ingenzi mbere y'ibindi byose,Dutanga na serivisi zihuse ku mishinga yihutirwa cyangwa se igenewe gukorwa mu gihe gito gishoboka.Twandikire cyangwa uduhamagare tuganire kubyo wifuza byihutirwa",
-        title5:"Mfite igitekerezo/umushinga ariko nta bushobozi mfite bwo kubishyira mu bikorwa",
-        description5:"Muri creaiva poeta twakira imishinga y'ikoranabuhanga,uko umushinga cyangwa igitekerezo cyawe cyaba kimeze kose ntutinye kukitugezaho,yewe niyo waba nta bushobozi ufite dushobora kugufasha kwiga, gukora cyangwa kubyaza umusaruro uwo mushinga ,tukaba twawushoramo imari,cyangwa tukaguhuza n'abandi bashoramari,ubushobozi ntibukubere imbogamizi twandikire vuba tubiganireho",
-        title6:"Ndi umushoramari sinsobanukiwe iby'ikoranabuhanga ,nkeneye gushorimari cyangwa kwiga ibijyanye n'ishoramari mu ikoranabuhanga",
+        title4:"Ese mushobora gukora kuri ‘projet’ yihutirwa?",
+        description4:"Yego. Turabizi ko rimwe na rimwe igihe gishobora kuba ingenzi mbere y’ibindi byose. Dutanga na serivisi zihuse ku mishinga yihutirwa cyangwa se igenewe gukorwa mu gihe gito gishoboka.Twandikire cyangwa uduhamagare tuganire ku byo wifuza byihutirwa.", 
+        title5:"Mfite igitekerezo / umushinga,ariko nta bushobozi mfite bwo kubishyira mu bikorwa.",
+        description5:"Muri creativa Poeta twakira imishinga y’ikoranabuhanga. Uko umushinga cyangwa igitekerezo cyawe cyaba kimeze kose ntutinye kukitugezaho. Yewe niyo waba nta bushobozi ufite. Dushobora kugufasha kwiga, gukora cyangwa kubyaza umusaruro uwo mushinga, tukaba twawushoramo imari, cyangwa tukaguhuza n’abandi bashoramari.Ubushobozi ntibukubere imbogamizi,twandikire vuba tubiganireho.",
+        title6:"Ndi umushoramari, sinsobanukiwe iby’ikoranabuhanga, nkeneye gushora imari cyangwa kwiga ibijyanye n’ishoramari mu ikoranabuhanga.",
         description6:"Muri creativa poeta twereka abifuza gushorimari mu ikoranabuhanga aho amahirwe ari.Tubereka uburyo bikorwa kuva kuri A kugeza kuri Z tubereka n'imishinga ibyara inyungu yo gushoramo,tukabafasha ndetse no kubyaza inyungu iyo mishinga ,Icyitonderwa:umushinga wose aho uva ukagera urigwa,urategurwa,ugakorwa,nta mushinga wunguka vuba cyangwa wakungura utakoze ubaho.  ",
         title7:"Ese koko nibyo, muha amafaranga ibihumbi magana abiri buri wese ubazaniye umukiliya?",
-        description7:"Yego! Dushobora guha buri muntu wese uturangiye cyangwa utuzaniye umukiliya amafaranga ashobora kugera ku 200000! Ingano y’amafaranga duhemba abaturangira abakiliya iterwa n’ubwoko cyangwa ingano y’umushinga uwo mukiliya afite. Amategeko n’amabwiriza birakurikizwa.",
+        description7:"Yego! Dushobora guha buri muntu wese uturangiye cyangwa utuzaniye umukiliya amafaranga ashobora kugera ku 200000! Ingano y’amafaranga duhemba abaturangira abakiliya iterwa n’ubwoko cyangwa ingano y’umushinga uwo mukiliya afite. Amategeko n’amabwirizwa birakurikizwa.",
         title8:"Ese koko nibyo, gutangira gukorana na Creativa Poeta nta kiguzi bisaba?",
         description8:"Yego! Gutangira gukorana na Creativa Poeta ni ubuntu! Iyo utuzaniye umushinga wawe,tugufasha kuwiga ndetse no kuwukora. Nyuma iyo ushimye ibyo twagukoreye, nibwo tugusaba ishimwe ry’abakozi. Ibi tubigeraho bitewe n’uko buri gihe kuri buri cyiciro tukwereka aho akazi kageze. Ntacyo tukwishyuza iyo uramutse utishimiye ibyo twakoze.",
         title9:"ibiciro byanyu byifashe gute?",
-        description9:" Ibiciro byacu biterwa n’ingano cyangwa ugukomera k’umushinga.Ni ukuvuga ko buri mushinga ugira igiciro cyawo cyihariye.Icyo twizeza abatugana nuko ibiciro byacu biri hasi cyane.Ni ibiciro utasanga ahandi!Ubonye ahandi igiciro kiri hasi kurusha icyacu, duhamagare tugusubize ikinyuranyo.",
+        description9:"Ibiciro byacu biterwa n’ingano cyangwa ugukomera k’umushinga.Ni ukuvuga ko buri mushinga ugira igiciro cyawo cyihariye.Icyo twizeza abatugana nuko ibiciro byacu biri hasi cyane.Ni ibiciro utasanga ahandi!Ubonye ahandi igiciro kiri hasi kurusha icyacu, duhamagare tugusubize ikinyuranyo.",
         title10:"Ese nshobora gusaba gusubiramo cyangwa gukosora ibyo mwankoreye?",
         description10:"Yego, mu gihe ubonye hari ikitameze neza kubyo twagukoreye,tugushishikariza rwose kugaruka vuba kutureba kugirango tugikosore.Nubwo tuba twakoze ibishoboka byose kugira ngo wishimire ibyo twakoze,birashoboka ko hari icyo twakwibagirwa. Ukunyurwa kwanyu niko dushyize imbere, dushobora rero guhindura cyangwa gusubiramo ibyo mutishimiye.",
         title11:"Ni gute mwatwizeza ubuziranenge bw’ibyo mukora?",
-        description11:"",
+
+        description11:"Dufite abakozi bashinzwe gukurikirana ubuziranenge bw’ibyo duha abatugana. Ibyo dukora bifite kandi byujuje amahame mpuzamahanga. Dushishikariza cyane buri wese kuduha ‘comments/commentaires’ y’uburyo abona ibyo dukora. Ibyo bidufasha kongera ubuziranenge, ubwiza ndetse n’urwego rwa serivisi dutanga.",
         title12:"Mukoresha ubuhe buryo mu kwishyura?",
-        description12:"Hari uburyo bwinshi nk'ama banks, amakarita(credit cards), n'ubundi buryo bwo kuri murandasi bwizewe. Tugerageza gukoresha uburyo bunogeye buri wese."
+        description12:"Hari uburyo bwinshi nk'ama banks, amakarita(credit cards), n'ubundi buryo bwo kuri murandasi bwizewe. Tugerageza gukoresha uburyo bunogeye buri wese.",
+        title13:"Ni uwuhe mutekano muha amakuru bwite yacu cyangwa imishinga tuba twabagejejeho?",
+        description13:"Amakuru n’imishinga byanyu birihariye. Ni umutungo bwite wanyu. Ibanga ry’amakuru yanyu dufite turiha agaciro kanini.imishinga yanyu ikorwa mu buryo bwihariye kuburyo iguma hagati yacu namwe gusa. Iyo mubicyeneye dushobora no gusinyana amasezerano ajyanye n’ibanga ry’amakuru yanyu.",
+        title14:"Ni gute nabona ingero z’ibyo mwakoze mbere?",
+        description14:"Ku bwumvikane n’abo twakoreye imishinga, dushobora gushyira ku rubuga rwacu zimwe muri ‘projets’ twakoze. Dufite umwanya twahariye kwerekana bimwe mu bikorwa duheruka gukora. Niba utabibonaho nuko kuri ubu nta mufatanyabikorwa uratwemerera gushyiraho ibyo twamukoreye. Ucyeneye ubundi busobanuro watwandikira.",
+        title15:"Ni ubuhe bwoko bw’ibigo cyangwa urwego rw’abantu mukorana nabo?",
+        description15:"Dukorana n’ingeri zose z’abantu cyangwa se ibigo byaba ibyigenga cyangwa ibya Leta, yaba abikorera ku giti cyabo,abashoramari cyangwa abantu basanzwe bifuza gutera imbere.Imvugo yacu yo guha umwihariko buri wese isobanuye ko ibyo dukora bigenewe bose, buri wese ku rwego rwe.",
+
+
+
+
+
+
+
+
+
     },
  
         nl: {

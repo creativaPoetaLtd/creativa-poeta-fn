@@ -75,8 +75,30 @@ const faqData = [
         // image : 'https://picsum.photos/200/300',
         description: FaqLocale[lang].description11
     },
-   
-    
+    {
+        id: 12,
+        title: FaqLocale[lang].title12,
+        // image : 'https://picsum.photos/200/300',
+        description: FaqLocale[lang].description12
+    },
+     {
+        id: 13,
+        title: FaqLocale[lang].title13,
+        // image : 'https://picsum.photos/200/300',
+        description: FaqLocale[lang].description13
+    },
+      {
+        id: 14,
+        title: FaqLocale[lang].title14,
+        // image : 'https://picsum.photos/200/300',
+        description: FaqLocale[lang].description14
+    },
+      {
+        id: 15,
+        title: FaqLocale[lang].title1,
+        // image : 'https://picsum.photos/200/300',
+        description: FaqLocale[lang].description15
+    },
    
 ]
 
