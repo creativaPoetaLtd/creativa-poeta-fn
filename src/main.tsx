@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -25,7 +25,7 @@ import Login from "./components/Login.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
-ReactDOM.render(
+const appElement = (
   <React.StrictMode>
     <Router>
       <AuthProvider>
@@ -107,6 +107,9 @@ ReactDOM.render(
       </AuthProvider>
     </Router>
     <ToastContainer />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
+
+const container = document.getElementById("root");
+const root = ReactDOM.createRoot(container!);
+root.render(appElement);
