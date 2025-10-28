@@ -140,6 +140,9 @@ header2:"Submit",
       projectPurposes2: "Improve brand image",
       projectPurposes3: "Generate more sales",
       projectPurposes4: "Personal project (portfolio, CV, etc.)",
+      placeholder1:"Select a goal",
+      placeholder2:"Select a style",
+      placeholder3:"Select a budget"
     
   },
   fr: {
@@ -278,6 +281,9 @@ projectPurposes1: "Lancer un nouveau service",
 projectPurposes2: "Améliorer l’image de marque",
 projectPurposes3: "Générer plus de ventes",
 projectPurposes4: "Projet personnel (portfolio, CV, etc.)",
+placeholder1:"Sélectionnez un objectif",
+placeholder2:"Sélectionnez un style",
+placeholder3:"Sélectionnez un budget"
   },
   kiny: {
     header1:"Tangira",
@@ -413,7 +419,9 @@ projectPurposes1: "Gutangira serivisi nshya",
 projectPurposes2: "Guteza imbere ishusho y’ikirango",
 projectPurposes3: "Kongera ubucuruzi",
 projectPurposes4: "Umushinga w’umuntu (portfolio, CV, nibindi)",
-
+placeholder1:"Hitamo intego",
+placeholder2:"Hitamo uburyo",
+placeholder3:"Hitamo ingengo y’imari"
 
   },
   nl: {
@@ -552,6 +560,9 @@ projectPurposes1: "Een nieuwe dienst lanceren",
 projectPurposes2: "Het merkimago verbeteren",
 projectPurposes3: "Meer verkoop genereren",
 projectPurposes4: "Persoonlijk project (portfolio, CV, enz.)",
+placeholder1:"Selecteer een doel",
+placeholder2:"Selecteer een stijl",
+placeholder3:"Selecteer een budget"
   },
 };
 

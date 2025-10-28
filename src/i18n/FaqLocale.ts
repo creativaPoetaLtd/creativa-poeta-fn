@@ -1,118 +1,221 @@
-
 const FaqLocale: any = {
-    fr:{
-        h1:"F.A.Q.",  
-        h2:" Questions Fréquentes",
-        title1:"Quels sont les avantages de faire appel à Creativa Poeta plutôt que de réaliser les tâches moi-même ?",
-        description1:"Faire appel à Creativa Poeta vous permet de bénéficier d'une expertise spécialisée, de solutions créatives personnalisées, d'un gain de temps, de résultats professionnels et d'une collaboration étroite pour atteindre vos objectifs créatifs de manière efficace et impressionnante",
-        title2: " Combien de temps prendra le projet et quand pourront-on avoir les résultats ?",
-        description2:"La durée du projet dépend de sa complexité et de la portée des services demandés. Nous travaillons efficacement pour respecter les délais convenus. Les résultats peuvent varier en fonction du type de projet, mais nous mettons en place des indicateurs de performance pour mesurer les résultats à des étapes clés du projet.",
-        title3:"Comment puis-je passer une commande avec Creativa Poeta ?",
-        description3:"Passer une commande avec Creativa Poeta est simple. Il vous suffit de nous contacter via notre site web, par e-mail ou par téléphone. Nous discuterons de vos besoins, établirons un devis et élaborerons un plan personnalisé pour votre projet.",
-        title4:"Pouvez-vous travailler sur des projets urgents ?",
-        description4:"Oui, nous comprenons que parfois le temps est essentiel. Nous proposons des services rapides pour les projets urgents. Contactez-nous pour discuter de vos besoins spécifiques en matière de délais.",
-        title5:"Pour quels types d'entreprises ou d'individus travaillez-vous ?",
-        description5:"Nous servons une grande variété de clients, allant des particuliers aux petites entreprises et aux grandes entreprises. Notre approche sur mesure signifie que nos services conviennent à quasiment tout le monde.",
-        title6:"Quels sont vos tarifs ?",
-        description6:"Nos tarifs varient en fonction de la complexité de chaque projet. Nous proposons des devis personnalisés adaptés à vos besoins spécifiques. Contactez-nous pour obtenir un devis gratuit.",
-        title7:"Comment garantissez-vous la qualité de vos créations ?",
-        description7:"Nous avons une équipe dédiée à la qualité qui veille à ce que chaque création réponde à nos normes élevées. De plus, nous sollicitons régulièrement les commentaires de nos clients pour nous améliorer en permanence",
-        tile8:"Puis-je demander des révisions sur les créations que vous fournissez ",
-        description8:"Absolument, nous encourageons les révisions pour nous assurer que vous êtes satisfait à 100 %. Votre satisfaction est notre priorité, et nous apporterons les modifications nécessaires pour répondre à vos attentes.",
-        title9:"Comment protégez-vous la confidentialité de mes données et projets ?",
-        description9:"Nous prenons la confidentialité très au sérieux. Vos données et projets sont traités avec la plus grande discrétion. Nous pouvons également signer des accords de confidentialité pour une protection supplémentaire.",
-        title10:"Proposez-vous des services de marketing pour promouvoir les créations que vous réalisez ?",
-        description10:"Oui, en plus de la création, de la rédaction et du montage vidéo, nous proposons des services de marketing pour augmenter la visibilité de vos créations. Nous développons des stratégies sur mesure pour toucher votre public cible et maximiser l'impact de vos contenus.",
-        title11:"Comment puis-je voir des exemples de vos travaux précédents ?",
-        description11:"Nous avons une section dédiée à nos réalisations sur notre site web où vous pouvez voir des exemples de nos travaux antérieurs. Si vous avez des besoins spécifiques, n'hésitez pas à nous les faire savoir.",
-        title12:"Quels sont les modes de paiement acceptés par Creativa Poeta ?",
-        description12:"Nous acceptons plusieurs modes de paiement courants, notamment les virements bancaires, les paiements par carte de crédit et d'autres méthodes de paiement en ligne sécurisées. Nous veillerons à ce que vous ayez des options de paiement pratiques."
-    },
-    en:{
-        h1:"F.A.Q.",
-        h2:" Frequently Asked Questions",
-        title1:"What are the benefits of using Creativa Poeta rather than doing the tasks myself?",
-        description1:"Using Creativa Poeta allows you to benefit from specialized expertise, personalized creative solutions, time savings, professional results, and close collaboration to achieve your creative goals effectively and impressively",
-        title2: " How long will the project take and when can we expect results?",
-        description2:"The duration of the project depends on its complexity and the scope of the services requested. We work efficiently to meet agreed deadlines. Results may vary depending on the type of project, but we put in place performance indicators to measure results at key stages of the project.",
-        title3:"How can I place an order with Creativa Poeta?",
-        description3:"Placing an order with Creativa Poeta is simple. Just contact us through our website, email, or phone. We will discuss your needs, provide a quote, and develop a personalized plan for your project.",
-        title4:"Can you work on urgent projects?",
-        description4:"Yes, we understand that sometimes time is of the essence. We offer fast services for urgent projects. Contact us to discuss your specific deadline needs.",
-        title5:"What types of businesses or individuals do you work with?",
-        description5:"We serve a wide variety of clients, from individuals to small businesses and large corporations. Our bespoke approach means our services are suitable for almost everyone.",
-        title6:"What are your rates?",
-        description6:"Our rates vary depending on the complexity of each project. We offer personalized quotes tailored to your specific needs. Contact us for a free quote.",
-        title7:"How do you ensure the quality of your creations?",
-        description7:"We have a dedicated quality team that ensures each creation meets our high standards. In addition, we regularly seek feedback from our clients to continuously improve",
-        title8:"Can I request revisions on the creations you provide",
-        description8:"Absolutely, we encourage revisions to ensure you are 100% satisfied. Your satisfaction is our priority, and we will make the necessary changes to meet your expectations.",
-        title9:"How do you protect the confidentiality of my data and projects?",
-        description9:"We take confidentiality very seriously. Your data and projects are treated with the utmost discretion. We can also sign confidentiality agreements for additional protection.",
-        title10:"Do you offer marketing services to promote the creations you make?",
-        description10:"Yes, in addition to creation, writing, and video editing, we offer marketing services to increase the visibility of your creations. We develop custom strategies to reach your target audience and maximize the impact of your content.",
-        title11:"How can I see examples of your previous work?",
-        description11:"We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
-        
-    },
-    kiny:{
-        h1:"F.A.Q.",
-        h2:"Ibibazo Bikunze kwibazwa",
-        title1:"Ni ibihe byiza gukoresha Creativa poeta kuruta kubyikorera ku giti cyanjye",
-        description1:"Gukoresha creativa apoeta bigufasha kubona amahirwe yo guhura n'abantu bahugukiye ikoranabuhanga, ibisubizo byiza kandi binoze, kubona ibintu mugihe gito, no gukomeza gukorana kugeza ugeze ku ntego zawe",
-        title2:"Ni mugihe kingana iki nshobora kubona ibyo nasabye?",
-        description2:"Igihe ibyo wasabye bimara ngo bibobenke kigenwa n'uburyo ubusabe bwawe bukomeyemo ndetse n'ubwoko bwa service ukeneye. Tugerageza gukora neza ngo twubahirize igihe twemeranyije",
-        title3:"Ni gute natanga order kuri creativa poeta?",
-        description3:"Biroroshye! Twandikire kuri website yacu, kuri email cyangwa kuri telephone. Tuganira ku busabe bwawe, tugasobanukirwa ibyo ukeneye, tugatangira gupanga uko tuzashyira ,ubikorwa igitekerezo cyawe",
-        title4:"Mushobora gukora kuri project yihutirwa?",
-        description4:"Yego, bishobora kugorana ariko turabikora, uratwandikira ukatubwira deadline wifuza n'ibyo wumva twakora.",
-        title5:"Ni abahe bantu cyangwa Business mukorana?",
-        description5:"Tugakorana n'abakiriya basanzwe, abashoramari ndetse n'ibigo binini. Service zacu zsigenewe buri wese",
-        title6:"Ibyiza ni ibihe?",
-        description6:"Ibyo dukora bitandukana bitewe na project twakozseho n'uburyo ikomeyemo. Tugukorera ibyo wifuza. Twandikire",
-        title7:"Ni gute mwizera ubuziranenge bw'ibyo mwakoze?",
-        description7:"Dukora neza kugeza ubu, tKuko dufite itsinda rishinzwe kugenzura no gupima niba ibyakozwe byujuje ubuziranenge kandi bihura n'ibyo umukiriya yadusabye. Ikindi nuko dusaba abo twakoreye kuduha ibitekerezo twasanga hari aho kuvugurura tukabikora.",
-        title8:"Nshobora kubasaba gusubiramo ibyo mwakoze?",
-        description8:"Yego, tubisubiramo iyo ari ngombwa kugira ngo uwo twakoreye arusheho kuryohetwa na service twamuhaye 100%. Ukunyurwa k'umukiriya niko dushyira imbere rero dukora icyo bidusaba cyose ngo unyurwe.",
-        title9:"Ni gute murinda amakuru yanjye mba nabahaye?",
-        description9:"Umutekano w'amakuru y'abakiriya tuwugira uw'ibanze kandi tubyitaho. Ikindi nuko tugirana amasezerano y'uburyo amakuru waduhaye azakoreshwamo natwe tukubahiriza ayo masezerano.",
-        title10:"Ese mwaba mutanga service yo kwamamaza ibyo mwakoze?",
-        description10:"Yego, nyuma yo kwandika, gushushanya ndetse no gukora ama video, dutanga service yo kwamamaza kugira ngo tugufashe kumenyekanisha ibyo wakuye iwacu. dufite uburyo bwinshi dukoresha kugira ngo tugere ku mubare munini w'abakoresha imbuga nkoranyambaga.",
-        title11:"Ni gute nabona urugero rw'ibyo mwakozze mbere?",
-        description11:"Dufite agace kuri website yacu kakugeza ku byo twakozeho, ibihembo twatsindiye. NIba hari icyo ukeneye twandikire.",
-        title12:"Mukoresha ubuhe buryo mu kwishyura?",
-        description12:"Hari uburyo bwinshi nk'ama banks, amakarita(credit cards), n'ubundi buryo bwo kuri murandasi bwizewe. Tugerageza gukoresha uburyo bunogeye buri wese."
-    },
- 
-        nl: {
-        h1: "F.A.Q.",
-        h2: " Veelgestelde Vragen",
-        title1: "Wat zijn de voordelen van Creativa Poeta gebruiken in plaats van het zelf doen?",
-        description1: "Met Creativa Poeta profiteert u van gespecialiseerde expertise, creatieve maatwerkoplossingen, tijdsbesparing, professionele resultaten en nauwe samenwerking om uw creatieve doelen effectief en indrukwekkend te bereiken.",
-        title2: " Hoe lang duurt het project en wanneer kunnen we resultaten verwachten?",
-        description2: "De duur van het project hangt af van de complexiteit en de omvang van de gevraagde diensten. We werken efficiënt om de afgesproken deadlines te halen. De resultaten kunnen variëren afhankelijk van het type project, maar we gebruiken prestatie-indicatoren om voortgang en succes te meten.",
-        title3: "Hoe kan ik een bestelling plaatsen bij Creativa Poeta?",
-        description3: "Een bestelling plaatsen bij Creativa Poeta is eenvoudig. Neem contact met ons op via onze website, e-mail of telefoon. We bespreken uw wensen, maken een offerte en stellen een persoonlijk plan op voor uw project.",
-        title4: "Kunt u werken aan urgente projecten?",
-        description4: "Ja, we begrijpen dat tijd soms cruciaal is. We bieden snelle diensten voor urgente projecten. Neem contact met ons op om uw specifieke deadlines te bespreken.",
-        title5: "Voor welke soorten bedrijven of individuen werkt u?",
-        description5: "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
-        title6: "Wat zijn uw tarieven?",
-        description6: "Onze tarieven variëren afhankelijk van de complexiteit van elk project. We bieden persoonlijke offertes die zijn afgestemd op uw specifieke behoeften. Neem contact met ons op voor een gratis offerte.",
-        title7: "Hoe garandeert u de kwaliteit van uw creaties?",
-        description7: "We hebben een speciaal kwaliteitsteam dat ervoor zorgt dat elke creatie aan onze hoge normen voldoet. Bovendien vragen we regelmatig feedback van onze klanten om continu te verbeteren.",
-        title8: "Kan ik revisies aanvragen voor de creaties die u levert?",
-        description8: "Absoluut, we moedigen revisies aan om ervoor te zorgen dat u 100% tevreden bent. Uw tevredenheid is onze prioriteit, en we brengen de nodige aanpassingen aan om aan uw verwachtingen te voldoen.",
-        title9: "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
-        description9: "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
-        title10: "Biedt u marketingdiensten aan om de creaties die u maakt te promoten?",
-        description10: "Ja, naast creatie, schrijven en video-editing, bieden we marketingdiensten om de zichtbaarheid van uw creaties te vergroten. We ontwikkelen strategieën op maat om uw doelgroep te bereiken en de impact van uw content te maximaliseren.",
-        title11: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
-        description11: "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
-        title12: "Welke betaalmethoden accepteert Creativa Poeta?",
-        description12: "We accepteren verschillende gangbare betaalmethoden, waaronder bankoverschrijvingen, creditcards en andere veilige online betalingsopties. We zorgen ervoor dat u altijd een gemakkelijke betalingsmethode hebt."
-    }
+  fr: {
+    h1: "F.A.Q.",
+    h2: " Questions Fréquentes",
+    title1:
+      "Quels sont les avantages de faire appel à Creativa Poeta plutôt que de réaliser les tâches moi-même ?",
+    description1:
+      "Faire appel à Creativa Poeta vous permet de bénéficier d'une expertise spécialisée, de solutions créatives personnalisées, d'un gain de temps, de résultats professionnels et d'une collaboration étroite pour atteindre vos objectifs créatifs de manière efficace et impressionnante",
+    title2:
+      " Combien de temps prendra le projet et quand pourront-on avoir les résultats ?",
+    description2:
+      "La durée du projet dépend de sa complexité et de la portée des services demandés. Nous travaillons efficacement pour respecter les délais convenus. Les résultats peuvent varier en fonction du type de projet, mais nous mettons en place des indicateurs de performance pour mesurer les résultats à des étapes clés du projet.",
+    title3: "Comment puis-je passer une commande avec Creativa Poeta ?",
+    description3:
+      "Passer une commande avec Creativa Poeta est simple. Il vous suffit de nous contacter via notre site web, par e-mail ou par téléphone. Nous discuterons de vos besoins, établirons un devis et élaborerons un plan personnalisé pour votre projet.",
+    title4: "Pouvez-vous travailler sur des projets urgents ?",
+    description4:
+      "Oui, nous comprenons que parfois le temps est essentiel. Nous proposons des services rapides pour les projets urgents. Contactez-nous pour discuter de vos besoins spécifiques en matière de délais.",
+    title5: "Pour quels types d'entreprises ou d'individus travaillez-vous ?",
+    description5:
+      "Nous servons une grande variété de clients, allant des particuliers aux petites entreprises et aux grandes entreprises. Notre approche sur mesure signifie que nos services conviennent à quasiment tout le monde.",
+    title6: "Quels sont vos tarifs ?",
+    description6:
+      "Nos tarifs varient en fonction de la complexité de chaque projet. Nous proposons des devis personnalisés adaptés à vos besoins spécifiques. Contactez-nous pour obtenir un devis gratuit.",
+    title7: "Comment garantissez-vous la qualité de vos créations ?",
+    description7:
+      "Nous avons une équipe dédiée à la qualité qui veille à ce que chaque création réponde à nos normes élevées. De plus, nous sollicitons régulièrement les commentaires de nos clients pour nous améliorer en permanence",
+    title8:
+      "Puis-je demander des révisions sur les créations que vous fournissez ",
+    description8:
+      "Absolument, nous encourageons les révisions pour nous assurer que vous êtes satisfait à 100 %. Votre satisfaction est notre priorité, et nous apporterons les modifications nécessaires pour répondre à vos attentes.",
+    title9:
+      "Comment protégez-vous la confidentialité de mes données et projets ?",
+    description9:
+      "Nous prenons la confidentialité très au sérieux. Vos données et projets sont traités avec la plus grande discrétion. Nous pouvons également signer des accords de confidentialité pour une protection supplémentaire.",
+    title10:
+      "Proposez-vous des services de marketing pour promouvoir les créations que vous réalisez ?",
+    description10:
+      "Oui, en plus de la création, de la rédaction et du montage vidéo, nous proposons des services de marketing pour augmenter la visibilité de vos créations. Nous développons des stratégies sur mesure pour toucher votre public cible et maximiser l'impact de vos contenus.",
+    title11: "Comment puis-je voir des exemples de vos travaux précédents ?",
+    description11:
+      "Nous avons une section dédiée à nos réalisations sur notre site web où vous pouvez voir des exemples de nos travaux antérieurs. Si vous avez des besoins spécifiques, n'hésitez pas à nous les faire savoir.",
+    title12: "Quels sont les modes de paiement acceptés par Creativa Poeta ?",
+    description12:
+      "Nous acceptons plusieurs modes de paiement courants, notamment les virements bancaires, les paiements par carte de crédit et d'autres méthodes de paiement en ligne sécurisées. Nous veillerons à ce que vous ayez des options de paiement pratiques.",
+    title13: "Comment protégez-vous la confidentialité de mes données et projets ?",
+    description13:
+      "Nous prenons la confidentialité très au sérieux. Vos données et projets sont traités avec la plus grande discrétion. Nous pouvons également signer des accords de confidentialité pour une protection supplémentaire.",
+    title14: "Comment puis-je voir des exemples de vos travaux précédents ?",
+    description14:
+      "Nous avons une section dédiée à nos réalisations sur notre site web où vous pouvez voir des exemples de nos travaux antérieurs. Si vous avez des besoins spécifiques, n'hésitez pas à nous les faire savoir.",
+    title15: "Pour quels types d'entreprises ou d'individus travaillez-vous ?",
+    description15:
+      "Nous servons une grande variété de clients, allant des particuliers aux petites entreprises et aux grandes entreprises. Notre approche sur mesure signifie que nos services conviennent à quasiment tout le monde.",
+  },
+  en: {
+    h1: "F.A.Q.",
+    h2: " Frequently Asked Questions",
+    title1:
+      "What are the benefits of using Creativa Poeta rather than doing the tasks myself?",
+    description1:
+      "Using Creativa Poeta allows you to benefit from specialized expertise, personalized creative solutions, time savings, professional results, and close collaboration to achieve your creative goals effectively and impressively",
+    title2: " How long will the project take and when can we expect results?",
+    description2:
+      "The duration of the project depends on its complexity and the scope of the services requested. We work efficiently to meet agreed deadlines. Results may vary depending on the type of project, but we put in place performance indicators to measure results at key stages of the project.",
+    title3: "How can I place an order with Creativa Poeta?",
+    description3:
+      "Placing an order with Creativa Poeta is simple. Just contact us through our website, email, or phone. We will discuss your needs, provide a quote, and develop a personalized plan for your project.",
+    title4: "Can you work on urgent projects?",
+    description4:
+      "Yes, we understand that sometimes time is of the essence. We offer fast services for urgent projects. Contact us to discuss your specific deadline needs.",
+    title5: "What types of businesses or individuals do you work with?",
+    description5:
+      "We serve a wide variety of clients, from individuals to small businesses and large corporations. Our bespoke approach means our services are suitable for almost everyone.",
+    title6: "What are your rates?",
+    description6:
+      "Our rates vary depending on the complexity of each project. We offer personalized quotes tailored to your specific needs. Contact us for a free quote.",
+    title7: "How do you ensure the quality of your creations?",
+    description7:
+      "We have a dedicated quality team that ensures each creation meets our high standards. In addition, we regularly seek feedback from our clients to continuously improve",
+    title8: "Can I request revisions on the creations you provide",
+    description8:
+      "Absolutely, we encourage revisions to ensure you are 100% satisfied. Your satisfaction is our priority, and we will make the necessary changes to meet your expectations.",
+    title9: "How do you protect the confidentiality of my data and projects?",
+    description9:
+      "We take confidentiality very seriously. Your data and projects are treated with the utmost discretion. We can also sign confidentiality agreements for additional protection.",
+    title10:
+      "Do you offer marketing services to promote the creations you make?",
+    description10:
+      "Yes, in addition to creation, writing, and video editing, we offer marketing services to increase the visibility of your creations. We develop custom strategies to reach your target audience and maximize the impact of your content.",
+    title11: "How can I see examples of your previous work?",
+    description11:
+      "We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
+    title12: "What payment methods does Creativa Poeta accept?",
+    description12:
+      "We accept several common payment methods, including bank transfers, credit card payments, and other secure online payment methods. We will ensure you have convenient payment options.",
+    title13: "How do you protect the confidentiality of my data and projects?",
+    description13:
+      "We take confidentiality very seriously. Your data and projects are treated with the utmost discretion. We can also sign confidentiality agreements for additional protection.",
+    title14: "How can I see examples of your previous work?",
+    description14:
+      "We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
+    title15: "What types of businesses or individuals do you work with?",
+    description15:
+      "We serve a wide variety of clients, from individuals to small businesses and large corporations. Our bespoke approach means our services are suitable for almost everyone.",
+  },
+  kiny: {
+    h1: "F.A.Q.",
+    h2: "Ibibazo Bikunze kwibazwa",
+    title1:
+      "Ni izihe nyungu ziri mu gukorana na Creativa Poeta kuruta kubyikorera ku giti cyanjye?",
+    description1:
+      "Gukorana na Creativa Poeta bigufasha gukorerwa n’ababigizi umwuga, bafite uburambe kandi bazi uburyo bikorwamo, bakagufasha gukora ibyawe wihariyeho udakoporoye ku bandi, kandi bazi neza ko bizatanga umusaruro.Bigufasha kandi kudatakaza igihe,ukabona ibyo wifuza mu gihe gito,ndetse no kurasa ku ntego y’ibyo wifuza ako kanya. ",
+    title2:
+      "Ni gute n'abagezaho icyifuzo cyanjye cy'umushinga?Ni gute n'abasaba gutangira gukorana namwe ?",
+    description2:
+      " Biroroshye uciye ku rubuga rwacu 'www.creativapoeta.rw' ukanda ahanditsengo'tangira umushinga' ushobora no kutwandikira kuri email cyangwa kuri website yacu.wanaduhamagara kuri telephone cyangwa ugaca ku mbuga nkoranyambaga zacu ndetse na 'watsap'.icyo gihe tuganira kubyo wifuza,tukanakubwira icyo bisaba,ubushobozi bizatwara ndetse n'igiciro cyabyo ",
+    title3: "Ese umushinga turi gukoranaho umara igihe kingana gute?",
+    description3:
+      "Igihe tumara dukora k'umushinga gishobora guterwa n'ibintu bitandukanye birimo ugukomera ndetse n'ubunini bwawo cyangwa se serivisi wifuza kuzaha abakugana,tugerageza gukora uko dushoboye kugirango twubahirize igihe twavuganye.Gutangira kubona umusaruro nabyo biterwa n'ubwoko bw'umushinga ,kuri buri kiciro dushyiraho ibimenyetso bishobora kutwereka uko umushinga uhagaze ,naho ugeze wunguka",
+    title4: "Ese mushobora gukora kuri ‘projet’ yihutirwa?",
+    description4:
+      "Yego. Turabizi ko rimwe na rimwe igihe gishobora kuba ingenzi mbere y’ibindi byose. Dutanga na serivisi zihuse ku mishinga yihutirwa cyangwa se igenewe gukorwa mu gihe gito gishoboka.Twandikire cyangwa uduhamagare tuganire ku byo wifuza byihutirwa.",
+    title5:
+      "Mfite igitekerezo / umushinga,ariko nta bushobozi mfite bwo kubishyira mu bikorwa.",
+    description5:
+      "Muri creativa Poeta twakira imishinga y’ikoranabuhanga. Uko umushinga cyangwa igitekerezo cyawe cyaba kimeze kose ntutinye kukitugezaho. Yewe niyo waba nta bushobozi ufite. Dushobora kugufasha kwiga, gukora cyangwa kubyaza umusaruro uwo mushinga, tukaba twawushoramo imari, cyangwa tukaguhuza n’abandi bashoramari.Ubushobozi ntibukubere imbogamizi,twandikire vuba tubiganireho.",
+    title6:
+      "Ndi umushoramari, sinsobanukiwe iby’ikoranabuhanga, nkeneye gushora imari cyangwa kwiga ibijyanye n’ishoramari mu ikoranabuhanga.",
+    description6:
+      "Muri creativa poeta twereka abifuza gushorimari mu ikoranabuhanga aho amahirwe ari.Tubereka uburyo bikorwa kuva kuri A kugeza kuri Z tubereka n'imishinga ibyara inyungu yo gushoramo,tukabafasha ndetse no kubyaza inyungu iyo mishinga ,Icyitonderwa:umushinga wose aho uva ukagera urigwa,urategurwa,ugakorwa,nta mushinga wunguka vuba cyangwa wakungura utakoze ubaho.  ",
+    title7:
+      "Ese koko nibyo, muha amafaranga ibihumbi magana abiri buri wese ubazaniye umukiliya?",
+    description7:
+      "Yego! Dushobora guha buri muntu wese uturangiye cyangwa utuzaniye umukiliya amafaranga ashobora kugera ku 200000! Ingano y’amafaranga duhemba abaturangira abakiliya iterwa n’ubwoko cyangwa ingano y’umushinga uwo mukiliya afite. Amategeko n’amabwirizwa birakurikizwa.",
+    title8:
+      "Ese koko nibyo, gutangira gukorana na Creativa Poeta nta kiguzi bisaba?",
+    description8:
+      "Yego! Gutangira gukorana na Creativa Poeta ni ubuntu! Iyo utuzaniye umushinga wawe,tugufasha kuwiga ndetse no kuwukora. Nyuma iyo ushimye ibyo twagukoreye, nibwo tugusaba ishimwe ry’abakozi. Ibi tubigeraho bitewe n’uko buri gihe kuri buri cyiciro tukwereka aho akazi kageze. Ntacyo tukwishyuza iyo uramutse utishimiye ibyo twakoze.",
+    title9: "ibiciro byanyu byifashe gute?",
+    description9:
+      "Ibiciro byacu biterwa n’ingano cyangwa ugukomera k’umushinga.Ni ukuvuga ko buri mushinga ugira igiciro cyawo cyihariye.Icyo twizeza abatugana nuko ibiciro byacu biri hasi cyane.Ni ibiciro utasanga ahandi!Ubonye ahandi igiciro kiri hasi kurusha icyacu, duhamagare tugusubize ikinyuranyo.",
+    title10: "Ese nshobora gusaba gusubiramo cyangwa gukosora ibyo mwankoreye?",
+    description10:
+      "Yego, mu gihe ubonye hari ikitameze neza kubyo twagukoreye,tugushishikariza rwose kugaruka vuba kutureba kugirango tugikosore.Nubwo tuba twakoze ibishoboka byose kugira ngo wishimire ibyo twakoze,birashoboka ko hari icyo twakwibagirwa. Ukunyurwa kwanyu niko dushyize imbere, dushobora rero guhindura cyangwa gusubiramo ibyo mutishimiye.",
+    title11: "Ni gute mwatwizeza ubuziranenge bw’ibyo mukora?",
 
-}
+    description11:
+      "Dufite abakozi bashinzwe gukurikirana ubuziranenge bw’ibyo duha abatugana. Ibyo dukora bifite kandi byujuje amahame mpuzamahanga. Dushishikariza cyane buri wese kuduha ‘comments/commentaires’ y’uburyo abona ibyo dukora. Ibyo bidufasha kongera ubuziranenge, ubwiza ndetse n’urwego rwa serivisi dutanga.",
+    title12: "Mukoresha ubuhe buryo mu kwishyura?",
+    description12:
+      "Hari uburyo bwinshi nk'ama banks, amakarita(credit cards), n'ubundi buryo bwo kuri murandasi bwizewe. Tugerageza gukoresha uburyo bunogeye buri wese.",
+    title13:
+      "Ni uwuhe mutekano muha amakuru bwite yacu cyangwa imishinga tuba twabagejejeho?",
+    description13:
+      "Amakuru n’imishinga byanyu birihariye. Ni umutungo bwite wanyu. Ibanga ry’amakuru yanyu dufite turiha agaciro kanini.imishinga yanyu ikorwa mu buryo bwihariye kuburyo iguma hagati yacu namwe gusa. Iyo mubicyeneye dushobora no gusinyana amasezerano ajyanye n’ibanga ry’amakuru yanyu.",
+    title14: "Ni gute nabona ingero z’ibyo mwakoze mbere?",
+    description14:
+      "Ku bwumvikane n’abo twakoreye imishinga, dushobora gushyira ku rubuga rwacu zimwe muri ‘projets’ twakoze. Dufite umwanya twahariye kwerekana bimwe mu bikorwa duheruka gukora. Niba utabibonaho nuko kuri ubu nta mufatanyabikorwa uratwemerera gushyiraho ibyo twamukoreye. Ucyeneye ubundi busobanuro watwandikira.",
+    title15: "Ni ubuhe bwoko bw’ibigo cyangwa urwego rw’abantu mukorana nabo?",
+    description15:
+      "Dukorana n’ingeri zose z’abantu cyangwa se ibigo byaba ibyigenga cyangwa ibya Leta, yaba abikorera ku giti cyabo,abashoramari cyangwa abantu basanzwe bifuza gutera imbere.Imvugo yacu yo guha umwihariko buri wese isobanuye ko ibyo dukora bigenewe bose, buri wese ku rwego rwe.",
+  },
+
+  nl: {
+    h1: "F.A.Q.",
+    h2: " Veelgestelde Vragen",
+    title1:
+      "Wat zijn de voordelen van Creativa Poeta gebruiken in plaats van het zelf doen?",
+    description1:
+      "Met Creativa Poeta profiteert u van gespecialiseerde expertise, creatieve maatwerkoplossingen, tijdsbesparing, professionele resultaten en nauwe samenwerking om uw creatieve doelen effectief en indrukwekkend te bereiken.",
+    title2:
+      " Hoe lang duurt het project en wanneer kunnen we resultaten verwachten?",
+    description2:
+      "De duur van het project hangt af van de complexiteit en de omvang van de gevraagde diensten. We werken efficiënt om de afgesproken deadlines te halen. De resultaten kunnen variëren afhankelijk van het type project, maar we gebruiken prestatie-indicatoren om voortgang en succes te meten.",
+    title3: "Hoe kan ik een bestelling plaatsen bij Creativa Poeta?",
+    description3:
+      "Een bestelling plaatsen bij Creativa Poeta is eenvoudig. Neem contact met ons op via onze website, e-mail of telefoon. We bespreken uw wensen, maken een offerte en stellen een persoonlijk plan op voor uw project.",
+    title4: "Kunt u werken aan urgente projecten?",
+    description4:
+      "Ja, we begrijpen dat tijd soms cruciaal is. We bieden snelle diensten voor urgente projecten. Neem contact met ons op om uw specifieke deadlines te bespreken.",
+    title5: "Voor welke soorten bedrijven of individuen werkt u?",
+    description5:
+      "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
+    title6: "Wat zijn uw tarieven?",
+    description6:
+      "Onze tarieven variëren afhankelijk van de complexiteit van elk project. We bieden persoonlijke offertes die zijn afgestemd op uw specifieke behoeften. Neem contact met ons op voor een gratis offerte.",
+    title7: "Hoe garandeert u de kwaliteit van uw creaties?",
+    description7:
+      "We hebben een speciaal kwaliteitsteam dat ervoor zorgt dat elke creatie aan onze hoge normen voldoet. Bovendien vragen we regelmatig feedback van onze klanten om continu te verbeteren.",
+    title8: "Kan ik revisies aanvragen voor de creaties die u levert?",
+    description8:
+      "Absoluut, we moedigen revisies aan om ervoor te zorgen dat u 100% tevreden bent. Uw tevredenheid is onze prioriteit, en we brengen de nodige aanpassingen aan om aan uw verwachtingen te voldoen.",
+    title9:
+      "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
+    description9:
+      "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
+    title10:
+      "Biedt u marketingdiensten aan om de creaties die u maakt te promoten?",
+    description10:
+      "Ja, naast creatie, schrijven en video-editing, bieden we marketingdiensten om de zichtbaarheid van uw creaties te vergroten. We ontwikkelen strategieën op maat om uw doelgroep te bereiken en de impact van uw content te maximaliseren.",
+    title11: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
+    description11:
+      "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
+    title12: "Welke betaalmethoden accepteert Creativa Poeta?",
+    description12:
+      "We accepteren verschillende gangbare betaalmethoden, waaronder bankoverschrijvingen, creditcards en andere veilige online betalingsopties. We zorgen ervoor dat u altijd een gemakkelijke betalingsmethode hebt.",
+    title13: "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
+    description13:
+      "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
+    title14: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
+    description14:
+      "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
+    title15: "Voor welke soorten bedrijven of individuen werkt u?",
+    description15:
+      "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
+  },
+
+};
 
 export default FaqLocale;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { FaTimes } from 'react-icons/fa';
-import { LiaBarsSolid } from 'react-icons/lia';
+import React from "react";
+import { FaTimes } from "react-icons/fa";
+import { LiaBarsSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
-import { Dropdown, Menu } from "antd";
+import { Dropdown } from "antd";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 interface BurgerButtonProps {
@@ -43,68 +43,78 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     }
   };
 
-  const langMenu = (
-    <Menu
-      onClick={({ key }) => handleLanguageChange(key)}
-      style={{
-        backgroundColor: "rgba(0, 0, 0, 0)",
-        marginTop: "1rem",
-        width: "50px",
-      }}
-    >
-      <Menu.Item key="English">
-        <div className="flagAndLang flex items-center">
-          <img src="/uk.svg" alt="flag" className="w-6 h-4" />
-        </div>
-      </Menu.Item>
-      <Menu.Item key="Kinyarwanda">
-        <div className="flagAndLang flex items-center space-x-2">
-          <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
-        </div>
-      </Menu.Item>
-      <Menu.Item key="French">
-        <div className="flagAndLang flex items-center space-x-2">
-          <img src="/fr.png" alt="flag" className="w-6 h-4" />
-        </div>
-      </Menu.Item>
-      <Menu.Item key="Dutch">
-        <div className="flagAndLang flex items-center space-x-2">
-          <img src="/nll.jpg" alt="flag" className="w-6 h-4" />
-        </div>
-      </Menu.Item>
-    </Menu>
-  );
+  const langMenu = {
+    onClick: ({ key }: { key: string }) => handleLanguageChange(key),
+    style: {
+      backgroundColor: "rgba(0, 0, 0, 0)",
+      marginTop: "1rem",
+      width: "50px",
+    },
+    items: [
+      {
+        key: "English",
+        label: (
+          <div className="flagAndLang flex items-center">
+            <img src="/uk.svg" alt="flag" className="w-6 h-4" />
+          </div>
+        ),
+      },
+      {
+        key: "Kinyarwanda",
+        label: (
+          <div className="flagAndLang flex items-center space-x-2">
+            <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
+          </div>
+        ),
+      },
+      {
+        key: "French",
+        label: (
+          <div className="flagAndLang flex items-center space-x-2">
+            <img src="/fr.png" alt="flag" className="w-6 h-4" />
+          </div>
+        ),
+      },
+      {
+        key: "Dutch",
+        label: (
+          <div className="flagAndLang flex items-center space-x-2">
+            <img src="/nll.jpg" alt="flag" className="w-6 h-4" />
+          </div>
+        ),
+      },
+    ],
+  };
 
   return (
     <div
       className={`font-bold z-30 text-3xl md:text-4xl text-white flex space-x-3 justify-center m-auto text-center items-center p-1 md:p-1`}
     >
       {/* Flags Dropdown */}
-   
 
       {/* Menu Button */}
       <div className="localizationButtonSwitcher justify-start ">
-  <Dropdown overlay={langMenu} trigger={["click"]}>
-    <button className="currentLocal flex items-center space-x-2">
-      <img
-        src={
-          selectedLang === "en"
-            ? "/uk.svg"
-            : selectedLang === "fr"
-            ? "/fr.png"
-            : selectedLang === "nl"
-            ? "/nll.jpg"
-            : "/rwanda.png"
-        }
-        alt="flag"
-        className="w-6 h-4"
-      />
-      <span className="text-white text-sm">
-        <IoMdArrowDropdown />
-      </span>
-    </button>
-  </Dropdown>
-</div>
+        <Dropdown menu={langMenu} trigger={["click"]}>
+          <button className="currentLocal flex items-center space-x-2">
+            <img
+              src={
+                selectedLang === "en"
+                  ? "/uk.svg"
+                  : selectedLang === "fr"
+                  ? "/fr.png"
+                  : selectedLang === "nl"
+                  ? "/nll.jpg"
+                  : "/rwanda.png"
+              }
+              alt="flag"
+              className="w-6 h-4"
+            />
+            <span className="text-white text-sm">
+              <IoMdArrowDropdown />
+            </span>
+          </button>
+        </Dropdown>
+      </div>
       <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-2 px-2 rounded-md">
         <p className="menu text-[#FFFF00] text-base font-thin">MENU</p>
         {sidebarVisible ? (
@@ -113,8 +123,6 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
           <LiaBarsSolid onClick={toggleSidebar} />
         )}
       </div>
-        
-
     </div>
   );
 };

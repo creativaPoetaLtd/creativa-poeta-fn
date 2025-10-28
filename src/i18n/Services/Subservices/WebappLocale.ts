@@ -24,7 +24,7 @@ answer10:"The cost varies based on project requirements, complexity, and feature
 
  },
   kiny: { 
-    faq:"",
+    faq:"Ibibazo bikunze kubazwa",
 question1:"Ni ubuhe bwoko bwa websites mukora?",
 answer1:"Twibanda ku gukora amoko atandukanye ya websites, harimo e-commerce, websites z’amakompanyi, blogs bwite, portfolio sites, ndetse n’imbuga zashyizweho ku buryo bwihariye ku rwego rw’ubucuruzi bwawe.",
 question2:"Ni iyihe tekinoloji mukoresha mu gukora web?",
@@ -47,7 +47,7 @@ question10:"Ni angahe gukora website cyangwa app bitwara?",
 answer10:"Igiciro kiterwa n’ibyo project isaba, uburemere bwayo, n’ibyo igomba gukora. Twandikire utubwire ibisobanuro bya project yawe.",
   },
    fr: {
-    faq:"",
+    faq:"Foire aux questions",
     question1:"Quels types de sites web développez-vous ?",
 answer1:"Nous sommes spécialisés dans le développement de divers types de sites web, y compris les plateformes e-commerce, les sites d’entreprise, les blogs personnels, les sites portfolio et les applications web personnalisées adaptées à vos besoins.",
 question2:"Quelles technologies utilisez-vous pour le développement web ?",
@@ -71,7 +71,7 @@ answer10:"Le coût varie en fonction des besoins, de la complexité et des fonct
 
    },
   nl: { 
-    faq:"",
+    faq:"Veelgestelde vragen",
 question1:"Welke soorten websites ontwikkelen jullie?",
 answer1:"Wij zijn gespecialiseerd in het ontwikkelen van verschillende soorten websites, waaronder e-commerceplatforms, bedrijfswebsites, persoonlijke blogs, portfoliosites en op maat gemaakte webapplicaties afgestemd op uw bedrijfsbehoeften.",
 question2:"Welke technologieën gebruiken jullie voor webontwikkeling?",

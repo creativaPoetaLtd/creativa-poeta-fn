@@ -18,13 +18,14 @@ const HomeLocale: any = {
         scroll:"FAIRE DÉFILER"
     },
     kiny: {
-        title1: "Udushya tugezweho",
-        description1: "Udushya, ubwiza bugukora ku mutima, ni Creativa Poeta",
-        title2: 'Gushyira mu ngito ibitekerezo byawe',
-        description2: "Ibisubiizo bikurura abakiriye bigatuma uba wihariye",
+        title1: "Hanga Udushya",
+        description1: "Impano mu guhanga udushya akarusho mu busizi iyo niyo Creativa Poeta",
+        title2: 'Hindura ibitekerezo byawe impamo',
+        description2: "Uburyo bwihariye bugutadukanya n'abandi,bugakora k'umutima kandi bugakurura abifuza ibyo ukora",
         action1: "TANGIRA UMUSHINGA",
-        action2: "ABO TURI BO",
+        action2: "IBYO DUKORA",
         scroll:"MANUKA HASI"
+
     },
 
        nl: {
