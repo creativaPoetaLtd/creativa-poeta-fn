@@ -1,15 +1,17 @@
-import Home from './components/sections/Home';
-import About from './components/sections/About';
-import NavBar from './components/NavBars/NavBar';
-import Faq from './components/sections/Faq';
-import Services from './components/sections/Services';
-import Footer from './components/sections/Footer';
-import MainFooter from './components/sections/MainFooter';
+import Home from "./components/sections/Home";
+import About from "./components/sections/About";
+import NavBar from "./components/NavBars/NavBar";
+import Faq from "./components/sections/Faq";
+import Services from "./components/sections/Services";
+import Footer from "./components/sections/Footer";
+import MainFooter from "./components/sections/MainFooter";
+import SEOHead from "./components/SEO/SEOHead";
+import { seoConfig } from "./components/SEO/seoConfig";
 // import Projects from './components/sections/Projects'
 const App = () => {
   return (
-
     <div className="App w-full flex flex-col snap-x scroll-smooth">
+      <SEOHead {...seoConfig.home} />
       <div className="w-full ml-6 right-2 left flex justify-end">
         <NavBar />
       </div>
@@ -17,13 +19,12 @@ const App = () => {
         <Home />
         <About />
         <Services />
-         {/* <Projects /> */}
+        {/* <Projects /> */}
         <Faq />
         <Footer />
         <MainFooter />
       </div>
     </div>
-
   );
 };
 

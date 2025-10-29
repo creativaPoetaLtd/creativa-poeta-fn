@@ -1,569 +1,479 @@
 const ProjectsFormLocale: any = {
   en: {
-header1:"Get Started", 
- button1:"Next",
- paragraph1:"Please select a deliverable to proceed.",
-button2:"Back",
-paragraph2:"What is the main goal of your project? ",
-paragraph3:"What type of project would you like to undertake?",
-paragraph4:"What deliverables are you expecting from this project?",
-paragraph5:"What audience are you aiming to reach?",
-paragraph6:" Please select audience to proceed.",
-paragraph7:"What style preferences do you have for this project?",
-paragraph8:"Please select prefered styles to proceed.",
-paragraph9:"Please select content elements to proceed.",
-paragraph10:"What is your budget for this project?",
-paragraph11:"Please select a budget to proceed.",
-paragraph12:"What is your timeline for this project?",
+    header1: "Get Started",
+    button1: "Next",
+    button2: "Back",
+    header2: "Submit",
+    paragraph1: "Please select a service type to proceed.",
+    paragraph2: "Please select what you want us to do for you.",
+    paragraph21: "Please fill out all fields correctly before submitting.",
 
-paragraph14:"Select a timeline",
-paragraph15:"Please select a timeline to proceed.",
-paragraph16:"What is your current status?",
+    name: "Name",
+    name2: "Enter your name",
+    email: "Email",
+    email2: "Enter your email",
+    phone: "Phone",
+    phone2: "Enter your phone number",
+    company: "Company",
+    company2: "Enter your company name",
+    additionalInfo: "Additional Information",
+    additionalInfo2: "Additional information",
 
-paragraph18:"Select a status",
-paragraph19:"Please select a status to proceed.",
-paragraph20:"What is the purpose of this project?",
-paragraph21:"Please fill out all fields correctly before submitting.",
+    // Other service handling
+    otherServiceQuestion: "Please describe the type of service you need",
+    otherServicePlaceholder: "Describe the service type you're looking for...",
+    otherSpecificQuestion: "What specific work do you want us to do for you?",
+    otherSpecificPlaceholder:
+      "Describe your specific requirements and what you want us to deliver...",
+    otherValidationMessage:
+      "Please describe your service needs before proceeding.",
 
-name2:"Enter your name",
+    // Service-specific "Other" handling
+    serviceSpecificOtherQuestion: "Please describe your specific requirements",
+    serviceSpecificOtherPlaceholder:
+      "Tell us exactly what you need us to do for you...",
+    serviceSpecificOtherValidation:
+      "Please describe your specific requirements before proceeding.",
 
-email2:"Enter your email",
+    // Step 1: Service Types (Radio - Single Choice)
+    step1Question: "What type of project would you like us to work on?",
+    serviceType1:
+      "Graphic Design/Logo Creation, Posters, Visual Messages (Graphic Design)",
+    serviceType2:
+      "Writing Content, Books, Letters, Web Content or Various Websites",
+    serviceType3:
+      "Online Marketing/Promotion and Creating Internet Opportunities and Social Media",
+    serviceType4:
+      "Creating/Designing Websites, Apps, Various Programs or Systems",
+    serviceType6: "Other",
 
-phone2:"Enter your phone number",
-company:"company",
-company2:"Enter your company name",
-additionalInfo:"additionalInfo",
-additionalInfo2:"Additional information",
-header2:"Submit",
-      projectType1: "Graphic Design and Visual Communication",
-     projectType2: "Content Writing and Creation",
-      projectType3:"Digital Marketing and Social Media",
-      projectType4:"Web and App Development",
-      projectType5:"Other", 
-    
-     deliverables1: "Graphic Design and Visual Communication",
-        deliverables2:"Logo Design",  
-        deliverables3:"Brand Identity Package (logos, business cards, letterheads)",
-       deliverables4: "Custom Illustrations",
-        deliverables5:"Infographics",
-       deliverables6: "Social Media Templates",
-        deliverables7:"Supports marketing (affiches, flyers, brochures)",
-       deliverables8: "Marketing Collaterals (posters, flyers, brochures)",
-       deliverables9: "Digital Ads Graphics",
-        deliverables10:"Presentation Design",
-      
-    deliverables11:"Content Writing and Creation",
-  deliverables12:"SEO-Optimized Blog Posts",
-  deliverables13:"Website Copy",
-  deliverables14:"Social Media Captions and Content",
-  deliverables15:"White Papers and Case Studies",
-  deliverables16:"Email Marketing Campaign Content",
-  deliverables17:"E-books and Guides",
-  deliverables18:"Press Releases",
-  deliverables19:"Video Scriptwriting",
-  deliverables20:"Product Descriptions",
+    // Step 2: Graphic Design Services (Multiple Choice)
+    step2GraphicQuestion: "Select what you want us to do for you",
+    graphicService1: "Logo Design/Creation",
+    graphicService2: "Brand Package (logo, business cards, headers, etc.)",
+    graphicService3: "Illustrations, Images, Special Photos",
+    graphicService4: "Message Graphics (infographics)",
+    graphicService5: "Graphics, Photos, Videos for Social Media Advertising",
+    graphicService6:
+      "Online Marketing Materials (posters, flyers, brochures, etc.)",
+    graphicService7: "Marketing Materials (posters, flyers, brochures, etc.)",
+    graphicService8:
+      "Logos on Packaging or Other Items (clothing, bags, cars, packaging, etc.)",
+    graphicService9:
+      "Creating Presentations, PowerPoints, Slides or Other Presentation Materials",
+    graphicService10: "Other",
 
-  deliverables21:"Digital Marketing and Social Media",
-  deliverables22:"Comprehensive Marketing Strategy Plan",
-  deliverables23:"Search Engine Optimization (SEO) Audits and Reports",
-  deliverables24:"Google Ads Campaign Setup and Management",
-  deliverables25:"Social Media Strategy and Management",
-  deliverables26:"Content Calendar for Social Platforms",
-  deliverables27:"Email Marketing Campaigns",
-  deliverables28:"Performance Analytics and Reports",
-  deliverables29:"Brand Campaign Development",
-  deliverables30:"Influencer Marketing Collaboration Plan",
+    // Step 2: Content Writing Services (Multiple Choice)
+    step2ContentQuestion: "Select what you want us to do for you",
+    contentService1:
+      "Writing Stories (blogs) that will make your website highly visited (SEO)",
+    contentService2:
+      "Writing Stories, Information, Lessons or Other Writings for Your Website",
+    contentService3:
+      "Writing Stories, Messages, Lessons for Social Media and Making Them Appear Often",
+    contentService4: "Detailed Writing Learning About Something Specific",
+    contentService5:
+      "Marketing Messages Sent via Email and Techniques to Send Them",
+    contentService6: "Guide Writing and Explanatory Writing (E-books & Guides)",
+    contentService7: "Announcements",
+    contentService8: "Writing Games or Drama",
+    contentService9: "Writing Product Descriptions",
+    contentService10:
+      "Writing Speeches, Speeches and Speeches, CVs, Job Application Letters and Other Letters",
+    contentService11: "Help Writing Books and Reports",
+    contentService12: "Writing and Editing Stories",
+    contentService13: "Translation, Special Letters and Professional Writing",
+    contentService14:
+      "Business Writing, Project Writing and Preparing or Starting Projects",
+    contentService15: "Other",
 
-   deliverables31:"Web and App Development",
-  deliverables32:"Fully Responsive Website",
-  deliverables33:"Custom Landing Page Design",
-  deliverables34:"E-commerce Website Development",
-  deliverables35:"Web Application Development",
-  deliverables36:"Mobile App Development (iOS and Android)",
-  deliverables37:"User Interface (UI) Design",
-  deliverables38:"User Experience (UX) Prototyping",
-  deliverables39:"Backend and Database Integration",
-  deliverables40:"Website Performance Optimization",
-  deliverables41:"Maintenance and Support Plans",
-    deliverables42:" Other",
+    // Step 2: Digital Marketing Services (Multiple Choice)
+    step2MarketingQuestion: "Select what you want us to do for you",
+    marketingService1: "Managing and using your social media accounts",
+    marketingService2:
+      "Assisting in earning money from your social media platforms using internet",
+    marketingService3: "Increasing number of viewers of what you do",
+    marketingService4: "Advitizing on internet and your social media platforms",
+    marketingService5:
+      "Hustling on internet (e.g., finding opportunities, working, selling, collaborations, commissioning, etc.)",
+    marketingService6: "Populaity raising",
+    marketingService7: "Search Engine Optimization (SEO)",
+    marketingService8: "Social media platforms audit and development",
+    marketingService9: "Other",
 
-      mainGoals1:"Increase brand visibility",
-      mainGoals2:"Attract new clients",
-      mainGoals3:"Build a visual identity",
-      mainGoals4:"Increase sales",
-      mainGoals5:"Promote a new offering",
-      mainGoals6:"Educate or inform the public",
-    
-   
-       audience1: "General public",
-       audience2: "Professionals",
-       audience3: "Young adults",
-       audience4: "Local community",
-      audience5:  "International market",
-    
-     
-      stylePreferences1:"Formal and professional",
-      stylePreferences2:"Creative and original",
-      stylePreferences3:"Minimalistic and modern",
-      stylePreferences4:"Warm and engaging",
-      stylePreferences5:"Casual and relaxed",
-     stylePreferences6: "Innovative and high-tech",
-    
-    
-     contentElements1:"Photos",
-      contentElements2: "Illustrations",
-      contentElements3: "Videos",
-      contentElements4: "Explanatory text",
-      contentElements5: "Client testimonials",
-      contentElements6: "Call-to-action statements",
-    
-     
-     budgetOptions1: "Less than €500",
-      budgetOptions2:"Between €500 and €1000",
-      budgetOptions3:"Between €1000 and €5000",
-      budgetOptions4:"More than €5000",
-    
-     
-      timelineOptions1:"Less than a month",
-      timelineOptions2:"1 to 3 months",
-      timelineOptions3:"3 to 6 months",
-      timelineOptions4:"More than 6 months",
-    
-    
-     statusOptions1:"Self-employed",
-      statusOptions2: "Student",
-      statusOptions3: "Company",
-      statusOptions4: "Non-profit",
-    
-    
-      projectPurposes1: "Launch a new service",
-      projectPurposes2: "Improve brand image",
-      projectPurposes3: "Generate more sales",
-      projectPurposes4: "Personal project (portfolio, CV, etc.)",
-      placeholder1:"Select a goal",
-      placeholder2:"Select a style",
-      placeholder3:"Select a budget"
-    
+    // Step 2: Web Development Services (Multiple Choice)
+    step2WebQuestion: "Select what you want us to do for you",
+    webService1: "Developing Websites",
+    webService2: "Maintaining and updating your websites",
+    webService3: "Designing websites and applications",
+    webService4: "Developing programs and systems",
+    webService5: "Mobile App Development (iOS and Android)",
+    webService6: "Other",
   },
+
   fr: {
-    header1:"Commencer",
-button1:"Suivant",
- paragraph1:"Veuillez sélectionner un livrable pour continuer",
- button2:" Retour",
- paragraph2:"Quel est l'objectif principal de votre projet ?",
- paragraph3:"Quel type de projet aimeriez-vous entreprendre ?",
- paragraph4:"Quels livrables attendez-vous de ce projet ?",
- paragraph5:"Quel public cherchez-vous à atteindre ?",
- paragraph6:"Veuillez sélectionner un public pour continuer.",
- paragraph7:"Quelles préférences de style avez-vous pour ce projet ?",
- paragraph8:"Veuillez sélectionner les styles préférés pour continuer.",
- paragraph9:"Veuillez sélectionner les éléments de contenu pour continuer.",
- paragraph10:"Quel est votre budget pour ce projet ?",
- paragraph11:"Veuillez sélectionner un budget pour continuer.",
- paragraph12:"Quel est votre calendrier pour ce projet ?",
- paragraph13:"Calendrier",
- paragraph14:"Sélectionnez un calendrier",
- paragraph15:"Veuillez sélectionner un calendrier pour continuer.",
- paragraph16:"Quel est votre statut actuel ?",
- paragraph17:"Statut",
- paragraph18:"Sélectionnez un statut",
- paragraph19:"Veuillez sélectionner un statut pour continuer.",
- paragraph20:"Quel est le but de ce projet ?",
- paragraph21:"Veuillez remplir correctement tous les champs avant de soumettre.",
- name:"Nom",
-name2:"Entrez votre nom",
-email:"E-mail",
-email2:"Entrez votre e-mail",
-phone:"Téléphone",
-phone2:"Entrez votre numéro de téléphone",
-company:"Société",
-company2:"Entrez le nom de votre société",
-additionalInfo:"Informations supplémentaires",
-additionalInfo2:"Informations supplémentaires",
-header2:"Soumettre",
+    header1: "Commencer",
+    button1: "Suivant",
+    button2: "Retour",
+    header2: "Soumettre",
+    paragraph1: "Veuillez sélectionner un type de service pour continuer.",
+    paragraph2:
+      "Veuillez sélectionner ce que vous voulez que nous fassions pour vous.",
+    paragraph21:
+      "Veuillez remplir correctement tous les champs avant de soumettre.",
 
-projectType1: "Conception graphique et communication visuelle",
-     projectType2: "Rédaction et création de contenu",
-      projectType3:"Marketing numérique et réseaux sociaux",
-      projectType4:"Développement web et application",
-      projectType5:"Autre", 
-    
+    name: "Nom",
+    name2: "Entrez votre nom",
+    email: "E-mail",
+    email2: "Entrez votre e-mail",
+    phone: "Téléphone",
+    phone2: "Entrez votre numéro de téléphone",
+    company: "Société",
+    company2: "Entrez le nom de votre société",
+    additionalInfo: "Informations supplémentaires",
+    additionalInfo2: "Informations supplémentaires",
 
-      deliverables1: "Conception graphique et communication visuelle",
-        deliverables2:"Conception de logo",
-        deliverables3:"Pack d’identité visuelle (logos, cartes de visite, en-têtes)",
-       deliverables4: "Illustrations personnalisées",
-        deliverables5:"Infographies",
-       deliverables6: "Modèles pour réseaux sociaux",
-        deliverables7:"Supports marketing (affiches, flyers, brochures)",
-       deliverables8: "Graphismes publicitaires numériques",
-       deliverables9: "Design d’emballage produit",
-        deliverables10:"Design de présentation",
-      
-    deliverables11:"Rédaction et Création de Contenu",
-  deliverables12:"Articles de blog optimisés SEO",
-  deliverables13:"Textes de site web",
-  deliverables14:"Légendes et contenus pour les réseaux sociaux",
-  deliverables15:"Livres blancs et études de cas",
-  deliverables16:"Contenu de campagnes d’email marketing",
-  deliverables17:"E-books et guides",
-  deliverables18:"Communiqués de presse",
-  deliverables19:"Rédaction de scripts vidéo",
-  deliverables20:"Descriptions de produits",
+    // Other service handling
+    otherServiceQuestion:
+      "Veuillez décrire le type de service dont vous avez besoin",
+    otherServicePlaceholder:
+      "Décrivez le type de service que vous recherchez...",
+    otherSpecificQuestion:
+      "Quel travail spécifique voulez-vous que nous fassions pour vous?",
+    otherSpecificPlaceholder:
+      "Décrivez vos exigences spécifiques et ce que vous voulez que nous livrions...",
+    otherValidationMessage:
+      "Veuillez décrire vos besoins de service avant de continuer.",
 
-  deliverables21:"Marketing Digital et Réseaux Sociaux",
-  deliverables22:"Plan stratégique de marketing complet",
-  deliverables23:"Audits et rapports SEO",
-  deliverables24:"Mise en place et gestion de campagnes Google Ads",
-  deliverables25:"Stratégie et gestion des réseaux sociaux",
-  deliverables26:"Calendrier éditorial pour les réseaux sociaux",
-  deliverables27:"Campagnes d’email marketing",
-  deliverables28:"Rapports et analyses de performance",
-  deliverables29:"Développement de campagnes de marque",
-  deliverables30:"Plan de collaboration avec des influenceurs",
+    // Service-specific "Other" handling
+    serviceSpecificOtherQuestion: "Veuillez décrire vos exigences spécifiques",
+    serviceSpecificOtherPlaceholder:
+      "Dites-nous exactement ce que vous voulez que nous fassions pour vous...",
+    serviceSpecificOtherValidation:
+      "Veuillez décrire vos exigences spécifiques avant de continuer.",
 
-   deliverables31:"Développement Web et Applications",
-  deliverables32:"Site web entièrement responsive",
-  deliverables33:"Conception de landing page personnalisée",
-  deliverables34:"Développement de site e-commerce",
-  deliverables35:"Développement d’applications web",
-  deliverables36:"Développement d’applications mobiles (iOS et Android)",
-  deliverables37:"Conception d’interface utilisateur (UI)",
-  deliverables38:"Prototypage d’expérience utilisateur (UX)",
-  deliverables39:"Intégration backend et base de données",
-  deliverables40:"Optimisation des performances du site",
-  deliverables41:"Plans de maintenance et support",
-    deliverables42:"Autre",
-    
-mainGoals1: "Accroître la visibilité de la marque",
-mainGoals2: "Attirer de nouveaux clients",
-mainGoals3: "Construire une identité visuelle",
-mainGoals4: "Augmenter les ventes",
-mainGoals5: "Promouvoir une nouvelle offre",
-mainGoals6: "Éduquer ou informer le public",
+    // Step 1: Service Types (Radio - Single Choice)
+    step1Question: "Quel type de projet aimeriez-vous que nous réalisions?",
+    serviceType1:
+      "Conception Graphique/Création de Logo, Affiches, Messages Visuels (Graphic Design)",
+    serviceType2:
+      "Rédaction de Contenu, Livres, Lettres, Contenu Web ou Divers Sites Web",
+    serviceType3:
+      "Marketing en Ligne/Promotion et Création d'Opportunités Internet et Réseaux Sociaux",
+    serviceType4:
+      "Création/Conception de Sites Web, Apps, Divers Programmes ou Systèmes",
+    serviceType6: "Autre",
 
-audience1: "Grand public",
-audience2: "Professionnels",
-audience3: "Jeunes adultes",
-audience4: "Communauté locale",
-audience5: "Marché international",
+    // Step 2: Graphic Design Services (Multiple Choice)
+    step2GraphicQuestion:
+      "Sélectionnez ce que vous voulez que nous fassions pour vous",
+    graphicService1: "Conception/Création de Logo",
+    graphicService2:
+      "Package de Marque (logo, cartes de visite, en-têtes, etc.)",
+    graphicService3: "Illustrations, Images, Photos Spéciales",
+    graphicService4: "Graphiques de Message (infographies)",
+    graphicService5:
+      "Graphiques, Photos, Vidéos pour la Publicité sur les Réseaux Sociaux",
+    graphicService6:
+      "Matériaux de Marketing en Ligne (affiches, flyers, posters, brochures, etc.)",
+    graphicService7:
+      "Matériaux de Marketing (affiches, flyers, posters, brochures, etc.)",
+    graphicService8:
+      "Logos sur Emballages ou Autres Articles (vêtements, sacs, voitures, emballages, etc.)",
+    graphicService9:
+      "Création de Présentations, PowerPoints, Slides ou Autres Matériaux de Présentation",
+    graphicService10: "Autre",
 
-stylePreferences1: "Formel et professionnel",
-stylePreferences2: "Créatif et original",
-stylePreferences3: "Minimaliste et moderne",
-stylePreferences4: "Chaleureux et engageant",
-stylePreferences5: "Décontracté et simple",
-stylePreferences6: "Innovant et haute technologie",
+    // Step 2: Content Writing Services (Multiple Choice)
+    step2ContentQuestion:
+      "Sélectionnez ce que vous voulez que nous fassions pour vous",
+    contentService1:
+      "Rédaction d'Histoires (blogs) qui rendront votre site web très visité (SEO)",
+    contentService2:
+      "Rédaction d'Histoires, Informations, Leçons ou Autres Écrits pour Votre Site Web",
+    contentService3:
+      "Rédaction d'Histoires, Messages, Leçons pour les Réseaux Sociaux et les Faire Apparaître Souvent",
+    contentService4:
+      "Rédaction Détaillée d'Apprentissage sur Quelque Chose de Spécifique",
+    contentService5:
+      "Messages Marketing Envoyés par E-mail et Techniques pour les Envoyer",
+    contentService6:
+      "Rédaction de Guides et Écrits Explicatifs (E-books & Guides)",
+    contentService7: "Annonces",
+    contentService8: "Rédaction de Jeux ou Drame",
+    contentService9: "Rédaction de Descriptions de Produits",
+    contentService10:
+      "Rédaction de Discours, Discours et Discours, CVs, Lettres de Candidature et Autres Lettres",
+    contentService11: "Aide à la Rédaction de Livres et Rapports",
+    contentService12: "Rédaction et Édition d'Histoires",
+    contentService13:
+      "Traduction, Lettres Spéciales et Rédaction Professionnelle",
+    contentService14:
+      "Rédaction d'Affaires, Rédaction de Projets et Préparation ou Démarrage de Projets",
+    contentService15: "Autre",
 
-contentElements1: "Photos",
-contentElements2: "Illustrations",
-contentElements3: "Vidéos",
-contentElements4: "Texte explicatif",
-contentElements5: "Témoignages clients",
-contentElements6: "Appels à l’action",
+    // Step 2: Digital Marketing Services (Multiple Choice)
+    step2MarketingQuestion:
+      "Sélectionnez ce que vous voulez que nous fassions pour vous",
+    marketingService1:
+      "Gestion et utilisation de vos comptes de réseaux sociaux",
+    marketingService2:
+      "Aide à gagner de l'argent à partir de vos plateformes de réseaux sociaux en utilisant Internet",
+    marketingService3:
+      "Augmentation du nombre de spectateurs de ce que vous faites",
+    marketingService4:
+      "Publicité sur Internet et vos plateformes de réseaux sociaux",
+    marketingService5:
+      "Hustling sur Internet (par exemple, trouver des opportunités, travailler, vendre, collaborations, commissions, etc.)",
+    marketingService6: "Augmentation de la popularité",
+    marketingService7: "Optimisation pour les moteurs de recherche (SEO)",
+    marketingService8:
+      "Audit et développement des plateformes de réseaux sociaux",
+    marketingService9: "Autre",
 
-budgetOptions1: "Moins de 500 €",
-budgetOptions2: "Entre 500 € et 1000 €",
-budgetOptions3: "Entre 1000 € et 5000 €",
-budgetOptions4: "Plus de 5000 €",
-
-timelineOptions1: "Moins d’un mois",
-timelineOptions2: "1 à 3 mois",
-timelineOptions3: "3 à 6 mois",
-timelineOptions4: "Plus de 6 mois",
-
-statusOptions1: "Travailleur indépendant",
-statusOptions2: "Étudiant",
-statusOptions3: "Entreprise",
-statusOptions4: "Organisation à but non lucratif",
-
-projectPurposes1: "Lancer un nouveau service",
-projectPurposes2: "Améliorer l’image de marque",
-projectPurposes3: "Générer plus de ventes",
-projectPurposes4: "Projet personnel (portfolio, CV, etc.)",
-placeholder1:"Sélectionnez un objectif",
-placeholder2:"Sélectionnez un style",
-placeholder3:"Sélectionnez un budget"
+    // Step 2: Web Development Services (Multiple Choice)
+    step2WebQuestion:
+      "Sélectionnez ce que vous voulez que nous fassions pour vous",
+    webService1: "Développement de Sites Web",
+    webService2: "Maintenance et mise à jour de vos sites web",
+    webService3: "Conception de sites web et d'applications",
+    webService4: "Développement de programmes et de systèmes",
+    webService5: "Développement d'Applications Mobiles (iOS et Android)",
+    webService6: "Autre",
   },
+
   kiny: {
-    header1:"Tangira",
-   button1:"Ibikurikira",
- paragraph1:"hitamo igikwiye gukorwa kugira ngo ukomeze.",
- button2:"Subira Inyuma",
- paragraph2:"Ni iyihe Ntego Nyamukuru y'umushinga wanyu",
- paragraph3:"Ni ubuhe bwoko bw’umushinga mwifuza gukora?",
- paragraph4:"Niki mwiteze kuri uyu mushinga",
- paragraph5:"Ni abahe bagenerwabikorwa mwifuza kugeraho",
- paragraph6:"Muhitemo abantu mushaka kugeraho kugira ngo mukomeze.",
- paragraph7:"Ni ubuhe buryo ukunda ufite kuri uyu mushinga?",
- paragraph8:"Muhitemo imiterere mukunda kugira ngo mukomeze.",
- paragraph9:"Muhitemo ibice by’ibikubiye mu mushinga kugira ngo mukomeze.",
- paragraph10:"Ni iyihe ngano y'amafaranga mwateguriye uyu mushinga",
- paragraph11:"Muhitemo ingengo y’imari kugira ngo mukomeze.",
- paragraph12:"Ni igihe kingana iki mufite ku mushinga wanyu?",
- paragraph13:"Ingengabihe y'umushinga",
- paragraph14:"Hitamo igihe cy'umushinga",
- paragraph15:"Muhitemo igihe cy’umushinga kugira ngo mukomeze.",
- paragraph16:"Ni ikihe cyiciro urimo ubu (status)",
- paragraph17:"Ikiciro",
- paragraph18:"Hitamo icyiciro",
- paragraph19:"Muhitemo icyiciro kugira ngo mukomeze.",
- paragraph20:"Intego y’uyu mushinga ni iyihe?",
- paragraph21:"Wuzuze neza imyanya yose mbere yo kohereza.",
- name:"Izina",
-name2:"Shyiramo izina ryawe",
-email:"emeli",
-email2:"shyiramo imeli yawe",
-phone:"Telefoni",
-phone2:"Shyiramo nimero zawe za telefoni",
-company:"Ikigo",
-company2:"Shyiramo izina ry'ikigo",
-additionalInfo:"Amakuru y'inyongera",
-additionalInfo2:"Amakuru y'inyongera",
-header2:"Ohereza",
-projectType1: "Igishushanyo mbonera n’Itumanaho rigaragara",
-projectType2: "Kwandika no Gukora Ibirimo",
-projectType3: "Ubucuruzi bwo kuri Murandasi n’Imbuga Nkoranyambaga",
-projectType4: "Gukora Urubuga na Porogaramu",
-projectType5: "Ibindi",
+    header1: "Tangira",
+    button1: "Ibikurikira",
+    button2: "Subira Inyuma",
+    header2: "Ohereza",
+    paragraph1: "Hitamo ubwoko bwa serivisi kugira ngo ukomeze.",
+    paragraph2: "Hitamo ibyo mwifuza ko tubakorera.",
+    paragraph21: "Wuzuze neza imyanya yose mbere yo kohereza.",
 
-deliverables1: "Igishushanyo mbonera n’Itumanaho riboneka mu mashusho",
-deliverables2:"Igishushanyo cya Logo",  
-deliverables3:"Paki yo kumenya Ikirango (logo, amakarita y’akazi, impapuro zifite umutwe w’ikigo)",
-deliverables4:"Ishusho zihariye",
-deliverables5:"Ibishushanyo bigaragaza amakuru (Infographics)",
-deliverables6:"Inyandiko za Sosiyete zikoreshwa ku mbuga nkoranyambaga",
-deliverables7:"Ibikoresho byo kwamamaza (amafishi, flyer, brochure)",
-deliverables8:"Ibikoresho byo kwamamaza (amafishi, flyer, brochure)",
-deliverables9:"Ibishushanyo by’amamaza kuri murandasi",
-deliverables10:"Igishushanyo cy’Icyegeranyo",
+    name: "Izina",
+    name2: "Shyiramo izina ryawe",
+    email: "Emeli",
+    email2: "Shyiramo imeli yawe",
+    phone: "Telefoni",
+    phone2: "Shyiramo nimero zawe za telefoni",
+    company: "Ikigo",
+    company2: "Shyiramo izina ry'ikigo",
+    additionalInfo: "Amakuru y'inyongera",
+    additionalInfo2: "Amakuru y'inyongera",
 
-deliverables11:"Kwandika no Gukora Ibirimo",
-deliverables12:"Inyandiko za Blog zinoze ku bijyanye na SEO",
-deliverables13:"Inyandiko zo ku rubuga rwa interineti",
-deliverables14:"Ubutumwa n’ibirimo byo ku mbuga nkoranyambaga",
-deliverables15:"Impapuro z’isesengura n’inyandiko z’icyitegererezo",
-deliverables16:"Ibirimo byo mu bikorwa byo kwamamaza ukoresheje email",
-deliverables17:"E-books n’Inyandiko ngenderwaho",
-deliverables18:"Amatangazo y’itangazamakuru",
-deliverables19:"Inyandiko z’amashusho (video scriptwriting)",
-deliverables20:"Ibisobanuro by’ibicuruzwa",
+    // Other service handling
+    otherServiceQuestion: "Sobanura ubwoko bwa serivisi ushaka",
+    otherServicePlaceholder: "Sobanura ubwoko bwa serivisi ushakisha...",
+    otherSpecificQuestion: "Ni iki cyane mwifuza ko tubakorera?",
+    otherSpecificPlaceholder:
+      "Sobanura ibyo mwifuza n'ibyo mwifuza ko tugeza...",
+    otherValidationMessage: "Sobanura icyo ushaka mbere yo gukomeza.",
 
-deliverables21:"Ubucuruzi bwo kuri Murandasi n’Imbuga Nkoranyambaga",
-deliverables22:"Gahunda y’Ubucuruzi yo kwamamaza irambuye",
-deliverables23:"Isesengura rya SEO n’amaraporo",
-deliverables24:"Gutunganya no gucunga ubukangurambaga bwa Google Ads",
-deliverables25:"Gahunda no gucunga imbuga nkoranyambaga",
-deliverables26:"Kalendari y’ibirimo byo ku mbuga nkoranyambaga",
-deliverables27:"Ubukangurambaga bwo kwamamaza ukoresheje email",
-deliverables28:"Isesengura ry’imikorere n’amaraporo",
-deliverables29:"Iterambere ry’ubukangurambaga bw’ikirango",
-deliverables30:"Gahunda yo gufatanya n’abamamyi b’ibyamamare",
+    // Service-specific "Other" handling
+    serviceSpecificOtherQuestion: "Sobanura ibyo ukeneye byihariye",
+    serviceSpecificOtherPlaceholder:
+      "Tubwire neza icyo ushaka ko tugukorera...",
+    serviceSpecificOtherValidation:
+      "Sobanura ibyo ukeneye byihariye mbere yo gukomeza.",
 
-deliverables31:"Gukora Urubuga na Porogaramu",
-deliverables32:"Urubuga rwose rukora neza kuri buri gikoresho",
-deliverables33:"Igishushanyo cy’urupapuro rwo gutangiza (Landing Page)",
-deliverables34:"Gukora urubuga rw’ubucuruzi bwo kuri murandasi",
-deliverables35:"Gukora Porogaramu z’urubuga",
-deliverables36:"Gukora Porogaramu z’igendanwa (iOS na Android)",
-deliverables37:"Igishushanyo cy’imigaragarire y’umukoresha (UI)",
-deliverables38:"Gukora igerageza ry’imikoreshereze y’umukoresha (UX Prototyping)",
-deliverables39:"Iyinjizamo rya Backend n’Ububiko bwa Database",
-deliverables40:"Kunoza imikorere y’urubuga",
-deliverables41:"Gahunda zo gufasha no kubungabunga",
-deliverables42:"Ibindi",
+    // Step 1: Service Types (Radio - Single Choice)
+    step1Question: "Ni ubuhe bwoko bw’umushinga mwifuza gukora?",
+    serviceType1:
+      "Gushushanya/Gukora ibirango,‘affiches’, ubutumwa mu buryo bw’amashusho ( ‘graphic design’))",
+    serviceType2:
+      "Kwandika imivugo, ibitabo, amabaruwa, ibigize ‘web’ cyangwa imbuga zitandukanye",
+    serviceType3:
+      "Gucururiza/Gukorera ‘online’ no kubyaza amahirwe ‘internet’ n’imbuga nkoranyambaga",
+    serviceType4:
+      "Gukora/Gushushanya ‘website’, ‘apps’, porogaramu zitandukanye cyangwa sisitemu",
+    serviceType6: "Ibindi",
 
-mainGoals1: "Kongera kumenyekana kw’ikirango",
-mainGoals2: "Gukurura abakiriya bashya",
-mainGoals3: "Kubaka ishusho y’ikirango",
-mainGoals4: "Kongera ubucuruzi",
-mainGoals5: "Kwamamaza serivisi nshya",
-mainGoals6: "Gutoza cyangwa kumenyesha abantu",
+    // Step 2: Graphic Design Services (Multiple Choice)
+    step2GraphicQuestion: "Hitamo ibyo mwifuza ko tubakorera",
+    graphicService1: "Gushushanya/Gukora ikirango ('logo')",
+    graphicService2:
+      "'Pack' y'ibiranga akazi (logo, amakarita y'akazi, impapuro zifite umutwe w'ikigo,...)",
+    graphicService3: "Ibishushanyo, amashusho, amafoto yihariye",
+    graphicService4:
+      "Ibishushanyo bigaragaza ubutumwa ( 'infographics/infographie')",
+    graphicService5:
+      "Ibishushanyo, amafoto, videwo byo gucisha ku mbuga nkoranyambaga",
+    graphicService6:
+      "Ibyifashishwa mu kwimenyakanisha kuri internet 'online' ( 'affiches', 'flyers', 'posters', 'brochures',...)",
+    graphicService7:
+      "Ibyifashishwa mu kwamamaza ( 'affiches', 'flyers', 'posters', 'brochures',...)",
+    graphicService8:
+      "Ibirango bijya ku bifuniko cyangwa ku bindi bintu (imyenda, ibikapu, imodoka, 'emballages',...)",
+    graphicService9:
+      "Gukora 'presentations, PowerPoints, slides' cyangwa ibindi byifashishwa muri 'presentation'",
+    graphicService10: "Ibindi",
 
-audience1: "Abaturage bose",
-audience2: "Ababigize umwuga",
-audience3: "Urubyiruko",
-audience4: "Umuryango w’aho utuye",
-audience5: "Isoko mpuzamahanga",
+    // Step 2: Content Writing Services (Multiple Choice)
+    step2ContentQuestion: "Hitamo ibyo mwifuza ko tubakorera",
+    contentService1:
+      "Kwandika inkuru ku kintu ( 'blog') kikazatuma urubuga rwawe rusurwa cyane (SEO)",
+    contentService2:
+      "Kwandika inkuru, amakuru, inyigisho cyangwa izindi nyandiko zigenewe kujya ku rubuga rwawe",
+    contentService3:
+      "Kwandika inkuru, ubutumwa, inyigisho bigenewe imbuga nk. no gukora ibituma bigaragara henshi",
+    contentService4: "Inyandiko isesenguye yiga ku kintu runaka",
+    contentService5:
+      "Ubutumwa bwo kwamamaza bucishwa kuri 'email' ndetse na tekiniki zo kubucishaho",
+    contentService6:
+      "Inyandiko ngenderwaho n'inyandiko zisobanura uburyo bikorwa ( 'E-books & Guides')",
+    contentService7: "Amatangazo",
+    contentService8: "Kwandika imikino cyangwa ikinamico",
+    contentService9: "Kwandika ibisobanuro by'ibicuruzwa",
+    contentService10:
+      "Kwandika 'discours/speeches', imivugo n'ibisigo, 'CV', amabaruwa asaba akazi n'andi mabaruwa,...",
+    contentService11: "Ubufasha mu kwandika ibitabo na raporo",
+    contentService12: "Kwandika no gukosora inkuru",
+    contentService13: "Inyandikomvugo, amabaruwa yihariye n'inyandiko z'umwuga",
+    contentService14:
+      "Inyandiko z'ubucuruzi, iz'imishinga no gutegura cyangwa gutangiza imishinga",
+    contentService15: "Ibindi",
 
-stylePreferences1: "Biteguye neza kandi by’umwuga",
-stylePreferences2: "Bihangano bishya kandi byihariye",
-stylePreferences3: "Byoroheje kandi bigezweho",
-stylePreferences4: "Bitanga urugwiro kandi bikurura",
-stylePreferences5: "Bisanzwe kandi byoroshye",
-stylePreferences6: "Bihanga udushya kandi bya tekinoloji yo hejuru",
+    // Step 2: Digital Marketing Services (Multiple Choice)
+    step2MarketingQuestion: "Hitamo ibyo mwifuza ko tubakorera",
+    marketingService1:
+      "Kugucungira no kugukoreshereza imbuga nkoranyambaga n’izindi mbuga zawe",
+    marketingService2:
+      "Ubufasha mu gukoresha no kubyaza umusaruro imbuga nkoranyambaga na internet",
+    marketingService3:
+      "Kongera umubare w’abareba ibyo ukora cyangwa uw’abasura imbuga nkoranyambaga zawe",
+    marketingService4:
+      "Kwamamaza kuri internet ‘online’ ndetse no ku mbuga nkoranyambaga",
+    marketingService5:
+      "Gushabika online ( gukorera, gucuruza, gucururiza abandi, ubukomisiyoneri online,...)",
+    marketingService6: "Kwimenyekanisha",
+    marketingService7: "Guhora imbere mu bandi (SEO)",
+    marketingService8: "Guhora imbere mu bandi (SEO)",
+    marketingService9: "Ibindi",
 
-contentElements1: "Amafoto",
-contentElements2: "Ishusho",
-contentElements3: "Amashusho (Videos)",
-contentElements4: "Ibisobanuro byanditse",
-contentElements5: "Ubuhamya bw’abakiriya",
-contentElements6: "Amagambo asaba gukora igikorwa",
-
-budgetOptions1: "Munsi ya €500",
-budgetOptions2: "Hagati ya €500 na €1000",
-budgetOptions3: "Hagati ya €1000 na €5000",
-budgetOptions4: "Hejuru ya €5000",
-
-timelineOptions1: "Munsi y’ukwezi",
-timelineOptions2: "Ukwezi 1 kugeza kuri 3",
-timelineOptions3: "Amezi 3 kugeza kuri 6",
-timelineOptions4: "Hejuru y’amezi 6",
-
-statusOptions1: "Ukora ku giti cyawe",
-statusOptions2: "Umuyobozi w’ishuri",
-statusOptions3: "Ikigo/Isosiyete",
-statusOptions4: "Umuryango udaharanira inyungu",
-
-projectPurposes1: "Gutangira serivisi nshya",
-projectPurposes2: "Guteza imbere ishusho y’ikirango",
-projectPurposes3: "Kongera ubucuruzi",
-projectPurposes4: "Umushinga w’umuntu (portfolio, CV, nibindi)",
-placeholder1:"Hitamo intego",
-placeholder2:"Hitamo uburyo",
-placeholder3:"Hitamo ingengo y’imari"
-
+    // Step 2: Web Development Services (Multiple Choice)
+    step2WebQuestion: "Hitamo ibyo mwifuza ko tubakorera",
+    webService1: "Gukora website",
+    webService2: "Gukosora, gusubiramo website",
+    webService3: "Gushushanya website ( ‘web design’)",
+    webService4: "Gukora porogaramu cyangwa sisitemu ( ‘software/logiciel’)",
+    webService5: "Gukora apps/applications (mobile - iOS & Android)",
+    webService6: "Ibindi",
   },
+
   nl: {
-    header1:"Beginnen",
-    button1:"Volgende",
-     paragraph1:"Selecteer een deliverable om verder te gaan.",
-     button2:"Terug",
-     paragraph2:"Wat is het hoofddoel van uw project?",
-     paragraph3:"Welk type project zou u graag willen ondernemen?",
-     paragraph4:"Welke opleveringen verwacht u van dit project?",
-     paragraph5:"Welk publiek probeert u te bereiken?",
-     paragraph6:"Selecteer een publiek om verder te gaan.",
-     paragraph7:"Welke stijlvoorkeuren heeft u voor dit project?",
-     paragraph8:"Selecteer de gewenste stijlen om verder te gaan.",
-     paragraph9:"Selecteer de inhoudselementen om verder te gaan.",
-     paragraph10:"Wat is uw budget voor dit project?",
-     paragraph11:"Selecteer een budget om verder te gaan.",
-     paragraph12:"Wat is uw tijdlijn voor dit project?",
-     paragraph13:"Tijdlijn",
-     paragraph14:"Selecteer een tijdlijn",
-     paragraph15:"Selecteer een tijdlijn om verder te gaan.",
-     paragraph16:"Wat is uw huidige status?",
-     paragraph17:"Status",
-     paragraph18:"Selecteer een status",
-     paragraph19:"Selecteer een status om verder te gaan.",
-     paragraph20:"Wat is het doel van dit project?",
-     paragraph21:"Vul alle velden correct in voordat u indient.",
-     name:"Naam",
-name2:"Voer uw naam in",
-email:"E-mail",
-email2:"Voer uw e-mail in",
-phone:"Telefoon",
-phone2:"Voer uw telefoonnummer in",
-company:"Bedrijf",
-company2:"Voer de naam van uw bedrijf in",
-additionalInfo:"Aanvullende informatie",
-additionalInfo2:"Aanvullende informatie invullen",
-header2:"Verzenden",
+    header1: "Beginnen",
+    button1: "Volgende",
+    button2: "Terug",
+    header2: "Verzenden",
+    paragraph1: "Selecteer een servicetype om verder te gaan.",
+    paragraph2: "Selecteer wat u wilt dat wij voor u doen.",
+    paragraph21: "Vul alle velden correct in voordat u indient.",
 
+    name: "Naam",
+    name2: "Voer uw naam in",
+    email: "E-mail",
+    email2: "Voer uw e-mail in",
+    phone: "Telefoon",
+    phone2: "Voer uw telefoonnummer in",
+    company: "Bedrijf",
+    company2: "Voer de naam van uw bedrijf in",
+    additionalInfo: "Aanvullende informatie",
+    additionalInfo2: "Aanvullende informatie invullen",
 
-      projectType1:"Grafisch ontwerp en visuele communicatie",
-      projectType2:"Tekstschrijven en contentcreatie",
-      projectType3:"Digitale marketing en sociale media",
-      projectType4:"Web- en app-ontwikkeling",
-      projectType5:"Overig",
-    
-deliverables1: "Grafisch Ontwerp en Visuele Communicatie",
-deliverables2:"Logo Ontwerp",  
-deliverables3:"Merkidentiteitspakket (logo’s, visitekaartjes, briefhoofden)",
-deliverables4:"Aangepaste Illustraties",
-deliverables5:"Infographics",
-deliverables6:"Sjablonen voor Sociale Media",
-deliverables7:"Marketingmateriaal (affiches, flyers, brochures)",
-deliverables8:"Marketingmateriaal (affiches, flyers, brochures)",
-deliverables9:"Digitale Advertentie Graphics",
-deliverables10:"Presentatie Ontwerp",
+    // Other service handling
+    otherServiceQuestion: "Beschrijf het type service dat u nodig heeft",
+    otherServicePlaceholder:
+      "Beschrijf het type service waar u naar op zoek bent...",
+    otherSpecificQuestion:
+      "Wat voor specifiek werk wilt u dat wij voor u doen?",
+    otherSpecificPlaceholder:
+      "Beschrijf uw specifieke vereisten en wat u wilt dat wij leveren...",
+    otherValidationMessage: "Beschrijf uw servicebehoeften voordat u doorgaat.",
 
-deliverables11:"Content Schrijven en Creatie",
-deliverables12:"SEO-geoptimaliseerde Blogposts",
-deliverables13:"Website Tekst",
-deliverables14:"Bijschriften en Inhoud voor Sociale Media",
-deliverables15:"Whitepapers en Case Studies",
-deliverables16:"Inhoud voor E-mailmarketingcampagnes",
-deliverables17:"E-books en Gidsen",
-deliverables18:"Persberichten",
-deliverables19:"Videoscripts",
-deliverables20:"Productbeschrijvingen",
+    // Service-specific "Other" handling
+    serviceSpecificOtherQuestion: "Beschrijf uw specifieke vereisten",
+    serviceSpecificOtherPlaceholder:
+      "Vertel ons precies wat u van ons nodig heeft...",
+    serviceSpecificOtherValidation:
+      "Beschrijf uw specifieke vereisten voordat u doorgaat.",
 
-deliverables21:"Digitale Marketing en Sociale Media",
-deliverables22:"Uitgebreid Marketing Strategieplan",
-deliverables23:"SEO-audits en Rapporten",
-deliverables24:"Google Ads Campagne Instellen en Beheren",
-deliverables25:"Sociale Media Strategie en Beheer",
-deliverables26:"Contentkalender voor Sociale Platforms",
-deliverables27:"E-mailmarketingcampagnes",
-deliverables28:"Prestatie-analyses en Rapporten",
-deliverables29:"Merkcampagne Ontwikkeling",
-deliverables30:"Samenwerkingsplan Influencer Marketing",
+    // Step 1: Service Types (Radio - Single Choice)
+    step1Question: "Welk type project zou u graag willen dat wij uitvoeren?",
+    serviceType1:
+      "Grafisch Ontwerp/Logo Creatie, Posters, Visuele Berichten (Graphic Design)",
+    serviceType2:
+      "Content Schrijven, Boeken, Brieven, Webcontent of Verschillende Websites",
+    serviceType3:
+      "Online Marketing/Promotie en Creëren van Internet Kansen en Social Media",
+    serviceType4:
+      "Creëren/Ontwerpen van Websites, Apps, Verschillende Programma's of Systemen",
+    serviceType6: "Overig",
 
-deliverables31:"Web- en App-ontwikkeling",
-deliverables32:"Volledig Responsieve Website",
-deliverables33:"Ontwerp van Aangepaste Landingspagina",
-deliverables34:"E-commerce Website Ontwikkeling",
-deliverables35:"Webapplicatie Ontwikkeling",
-deliverables36:"Mobiele App Ontwikkeling (iOS en Android)",
-deliverables37:"Gebruikersinterface (UI) Ontwerp",
-deliverables38:"Gebruikerservaring (UX) Prototyping",
-deliverables39:"Backend- en Database-integratie",
-deliverables40:"Optimalisatie van Websiteprestaties",
-deliverables41:"Onderhouds- en Ondersteuningsplannen",
-deliverables42:"Overige",
+    // Step 2: Graphic Design Services (Multiple Choice)
+    step2GraphicQuestion: "Selecteer wat u wilt dat wij voor u doen",
+    graphicService1: "Logo Ontwerp/Creatie",
+    graphicService2: "Merkpakket (logo, visitekaartjes, briefhoofden, enz.)",
+    graphicService3: "Illustraties, Afbeeldingen, Speciale Foto's",
+    graphicService4: "Bericht Graphics (infographics)",
+    graphicService5: "Graphics, Foto's, Video's voor Social Media Reclame",
+    graphicService6:
+      "Online Marketing Materialen (affiches, flyers, posters, brochures, enz.)",
+    graphicService7:
+      "Marketing Materialen (affiches, flyers, posters, brochures, enz.)",
+    graphicService8:
+      "Logo's op Verpakkingen of Andere Items (kleding, tassen, auto's, verpakkingen, enz.)",
+    graphicService9:
+      "Creëren van Presentaties, PowerPoints, Slides of Andere Presentatie Materialen",
+    graphicService10: "Overig",
 
-mainGoals1: "De zichtbaarheid van het merk vergroten",
-mainGoals2: "Nieuwe klanten aantrekken",
-mainGoals3: "Een visuele identiteit opbouwen",
-mainGoals4: "De verkoop verhogen",
-mainGoals5: "Een nieuw aanbod promoten",
-mainGoals6: "Het publiek onderwijzen of informeren",
+    // Step 2: Content Writing Services (Multiple Choice)
+    step2ContentQuestion: "Selecteer wat u wilt dat wij voor u doen",
+    contentService1:
+      "Verhalen Schrijven (blogs) die uw website veel bezocht zullen maken (SEO)",
+    contentService2:
+      "Verhalen, Informatie, Lessen of Andere Geschriften voor Uw Website Schrijven",
+    contentService3:
+      "Verhalen, Berichten, Lessen voor Social Media Schrijven en Ze Vaak Laten Verschijnen",
+    contentService4: "Gedetailleerd Schrijven Leren over Iets Specifieks",
+    contentService5:
+      "Marketing Berichten Verzonden via E-mail en Technieken om Ze te Verzenden",
+    contentService6:
+      "Gids Schrijven en Verklarend Schrijven (E-books & Gidsen)",
+    contentService7: "Aankondigingen",
+    contentService8: "Spellen of Drama Schrijven",
+    contentService9: "Productbeschrijvingen Schrijven",
+    contentService10:
+      "Toespraken, Speeches en Speeches, CV's, Sollicitatiebrieven en Andere Brieven Schrijven",
+    contentService11: "Hulp bij het Schrijven van Boeken en Rapporten",
+    contentService12: "Verhalen Schrijven en Bewerken",
+    contentService13: "Vertaling, Speciale Brieven en Professioneel Schrijven",
+    contentService14:
+      "Zakelijk Schrijven, Project Schrijven en Voorbereiden of Starten van Projecten",
+    contentService15: "Overig",
 
-audience1: "Algemeen publiek",
-audience2: "Professionals",
-audience3: "Jongvolwassenen",
-audience4: "Lokale gemeenschap",
-audience5: "Internationale markt",
+    // Step 2: Digital Marketing Services (Multiple Choice)
+    step2MarketingQuestion: "Selecteer wat u wilt dat wij voor u doen",
+    marketingService1: "Beheren en gebruiken van uw social media accounts",
+    marketingService2:
+      "Assisteren bij het verdienen van geld van uw social media platforms met behulp van internet",
+    marketingService3: "Het aantal kijkers van wat u doet vergroten",
+    marketingService4: "Adverteren op internet en uw social media platforms",
+    marketingService5:
+      "Hustling op internet (bijv. het vinden van kansen, werken, verkopen, samenwerkingen, commissies, enz.)",
+    marketingService6: "Populariteit vergroten",
+    marketingService7: "Zoekmachineoptimalisatie (SEO)",
+    marketingService8: "Audit en ontwikkeling van social media platforms",
+    marketingService9: "Overig",
 
-stylePreferences1: "Formeel en professioneel",
-stylePreferences2: "Creatief en origineel",
-stylePreferences3: "Minimalistisch en modern",
-stylePreferences4: "Warm en uitnodigend",
-stylePreferences5: "Casual en ontspannen",
-stylePreferences6: "Innovatief en hightech",
-
-contentElements1: "Foto’s",
-contentElements2: "Illustraties",
-contentElements3: "Video’s",
-contentElements4: "Verklarende tekst",
-contentElements5: "Klantgetuigenissen",
-contentElements6: "Call-to-action statements",
-
-budgetOptions1: "Minder dan €500",
-budgetOptions2: "Tussen €500 en €1000",
-budgetOptions3: "Tussen €1000 en €5000",
-budgetOptions4: "Meer dan €5000",
-
-timelineOptions1: "Minder dan een maand",
-timelineOptions2: "1 tot 3 maanden",
-timelineOptions3: "3 tot 6 maanden",
-timelineOptions4: "Meer dan 6 maanden",
-
-statusOptions1: "Zelfstandig ondernemer",
-statusOptions2: "Student",
-statusOptions3: "Bedrijf",
-statusOptions4: "Non-profitorganisatie",
-
-projectPurposes1: "Een nieuwe dienst lanceren",
-projectPurposes2: "Het merkimago verbeteren",
-projectPurposes3: "Meer verkoop genereren",
-projectPurposes4: "Persoonlijk project (portfolio, CV, enz.)",
-placeholder1:"Selecteer een doel",
-placeholder2:"Selecteer een stijl",
-placeholder3:"Selecteer een budget"
+    // Step 2: Web Development Services (Multiple Choice)
+    step2WebQuestion: "Selecteer wat u wilt dat wij voor u doen",
+    webService1: "Websites Ontwikkelen",
+    webService2: "Uw websites onderhouden en bijwerken",
+    webService3: "Websites en applicaties ontwerpen",
+    webService4: "Programma's en systemen ontwikkelen",
+    webService5: "Mobiele App Ontwikkeling (iOS en Android)",
+    webService6: "Overig",
   },
 };
-
 export default ProjectsFormLocale;

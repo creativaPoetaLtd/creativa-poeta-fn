@@ -86,13 +86,7 @@ const faqData = [
     title: FaqLocale[lang].title14,
     // image : 'https://picsum.photos/200/300',
     description: FaqLocale[lang].description14,
-  },
-  {
-    id: 15,
-    title: FaqLocale[lang].title15,
-    // image : 'https://picsum.photos/200/300',
-    description: FaqLocale[lang].description15,
-  },
+  }
 ];
 
 export default faqData;
