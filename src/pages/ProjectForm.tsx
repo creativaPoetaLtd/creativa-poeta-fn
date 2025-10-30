@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/flags/logopoeta1.png";
 import Typewriter from "../utils/TypeWritter";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import image8 from "../assets/flags/image8.jpg";
 import { projectForm } from "../APIs/projectForm";
-import CustomSelect from "../components/CustomSelect";
 import "../styles/custom-inputs.css";
 import getLangFromLocalStorage from "../../utils/Lang";
 import ProjectsFormLocale from "../i18n/ProjectsFormLocale";
-// const lang: keyof typeof ProjectsFormLocale = getLangFromLocalStorage() as keyof typeof ProjectsFormLocale;
-const lang:any = getLangFromLocalStorage();
+
+const lang: any = getLangFromLocalStorage();
+
 const ProjectForm = () => {
   const [step, setStep] = useState(1);
   const [showOptions, setShowOptions] = useState(false);
-  const [showError, setShowError] = useState(false); // New state for validation
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -23,186 +21,268 @@ const ProjectForm = () => {
     email: "",
     phone: "",
     company: "",
-    projectType: "" as keyof typeof options.deliverables | "Other",
-    deliverables: [] as string[],
-    mainGoal: "",
-    audience: [] as string[],
-    stylePreference: "",
-    contentElements: [] as string[],
-    budget: "",
-    timeline: "",
-    status: "",
-    projectPurpose: [] as string[],
+    serviceType: "",
+    selectedServices: [] as string[],
+    customServiceDescription: "", // For "Other" service type description
+    customServiceNeeds: "", // For "Other" specific needs description
+    serviceSpecificOtherDescription: "", // For when user selects "Other" from service options
     additionalInfo: "",
   });
 
-   
   useEffect(() => {
     const timer = setTimeout(() => setShowOptions(true), 2000);
     return () => clearTimeout(timer);
   }, [step]);
 
+  // Service type options for step 1
+  const serviceTypes = [
+    ProjectsFormLocale[lang]?.serviceType1 ||
+      ProjectsFormLocale.en.serviceType1,
+    ProjectsFormLocale[lang]?.serviceType2 ||
+      ProjectsFormLocale.en.serviceType2,
+    ProjectsFormLocale[lang]?.serviceType3 ||
+      ProjectsFormLocale.en.serviceType3,
+    ProjectsFormLocale[lang]?.serviceType4 ||
+      ProjectsFormLocale.en.serviceType4,
+    ProjectsFormLocale[lang]?.serviceType6 ||
+      ProjectsFormLocale.en.serviceType6,
+  ];
+
+  // Get services based on selected service type
+  const getServicesForType = (serviceType: string) => {
+    const locale = ProjectsFormLocale[lang] || ProjectsFormLocale.en;
+
+    if (
+      serviceType ===
+      (ProjectsFormLocale[lang]?.serviceType1 ||
+        ProjectsFormLocale.en.serviceType1)
+    ) {
+      // Graphic Design Services
+      return [
+        locale.graphicService1,
+        locale.graphicService2,
+        locale.graphicService3,
+        locale.graphicService4,
+        locale.graphicService5,
+        locale.graphicService6,
+        locale.graphicService7,
+        locale.graphicService8,
+        locale.graphicService9,
+        locale.graphicService10,
+      ];
+    } else if (
+      serviceType ===
+      (ProjectsFormLocale[lang]?.serviceType2 ||
+        ProjectsFormLocale.en.serviceType2)
+    ) {
+      // Content Writing Services
+      return [
+        locale.contentService1,
+        locale.contentService2,
+        locale.contentService3,
+        locale.contentService4,
+        locale.contentService5,
+        locale.contentService6,
+        locale.contentService7,
+        locale.contentService8,
+        locale.contentService9,
+        locale.contentService10,
+        locale.contentService11,
+        locale.contentService12,
+        locale.contentService13,
+        locale.contentService14,
+        locale.contentService15,
+      ];
+    } else if (
+      serviceType ===
+      (ProjectsFormLocale[lang]?.serviceType3 ||
+        ProjectsFormLocale.en.serviceType3)
+    ) {
+      // Digital Marketing Services
+      return [
+        locale.marketingService1,
+        locale.marketingService2,
+        locale.marketingService3,
+        locale.marketingService4,
+        locale.marketingService5,
+        locale.marketingService6,
+        locale.marketingService7,
+        locale.marketingService8,
+        locale.marketingService9,
+      ];
+    } else if (
+      serviceType ===
+      (ProjectsFormLocale[lang]?.serviceType4 ||
+        ProjectsFormLocale.en.serviceType4)
+    ) {
+      // Web Development Services
+      return [
+        locale.webService1,
+        locale.webService2,
+        locale.webService3,
+        locale.webService4,
+        locale.webService5,
+        locale.webService6,
+      ];
+    }
+    return [];
+  };
+
   const handleNextStep = () => {
     let isValid = true;
-    // Special handling for "Other" project type in step 1
-    if (step === 1 && formData.projectType === "Other") {
-      setStep(11); // Skip to the last step
-      setShowError(false);
-      return;
-    }
+    const locale = ProjectsFormLocale[lang] || ProjectsFormLocale.en;
+    const isOtherServiceType = formData.serviceType === locale.serviceType6;
 
-    switch (step) {
-      case 1:
-        if (!formData.projectType) isValid = false;
-        break;
-      case 2:
-        if (formData.deliverables.length === 0) isValid = false; // Validate deliverables
-        break;
-      case 3:
-        if (!formData.mainGoal) isValid = false; // Validate main goal
-        break;
-      case 4:
-        if (formData.audience.length === 0) isValid = false; // Validate audience
-        break;
-      case 5:
-        if (!formData.stylePreference) isValid = false; // Validate style preference
-        break;
-      case 6:
-        if (formData.contentElements.length === 0) isValid = false; // Validate content elements
-        break;
-      case 7:
-        if (!formData.budget) isValid = false; // Validate budget
-        break;
-      case 8:
-        if (!formData.timeline) isValid = false; // Validate timeline
-        break;
-      case 9:
-        if (!formData.status) isValid = false; // Validate status
-        break;
-      case 10:
-        if (formData.projectPurpose.length === 0) isValid = false; // Validate project purpose
-        break;
-      // additional information form case
-      case 11:
-        if (
-          !formData.name ||
+    // Check if user selected ONLY "Other" from service-specific options
+    const otherServices = [
+      "graphicService10",
+      "contentService15",
+      "marketingService9",
+      "webService6",
+    ];
+    const selectedOtherServices = formData.selectedServices.filter((service) =>
+      otherServices.includes(service)
+    );
+    const hasOnlyServiceSpecificOther =
+      selectedOtherServices.length === 1 &&
+      formData.selectedServices.length === 1;
+
+    if (step === 1) {
+      if (!formData.serviceType) {
+        isValid = false;
+      } else if (
+        isOtherServiceType &&
+        !formData.customServiceDescription.trim()
+      ) {
+        isValid = false;
+      }
+    } else if (step === 2) {
+      if (isOtherServiceType && !formData.customServiceNeeds.trim()) {
+        isValid = false;
+      } else if (
+        !isOtherServiceType &&
+        formData.selectedServices.length === 0
+      ) {
+        isValid = false;
+      }
+    } else if (step === 3) {
+      // If we have ONLY service-specific "Other", validate the description
+      if (
+        hasOnlyServiceSpecificOther &&
+        !formData.serviceSpecificOtherDescription.trim()
+      ) {
+        isValid = false;
+      } else if (
+        !hasOnlyServiceSpecificOther &&
+        (!formData.name ||
           !formData.email ||
           !formData.phone ||
-          !formData.company
-        )
-          isValid = false;
-        break;
-      default:
-        break;
+          !formData.company)
+      ) {
+        isValid = false;
+      }
+    } else if (step === 4) {
+      if (
+        !formData.name ||
+        !formData.email ||
+        !formData.phone ||
+        !formData.company
+      ) {
+        isValid = false;
+      }
     }
 
     if (!isValid) {
-      setShowError(true); // Show error message
-      return;
-    }
-
-    // Proceed if validation passes
-    setStep((prevStep) => prevStep + 1);
-    setShowError(false); // Reset error state
-  };
-
-  const isNextDisabled = step === 1 && !formData.projectType;
-  const handlePrevStep = () => setStep((prevStep) => prevStep - 1);
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    if (e.target instanceof HTMLInputElement && type === "checkbox") {
-      const { checked } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: checked
-          ? [...(prevData[name as keyof typeof formData] as string[]), value]
-          : (prevData[name as keyof typeof formData] as string[]).filter(
-              (item) => item !== value
-            ),
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
-
-  const handleSelectChange = (e: {
-    target: { name: string; value: string };
-  }) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validate required fields based on backend requirements
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.projectType ||
-      !formData.deliverables.length ||
-      !formData.audience.length ||
-      !formData.contentElements.length ||
-      !formData.projectPurpose.length ||
-      !formData.mainGoal ||
-      !formData.stylePreference ||
-      !formData.budget ||
-      !formData.timeline
-    ) {
       setShowError(true);
-      toast.error("Please fill in all required fields");
       return;
     }
 
-    // Convert budget range to numeric value for backend
-    const getBudgetValue = (budgetRange: string): number => {
-      switch (budgetRange) {
-        case "Less than €500":
-          return 500;
-        case "Between €500 and €1000":
-          return 1000;
-        case "Between €1000 and €5000":
-          return 5000;
-        case "More than €5000":
-          return 10000;
-        default:
-          return 1000; // fallback value
+    // Determine next step logic
+    if (step === 1) {
+      setStep(2);
+    } else if (step === 2) {
+      // If user selected ONLY service-specific "Other", go to step 3 for description
+      if (hasOnlyServiceSpecificOther) {
+        setStep(3);
+      } else {
+        // Skip to contact info (step 3 or 4 depending on service type)
+        setStep(isOtherServiceType ? 4 : 3);
       }
-    };
+    } else if (step === 3) {
+      // If we're on step 3 and have ONLY service-specific "Other", go to contact (step 4)
+      // Otherwise submit
+      if (hasOnlyServiceSpecificOther) {
+        setStep(4);
+      } else {
+        handleSubmit();
+      }
+    } else {
+      handleSubmit();
+    }
+    setShowError(false);
+  };
 
+  const handlePrevStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+      setShowError(false);
+    }
+  };
+
+  const handleServiceTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      serviceType: e.target.value,
+      selectedServices: [], // Reset selected services when service type changes
+      customServiceDescription: "", // Reset custom service description
+      customServiceNeeds: "", // Reset custom service needs
+    });
+  };
+
+  const handleServiceSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setFormData({
+        ...formData,
+        selectedServices: [...formData.selectedServices, value],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        selectedServices: formData.selectedServices.filter(
+          (service) => service !== value
+        ),
+      });
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
     try {
-      const data: any = {
+      const data = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         company: formData.company,
-        projectType: formData.projectType,
-        deliverables: formData.deliverables,
-        mainGoal: formData.mainGoal,
-        audience: formData.audience,
-        stylePreference: formData.stylePreference,
-        contentElements: formData.contentElements,
-        budget: getBudgetValue(formData.budget), // Convert to numeric value
-        timeline: formData.timeline,
-        status: formData.status,
-        projectPurpose: formData.projectPurpose,
+        serviceType: formData.serviceType,
+        selectedServices: formData.selectedServices,
+        customServiceDescription: formData.customServiceDescription,
+        customServiceNeeds: formData.customServiceNeeds,
+        serviceSpecificOtherDescription:
+          formData.serviceSpecificOtherDescription,
         additionalInfo: formData.additionalInfo,
       };
 
       const response = await projectForm(data);
-
       toast.success(
         response.message || "Project inquiry submitted successfully!"
       );
@@ -213,16 +293,11 @@ const ProjectForm = () => {
         email: "",
         phone: "",
         company: "",
-        projectType: ProjectsFormLocale[lang].projectType1,
-        deliverables: [],
-        mainGoal: "",
-        audience: [],
-        stylePreference: "",
-        contentElements: [],
-        budget: "",
-        timeline: "",
-        status: "",
-        projectPurpose: [],
+        serviceType: "",
+        selectedServices: [],
+        customServiceDescription: "",
+        customServiceNeeds: "",
+        serviceSpecificOtherDescription: "",
         additionalInfo: "",
       });
 
@@ -236,709 +311,374 @@ const ProjectForm = () => {
     }
   };
 
-
-
-
-// 1. Type for Project Types
-type ProjectType =
-  | typeof ProjectsFormLocale["en"]["projectType1"]
-  | typeof ProjectsFormLocale["en"]["projectType2"]
-  | typeof ProjectsFormLocale["en"]["projectType3"]
-  | typeof ProjectsFormLocale["en"]["projectType4"]
-  | typeof ProjectsFormLocale["en"]["projectType5"];
-
-// 2. Type for Deliverables mapping
-type DeliverablesMap = {
-  [key in ProjectType]: string[];
-};
-
-// 3. Type for the full options object
-interface Options {
-  projectType: ProjectType[];
-  deliverables: DeliverablesMap;
-  mainGoals: string[];
-  audience: string[];
-  stylePreferences: string[];
-  contentElements: string[];
-  budgetOptions: string[];
-  timelineOptions: string[];
-  statusOptions: string[];
-  projectPurposes: string[];
-}
-
-// 4. Example of using it
-const options: Options = {
-  projectType: [
-    ProjectsFormLocale[lang].projectType1,
-    ProjectsFormLocale[lang].projectType2,
-    ProjectsFormLocale[lang].projectType3,
-    ProjectsFormLocale[lang].projectType4,
-    ProjectsFormLocale[lang].projectType5,
-  ],
-  deliverables: {
-    [ProjectsFormLocale[lang].projectType1]: [
-      ProjectsFormLocale[lang].deliverables2,
-      ProjectsFormLocale[lang].deliverables3,
-      ProjectsFormLocale[lang].deliverables4,
-      ProjectsFormLocale[lang].deliverables5,
-      ProjectsFormLocale[lang].deliverables6,
-      ProjectsFormLocale[lang].deliverables7,
-      ProjectsFormLocale[lang].deliverables8,
-      ProjectsFormLocale[lang].deliverables9,
-      ProjectsFormLocale[lang].deliverables10,
-    ],
-    [ProjectsFormLocale[lang].projectType2]: [
-      ProjectsFormLocale[lang].deliverables12,
-      ProjectsFormLocale[lang].deliverables13,
-      ProjectsFormLocale[lang].deliverables14,
-      ProjectsFormLocale[lang].deliverables15,
-      ProjectsFormLocale[lang].deliverables16,
-      ProjectsFormLocale[lang].deliverables17,
-      ProjectsFormLocale[lang].deliverables18,
-      ProjectsFormLocale[lang].deliverables19,
-      ProjectsFormLocale[lang].deliverables20,
-    ],
-    [ProjectsFormLocale[lang].projectType3]: [
-      ProjectsFormLocale[lang].deliverables22,
-      ProjectsFormLocale[lang].deliverables23,
-      ProjectsFormLocale[lang].deliverables24,
-      ProjectsFormLocale[lang].deliverables25,
-      ProjectsFormLocale[lang].deliverables26,
-      ProjectsFormLocale[lang].deliverables27,
-      ProjectsFormLocale[lang].deliverables28,
-      ProjectsFormLocale[lang].deliverables29,
-      ProjectsFormLocale[lang].deliverables30,
-    ],
-    [ProjectsFormLocale[lang].projectType4]: [
-      ProjectsFormLocale[lang].deliverables32,
-      ProjectsFormLocale[lang].deliverables33,
-      ProjectsFormLocale[lang].deliverables34,
-      ProjectsFormLocale[lang].deliverables35,
-      ProjectsFormLocale[lang].deliverables36,
-      ProjectsFormLocale[lang].deliverables37,
-      ProjectsFormLocale[lang].deliverables38,
-      ProjectsFormLocale[lang].deliverables39,
-      ProjectsFormLocale[lang].deliverables40,
-      ProjectsFormLocale[lang].deliverables41,
-    ],
-    [ProjectsFormLocale[lang].projectType5]: [
-      ProjectsFormLocale[lang].deliverables42,
-    ],
-  },
-  mainGoals: [
-    ProjectsFormLocale[lang].mainGoals1,
-    ProjectsFormLocale[lang].mainGoals2,
-    ProjectsFormLocale[lang].mainGoals3,
-    ProjectsFormLocale[lang].mainGoals4,
-    ProjectsFormLocale[lang].mainGoals5,
-    ProjectsFormLocale[lang].mainGoals6,
-  ],
-  audience: [
-    ProjectsFormLocale[lang].audience1,
-    ProjectsFormLocale[lang].audience2,
-    ProjectsFormLocale[lang].audience3,
-    ProjectsFormLocale[lang].audience4,
-    ProjectsFormLocale[lang].audience5,
-  ],
-  stylePreferences: [
-    ProjectsFormLocale[lang].stylePreferences1,
-    ProjectsFormLocale[lang].stylePreferences2,
-    ProjectsFormLocale[lang].stylePreferences3,
-    ProjectsFormLocale[lang].stylePreferences4,
-    ProjectsFormLocale[lang].stylePreferences5,
-    ProjectsFormLocale[lang].stylePreferences6,
-  ],
-  contentElements: [
-    ProjectsFormLocale[lang].contentElements1,
-    ProjectsFormLocale[lang].contentElements2,
-    ProjectsFormLocale[lang].contentElements3,
-    ProjectsFormLocale[lang].contentElements4,
-    ProjectsFormLocale[lang].contentElements5,
-    ProjectsFormLocale[lang].contentElements6,
-  ],
-  budgetOptions: [
-    ProjectsFormLocale[lang].budgetOptions1,
-    ProjectsFormLocale[lang].budgetOptions2,
-    ProjectsFormLocale[lang].budgetOptions3,
-    ProjectsFormLocale[lang].budgetOptions4,
-  ],
-  timelineOptions: [
-    ProjectsFormLocale[lang].timelineOptions1,
-    ProjectsFormLocale[lang].timelineOptions2,
-    ProjectsFormLocale[lang].timelineOptions3,
-    ProjectsFormLocale[lang].timelineOptions4,
-  ],
-  statusOptions: [
-    ProjectsFormLocale[lang].statusOptions1,
-    ProjectsFormLocale[lang].statusOptions2,
-    ProjectsFormLocale[lang].statusOptions3,
-    ProjectsFormLocale[lang].statusOptions4,
-  ],
-  projectPurposes: [
-    ProjectsFormLocale[lang].projectPurposes1,
-    ProjectsFormLocale[lang].projectPurposes2,
-    ProjectsFormLocale[lang].projectPurposes3,
-    ProjectsFormLocale[lang].projectPurposes4,
-  ],
-};
-
-
   const renderStep = () => {
+    const locale = ProjectsFormLocale[lang] || ProjectsFormLocale.en;
+
     switch (step) {
       case 1:
         return (
           <>
-            <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex  text-[#806829]">
-              {ProjectsFormLocale[lang]?.header1 || ProjectsFormLocale.en.header1}
+            <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex text-[#FFFF00] mb-6">
+              {locale.header1}
             </h1>
-            <div className="w-full max-w-screen-sm mx-auto">
+            <div className="w-full max-w-screen-sm mx-auto mb-6">
               <Typewriter
-                text= {ProjectsFormLocale[lang]?.paragraph3 || ProjectsFormLocale.en.paragraph3}
-                className="mb-2"
+                text={locale.step1Question}
+                className="mb-4 text-white text-lg font-medium"
               />
             </div>
 
-          {showOptions && (
-              <div className="space-y-2">
-                {options.projectType.map((type) => (
-                  <label key={type} className="block text-white">
-                    <input
-                      type="radio"
-                      name="projectType"
-                      value={type}
-                      onChange={handleChange}
-                      checked={formData.projectType === type}
-                      className="mr-2"
-                    />
-                    {type}
+            {showError && (
+              <p className="text-red-500 text-sm mb-4 text-center">
+                {formData.serviceType === locale.serviceType6
+                  ? locale.otherValidationMessage
+                  : locale.paragraph1}
+              </p>
+            )}
+
+            {showOptions && (
+              <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto space-y-3">
+                {serviceTypes.map((serviceType, index) => (
+                  <label
+                    key={index}
+                    className="block p-2 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors"
+                  >
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        name="serviceType"
+                        value={serviceType}
+                        checked={formData.serviceType === serviceType}
+                        onChange={handleServiceTypeChange}
+                        className="mr-3"
+                      />
+                      <span className="text-white">{serviceType}</span>
+                    </div>
                   </label>
                 ))}
               </div>
-            )} 
-
-            
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
-              </p>
             )}
-            <div className="flex justify-end mt-6">
-              <button
-                type="button"
-                onClick={handleNextStep}
-                //   disabled={isNextDisabled}
-                className={`px-6 py-2 ${
-                  isNextDisabled
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
+
+            {/* Show description field if "Other" is selected */}
+            {formData.serviceType === locale.serviceType6 && (
+              <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto mt-6">
+                <div className="mb-4">
+                  <label className="block text-white text-lg font-medium mb-2 text-center">
+                    {locale.otherServiceQuestion}
+                  </label>
+                  <textarea
+                    name="customServiceDescription"
+                    value={formData.customServiceDescription}
+                    onChange={handleInputChange}
+                    placeholder={locale.otherServicePlaceholder}
+                    rows={4}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+            )}
           </>
         );
 
       case 2:
+        const availableServices = getServicesForType(formData.serviceType);
+        const isContentWriting = formData.serviceType === locale.serviceType2;
+        const isMarketing = formData.serviceType === locale.serviceType3;
+        const isWebDev = formData.serviceType === locale.serviceType4;
+        const isOtherService = formData.serviceType === locale.serviceType6;
+
+        let questionText = locale.step2GraphicQuestion;
+        if (isContentWriting) questionText = locale.step2ContentQuestion;
+        else if (isMarketing) questionText = locale.step2MarketingQuestion;
+        else if (isWebDev) questionText = locale.step2WebQuestion;
+        else if (isOtherService) questionText = locale.otherSpecificQuestion;
+
         return (
           <>
-            <Typewriter
-              text={ProjectsFormLocale[lang]?.paragraph4 || ProjectsFormLocale.en.paragraph4}
-              className="mb-2"
-            />
-          {showOptions && (
-              <div className="space-y-2">
-                {(options.deliverables[formData.projectType] || []).map(
-                  (deliverable) => (
-                    <label key={deliverable} className="block text-white">
-                      <input
-                        type="checkbox"
-                        name="deliverables"
-                        value={deliverable}
-                        onChange={handleChange}
-                        checked={formData.deliverables.includes(deliverable)}
-                        className="mr-2"
-                      />
-                      {deliverable}
-                    </label>
-                  )
-                )}
-              </div>
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={formData.deliverables.length === 0}
-                className={`px-6 py-2 ${
-                  formData.deliverables.length > 0
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <Typewriter
-              text= {ProjectsFormLocale[lang]?.paragraph2 || ProjectsFormLocale.en.paragraph2}
-              className="mb-2"
-            />
-            {showOptions && (
-              <CustomSelect
-                name="mainGoal"
-                value={formData.mainGoal}
-                onChange={handleSelectChange}
-                options={options.mainGoals}
-                placeholder={ProjectsFormLocale[lang]?.placeholder1 || ProjectsFormLocale.en.placeholder1}
+            <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex text-[#FFFF00] mb-6">
+              {locale.header1}
+            </h1>
+
+            <div className="w-full max-w-screen-sm mx-auto mb-6">
+              <Typewriter
+                text={questionText}
+                className="mb-4 text-white text-lg font-medium text-center"
               />
-            )}
+            </div>
+
             {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph1 || ProjectsFormLocale.en.paragraph1}
+              <p className="text-red-500 text-sm mb-4 text-center">
+                {isOtherService
+                  ? locale.otherValidationMessage
+                  : locale.paragraph2}
               </p>
             )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={!formData.mainGoal}
-                className={`px-6 py-2 ${
-                  formData.mainGoal
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
+
+            {/* Show specific needs input for "Other" service type */}
+            {isOtherService ? (
+              <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto">
+                <div className="mb-6">
+                  <textarea
+                    name="customServiceNeeds"
+                    value={formData.customServiceNeeds}
+                    onChange={handleInputChange}
+                    placeholder={locale.otherSpecificPlaceholder}
+                    rows={6}
+                    className="w-full p-4 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+            ) : (
+              /* Show predefined services for standard service types */
+              showOptions && (
+                <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto space-y-3">
+                  {availableServices.map((service, index) => (
+                    <label
+                      key={index}
+                      className="block p-3 border border-gray-600 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors bg-gray-900"
+                    >
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          name="selectedServices"
+                          value={service}
+                          checked={formData.selectedServices.includes(service)}
+                          onChange={handleServiceSelection}
+                          className="mr-3"
+                        />
+                        <span className="text-white text-sm">{service}</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )
+            )}
+          </>
+        );
+
+      case 3:
+        // Check if we need to show service-specific "Other" description
+        const hasServiceSpecificOther = formData.selectedServices.some(
+          (service) =>
+            service === "graphicService10" ||
+            service === "contentService15" ||
+            service === "marketingService9" ||
+            service === "webService6"
+        );
+
+        if (hasServiceSpecificOther) {
+          return (
+            <>
+              <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex text-[#FFFF00] mb-6">
+                {locale.serviceSpecificOtherQuestion}
+              </h1>
+
+              {showError && (
+                <p className="text-red-500 text-sm mb-4 text-center">
+                  {locale.serviceSpecificOtherValidation}
+                </p>
+              )}
+
+              <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto">
+                <div className="mb-6">
+                  <textarea
+                    name="serviceSpecificOtherDescription"
+                    value={formData.serviceSpecificOtherDescription}
+                    onChange={handleInputChange}
+                    placeholder={locale.serviceSpecificOtherPlaceholder}
+                    rows={6}
+                    className="w-full p-4 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+            </>
+          );
+        }
+        // If no service-specific "Other", show contact info directly
+        return (
+          <>
+            <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex text-[#FFFF00] mb-6">
+              Contact Information
+            </h1>
+
+            {showError && (
+              <p className="text-red-500 text-sm mb-4 text-center">
+                {locale.paragraph21}
+              </p>
+            )}
+
+            <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.name}
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder={locale.name2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.email}
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder={locale.email2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.phone}
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder={locale.phone2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.company}
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder={locale.company2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-white mb-1">
+                  {locale.additionalInfo}
+                </label>
+                <textarea
+                  name="additionalInfo"
+                  value={formData.additionalInfo}
+                  onChange={handleInputChange}
+                  placeholder={locale.additionalInfo2}
+                  rows={4}
+                  className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                />
+              </div>
             </div>
           </>
         );
+
       case 4:
         return (
           <>
-            <Typewriter
-              text={ProjectsFormLocale[lang]?.paragraph5 || ProjectsFormLocale.en.paragraph5}
-              className="mb-2"
-            />
+            <h1 className="laptop:text-3xl text-xl font-bold mx-auto items-center justify-center self-center flex text-[#FFFF00] mb-6">
+              Contact Information
+            </h1>
 
-            {showOptions && (
-              <div className="space-y-2">
-                {options.audience.map((aud) => (
-                  <label key={aud} className="block text-white">
-                    <input
-                      type="checkbox"
-                      name="audience"
-                      value={aud}
-                      onChange={handleChange}
-                      checked={formData.audience.includes(aud)}
-                      className="mr-2"
-                    />
-                    {aud}
+            {showError && (
+              <p className="text-red-500 text-sm mb-4 text-center">
+                {locale.paragraph21}
+              </p>
+            )}
+
+            <div className="w-full laptop:max-w-screen-lg max-w-screen-sm mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.name}
                   </label>
-                ))}
-              </div>
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph6 || ProjectsFormLocale.en.paragraph6}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={formData.audience.length === 0}
-                className={`px-6 py-2 ${
-                  formData.audience.length > 0
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 5:
-        return (
-          <>
-            <Typewriter
-              text= {ProjectsFormLocale[lang]?.paragraph7 || ProjectsFormLocale.en.paragraph7}
-              className="mb-2"
-            />
-            {showOptions && (
-              <CustomSelect
-                name="stylePreference"
-                value={formData.stylePreference}
-                onChange={handleSelectChange}
-                options={options.stylePreferences}
-                placeholder= {ProjectsFormLocale[lang]?.placeholder2 || ProjectsFormLocale.en.placeholder2}
-              />
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph8 || ProjectsFormLocale.en.paragraph8}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={!formData.stylePreference}
-                className={`px-6 py-2 ${
-                  formData.stylePreference
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 6:
-        return (
-          <>
-            <Typewriter
-              text=" What content elements would you like to include in your project?"
-              className="mb-2"
-            />
-            {showOptions && (
-              <div className="space-y-2">
-                {options.contentElements.map((element) => (
-                  <label key={element} className="block text-white">
-                    <input
-                      type="checkbox"
-                      name="contentElements"
-                      value={element}
-                      onChange={handleChange}
-                      checked={formData.contentElements.includes(element)}
-                      className="mr-2"
-                    />
-                    {element}
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder={locale.name2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.email}
                   </label>
-                ))}
-              </div>
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph9 || ProjectsFormLocale.en.paragraph9}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={formData.contentElements.length === 0}
-                className={`px-6 py-2 ${
-                  formData.contentElements.length > 0
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 7:
-        return (
-          <>
-            <Typewriter
-              text={ProjectsFormLocale[lang]?.paragraph10 || ProjectsFormLocale.en.paragraph10}
-              className="mb-2"
-            />
-            {showOptions && (
-              <CustomSelect
-                name="budget"
-                value={formData.budget}
-                onChange={handleSelectChange}
-                options={options.budgetOptions}
-                placeholder={ProjectsFormLocale[lang]?.placeholder3 || ProjectsFormLocale.en.placeholder3}
-              />
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph11 || ProjectsFormLocale.en.paragraph11}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={!formData.budget}
-                className={`px-6 py-2 ${
-                  formData.budget
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 8:
-        return (
-          <>
-            <Typewriter
-              text= {ProjectsFormLocale[lang]?.paragraph12 || ProjectsFormLocale.en.paragraph12}
-              className="mb-2"
-            />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder={locale.email2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
 
-            {showOptions && (
-              <CustomSelect
-                name="timeline"
-                value={formData.timeline}
-                onChange={handleSelectChange}
-                options={options.timelineOptions}
-                placeholder= {ProjectsFormLocale[lang]?.paragraph14 || ProjectsFormLocale.en.paragraph14}
-              />
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                 {ProjectsFormLocale[lang]?.paragraph15 || ProjectsFormLocale.en.paragraph15}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={!formData.timeline}
-                className={`px-6 py-2 ${
-                  formData.timeline
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 9:
-        return (
-          <>
-            <Typewriter text={ProjectsFormLocale[lang]?.paragraph16 || ProjectsFormLocale.en.paragraph16} className="mb-2" />
-            {showOptions && (
-              <CustomSelect
-                name= "status"
-                value={formData.status}
-                onChange={handleSelectChange}
-                options={options.statusOptions}
-                placeholder={ProjectsFormLocale[lang]?.paragraph18 || ProjectsFormLocale.en.paragraph18}
-              />
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                {ProjectsFormLocale[lang]?.paragraph19 || ProjectsFormLocale.en.paragraph19}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={!formData.status}
-                className={`px-6 py-2 ${
-                  formData.status
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 10:
-        return (
-          <>
-            <Typewriter
-              text="What is the purpose of this project?"
-              className="mb-2"
-            />
-            {showOptions && (
-              <div className="space-y-2">
-                {options.projectPurposes.map((purpose) => (
-                  <label key={purpose} className="block text-white">
-                    <input
-                      type="checkbox"
-                      name="projectPurpose"
-                      value={purpose}
-                      onChange={handleChange}
-                      checked={formData.projectPurpose.includes(purpose)}
-                      className="mr-2"
-                    />
-                    {purpose}
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.phone}
                   </label>
-                ))}
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder={locale.phone2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-white mb-1">
+                    {locale.company}
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder={locale.company2}
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                    required
+                  />
+                </div>
               </div>
-            )}
-            {showError && (
-              <p className="text-red-500 text-sm mt-2">
-                 {ProjectsFormLocale[lang]?.paragraph20 || ProjectsFormLocale.en.paragraph20}
-              </p>
-            )}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                 {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                // disabled={formData.projectPurpose.length === 0}
-                className={`px-6 py-2 ${
-                  formData.projectPurpose.length > 0
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                 {ProjectsFormLocale[lang]?.button1 || ProjectsFormLocale.en.button1}
-              </button>
-            </div>
-          </>
-        );
-      case 11:
-        return (
-          <>
-            {/* Error Message */}
-            {showError && (
-              <p className="text-red-500 text-sm mb-4">
-               {ProjectsFormLocale[lang]?.paragraph21 || ProjectsFormLocale.en.paragraph21}
-              </p>
-            )}
 
-            {/* Form Inputs */}
-            <input
-              type="text"
-              name= "name"
-              placeholder={ProjectsFormLocale[lang]?.name2 || ProjectsFormLocale.en.name2}
-              onChange={handleChange}
-              value={formData.name}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder={ProjectsFormLocale[lang]?.email2 || ProjectsFormLocale.en.email2}
-              onChange={handleChange}
-              value={formData.email}
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder={ProjectsFormLocale[lang]?.phone2 || ProjectsFormLocale.en.phone2}
-              onChange={handleChange}
-              value={formData.phone}
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder= {ProjectsFormLocale[lang]?.company2 || ProjectsFormLocale.en.company2}
-              onChange={handleChange}
-              value={formData.company}
-            />
-            <textarea
-              name="additionalInfo"
-              placeholder={ProjectsFormLocale[lang]?.additionalInfo2 || ProjectsFormLocale.en.additionalInfo2}
-              onChange={handleChange}
-              value={formData.additionalInfo}
-            />
-
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={handlePrevStep}
-                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md"
-              >
-                {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
-              </button>
-              <button
-                type="button"
-                onClick={handleSubmit}
-                // disabled={formData.name === '' || formData.email === '' || formData.phone === '' || formData.company === '' || formData.additionalInfo === ''}  // Disable if any field is empty
-                className={`px-6 py-2 ${
-                  formData.name &&
-                  formData.email &&
-                  formData.phone &&
-                  formData.company &&
-                  formData.additionalInfo
-                    ? "bg-[#EEBA2B] hover:bg-[#8b6e1c]"
-                    : "bg-gray-400 cursor-not-allowed"
-                } font-semibold rounded-md`}
-              >
-                 {ProjectsFormLocale[lang]?.header2 || ProjectsFormLocale.en.header2}
-              </button>
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-white mb-1">
+                  {locale.additionalInfo}
+                </label>
+                <textarea
+                  name="additionalInfo"
+                  value={formData.additionalInfo}
+                  onChange={handleInputChange}
+                  placeholder={locale.additionalInfo2}
+                  rows={4}
+                  className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFFF00] focus:border-transparent bg-gray-800 text-white placeholder-gray-400"
+                />
+              </div>
             </div>
           </>
         );
@@ -950,28 +690,102 @@ const options: Options = {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-[#24303E] py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-cover bg-center bg-fixed flex items-center justify-center p-4"
       style={{
-        backgroundImage: `url(${image8})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${image8})`,
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <Link to="/" className="">
-        <div className="absolute top-5 left-4 text-white">
-          <img src={logo} alt="logo" className="h-[50px]" />
+      <div className="bg-black rounded-3xl shadow-xl p-8 w-full max-w-4xl">
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex space-x-2">
+              {(() => {
+                const locale =
+                  ProjectsFormLocale[lang] || ProjectsFormLocale.en;
+                const isOtherServiceType =
+                  formData.serviceType === locale.serviceType6;
+                // Check if user selected ONLY "Other" from service-specific options
+                const otherServices = [
+                  "graphicService10",
+                  "contentService15",
+                  "marketingService9",
+                  "webService6",
+                ];
+                const selectedOtherServices = formData.selectedServices.filter(
+                  (service) => otherServices.includes(service)
+                );
+                const hasOnlyServiceSpecificOther =
+                  selectedOtherServices.length === 1 &&
+                  formData.selectedServices.length === 1;
+
+                const totalSteps =
+                  isOtherServiceType || hasOnlyServiceSpecificOther ? 4 : 3;
+
+                return Array.from({ length: totalSteps }, (_, i) => i + 1).map(
+                  (stepNumber) => (
+                    <div
+                      key={stepNumber}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                        step >= stepNumber
+                          ? "bg-[#FFFF00] text-black"
+                          : "bg-gray-700 text-gray-400"
+                      }`}
+                    >
+                      {stepNumber}
+                    </div>
+                  )
+                );
+              })()}
+            </div>
+            <span className="text-sm text-gray-400">
+              Step {step} of{" "}
+              {(() => {
+                const locale =
+                  ProjectsFormLocale[lang] || ProjectsFormLocale.en;
+                const isOtherServiceType =
+                  formData.serviceType === locale.serviceType6;
+                const hasServiceSpecificOther = formData.selectedServices.some(
+                  (service) =>
+                    service === "graphicService10" ||
+                    service === "contentService15" ||
+                    service === "marketingService9" ||
+                    service === "webService6"
+                );
+
+                if (isOtherServiceType) return 4;
+                if (hasServiceSpecificOther) return 4;
+                return 3;
+              })()}
+            </span>
+          </div>
         </div>
-      </Link>
-      <div className="md:max-w-5xl max-w-7xl w-full md:p-10 p-6 relative bg-black rounded-2xl">
-        <form
-          onSubmit={handleSubmit}
-          className="project-form space-y-8 w-full"
-          style={{ height: "500px" }}
-        >
-          {renderStep()}
-        </form>
+
+        {renderStep()}
+
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={handlePrevStep}
+            disabled={step === 1}
+            className={`px-6 py-2 rounded-lg font-medium ${
+              step === 1
+                ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+                : "bg-gray-600 text-white hover:bg-gray-500"
+            }`}
+          >
+            {ProjectsFormLocale[lang]?.button2 || ProjectsFormLocale.en.button2}
+          </button>
+
+          <button
+            onClick={handleNextStep}
+            className="px-6 py-2 bg-[#FFFF00] text-black rounded-lg font-medium hover:bg-yellow-400 transition-colors"
+          >
+            {step === 3
+              ? ProjectsFormLocale[lang]?.header2 ||
+                ProjectsFormLocale.en.header2
+              : ProjectsFormLocale[lang]?.button1 ||
+                ProjectsFormLocale.en.button1}
+          </button>
+        </div>
       </div>
     </div>
   );

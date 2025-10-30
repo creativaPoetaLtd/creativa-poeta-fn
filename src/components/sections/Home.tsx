@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { AiOutlineDown, AiOutlineTwitter } from "react-icons/ai";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTiktok,
+} from "react-icons/fa";
 import image8 from "../../assets/flags/image8.jpg";
 import image2 from "../../assets/flags/image2.jpg";
 import BackgroundCircles from "../buttons/BackgroundCircles";
@@ -29,7 +34,13 @@ const backgrounds = [
       description: HomeLocale[lang].description2,
     },
   },
-
+  {
+    image: image8,
+    content: {
+      title: HomeLocale[lang].title3,
+      description: HomeLocale[lang].description3,
+    },
+  },
 ];
 
 const Home = () => {
@@ -44,7 +55,6 @@ const Home = () => {
   const token = queryParams.get("token");
   const [successMessage, setsuccessMessage] = useState("" as any);
   const [errorMessage, setErrorMessage] = useState("" as any);
-
 
   useEffect(() => {
     if (token) {
@@ -136,16 +146,16 @@ const Home = () => {
     setTouchStartX(null);
   };
 
-   // handle navigate to about section with id about
-   const handleNavigateToAbout = () => {
+  // handle navigate to about section with id about
+  const handleNavigateToAbout = () => {
     window.location.href = "/#about";
-  }
+  };
   const currentBackground = backgrounds[currentIndex];
-//naviga to /start-project page
+  //naviga to /start-project page
 
-const handleStartProject = () => {
-  window.location.href = "/start-project";
-}
+  const handleStartProject = () => {
+    window.location.href = "/start-project";
+  };
 
   return (
     <section
@@ -153,7 +163,7 @@ const handleStartProject = () => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className={`homesec h-fit min-h-screen laptop:m-0 tablet:m-0 tablet:-0 flex flex-col laptop:p-[10rem] tablet:p-[8rem] laptop:pr-[4rem] tablet:pr-[4rem] laptop:justify-normal laptop:text-left text-center tablet:text-center items-center my-auto justify-center px-2 relative ${
+      className={`homesec h-fit min-h-screen laptop:m-0 tablet:m-0 tablet:-0 flex flex-col laptop:p-[10rem] tablet:p-[8rem] laptop:pr-[4rem] tablet:pr-[4rem] laptop:justify-center laptop:text-center text-center tablet:text-center items-center my-auto justify-center px-2 relative ${
         currentIndex === prevIndex ? "slide-in" : "slide-out"
       }`}
       style={{
@@ -166,7 +176,8 @@ const handleStartProject = () => {
         transition: "background 0.9s ease-in-out",
         animation: "slideAnimation 0.9s ease-in-out",
         animationName: "slideAnimation",
-      }}>
+      }}
+    >
       <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
         <img
           src={logopoeta1}
@@ -176,36 +187,40 @@ const handleStartProject = () => {
       </div>
       <div className="">
         <div className="flex justify-between">
-          <div className="flex flex-col laptop:w-[72%] tablet:w-[80%] w-full justify-start laptop:m-0 items-start">
-            <div className="phone:space-y-3 xs:space-y-1 laptop:space-y-0 ">
+          <div className="flex flex-col laptop:w-[72%] tablet:w-[80%] w-full justify-center laptop:m-0 items-center">
+            <div className="phone:space-y-3 xs:space-y-1 laptop:space-y-0 text-center">
               <h1
-                className={`laptop:text-4xl desktop:text-4xl laptop:pb-7 desktop:pb-7 tablet:-bottom-7 pb-7 xs:pb-2 tablet:text-4xl md:text-4xl text-sm phone:text-3xl font-bold laptop:px-0 desktop:px-0 tablet:px-0 mdpx0 px-7 text-[#FFFF00] mx-0 animate-fade-in animate-bounce ${
+                className={`laptop:text-4xl desktop:text-4xl laptop:pb-7 desktop:pb-7 tablet:-bottom-7 pb-7 xs:pb-2 tablet:text-4xl md:text-4xl text-sm text-[#FFFF00] phone:text-3xl font-bold laptop:px-0 desktop:px-0 tablet:px-0 mdpx0 px-7 mx-0 animate-fade-in animate-bounce ${
                   showTitle ? "visible2" : ""
-                }`}>
+                }`}
+              >
                 {currentBackground.content.title.toLocaleUpperCase()}
               </h1>
               <p
-                className={`animate-bounce leading-tight laptop:text-left tablet:text-left text-center laptop:ox-0 desktop:px-0 tablet:px-0 mdpx0 px-7 font-semibold text-white animate-slide-up ${
+                className={`animate-bounce leading-tight text-center laptop:ox-0 desktop:px-0 tablet:px-0 mdpx0 px-7 font-semibold text-white animate-slide-up ${
                   currentBackground.content.title === "CREATIVE MODERN DESIGN"
                     ? "laptop:text-xl desktop:text-xl phone:text-lg tablet:text-1xl text-lg xs:text-sm "
                     : "laptop:text-2xl desktop:text-2xl phone:text-lg tablet:text-1xl text-lg xs:text-sm"
-                } ${showDescription ? "visible2" : ""}`}>
+                } ${showDescription ? "visible2" : ""}`}
+              >
                 {currentBackground.content.description}
               </p>
             </div>
-            <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-0 w-full space-y-4 laptop:space-y-0 tablet:space-y-0">
-  <button
-    onClick={handleStartProject}
-    className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
-    {HomeLocale[lang].action1}
-  </button>
+            <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-auto w-full space-y-4 laptop:space-y-0 tablet:space-y-0 justify-center items-center">
+              <button
+                onClick={handleStartProject}
+                className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in whitespace-nowrap"
+              >
+                {HomeLocale[lang].action1}
+              </button>
 
-  <button
-    onClick={handleNavigateToAbout}
-    className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in">
-    {HomeLocale[lang].action2}
-  </button>
-</div>
+              <button
+                onClick={handleNavigateToAbout}
+                className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in"
+              >
+                {HomeLocale[lang].action2}
+              </button>
+            </div>
 
             <SlideLeft
               backgrounds={backgrounds}
@@ -225,89 +240,96 @@ const handleStartProject = () => {
           </div>
           <div className="laptop:block tablet:block hidden absolute right-60 ">
             <div className="flex flex-col space-y-5 animate-pulse hover:animate-none py-20">
-             <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "Twitter" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("Twitter")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-20 text-[#FFFF00] ${
-                    hoveredIcon === "Twitter" ? "block" : "hidden"
-                  }`}>
-                  Twitter
-                </span>
-                <AiOutlineTwitter />
-              </div>
+              <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
+                <div
+                  className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                    hoveredIcon === "Twitter" ? "animate-icon-active" : ""
+                  }`}
+                  onMouseEnter={() => handleIconHover("Twitter")}
+                  onMouseLeave={() => handleIconHover("")}
+                >
+                  <span
+                    className={`absolute -right-20 text-[#FFFF00] ${
+                      hoveredIcon === "Twitter" ? "block" : "hidden"
+                    }`}
+                  >
+                    Twitter
+                  </span>
+                  <AiOutlineTwitter />
+                </div>
               </a>
               <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "Facebook" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("Facebook")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-24 text-[#FFFF00] ${
-                    hoveredIcon === "Facebook" ? "block" : "hidden"
-                  }`}>
-                  Facebook
-                </span>
-                <FaFacebookF />
-              </div>
+                <div
+                  className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                    hoveredIcon === "Facebook" ? "animate-icon-active" : ""
+                  }`}
+                  onMouseEnter={() => handleIconHover("Facebook")}
+                  onMouseLeave={() => handleIconHover("")}
+                >
+                  <span
+                    className={`absolute -right-24 text-[#FFFF00] ${
+                      hoveredIcon === "Facebook" ? "block" : "hidden"
+                    }`}
+                  >
+                    Facebook
+                  </span>
+                  <FaFacebookF />
+                </div>
               </a>
               <a href="https://www.instagram.com/creativapoeta_/">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "Instagram" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("Instagram")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-28 text-[#FFFF00] ${
-                    hoveredIcon === "Instagram" ? "block" : "hidden"
-                  }`}>
-                 Instagram
-                  
-                </span>
-                <FaInstagram />
-              </div>
+                <div
+                  className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                    hoveredIcon === "Instagram" ? "animate-icon-active" : ""
+                  }`}
+                  onMouseEnter={() => handleIconHover("Instagram")}
+                  onMouseLeave={() => handleIconHover("")}
+                >
+                  <span
+                    className={`absolute -right-28 text-[#FFFF00] ${
+                      hoveredIcon === "Instagram" ? "block" : "hidden"
+                    }`}
+                  >
+                    Instagram
+                  </span>
+                  <FaInstagram />
+                </div>
               </a>
               <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "Tick Tok" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("Tick Tok")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-28 text-[#FFFF00] ${
-                    hoveredIcon === "Tick Tok" ? "block" : "hidden"
-                  }`}>
-                 TickTok
-                  
-                </span>
-                <FaTiktok />
-              </div>
+                <div
+                  className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                    hoveredIcon === "Tick Tok" ? "animate-icon-active" : ""
+                  }`}
+                  onMouseEnter={() => handleIconHover("Tick Tok")}
+                  onMouseLeave={() => handleIconHover("")}
+                >
+                  <span
+                    className={`absolute -right-28 text-[#FFFF00] ${
+                      hoveredIcon === "Tick Tok" ? "block" : "hidden"
+                    }`}
+                  >
+                    TickTok
+                  </span>
+                  <FaTiktok />
+                </div>
               </a>
               <a href="https://www.linkedin.com/company/105066709/">
-              <div
-                className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
-                  hoveredIcon === "LinkedIn" ? "animate-icon-active" : ""
-                }`}
-                onMouseEnter={() => handleIconHover("LinkedIn")}
-                onMouseLeave={() => handleIconHover("")}>
-                <span
-                  className={`absolute -right-24 text-[#FFFF00] ${
-                    hoveredIcon === "LinkedIn" ? "block" : "hidden"
-                  }`}>
-                  LinkedIn
-                </span>
-                <FaLinkedinIn />
-              </div>
+                <div
+                  className={`group rounded-full h-[3rem] w-[3rem] border-4 text-slate-500 text-center items-center flex justify-center text-xl  border-gray-500 cursor-pointer animate-icon ${
+                    hoveredIcon === "LinkedIn" ? "animate-icon-active" : ""
+                  }`}
+                  onMouseEnter={() => handleIconHover("LinkedIn")}
+                  onMouseLeave={() => handleIconHover("")}
+                >
+                  <span
+                    className={`absolute -right-24 text-[#FFFF00] ${
+                      hoveredIcon === "LinkedIn" ? "block" : "hidden"
+                    }`}
+                  >
+                    LinkedIn
+                  </span>
+                  <FaLinkedinIn />
+                </div>
               </a>
-           
             </div>
           </div>
         </div>

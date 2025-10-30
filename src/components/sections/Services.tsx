@@ -9,7 +9,8 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="mainn h-fit min-h-screen flex flex-col items-center bg-slate-800 relative">
+      className="mainn h-fit min-h-screen flex flex-col items-center bg-slate-800 relative"
+    >
       {/* Title Section */}
       <div className="w-full backdrop-blur-lg bg-gradient-to-r from-white to-transparent flex flex-col items-center py-3">
         <h1 className="text-2xl tablet:text-3xl laptop:text-4xl font-bold text-center text-[#EEBA2B]">
@@ -34,7 +35,8 @@ const Services = () => {
                 ? "/services/digital-marketing"
                 : "#"
             }
-            key={blog.id}>
+            key={blog.id}
+          >
             <div className="flex flex-col laptop:w-full desktop:w-full tablet:w-4/5 w-[98%] mx-auto h-fit">
               <div className="flex items-center h-[6rem]">
                 {/* Blog Icon */}
@@ -51,7 +53,7 @@ const Services = () => {
                 <div className="flex flex-col w-fit p-3 h-[7rem] space-y-2">
                   <div className="flex flex-col text-xl laptop:text-3xl text-white">
                     <p>{blog.h1}</p>
-                    <p className="font-bold">{blog.h2}</p>
+                    <p className="font-bold text-[#def0f2]">{blog.h2}</p>
                   </div>
                   <div className="w-full bg-yellow-400 h-[0.5rem]"></div>
                 </div>

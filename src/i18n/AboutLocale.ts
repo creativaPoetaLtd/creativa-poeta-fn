@@ -16,9 +16,7 @@ const AboutLocale: any = {
   kiny: {
     title1: "ABO TURIBO",
     title2: "TURIBO",
-    description:
-      "Inararibonye mu kugaragaza ibihangano,abahanga mu ikoranabuhanga no muguhanga udushya turi itsinda ry'abahanzi budushya(designer's) Abanditse ndetse naba Web developers  babigize umwuga tubafitiye ibisubizo byihariye bibagaragaza mu buryo bw'ihariye mwifuza.intego nyamukuru yacu ni ukumva neza ibyifuzo byanyu tukabafasha kubihindura impamo mu buryo bunogeye ijisho.Bitewe n'uburyo dushyira imbere umurimo unoze no guhanga udushya ,tubafasha kwigaragaza mubandi mu buryo buhoraho,mugahora muri imbere.Witinda twandikire uyu munsi tuganire ku mishinga yawe,Tukwereke uburyo wayibyaza umusaruro vuba ndetse n'uburyo wagera ku ntego n'ibyifuzo byawe ",
-    action: "TWANDIKIRE",
+    description:"Inararibonye mu kugaragaza ibihangano, abahanga mu ikoranabuhanga no guhanga udushya, turi itsinda ry’abahanzi b’udushya (‘designers’), abanditsi ndetse n’aba ‘web developers’ babigize umwuga. Tubafitiye ibisubizo byihariye, bibagaragaza mu buryo mwifuza. Intego nyamukuru yacu ni ukumva neza ibyifuzo byanyu tukabafasha kubihindura impamo mu buryo bunogeye ijisho. Bitewe n’uburyo dushyira imbere umurimo unoze no guhanga udushya, tubafasha kwigaragaza mu bandi mu buryo buhoraho, mugahora muri imbere. Witinda! Twandikire uyu munsi tuganire ku mishinga yawe, tukwereke uburyo wayibyaza umusaruro vuba ndetse n’uburyo wagera ku ntego n’ibyifuzo byawe.",    action: "TWANDIKIRE",
   },
     nl: {
     title1: "WIE WIJ ZIJN",
