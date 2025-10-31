@@ -3,7 +3,6 @@ import Typewriter from "../utils/TypeWritter";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import image8 from "../assets/flags/image8.jpg";
-import { projectForm } from "../APIs/projectForm";
 import "../styles/custom-inputs.css";
 import getLangFromLocalStorage from "../../utils/Lang";
 import ProjectsFormLocale from "../i18n/ProjectsFormLocale";
@@ -282,6 +281,8 @@ const ProjectForm = () => {
         additionalInfo: formData.additionalInfo,
       };
 
+      // Dynamic import to avoid module resolution issues
+      const { projectForm } = await import("../APIs/projectForm");
       const response = await projectForm(data);
       toast.success(
         response.message || "Project inquiry submitted successfully!"
@@ -695,7 +696,16 @@ const ProjectForm = () => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${image8})`,
       }}
     >
-      <div className="bg-black rounded-3xl shadow-xl p-8 w-full max-w-4xl">
+      <div className="bg-black rounded-3xl shadow-xl p-8 w-full max-w-4xl relative">
+        {/* Close Button */}
+        <button
+          onClick={() => navigate("/")}
+          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-gray-700 hover:bg-red-600 transition-colors duration-200 flex items-center justify-center text-white text-lg font-bold z-10"
+          title="Close and return to home"
+        >
+          ×
+        </button>
+
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <div className="flex space-x-2">
@@ -737,7 +747,7 @@ const ProjectForm = () => {
                 );
               })()}
             </div>
-            <span className="text-sm text-gray-400">
+            <span className="text-sm text-gray-400 ">
               Step {step} of{" "}
               {(() => {
                 const locale =

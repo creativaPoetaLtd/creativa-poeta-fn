@@ -2,18 +2,50 @@ import axios from "axios";
 
 const BASE_URL = "https://creativapoeta-bn.onrender.com/api/project";
 
+// Helper function to handle auth errors gracefully
+const handleAuthError = (error: any) => {
+  if (axios.isAxiosError(error) && error.response?.status === 401) {
+    // Check if the error is specifically about token signature/expiration
+    const errorMessage = error.response?.data?.message || "";
+
+    if (
+      errorMessage.includes("signature") ||
+      errorMessage.includes("expired")
+    ) {
+      // Only clear storage and redirect for genuine token issues
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      // Use a more gentle approach - don't immediately redirect
+      console.warn(
+        "Authentication token expired. Please refresh and login again."
+      );
+      throw new Error(
+        "Session expired. Please refresh the page and login again."
+      );
+    } else {
+      // For other 401 errors, just throw without auto-logout
+      throw new Error(
+        errorMessage || "Authentication failed. Please try again."
+      );
+    }
+  }
+
+  if (axios.isAxiosError(error)) {
+    throw new Error(
+      error.response?.data?.message || "Request failed. Please try again."
+    );
+  }
+  throw error;
+};
+
 // Public endpoint for project inquiries
 export const projectForm = async (data: any) => {
   try {
     const response = await axios.post(`${BASE_URL}/send-inquiry`, data);
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to submit project inquiry"
-      );
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
 
@@ -21,6 +53,10 @@ export const projectForm = async (data: any) => {
 export const getProjects = async (page = 1, limit = 10, status = "all") => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please login.");
+    }
+
     const response = await axios.get(`${BASE_URL}`, {
       params: { page, limit, status },
       headers: {
@@ -29,19 +65,7 @@ export const getProjects = async (page = 1, limit = 10, status = "all") => {
     });
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      // Token is invalid/expired - clear storage and redirect to secure login
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to fetch projects"
-      );
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
 
@@ -51,6 +75,10 @@ export const updateProjectStatus = async (
 ) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please login.");
+    }
+
     const response = await axios.put(
       `${BASE_URL}/${projectId}/status`,
       { status },
@@ -62,18 +90,7 @@ export const updateProjectStatus = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to update project status"
-      );
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
 
@@ -84,6 +101,10 @@ export const replyToProject = async (
 ) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please login.");
+    }
+
     const response = await axios.post(
       `${BASE_URL}/${projectId}/reply`,
       { replyMessage, subject },
@@ -95,22 +116,17 @@ export const replyToProject = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || "Failed to send reply");
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
 
 export const deleteProject = async (projectId: string) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please login.");
+    }
+
     const response = await axios.delete(`${BASE_URL}/${projectId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -118,24 +134,17 @@ export const deleteProject = async (projectId: string) => {
     });
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to delete project"
-      );
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
 
 export const getProjectById = async (projectId: string) => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No authentication token found. Please login.");
+    }
+
     const response = await axios.get(`${BASE_URL}/${projectId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -143,17 +152,6 @@ export const getProjectById = async (projectId: string) => {
     });
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to fetch project"
-      );
-    }
-    throw error;
+    handleAuthError(error);
   }
 };
