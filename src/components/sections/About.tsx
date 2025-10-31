@@ -65,7 +65,7 @@ const About = () => {
     >
       <div
         className="main_about h-fit  laptop:py-0 desktop:py-0 tablet:py-0 phone:py-0 pb-12 min-h-screen backdrop-blur-xs flex flex-col justify-center items-center text-center relative"
-        style={{ backgroundColor: "rgba(255, 233, 80, 0.9)" }}
+        style={{ backgroundColor: "rgba(255, 248, 128, 0.8)" }}
       >
         <div className="laptop:mt-[0%]  laptop:py-0 desktop:py-0 phone:py-0 tablet:py-0 iphone:py-0 ipod:py-0 xs:py-20 tablet:mt-[0%] laptop:space-y-10 space-y-5 mt-[0rem]">
           <div className="flex justify-evenly flex-col laptop:space-y-10 space-y-5 laptop:w-[50%] w-[90%] tablet:w-[70%] mx-auto">
