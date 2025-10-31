@@ -3,7 +3,6 @@ import Typewriter from "../utils/TypeWritter";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import image8 from "../assets/flags/image8.jpg";
-import { projectForm } from "../APIs/projectForm";
 import "../styles/custom-inputs.css";
 import getLangFromLocalStorage from "../../utils/Lang";
 import ProjectsFormLocale from "../i18n/ProjectsFormLocale";
@@ -282,6 +281,8 @@ const ProjectForm = () => {
         additionalInfo: formData.additionalInfo,
       };
 
+      // Dynamic import to avoid module resolution issues
+      const { projectForm } = await import("../APIs/projectForm");
       const response = await projectForm(data);
       toast.success(
         response.message || "Project inquiry submitted successfully!"

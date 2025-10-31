@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import {
   Box,
   Typography,
@@ -28,7 +29,6 @@ import {
   Business,
   ExpandMore,
   Timeline,
-  AttachMoney,
   Person,
   Assignment,
   Reply,
@@ -43,13 +43,6 @@ import {
   ActionButton,
   MenuAction,
 } from "./components/DashboardComponents";
-import {
-  getProjects,
-  updateProjectStatus,
-  deleteProject,
-  getProjectById,
-  replyToProject,
-} from "../APIs/projectForm";
 
 interface Project {
   _id: string;
@@ -57,17 +50,13 @@ interface Project {
   email: string;
   phone: string;
   company: string;
-  projectType: string;
-  deliverables: string[];
-  mainGoal: string;
-  audience: string[];
-  stylePreference: string;
-  contentElements: string[];
-  budget: string | number;
-  timeline: string;
-  status: string;
-  projectPurpose: string[];
+  serviceType: string;
+  selectedServices: string[];
+  customServiceDescription: string;
+  customServiceNeeds: string;
+  serviceSpecificOtherDescription: string;
   additionalInfo: string;
+  status: string;
   createdAt: string;
   updatedAt: string;
   isReplied?: boolean;
@@ -77,13 +66,14 @@ interface Project {
 }
 
 export default function Projects() {
+  const { isAuthenticated, token } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [projectTypeFilter, setProjectTypeFilter] = useState("");
+  const [serviceTypeFilter, setServiceTypeFilter] = useState("");
   const [replyModalOpen, setReplyModalOpen] = useState(false);
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
@@ -107,9 +97,22 @@ export default function Projects() {
     try {
       setLoading(true);
       setError(null);
-      const data = await getProjects();
+
+      // Check authentication first
+      if (!isAuthenticated || !token) {
+        throw new Error("Please login to access this feature");
+      }
+
+      const module = await import("../APIs/projectForm");
+
+      if (typeof module.getProjects !== "function") {
+        throw new Error("getProjects function not found in module");
+      }
+
+      const data = await module.getProjects();
       setProjects(data.requests || []);
     } catch (err) {
+      console.error("Error fetching projects:", err);
       setError(err instanceof Error ? err.message : "Failed to fetch projects");
     } finally {
       setLoading(false);
@@ -117,28 +120,42 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (isAuthenticated && token) {
+      fetchProjects();
+    }
+  }, [isAuthenticated, token]);
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch =
       project.name.toLowerCase().includes(search.toLowerCase()) ||
       project.email.toLowerCase().includes(search.toLowerCase()) ||
       project.company.toLowerCase().includes(search.toLowerCase()) ||
-      project.projectType.toLowerCase().includes(search.toLowerCase());
+      project.serviceType.toLowerCase().includes(search.toLowerCase());
 
-    const matchesProjectType =
-      projectTypeFilter === "" || project.projectType === projectTypeFilter;
+    const matchesServiceType =
+      serviceTypeFilter === "" || project.serviceType === serviceTypeFilter;
 
-    return matchesSearch && matchesProjectType;
+    return matchesSearch && matchesServiceType;
   });
 
   const handleView = async (project: Project) => {
     try {
-      const detailedProject = await getProjectById(project._id);
+      // Check authentication first
+      if (!isAuthenticated || !token) {
+        throw new Error("Please login to access this feature");
+      }
+
+      const module = await import("../APIs/projectForm");
+
+      if (typeof module.getProjectById !== "function") {
+        throw new Error("getProjectById function not found in module");
+      }
+
+      const detailedProject = await module.getProjectById(project._id);
       setSelectedProject(detailedProject.request || detailedProject);
       setViewModalOpen(true);
     } catch (err) {
+      console.error("Error fetching project details:", err);
       setError(
         err instanceof Error ? err.message : "Failed to fetch project details"
       );
@@ -147,10 +164,17 @@ export default function Projects() {
 
   const handleStatusUpdate = async (projectId: string, newStatus: string) => {
     try {
-      await updateProjectStatus(projectId, newStatus);
+      const module = await import("../APIs/projectForm");
+
+      if (typeof module.updateProjectStatus !== "function") {
+        throw new Error("updateProjectStatus function not found in module");
+      }
+
+      await module.updateProjectStatus(projectId, newStatus);
       fetchProjects(); // Refresh the list
       showMessage(`Project status updated to ${newStatus}`, "success");
     } catch (err) {
+      console.error("Error updating project status:", err);
       showMessage(
         err instanceof Error ? err.message : "Failed to update project status",
         "error"
@@ -163,10 +187,17 @@ export default function Projects() {
       window.confirm("Are you sure you want to delete this project request?")
     ) {
       try {
-        await deleteProject(projectId);
+        const module = await import("../APIs/projectForm");
+
+        if (typeof module.deleteProject !== "function") {
+          throw new Error("deleteProject function not found in module");
+        }
+
+        await module.deleteProject(projectId);
         fetchProjects(); // Refresh the list
         showMessage("Project deleted successfully", "success");
       } catch (err) {
+        console.error("Error deleting project:", err);
         showMessage(
           err instanceof Error ? err.message : "Failed to delete project",
           "error"
@@ -177,7 +208,7 @@ export default function Projects() {
 
   const handleReply = (project: Project) => {
     setSelectedProject(project);
-    setReplySubject(`Re: ${project.projectType} Project Inquiry`);
+    setReplySubject(`Re: ${project.serviceType} Service Inquiry`);
     setReplyMessage(
       `Dear ${project.name},\n\nThank you for your interest in our services. I have reviewed your project requirements and would like to discuss this further.\n\nBest regards,\nCreativa Poeta Team`
     );
@@ -192,7 +223,17 @@ export default function Projects() {
 
     try {
       setReplyLoading(true);
-      await replyToProject(selectedProject._id, replyMessage, replySubject);
+      const module = await import("../APIs/projectForm");
+
+      if (typeof module.replyToProject !== "function") {
+        throw new Error("replyToProject function not found in module");
+      }
+
+      await module.replyToProject(
+        selectedProject._id,
+        replyMessage,
+        replySubject
+      );
       setReplyModalOpen(false);
       setReplySubject("");
       setReplyMessage("");
@@ -202,6 +243,7 @@ export default function Projects() {
       await handleStatusUpdate(selectedProject._id, "In-Progress");
       fetchProjects(); // Refresh the list to show updated reply status
     } catch (err) {
+      console.error("Error sending reply:", err);
       showMessage(
         err instanceof Error ? err.message : "Failed to send reply",
         "error"
@@ -231,18 +273,15 @@ export default function Projects() {
     }
   };
 
-  const getProjectTypeColor = (projectType: string) => {
+  const getServiceTypeColor = (serviceType: string) => {
     const colors = {
-      "Website Development": "#2196f3",
-      "Mobile App": "#9c27b0",
-      "Digital Marketing": "#ff9800",
-      "Content Writing": "#4caf50",
       "Graphic Design": "#e91e63",
-      "Video Production": "#ff5722",
-      "SEO Services": "#607d8b",
-      Consulting: "#795548",
+      "Content Writing": "#4caf50",
+      "Digital Marketing": "#ff9800",
+      "Web Development": "#2196f3",
+      Other: "#795548",
     };
-    return colors[projectType as keyof typeof colors] || "#EEBA2B";
+    return colors[serviceType as keyof typeof colors] || "#EEBA2B";
   };
 
   if (loading) {
@@ -302,9 +341,8 @@ export default function Projects() {
   const tableHeaders = [
     "Client Name",
     "Company",
-    "Project Type",
-    "Budget",
-    "Timeline",
+    "Service Type",
+    "Services",
     "Status",
     "Created",
   ];
@@ -323,29 +361,53 @@ export default function Projects() {
         {project.company || "N/A"}
       </Box>
     ),
-    "Project Type": (
+    "Service Type": (
       <Chip
-        label={project.projectType}
+        label={project.serviceType}
         size="small"
         sx={{
-          bgcolor: getProjectTypeColor(project.projectType),
+          bgcolor: getServiceTypeColor(project.serviceType),
           color: "white",
           fontWeight: "bold",
+          maxWidth: "200px",
         }}
       />
     ),
-    Budget: (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <AttachMoney fontSize="small" />
-        {typeof project.budget === "number"
-          ? `$${project.budget.toLocaleString()}`
-          : project.budget}
-      </Box>
-    ),
-    Timeline: (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Timeline fontSize="small" />
-        {project.timeline}
+    Services: (
+      <Box sx={{ maxWidth: "250px" }}>
+        {project.selectedServices && project.selectedServices.length > 0 ? (
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            {project.selectedServices.slice(0, 2).map((service, index) => (
+              <Chip
+                key={index}
+                label={
+                  service.length > 30
+                    ? service.substring(0, 30) + "..."
+                    : service
+                }
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: "0.7rem", height: "20px" }}
+              />
+            ))}
+            {project.selectedServices.length > 2 && (
+              <Chip
+                label={`+${project.selectedServices.length - 2} more`}
+                size="small"
+                variant="outlined"
+                sx={{ fontSize: "0.7rem", height: "20px" }}
+              />
+            )}
+          </Box>
+        ) : project.customServiceDescription ? (
+          <Typography variant="caption" sx={{ fontStyle: "italic" }}>
+            Custom: {project.customServiceDescription.substring(0, 50)}...
+          </Typography>
+        ) : (
+          <Typography variant="caption" color="textSecondary">
+            No services specified
+          </Typography>
+        )}
       </Box>
     ),
     Status: (
@@ -476,9 +538,9 @@ export default function Projects() {
             <FormControl sx={{ minWidth: 200 }}>
               <InputLabel>Filter by Type</InputLabel>
               <Select
-                value={projectTypeFilter}
+                value={serviceTypeFilter}
                 label="Filter by Type"
-                onChange={(e) => setProjectTypeFilter(e.target.value)}
+                onChange={(e) => setServiceTypeFilter(e.target.value)}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "&:hover fieldset": { borderColor: "#EEBA2B" },
@@ -487,7 +549,7 @@ export default function Projects() {
                 }}
               >
                 <MenuItem value="">All Types</MenuItem>
-                {Array.from(new Set(projects.map((p) => p.projectType)))
+                {Array.from(new Set(projects.map((p) => p.serviceType)))
                   .sort()
                   .map((type) => (
                     <MenuItem key={type} value={type}>
@@ -587,30 +649,33 @@ export default function Projects() {
                 <Card>
                   <CardContent>
                     <Typography variant="h6" sx={{ mb: 2, color: "#EEBA2B" }}>
-                      📋 Project Overview
+                      📋 Service Overview
                     </Typography>
                     <Box
                       sx={{ display: "flex", flexDirection: "column", gap: 1 }}
                     >
                       <Typography>
-                        <strong>Type:</strong> {selectedProject.projectType}
+                        <strong>Service Type:</strong>{" "}
+                        {selectedProject.serviceType}
                       </Typography>
-                      <Typography>
-                        <strong>Main Goal:</strong> {selectedProject.mainGoal}
-                      </Typography>
-                      <Typography>
-                        <strong>Budget:</strong>{" "}
-                        {typeof selectedProject.budget === "number"
-                          ? `$${selectedProject.budget.toLocaleString()}`
-                          : selectedProject.budget}
-                      </Typography>
-                      <Typography>
-                        <strong>Timeline:</strong> {selectedProject.timeline}
-                      </Typography>
-                      <Typography>
-                        <strong>Style:</strong>{" "}
-                        {selectedProject.stylePreference}
-                      </Typography>
+                      {selectedProject.customServiceDescription && (
+                        <Typography>
+                          <strong>Custom Service:</strong>{" "}
+                          {selectedProject.customServiceDescription}
+                        </Typography>
+                      )}
+                      {selectedProject.customServiceNeeds && (
+                        <Typography>
+                          <strong>Specific Needs:</strong>{" "}
+                          {selectedProject.customServiceNeeds}
+                        </Typography>
+                      )}
+                      {selectedProject.serviceSpecificOtherDescription && (
+                        <Typography>
+                          <strong>Additional Requirements:</strong>{" "}
+                          {selectedProject.serviceSpecificOtherDescription}
+                        </Typography>
+                      )}
                       <Chip
                         label={selectedProject.status}
                         color={getStatusColor(selectedProject.status) as any}
@@ -621,101 +686,37 @@ export default function Projects() {
                 </Card>
               </Grid>
 
-              {/* Deliverables */}
-              <Grid item xs={12}>
-                <Accordion>
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Typography variant="h6">
-                      📦 Deliverables ({selectedProject.deliverables.length})
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {selectedProject.deliverables.map(
-                        (deliverable, index) => (
-                          <Chip
-                            key={index}
-                            label={deliverable}
-                            variant="outlined"
-                            sx={{ borderColor: "#EEBA2B", color: "#EEBA2B" }}
-                          />
-                        )
-                      )}
-                    </Box>
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              {/* Target Audience */}
-              <Grid item xs={12}>
-                <Accordion>
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Typography variant="h6">
-                      🎯 Target Audience ({selectedProject.audience.length})
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {selectedProject.audience.map((audienceType, index) => (
-                        <Chip
-                          key={index}
-                          label={audienceType}
-                          variant="outlined"
-                          color="primary"
-                        />
-                      ))}
-                    </Box>
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              {/* Content Elements */}
-              <Grid item xs={12}>
-                <Accordion>
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Typography variant="h6">
-                      🎨 Content Elements (
-                      {selectedProject.contentElements.length})
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {selectedProject.contentElements.map((element, index) => (
-                        <Chip
-                          key={index}
-                          label={element}
-                          variant="outlined"
-                          color="secondary"
-                        />
-                      ))}
-                    </Box>
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
-
-              {/* Project Purpose */}
-              <Grid item xs={12}>
-                <Accordion>
-                  <AccordionSummary expandIcon={<ExpandMore />}>
-                    <Typography variant="h6">
-                      🎯 Project Purpose (
-                      {selectedProject.projectPurpose.length})
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                      {selectedProject.projectPurpose.map((purpose, index) => (
-                        <Chip
-                          key={index}
-                          label={purpose}
-                          variant="outlined"
-                          color="info"
-                        />
-                      ))}
-                    </Box>
-                  </AccordionDetails>
-                </Accordion>
-              </Grid>
+              {/* Selected Services */}
+              {selectedProject.selectedServices &&
+                selectedProject.selectedServices.length > 0 && (
+                  <Grid item xs={12}>
+                    <Accordion>
+                      <AccordionSummary expandIcon={<ExpandMore />}>
+                        <Typography variant="h6">
+                          🛠️ Selected Services (
+                          {selectedProject.selectedServices.length})
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                          {selectedProject.selectedServices.map(
+                            (service, index) => (
+                              <Chip
+                                key={index}
+                                label={service}
+                                variant="outlined"
+                                sx={{
+                                  borderColor: "#EEBA2B",
+                                  color: "#EEBA2B",
+                                }}
+                              />
+                            )
+                          )}
+                        </Box>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Grid>
+                )}
 
               {/* Additional Information */}
               {selectedProject.additionalInfo && (
@@ -732,7 +733,7 @@ export default function Projects() {
               )}
 
               {/* Reply Information */}
-              {selectedProject.isReplied && selectedProject.replyMessage && (
+              {selectedProject?.isReplied && selectedProject?.replyMessage && (
                 <Grid item xs={12}>
                   <Card
                     sx={{ bgcolor: "#f8f9fa", border: "1px solid #EEBA2B" }}
@@ -750,11 +751,11 @@ export default function Projects() {
                       >
                         <Typography>
                           <strong>Replied by:</strong>{" "}
-                          {selectedProject.repliedBy || "Admin"}
+                          {selectedProject?.repliedBy || "Admin"}
                         </Typography>
                         <Typography>
                           <strong>Replied on:</strong>{" "}
-                          {selectedProject.repliedAt
+                          {selectedProject?.repliedAt
                             ? formatDate(selectedProject.repliedAt)
                             : "N/A"}
                         </Typography>
@@ -774,7 +775,7 @@ export default function Projects() {
                               whiteSpace: "pre-wrap",
                             }}
                           >
-                            {selectedProject.replyMessage}
+                            {selectedProject?.replyMessage}
                           </Typography>
                         </Box>
                       </Box>
