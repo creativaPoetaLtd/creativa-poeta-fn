@@ -37,7 +37,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "https://creativapoeta-bn.onrender.com/api/auth/signup",
+        "https://creativa-poeta-bn-phi.vercel.app/api/auth/signup",
         {
           name: data.fullName, // Map fullName to name (API expects "name")
           email: data.email,

@@ -45,7 +45,7 @@ export default function Jobs() {
   // @ts-ignore
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = "https://creativapoeta-bn.onrender.com/api/jobs";
+  const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/jobs";
 
   const fetchJobs = async () => {
     try {

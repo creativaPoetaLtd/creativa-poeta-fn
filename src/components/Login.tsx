@@ -47,7 +47,7 @@ const Login: React.FC = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "https://creativapoeta-bn.onrender.com/api/auth/login",
+        "https://creativa-poeta-bn-phi.vercel.app/api/auth/login",
         {
           email: data.email,
           password: data.password,

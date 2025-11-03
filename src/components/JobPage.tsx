@@ -27,7 +27,7 @@ const JobPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = "https://creativapoeta-bn.onrender.com/api/jobs";
+  const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/jobs";
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -38,8 +38,8 @@ const JobPage = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setJobs(data.jobs); 
-   
+        setJobs(data.jobs);
+
         if (window.innerWidth >= 768 && data.jobs.length > 0) {
           setSelectedJob(data.jobs[0]);
         }
