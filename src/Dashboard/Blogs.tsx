@@ -28,7 +28,7 @@ import {
   MenuAction,
 } from "./components/DashboardComponents";
 
-const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
+const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/blogs";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState<

@@ -438,7 +438,7 @@ const ProjectForm = () => {
                   {availableServices.map((service, index) => (
                     <label
                       key={index}
-                      className="block p-3 border border-gray-600 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors bg-gray-900"
+                      className="block p-3 rounded-lg cursor-pointer hover:bg-gray-800 transition-colors"
                     >
                       <div className="flex items-center">
                         <input

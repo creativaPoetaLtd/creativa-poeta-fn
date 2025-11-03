@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Calendar, MessageCircle, Heart, User, ArrowRight } from "lucide-react";
 import BlogLocale from "../i18n/BlogLocale";
 
-const API_URL = "https://creativapoeta-bn.onrender.com/api/blogs";
+const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/blogs";
 
 // Get selected language from localStorage
 const rawLang = localStorage.getItem("selectedLang");
-const selectedLang = rawLang && ["en", "fr", "kiny" ,"nl"].includes(rawLang) ? rawLang : "en";
+const selectedLang =
+  rawLang && ["en", "fr", "kiny", "nl"].includes(rawLang) ? rawLang : "en";
 const locale = BlogLocale[selectedLang]; // safely get the locale
 
 const BlogGrid = () => {
@@ -105,7 +106,9 @@ const BlogGrid = () => {
           {blog.title}
         </h2>
 
-        <p className="text-gray-600 line-clamp-3">{getPlainTextExcerpt(blog.content)}</p>
+        <p className="text-gray-600 line-clamp-3">
+          {getPlainTextExcerpt(blog.content)}
+        </p>
 
         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div className="flex space-x-4">
@@ -136,7 +139,9 @@ const BlogGrid = () => {
       <div className="max-w-7xl mx-auto px-4 py-16">
         {/* Page Title */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-white mb-4">{locale.pageTitle}</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {locale.pageTitle}
+          </h1>
           <div className="flex justify-center items-center space-x-2">
             <div className="h-1 bg-yellow-500 rounded-full" />
           </div>
@@ -145,14 +150,18 @@ const BlogGrid = () => {
         {/* Blog Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-8">
-            {blogs.filter((_, idx) => idx % 2 === 0).map((blog) => (
-              <BlogCard key={blog._id} blog={blog} />
-            ))}
+            {blogs
+              .filter((_, idx) => idx % 2 === 0)
+              .map((blog) => (
+                <BlogCard key={blog._id} blog={blog} />
+              ))}
           </div>
           <div className="space-y-8">
-            {blogs.filter((_, idx) => idx % 2 === 1).map((blog) => (
-              <BlogCard key={blog._id} blog={blog} />
-            ))}
+            {blogs
+              .filter((_, idx) => idx % 2 === 1)
+              .map((blog) => (
+                <BlogCard key={blog._id} blog={blog} />
+              ))}
           </div>
         </div>
       </div>

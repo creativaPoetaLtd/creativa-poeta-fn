@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://creativapoeta-bn.onrender.com/api/project";
+const BASE_URL = "https://creativa-poeta-bn-phi.vercel.app/api/project";
 
 // Helper function to handle auth errors gracefully
 const handleAuthError = (error: any) => {

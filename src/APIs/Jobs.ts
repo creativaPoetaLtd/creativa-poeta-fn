@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://creativapoeta-bn.onrender.com/api/jobs";
+const BASE_URL = "https://creativa-poeta-bn-phi.vercel.app/api/jobs";
 
 export const CreateJob = async (jobData: any) => {
   try {
