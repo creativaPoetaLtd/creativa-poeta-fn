@@ -5,16 +5,8 @@ Allow: /
 Disallow: /secure-admin-*
 Disallow: /admin/
 Disallow: /dashboard/
-
-# Allow all service pages
-Allow: /services/
-Allow: /contact
-Allow: /start-project
-Allow: /thank-you
-Allow: /terms-and-conditions
+Disallow: /thank-you
+Disallow: /thank-you-for-applying
 
 # Sitemap location
-Sitemap: https://creativapoeta.rw/sitemap.xml
-
-# Crawl-delay (optional - be respectful to servers)
-Crawl-delay: 1
+Sitemap: https://creativapoeta.com/sitemap.xml

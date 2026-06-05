@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { AiOutlineDown, AiOutlineTwitter } from "react-icons/ai";
+import { AiOutlineTwitter } from "react-icons/ai";
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaTiktok,
 } from "react-icons/fa";
-import image8 from "../../assets/flags/image8.jpg";
-import image2 from "../../assets/flags/image2.jpg";
 import BackgroundCircles from "../buttons/BackgroundCircles";
+import SectionScrollButton from "../buttons/SectionScrollButton";
 import SlideLeft from "../buttons/SlideLeft";
 import SlideRight from "../buttons/SlideRight";
 import logopoeta1 from "../../assets/flags/logopoeta1.png";
@@ -16,26 +15,27 @@ import Confirm from "../unUsedComponents/Confirm";
 import { useLocation } from "react-router-dom";
 import HomeLocale from "../../i18n/HomeLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
+import { localizePath } from "../../data/marketRuntime";
 
 const lang: any = getLangFromLocalStorage();
 
 const backgrounds = [
   {
-    image: image8,
+    image: "",
     content: {
       title: HomeLocale[lang].title1,
       description: HomeLocale[lang].description1,
     },
   },
   {
-    image: image2,
+    image: "",
     content: {
       title: HomeLocale[lang].title2,
       description: HomeLocale[lang].description2,
     },
   },
   {
-    image: image8,
+    image: "",
     content: {
       title: HomeLocale[lang].title3,
       description: HomeLocale[lang].description3,
@@ -146,15 +146,12 @@ const Home = () => {
     setTouchStartX(null);
   };
 
-  // handle navigate to about section with id about
-  const handleNavigateToAbout = () => {
-    window.location.href = "/#about";
+  const handleNavigateToServices = () => {
+    window.location.href = `${localizePath("/")}#services`;
   };
   const currentBackground = backgrounds[currentIndex];
-  //naviga to /start-project page
-
-  const handleStartProject = () => {
-    window.location.href = "/start-project";
+  const handleVisibilityTest = () => {
+    window.location.href = `${localizePath("/")}#audit-form`;
   };
 
   return (
@@ -167,9 +164,6 @@ const Home = () => {
         currentIndex === prevIndex ? "slide-in" : "slide-out"
       }`}
       style={{
-        backgroundImage: currentBackground.image
-          ? `url(${currentBackground.image})`
-          : "none",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
@@ -206,17 +200,17 @@ const Home = () => {
                 {currentBackground.content.description}
               </p>
             </div>
-            <div className="flex animate-bounce laptop:flex-row tablet:flex-row flex-col laptop:space-x-5 tablet:space-x-5 mt-12 mx-auto laptop:mx-auto w-full space-y-4 laptop:space-y-0 tablet:space-y-0 justify-center items-center">
+            <div className="flex animate-bounce flex-row gap-2 phone:gap-3 laptop:gap-5 mt-12 mx-auto laptop:mx-auto w-full justify-center items-center px-3">
               <button
-                onClick={handleStartProject}
-                className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in whitespace-nowrap"
+                onClick={handleVisibilityTest}
+                className="hover:bg-white hover:text-black text-white laptop:w-[300px] min-w-0 flex-1 max-w-[300px] px-2 phone:px-5 laptop:px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-2 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-xs border-2 border-white animate-fade-in whitespace-nowrap"
               >
                 {HomeLocale[lang].action1}
               </button>
 
               <button
-                onClick={handleNavigateToAbout}
-                className="hover:bg-white hover:text-black text-white laptop:w-[300px] px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-1 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-sm border-2 border-white animate-fade-in"
+                onClick={handleNavigateToServices}
+                className="hover:bg-white hover:text-black text-white laptop:w-[300px] min-w-0 flex-1 max-w-[300px] px-2 phone:px-5 laptop:px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-2 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-xs border-2 border-white animate-fade-in whitespace-nowrap"
               >
                 {HomeLocale[lang].action2}
               </button>
@@ -334,16 +328,14 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="very-buttom h-[10%] laptop:w-[10%] tablet:w-[17%] phone:w-[35%] w-[38%] absolute laptop:right-20 right-11 bottom-0 border-r-2 border-[#FFE533]">
-        <div className="buttons h-full flex cursor-pointer items-start space-x-1">
-          <button className="font-bold w-5 text-md text-[#FFFF00]">
-            <AiOutlineDown />
-          </button>
-          <button className="text-white tablet:text-xs desktop:text-xs phone:text-xs laptop:text-xs text-xs font-bold">
-            <a href="#about">{HomeLocale[lang].scroll}</a>
-          </button>
-        </div>
-      </div>
+      <SectionScrollButton
+        label={HomeLocale[lang].scroll}
+        targetId="about"
+        side="right"
+        tone="light"
+        topColor="#EEBA2B"
+        bottomColor="#071a33"
+      />
 
       {istToken && !isTokenValid && (
         <Confirm

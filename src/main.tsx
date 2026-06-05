@@ -25,6 +25,7 @@ import Signup from "./components/Signup.tsx";
 import Login from "./components/Login.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import RefontePreviewPage from "./pages/RefontePreviewPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -34,10 +35,27 @@ const appElement = (
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="/en" element={<App />} />
+            <Route path="/fr" element={<App />} />
+            <Route path="/nl" element={<App />} />
+            <Route path="/rw" element={<App />} />
+            <Route path="/refonte" element={<RefontePreviewPage />} />
             <Route path="/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/en/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/fr/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/nl/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/rw/terms-and-conditions" element={<TermsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/en/contact" element={<ContactPage />} />
+            <Route path="/fr/contact" element={<ContactPage />} />
+            <Route path="/nl/contact" element={<ContactPage />} />
+            <Route path="/rw/contact" element={<ContactPage />} />
             {/* <Route path="/career" element={<JobsPages />} /> */}
             <Route path="/start-project" element={<ProjectFormPage />} />
+            <Route path="/en/start-project" element={<ProjectFormPage />} />
+            <Route path="/fr/start-project" element={<ProjectFormPage />} />
+            <Route path="/nl/start-project" element={<ProjectFormPage />} />
+            <Route path="/rw/start-project" element={<ProjectFormPage />} />
             <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
@@ -76,13 +94,53 @@ const appElement = (
 
             {/* Valid servicessss */}
             <Route path="/services/web-app" element={<WebPage />} />
+            <Route path="/en/services/web-app" element={<WebPage />} />
+            <Route path="/fr/services/web-app" element={<WebPage />} />
+            <Route path="/nl/services/web-app" element={<WebPage />} />
+            <Route path="/rw/services/web-app" element={<WebPage />} />
             <Route path="/services/content-writing" element={<ContentPage />} />
+            <Route path="/en/services/content-writing" element={<ContentPage />} />
+            <Route path="/fr/services/content-writing" element={<ContentPage />} />
+            <Route path="/nl/services/content-writing" element={<ContentPage />} />
+            <Route path="/rw/services/content-writing" element={<ContentPage />} />
             <Route
               path="/services/graphic-design"
               element={<GraphicDesignPage />}
             />
             <Route
+              path="/en/services/graphic-design"
+              element={<GraphicDesignPage />}
+            />
+            <Route
+              path="/fr/services/graphic-design"
+              element={<GraphicDesignPage />}
+            />
+            <Route
+              path="/nl/services/graphic-design"
+              element={<GraphicDesignPage />}
+            />
+            <Route
+              path="/rw/services/graphic-design"
+              element={<GraphicDesignPage />}
+            />
+            <Route
               path="/services/digital-marketing"
+              element={<DigitalMarketingPage />}
+            />
+            <Route
+              path="/en/services/digital-marketing"
+              element={<DigitalMarketingPage />}
+            />
+            <Route
+              path="/fr/services/digital-marketing"
+              element={<DigitalMarketingPage />}
+            />
+            <Route
+              path="/nl/services/digital-marketing"
+              element={<DigitalMarketingPage />}
+            />
+            <Route
+              path="/rw/services/digital-marketing"
               element={<DigitalMarketingPage />}
             />
 

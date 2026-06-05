@@ -12,19 +12,24 @@ interface SEOHeadProps {
   locale?: string;
   twitterCard?: string;
   structuredData?: object;
+  alternates?: Array<{
+    hrefLang: string;
+    href: string;
+  }>;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
   title = "Creativa Poeta - Creative Digital Solutions | Web Development, Design & Marketing",
   description = "Creativa Poeta offers professional web development, graphic design, content writing, and digital marketing services. Transform your business with our creative solutions and expert team.",
   keywords = "web development, graphic design, digital marketing, content writing, creative solutions, business growth, professional services, Rwanda, East Africa",
-  image = "https://creativapoeta.rw/poeta.jpeg",
-  url = "https://creativapoeta.rw/",
+  image = "https://creativapoeta.com/poeta.jpeg",
+  url = "https://creativapoeta.com/",
   type = "website",
   siteName = "Creativa Poeta",
   locale = "en_US",
   twitterCard = "summary_large_image",
   structuredData,
+  alternates = [],
 }) => {
   return (
     <Helmet>
@@ -52,6 +57,14 @@ const SEOHead: React.FC<SEOHeadProps> = ({
 
       {/* Canonical URL */}
       <link rel="canonical" href={url} />
+      {alternates.map((alternate) => (
+        <link
+          key={`${alternate.hrefLang}-${alternate.href}`}
+          rel="alternate"
+          hrefLang={alternate.hrefLang}
+          href={alternate.href}
+        />
+      ))}
 
       {/* Structured Data */}
       {structuredData && (

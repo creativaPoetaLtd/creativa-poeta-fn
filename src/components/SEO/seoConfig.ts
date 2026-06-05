@@ -1,52 +1,50 @@
-// SEO configurations for different pages
 export const seoConfig = {
   home: {
     title:
-      "Creativa Poeta - Creative Digital Solutions | Web Development, Design & Marketing",
+      "Creativa Poeta | Be found on Google, maps, voice search and AI tools",
     description:
-      "Transform your business with professional web development, graphic design, content writing, and digital marketing services. Expert creative solutions for modern businesses in Rwanda and East Africa.",
+      "Creativa Poeta helps businesses become easier to find, understand and contact by aligning websites, maps, social profiles and useful content.",
     keywords:
-      "web development Rwanda, graphic design services, digital marketing Rwanda, content writing, creative solutions, business growth, professional services, Kigali",
-    url: "https://creativapoeta.rw/",
+      "Creativa Poeta, website, local visibility, Google Maps, voice search, ChatGPT visibility, business website, digital presence",
+    url: "https://creativapoeta.com/",
     structuredData: {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "ProfessionalService",
       name: "Creativa Poeta",
-      url: "https://creativapoeta.rw",
-      logo: "https://creativapoeta.rw/poeta.jpeg",
+      url: "https://creativapoeta.com",
+      logo: "https://creativapoeta.com/poeta.jpeg",
       description:
-        "Professional creative digital solutions including web development, graphic design, content writing, and digital marketing services.",
+        "Creativa Poeta helps businesses become easier to find, understand and contact by aligning websites, maps, social profiles and useful content.",
       foundingDate: "2023",
-      address: {
-        "@type": "PostalAddress",
-        addressCountry: "RW",
-        addressRegion: "Kigali",
-      },
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
-        url: "https://creativapoeta.rw/contact",
+        url: "https://creativapoeta.com/contact",
       },
       service: [
         {
           "@type": "Service",
-          name: "Web Development",
-          description: "Professional web application development services",
+          name: "Website and official business page",
+          description:
+            "Creation or improvement of a clear official website or page for business information.",
         },
         {
           "@type": "Service",
-          name: "Graphic Design",
-          description: "Creative graphic design solutions for businesses",
+          name: "Local visibility",
+          description:
+            "Alignment of business information across Google, maps, social profiles and contact channels.",
         },
         {
           "@type": "Service",
-          name: "Digital Marketing",
-          description: "Comprehensive digital marketing strategies",
+          name: "Message and content clarity",
+          description:
+            "Clear words, visuals and content to help clients understand the business faster.",
         },
         {
           "@type": "Service",
-          name: "Content Writing",
-          description: "Professional content creation and copywriting services",
+          name: "Useful pages for precise searches",
+          description:
+            "Useful service and question pages for specific client needs, locations or searches.",
         },
       ],
     },
@@ -54,126 +52,121 @@ export const seoConfig = {
 
   services: {
     webDevelopment: {
-      title:
-        "Web Development Services | Professional Web Apps | Creativa Poeta",
+      title: "Clear official websites | Creativa Poeta",
       description:
-        "Expert web development services including responsive websites, web applications, e-commerce solutions, and custom development. Modern technologies for optimal performance.",
+        "Create or improve a website so it becomes the official place where clients understand your services, contact details and answers.",
       keywords:
-        "web development, responsive websites, web applications, e-commerce development, custom web solutions, React development, Node.js, Rwanda web development",
-      url: "https://creativapoeta.rw/services/web-app",
+        "business website, website redesign, official business page, clear website, Creativa Poeta",
+      url: "https://creativapoeta.com/services/web-app",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Web Development Services",
+        name: "Clear official websites",
         description:
-          "Professional web development including responsive websites, web applications, and e-commerce solutions",
+          "Creation or improvement of a clear official website for business information.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
         },
-        serviceType: "Web Development",
-        areaServed: "Rwanda",
+        serviceType: "Website",
       },
     },
 
     graphicDesign: {
-      title:
-        "Graphic Design Services | Brand Identity & Visual Design | Creativa Poeta",
+      title: "Message, image and content | Creativa Poeta",
       description:
-        "Professional graphic design services including logo design, brand identity, marketing materials, and visual content creation. Creative solutions for your brand.",
+        "Clarify your words, visuals and content so clients understand who you are, what you offer and why they should contact you.",
       keywords:
-        "graphic design, logo design, brand identity, marketing materials, visual design, creative design, business cards, posters, Rwanda graphic design",
-      url: "https://creativapoeta.rw/services/graphic-design",
+        "brand message, business content, visual identity, clear communication, Creativa Poeta",
+      url: "https://creativapoeta.com/services/graphic-design",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Graphic Design Services",
+        name: "Message, image and content",
         description:
-          "Professional graphic design including logo design, brand identity, and marketing materials",
+          "Clear words, visuals and content to help clients understand a business faster.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
         },
-        serviceType: "Graphic Design",
+        serviceType: "Brand and content",
       },
     },
 
     digitalMarketing: {
-      title: "Digital Marketing Services | SEO & Social Media | Creativa Poeta",
+      title: "Visibility on Google, maps and AI tools | Creativa Poeta",
       description:
-        "Comprehensive digital marketing services including SEO, social media marketing, content strategy, and online advertising. Grow your business online.",
+        "Make your business easier to find and understand on Google, maps, voice search and tools like ChatGPT.",
       keywords:
-        "digital marketing, SEO services, social media marketing, content strategy, online advertising, digital growth, marketing campaigns, Rwanda digital marketing",
-      url: "https://creativapoeta.rw/services/digital-marketing",
+        "local visibility, Google Maps, voice search, AI tools, ChatGPT visibility, digital presence",
+      url: "https://creativapoeta.com/services/digital-marketing",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Digital Marketing Services",
+        name: "Visibility on Google, maps and AI tools",
         description:
-          "Comprehensive digital marketing including SEO, social media marketing, and online advertising",
+          "Alignment of business information across Google, maps, social profiles and modern search tools.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
         },
-        serviceType: "Digital Marketing",
+        serviceType: "Local visibility",
       },
     },
 
     contentWriting: {
-      title:
-        "Content Writing Services | Professional Copywriting | Creativa Poeta",
+      title: "Useful pages for precise searches | Creativa Poeta",
       description:
-        "Expert content writing services including blog posts, website copy, marketing content, and technical writing. Engaging content that converts.",
+        "Create useful pages that answer precise client questions without empty or repetitive content.",
       keywords:
-        "content writing, copywriting, blog writing, website content, marketing copy, technical writing, content creation, professional writing, Rwanda content services",
-      url: "https://creativapoeta.rw/services/content-writing",
+        "service pages, business FAQ, useful content, precise searches, content strategy",
+      url: "https://creativapoeta.com/services/content-writing",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Content Writing Services",
+        name: "Useful pages for precise searches",
         description:
-          "Professional content writing including blog posts, website copy, and marketing content",
+          "Useful service and question pages for specific client needs, locations or searches.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
         },
-        serviceType: "Content Writing",
+        serviceType: "Content",
       },
     },
   },
 
   contact: {
-    title: "Contact Us | Get In Touch | Creativa Poeta",
+    title: "Contact Creativa Poeta",
     description:
-      "Ready to start your project? Contact Creativa Poeta for professional web development, design, and marketing services. Get a free consultation today.",
+      "Contact Creativa Poeta to improve your website, local visibility, maps, social profiles and business content.",
     keywords:
-      "contact creativa poeta, get quote, free consultation, project inquiry, web development contact, design services contact",
-    url: "https://creativapoeta.rw/contact",
+      "contact Creativa Poeta, website help, local visibility help, business digital presence",
+    url: "https://creativapoeta.com/contact",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ContactPage",
       name: "Contact Creativa Poeta",
-      description: "Contact page for Creativa Poeta digital services",
-      url: "https://creativapoeta.rw/contact",
+      description: "Contact page for Creativa Poeta.",
+      url: "https://creativapoeta.com/contact",
     },
   },
 
   startProject: {
-    title: "Start Your Project | Free Quote | Creativa Poeta",
+    title: "Start your project | Creativa Poeta",
     description:
-      "Ready to bring your ideas to life? Start your project with Creativa Poeta. Get a personalized quote for web development, design, or marketing services.",
+      "Start a project with Creativa Poeta: website, official page, local visibility, content or platform alignment.",
     keywords:
-      "start project, free quote, project consultation, web development quote, design quote, marketing services quote",
-    url: "https://creativapoeta.rw/start-project",
+      "start project, business website, local visibility, official page, Creativa Poeta",
+    url: "https://creativapoeta.com/start-project",
   },
 
   thankYou: {
-    title: "Thank You | Project Submitted | Creativa Poeta",
+    title: "Thank you | Creativa Poeta",
     description:
-      "Thank you for choosing Creativa Poeta! Your project has been submitted successfully. We'll get back to you soon with a detailed proposal.",
-    keywords:
-      "thank you, project submitted, consultation request, creativa poeta",
-    url: "https://creativapoeta.rw/thank-you",
+      "Thank you for contacting Creativa Poeta. We will get back to you soon.",
+    keywords: "thank you, Creativa Poeta",
+    url: "https://creativapoeta.com/thank-you",
   },
 };
 

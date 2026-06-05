@@ -1,56 +1,58 @@
 const HomeLocale: any = {
   en: {
-    title1: "inspired innovation",
+    title1: "be found where clients search",
     description1:
-      "A breath of creativity, a poetic touch, that's Creativa Poeta",
-    title2: "turn your ideas into reality",
-    decription2:
-      "Tailored solutions that captivate your audience and set you apart from the competition",
-    title3: "Get noticed online",
-    description3: "Start earning or increasing your online profits.",
-    action1: "START A PROJECT",
-    action2: "ABOUT US",
+      "Creativa Poeta helps your business stay clear on Google, maps, voice search and tools like ChatGPT.",
+    title2: "make your website your official source",
+    description2:
+      "Your website explains your services, your contact details and your answers, while your maps and social pages stay connected.",
+    title3: "turn scattered profiles into one clear presence",
+    description3:
+      "Whether you already have a website or only use Google Maps, Facebook or Instagram, we help people understand and contact you faster.",
+    action1: "TEST MY VISIBILITY",
+    action2: "OUR SERVICES",
     scroll: "SCROLL DOWN",
   },
   fr: {
-    title1: "innovation inspirée",
+    title1: "soyez visible la ou vos clients cherchent",
     description1:
-      "Un souffle de créativité, une touche poétique, voilà Creativa Poeta",
-    title2: "transformez vos idées en réalité",
+      "Creativa Poeta aide votre entreprise a rester claire sur Google, les maps, la recherche vocale et les outils comme ChatGPT.",
+    title2: "faites de votre site votre source officielle",
     description2:
-      "Des solutions sur mesure qui captivent votre public et vous démarquent de la concurrence",
-    title3: "Faites-vous remarquer en ligne",
-    description3: "Commencez à gagner ou à augmenter vos bénéfices en ligne.",
-    action1: "DÉMARRER UN PROJET",
-    action2: "A PROPOS DE NOUS",
-    scroll: "FAIRE DÉFILER",
+      "Votre site explique vos services, vos contacts et vos reponses, pendant que vos maps et reseaux restent relies.",
+    title3: "transformez vos profils disperses en presence claire",
+    description3:
+      "Que vous ayez deja un site ou seulement Google Maps, Facebook ou Instagram, nous aidons les clients a vous comprendre et vous contacter plus vite.",
+    action1: "TESTER MA VISIBILITE",
+    action2: "NOS SERVICES",
+    scroll: "FAIRE DEFILER",
   },
   kiny: {
-    title1: "Hanga Udushya",
+    title1: "garagara aho abakiliya bagushakira",
     description1:
-      "Impano mu guhanga udushya, akarusho mu busizi, iyo niyo Creativa Poeta",
-    title2: "Hindura ibitekerezo byawe impamo",
+      "Creativa Poeta igufasha gusobanura neza ibikorwa byawe kuri Google, ku makarita, mu gushakisha ukoresheje ijwi no ku bikoresho nka ChatGPT.",
+    title2: "website yawe ibe isoko y'amakuru yizewe",
     description2:
-      "Uburyo bwihariye bugutandukanya n’abandi, bugakora ku mutima kandi bugakurura abifuza ibyo ukora",
-    title3: "igaragaze online",
+      "Website isobanura serivisi zawe, aho bagushakira n'ibisubizo by'ingenzi, imbuga nkoranyambaga n'amakarita bikaguma bihujwe.",
+    title3: "huza amakuru yawe yose mu buryo busobanutse",
     description3:
-      "Tangira gukorera ‘online’ uhavane inyungu, cyangwa se wongere inyungu uhavana",
-    action1: "TANGIRA UMUSHINGA",
+      "Waba ufite website cyangwa ukoresha Google Maps, Facebook cyangwa Instagram gusa, tugufasha gusobanuka no kuboneka vuba.",
+    action1: "GERAGEZA UKO UBONEKA",
     action2: "IBYO DUKORA",
     scroll: "MANUKA HASI",
   },
-
   nl: {
-    title1: "geïnspireerde innovatie",
+    title1: "word gevonden waar klanten zoeken",
     description1:
-      "Een adem van creativiteit, een poëtische toets, dat is Creativa Poeta",
-    title2: "maak je ideeën werkelijkheid",
+      "Creativa Poeta helpt je bedrijf duidelijk te zijn op Google, kaarten, gesproken zoekopdrachten en tools zoals ChatGPT.",
+    title2: "maak van je website je officiele bron",
     description2:
-      "Op maat gemaakte oplossingen die je publiek boeien en je onderscheiden van de concurrentie",
-    title3: "Val op online",
-    description3: "Begin met verdienen of het verhogen van je online winst.",
-    action1: "START EEN PROJECT",
-    action2: "OVER ONS",
+      "Je website legt je diensten, contactgegevens en antwoorden uit, terwijl je kaarten en sociale pagina's verbonden blijven.",
+    title3: "maak van losse profielen een duidelijke aanwezigheid",
+    description3:
+      "Of je al een website hebt of alleen Google Maps, Facebook of Instagram gebruikt, wij helpen klanten je sneller te begrijpen en contacteren.",
+    action1: "TEST MIJN ZICHTBAARHEID",
+    action2: "ONZE DIENSTEN",
     scroll: "SCROLL OMLAAG",
   },
 };

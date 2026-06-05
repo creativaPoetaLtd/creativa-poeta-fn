@@ -2,6 +2,7 @@ import blogData from "../../data/blog";
 import ServiceLocale from "../../i18n/ServiceLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import { Link } from "react-router-dom";
+import SectionScrollButton from "../buttons/SectionScrollButton";
 
 const lang: any = getLangFromLocalStorage();
 
@@ -68,6 +69,13 @@ const Services = () => {
           </Link>
         ))}
       </div>
+      <SectionScrollButton
+        targetId="audit-visibilite"
+        side="left"
+        tone="light"
+        topColor="#EEBA2B"
+        bottomColor="#071a33"
+      />
     </section>
   );
 };

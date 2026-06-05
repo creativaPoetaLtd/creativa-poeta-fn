@@ -1,220 +1,187 @@
 const FaqLocale: any = {
   fr: {
     h1: "F.A.Q.",
-    h2: " Questions Fréquentes",
-    title1:
-      "Quels sont les avantages de faire appel à Creativa Poeta plutôt que de réaliser les tâches moi-même ?",
+    h2: "Questions frequentes",
+    title1: "Est-ce que j'ai encore besoin d'un site si j'ai deja Google Maps ou Instagram ?",
     description1:
-      "Faire appel à Creativa Poeta vous permet de bénéficier d'une expertise spécialisée, de solutions créatives personnalisées, d'un gain de temps, de résultats professionnels et d'une collaboration étroite pour atteindre vos objectifs créatifs de manière efficace et impressionnante",
-    title2:
-      " Combien de temps prendra le projet et quand pourront-on avoir les résultats ?",
+      "Oui, si vous voulez une base officielle que vous controlez. Google Maps, Instagram, Facebook et WhatsApp sont utiles, mais votre site rassemble vos informations importantes au meme endroit.",
+    title2: "Je n'ai pas encore de site. Est-ce grave ?",
     description2:
-      "La durée du projet dépend de sa complexité et de la portée des services demandés. Nous travaillons efficacement pour respecter les délais convenus. Les résultats peuvent varier en fonction du type de projet, mais nous mettons en place des indicateurs de performance pour mesurer les résultats à des étapes clés du projet.",
-    title3: "Comment puis-je passer une commande avec Creativa Poeta ?",
+      "Non. On peut commencer petit avec une page officielle simple: vos services, vos contacts, vos horaires, vos langues, vos liens et vos reponses principales.",
+    title3: "Vous parlez d'IA. Qu'est-ce que cela veut dire pour mon entreprise ?",
     description3:
-      "Passer une commande avec Creativa Poeta est simple. Il vous suffit de nous contacter via notre site web, par e-mail ou par téléphone. Nous discuterons de vos besoins, établirons un devis et élaborerons un plan personnalisé pour votre projet.",
-    title4: "Pouvez-vous travailler sur des projets urgents ?",
+      "IA veut dire intelligence artificielle. Ce sont des outils comme ChatGPT, Perplexity ou certains assistants vocaux. Ils ont besoin d'informations claires pour comprendre une entreprise.",
+    title4: "Est-ce que vous promettez la premiere place sur Google ?",
     description4:
-      "Oui, nous comprenons que parfois le temps est essentiel. Nous proposons des services rapides pour les projets urgents. Contactez-nous pour discuter de vos besoins spécifiques en matière de délais.",
-    title5: "Pour quels types d'entreprises ou d'individus travaillez-vous ?",
+      "Non. Personne ne peut garantir une premiere place serieusement. Nous mettons en place les bonnes bases pour augmenter vos chances d'etre trouve, compris et contacte.",
+    title5: "Pouvez-vous ameliorer un site deja existant ?",
     description5:
-      "Nous servons une grande variété de clients, allant des particuliers aux petites entreprises et aux grandes entreprises. Notre approche sur mesure signifie que nos services conviennent à quasiment tout le monde.",
-    title6: "Quels sont vos tarifs ?",
+      "Oui. Nous pouvons garder ce qui fonctionne, corriger ce qui bloque et remettre le contenu au clair sans forcement tout jeter.",
+    title6: "Pouvez-vous aussi aider mes profils Google, Facebook ou Instagram ?",
     description6:
-      "Nos tarifs varient en fonction de la complexité de chaque projet. Nous proposons des devis personnalisés adaptés à vos besoins spécifiques. Contactez-nous pour obtenir un devis gratuit.",
-    title7: "Comment garantissez-vous la qualité de vos créations ?",
+      "Oui. Le but est que votre site, vos maps et vos reseaux racontent la meme chose. Cela aide les clients a vous faire confiance.",
+    title7: "Travaillez-vous avec des petits commerces et independants ?",
     description7:
-      "Nous avons une équipe dédiée à la qualité qui veille à ce que chaque création réponde à nos normes élevées. De plus, nous sollicitons régulièrement les commentaires de nos clients pour nous améliorer en permanence",
-    title8:
-      "Puis-je demander des révisions sur les créations que vous fournissez ",
+      "Oui. Nous travaillons avec les commerces, restaurants, services locaux, independants, associations, createurs et entreprises qui veulent etre plus faciles a trouver.",
+    title8: "Est-ce que je dois comprendre la technique pour travailler avec vous ?",
     description8:
-      "Absolument, nous encourageons les révisions pour nous assurer que vous êtes satisfait à 100 %. Votre satisfaction est notre priorité, et nous apporterons les modifications nécessaires pour répondre à vos attentes.",
-    title9:
-      "Comment protégez-vous la confidentialité de mes données et projets ?",
+      "Non. Nous expliquons simplement ce que nous faisons, pourquoi nous le faisons et ce que cela change pour votre activite.",
+    title9: "Combien de temps prend un projet ?",
     description9:
-      "Nous prenons la confidentialité très au sérieux. Vos données et projets sont traités avec la plus grande discrétion. Nous pouvons également signer des accords de confidentialité pour une protection supplémentaire.",
-    title10:
-      "Proposez-vous des services de marketing pour promouvoir les créations que vous réalisez ?",
+      "Cela depend du besoin. Une page officielle peut aller vite. Une refonte complete ou une presence en plusieurs langues demande plus de preparation.",
+    title10: "Combien cela coute ?",
     description10:
-      "Oui, en plus de la création, de la rédaction et du montage vidéo, nous proposons des services de marketing pour augmenter la visibilité de vos créations. Nous développons des stratégies sur mesure pour toucher votre public cible et maximiser l'impact de vos contenus.",
-    title11: "Comment puis-je voir des exemples de vos travaux précédents ?",
+      "Le prix depend du niveau d'accompagnement. Nous pouvons commencer par un audit ou une base simple avant de construire plus grand.",
+    title11: "Pouvez-vous travailler en plusieurs langues ?",
     description11:
-      "Nous avons une section dédiée à nos réalisations sur notre site web où vous pouvez voir des exemples de nos travaux antérieurs. Si vous avez des besoins spécifiques, n'hésitez pas à nous les faire savoir.",
-    title12: "Quels sont les modes de paiement acceptés par Creativa Poeta ?",
+      "Oui. Nous pouvons preparer le contenu pour plusieurs langues, en gardant une base commune et des adaptations locales quand c'est utile.",
+    title12: "Est-ce que les reseaux sociaux restent importants ?",
     description12:
-      "Nous acceptons plusieurs modes de paiement courants, notamment les virements bancaires, les paiements par carte de crédit et d'autres méthodes de paiement en ligne sécurisées. Nous veillerons à ce que vous ayez des options de paiement pratiques.",
-    title13:
-      "Comment protégez-vous la confidentialité de mes données et projets ?",
+      "Oui. Les reseaux montrent votre activite. Le site sert plutot de base officielle et stable. Les deux peuvent se completer.",
+    title13: "Comment commence-t-on ?",
     description13:
-      "Nous prenons la confidentialité très au sérieux. Vos données et projets sont traités avec la plus grande discrétion. Nous pouvons également signer des accords de confidentialité pour une protection supplémentaire.",
-    title14: "Comment puis-je voir des exemples de vos travaux précédents ?",
+      "Vous nous contactez, nous regardons votre presence actuelle, puis nous proposons les premieres priorites: site, page officielle, maps, contenu ou profils.",
+    title14: "Mes donnees et mes acces sont-ils proteges ?",
     description14:
-      "Nous avons une section dédiée à nos réalisations sur notre site web où vous pouvez voir des exemples de nos travaux antérieurs. Si vous avez des besoins spécifiques, n'hésitez pas à nous les faire savoir.",
-    title15: "Pour quels types d'entreprises ou d'individus travaillez-vous ?",
-    description15:
-      "Nous servons une grande variété de clients, allant des particuliers aux petites entreprises et aux grandes entreprises. Notre approche sur mesure signifie que nos services conviennent à quasiment tout le monde.",
+      "Oui. Nous limitons les acces au strict necessaire et nous vous aidons a garder le controle de vos comptes, mots de passe et plateformes.",
   },
   en: {
     h1: "F.A.Q.",
-    h2: " Frequently Asked Questions",
-    title1:
-      "What are the benefits of using Creativa Poeta rather than doing the tasks myself?",
+    h2: "Frequently Asked Questions",
+    title1: "Do I still need a website if I already use Google Maps or Instagram?",
     description1:
-      "Using Creativa Poeta allows you to benefit from specialized expertise, personalized creative solutions, time savings, professional results, and close collaboration to achieve your creative goals effectively and impressively",
-    title2: " How long will the project take and when can we expect results?",
+      "Yes, if you want an official base that you control. Google Maps, Instagram, Facebook and WhatsApp are useful, but your website gathers your key information in one place.",
+    title2: "I do not have a website yet. Is that a problem?",
     description2:
-      "The duration of the project depends on its complexity and the scope of the services requested. We work efficiently to meet agreed deadlines. Results may vary depending on the type of project, but we put in place performance indicators to measure results at key stages of the project.",
-    title3: "How can I place an order with Creativa Poeta?",
+      "No. We can start small with a simple official page: your services, contact details, opening hours, languages, links and main answers.",
+    title3: "You mention AI. What does that mean for my business?",
     description3:
-      "Placing an order with Creativa Poeta is simple. Just contact us through our website, email, or phone. We will discuss your needs, provide a quote, and develop a personalized plan for your project.",
-    title4: "Can you work on urgent projects?",
+      "AI means artificial intelligence. It includes tools like ChatGPT, Perplexity and some voice assistants. They need clear information to understand a business.",
+    title4: "Do you promise first place on Google?",
     description4:
-      "Yes, we understand that sometimes time is of the essence. We offer fast services for urgent projects. Contact us to discuss your specific deadline needs.",
-    title5: "What types of businesses or individuals do you work with?",
+      "No. Nobody can honestly guarantee that. We build the right foundations to improve your chances of being found, understood and contacted.",
+    title5: "Can you improve an existing website?",
     description5:
-      "We serve a wide variety of clients, from individuals to small businesses and large corporations. Our bespoke approach means our services are suitable for almost everyone.",
-    title6: "What are your rates?",
+      "Yes. We can keep what works, fix what blocks visibility and clarify the content without necessarily throwing everything away.",
+    title6: "Can you also help with Google, Facebook or Instagram profiles?",
     description6:
-      "Our rates vary depending on the complexity of each project. We offer personalized quotes tailored to your specific needs. Contact us for a free quote.",
-    title7: "How do you ensure the quality of your creations?",
+      "Yes. The goal is for your website, maps and social profiles to say the same thing. That helps clients trust your business.",
+    title7: "Do you work with small businesses and independents?",
     description7:
-      "We have a dedicated quality team that ensures each creation meets our high standards. In addition, we regularly seek feedback from our clients to continuously improve",
-    title8: "Can I request revisions on the creations you provide",
+      "Yes. We work with shops, restaurants, local services, independents, associations, creators and businesses that want to be easier to find.",
+    title8: "Do I need to understand technical things to work with you?",
     description8:
-      "Absolutely, we encourage revisions to ensure you are 100% satisfied. Your satisfaction is our priority, and we will make the necessary changes to meet your expectations.",
-    title9: "How do you protect the confidentiality of my data and projects?",
+      "No. We explain what we do, why we do it and what it changes for your activity in simple words.",
+    title9: "How long does a project take?",
     description9:
-      "We take confidentiality very seriously. Your data and projects are treated with the utmost discretion. We can also sign confidentiality agreements for additional protection.",
-    title10:
-      "Do you offer marketing services to promote the creations you make?",
+      "It depends on the need. A simple official page can be quick. A full redesign or multilingual presence needs more preparation.",
+    title10: "How much does it cost?",
     description10:
-      "Yes, in addition to creation, writing, and video editing, we offer marketing services to increase the visibility of your creations. We develop custom strategies to reach your target audience and maximize the impact of your content.",
-    title11: "How can I see examples of your previous work?",
+      "The price depends on the level of support. We can start with an audit or a simple base before building something larger.",
+    title11: "Can you work in several languages?",
     description11:
-      "We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
-    title12: "What payment methods does Creativa Poeta accept?",
+      "Yes. We can prepare content for several languages, keeping one shared base and adapting it locally when useful.",
+    title12: "Are social networks still important?",
     description12:
-      "We accept several common payment methods, including bank transfers, credit card payments, and other secure online payment methods. We will ensure you have convenient payment options.",
-    title13: "How do you protect the confidentiality of my data and projects?",
+      "Yes. Social networks show your activity. The website acts as a stable official base. Both can work together.",
+    title13: "How do we start?",
     description13:
-      "We take confidentiality very seriously. Your data and projects are treated with the utmost discretion. We can also sign confidentiality agreements for additional protection.",
-    title14: "How can I see examples of your previous work?",
+      "You contact us, we review your current presence, then we suggest the first priorities: website, official page, maps, content or profiles.",
+    title14: "Are my data and accesses protected?",
     description14:
-      "We have a dedicated section for our achievements on our website where you can see examples of our previous work. If you have specific needs, please let us know.",
-    title15: "What types of businesses or individuals do you work with?",
-    description15:
-      "We serve a wide variety of clients, from individuals to small businesses and large corporations. Our bespoke approach means our services are suitable for almost everyone.",
+      "Yes. We limit access to what is needed and help you keep control of your accounts, passwords and platforms.",
   },
   kiny: {
     h1: "F.A.Q.",
-    h2: "Ibibazo Bikunze kwibazwa",
-    title1:
-      "Ni izihe nyungu ziri mugukorana na Creativa Poeta kuruta kubyikorera ku giti cyanjye?",
+    h2: "Ibibazo bikunze kubazwa",
+    title1: "Ese nkeneye website niba mfite Google Maps cyangwa Instagram?",
     description1:
-      "Gukorana na Creativa Poeta bigufasha gukorerwa n’ababigizi umwuga, bafite uburambe kandi bazi uburyo bikorwamo, bakagufasha gukora ibyawe wihariyeho udakoporoye ku bandi, kandi bazi neza ko bizatanga umusaruro. Bigufasha kandi kudatakaza igihe, ukabona ibyo wifuza mu gihe gito, ndetse no kurasa ku ntego y’ibyo wifuza ako kanya.",
-    title2:
-      "Ni gute nabagezaho ikifuzo cyanjye cy’umushinga? Ni gute nabasaba gutangira gukorana namwe?",
+      "Yego, niba ushaka ahantu hizewe ugenzura. Google Maps, Instagram, Facebook na WhatsApp ni ingenzi, ariko website ihuriza amakuru yawe y'ingenzi hamwe.",
+    title2: "Nta website mfite. Ese ni ikibazo?",
     description2:
-      " Biroroshye! Uciye ku rubuga rwacu “www.creativapoeta.rw” ukanda ahanditse ngo “Tangira umushinga”. Ushobora no kutwandikira kuri ‘email’ , cyangwa kuri ‘website’ yacu. Wanaduhamagara kuri telefoni, cyangwa ugaca ku mbuga nkoranyambaga zacu ndetse na ‘WhatsApp’. Icyo gihe tuganira ku byo wifuza, tukanakubwira icyo bisaba, ubushobozi bizatwara ndetse n’igiciro cyabyo.",
-    title3:
-      "Ese umushinga turi gukoranaho umara igihe kingana gute? Ni mu gihe kingana iki nizeye gutangira kubona umusaruro?",
+      "Oya. Dushobora gutangira n'urupapuro rwemewe ruto: serivisi zawe, aho bagushakira, amasaha, indimi ukoresha n'ibisubizo by'ingenzi.",
+    title3: "Iyo muvuga IA muba mushaka kuvuga iki?",
     description3:
-      "Igihe tumara dukora ku mushinga gishobora guterwa n’ibintu bitandukanye birimo ugukomera ndetse n’ubunini bwawo, cyangwa se serivisi wifuza kuzaha abakugana. Tugerageza gukora uko dushoboye kugirango twubahirize igihe twavuganye. Gutangira kubona umusaruro nabyo biterwa n’ubwoko bw’umushinga. Kuri buri kiciro dushyiraho ibimenyetso bishobora kutwereka uko umushinga uhagaze n’aho ugeze wunguka.",
-    title4: "Ese mushobora gukora kuri ‘projet’ yihutirwa?",
+      "IA ni ikoranabuhanga risa no gutekereza, nka ChatGPT cyangwa abafasha bakoresha ijwi. Rikenera amakuru asobanutse kugira ngo ryumve ibyo ukora.",
+    title4: "Mwemera ko nzaba uwa mbere kuri Google?",
     description4:
-      "Yego. Turabizi ko rimwe na rimwe igihe gishobora kuba ingenzi mbere y’ibindi byose. Dutanga na serivisi zihuse ku mishinga yihutirwa cyangwa se igenewe gukorwa mu gihe gito gishoboka. Twandikire cyangwa uduhamagare tuganire ku byo wifuza byihutirwa.",
-    title5:
-      "Mfite igitekerezo / umushinga, ariko nta bushobozi mfite bwo kubishyira mu bikorwa.",
+      "Oya. Nta muntu wabisezeranya mu kuri. Dushyiraho ishingiro rifasha amahirwe yo kuboneka, kumvikana no kuvugishwa.",
+    title5: "Mushobora kuvugurura website nsanganywe?",
     description5:
-      "Muri creativa Poeta twakira imishinga y’ikoranabuhanga. Uko umushinga cyangwa igitekerezo cyawe cyaba kimeze kose ntutinye kukitugezaho. Yewe niyo waba nta bushobozi ufite. Dushobora kugufasha kwiga, gukora cyangwa kubyaza umusaruro uwo mushinga, tukaba twawushoramo imari, cyangwa tukaguhuza n’abandi bashoramari. Ubushobozi ntibukubere imbogamizi, twandikire vuba tubiganireho.",
-    title6:
-      "Ndi umushoramari, sinsobanukiwe iby’ikoranabuhanga, nkeneye gushora imari cyangwa kwiga ibijyanye n’ishoramari mu ikoranabuhanga.",
+      "Yego. Dushobora kugumana ibikora neza, tugakosora ibikubuza kugaragara kandi tugasobanura neza ibirimo.",
+    title6: "Mufasha no kuri Google, Facebook cyangwa Instagram?",
     description6:
-      "Muri Creativa Poeta twereka abifuza gushora imari mu ikoranabuhanga aho amahirwe ari! Tubereka uburyo bikorwa kuva kuri A kugera kuri Z. Tubereka n’imishinga ibyara inyungu yo gushoramo. Tukabafasha ndetse no kubyaza inyungu iyo mishinga. Icyitonderwa : umushinga wose aho uva ukagera, urigwa, ugategurwa, ugakorwa. Nta mushinga wunguka vuba cyangwa wakungura utakoze ubaho.",
-    title7:
-      "Ese koko nibyo, muha amafaranga ibihumbi magana abiri buri wese ubazaniye umukiliya?",
+      "Yego. Intego ni uko website, amakarita n'imbuga nkoranyambaga bitanga amakuru ahuye.",
+    title7: "Mukorana n'ubucuruzi buto n'abikorera?",
     description7:
-      "Yego! Dushobora guha buri muntu wese uturangiye cyangwa utuzaniye umukiliya amafaranga ashobora kugera ku 200000! Ingano y’amafaranga duhemba abaturangira abakiliya iterwa n’ubwoko cyangwa ingano y’umushinga uwo mukiliya afite. Amategeko n’amabwirizwa birakurikizwa.",
-    title8:
-      "Ese koko nibyo, gutangira gukorana na Creativa Poeta nta kiguzi bisaba?",
+      "Yego. Dukorana n'amaduka, restaurants, serivisi z'aho mutuye, abikorera, amashyirahamwe n'abashaka kuboneka neza.",
+    title8: "Ngomba kuba nzi ikoranabuhanga?",
     description8:
-      "Yego! Gutangira gukorana na Creativa Poeta ni ubuntu! Iyo utuzaniye umushinga wawe, tugufasha kuwiga ndetse no kuwukora. Nyuma iyo ushimye ibyo twagukoreye, nibwo tugusaba ishimwe ry’abakozi. Ibi tubigeraho bitewe n’uko buri gihe kuri buri cyiciro tukwereka aho akazi kageze. Ntacyo tukwishyuza iyo uramutse utishimiye ibyo twakoze.",
-    title9: "ibiciro byanyu byifashe gute?",
+      "Oya. Dusobanura mu magambo yoroshye icyo dukora, impamvu tugikora n'icyo bihindura ku bikorwa byawe.",
+    title9: "Umushinga umara igihe kingana iki?",
     description9:
-      "Ibiciro byacu biterwa n’ingano cyangwa ugukomera k’umushinga. Ni ukuvuga ko buri mushinga ugira igiciro cyawo cyihariye. Icyo twizeza abatugana nuko ibiciro byacu biri hasi cyane. Ni ibiciro utasanga ahandi! Ubonye ahandi igiciro kiri hasi kurusha icyacu, duhamagare tugusubize ikinyuranyo.",
-    title10: "Ese nshobora gusaba gusubiramo cyangwa gukosora ibyo mwankoreye?",
+      "Biterwa n'icyifuzo. Urupapuro ruto rushobora gukorwa vuba. Website yuzuye cyangwa indimi nyinshi bisaba gutegura neza.",
+    title10: "Ibiciro bimeze gute?",
     description10:
-      "Yego, mu gihe ubonye hari ikitameze neza kubyo twagukoreye, tugushishikariza rwose kugaruka vuba kutureba kugirango tugikosore. Nubwo tuba twakoze ibishoboka byose kugira ngo wishimire ibyo twakoze, birashoboka ko hari icyo twakwibagirwa. Ukunyurwa kwanyu niko dushyize imbere, dushobora rero guhindura cyangwa gusubiramo ibyo mutishimiye.",
-    title11: "Ni gute mwatwizeza ubuziranenge bw’ibyo mukora?",
-
+      "Igiciro giterwa n'urwego rw'ubufasha ukeneye. Dushobora gutangira n'isuzuma cyangwa ishingiro rito mbere yo kwagura.",
+    title11: "Mushobora gukora mu ndimi nyinshi?",
     description11:
-      "Dufite abakozi bashinzwe gukurikirana ubuziranenge bw’ibyo duha abatugana. Ibyo dukora bifite kandi byujuje amahame mpuzamahanga. Dushishikariza cyane buri wese kuduha ‘comments/commentaires’ y’uburyo abona ibyo dukora. Ibyo bidufasha kongera ubuziranenge, ubwiza ndetse n’urwego rwa serivisi dutanga.",
-    title12:
-      "Ni uwuhe mutekano muha amakuru bwite yacu cyangwa imishinga tuba twabagejejeho?",
+      "Yego. Dushobora gutegura amagambo mu ndimi nyinshi, tugakoresha ishingiro rimwe ariko tugahindura aho bikenewe.",
+    title12: "Imbuga nkoranyambaga ziracyafite akamaro?",
     description12:
-      "Amakuru n’imishinga byanyu birihariye. Ni umutungo bwite wanyu. Ibanga ry’amakuru yanyu dufite turiha agaciro kanini. imishinga yanyu ikorwa mu buryo bwihariye kuburyo iguma hagati yacu namwe gusa. Iyo mubicyeneye dushobora no gusinyana ammasezerano ajyanye n’ibanga ry’amakuru yanyu.",
-    title13: "Ni gute nabona ingero z’ibyo mwakoze mbere?",
+      "Yego. Zerekana ibikorwa byawe. Website iba ahantu hizewe kandi hahoraho. Byombi biruzuzanya.",
+    title13: "Dutangira dute?",
     description13:
-      "Ku bwumvikane n’abo twakoreye imishinga, dushobora gushyira ku rubuga rwacu zimwe muri ‘projets’ twakoze. Dufite umwanya twahariye kwerekana bimwe mu bikorwa duheruka gukora. Niba utabibonaho nuko kuri ubu nta mufatanyabikorwa uratwemerera gushyiraho ibyo twamukoreye. Ucyeneye ubundi busobanuro watwandikira.",
-    title14: "Ni ubuhe bwoko bw’ibigo cyangwa urwego rw’abantu mukorana nabo?",
+      "Uratwandikira, tukareba uko ugaragara ubu, hanyuma tukakwereka ibyihutirwa: website, page, amakarita, amagambo cyangwa profili.",
+    title14: "Amakuru yanjye ararinzwe?",
     description14:
-      "Dukorana n’ingeri zose z’abantu cyangwa se ibigo byaba ibyigenga cyangwa ibya Leta, yaba abikorera ku giti cyabo, abashoramari cyangwa abantu basanzwe bifuza gutera imbere. Imvugo yacu yo guha umwihariko buri wese isobanuye ko ibyo dukora bigenewe bose, buri wese ku rwego rwe.",
-   
+      "Yego. Dufata gusa acces zikenewe kandi tugufasha kugumana ububasha kuri konti, ijambo ry'ibanga n'ibikoresho ukoresha.",
   },
-
   nl: {
     h1: "F.A.Q.",
-    h2: " Veelgestelde Vragen",
-    title1:
-      "Wat zijn de voordelen van Creativa Poeta gebruiken in plaats van het zelf doen?",
+    h2: "Veelgestelde vragen",
+    title1: "Heb ik nog een website nodig als ik Google Maps of Instagram heb?",
     description1:
-      "Met Creativa Poeta profiteert u van gespecialiseerde expertise, creatieve maatwerkoplossingen, tijdsbesparing, professionele resultaten en nauwe samenwerking om uw creatieve doelen effectief en indrukwekkend te bereiken.",
-    title2:
-      " Hoe lang duurt het project en wanneer kunnen we resultaten verwachten?",
+      "Ja, als je een officiele basis wilt die je zelf beheert. Google Maps, Instagram, Facebook en WhatsApp zijn nuttig, maar je website brengt je belangrijkste informatie samen.",
+    title2: "Ik heb nog geen website. Is dat erg?",
     description2:
-      "De duur van het project hangt af van de complexiteit en de omvang van de gevraagde diensten. We werken efficiënt om de afgesproken deadlines te halen. De resultaten kunnen variëren afhankelijk van het type project, maar we gebruiken prestatie-indicatoren om voortgang en succes te meten.",
-    title3: "Hoe kan ik een bestelling plaatsen bij Creativa Poeta?",
+      "Nee. We kunnen starten met een eenvoudige officiele pagina: diensten, contact, openingsuren, talen, links en belangrijke antwoorden.",
+    title3: "Jullie spreken over AI. Wat betekent dat voor mijn bedrijf?",
     description3:
-      "Een bestelling plaatsen bij Creativa Poeta is eenvoudig. Neem contact met ons op via onze website, e-mail of telefoon. We bespreken uw wensen, maken een offerte en stellen een persoonlijk plan op voor uw project.",
-    title4: "Kunt u werken aan urgente projecten?",
+      "AI betekent artificiele intelligentie. Denk aan tools zoals ChatGPT, Perplexity of spraakassistenten. Ze hebben duidelijke informatie nodig om een bedrijf te begrijpen.",
+    title4: "Beloven jullie de eerste plaats op Google?",
     description4:
-      "Ja, we begrijpen dat tijd soms cruciaal is. We bieden snelle diensten voor urgente projecten. Neem contact met ons op om uw specifieke deadlines te bespreken.",
-    title5: "Voor welke soorten bedrijven of individuen werkt u?",
+      "Nee. Niemand kan dat eerlijk garanderen. We bouwen de juiste basis om je kansen te verhogen om gevonden, begrepen en gecontacteerd te worden.",
+    title5: "Kunnen jullie een bestaande website verbeteren?",
     description5:
-      "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
-    title6: "Wat zijn uw tarieven?",
+      "Ja. We behouden wat werkt, herstellen wat blokkeert en maken de inhoud duidelijker zonder noodzakelijk alles weg te gooien.",
+    title6: "Helpen jullie ook met Google, Facebook of Instagram?",
     description6:
-      "Onze tarieven variëren afhankelijk van de complexiteit van elk project. We bieden persoonlijke offertes die zijn afgestemd op uw specifieke behoeften. Neem contact met ons op voor een gratis offerte.",
-    title7: "Hoe garandeert u de kwaliteit van uw creaties?",
+      "Ja. De bedoeling is dat je website, kaarten en sociale profielen hetzelfde verhaal vertellen. Dat wekt vertrouwen.",
+    title7: "Werken jullie met kleine bedrijven en zelfstandigen?",
     description7:
-      "We hebben een speciaal kwaliteitsteam dat ervoor zorgt dat elke creatie aan onze hoge normen voldoet. Bovendien vragen we regelmatig feedback van onze klanten om continu te verbeteren.",
-    title8: "Kan ik revisies aanvragen voor de creaties die u levert?",
+      "Ja. We werken met winkels, restaurants, lokale diensten, zelfstandigen, verenigingen, makers en bedrijven die beter gevonden willen worden.",
+    title8: "Moet ik technische dingen begrijpen?",
     description8:
-      "Absoluut, we moedigen revisies aan om ervoor te zorgen dat u 100% tevreden bent. Uw tevredenheid is onze prioriteit, en we brengen de nodige aanpassingen aan om aan uw verwachtingen te voldoen.",
-    title9:
-      "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
+      "Nee. We leggen eenvoudig uit wat we doen, waarom we het doen en wat het verandert voor je activiteit.",
+    title9: "Hoe lang duurt een project?",
     description9:
-      "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
-    title10:
-      "Biedt u marketingdiensten aan om de creaties die u maakt te promoten?",
+      "Dat hangt af van de behoefte. Een eenvoudige officiele pagina kan snel. Een volledige vernieuwing of meerdere talen vraagt meer voorbereiding.",
+    title10: "Hoeveel kost het?",
     description10:
-      "Ja, naast creatie, schrijven en video-editing, bieden we marketingdiensten om de zichtbaarheid van uw creaties te vergroten. We ontwikkelen strategieën op maat om uw doelgroep te bereiken en de impact van uw content te maximaliseren.",
-    title11: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
+      "De prijs hangt af van de begeleiding. We kunnen starten met een analyse of een eenvoudige basis voor we groter bouwen.",
+    title11: "Kunnen jullie in meerdere talen werken?",
     description11:
-      "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
-    title12: "Welke betaalmethoden accepteert Creativa Poeta?",
+      "Ja. We kunnen inhoud voorbereiden in meerdere talen, met een gemeenschappelijke basis en lokale aanpassingen waar nodig.",
+    title12: "Blijven sociale netwerken belangrijk?",
     description12:
-      "We accepteren verschillende gangbare betaalmethoden, waaronder bankoverschrijvingen, creditcards en andere veilige online betalingsopties. We zorgen ervoor dat u altijd een gemakkelijke betalingsmethode hebt.",
-    title13:
-      "Hoe beschermt u de vertrouwelijkheid van mijn gegevens en projecten?",
+      "Ja. Sociale netwerken tonen je activiteit. De website dient als stabiele officiele basis. Beide vullen elkaar aan.",
+    title13: "Hoe starten we?",
     description13:
-      "We nemen vertrouwelijkheid zeer serieus. Uw gegevens en projecten worden met de grootste discretie behandeld. We kunnen ook geheimhoudingsovereenkomsten ondertekenen voor extra bescherming.",
-    title14: "Hoe kan ik voorbeelden van uw eerdere werk zien?",
+      "Je contacteert ons, wij bekijken je huidige aanwezigheid en stellen dan de eerste prioriteiten voor: website, pagina, kaarten, content of profielen.",
+    title14: "Zijn mijn gegevens en toegangen beschermd?",
     description14:
-      "Op onze website hebben we een speciale sectie met onze eerdere projecten. Als u specifieke voorbeelden wilt zien, laat het ons weten.",
-    title15: "Voor welke soorten bedrijven of individuen werkt u?",
-    description15:
-      "We bedienen een breed scala aan klanten, van particulieren tot kleine bedrijven en grote ondernemingen. Onze op maat gemaakte aanpak maakt onze diensten geschikt voor vrijwel iedereen.",
+      "Ja. We beperken toegang tot wat nodig is en helpen je controle houden over je accounts, wachtwoorden en platformen.",
   },
 };
 

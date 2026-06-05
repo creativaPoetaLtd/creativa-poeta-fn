@@ -2,6 +2,7 @@ import faqData from "../../data/faq";
 import phonevid from "../../assets/phonevid.mp4";
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import SectionScrollButton from "../buttons/SectionScrollButton";
 
 // About.tsx
 const Faq = () => {
@@ -70,8 +71,13 @@ const Faq = () => {
           ))}
         </div>
       </div>
-      {/* <div className="laptop:h-[5%] tablet:h-[3.5%] phone:h-[3%] h-[3%] laptop:w-[10%] w-[8%] absolute xs:h-[.8%] laptop:right-1/2 right-1/2 top-0 border-r-2 border-white"></div> */}
-      <div className="very-buttom laptop:h-[7%] desktop:h-[7%] tablet:h-[7%] phone:h-[2.5%] h-[2.5%] xs:h-[2.2%] laptop:w-[10%] w-[35%] absolute laptop:right-11 right-11 bottom-0 border-r-2 border-white"></div>
+      <SectionScrollButton
+        targetId="footer"
+        side="right"
+        tone="light"
+        topColor="#ffffff"
+        bottomColor="#EEBA2B"
+      />
     </section>
   );
 };

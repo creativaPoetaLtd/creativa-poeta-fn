@@ -1,0 +1,146 @@
+.cp-scroll-button {
+  --cp-scroll-top: #eeba2b;
+  --cp-scroll-bottom: #071a33;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  bottom: 1.05rem;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 900;
+  gap: 0.45rem;
+  letter-spacing: 0;
+  padding: 0;
+  position: absolute;
+  text-transform: uppercase;
+  z-index: 999;
+}
+
+.cp-scroll-button::before {
+  background: linear-gradient(
+    to bottom,
+    var(--cp-scroll-top) 0 50%,
+    var(--cp-scroll-bottom) 50% 100%
+  );
+  content: "";
+  height: 5.8rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+}
+
+.cp-scroll-button-left {
+  left: clamp(1.6rem, 7vw, 7.5rem);
+}
+
+.cp-scroll-button-left::before {
+  left: -0.85rem;
+}
+
+.cp-scroll-button-right {
+  right: clamp(1.6rem, 7vw, 7.5rem);
+}
+
+.cp-scroll-button-right::before {
+  right: -0.85rem;
+}
+
+.cp-scroll-button-light {
+  color: #ffffff;
+}
+
+.cp-scroll-button-dark {
+  color: #071a33;
+}
+
+.cp-scroll-button-icon {
+  align-items: center;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  display: inline-flex;
+  height: 1.75rem;
+  justify-content: center;
+  width: 1.75rem;
+}
+
+.cp-scroll-button svg {
+  animation: cpScrollArrow 1.4s ease-in-out infinite;
+}
+
+.cp-refonte-section > .cp-scroll-button {
+  bottom: 5.6rem;
+}
+
+.cp-refonte-final > .cp-scroll-button {
+  bottom: 4.4rem;
+}
+
+#services > .cp-scroll-button,
+.faq > .cp-scroll-button {
+  bottom: 3rem;
+}
+
+.cp-scroll-fade-target {
+  animation: cpScrollFadeTarget 720ms ease both;
+}
+
+@keyframes cpScrollArrow {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes cpScrollFadeTarget {
+  0% {
+    opacity: 0.18;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  #home,
+  #services,
+  #faq {
+    padding-bottom: 6.8rem;
+  }
+
+  .cp-scroll-button {
+    bottom: 1.6rem;
+    color: #ffff00;
+    font-size: 0.72rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+  }
+
+  .cp-scroll-button::before {
+    background: linear-gradient(
+      to bottom,
+      #ffff00 0 50%,
+      rgba(255, 255, 255, 0.95) 50% 100%
+    );
+    height: 5.8rem;
+  }
+
+  .cp-refonte-section > .cp-scroll-button,
+  .cp-refonte-final > .cp-scroll-button {
+    bottom: 4.8rem;
+  }
+
+  .cp-scroll-button-left {
+    left: 3.2rem;
+  }
+
+  .cp-scroll-button-right {
+    right: 3.2rem;
+  }
+}

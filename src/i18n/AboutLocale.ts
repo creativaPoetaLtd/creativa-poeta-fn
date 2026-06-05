@@ -1,27 +1,30 @@
-
 const AboutLocale: any = {
   en: {
-    title1:"WHO WE ARE",
+    title1: "WHAT WE DO",
+    title2: "WE DO",
     description:
-      "Passionate about artistic expression and inspiring creation, we are a company comprised of experienced designers, writers, and web developers who offer you unique creative solutions. Our main goal is to understand your needs in order to create outstanding results. Through our creativity and excellence-focused approach, we captivate attention and leave a lasting impression. Feel free to contact us today to discuss your projects and discover how we can help you achieve your creative goals.",
+      "Creativa Poeta helps businesses build a clear digital presence. We do not only create beautiful websites or content. We help your information become easy to find, easy to understand and easy to trust. If you already have a website, we can improve it. If you only have Google Maps, Facebook, Instagram or WhatsApp, we can start with a simple official page and connect everything step by step.",
     action: "CONTACT OUR TEAM",
   },
   fr: {
-    title1: "QUI NOUS SOMMES",
-    title2: "NOUS SOMMES",
+    title1: "CE QUE NOUS FAISONS",
+    title2: "NOUS FAISONS",
     description:
-      "Passionnés par l'expression artistique et la création inspirante, nous sommes une entreprise regroupant des designers, rédacteurs et développeurs web expérimentés qui vous offrent des solutions créatives uniques. Notre objectif principal est de comprendre vos besoins afin de créer des résultats exceptionnels. Grâce à notre approche axée sur la créativité et l'excellence, nous captivons l'attention et laissons une impression durable. N'hésitez pas à nous contacter dès aujourd'hui pour discuter de vos projets et découvrir comment nous pouvons vous aider à atteindre vos objectifs créatifs",
+      "Creativa Poeta aide les entreprises a construire une presence digitale claire. Nous ne faisons pas seulement de beaux sites ou de beaux contenus. Nous aidons vos informations a devenir faciles a trouver, faciles a comprendre et faciles a verifier. Si vous avez deja un site, nous pouvons l'ameliorer. Si vous utilisez seulement Google Maps, Facebook, Instagram ou WhatsApp, nous pouvons commencer par une page officielle simple et tout relier petit a petit.",
     action: "CONTACTEZ NOTRE EQUIPE",
   },
   kiny: {
-    title1: "ABO TURIBO",
-    title2: "TURIBO",
-    description:"Inararibonye mu kugaragaza ibihangano, abahanga mu ikoranabuhanga no guhanga udushya, turi itsinda ry’abahanzi b’udushya (‘designers’), abanditsi ndetse n’aba ‘web developers’ babigize umwuga. Tubafitiye ibisubizo byihariye, bibagaragaza mu buryo mwifuza. Intego nyamukuru yacu ni ukumva neza ibyifuzo byanyu tukabafasha kubihindura impamo mu buryo bunogeye ijisho. Bitewe n’uburyo dushyira imbere umurimo unoze no guhanga udushya, tubafasha kwigaragaza mu bandi mu buryo buhoraho, mugahora muri imbere. Witinda! Twandikire uyu munsi tuganire ku mishinga yawe, tukwereke uburyo wayibyaza umusaruro vuba ndetse n’uburyo wagera ku ntego n’ibyifuzo byawe.",    action: "TWANDIKIRE",
-  },
-    nl: {
-    title1: "WIE WIJ ZIJN",
+    title1: "IBYO DUKORA",
+    title2: "DUKORA",
     description:
-      "Gepassioneerd door artistieke expressie en inspirerende creatie, zijn wij een team van ervaren ontwerpers, schrijvers en webontwikkelaars die u unieke creatieve oplossingen bieden. Ons belangrijkste doel is om uw behoeften te begrijpen en uitzonderlijke resultaten te creëren. Met onze creativiteit en focus op excellentie trekken we de aandacht en laten we een blijvende indruk achter. Neem vandaag nog contact met ons op om uw projecten te bespreken en te ontdekken hoe wij u kunnen helpen uw creatieve doelen te bereiken.",
+      "Creativa Poeta ifasha ubucuruzi n'imishinga kugira aho bigaragarira neza kuri internet. Ntabwo dukora websites nziza gusa; dufasha amakuru yawe kuboneka, kumvikana no kwizerwa. Niba usanganywe website, dushobora kuyivugurura. Niba ukoresha Google Maps, Facebook, Instagram cyangwa WhatsApp gusa, dushobora gutangira n'urupapuro rwemewe ruto tugahuza byose buhoro buhoro.",
+    action: "TWANDIKIRE",
+  },
+  nl: {
+    title1: "WAT WIJ DOEN",
+    title2: "WIJ DOEN",
+    description:
+      "Creativa Poeta helpt bedrijven een duidelijke digitale aanwezigheid op te bouwen. We maken niet alleen mooie websites of content. We zorgen dat je informatie gemakkelijk te vinden, te begrijpen en te vertrouwen is. Heb je al een website, dan verbeteren we die. Gebruik je alleen Google Maps, Facebook, Instagram of WhatsApp, dan kunnen we starten met een eenvoudige officiele pagina en alles stap voor stap verbinden.",
     action: "CONTACTEER ONS TEAM",
   },
 };

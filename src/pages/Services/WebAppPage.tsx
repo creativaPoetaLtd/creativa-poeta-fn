@@ -2,13 +2,16 @@ import NavBar from "../../components/NavBars/NavBar";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";
 import WebApp from "../../components/Services/WebApp";
-import SEOHead from "../../components/SEO/SEOHead";
+import MarketSEOHead from "../../components/SEO/MarketSEOHead";
 import { seoConfig } from "../../components/SEO/seoConfig";
 
 const WebAppPage = () => {
   return (
     <div className="App w-full flex flex-col snap-x scroll-smooth">
-      <SEOHead {...seoConfig.services.webDevelopment} />
+      <MarketSEOHead
+        {...seoConfig.services.webDevelopment}
+        path="/services/web-app"
+      />
       <div className="w-full ml-6 right-2 left flex justify-end">
         <NavBar />
       </div>

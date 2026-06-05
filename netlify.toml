@@ -1,3 +1,7 @@
+[[edge_functions]]
+path = "/*"
+function = "market-rewrite"
+
 [[redirects]]
 from = "/*"
 to = "/index.html"

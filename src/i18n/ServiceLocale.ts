@@ -1,75 +1,84 @@
-
-const ServiceLocale:any = {
-    en: {
-        title1: 'OUR',
-        title2:"SERVICES",
-        service11:'Web & App',
-        service12:"Development",
-        description1:"Transform your ideas into powerful digital solutions: websites, interactive applications, and custom software tailored to your unique needs.",
-        service21:'Content',
-        service22:"Writing & Creation",
-        description2:'Carefully chosen words that tell your story and engage your audience in a captivating way',
-        service31:'Graphic Design & ',
-        service32:'Visual Communication',
-        description3:"Bring your ideas to life with memorable visual creations: graphics, advertisements, digital videos, and captivating animations. ",
-        service41:'Digital Marketing &',
-        service42:"Social media",
-        description4:"Boost your presence, increase your visibility, engage your online audience, and maximize your revenue with a comprehensive digital strategy: social media, content, SEO, and e-commerce."
-    },
-    fr: {
-        title1: 'NOS',
-        title2:'SERVICES',
-        service11:'Développement',
-        service12:"Web & App",
-        description1:"Transformez vos idées en solutions digitales puissantes: sites web, applications interactives, et logiciels personnalisés adaptés à vos besoins uniques.",
-        service21:'Rédaction &',
-        service22:"Création de contenu",
-        description2:"Des mots soigneusement choisis pour raconter votre histoire et captiver votre audience de manière engageante",
-        service31:'Design Graphique &',
-        service32:'Communication Visuelle',
-        description3:"Donnez vie à vos idées avec des créations visuelles mémorables: graphiques, publicités, vidéos digitales, et animations captivantes.",
-        service41:'Marketing Digital &',
-        service42:"Réseaux sociaux",
-        description4:"Boostez votre présence, augmentez votre visibilité, engagez votre audience en ligne, et maximisez vos revenus avec une stratégie digitale complète: réseaux sociaux, contenu, SEO, et e-commerce."
-    },
-    kiny: {
-        title1: 'IBYO',
-        title2:'DUKORA',
-        service11:'Gukora ama',
-        service12:"'AppApplication'",
-        description1:"hindura ibitekerezo byawe mo ibisubizo mu ikoranabuhanga: 'Websites', 'Apps', 'Softwares' Zifite umwihariko",
-        service21:"Guhimba ,Kwandika no Gukora ",
-        service22:"inkuru",
-        description2:"Amagambo asobanura neza ibitekerezo byawe kandi aryoheye amatwi.Yandikanwa ubuhanga,ubushishozi ndetse n'ubwitonzi",
-        service31:'Guhimba no gukora',
-        service32:'Amashusho',
-        description3:"Ha ibitekerezo byawe ubuzima!Bireme ukoresheje amashusho (Amafoto cyangwa Videwo)maze bikorohere kubibwira cyangwa kubisangiza abandi.",
-        service41:"Kwigaragaza 'Online'&",
-        service42:'Imbuga nkoranyambaga',
-        description4:"Ongera umubare w'abareba ibiikorwa cyangwa ibihangano byawe ,Za mubimbere mu mashakiro atandukanye ndetse no ku mbuga nkoranyambaga.tangira gukorera online uhavane inyungu cyangwa se wongere inyungu uhavana ",
-    },
-
-
-
-
-
-      nl: {
-    title1: 'ONZE',
-    title2: 'DIENSTEN',
-    service11: 'Web & App',
-    service12: 'Ontwikkeling',
-    description1: 'Transformeer je ideeën in krachtige digitale oplossingen: websites, interactieve apps en maatwerksoftware op maat van jouw behoeften.',
-    service21: 'Content',
-    service22: 'Schrijven & Creatie',
-    description2: 'Zorgvuldig gekozen woorden die jouw verhaal vertellen en je publiek op een boeiende manier betrekken.',
-    service31: 'Grafisch ontwerp &',
-    service32: 'Visuele communicatie',
-    description3: 'Breng je ideeën tot leven met gedenkwaardige visuele creaties: graphics, advertenties, digitale video’s en boeiende animaties.',
-    service41: 'Digitale marketing &',
-    service42: 'Social media',
-    description4: 'Vergroot je online aanwezigheid, verhoog je zichtbaarheid, betrek je publiek en maximaliseer je omzet met een complete digitale strategie: social media, content, SEO en e-commerce.'
-}
-
-}
+const ServiceLocale: any = {
+  en: {
+    title1: "OUR",
+    title2: "SERVICES",
+    service11: "Be found",
+    service12: "where clients search",
+    description1:
+      "We help your business appear more clearly on Google, maps, voice search and tools like ChatGPT by making your information reliable and easy to understand.",
+    service21: "A clear",
+    service22: "official website",
+    description2:
+      "We create or improve your website so it becomes the official place where clients understand your services, contact details, languages and answers.",
+    service31: "Message, image",
+    service32: "and content",
+    description3:
+      "We clarify your words, visuals and content so people understand who you are, what you offer and why they should contact you.",
+    service41: "Useful pages",
+    service42: "for precise searches",
+    description4:
+      "We build useful pages for specific client questions, services or locations, without creating empty or repetitive content.",
+  },
+  fr: {
+    title1: "NOS",
+    title2: "SERVICES",
+    service11: "Etre trouve",
+    service12: "la ou les clients cherchent",
+    description1:
+      "Nous aidons votre entreprise a etre plus claire sur Google, les maps, la recherche vocale et les outils comme ChatGPT, avec des informations fiables et faciles a comprendre.",
+    service21: "Un site clair",
+    service22: "comme source officielle",
+    description2:
+      "Nous creons ou ameliorons votre site pour qu'il explique vos services, vos contacts, vos langues et vos reponses importantes.",
+    service31: "Message, image",
+    service32: "et contenu",
+    description3:
+      "Nous clarifions vos mots, vos visuels et vos contenus pour que les gens comprennent qui vous etes, ce que vous proposez et pourquoi vous contacter.",
+    service41: "Des pages utiles",
+    service42: "pour des recherches precises",
+    description4:
+      "Nous creons des pages utiles pour des questions, services ou zones precises, sans remplir le site avec du contenu vide ou repetitif.",
+  },
+  kiny: {
+    title1: "IBYO",
+    title2: "DUKORA",
+    service11: "Kuboneka",
+    service12: "aho abakiliya bagushakira",
+    description1:
+      "Dufasha ibikorwa byawe gusobanuka kuri Google, ku makarita, mu gushakisha ukoresheje ijwi no ku bikoresho nka ChatGPT, amakuru yawe akaba yizewe kandi yumvikana.",
+    service21: "Website",
+    service22: "isobanutse",
+    description2:
+      "Dukora cyangwa tukavugurura website yawe kugira ngo isobanure serivisi zawe, aho bagushakira, indimi ukoresha n'ibisubizo by'ingenzi.",
+    service31: "Ubutumwa, ishusho",
+    service32: "n'ibirimo",
+    description3:
+      "Dufasha amagambo, amashusho n'ibyo utangaza gusobanuka kugira ngo abantu bamenye uwo uri we, ibyo ukora n'impamvu bakwandikira.",
+    service41: "Paji zifite akamaro",
+    service42: "ku bibazo byihariye",
+    description4:
+      "Dukora paji zisubiza ibibazo by'abakiliya, serivisi cyangwa aho ukorera, tutuzuzamo amagambo adafite akamaro.",
+  },
+  nl: {
+    title1: "ONZE",
+    title2: "DIENSTEN",
+    service11: "Gevonden worden",
+    service12: "waar klanten zoeken",
+    description1:
+      "We helpen je bedrijf duidelijker te verschijnen op Google, kaarten, gesproken zoekopdrachten en tools zoals ChatGPT, met betrouwbare en begrijpelijke informatie.",
+    service21: "Een duidelijke",
+    service22: "officiele website",
+    description2:
+      "We maken of verbeteren je website zodat klanten je diensten, contactgegevens, talen en belangrijke antwoorden begrijpen.",
+    service31: "Boodschap, beeld",
+    service32: "en content",
+    description3:
+      "We verduidelijken je woorden, beelden en content zodat mensen begrijpen wie je bent, wat je aanbiedt en waarom ze contact opnemen.",
+    service41: "Nuttige pagina's",
+    service42: "voor gerichte zoekvragen",
+    description4:
+      "We maken nuttige pagina's voor specifieke vragen, diensten of zones, zonder lege of herhalende content te maken.",
+  },
+};
 
 export default ServiceLocale;

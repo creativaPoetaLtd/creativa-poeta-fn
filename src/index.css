@@ -17,12 +17,67 @@
   font-family: 'Black Ops One', cursive;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body{
+  animation: cpGlobalBgCycle 30s infinite;
+  background-attachment: fixed;
+  background-color: #101a29;
+  background-image: url("/src/assets/flags/image2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
+
+@keyframes cpGlobalBgCycle {
+  0%,
+  30% {
+    background-image: url("/src/assets/flags/image2.jpg");
+  }
+  36%,
+  63% {
+    background-image: url("/src/assets/flags/image8.jpg");
+  }
+  69%,
+  94% {
+    background-image: url("/src/assets/flags/image9.jpg");
+  }
+  100% {
+    background-image: url("/src/assets/flags/image2.jpg");
+  }
+}
+
 .menus{
   background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black background */
+}
+
+@media (max-width: 640px) {
+  body {
+    background-position: left center;
+  }
+
+  .cp-nav-actions {
+    box-sizing: border-box;
+    max-width: 100vw;
+    overflow: visible;
+  }
+
+  .cp-nav-actions .localizationButtonSwitcher,
+  .cp-nav-actions .menus {
+    flex: 0 0 auto;
+  }
+
+  .cp-nav-actions .menus {
+    min-width: 4.25rem;
+  }
 }
 
 

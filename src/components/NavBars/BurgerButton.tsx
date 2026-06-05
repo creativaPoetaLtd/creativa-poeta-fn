@@ -4,6 +4,12 @@ import { LiaBarsSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
 import { Dropdown } from "antd";
 import { IoMdArrowDropdown } from "react-icons/io";
+import {
+  buildLocalLocalePath,
+  getCurrentLocale,
+  getCurrentMarket,
+} from "../../data/marketRuntime";
+import { LocaleCode } from "../../data/markets";
 
 interface BurgerButtonProps {
   sidebarVisible: boolean;
@@ -15,13 +21,24 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
   toggleSidebar,
 }) => {
   const [selectedLang, setSelectedLang] = useState<string>("en");
+  const market = getCurrentMarket();
+
+  const languageOptions: Record<
+    LocaleCode,
+    { key: string; label: string; flag: string }
+  > = {
+    en: { key: "English", label: "English", flag: "/uk.svg" },
+    fr: { key: "French", label: "French", flag: "/fr.png" },
+    nl: { key: "Dutch", label: "Dutch", flag: "/nll.jpg" },
+    kiny: { key: "Kinyarwanda", label: "Kinyarwanda", flag: "/rwanda.png" },
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const currentLocal = window.localStorage.getItem("selectedLang") || "en";
+      const currentLocal = getCurrentLocale(market);
       setSelectedLang(currentLocal);
     }
-  }, []);
+  }, [market]);
 
   const handleLanguageChange = (lang: string) => {
     const selected =
@@ -39,7 +56,11 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
 
     if (typeof window !== "undefined") {
       window.localStorage.setItem("selectedLang", selected);
-      window.location.reload();
+      window.location.href = buildLocalLocalePath(
+        market,
+        selected as LocaleCode,
+        window.location.pathname
+      );
     }
   };
 
@@ -50,45 +71,23 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
       marginTop: "1rem",
       width: "50px",
     },
-    items: [
-      {
-        key: "English",
-        label: (
-          <div className="flagAndLang flex items-center">
-            <img src="/uk.svg" alt="flag" className="w-6 h-4" />
-          </div>
-        ),
-      },
-      {
-        key: "Kinyarwanda",
-        label: (
-          <div className="flagAndLang flex items-center space-x-2">
-            <img src="/rwanda.png" alt="flag" className="w-6 h-4" />
-          </div>
-        ),
-      },
-      {
-        key: "French",
-        label: (
-          <div className="flagAndLang flex items-center space-x-2">
-            <img src="/fr.png" alt="flag" className="w-6 h-4" />
-          </div>
-        ),
-      },
-      {
-        key: "Dutch",
-        label: (
-          <div className="flagAndLang flex items-center space-x-2">
-            <img src="/nll.jpg" alt="flag" className="w-6 h-4" />
-          </div>
-        ),
-      },
-    ],
+    items: market.locales.map((locale) => ({
+      key: languageOptions[locale].key,
+      label: (
+        <div className="flagAndLang flex items-center">
+          <img
+            src={languageOptions[locale].flag}
+            alt={languageOptions[locale].label}
+            className="w-6 h-4"
+          />
+        </div>
+      ),
+    })),
   };
 
   return (
     <div
-      className={`font-bold z-30 text-3xl md:text-4xl text-white flex space-x-3 justify-center m-auto text-center items-center p-1 md:p-1`}
+      className={`font-bold z-30 text-2xl phone:text-3xl md:text-4xl text-white flex space-x-1 phone:space-x-3 justify-end text-center items-center p-0 phone:p-1 md:p-1`}
     >
       {/* Flags Dropdown */}
 
@@ -99,12 +98,12 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
             <img
               src={
                 selectedLang === "en"
-                  ? "/uk.svg"
+                  ? languageOptions.en.flag
                   : selectedLang === "fr"
-                  ? "/fr.png"
+                  ? languageOptions.fr.flag
                   : selectedLang === "nl"
-                  ? "/nll.jpg"
-                  : "/rwanda.png"
+                  ? languageOptions.nl.flag
+                  : languageOptions.kiny.flag
               }
               alt="flag"
               className="w-6 h-4"
@@ -115,8 +114,8 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
           </button>
         </Dropdown>
       </div>
-      <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-2 px-2 rounded-md">
-        <p className="menu text-[#FFFF00] text-base font-thin">MENU</p>
+      <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-1 phone:gap-2 px-1.5 phone:px-2 rounded-md">
+        <p className="menu text-[#FFFF00] text-xs phone:text-base font-thin">MENU</p>
         {sidebarVisible ? (
           <FaTimes onClick={toggleSidebar} />
         ) : (

@@ -74,7 +74,7 @@ function NavBar() {
   return (
     <>
       {/* Navigation Header */}
-      <div className="fixed top-5 right-4 z-50 flex items-center space-x-4">
+      <div className="cp-nav-actions fixed top-5 left-0 right-0 z-50 flex items-center justify-end gap-1 px-2 phone:gap-4 phone:px-4">
         {/* Admin Profile Dropdown */}
         {isAuthenticated && (
           <div className="relative" ref={adminDropdownRef}>
