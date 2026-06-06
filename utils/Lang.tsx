@@ -1,5 +1,8 @@
+import { getCurrentLocale, getCurrentMarket } from "../src/data/marketRuntime";
+
 function getLangFromLocalStorage() {
-      return localStorage.getItem("selectedLang") || "en";
-    }
+  const market = getCurrentMarket();
+  return getCurrentLocale(market);
+}
 
 export default getLangFromLocalStorage;

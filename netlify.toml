@@ -3,6 +3,16 @@ path = "/*"
 function = "market-rewrite"
 
 [[redirects]]
+from = "/_markets/*"
+to = "/"
+status = 301
+
+[[redirects]]
+from = "/__markets/*"
+to = "/"
+status = 301
+
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200

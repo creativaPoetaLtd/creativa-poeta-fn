@@ -586,6 +586,7 @@ function applyMeta(html, page) {
   };
 
   const injected = `
+    <script>document.documentElement.classList.add("cp-js");</script>
     <link rel="canonical" href="${escapedUrl}" />
     ${alternateLinks}
     <link rel="alternate" hreflang="x-default" href="${siteUrl}/" />
@@ -597,6 +598,7 @@ function applyMeta(html, page) {
       .cp-prerender section { margin-top: 34px; }
       .cp-prerender h2 { color: #fff; font-size: 1.55rem; margin: 0 0 10px; }
       .cp-prerender a { display: inline-block; margin-top: 28px; color: #101a29; background: #fff200; padding: 14px 22px; font-weight: 700; text-decoration: none; }
+      .cp-js .cp-prerender { display: none; }
     </style>
     <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
   `;
