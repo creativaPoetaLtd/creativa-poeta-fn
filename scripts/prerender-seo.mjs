@@ -13,22 +13,117 @@ const marketHosts = {
   global: {
     baseUrl: "https://creativapoeta.com",
     locales: ["en", "fr"],
+    countryCode: "Global",
+    areaName: "International",
+    brandSuffix: "",
   },
   be: {
     baseUrl: "https://be.creativapoeta.com",
     locales: ["fr", "nl"],
+    countryCode: "BE",
+    areaName: "Belgique",
+    brandSuffix: "Belgique",
   },
   fr: {
     baseUrl: "https://fr.creativapoeta.com",
     locales: ["fr"],
+    countryCode: "FR",
+    areaName: "France",
+    brandSuffix: "France",
   },
   rw: {
     baseUrl: "https://rw.creativapoeta.com",
     locales: ["rw", "fr", "en"],
+    countryCode: "RW",
+    areaName: "Rwanda",
+    brandSuffix: "Rwanda",
   },
   nl: {
     baseUrl: "https://nl.creativapoeta.com",
     locales: ["nl"],
+    countryCode: "NL",
+    areaName: "Nederland",
+    brandSuffix: "Nederland",
+  },
+};
+
+const marketHomeMeta = {
+  global: {
+    en: {
+      title: "Creativa Poeta | Be found where clients search",
+      description:
+        "Creativa Poeta helps businesses build a clear official presence for Google, maps, voice search and tools like ChatGPT.",
+    },
+    fr: {
+      title: "Creativa Poeta | Visibilite digitale claire et utile",
+      description:
+        "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees via leur site, les maps, la recherche vocale et les moteurs IA.",
+    },
+  },
+  be: {
+    fr: {
+      title: "Creativa Poeta Belgique | Visibilite locale en francais et neerlandais",
+      description:
+        "Creativa Poeta aide les entreprises en Belgique a clarifier leur site, leurs profils locaux, leurs maps et leurs reponses clients.",
+    },
+    nl: {
+      title: "Creativa Poeta Belgie | Lokale zichtbaarheid in Frans en Nederlands",
+      description:
+        "Creativa Poeta helpt bedrijven in Belgie hun website, lokale profielen, maps en klantinformatie duidelijk en betrouwbaar te maken.",
+    },
+  },
+  fr: {
+    fr: {
+      title: "Creativa Poeta France | Site clair, maps et visibilite moderne",
+      description:
+        "Creativa Poeta aide les entreprises en France a creer une presence officielle claire pour leur site, leurs maps et les recherches modernes.",
+    },
+  },
+  rw: {
+    rw: {
+      title: "Creativa Poeta Rwanda | Garagara aho abakiriya bagushakira",
+      description:
+        "Creativa Poeta ifasha ubucuruzi mu Rwanda kugira amakuru asobanutse kuri website, maps, imbuga nkoranyambaga n'ibikoresho bya AI.",
+    },
+    fr: {
+      title: "Creativa Poeta Rwanda | Site, maps et visibilite locale",
+      description:
+        "Creativa Poeta aide les entreprises au Rwanda a clarifier leur site, leurs profils locaux, leurs contacts et leurs reponses clients.",
+    },
+    en: {
+      title: "Creativa Poeta Rwanda | Website, maps and local visibility",
+      description:
+        "Creativa Poeta helps businesses in Rwanda make their website, maps, profiles and contact information clear and easy to find.",
+    },
+  },
+  nl: {
+    nl: {
+      title: "Creativa Poeta Nederland | Website, maps en moderne zichtbaarheid",
+      description:
+        "Creativa Poeta helpt bedrijven in Nederland hun website, maps, lokale profielen en klantinformatie duidelijker te maken.",
+    },
+  },
+};
+
+const marketServiceIntro = {
+  global: {
+    en: "Useful for companies that need one clear source of information for clients and modern search tools.",
+    fr: "Utile pour les entreprises qui veulent une source officielle claire pour leurs clients et les moteurs modernes.",
+  },
+  be: {
+    fr: "Adapte aux entreprises qui doivent etre comprises en Belgique, en francais et en neerlandais.",
+    nl: "Aangepast voor bedrijven die in Belgie duidelijk willen zijn in het Frans en het Nederlands.",
+  },
+  fr: {
+    fr: "Adapte aux entreprises qui veulent etre plus claires et mieux trouvees en France.",
+  },
+  rw: {
+    rw: "Bikenewe ku bucuruzi bwo mu Rwanda bushaka gusobanuka no kuboneka neza.",
+    fr: "Adapte aux entreprises au Rwanda qui veulent etre plus claires, visibles et faciles a contacter.",
+    en: "Adapted for businesses in Rwanda that want to be clearer, easier to find and easier to contact.",
+  },
+  nl: {
+    nl: "Aangepast voor bedrijven in Nederland die duidelijker en beter vindbaar willen zijn.",
   },
 };
 
@@ -435,6 +530,7 @@ for (const [market, config] of Object.entries(marketHosts)) {
       routeDefinitions.push({
         outputPath: `/__markets/${market}${publicPath}`,
         canonicalUrl: `${config.baseUrl}${publicPath}`,
+        market,
         lang,
         template,
         alternates: marketAlternates(config, template.path),
@@ -472,6 +568,51 @@ function alternatesFor(template) {
       href: absoluteUrl(pathForLang),
     };
   });
+}
+
+function withoutBrandSuffix(title) {
+  return title.replace(/\s*\|\s*Creativa Poeta.*$/i, "");
+}
+
+function titleForRoute(route) {
+  const baseTitle = route.template.title(route.lang);
+  if (!route.market) return baseTitle;
+
+  const marketMeta = marketHomeMeta[route.market]?.[route.lang];
+  if (route.template === pageTemplates.home && marketMeta?.title) {
+    return marketMeta.title;
+  }
+
+  const marketConfig = marketHosts[route.market];
+  if (!marketConfig?.brandSuffix) return baseTitle;
+
+  return `${withoutBrandSuffix(baseTitle)} | Creativa Poeta ${marketConfig.brandSuffix}`;
+}
+
+function descriptionForRoute(route) {
+  const baseDescription = route.template.description(route.lang);
+  if (!route.market) return baseDescription;
+
+  const marketMeta = marketHomeMeta[route.market]?.[route.lang];
+  if (route.template === pageTemplates.home && marketMeta?.description) {
+    return marketMeta.description;
+  }
+
+  const intro = marketServiceIntro[route.market]?.[route.lang];
+  return intro ? `${baseDescription} ${intro}` : baseDescription;
+}
+
+function keywordsForRoute(route) {
+  const marketConfig = route.market ? marketHosts[route.market] : undefined;
+  const marketWords = marketConfig
+    ? `, ${marketConfig.areaName}, ${marketConfig.countryCode}, local business visibility`
+    : "";
+
+  return `${route.template.keywords}${marketWords}`;
+}
+
+function languageName(lang) {
+  return languages[lang]?.label ?? lang;
 }
 
 function updateTag(html, regex, replacement) {
@@ -570,19 +711,72 @@ function applyMeta(html, page) {
     )
     .join("\n    ");
 
+  const marketConfig = page.market ? marketHosts[page.market] : marketHosts.global;
+  const pageType = page.template === pageTemplates.contact ? "ContactPage" : "WebPage";
+  const serviceArea =
+    marketConfig.countryCode === "Global"
+      ? "Global"
+      : {
+          "@type": "Country",
+          name: marketConfig.areaName,
+          identifier: marketConfig.countryCode,
+        };
+  const serviceNames = [
+    "Official business website",
+    "Local visibility",
+    "Maps profile alignment",
+    "Voice search readiness",
+    "AI answer readiness",
+    "Clear service pages",
+  ];
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": page.template === pageTemplates.contact ? "ContactPage" : "WebPage",
-    name: page.title,
-    description: page.description,
-    url: page.url,
-    inLanguage: page.lang,
-    publisher: {
-      "@type": "Organization",
-      name: "Creativa Poeta",
-      url: siteUrl,
-      logo: imageUrl,
-    },
+    "@graph": [
+      {
+        "@type": pageType,
+        "@id": `${page.url}#webpage`,
+        name: page.title,
+        description: page.description,
+        url: page.url,
+        inLanguage: page.lang,
+        isPartOf: {
+          "@id": `${marketConfig.baseUrl}/#website`,
+        },
+        about: {
+          "@id": `${marketConfig.baseUrl}/#professionalservice`,
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${marketConfig.baseUrl}/#website`,
+        name: "Creativa Poeta",
+        url: marketConfig.baseUrl,
+        inLanguage: marketConfig.locales,
+        publisher: {
+          "@id": `${marketConfig.baseUrl}/#professionalservice`,
+        },
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${marketConfig.baseUrl}/#professionalservice`,
+        name: marketConfig.brandSuffix
+          ? `Creativa Poeta ${marketConfig.brandSuffix}`
+          : "Creativa Poeta",
+        url: marketConfig.baseUrl,
+        logo: imageUrl,
+        image: imageUrl,
+        description: page.description,
+        areaServed: serviceArea,
+        availableLanguage: marketConfig.locales.map(languageName),
+        knowsAbout: serviceNames,
+        serviceType: serviceNames,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          url: `${marketConfig.baseUrl}/contact`,
+        },
+      },
+    ],
   };
 
   const injected = `
@@ -636,9 +830,9 @@ function applyFallback(html, page) {
 for (const route of routeDefinitions) {
   const page = {
     ...route,
-    title: route.template.title(route.lang),
-    description: route.template.description(route.lang),
-    keywords: route.template.keywords,
+    title: titleForRoute(route),
+    description: descriptionForRoute(route),
+    keywords: keywordsForRoute(route),
     sections: route.template.sections(route.lang),
     url: route.canonicalUrl ?? absoluteUrl(route.canonicalPath),
     alternates: route.alternates ?? alternatesFor(route.template),
