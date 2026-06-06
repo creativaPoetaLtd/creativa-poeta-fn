@@ -33,6 +33,10 @@ export default async (request) => {
   if (ignoredPrefixes.some((prefix) => url.pathname.startsWith(prefix))) return;
   if (url.pathname.includes(".")) return;
 
-  const marketPath = url.pathname === "/" ? "" : url.pathname;
-  return new URL(`/__markets/${market}${marketPath}${url.search}`, request.url);
+  const cleanPath = url.pathname.replace(/\/$/, "");
+  const marketPath = cleanPath === "" ? "" : cleanPath;
+  return new URL(
+    `/__markets/${market}${marketPath}/index.html${url.search}`,
+    request.url
+  );
 };
