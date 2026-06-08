@@ -26,7 +26,7 @@ body,
 }
 
 body{
-  animation: cpGlobalBgCycle 30s infinite;
+  animation: cpGlobalBgCycle 40s infinite;
   background-attachment: fixed;
   background-color: #101a29;
   background-image: url("/src/assets/flags/image2.jpg");
@@ -39,16 +39,20 @@ body{
 
 @keyframes cpGlobalBgCycle {
   0%,
-  30% {
+  22% {
     background-image: url("/src/assets/flags/image2.jpg");
   }
-  36%,
-  63% {
-    background-image: url("/src/assets/flags/image8.jpg");
-  }
-  69%,
-  94% {
+  28%,
+  47% {
     background-image: url("/src/assets/flags/image9.jpg");
+  }
+  53%,
+  72% {
+    background-image: url("/src/assets/flags/image10.jpg");
+  }
+  78%,
+  94% {
+    background-image: url("/src/assets/flags/image11.jpg");
   }
   100% {
     background-image: url("/src/assets/flags/image2.jpg");
