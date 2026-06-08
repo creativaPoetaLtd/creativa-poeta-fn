@@ -50,6 +50,24 @@ function isIgnoredPath(pathname) {
   return false;
 }
 
+function redirectVisibleMarketPath(url) {
+  const match = url.pathname.match(/^\/_{1,2}markets\/([^/]+)(?:\/(.*))?$/);
+  if (!match) return;
+
+  const [, market, rest = ""] = match;
+  if (!marketLocales[market]) return;
+
+  const cleanRest = rest
+    .replace(/\/?index\.html$/, "")
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "");
+
+  const targetUrl = new URL(url.toString());
+  targetUrl.pathname = cleanRest ? `/${cleanRest}` : "/";
+
+  return Response.redirect(targetUrl.toString(), 308);
+}
+
 function normalizePathForMarket(pathname, market) {
   const config = marketLocales[market];
   if (!config) return pathname;
@@ -98,6 +116,9 @@ function redirectByCountry(request, context, url) {
 
 export default async (request, context) => {
   const url = new URL(request.url);
+  const cleanVisibleMarketPath = redirectVisibleMarketPath(url);
+  if (cleanVisibleMarketPath) return cleanVisibleMarketPath;
+
   const geoRedirect = redirectByCountry(request, context, url);
   if (geoRedirect) return geoRedirect;
 
