@@ -425,15 +425,16 @@
 .cp-refonte-problem-shell {
   align-items: center;
   display: grid;
-  gap: 2.5rem;
-  grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1.18fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 0.64fr) minmax(360px, 1.36fr);
 }
 
 .cp-refonte-problem-art {
-  filter: drop-shadow(0 28px 44px rgba(7, 26, 51, 0.26));
+  animation: cp-problem-art-in 900ms ease both;
+  filter: drop-shadow(0 32px 52px rgba(7, 26, 51, 0.3));
   margin: 0;
   position: relative;
-  transform: rotate(1.4deg) translateY(1rem);
+  transform: rotate(0.6deg) translateY(0.6rem);
   z-index: 2;
 }
 
@@ -451,7 +452,7 @@
 }
 
 .cp-refonte-problem-art::after {
-  border: 0.35rem solid rgba(7, 26, 51, 0.92);
+  border: 0.35rem solid rgba(238, 186, 43, 0.78);
   border-radius: 999px;
   bottom: -1.2rem;
   content: "";
@@ -463,17 +464,37 @@
 }
 
 .cp-refonte-problem-art img {
-  aspect-ratio: 1 / 1;
-  clip-path: polygon(6% 0, 100% 4%, 94% 94%, 14% 100%, 0 12%);
   display: block;
   height: auto;
-  max-height: min(68vh, 760px);
-  object-fit: cover;
+  max-height: min(82vh, 900px);
+  object-fit: contain;
   width: 100%;
 }
 
 .cp-refonte-problem-visual .cp-refonte-heading {
   max-width: 620px;
+}
+
+.cp-refonte-problem-visual .cp-refonte-heading p {
+  color: var(--cp-yellow);
+}
+
+.cp-refonte-problem-visual .cp-refonte-heading h2,
+.cp-refonte-problem-visual .cp-refonte-heading span {
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(7, 26, 51, 0.35);
+}
+
+@keyframes cp-problem-art-in {
+  from {
+    opacity: 0;
+    transform: translateX(2rem) rotate(3deg) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0.6deg) translateY(0.6rem) scale(1);
+  }
 }
 
 .cp-refonte-icon-grid article,
@@ -895,8 +916,8 @@
 
   .cp-refonte-problem-art {
     margin-left: auto;
-    max-width: 760px;
-    transform: rotate(-1deg);
+    max-width: 900px;
+    transform: rotate(-0.4deg);
   }
 
   .cp-refonte-paths article,
@@ -922,9 +943,9 @@
   }
 
   .cp-refonte-problem-art {
-    margin-left: -0.55rem;
-    margin-right: -0.55rem;
-    transform: rotate(0.8deg);
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
   }
 
   .cp-refonte-problem-art::before {
