@@ -252,10 +252,10 @@ export const HomeRefonteBeforeServices = () => {
               <em>vous avez</em>
             </strong>
             <small>
-              la bonne visibilite, au bon moment, sur tous les canaux
+              la bonne visibilite, au bon moment, sur tous les reseaux
             </small>
             <span className="cp-refonte-local-action">
-              Contacter Creativa Poeta
+              Contactez-nous
               <ArrowRight size={18} />
             </span>
           </div>
