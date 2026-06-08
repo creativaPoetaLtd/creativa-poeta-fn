@@ -26,6 +26,9 @@ import {
   getCurrentMarket,
   localizePath,
 } from "../../data/marketRuntime";
+import alignVisibilityEn from "../../assets/align-visibility-en.png";
+import alignVisibilityFr from "../../assets/align-visibility-fr.png";
+import alignVisibilityNl from "../../assets/align-visibility-nl.png";
 import problemVisibilityEn from "../../assets/problem-visibility-en.png";
 import problemVisibilityFr from "../../assets/problem-visibility-fr.png";
 import problemVisibilityNl from "../../assets/problem-visibility-nl.png";
@@ -163,6 +166,12 @@ export const HomeRefonteBeforeServices = () => {
       : locale === "nl"
         ? problemVisibilityNl
         : problemVisibilityEn;
+  const alignImage =
+    locale === "fr"
+      ? alignVisibilityFr
+      : locale === "nl"
+        ? alignVisibilityNl
+        : alignVisibilityEn;
 
   return (
     <>
@@ -282,19 +291,26 @@ export const HomeRefonteBeforeServices = () => {
             <h2>{homeContentFr.approach.title}</h2>
             <span>{homeContentFr.approach.body}</span>
           </div>
-          <div className="cp-refonte-icon-grid cp-animate-list">
-            {proofPoints.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title}>
-                  <span className="cp-refonte-icon-badge">
-                    <Icon size={26} aria-hidden="true" />
+          <div className="cp-refonte-align-frame">
+            <figure className="cp-refonte-align-art">
+              <img
+                src={alignImage}
+                alt="Site, profils locaux, reseaux sociaux, recherche vocale et outils IA alignes"
+              />
+            </figure>
+            <div className="cp-refonte-align-icons" aria-hidden="true">
+              {proofPoints.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <span
+                    key={item.title}
+                    className={`cp-refonte-align-float cp-refonte-align-float-${index + 1}`}
+                  >
+                    <Icon size={24} />
                   </span>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </article>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
         <SectionScrollButton
