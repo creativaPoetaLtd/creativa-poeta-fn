@@ -13,6 +13,10 @@ const marketHosts = {
   global: {
     baseUrl: "https://creativapoeta.com",
     locales: ["en", "fr"],
+    hreflang: {
+      en: "en",
+      fr: "fr",
+    },
     countryCode: "Global",
     areaName: "International",
     brandSuffix: "",
@@ -20,6 +24,10 @@ const marketHosts = {
   be: {
     baseUrl: "https://be.creativapoeta.com",
     locales: ["fr", "nl"],
+    hreflang: {
+      fr: "fr-BE",
+      nl: "nl-BE",
+    },
     countryCode: "BE",
     areaName: "Belgique",
     brandSuffix: "Belgique",
@@ -27,6 +35,9 @@ const marketHosts = {
   fr: {
     baseUrl: "https://fr.creativapoeta.com",
     locales: ["fr"],
+    hreflang: {
+      fr: "fr-FR",
+    },
     countryCode: "FR",
     areaName: "France",
     brandSuffix: "France",
@@ -34,6 +45,11 @@ const marketHosts = {
   rw: {
     baseUrl: "https://rw.creativapoeta.com",
     locales: ["rw", "fr", "en"],
+    hreflang: {
+      rw: "rw-RW",
+      fr: "fr-RW",
+      en: "en-RW",
+    },
     countryCode: "RW",
     areaName: "Rwanda",
     brandSuffix: "Rwanda",
@@ -41,6 +57,9 @@ const marketHosts = {
   nl: {
     baseUrl: "https://nl.creativapoeta.com",
     locales: ["nl"],
+    hreflang: {
+      nl: "nl-NL",
+    },
     countryCode: "NL",
     areaName: "Nederland",
     brandSuffix: "Nederland",
@@ -527,10 +546,14 @@ function localizedMarketPath(locale, defaultLocale, pagePath) {
   return `${prefix}${pagePath}` || "/";
 }
 
+function hreflangFor(config, locale) {
+  return config.hreflang?.[locale] ?? locale;
+}
+
 function marketAlternates(config, pagePath) {
   const defaultLocale = config.locales[0];
   return config.locales.map((locale) => ({
-    lang: locale,
+    lang: hreflangFor(config, locale),
     href: `${config.baseUrl}${localizedMarketPath(locale, defaultLocale, pagePath)}`,
   }));
 }
@@ -915,7 +938,7 @@ function writeSitemapFiles() {
               defaultLocale,
               pagePath
             );
-            return `    <xhtml:link rel="alternate" hreflang="${alternateLocale}" href="${config.baseUrl}${altPath}" />`;
+            return `    <xhtml:link rel="alternate" hreflang="${hreflangFor(config, alternateLocale)}" href="${config.baseUrl}${altPath}" />`;
           })
           .join("\n");
 

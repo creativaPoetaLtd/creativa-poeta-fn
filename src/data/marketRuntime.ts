@@ -66,7 +66,7 @@ export function getMarketAlternateLinks(
 ): AlternateLink[] {
   const marketLinks = market.locales.map((locale) => ({
     hrefLang:
-      market.countryCode && locale !== "kiny"
+      market.countryCode
         ? `${localeHreflang[locale]}-${market.countryCode}`
         : localeHreflang[locale],
     href: buildMarketUrl(market, locale, path),
