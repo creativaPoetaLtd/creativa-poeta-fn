@@ -431,10 +431,10 @@
   border-radius: 2.2rem 0.7rem 2.8rem 0.7rem;
   box-shadow: 0 32px 70px rgba(7, 26, 51, 0.22);
   display: grid;
-  gap: clamp(1.6rem, 3.6vw, 3.2rem);
+  gap: 0;
   grid-template-columns: minmax(0, 0.62fr) minmax(360px, 1.38fr);
   overflow: hidden;
-  padding: clamp(1.2rem, 3vw, 2.5rem);
+  padding: 0;
   position: relative;
 }
 
@@ -469,7 +469,10 @@
 }
 
 .cp-refonte-problem-art {
+  align-self: stretch;
   animation: cp-problem-art-in 900ms ease both;
+  background: rgba(255, 255, 255, 0.34);
+  display: flex;
   filter: drop-shadow(0 32px 52px rgba(7, 26, 51, 0.3));
   margin: 0;
   position: relative;
@@ -512,6 +515,7 @@
 
 .cp-refonte-problem-visual .cp-refonte-heading {
   max-width: 620px;
+  padding: clamp(1.2rem, 3vw, 2.5rem);
   position: relative;
   z-index: 2;
 }
@@ -982,8 +986,8 @@
 
   .cp-refonte-problem-shell {
     border-radius: 1.35rem 0.35rem 1.8rem 0.35rem;
-    gap: 1.3rem;
-    padding: 1rem;
+    gap: 0;
+    padding: 0;
   }
 
   .cp-refonte-problem-shell::before {
@@ -1023,6 +1027,10 @@
   .cp-refonte-problem-art img {
     max-height: none;
     width: 100%;
+  }
+
+  .cp-refonte-problem-visual .cp-refonte-heading {
+    padding: 1rem;
   }
 
   .cp-refonte-showcase-grid article,
