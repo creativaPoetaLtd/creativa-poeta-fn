@@ -515,7 +515,7 @@
 }
 
 .cp-refonte-problem-visual .cp-refonte-heading p {
-  color: var(--cp-yellow);
+  color: #e8eef4;
 }
 
 .cp-refonte-problem-visual .cp-refonte-heading h2,
@@ -1054,6 +1054,10 @@
 
   .cp-refonte-light {
     background: rgba(247, 244, 237, 0.58) !important;
+  }
+
+  .cp-refonte-problem-visual {
+    background: transparent !important;
   }
 
   .cp-refonte-dark,
