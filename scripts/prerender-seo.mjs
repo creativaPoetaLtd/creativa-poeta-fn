@@ -430,20 +430,20 @@ const pageTemplates = {
     path: "/services/audit-visibilite",
     title: (lang) =>
       lang === "fr"
-        ? "Audit de visibilite moderne | Creativa Poeta"
+        ? "Audit de visibilite IA, Google et maps | Creativa Poeta"
         : lang === "nl"
           ? "Zichtbaarheidsaudit | Creativa Poeta"
           : lang === "rw"
             ? "Isuzuma ry'uko ugaragara | Creativa Poeta"
-            : "Modern visibility audit | Creativa Poeta",
+            : "AI, Google and maps visibility audit | Creativa Poeta",
     description: (lang) =>
       lang === "fr"
-        ? "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients peuvent vous trouver, vous comprendre et vous contacter."
+        ? "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients et les outils IA peuvent vous trouver, vous comprendre et vous recommander."
         : lang === "nl"
           ? "Laat uw website, maps, lokale profielen en publieke informatie controleren om te zien of klanten u makkelijk vinden en begrijpen."
           : lang === "rw"
             ? "Reba niba website, maps, imbuga ukoresha n'amakuru yawe bifasha abakiriya kukubona no kugusobanukirwa."
-            : "Review your website, maps, local profiles and public information to see whether clients can find, understand and contact you.",
+            : "Review your website, maps, local profiles and public information to see whether clients and AI tools can find, understand and recommend you.",
     keywords:
       "visibility audit, local visibility, Google Maps, voice search, AI tools, ChatGPT visibility, Creativa Poeta",
     sections: (lang) =>
@@ -473,20 +473,20 @@ const pageTemplates = {
     path: "/services/site-officiel",
     title: (lang) =>
       lang === "fr"
-        ? "Site officiel et source d'information | Creativa Poeta"
+        ? "Site officiel pret pour les IA | Creativa Poeta"
         : lang === "nl"
           ? "Officiele website als betrouwbare bron | Creativa Poeta"
           : lang === "rw"
             ? "Website yemewe y'ubucuruzi bwawe | Creativa Poeta"
-            : "Official business website and source | Creativa Poeta",
+            : "AI-ready official business website | Creativa Poeta",
     description: (lang) =>
       lang === "fr"
-        ? "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, vos maps, vos reseaux et les outils modernes."
+        ? "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, Google, les maps et les outils IA."
         : lang === "nl"
           ? "Maak of verbeter een duidelijke website die de officiele bron wordt voor klanten, maps, sociale profielen en moderne tools."
           : lang === "rw"
             ? "Kubaka cyangwa kuvugurura website isobanura serivisi, aho bakubariza, aho ukorera n'amakuru yizewe y'ubucuruzi bwawe."
-            : "Create or rebuild a clear website that becomes your business official source for clients, maps, social profiles and modern tools.",
+            : "Create or rebuild a clear website that becomes your official source for clients, Google, maps and AI tools.",
     keywords:
       "official business website, clear website, business source, service pages, contact page, local visibility, Creativa Poeta",
     sections: (lang) =>
@@ -516,20 +516,20 @@ const pageTemplates = {
     path: "/services/visibilite-locale",
     title: (lang) =>
       lang === "fr"
-        ? "Visibilite locale, maps et recherche vocale | Creativa Poeta"
+        ? "Visibilite locale pour Google, maps et IA | Creativa Poeta"
         : lang === "nl"
           ? "Lokale zichtbaarheid, maps en spraakzoekopdrachten | Creativa Poeta"
           : lang === "rw"
             ? "Kugaragara kuri maps no mu gushakisha hafi | Creativa Poeta"
-            : "Local visibility, maps and voice search | Creativa Poeta",
+            : "Local visibility for Google, maps and AI tools | Creativa Poeta",
     description: (lang) =>
       lang === "fr"
-        ? "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients a vous trouver et vous contacter."
+        ? "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients et les outils IA a vous trouver."
         : lang === "nl"
           ? "Stem uw informatie af op Google Maps, Apple Maps, Bing, lokale profielen en sociale profielen zodat klanten u kunnen vinden en contacteren."
           : lang === "rw"
             ? "Duhuza amakuru yawe kuri Google Maps, Apple Maps, Bing n'imbuga ukoresha kugira ngo abakiriya bakubone kandi bakwandikire."
-            : "Align your information across Google Maps, Apple Maps, Bing, local profiles and social profiles so clients can find and contact you.",
+            : "Align your information across Google Maps, Apple Maps, Bing, local profiles and social profiles so clients and AI tools can find you.",
     keywords:
       "local visibility, Google Maps, Apple Maps, Bing Places, voice search, local profiles, client reviews, Creativa Poeta",
     sections: (lang) =>

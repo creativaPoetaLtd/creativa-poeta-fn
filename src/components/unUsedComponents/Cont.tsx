@@ -5,9 +5,12 @@ import { toast } from "react-toastify";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import FooterLocale from "../../i18n/FooterLocale";
 import { contactUs } from "../../APIs/Contact";
+import { getCurrentMarket } from "../../data/marketRuntime";
 
 const lang:any = getLangFromLocalStorage();
 const Cont = () => {
+  const market = getCurrentMarket();
+  const contactEmail = market.email ?? "contact@creativapoeta.com";
 
   const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState('');
@@ -122,7 +125,7 @@ const Cont = () => {
                     <div className="text-2xl mt-2  text-[#EEBA2B] flex space-x-4 ">
                       <FaRegEnvelope className="text-2xl  text-[#EEBA2B] flex my-auto justify-center text-center items-center " />
                       <h1 className="laptop:text-2xl desktop:text-xl text-xl ">
-                        contact@creativapoeta.rw
+                        {contactEmail}
                       </h1>
                     </div>
 

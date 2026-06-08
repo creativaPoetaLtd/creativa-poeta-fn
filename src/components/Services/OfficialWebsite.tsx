@@ -34,9 +34,9 @@ type OfficialCopy = {
 const copies: Record<string, OfficialCopy> = {
   fr: {
     eyebrow: "Site officiel",
-    title: "Votre site doit devenir la source officielle de votre entreprise.",
+    title: "Votre site doit devenir la source officielle que les clients et les IA comprennent.",
     intro:
-      "Nous creons ou refondons un site clair qui explique vos services, vos contacts, vos zones, vos langues, vos questions frequentes et vos preuves de confiance.",
+      "Nous creons ou refondons un site clair qui explique vos services, vos contacts, vos zones, vos langues, vos questions frequentes et vos preuves de confiance pour les clients, Google et les outils IA.",
     cta: "Construire ma source officielle",
     secondaryCta: "Tester d'abord ma visibilite",
     whyTitle: "Un site vitrine ne suffit plus s'il ne sert qu'a faire joli.",
@@ -101,9 +101,9 @@ const copies: Record<string, OfficialCopy> = {
   },
   en: {
     eyebrow: "Official website",
-    title: "Your website should become your business official source.",
+    title: "Your website should become the official source clients and AI tools understand.",
     intro:
-      "We create or rebuild a clear website that explains your services, contacts, areas, languages, common questions and trust signals.",
+      "We create or rebuild a clear website that explains your services, contacts, areas, languages, common questions and trust signals for clients, Google and AI tools.",
     cta: "Build my official source",
     secondaryCta: "Test visibility first",
     whyTitle: "A brochure website is not enough if it only looks nice.",
@@ -168,9 +168,9 @@ const copies: Record<string, OfficialCopy> = {
   },
   nl: {
     eyebrow: "Officiele website",
-    title: "Uw website moet de officiele bron van uw bedrijf worden.",
+    title: "Uw website moet de officiele bron worden die klanten en AI-tools begrijpen.",
     intro:
-      "We maken of verbeteren een duidelijke website die uw diensten, contactgegevens, regio's, talen, veelgestelde vragen en vertrouwen uitlegt.",
+      "We maken of verbeteren een duidelijke website die uw diensten, contactgegevens, regio's, talen, veelgestelde vragen en vertrouwen uitlegt voor klanten, Google en AI-tools.",
     cta: "Bouw mijn officiele bron",
     secondaryCta: "Test eerst mijn zichtbaarheid",
     whyTitle: "Een mooie website is niet genoeg als hij niets duidelijk maakt.",
@@ -235,9 +235,9 @@ const copies: Record<string, OfficialCopy> = {
   },
   kiny: {
     eyebrow: "Website yemewe",
-    title: "Website yawe igomba kuba isoko yemewe y'amakuru y'ubucuruzi bwawe.",
+    title: "Website yawe igomba kuba isoko yemewe abakiriya na AI basobanukirwa.",
     intro:
-      "Dukora cyangwa tuvugurura website isobanura serivisi, aho bakubariza, aho ukorera, indimi, ibibazo bisanzwe n'ibimenyetso bitanga icyizere.",
+      "Dukora cyangwa tuvugurura website isobanura serivisi, aho bakubariza, aho ukorera, indimi, ibibazo bisanzwe n'ibimenyetso bitanga icyizere ku bakiriya, Google n'ibikoresho bya AI.",
     cta: "Kubaka isoko yemewe",
     secondaryCta: "Banza urebe uko ugaragara",
     whyTitle: "Website isa neza gusa ntihagije.",

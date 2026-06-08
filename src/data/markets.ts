@@ -50,7 +50,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     currency: "EUR",
     countryCode: "BE",
     primaryCity: "Bruxelles",
-    email: "contact@creativapoeta.com",
+    email: "contact@creativapoeta.be",
     publicPositioning:
       "Une presence claire pour les clients qui cherchent en francais ou en neerlandais.",
   },
@@ -63,7 +63,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     currency: "EUR",
     countryCode: "FR",
     primaryCity: "Paris",
-    email: "contact@creativapoeta.com",
+    email: "contact@creativapoeta.fr",
     publicPositioning:
       "Une presence claire pour etre mieux compris dans les recherches locales et modernes.",
   },
@@ -76,7 +76,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     currency: "RWF",
     countryCode: "RW",
     primaryCity: "Kigali",
-    email: "contact@creativapoeta.com",
+    email: "contact@creativapoeta.rw",
     publicPositioning:
       "Uburyo bworoshye bwo gusobanura serivisi no kuboneka aho abakiriya bashakira.",
   },
@@ -89,7 +89,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     currency: "EUR",
     countryCode: "NL",
     primaryCity: "Amsterdam",
-    email: "contact@creativapoeta.com",
+    email: "contact@creativapoeta.nl",
     publicPositioning:
       "Een duidelijke online aanwezigheid voor klanten die lokaal en gericht zoeken.",
   },

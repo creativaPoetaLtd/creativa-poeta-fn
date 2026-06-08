@@ -9,11 +9,11 @@ const ServiceLocale: any = {
     service21: "A clear",
     service22: "official website",
     description2:
-      "We create or improve your website so it becomes the official place where clients understand your services, contact details, languages and answers.",
+      "We create or improve your website so it becomes the official source clients, Google and AI tools can understand.",
     service31: "Local",
     service32: "visibility",
     description3:
-      "We clarify your words, visuals and content so people understand who you are, what you offer and why they should contact you.",
+      "We align maps, local profiles and public information so clients and AI tools see the same reliable facts.",
     service41: "Useful pages",
     service42: "for precise searches",
     description4:
@@ -29,11 +29,11 @@ const ServiceLocale: any = {
     service21: "Un site clair",
     service22: "comme source officielle",
     description2:
-      "Nous creons ou ameliorons votre site pour qu'il explique vos services, vos contacts, vos langues et vos reponses importantes.",
+      "Nous creons ou ameliorons votre site pour qu'il devienne la source officielle comprise par vos clients, Google et les outils IA.",
     service31: "Visibilite",
     service32: "locale",
     description3:
-      "Nous clarifions vos mots, vos visuels et vos contenus pour que les gens comprennent qui vous etes, ce que vous proposez et pourquoi vous contacter.",
+      "Nous alignons maps, profils locaux et informations publiques pour que vos clients et les outils IA voient les memes informations fiables.",
     service41: "Des pages utiles",
     service42: "pour des recherches precises",
     description4:
@@ -49,11 +49,11 @@ const ServiceLocale: any = {
     service21: "Website",
     service22: "isobanutse",
     description2:
-      "Dukora cyangwa tukavugurura website yawe kugira ngo isobanure serivisi zawe, aho bagushakira, indimi ukoresha n'ibisubizo by'ingenzi.",
+      "Dukora cyangwa tukavugurura website yawe kugira ngo ibe isoko yemewe abakiriya, Google na AI bashobora gusobanukirwa.",
     service31: "Kugaragara",
     service32: "hafi y'abakiriya",
     description3:
-      "Dufasha amagambo, amashusho n'ibyo utangaza gusobanuka kugira ngo abantu bamenye uwo uri we, ibyo ukora n'impamvu bakwandikira.",
+      "Duhuza maps, imbuga z'ibanze n'amakuru agaragara kugira ngo abakiriya na AI babone amakuru yizewe.",
     service41: "Paji zifite akamaro",
     service42: "ku bibazo byihariye",
     description4:
@@ -69,11 +69,11 @@ const ServiceLocale: any = {
     service21: "Een duidelijke",
     service22: "officiele website",
     description2:
-      "We maken of verbeteren je website zodat klanten je diensten, contactgegevens, talen en belangrijke antwoorden begrijpen.",
+      "We maken of verbeteren je website zodat klanten, Google en AI-tools je bedrijf duidelijk begrijpen.",
     service31: "Lokale",
     service32: "zichtbaarheid",
     description3:
-      "We verduidelijken je woorden, beelden en content zodat mensen begrijpen wie je bent, wat je aanbiedt en waarom ze contact opnemen.",
+      "We stemmen maps, lokale profielen en publieke informatie af zodat klanten en AI-tools dezelfde betrouwbare feiten zien.",
     service41: "Nuttige pagina's",
     service42: "voor gerichte zoekvragen",
     description4:

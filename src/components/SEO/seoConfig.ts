@@ -52,9 +52,9 @@ export const seoConfig = {
 
   services: {
     auditVisibility: {
-      title: "Audit de visibilite moderne | Creativa Poeta",
+      title: "Audit de visibilite IA, Google et maps | Creativa Poeta",
       description:
-        "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients peuvent vous trouver, vous comprendre et vous contacter.",
+        "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients et les outils IA peuvent vous trouver, vous comprendre et vous recommander.",
       keywords:
         "audit visibilite, Google Maps, visibilite locale, recherche vocale, ChatGPT, presence digitale, Creativa Poeta",
       url: "https://creativapoeta.com/services/audit-visibilite",
@@ -73,9 +73,9 @@ export const seoConfig = {
     },
 
     officialWebsite: {
-      title: "Site officiel et source d'information | Creativa Poeta",
+      title: "Site officiel pret pour les IA | Creativa Poeta",
       description:
-        "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, vos maps, vos reseaux et les outils modernes.",
+        "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, Google, les maps et les outils IA.",
       keywords:
         "site officiel entreprise, site vitrine clair, source officielle, site web local, site pour IA, Creativa Poeta",
       url: "https://creativapoeta.com/services/site-officiel",
@@ -94,9 +94,9 @@ export const seoConfig = {
     },
 
     localVisibility: {
-      title: "Visibilite locale, maps et recherche vocale | Creativa Poeta",
+      title: "Visibilite locale pour Google, maps et IA | Creativa Poeta",
       description:
-        "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients a vous trouver et vous contacter.",
+        "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients et les outils IA a vous trouver.",
       keywords:
         "visibilite locale, Google Maps, Apple Maps, Bing Places, recherche vocale, profils locaux, avis clients, Creativa Poeta",
       url: "https://creativapoeta.com/services/visibilite-locale",

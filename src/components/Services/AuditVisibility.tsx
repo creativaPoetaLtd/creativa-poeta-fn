@@ -36,9 +36,9 @@ type AuditCopy = {
 const copies: Record<string, AuditCopy> = {
   fr: {
     eyebrow: "Premier produit d'appel",
-    title: "Votre entreprise est-elle vraiment visible la ou vos clients cherchent ?",
+    title: "Votre entreprise est-elle visible dans Google, les maps et les moteurs IA ?",
     intro:
-      "Nous analysons votre site, votre page Google Maps, vos profils locaux et vos informations publiques pour voir si un client peut vous trouver, vous comprendre et vous contacter facilement.",
+      "Nous analysons votre site, votre page Google Maps, vos profils locaux et vos informations publiques pour voir si un client ou un outil comme ChatGPT peut vous trouver, vous comprendre et vous recommander.",
     cta: "Tester ma visibilite",
     secondaryCta: "Parler a Creativa Poeta",
     promiseTitle: "Le but n'est pas de faire un rapport complique.",
@@ -98,9 +98,9 @@ const copies: Record<string, AuditCopy> = {
   },
   en: {
     eyebrow: "First entry service",
-    title: "Is your business truly visible where clients search?",
+    title: "Is your business visible on Google, maps and AI search tools?",
     intro:
-      "We review your website, Google Maps page, local profiles and public information to see whether clients can find, understand and contact you easily.",
+      "We review your website, Google Maps page, local profiles and public information to see whether clients or tools like ChatGPT can find, understand and recommend you.",
     cta: "Test my visibility",
     secondaryCta: "Talk to Creativa Poeta",
     promiseTitle: "The goal is not a complicated report.",
@@ -160,9 +160,9 @@ const copies: Record<string, AuditCopy> = {
   },
   nl: {
     eyebrow: "Eerste instapdienst",
-    title: "Is uw bedrijf echt zichtbaar waar klanten zoeken?",
+    title: "Is uw bedrijf zichtbaar op Google, maps en AI-tools?",
     intro:
-      "We bekijken uw website, Google Maps-pagina, lokale profielen en publieke informatie om te zien of klanten u makkelijk kunnen vinden, begrijpen en contacteren.",
+      "We bekijken uw website, Google Maps-pagina, lokale profielen en publieke informatie om te zien of klanten of tools zoals ChatGPT u kunnen vinden, begrijpen en aanbevelen.",
     cta: "Test mijn zichtbaarheid",
     secondaryCta: "Praat met Creativa Poeta",
     promiseTitle: "Het doel is geen ingewikkeld rapport.",
@@ -222,9 +222,9 @@ const copies: Record<string, AuditCopy> = {
   },
   kiny: {
     eyebrow: "Serivisi yo gutangiriraho",
-    title: "Ese ibikorwa byawe biragaragara aho abakiriya bagushakira?",
+    title: "Ese ibikorwa byawe biragaragara kuri Google, maps na AI?",
     intro:
-      "Tureba website yawe, Google Maps, imbuga ukoresha n'amakuru agaragara hanze kugira ngo tumenye niba umukiriya ashobora kukubona, kugusobanukirwa no kuguhamagara byoroshye.",
+      "Tureba website yawe, Google Maps, imbuga ukoresha n'amakuru agaragara hanze kugira ngo tumenye niba umukiriya cyangwa igikoresho nka ChatGPT gishobora kukubona no kugusobanukirwa.",
     cta: "Reba uko ugaragara",
     secondaryCta: "Vugana na Creativa Poeta",
     promiseTitle: "Intego si raporo igoye.",

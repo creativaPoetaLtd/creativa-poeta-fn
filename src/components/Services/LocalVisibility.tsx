@@ -36,9 +36,9 @@ type LocalCopy = {
 const copies: Record<string, LocalCopy> = {
   fr: {
     eyebrow: "Visibilite locale",
-    title: "Vos clients doivent vous trouver sur les maps, pas seulement sur votre site.",
+    title: "Vos clients et les IA doivent vous trouver sur les maps, pas seulement sur votre site.",
     intro:
-      "Nous alignons vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour que vos clients voient les memes informations partout.",
+      "Nous alignons vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour que vos clients et les outils IA voient les memes informations partout.",
     cta: "Ameliorer ma visibilite locale",
     secondaryCta: "Faire l'audit d'abord",
     whyTitle: "La recherche locale se joue au moment ou le client a besoin de vous.",
@@ -95,9 +95,9 @@ const copies: Record<string, LocalCopy> = {
   },
   en: {
     eyebrow: "Local visibility",
-    title: "Clients should find you on maps, not only on your website.",
+    title: "Clients and AI tools should find you on maps, not only on your website.",
     intro:
-      "We align your information across Google Maps, Apple Maps, Bing, local profiles and social profiles so clients see the same facts everywhere.",
+      "We align your information across Google Maps, Apple Maps, Bing, local profiles and social profiles so clients and AI tools see the same facts everywhere.",
     cta: "Improve local visibility",
     secondaryCta: "Run the audit first",
     whyTitle: "Local search happens when the client needs you.",
@@ -154,9 +154,9 @@ const copies: Record<string, LocalCopy> = {
   },
   nl: {
     eyebrow: "Lokale zichtbaarheid",
-    title: "Klanten moeten u vinden op maps, niet alleen op uw website.",
+    title: "Klanten en AI-tools moeten u vinden op maps, niet alleen op uw website.",
     intro:
-      "We stemmen uw informatie af op Google Maps, Apple Maps, Bing, lokale profielen en sociale profielen zodat klanten overal dezelfde feiten zien.",
+      "We stemmen uw informatie af op Google Maps, Apple Maps, Bing, lokale profielen en sociale profielen zodat klanten en AI-tools overal dezelfde feiten zien.",
     cta: "Verbeter mijn lokale zichtbaarheid",
     secondaryCta: "Eerst de audit doen",
     whyTitle: "Lokale zoekopdrachten gebeuren wanneer de klant u nodig heeft.",
@@ -213,9 +213,9 @@ const copies: Record<string, LocalCopy> = {
   },
   kiny: {
     eyebrow: "Kugaragara hafi y'abakiriya",
-    title: "Abakiriya bagomba kukubona kuri maps, si kuri website gusa.",
+    title: "Abakiriya na AI bigomba kukubona kuri maps, si kuri website gusa.",
     intro:
-      "Duhuza amakuru yawe kuri Google Maps, Apple Maps, Bing, imbuga z'ibanze n'imbuga nkoranyambaga kugira ngo abakiriya babone amakuru amwe hose.",
+      "Duhuza amakuru yawe kuri Google Maps, Apple Maps, Bing, imbuga z'ibanze n'imbuga nkoranyambaga kugira ngo abakiriya n'ibikoresho bya AI bibone amakuru amwe hose.",
     cta: "Kongera kugaragara hafi",
     secondaryCta: "Banza ukore audit",
     whyTitle: "Umukiriya ashaka hafi ye igihe agukeneye.",

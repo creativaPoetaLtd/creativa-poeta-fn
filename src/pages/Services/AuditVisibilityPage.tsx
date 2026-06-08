@@ -1,4 +1,5 @@
 import NavBar from "../../components/NavBars/NavBar";
+import BrandHomeLink from "../../components/NavBars/BrandHomeLink";
 import AuditVisibility from "../../components/Services/AuditVisibility";
 import MarketSEOHead from "../../components/SEO/MarketSEOHead";
 import { seoConfig } from "../../components/SEO/seoConfig";
@@ -13,6 +14,7 @@ const AuditVisibilityPage = () => {
         path="/services/audit-visibilite"
       />
       <div className="w-full ml-6 right-2 left flex justify-end">
+        <BrandHomeLink />
         <NavBar />
       </div>
       <AuditVisibility />
