@@ -422,6 +422,60 @@
   border-left-color: var(--cp-blue);
 }
 
+.cp-refonte-problem-shell {
+  align-items: center;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1.18fr);
+}
+
+.cp-refonte-problem-art {
+  filter: drop-shadow(0 28px 44px rgba(7, 26, 51, 0.26));
+  margin: 0;
+  position: relative;
+  transform: rotate(1.4deg) translateY(1rem);
+  z-index: 2;
+}
+
+.cp-refonte-problem-art::before {
+  background: rgba(238, 186, 43, 0.85);
+  clip-path: polygon(0 0, 100% 12%, 82% 100%, 0 88%);
+  content: "";
+  height: 22%;
+  left: -1.1rem;
+  position: absolute;
+  top: -1rem;
+  transform: rotate(-7deg);
+  width: 28%;
+  z-index: -1;
+}
+
+.cp-refonte-problem-art::after {
+  border: 0.35rem solid rgba(7, 26, 51, 0.92);
+  border-radius: 999px;
+  bottom: -1.2rem;
+  content: "";
+  height: 6.5rem;
+  position: absolute;
+  right: -1.4rem;
+  width: 6.5rem;
+  z-index: -1;
+}
+
+.cp-refonte-problem-art img {
+  aspect-ratio: 1 / 1;
+  clip-path: polygon(6% 0, 100% 4%, 94% 94%, 14% 100%, 0 12%);
+  display: block;
+  height: auto;
+  max-height: min(68vh, 760px);
+  object-fit: cover;
+  width: 100%;
+}
+
+.cp-refonte-problem-visual .cp-refonte-heading {
+  max-width: 620px;
+}
+
 .cp-refonte-icon-grid article,
 .cp-refonte-base-grid article {
   background: rgba(255, 255, 255, 0.94);
@@ -835,6 +889,16 @@
     grid-template-columns: 1fr;
   }
 
+  .cp-refonte-problem-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .cp-refonte-problem-art {
+    margin-left: auto;
+    max-width: 760px;
+    transform: rotate(-1deg);
+  }
+
   .cp-refonte-paths article,
   .cp-refonte-paths article:nth-child(1),
   .cp-refonte-paths article:nth-child(2),
@@ -847,6 +911,39 @@
   .cp-refonte-showcase-grid,
   .cp-refonte-testimonial-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cp-refonte-problem-visual {
+    padding-bottom: 5rem;
+  }
+
+  .cp-refonte-problem-shell {
+    gap: 1.6rem;
+  }
+
+  .cp-refonte-problem-art {
+    margin-left: -0.55rem;
+    margin-right: -0.55rem;
+    transform: rotate(0.8deg);
+  }
+
+  .cp-refonte-problem-art::before {
+    height: 18%;
+    left: -0.4rem;
+    top: -0.4rem;
+    width: 34%;
+  }
+
+  .cp-refonte-problem-art::after {
+    bottom: -0.6rem;
+    height: 4.4rem;
+    right: -0.5rem;
+    width: 4.4rem;
+  }
+
+  .cp-refonte-problem-art img {
+    max-height: none;
+    width: 100%;
   }
 
   .cp-refonte-showcase-grid article,

@@ -21,7 +21,14 @@ import {
   homeContentFr,
   servicePageContentFr,
 } from "../../data/siteContent";
-import { localizePath } from "../../data/marketRuntime";
+import {
+  getCurrentLocale,
+  getCurrentMarket,
+  localizePath,
+} from "../../data/marketRuntime";
+import problemVisibilityEn from "../../assets/problem-visibility-en.png";
+import problemVisibilityFr from "../../assets/problem-visibility-fr.png";
+import problemVisibilityNl from "../../assets/problem-visibility-nl.png";
 import "./HomeRefonteSections.css";
 
 const proofPoints = [
@@ -148,6 +155,14 @@ const sectionStyleTwo = {
 
 export const HomeRefonteBeforeServices = () => {
   const siteService = servicePageContentFr["ai-ready-websites"];
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
+  const problemImage =
+    locale === "fr"
+      ? problemVisibilityFr
+      : locale === "nl"
+        ? problemVisibilityNl
+        : problemVisibilityEn;
 
   return (
     <>
@@ -195,21 +210,22 @@ export const HomeRefonteBeforeServices = () => {
 
       <section
         id="probleme-actuel"
-        className="cp-refonte-section cp-refonte-light"
+        className="cp-refonte-section cp-refonte-light cp-refonte-problem-visual"
         style={sectionStyleOne}
       >
         <div className="cp-shape-slab cp-shape-slab-right" aria-hidden="true" />
-        <div className="cp-refonte-shell">
+        <div className="cp-refonte-shell cp-refonte-problem-shell">
           <div className="cp-refonte-heading">
             <p>Le probleme actuel</p>
             <h2>{homeContentFr.problem.title}</h2>
             <span>{homeContentFr.problem.body}</span>
           </div>
-          <div className="cp-refonte-quotes cp-animate-list">
-            {homeContentFr.problem.examples.map((example) => (
-              <blockquote key={example}>{example}</blockquote>
-            ))}
-          </div>
+          <figure className="cp-refonte-problem-art">
+            <img
+              src={problemImage}
+              alt="Presence invisible ou visible au bon moment selon la coherence des informations"
+            />
+          </figure>
         </div>
         <SectionScrollButton
           targetId="aligner"
