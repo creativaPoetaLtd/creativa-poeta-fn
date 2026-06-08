@@ -211,7 +211,6 @@ export const HomeRefonteBeforeServices = () => {
       <section
         id="probleme-actuel"
         className="cp-refonte-section cp-refonte-light cp-refonte-problem-visual"
-        style={sectionStyleOne}
       >
         <div className="cp-shape-slab cp-shape-slab-right" aria-hidden="true" />
         <div className="cp-refonte-shell cp-refonte-problem-shell">
