@@ -7,9 +7,17 @@ import Cont from '../unUsedComponents/Cont';
 import getLangFromLocalStorage from '../../../utils/Lang';
 import FooterLocale from '../../i18n/FooterLocale';
 import { Link } from 'react-router-dom';
+import {
+  buildLocalLocalePath,
+  getCurrentLocale,
+  getCurrentMarket,
+} from '../../data/marketRuntime';
 
 const lang:any = getLangFromLocalStorage();
 function Footer() {
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
+  const homePath = buildLocalLocalePath(market, locale, "/");
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -50,7 +58,13 @@ function Footer() {
       <div className="laptop:flex-row  desktop:flex-row tablet:flex-col flex-col flex  items-center w-full">
         <div className="flex flex-col laptop:w-[63%] desktop:w-[63%] tablet:w-full w-full h-fit ">
           <h1 className='logo text-4xl text-[#EEBA2B] flex laptop:mx-0 tablet:mx-0 laptop:justify-start tablet:justify-start text-left laptop:items-start tablet:items-start float-left justify-start items-start'>
-          <img src={logopoeta1} alt="logo" className="laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] laptop:h-[100%] desktop:h-[100%] h-[100%] w-[50%]"/>
+          <Link
+            to={homePath}
+            aria-label="Retour a l'accueil Creativa Poeta"
+            className="block laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] w-[50%]"
+          >
+            <img src={logopoeta1} alt="Creativa Poeta" className="h-auto w-full"/>
+          </Link>
           </h1>
           <p className='flex justify-start text-start  items-start pr-7 float-left mt-3 text-slate-400'>
              {FooterLocale[lang].desc}          
