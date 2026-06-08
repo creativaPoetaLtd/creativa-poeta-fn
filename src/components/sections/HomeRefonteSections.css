@@ -682,6 +682,30 @@
   position: relative;
 }
 
+.cp-refonte-align-heading {
+  margin: 0;
+  max-width: none;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  position: relative;
+  z-index: 5;
+}
+
+.cp-refonte-align-heading::after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(131, 145, 160, 0.82),
+    rgba(238, 186, 43, 0.68),
+    rgba(255, 255, 255, 0.9)
+  );
+  bottom: 0;
+  content: "";
+  height: 2px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
 .cp-refonte-align-frame::before {
   background: linear-gradient(
     90deg,
@@ -1342,6 +1366,18 @@
   .cp-refonte-align-frame {
     border-radius: 1.1rem 0.3rem 1.1rem 0.3rem;
     margin-top: 1.2rem;
+  }
+
+  .cp-refonte-align-heading {
+    padding: 1rem;
+  }
+
+  .cp-refonte-align-heading h2 {
+    font-size: clamp(1.7rem, 8vw, 2.35rem);
+  }
+
+  .cp-refonte-align-heading span {
+    font-size: 0.92rem;
   }
 
   .cp-refonte-align-frame::after {

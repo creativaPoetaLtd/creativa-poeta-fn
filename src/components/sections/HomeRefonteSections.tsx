@@ -286,12 +286,12 @@ export const HomeRefonteBeforeServices = () => {
         <div className="cp-shape-stripes cp-shape-stripes-left" aria-hidden="true" />
         <div className="cp-shape-ring cp-shape-ring-right" aria-hidden="true" />
         <div className="cp-refonte-shell">
-          <div className="cp-refonte-heading cp-refonte-heading-dark">
-            <p>Ce qu'il faut aligner</p>
-            <h2>{homeContentFr.approach.title}</h2>
-            <span>{homeContentFr.approach.body}</span>
-          </div>
           <div className="cp-refonte-align-frame">
+            <div className="cp-refonte-heading cp-refonte-heading-dark cp-refonte-align-heading">
+              <p>Ce qu'il faut aligner</p>
+              <h2>{homeContentFr.approach.title}</h2>
+              <span>{homeContentFr.approach.body}</span>
+            </div>
             <figure className="cp-refonte-align-art">
               <img
                 src={alignImage}
