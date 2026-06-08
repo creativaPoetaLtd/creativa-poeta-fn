@@ -1,23 +1,23 @@
 import NavBar from "../../components/NavBars/NavBar";
 import BrandHomeLink from "../../components/NavBars/BrandHomeLink";
-import LocalVisibility from "../../components/Services/LocalVisibility";
+import UsefulContent from "../../components/Services/UsefulContent";
 import MarketSEOHead from "../../components/SEO/MarketSEOHead";
 import { seoConfig } from "../../components/SEO/seoConfig";
 import Footer from "../../components/sections/Footer";
 import MainFooter from "../../components/sections/MainFooter";
 
-const LocalVisibilityPage = () => {
+const UsefulContentPage = () => {
   return (
     <div className="App w-full flex flex-col snap-x scroll-smooth">
       <MarketSEOHead
-        {...seoConfig.services.localVisibility}
-        path="/services/visibilite-locale"
+        {...seoConfig.services.usefulContent}
+        path="/services/contenus-utiles"
       />
       <div className="relative w-full ml-6 right-2 left flex justify-end">
         <BrandHomeLink />
         <NavBar />
       </div>
-      <LocalVisibility />
+      <UsefulContent />
       <div className="w-full flex flex-col scroll-smooth snap-x">
         <Footer />
         <MainFooter />
@@ -26,4 +26,4 @@ const LocalVisibilityPage = () => {
   );
 };
 
-export default LocalVisibilityPage;
+export default UsefulContentPage;

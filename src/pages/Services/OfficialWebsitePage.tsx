@@ -13,7 +13,7 @@ const OfficialWebsitePage = () => {
         {...seoConfig.services.officialWebsite}
         path="/services/site-officiel"
       />
-      <div className="w-full ml-6 right-2 left flex justify-end">
+      <div className="relative w-full ml-6 right-2 left flex justify-end">
         <BrandHomeLink />
         <NavBar />
       </div>

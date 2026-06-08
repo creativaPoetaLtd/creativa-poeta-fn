@@ -114,6 +114,27 @@ export const seoConfig = {
       },
     },
 
+    usefulContent: {
+      title: "Pages utiles pour Google, clients et IA | Creativa Poeta",
+      description:
+        "Creez des pages claires qui repondent aux vraies questions de vos clients et aident Google, les maps et les outils IA a comprendre votre entreprise.",
+      keywords:
+        "contenus utiles, questions clients, pages services, FAQ entreprise, visibilite IA, Google, ChatGPT, Creativa Poeta",
+      url: "https://creativapoeta.com/services/contenus-utiles",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Pages utiles pour questions precises",
+        description:
+          "Creation de pages claires pour les services, questions frequentes, zones, langues et besoins precis des clients.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "Useful content",
+      },
+    },
+
     webDevelopment: {
       title: "Clear official websites | Creativa Poeta",
       description:

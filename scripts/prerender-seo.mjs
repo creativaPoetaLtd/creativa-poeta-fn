@@ -555,6 +555,71 @@ const pageTemplates = {
             ],
           ],
   },
+  usefulContent: {
+    path: "/services/contenus-utiles",
+    title: (lang) =>
+      lang === "fr"
+        ? "Pages utiles pour Google, clients et IA | Creativa Poeta"
+        : lang === "nl"
+          ? "Nuttige pagina's voor klanten, Google en AI | Creativa Poeta"
+          : lang === "rw"
+            ? "Paji zifasha abakiriya, Google na AI | Creativa Poeta"
+            : "Useful pages for clients, Google and AI | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Creez des pages claires qui repondent aux vraies questions de vos clients et aident Google, les maps et les outils IA a comprendre votre entreprise."
+        : lang === "nl"
+          ? "Maak duidelijke pagina's die echte klantvragen beantwoorden en Google, maps en AI-tools helpen uw bedrijf te begrijpen."
+          : lang === "rw"
+            ? "Dukora paji zisubiza ibibazo by'abakiriya kandi zigafasha Google, maps na AI kumva business yawe."
+            : "Create clear pages that answer real client questions and help Google, maps and AI tools understand your business.",
+    keywords:
+      "useful pages, client questions, service pages, business FAQ, AI visibility, Google, ChatGPT, Creativa Poeta",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Repondez aux vraies questions de vos clients.",
+              "Nous creons des pages simples pour vos services, vos questions frequentes, vos zones, vos langues et vos cas concrets.",
+            ],
+            [
+              "Le but",
+              "Votre site doit devenir une source claire que vos clients, Google, les maps et les outils IA peuvent comprendre sans effort.",
+            ],
+          ]
+        : lang === "nl"
+          ? [
+              [
+                "Beantwoord echte klantvragen.",
+                "We maken eenvoudige pagina's voor uw diensten, veelgestelde vragen, regio's, talen en concrete situaties.",
+              ],
+              [
+                "Het doel",
+                "Uw website moet een duidelijke bron worden die klanten, Google, maps en AI-tools makkelijk begrijpen.",
+              ],
+            ]
+          : lang === "rw"
+            ? [
+                [
+                  "Subiza ibibazo nyabyo by'abakiriya.",
+                  "Dukora paji zoroshye kuri serivisi, ibibazo bikunze kubazwa, aho ukorera, indimi n'ingero zifatika.",
+                ],
+                [
+                  "Intego",
+                  "Website yawe igomba kuba isoko isobanutse abakiriya, Google, maps na AI bumva byoroshye.",
+                ],
+              ]
+            : [
+                [
+                  "Answer real client questions.",
+                  "We create simple pages for your services, common questions, areas, languages and practical cases.",
+                ],
+                [
+                  "The goal",
+                  "Your website should become a clear source that clients, Google, maps and AI tools can understand easily.",
+                ],
+              ],
+  },
   webApp: {
     path: "/services/web-app",
     title: (lang) =>
@@ -1007,6 +1072,7 @@ const sitemapPagePaths = [
   "/services/audit-visibilite",
   "/services/site-officiel",
   "/services/visibilite-locale",
+  "/services/contenus-utiles",
 ];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {

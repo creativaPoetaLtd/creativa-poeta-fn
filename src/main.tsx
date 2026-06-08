@@ -21,6 +21,7 @@ import GraphicDesignPage from "./pages/Services/GraphicDesignPage.tsx";
 import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
 import OfficialWebsitePage from "./pages/Services/OfficialWebsitePage.tsx";
 import LocalVisibilityPage from "./pages/Services/LocalVisibilityPage.tsx";
+import UsefulContentPage from "./pages/Services/UsefulContentPage.tsx";
 import Dashboard from "./Dashboard/Dashboard.tsx";
 import BlogsPage from "./pages/BlogsPage.tsx";
 import SingleBlogPage from "./pages/SingleBlogPage.tsx";
@@ -111,6 +112,11 @@ const appElement = (
             <Route path="/fr/services/visibilite-locale" element={<LocalVisibilityPage />} />
             <Route path="/nl/services/visibilite-locale" element={<LocalVisibilityPage />} />
             <Route path="/rw/services/visibilite-locale" element={<LocalVisibilityPage />} />
+            <Route path="/services/contenus-utiles" element={<UsefulContentPage />} />
+            <Route path="/en/services/contenus-utiles" element={<UsefulContentPage />} />
+            <Route path="/fr/services/contenus-utiles" element={<UsefulContentPage />} />
+            <Route path="/nl/services/contenus-utiles" element={<UsefulContentPage />} />
+            <Route path="/rw/services/contenus-utiles" element={<UsefulContentPage />} />
             <Route path="/services/web-app" element={<WebPage />} />
             <Route path="/en/services/web-app" element={<WebPage />} />
             <Route path="/fr/services/web-app" element={<WebPage />} />

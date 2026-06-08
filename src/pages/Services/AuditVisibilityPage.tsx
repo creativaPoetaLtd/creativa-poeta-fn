@@ -13,7 +13,7 @@ const AuditVisibilityPage = () => {
         {...seoConfig.services.auditVisibility}
         path="/services/audit-visibilite"
       />
-      <div className="w-full ml-6 right-2 left flex justify-end">
+      <div className="relative w-full ml-6 right-2 left flex justify-end">
         <BrandHomeLink />
         <NavBar />
       </div>
