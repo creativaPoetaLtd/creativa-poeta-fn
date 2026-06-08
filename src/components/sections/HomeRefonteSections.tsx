@@ -226,6 +226,40 @@ export const HomeRefonteBeforeServices = () => {
             />
           </figure>
         </div>
+        <Link
+          to={localizePath("/contact")}
+          className="cp-refonte-local-cta"
+          aria-label="Contacter Creativa Poeta"
+        >
+          <div className="cp-refonte-local-bubbles" aria-hidden="true">
+            <span>
+              <Search size={30} />
+              Quelle agence peut refaire mon site pour etre visible dans Google
+              et les moteurs IA ?
+            </span>
+            <span>
+              <MapPin size={32} />
+              Qui peut m'aider a etre visible dans Google Maps, Apple Maps et
+              ChatGPT ?
+            </span>
+          </div>
+          <div className="cp-refonte-local-ribbon">
+            <span className="cp-refonte-local-target">
+              <Target size={52} />
+            </span>
+            <strong>
+              avec Creativa Poeta
+              <em>vous avez</em>
+            </strong>
+            <small>
+              la bonne visibilite, au bon moment, sur tous les canaux
+            </small>
+            <span className="cp-refonte-local-action">
+              Contacter Creativa Poeta
+              <ArrowRight size={18} />
+            </span>
+          </div>
+        </Link>
         <SectionScrollButton
           targetId="aligner"
           side="left"
