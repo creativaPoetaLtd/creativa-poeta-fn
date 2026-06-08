@@ -10,8 +10,8 @@ const ServiceLocale: any = {
     service22: "official website",
     description2:
       "We create or improve your website so it becomes the official place where clients understand your services, contact details, languages and answers.",
-    service31: "Message, image",
-    service32: "and content",
+    service31: "Local",
+    service32: "visibility",
     description3:
       "We clarify your words, visuals and content so people understand who you are, what you offer and why they should contact you.",
     service41: "Useful pages",
@@ -30,8 +30,8 @@ const ServiceLocale: any = {
     service22: "comme source officielle",
     description2:
       "Nous creons ou ameliorons votre site pour qu'il explique vos services, vos contacts, vos langues et vos reponses importantes.",
-    service31: "Message, image",
-    service32: "et contenu",
+    service31: "Visibilite",
+    service32: "locale",
     description3:
       "Nous clarifions vos mots, vos visuels et vos contenus pour que les gens comprennent qui vous etes, ce que vous proposez et pourquoi vous contacter.",
     service41: "Des pages utiles",
@@ -50,8 +50,8 @@ const ServiceLocale: any = {
     service22: "isobanutse",
     description2:
       "Dukora cyangwa tukavugurura website yawe kugira ngo isobanure serivisi zawe, aho bagushakira, indimi ukoresha n'ibisubizo by'ingenzi.",
-    service31: "Ubutumwa, ishusho",
-    service32: "n'ibirimo",
+    service31: "Kugaragara",
+    service32: "hafi y'abakiriya",
     description3:
       "Dufasha amagambo, amashusho n'ibyo utangaza gusobanuka kugira ngo abantu bamenye uwo uri we, ibyo ukora n'impamvu bakwandikira.",
     service41: "Paji zifite akamaro",
@@ -70,8 +70,8 @@ const ServiceLocale: any = {
     service22: "officiele website",
     description2:
       "We maken of verbeteren je website zodat klanten je diensten, contactgegevens, talen en belangrijke antwoorden begrijpen.",
-    service31: "Boodschap, beeld",
-    service32: "en content",
+    service31: "Lokale",
+    service32: "zichtbaarheid",
     description3:
       "We verduidelijken je woorden, beelden en content zodat mensen begrijpen wie je bent, wat je aanbiedt en waarom ze contact opnemen.",
     service41: "Nuttige pagina's",

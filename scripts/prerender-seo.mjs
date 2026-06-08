@@ -512,6 +512,49 @@ const pageTemplates = {
             ],
           ],
   },
+  localVisibility: {
+    path: "/services/visibilite-locale",
+    title: (lang) =>
+      lang === "fr"
+        ? "Visibilite locale, maps et recherche vocale | Creativa Poeta"
+        : lang === "nl"
+          ? "Lokale zichtbaarheid, maps en spraakzoekopdrachten | Creativa Poeta"
+          : lang === "rw"
+            ? "Kugaragara kuri maps no mu gushakisha hafi | Creativa Poeta"
+            : "Local visibility, maps and voice search | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients a vous trouver et vous contacter."
+        : lang === "nl"
+          ? "Stem uw informatie af op Google Maps, Apple Maps, Bing, lokale profielen en sociale profielen zodat klanten u kunnen vinden en contacteren."
+          : lang === "rw"
+            ? "Duhuza amakuru yawe kuri Google Maps, Apple Maps, Bing n'imbuga ukoresha kugira ngo abakiriya bakubone kandi bakwandikire."
+            : "Align your information across Google Maps, Apple Maps, Bing, local profiles and social profiles so clients can find and contact you.",
+    keywords:
+      "local visibility, Google Maps, Apple Maps, Bing Places, voice search, local profiles, client reviews, Creativa Poeta",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Vos informations doivent etre coherentes partout.",
+              "Nom, contact, horaires, services, zones, liens, photos et avis doivent raconter la meme chose sur votre site, vos maps et vos profils.",
+            ],
+            [
+              "Les clients cherchent localement",
+              "Ils peuvent chercher un service proche, ouvert maintenant, dans une langue precise ou recommande par des avis. Les maps et la recherche vocale doivent comprendre vos informations.",
+            ],
+          ]
+        : [
+            [
+              "Your information must be consistent everywhere.",
+              "Name, contact, hours, services, areas, links, photos and reviews should tell the same story on your website, maps and profiles.",
+            ],
+            [
+              "Clients search locally",
+              "They can search for a nearby service, open now, in a specific language or trusted by reviews. Maps and voice search must understand your information.",
+            ],
+          ],
+  },
   webApp: {
     path: "/services/web-app",
     title: (lang) =>
@@ -963,6 +1006,7 @@ const sitemapPagePaths = [
   "/terms-and-conditions",
   "/services/audit-visibilite",
   "/services/site-officiel",
+  "/services/visibilite-locale",
 ];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {

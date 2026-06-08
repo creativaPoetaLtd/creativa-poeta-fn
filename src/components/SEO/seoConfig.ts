@@ -93,6 +93,27 @@ export const seoConfig = {
       },
     },
 
+    localVisibility: {
+      title: "Visibilite locale, maps et recherche vocale | Creativa Poeta",
+      description:
+        "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos reseaux pour aider les clients a vous trouver et vous contacter.",
+      keywords:
+        "visibilite locale, Google Maps, Apple Maps, Bing Places, recherche vocale, profils locaux, avis clients, Creativa Poeta",
+      url: "https://creativapoeta.com/services/visibilite-locale",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Visibilite locale, maps et recherche vocale",
+        description:
+          "Alignement des informations publiques d'une entreprise sur les maps, profils locaux, reseaux et recherches vocales.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "Local visibility",
+      },
+    },
+
     webDevelopment: {
       title: "Clear official websites | Creativa Poeta",
       description:

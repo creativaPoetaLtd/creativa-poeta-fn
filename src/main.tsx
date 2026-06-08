@@ -20,6 +20,7 @@ import DigitalMarketingPage from "./pages/Services/DigitalMarketing.tsx";
 import GraphicDesignPage from "./pages/Services/GraphicDesignPage.tsx";
 import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
 import OfficialWebsitePage from "./pages/Services/OfficialWebsitePage.tsx";
+import LocalVisibilityPage from "./pages/Services/LocalVisibilityPage.tsx";
 import Dashboard from "./Dashboard/Dashboard.tsx";
 import BlogsPage from "./pages/BlogsPage.tsx";
 import SingleBlogPage from "./pages/SingleBlogPage.tsx";
@@ -105,6 +106,11 @@ const appElement = (
             <Route path="/fr/services/site-officiel" element={<OfficialWebsitePage />} />
             <Route path="/nl/services/site-officiel" element={<OfficialWebsitePage />} />
             <Route path="/rw/services/site-officiel" element={<OfficialWebsitePage />} />
+            <Route path="/services/visibilite-locale" element={<LocalVisibilityPage />} />
+            <Route path="/en/services/visibilite-locale" element={<LocalVisibilityPage />} />
+            <Route path="/fr/services/visibilite-locale" element={<LocalVisibilityPage />} />
+            <Route path="/nl/services/visibilite-locale" element={<LocalVisibilityPage />} />
+            <Route path="/rw/services/visibilite-locale" element={<LocalVisibilityPage />} />
             <Route path="/services/web-app" element={<WebPage />} />
             <Route path="/en/services/web-app" element={<WebPage />} />
             <Route path="/fr/services/web-app" element={<WebPage />} />
