@@ -18,6 +18,10 @@ const ServiceLocale: any = {
     service42: "for precise searches",
     description4:
       "We build useful pages for specific client questions, services or locations, without creating empty or repetitive content.",
+    service51: "Custom",
+    service52: "AI assistants",
+    description5:
+      "We help you create or configure private AI assistants, custom GPTs and smart tools trained around your work, content and goals.",
   },
   fr: {
     title1: "NOS",
@@ -38,6 +42,10 @@ const ServiceLocale: any = {
     service42: "pour des recherches precises",
     description4:
       "Nous creons des pages utiles pour des questions, services ou zones precises, sans remplir le site avec du contenu vide ou repetitif.",
+    service51: "Assistants IA",
+    service52: "sur mesure",
+    description5:
+      "Nous vous aidons a creer ou configurer vos propres assistants IA, GPT personnalises et outils intelligents adaptes a votre metier.",
   },
   kiny: {
     title1: "IBYO",
@@ -58,6 +66,10 @@ const ServiceLocale: any = {
     service42: "ku bibazo byihariye",
     description4:
       "Dukora paji zisubiza ibibazo by'abakiliya, serivisi cyangwa aho ukorera, tutuzuzamo amagambo adafite akamaro.",
+    service51: "Assistant",
+    service52: "za IA",
+    description5:
+      "Tugufasha gukora cyangwa gutunganya assistant za IA na GPT zihariye zifasha business yawe n'abakiriya bawe.",
   },
   nl: {
     title1: "ONZE",
@@ -78,6 +90,10 @@ const ServiceLocale: any = {
     service42: "voor gerichte zoekvragen",
     description4:
       "We maken nuttige pagina's voor specifieke vragen, diensten of zones, zonder lege of herhalende content te maken.",
+    service51: "AI-assistenten",
+    service52: "op maat",
+    description5:
+      "We helpen u eigen AI-assistenten, aangepaste GPTs en slimme tools maken of configureren rond uw werk en doelen.",
   },
 };
 

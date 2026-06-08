@@ -1,8 +1,8 @@
 const FooterLocale: any = {
   fr: {
     desc:
-      "Creativa Poeta aide les entreprises a etre plus faciles a trouver, comprendre et contacter. Nous alignons votre site, vos maps, vos reseaux et vos contenus pour que vos informations restent claires partout.",
-    key: "Ce que nous pouvons ameliorer",
+      "La creativite est notre passion et notre metier. Notre mission est de donner vie a vos idees, de renforcer votre presence en ligne et de susciter l'engagement de votre public.",
+    key: "Nos competences",
     competence1: "Site officiel ou page de presentation",
     competence2: "Refonte de site existant",
     competence3: "Pages de services claires",
@@ -15,7 +15,7 @@ const FooterLocale: any = {
     competence10: "Contenus pour etre mieux compris",
     competence11: "Presence locale",
     competence12: "Recherche vocale",
-    competence13: "Outils comme ChatGPT",
+    competence13: "Assistants IA et GPT personnalises",
     competence14: "Formulaires de contact",
     competence15: "Demandes de devis",
     competence16: "Securite des acces",
@@ -24,8 +24,8 @@ const FooterLocale: any = {
     competence19: "Contenus pour reseaux",
     competence20: "Videos et contenus courts",
     competence21:
-      "Que vous ayez deja un site ou non, nous pouvons commencer par une base simple puis la faire grandir selon vos besoins.",
-    competence22: "Votre presence doit etre claire partout.",
+      "Que vous soyez entrepreneur, createur de contenu, entreprise ou particulier, nous sommes la pour donner vie a vos idees et vous aider a reussir dans votre domaine.",
+    competence22: "Votre creativite, notre passion.",
     competence23: "Site, maps, reseaux et contenus alignes",
     contact1: "Nous contacter",
     nom: "Noms",
@@ -35,8 +35,8 @@ const FooterLocale: any = {
   },
   en: {
     desc:
-      "Creativa Poeta helps businesses become easier to find, understand and contact. We align your website, maps, social profiles and content so your information stays clear everywhere.",
-    key: "What we can improve",
+      "At Creativa Poeta, creativity meets innovation. We bring ideas to life through tailored digital and artistic solutions that captivate and inspire.",
+    key: "Our skills",
     competence1: "Official website or presentation page",
     competence2: "Existing website redesign",
     competence3: "Clear service pages",
@@ -49,7 +49,7 @@ const FooterLocale: any = {
     competence10: "Content to be better understood",
     competence11: "Local presence",
     competence12: "Voice search",
-    competence13: "Tools like ChatGPT",
+    competence13: "Custom AI assistants and GPTs",
     competence14: "Contact forms",
     competence15: "Quote requests",
     competence16: "Access security",
@@ -58,8 +58,8 @@ const FooterLocale: any = {
     competence19: "Social content",
     competence20: "Short videos and content",
     competence21:
-      "Whether you already have a website or not, we can start with a simple base and grow it according to your needs.",
-    competence22: "Your presence must be clear everywhere.",
+      "Whether you are an entrepreneur, content creator, business or individual, we help bring your ideas to life and support your success.",
+    competence22: "Your creativity, our passion.",
     competence23: "Website, maps, social profiles and content aligned",
     contact1: "Contact us",
     nom: "Names",
@@ -69,8 +69,8 @@ const FooterLocale: any = {
   },
   kiny: {
     desc:
-      "Creativa Poeta ifasha ibikorwa byawe kuboneka, kumvikana no kuvugishwa. Duhuza website, amakarita, imbuga nkoranyambaga n'ibirimo kugira ngo amakuru yawe asobanuke hose.",
-    key: "Ibyo dushobora kunoza",
+      "Kuri Creativa Poeta, guhanga ni passion yacu. Duha ubuzima ibitekerezo byawe, tugakomeza uko ugaragara online kandi tugafasha abantu kukumva.",
+    key: "Ubumenyi bwacu",
     competence1: "Website cyangwa page yemewe",
     competence2: "Kuvugurura website isanzwe",
     competence3: "Paji za serivisi zisobanutse",
@@ -83,7 +83,7 @@ const FooterLocale: any = {
     competence10: "Ibirimo bifasha kumvikana",
     competence11: "Kugaragara mu gace ukoreramo",
     competence12: "Gushakisha ukoresheje ijwi",
-    competence13: "Ibikoresho nka ChatGPT",
+    competence13: "Assistant za IA na GPT zihariye",
     competence14: "Amaforms yo kuvugana",
     competence15: "Gusaba ibiciro",
     competence16: "Umutekano wa konti",
@@ -92,8 +92,8 @@ const FooterLocale: any = {
     competence19: "Ibirimo ku mbuga nkoranyambaga",
     competence20: "Amavideo magufi n'ibirimo",
     competence21:
-      "Waba ufite website cyangwa utayifite, dushobora gutangira ku ishingiro ryoroshye tukagenda twagura uko bikenewe.",
-    competence22: "Uko ugaragara bigomba gusobanuka hose.",
+      "Waba entrepreneur, creator, business cyangwa umuntu ku giti cye, turi hano ngo duhe ubuzima ibitekerezo byawe.",
+    competence22: "Igitekerezo cyawe, passion yacu.",
     competence23: "Website, amakarita, imbuga n'ibirimo bihujwe",
     contact1: "Twandikire",
     nom: "Amazina",
@@ -103,8 +103,8 @@ const FooterLocale: any = {
   },
   nl: {
     desc:
-      "Creativa Poeta helpt bedrijven gemakkelijker gevonden, begrepen en gecontacteerd te worden. We stemmen je website, kaarten, sociale profielen en content op elkaar af.",
-    key: "Wat we kunnen verbeteren",
+      "Bij Creativa Poeta ontmoet creativiteit innovatie. We brengen ideeen tot leven met digitale en artistieke oplossingen die raken en inspireren.",
+    key: "Onze vaardigheden",
     competence1: "Officiele website of presentatiepagina",
     competence2: "Vernieuwing van bestaande website",
     competence3: "Duidelijke dienstenpagina's",
@@ -117,7 +117,7 @@ const FooterLocale: any = {
     competence10: "Content om beter begrepen te worden",
     competence11: "Lokale aanwezigheid",
     competence12: "Gesproken zoekopdrachten",
-    competence13: "Tools zoals ChatGPT",
+    competence13: "AI-assistenten en GPTs op maat",
     competence14: "Contactformulieren",
     competence15: "Offerteaanvragen",
     competence16: "Beveiliging van toegangen",
@@ -126,8 +126,8 @@ const FooterLocale: any = {
     competence19: "Content voor sociale media",
     competence20: "Korte video's en content",
     competence21:
-      "Of je al een website hebt of niet, we kunnen starten met een eenvoudige basis en die laten groeien volgens je behoeften.",
-    competence22: "Je aanwezigheid moet overal duidelijk zijn.",
+      "Of u ondernemer, creator, bedrijf of particulier bent, we helpen uw ideeen tot leven brengen en uw succes ondersteunen.",
+    competence22: "Uw creativiteit, onze passie.",
     competence23: "Website, kaarten, sociale profielen en content afgestemd",
     contact1: "Contacteer ons",
     nom: "Namen",

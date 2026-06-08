@@ -79,6 +79,65 @@ const reassurance = [
   "On construit une base que vous controlez vraiment.",
 ];
 
+const creativePillars = [
+  {
+    icon: MessageCircle,
+    title: "Une voix",
+    body: "Des mots qui portent votre idee avec clarte, rythme et intention.",
+  },
+  {
+    icon: Target,
+    title: "Une image",
+    body: "Des visuels, logos et supports qui donnent une forme visible a votre univers.",
+  },
+  {
+    icon: Globe2,
+    title: "Une presence",
+    body: "Un site, des profils et des contenus qui relient votre creation au public.",
+  },
+  {
+    icon: Bot,
+    title: "Une intelligence",
+    body: "Des assistants IA et outils sur mesure qui prolongent votre savoir-faire.",
+  },
+];
+
+const latestProjects = [
+  {
+    title: "Refonte d'une presence officielle",
+    tag: "Site, contenu, maps",
+    body: "Transformer une presence dispersee en source claire pour les clients, les recherches et les outils IA.",
+  },
+  {
+    title: "Identite et supports de communication",
+    tag: "Logo, visuels, message",
+    body: "Donner une signature visuelle et des mots plus nets a une activite qui veut etre comprise vite.",
+  },
+  {
+    title: "Assistant IA prive pour une equipe",
+    tag: "IA, knowledge base, support",
+    body: "Preparer un assistant capable de repondre avec les informations internes, les services et le ton de l'entreprise.",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Creativa Poeta a transforme nos idees en une presence plus claire, plus belle et plus facile a expliquer.",
+    author: "Entrepreneur local",
+  },
+  {
+    quote:
+      "On avait des contenus, des profils et des envies partout. L'equipe nous a aide a remettre de l'ordre sans perdre notre style.",
+    author: "Createur de contenu",
+  },
+  {
+    quote:
+      "Le plus utile a ete la maniere de traduire notre activite en mots simples, visuels propres et prochaines actions.",
+    author: "Petite entreprise",
+  },
+];
+
 const sectionStyleOne = {
   background: "rgba(247, 244, 237, 0.32)",
 };
@@ -101,6 +160,47 @@ export const HomeRefonteBeforeServices = () => {
         <div className="cp-shape-slab cp-shape-slab-right" aria-hidden="true" />
         <div className="cp-refonte-shell">
           <div className="cp-refonte-heading">
+            <p>Qui sommes-nous</p>
+            <h2>Un souffle creatif, une main technique, une touche poetique.</h2>
+            <span>
+              Creativa Poeta donne vie aux idees. Nous melons design, mots,
+              sites web, contenus, visibilite et intelligence artificielle pour
+              creer des presences qui se voient, se comprennent et se retiennent.
+              Votre creativite est notre passion.
+            </span>
+          </div>
+          <div className="cp-refonte-icon-grid cp-animate-list">
+            {creativePillars.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title}>
+                  <span className="cp-refonte-icon-badge">
+                    <Icon size={26} aria-hidden="true" />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+        <SectionScrollButton
+          targetId="probleme-actuel"
+          side="right"
+          tone="dark"
+          topColor="#071a33"
+          bottomColor="#EEBA2B"
+        />
+      </section>
+
+      <section
+        id="probleme-actuel"
+        className="cp-refonte-section cp-refonte-light"
+        style={sectionStyleOne}
+      >
+        <div className="cp-shape-slab cp-shape-slab-right" aria-hidden="true" />
+        <div className="cp-refonte-shell">
+          <div className="cp-refonte-heading">
             <p>Le probleme actuel</p>
             <h2>{homeContentFr.problem.title}</h2>
             <span>{homeContentFr.problem.body}</span>
@@ -113,7 +213,7 @@ export const HomeRefonteBeforeServices = () => {
         </div>
         <SectionScrollButton
           targetId="aligner"
-          side="right"
+          side="left"
           tone="dark"
           topColor="#071a33"
           bottomColor="#EEBA2B"
@@ -314,6 +414,73 @@ export const HomeRefonteAfterServices = () => {
           </div>
         </div>
         <SectionScrollButton
+          targetId="derniers-projets"
+          side="left"
+          tone="dark"
+          topColor="#071a33"
+          bottomColor="#EEBA2B"
+        />
+      </section>
+
+      <section
+        id="derniers-projets"
+        className="cp-refonte-section cp-refonte-dark"
+        style={sectionStyleTwo}
+      >
+        <div className="cp-shape-stripes cp-shape-stripes-left" aria-hidden="true" />
+        <div className="cp-refonte-shell">
+          <div className="cp-refonte-heading cp-refonte-heading-dark">
+            <p>Nos derniers projets</p>
+            <h2>Des idees mises en forme, des presences remises en lumiere.</h2>
+            <span>
+              Chaque projet est une rencontre entre une intention, une image,
+              des mots et un chemin pour atteindre le bon public.
+            </span>
+          </div>
+          <div className="cp-refonte-showcase-grid">
+            {latestProjects.map((project) => (
+              <article key={project.title}>
+                <span>{project.tag}</span>
+                <h3>{project.title}</h3>
+                <p>{project.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <SectionScrollButton
+          targetId="paroles-clients"
+          side="right"
+          tone="light"
+          topColor="#EEBA2B"
+          bottomColor="#ffffff"
+        />
+      </section>
+
+      <section
+        id="paroles-clients"
+        className="cp-refonte-section cp-refonte-light"
+        style={sectionStyleOne}
+      >
+        <div className="cp-shape-ring cp-shape-ring-right" aria-hidden="true" />
+        <div className="cp-refonte-shell">
+          <div className="cp-refonte-heading">
+            <p>Paroles de confiance</p>
+            <h2>Quand une idee devient plus claire, elle respire mieux.</h2>
+            <span>
+              Nous accompagnons entrepreneurs, createurs, entreprises et
+              particuliers pour transformer une intuition en presence solide.
+            </span>
+          </div>
+          <div className="cp-refonte-testimonial-grid">
+            {testimonials.map((item) => (
+              <blockquote key={item.quote}>
+                <p>{item.quote}</p>
+                <cite>{item.author}</cite>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+        <SectionScrollButton
           targetId="cta-final"
           side="left"
           tone="dark"
@@ -326,8 +493,12 @@ export const HomeRefonteAfterServices = () => {
         <div className="cp-shape-stripes cp-shape-stripes-left" aria-hidden="true" />
         <div className="cp-refonte-shell">
           <Globe2 size={36} aria-hidden="true" />
-          <h2>{homeContentFr.finalCta.title}</h2>
-          <p>{homeContentFr.finalCta.body}</p>
+          <h2>Votre creativite, notre passion.</h2>
+          <p>
+            Que vous soyez entrepreneur, createur de contenu, entreprise ou
+            particulier, nous sommes la pour donner vie a vos idees, renforcer
+            votre presence en ligne et susciter l'engagement de votre public.
+          </p>
           <div className="cp-refonte-actions">
             <a className="cp-refonte-button cp-refonte-button-yellow" href="#audit-form">
               Tester ma visibilite

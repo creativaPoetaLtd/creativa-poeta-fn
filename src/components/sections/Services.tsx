@@ -43,6 +43,8 @@ const Services = () => {
                 ? servicePath("/services/visibilite-locale")
                 : blog.id === 4
                 ? servicePath("/services/contenus-utiles")
+                : blog.id === 5
+                ? servicePath("/start-project")
                 : "#"
             }
             key={blog.id}

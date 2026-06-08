@@ -35,6 +35,13 @@ const blogData = [
         image : market,    
         description: ServiceLocale[lang].description4
     },
+    {
+        id: 5,
+        h1: ServiceLocale[lang].service51,
+        h2: ServiceLocale[lang].service52,
+        image : web,
+        description: ServiceLocale[lang].description5
+    },
   
 ]
 

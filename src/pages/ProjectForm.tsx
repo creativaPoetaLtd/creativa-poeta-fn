@@ -5,6 +5,7 @@ import {
   FaArrowRight,
   FaCheckCircle,
   FaChevronLeft,
+  FaTimes,
   FaFeatherAlt,
   FaGlobe,
   FaLightbulb,
@@ -172,7 +173,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
         icon: FaGlobe,
         title: "Construire votre presence officielle",
         description:
-          "Créer ou refondre la base que vos clients, Google, maps et outils IA peuvent comprendre.",
+          "Creer ou refondre la base que vos clients, Google, maps et outils IA peuvent comprendre.",
         services: [
           "Site vitrine ou page officielle",
           "Refonte d'un site existant",
@@ -1050,7 +1051,15 @@ const ProjectForm = () => {
         backgroundImage: `linear-gradient(rgba(7, 26, 51, 0.88), rgba(0, 0, 0, 0.82)), url(${image8})`,
       }}
     >
-      <section className="mx-auto max-w-6xl rounded-[2rem] border border-white/15 bg-[#071a33]/85 p-5 shadow-2xl backdrop-blur-md phone:p-8 laptop:p-10">
+      <section className="relative mx-auto max-w-6xl rounded-[2rem] border border-white/15 bg-[#071a33]/85 p-5 shadow-2xl backdrop-blur-md phone:p-8 laptop:p-10">
+        <button
+          type="button"
+          onClick={() => navigate(homePath)}
+          aria-label={copy.close}
+          className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition hover:border-[#EEBA2B] hover:text-[#fff200]"
+        >
+          <FaTimes />
+        </button>
         <button
           type="button"
           onClick={() => navigate(homePath)}

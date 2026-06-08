@@ -41,6 +41,13 @@ const backgrounds = [
       description: HomeLocale[lang].description3,
     },
   },
+  {
+    image: "",
+    content: {
+      title: HomeLocale[lang].title4,
+      description: HomeLocale[lang].description4,
+    },
+  },
 ];
 
 const Home = () => {
