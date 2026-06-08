@@ -469,6 +469,49 @@ const pageTemplates = {
             ],
           ],
   },
+  officialWebsite: {
+    path: "/services/site-officiel",
+    title: (lang) =>
+      lang === "fr"
+        ? "Site officiel et source d'information | Creativa Poeta"
+        : lang === "nl"
+          ? "Officiele website als betrouwbare bron | Creativa Poeta"
+          : lang === "rw"
+            ? "Website yemewe y'ubucuruzi bwawe | Creativa Poeta"
+            : "Official business website and source | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, vos maps, vos reseaux et les outils modernes."
+        : lang === "nl"
+          ? "Maak of verbeter een duidelijke website die de officiele bron wordt voor klanten, maps, sociale profielen en moderne tools."
+          : lang === "rw"
+            ? "Kubaka cyangwa kuvugurura website isobanura serivisi, aho bakubariza, aho ukorera n'amakuru yizewe y'ubucuruzi bwawe."
+            : "Create or rebuild a clear website that becomes your business official source for clients, maps, social profiles and modern tools.",
+    keywords:
+      "official business website, clear website, business source, service pages, contact page, local visibility, Creativa Poeta",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Votre site rassemble les informations que vous controlez.",
+              "Il explique vos services, vos contacts, vos zones, vos langues, vos questions frequentes et vos preuves de confiance.",
+            ],
+            [
+              "Avec ou sans site aujourd'hui",
+              "Nous pouvons refondre une base existante ou commencer par une page officielle simple avant d'ajouter d'autres contenus.",
+            ],
+          ]
+        : [
+            [
+              "Your website gathers the information you control.",
+              "It explains your services, contacts, areas, languages, common questions and trust signals.",
+            ],
+            [
+              "With or without a website today",
+              "We can improve an existing base or start with a simple official page before adding more content.",
+            ],
+          ],
+  },
   webApp: {
     path: "/services/web-app",
     title: (lang) =>
@@ -731,6 +774,9 @@ function applyMeta(html, page) {
   const escapedDescription = escapeHtml(page.description);
   const escapedKeywords = escapeHtml(page.keywords);
   const escapedUrl = escapeHtml(page.url);
+  const escapedXDefaultUrl = escapeHtml(
+    `${siteUrl}${page.template.path || "/"}`
+  );
 
   next = next.replace(/<html[^>]*>/i, `<html lang="${page.lang}">`);
   next = updateTag(next, /<title>[\s\S]*?<\/title>/i, `<title>${escapedTitle}</title>`);
@@ -849,7 +895,7 @@ function applyMeta(html, page) {
     <script>document.documentElement.classList.add("cp-js");</script>
     <link rel="canonical" href="${escapedUrl}" />
     ${alternateLinks}
-    <link rel="alternate" hreflang="x-default" href="${siteUrl}/" />
+    <link rel="alternate" hreflang="x-default" href="${escapedXDefaultUrl}" />
     <style>
       .cp-prerender { min-height: 100vh; padding: 96px 22px; color: #ffffff; background: #101a29; font-family: Arial, sans-serif; }
       .cp-prerender__inner { max-width: 980px; margin: 0 auto; }
@@ -916,6 +962,7 @@ const sitemapPagePaths = [
   "/start-project",
   "/terms-and-conditions",
   "/services/audit-visibilite",
+  "/services/site-officiel",
 ];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {

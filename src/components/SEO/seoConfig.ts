@@ -72,6 +72,27 @@ export const seoConfig = {
       },
     },
 
+    officialWebsite: {
+      title: "Site officiel et source d'information | Creativa Poeta",
+      description:
+        "Creez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, vos maps, vos reseaux et les outils modernes.",
+      keywords:
+        "site officiel entreprise, site vitrine clair, source officielle, site web local, site pour IA, Creativa Poeta",
+      url: "https://creativapoeta.com/services/site-officiel",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Site officiel et source d'information",
+        description:
+          "Creation ou refonte d'un site clair qui rassemble les services, contacts, zones, langues, questions frequentes et preuves de confiance d'une entreprise.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "Official business website",
+      },
+    },
+
     webDevelopment: {
       title: "Clear official websites | Creativa Poeta",
       description:

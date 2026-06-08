@@ -38,7 +38,7 @@ const Services = () => {
               blog.id === 1
                 ? servicePath("/services/audit-visibilite")
                 : blog.id === 2
-                ? servicePath("/services/content-writing")
+                ? servicePath("/services/site-officiel")
                 : blog.id === 3
                 ? servicePath("/services/graphic-design")
                 : blog.id === 4

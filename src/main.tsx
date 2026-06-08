@@ -19,6 +19,7 @@ import GetBackToYou from "./components/getBackToYou.tsx";
 import DigitalMarketingPage from "./pages/Services/DigitalMarketing.tsx";
 import GraphicDesignPage from "./pages/Services/GraphicDesignPage.tsx";
 import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
+import OfficialWebsitePage from "./pages/Services/OfficialWebsitePage.tsx";
 import Dashboard from "./Dashboard/Dashboard.tsx";
 import BlogsPage from "./pages/BlogsPage.tsx";
 import SingleBlogPage from "./pages/SingleBlogPage.tsx";
@@ -99,6 +100,11 @@ const appElement = (
             <Route path="/fr/services/audit-visibilite" element={<AuditVisibilityPage />} />
             <Route path="/nl/services/audit-visibilite" element={<AuditVisibilityPage />} />
             <Route path="/rw/services/audit-visibilite" element={<AuditVisibilityPage />} />
+            <Route path="/services/site-officiel" element={<OfficialWebsitePage />} />
+            <Route path="/en/services/site-officiel" element={<OfficialWebsitePage />} />
+            <Route path="/fr/services/site-officiel" element={<OfficialWebsitePage />} />
+            <Route path="/nl/services/site-officiel" element={<OfficialWebsitePage />} />
+            <Route path="/rw/services/site-officiel" element={<OfficialWebsitePage />} />
             <Route path="/services/web-app" element={<WebPage />} />
             <Route path="/en/services/web-app" element={<WebPage />} />
             <Route path="/fr/services/web-app" element={<WebPage />} />
