@@ -3,10 +3,19 @@ import ServiceLocale from "../../i18n/ServiceLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import { Link } from "react-router-dom";
 import SectionScrollButton from "../buttons/SectionScrollButton";
+import {
+  buildLocalLocalePath,
+  getCurrentLocale,
+  getCurrentMarket,
+} from "../../data/marketRuntime";
 
 const lang: any = getLangFromLocalStorage();
 
 const Services = () => {
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
+  const servicePath = (path: string) => buildLocalLocalePath(market, locale, path);
+
   return (
     <section
       id="services"
@@ -27,13 +36,13 @@ const Services = () => {
           <Link
             to={
               blog.id === 1
-                ? "/services/web-app"
+                ? servicePath("/services/audit-visibilite")
                 : blog.id === 2
-                ? "/services/content-writing"
+                ? servicePath("/services/content-writing")
                 : blog.id === 3
-                ? "/services/graphic-design"
+                ? servicePath("/services/graphic-design")
                 : blog.id === 4
-                ? "/services/digital-marketing"
+                ? servicePath("/services/digital-marketing")
                 : "#"
             }
             key={blog.id}

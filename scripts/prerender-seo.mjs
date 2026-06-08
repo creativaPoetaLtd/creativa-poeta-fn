@@ -407,6 +407,49 @@ const pageTemplates = {
       ],
     ],
   },
+  auditVisibility: {
+    path: "/services/audit-visibilite",
+    title: (lang) =>
+      lang === "fr"
+        ? "Audit de visibilite moderne | Creativa Poeta"
+        : lang === "nl"
+          ? "Zichtbaarheidsaudit | Creativa Poeta"
+          : lang === "rw"
+            ? "Isuzuma ry'uko ugaragara | Creativa Poeta"
+            : "Modern visibility audit | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients peuvent vous trouver, vous comprendre et vous contacter."
+        : lang === "nl"
+          ? "Laat uw website, maps, lokale profielen en publieke informatie controleren om te zien of klanten u makkelijk vinden en begrijpen."
+          : lang === "rw"
+            ? "Reba niba website, maps, imbuga ukoresha n'amakuru yawe bifasha abakiriya kukubona no kugusobanukirwa."
+            : "Review your website, maps, local profiles and public information to see whether clients can find, understand and contact you.",
+    keywords:
+      "visibility audit, local visibility, Google Maps, voice search, AI tools, ChatGPT visibility, Creativa Poeta",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Votre presence est-elle claire partout ?",
+              "Nous regardons votre site, vos maps, vos profils publics et vos informations importantes pour voir si un client peut comprendre rapidement qui vous etes, ce que vous proposez et comment vous contacter.",
+            ],
+            [
+              "Ce que vous recevez",
+              "Une lecture simple de vos blocages, les informations a harmoniser et une liste d'actions prioritaires avant de lancer une refonte ou un travail plus large.",
+            ],
+          ]
+        : [
+            [
+              "Can clients understand your business?",
+              "We check your website, maps, public profiles and important information to see whether clients can understand who you are, what you offer and how to contact you.",
+            ],
+            [
+              "What you receive",
+              "A simple view of the main blockers, the information to align and a priority list before a bigger project starts.",
+            ],
+          ],
+  },
   webApp: {
     path: "/services/web-app",
     title: (lang) =>
@@ -849,10 +892,7 @@ const sitemapPagePaths = [
   "/contact",
   "/start-project",
   "/terms-and-conditions",
-  "/services/web-app",
-  "/services/graphic-design",
-  "/services/digital-marketing",
-  "/services/content-writing",
+  "/services/audit-visibilite",
 ];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {

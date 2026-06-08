@@ -2,8 +2,8 @@ const ServiceLocale: any = {
   en: {
     title1: "OUR",
     title2: "SERVICES",
-    service11: "Be found",
-    service12: "where clients search",
+    service11: "Visibility",
+    service12: "audit",
     description1:
       "We help your business appear more clearly on Google, maps, voice search and tools like ChatGPT by making your information reliable and easy to understand.",
     service21: "A clear",
@@ -22,8 +22,8 @@ const ServiceLocale: any = {
   fr: {
     title1: "NOS",
     title2: "SERVICES",
-    service11: "Etre trouve",
-    service12: "la ou les clients cherchent",
+    service11: "Audit de",
+    service12: "visibilite",
     description1:
       "Nous aidons votre entreprise a etre plus claire sur Google, les maps, la recherche vocale et les outils comme ChatGPT, avec des informations fiables et faciles a comprendre.",
     service21: "Un site clair",
@@ -42,8 +42,8 @@ const ServiceLocale: any = {
   kiny: {
     title1: "IBYO",
     title2: "DUKORA",
-    service11: "Kuboneka",
-    service12: "aho abakiliya bagushakira",
+    service11: "Isuzuma",
+    service12: "ry'uko ugaragara",
     description1:
       "Dufasha ibikorwa byawe gusobanuka kuri Google, ku makarita, mu gushakisha ukoresheje ijwi no ku bikoresho nka ChatGPT, amakuru yawe akaba yizewe kandi yumvikana.",
     service21: "Website",
@@ -62,8 +62,8 @@ const ServiceLocale: any = {
   nl: {
     title1: "ONZE",
     title2: "DIENSTEN",
-    service11: "Gevonden worden",
-    service12: "waar klanten zoeken",
+    service11: "Audit van",
+    service12: "zichtbaarheid",
     description1:
       "We helpen je bedrijf duidelijker te verschijnen op Google, kaarten, gesproken zoekopdrachten en tools zoals ChatGPT, met betrouwbare en begrijpelijke informatie.",
     service21: "Een duidelijke",

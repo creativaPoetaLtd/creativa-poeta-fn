@@ -18,6 +18,7 @@ import ContentPage from "./pages/Services/ContentPage.tsx";
 import GetBackToYou from "./components/getBackToYou.tsx";
 import DigitalMarketingPage from "./pages/Services/DigitalMarketing.tsx";
 import GraphicDesignPage from "./pages/Services/GraphicDesignPage.tsx";
+import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
 import Dashboard from "./Dashboard/Dashboard.tsx";
 import BlogsPage from "./pages/BlogsPage.tsx";
 import SingleBlogPage from "./pages/SingleBlogPage.tsx";
@@ -93,6 +94,11 @@ const appElement = (
             <Route path="/secure-admin-login-2024" element={<Login />} />
 
             {/* Valid servicessss */}
+            <Route path="/services/audit-visibilite" element={<AuditVisibilityPage />} />
+            <Route path="/en/services/audit-visibilite" element={<AuditVisibilityPage />} />
+            <Route path="/fr/services/audit-visibilite" element={<AuditVisibilityPage />} />
+            <Route path="/nl/services/audit-visibilite" element={<AuditVisibilityPage />} />
+            <Route path="/rw/services/audit-visibilite" element={<AuditVisibilityPage />} />
             <Route path="/services/web-app" element={<WebPage />} />
             <Route path="/en/services/web-app" element={<WebPage />} />
             <Route path="/fr/services/web-app" element={<WebPage />} />

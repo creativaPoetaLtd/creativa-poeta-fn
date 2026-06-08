@@ -51,6 +51,27 @@ export const seoConfig = {
   },
 
   services: {
+    auditVisibility: {
+      title: "Audit de visibilite moderne | Creativa Poeta",
+      description:
+        "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients peuvent vous trouver, vous comprendre et vous contacter.",
+      keywords:
+        "audit visibilite, Google Maps, visibilite locale, recherche vocale, ChatGPT, presence digitale, Creativa Poeta",
+      url: "https://creativapoeta.com/services/audit-visibilite",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Audit de visibilite moderne",
+        description:
+          "Analyse de la presence publique d'une entreprise sur son site, ses maps, ses profils locaux et ses informations importantes.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "Visibility audit",
+      },
+    },
+
     webDevelopment: {
       title: "Clear official websites | Creativa Poeta",
       description:
