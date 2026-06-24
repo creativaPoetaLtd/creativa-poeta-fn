@@ -1,883 +1,675 @@
-import { useEffect, useState } from "react";
-import { FaQuoteLeft, FaTiktok } from "react-icons/fa";
-import { IoBusinessOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import image2 from "../../assets/flags/image2.jpg";
-import logo from "../../assets/flags/logopoeta1.png";
-import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
-import WebappLocale from "../../i18n/Services/Subservices/WebappLocale";
-import getLangFromLocalStorage from "../../../utils/Lang";
 import {
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-  FaFacebook,
+  FaArrowRight,
+  FaCheckCircle,
+  FaClipboardList,
+  FaDesktop,
+  FaGlobe,
+  FaLayerGroup,
+  FaMobileAlt,
+  FaTools,
 } from "react-icons/fa";
-import { handleNavigate } from "./DigitalMarketing";
-// const lang: string = getLangFromLocalStorage();
-const lang: keyof typeof WebappLocale = getLangFromLocalStorage() as keyof typeof WebappLocale;
-//  const faqs = FaqLocale[lang];
+import {
+  buildLocalLocalePath,
+  getCurrentLocale,
+  getCurrentMarket,
+} from "../../data/marketRuntime";
+import siteFr from "../../assets/alignment/site-web.webp";
+import siteEn from "../../assets/alignment/site-web-en.webp";
+import siteNl from "../../assets/alignment/site-web-nl.webp";
+import sourceFr from "../../assets/alignment/official-source-flow.webp";
+import sourceEn from "../../assets/alignment/official-source-flow-en.webp";
+import sourceNl from "../../assets/alignment/official-source-flow-nl.webp";
+import modernFr from "../../assets/alignment/modern-visibility.webp";
+import modernEn from "../../assets/alignment/modern-visibility-en.webp";
+import modernNl from "../../assets/alignment/modern-visibility-nl.webp";
+import creativeFr from "../../assets/creative-services.webp";
+import creativeEn from "../../assets/creative-services-en.webp";
+import creativeNl from "../../assets/creative-services-nl.webp";
+import ServiceFinalCTA from "./ServiceFinalCTA";
 
-const testimonials = [
-  {
-    quote: DesignLocale[lang].quote1,
-    client: "Sarah Johnson",
-    role: "CEO, TechNova",
-    image: "/profile.jpg",
+type LocaleCopy = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  primary: string;
+  secondary: string;
+  promises: string[];
+  baseEyebrow: string;
+  baseTitle: string;
+  baseText: string;
+  buildEyebrow: string;
+  buildTitle: string;
+  buildText: string;
+  productsEyebrow: string;
+  productsTitle: string;
+  productsText: string;
+  products: Array<{ icon: "site" | "pages" | "platform" | "app" | "system"; title: string; text: string }>;
+  methodEyebrow: string;
+  methodTitle: string;
+  methodText: string;
+  steps: string[];
+  creativeEyebrow: string;
+  creativeTitle: string;
+  creativeText: string;
+  faqTitle: string;
+  faqs: Array<{ question: string; answer: string }>;
+};
+
+const copies: Record<string, LocaleCopy> = {
+  fr: {
+    eyebrow: "Sites web, applications & outils digitaux",
+    title: "Nous construisons la base officielle de votre entreprise.",
+    intro:
+      "Un site, une application ou un outil interne doit faire plus que fonctionner. Il doit expliquer, guider, rassurer et permettre a vos clients comme a votre equipe d'agir simplement.",
+    primary: "Demarrer un projet",
+    secondary: "Nous contacter",
+    promises: [
+      "Site vitrine clair",
+      "Pages de service utiles",
+      "Applications et plateformes",
+      "Formulaires, tableaux de bord et outils internes",
+    ],
+    baseEyebrow: "Votre base officielle",
+    baseTitle: "Votre site devient l'endroit ou tout est clair.",
+    baseText:
+      "Nous rassemblons vos services, vos preuves, vos contacts, vos zones et vos reponses dans une experience simple a comprendre. Votre presence devient plus propre pour vos clients, Google, les maps et les assistants modernes.",
+    buildEyebrow: "Ce que nous construisons",
+    buildTitle: "Du site simple au systeme complet, on part de votre vrai besoin.",
+    buildText:
+      "Une entreprise n'a pas toujours besoin d'une grande plateforme. Parfois il faut une page claire. Parfois un formulaire solide. Parfois un espace complet pour gerer les demandes, les clients ou les documents.",
+    productsEyebrow: "Solutions possibles",
+    productsTitle: "Chaque support a un role precis.",
+    productsText:
+      "Nous evitons les sites remplis de contenu vide. Chaque page, chaque bouton et chaque outil doit aider quelqu'un a comprendre, choisir, contacter ou travailler plus vite.",
+    products: [
+      {
+        icon: "site",
+        title: "Site vitrine",
+        text: "Une presence claire qui presente votre entreprise, vos services et vos chemins de contact.",
+      },
+      {
+        icon: "pages",
+        title: "Pages utiles",
+        text: "Des pages de service, zones, questions frequentes et cas concrets pour mieux repondre aux recherches.",
+      },
+      {
+        icon: "platform",
+        title: "Plateformes web",
+        text: "Des espaces plus complets pour vendre, publier, presenter, reserver ou organiser une activite.",
+      },
+      {
+        icon: "app",
+        title: "Applications",
+        text: "Des interfaces web ou mobiles pensees pour une action precise, avec un parcours simple.",
+      },
+      {
+        icon: "system",
+        title: "Outils internes",
+        text: "Formulaires, tableaux de bord, suivi de demandes, documents et systemes adaptes a votre travail.",
+      },
+    ],
+    methodEyebrow: "Notre methode",
+    methodTitle: "On clarifie d'abord. On construit ensuite.",
+    methodText:
+      "Le but n'est pas d'ajouter de la technique pour impressionner. Le but est de creer un outil propre, utile et durable, que vous pouvez faire evoluer.",
+    steps: [
+      "Comprendre votre activite et vos priorites",
+      "Definir les pages, actions et informations essentielles",
+      "Creer une structure lisible sur mobile d'abord",
+      "Relier le site a vos profils, formulaires et outils utiles",
+      "Prevoir une base facile a faire grandir",
+    ],
+    creativeEyebrow: "Creativa Poeta",
+    creativeTitle: "Une base technique, mais avec une ame.",
+    creativeText:
+      "Nous gardons l'ADN de Creativa Poeta : des mots choisis, des visuels justes, une experience fluide et une presence qui porte votre histoire.",
+    faqTitle: "Questions frequentes",
+    faqs: [
+      {
+        question: "Est-ce que je dois commencer par un grand site ?",
+        answer:
+          "Non. Le plus important est de commencer par une base claire. Elle peut grandir ensuite avec des pages, des outils ou des langues.",
+      },
+      {
+        question: "Est-ce que vous refondez aussi un site existant ?",
+        answer:
+          "Oui. On garde ce qui fonctionne, puis on clarifie la structure, les textes, les contacts, les pages utiles et les parcours.",
+      },
+      {
+        question: "Est-ce que vous pouvez construire un outil sur mesure ?",
+        answer:
+          "Oui. Cela peut etre un formulaire avance, un tableau de bord, un espace client, un outil de gestion ou une application plus complete.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote2,
-    client: "James Lee",
-    role: "Marketing Director, BrightWave",
-    image: "/delivery.png",
+  en: {
+    eyebrow: "Websites, applications & digital tools",
+    title: "We build the official base of your business.",
+    intro:
+      "A website, app or internal tool should do more than work. It should explain, guide, reassure and help clients or teams act simply.",
+    primary: "Start a project",
+    secondary: "Contact us",
+    promises: [
+      "Clear business website",
+      "Useful service pages",
+      "Applications and platforms",
+      "Forms, dashboards and internal tools",
+    ],
+    baseEyebrow: "Your official base",
+    baseTitle: "Your website becomes the place where everything is clear.",
+    baseText:
+      "We gather your services, proof, contacts, areas and answers into an experience that is easy to understand. Your presence becomes cleaner for clients, Google, maps and modern assistants.",
+    buildEyebrow: "What we build",
+    buildTitle: "From a simple website to a complete system, we start from the real need.",
+    buildText:
+      "A business does not always need a large platform. Sometimes it needs one clear page. Sometimes a solid form. Sometimes a full space to manage requests, clients or documents.",
+    productsEyebrow: "Possible solutions",
+    productsTitle: "Every support has a precise role.",
+    productsText:
+      "We avoid websites full of empty content. Each page, button and tool must help someone understand, choose, contact or work faster.",
+    products: [
+      {
+        icon: "site",
+        title: "Business website",
+        text: "A clear presence that presents your business, services and contact paths.",
+      },
+      {
+        icon: "pages",
+        title: "Useful pages",
+        text: "Service pages, areas, common questions and concrete cases to answer searches better.",
+      },
+      {
+        icon: "platform",
+        title: "Web platforms",
+        text: "Richer spaces to sell, publish, present, book or organize an activity.",
+      },
+      {
+        icon: "app",
+        title: "Applications",
+        text: "Web or mobile interfaces designed for a specific action, with a simple journey.",
+      },
+      {
+        icon: "system",
+        title: "Internal tools",
+        text: "Forms, dashboards, request tracking, documents and systems adapted to your work.",
+      },
+    ],
+    methodEyebrow: "Our method",
+    methodTitle: "We clarify first. Then we build.",
+    methodText:
+      "The goal is not to add technology to impress. The goal is to create a clean, useful and durable tool that can grow.",
+    steps: [
+      "Understand your activity and priorities",
+      "Define essential pages, actions and information",
+      "Create a mobile-first readable structure",
+      "Connect the site to profiles, forms and useful tools",
+      "Prepare a base that can grow easily",
+    ],
+    creativeEyebrow: "Creativa Poeta",
+    creativeTitle: "A technical base, but with a soul.",
+    creativeText:
+      "We keep Creativa Poeta's DNA: chosen words, precise visuals, a smooth experience and a presence that carries your story.",
+    faqTitle: "Common questions",
+    faqs: [
+      {
+        question: "Do I need to start with a large website?",
+        answer:
+          "No. The most important thing is to start with a clear base. It can later grow with pages, tools or languages.",
+      },
+      {
+        question: "Can you rebuild an existing website?",
+        answer:
+          "Yes. We keep what works, then clarify the structure, wording, contacts, useful pages and user journeys.",
+      },
+      {
+        question: "Can you build a custom tool?",
+        answer:
+          "Yes. It can be an advanced form, dashboard, client area, management tool or a more complete application.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote3,
-    client: "Emma Brown",
-    role: "Founder, GreenNest",
-    image: "/profile.jpg",
+  nl: {
+    eyebrow: "Websites, applicaties & digitale tools",
+    title: "Wij bouwen de officiele basis van uw bedrijf.",
+    intro:
+      "Een website, app of intern hulpmiddel moet meer doen dan werken. Het moet uitleggen, begeleiden, vertrouwen geven en klanten of teams eenvoudig laten handelen.",
+    primary: "Project starten",
+    secondary: "Contact opnemen",
+    promises: [
+      "Duidelijke bedrijfswebsite",
+      "Nuttige dienstenpagina's",
+      "Applicaties en platformen",
+      "Formulieren, dashboards en interne tools",
+    ],
+    baseEyebrow: "Uw officiele basis",
+    baseTitle: "Uw website wordt de plek waar alles duidelijk is.",
+    baseText:
+      "We verzamelen uw diensten, bewijzen, contactgegevens, regio's en antwoorden in een ervaring die gemakkelijk te begrijpen is. Uw aanwezigheid wordt duidelijker voor klanten, Google, maps en moderne assistenten.",
+    buildEyebrow: "Wat wij bouwen",
+    buildTitle: "Van een eenvoudige site tot een volledig systeem, we vertrekken van uw echte behoefte.",
+    buildText:
+      "Een bedrijf heeft niet altijd een groot platform nodig. Soms volstaat een duidelijke pagina. Soms een stevig formulier. Soms een volledige ruimte om aanvragen, klanten of documenten te beheren.",
+    productsEyebrow: "Mogelijke oplossingen",
+    productsTitle: "Elke drager heeft een precieze rol.",
+    productsText:
+      "We vermijden websites vol lege inhoud. Elke pagina, knop en tool moet iemand helpen sneller te begrijpen, kiezen, contact opnemen of werken.",
+    products: [
+      {
+        icon: "site",
+        title: "Bedrijfswebsite",
+        text: "Een duidelijke aanwezigheid die uw bedrijf, diensten en contactpaden presenteert.",
+      },
+      {
+        icon: "pages",
+        title: "Nuttige pagina's",
+        text: "Diensten, regio's, veelgestelde vragen en concrete voorbeelden om beter op zoekvragen te antwoorden.",
+      },
+      {
+        icon: "platform",
+        title: "Webplatformen",
+        text: "Ruimere omgevingen om te verkopen, publiceren, presenteren, reserveren of organiseren.",
+      },
+      {
+        icon: "app",
+        title: "Applicaties",
+        text: "Web- of mobiele interfaces voor een duidelijke actie, met een eenvoudig traject.",
+      },
+      {
+        icon: "system",
+        title: "Interne tools",
+        text: "Formulieren, dashboards, opvolging van aanvragen, documenten en systemen op maat van uw werk.",
+      },
+    ],
+    methodEyebrow: "Onze methode",
+    methodTitle: "Eerst verduidelijken. Daarna bouwen.",
+    methodText:
+      "Het doel is niet om techniek toe te voegen om indruk te maken. Het doel is een duidelijke, nuttige en duurzame tool te maken die kan groeien.",
+    steps: [
+      "Uw activiteit en prioriteiten begrijpen",
+      "Essentiele pagina's, acties en informatie bepalen",
+      "Een leesbare structuur maken, eerst voor mobiel",
+      "De site verbinden met profielen, formulieren en nuttige tools",
+      "Een basis voorzien die gemakkelijk kan groeien",
+    ],
+    creativeEyebrow: "Creativa Poeta",
+    creativeTitle: "Een technische basis, maar met een ziel.",
+    creativeText:
+      "We bewaren het DNA van Creativa Poeta: gekozen woorden, juiste beelden, een vloeiende ervaring en een aanwezigheid die uw verhaal draagt.",
+    faqTitle: "Veelgestelde vragen",
+    faqs: [
+      {
+        question: "Moet ik beginnen met een grote website?",
+        answer:
+          "Nee. Het belangrijkste is starten met een duidelijke basis. Die kan later groeien met pagina's, tools of talen.",
+      },
+      {
+        question: "Kunnen jullie ook een bestaande website vernieuwen?",
+        answer:
+          "Ja. We behouden wat werkt en verduidelijken daarna de structuur, teksten, contacten, nuttige pagina's en trajecten.",
+      },
+      {
+        question: "Kunnen jullie een tool op maat bouwen?",
+        answer:
+          "Ja. Dat kan een geavanceerd formulier, dashboard, klantenzone, beheertool of volledige applicatie zijn.",
+      },
+    ],
   },
-
-  {
-    quote: DesignLocale[lang].quote4,
-    client: "John Doe",
-    role: "CEO, TechNova",
-    image: "/profile.jpg",
+  kiny: {
+    eyebrow: "Websites, apps & digital tools",
+    title: "We build the official base of your business.",
+    intro:
+      "A website, app or internal tool should explain your services clearly, help clients contact you and give your team a cleaner way to work.",
+    primary: "Start a project",
+    secondary: "Contact us",
+    promises: [
+      "Clear business website",
+      "Useful service pages",
+      "Applications and platforms",
+      "Forms, dashboards and internal tools",
+    ],
+    baseEyebrow: "Your official base",
+    baseTitle: "Your website becomes the place where everything is clear.",
+    baseText:
+      "We gather your services, proof, contacts, areas and answers into an experience that is easy to understand and easy to trust.",
+    buildEyebrow: "What we build",
+    buildTitle: "From a simple website to a complete system, we start from the real need.",
+    buildText:
+      "Sometimes you need one clear page. Sometimes a solid form. Sometimes a full space to manage requests, clients or documents.",
+    productsEyebrow: "Possible solutions",
+    productsTitle: "Every support has a precise role.",
+    productsText:
+      "Each page, button and tool must help someone understand, choose, contact or work faster.",
+    products: [
+      {
+        icon: "site",
+        title: "Business website",
+        text: "A clear presence that presents your business, services and contact paths.",
+      },
+      {
+        icon: "pages",
+        title: "Useful pages",
+        text: "Service pages, areas, common questions and concrete cases.",
+      },
+      {
+        icon: "platform",
+        title: "Web platforms",
+        text: "Richer spaces to sell, publish, present, book or organize an activity.",
+      },
+      {
+        icon: "app",
+        title: "Applications",
+        text: "Web or mobile interfaces designed for a specific action.",
+      },
+      {
+        icon: "system",
+        title: "Internal tools",
+        text: "Forms, dashboards, request tracking, documents and custom systems.",
+      },
+    ],
+    methodEyebrow: "Our method",
+    methodTitle: "We clarify first. Then we build.",
+    methodText:
+      "The goal is to create a clean, useful and durable tool that can grow with your business.",
+    steps: [
+      "Understand your activity and priorities",
+      "Define essential pages, actions and information",
+      "Create a mobile-first readable structure",
+      "Connect the site to profiles, forms and useful tools",
+      "Prepare a base that can grow easily",
+    ],
+    creativeEyebrow: "Creativa Poeta",
+    creativeTitle: "A technical base, but with a soul.",
+    creativeText:
+      "We keep Creativa Poeta's DNA: chosen words, precise visuals, a smooth experience and a presence that carries your story.",
+    faqTitle: "Common questions",
+    faqs: [
+      {
+        question: "Do I need to start with a large website?",
+        answer:
+          "No. The most important thing is to start with a clear base. It can later grow with pages, tools or languages.",
+      },
+      {
+        question: "Can you rebuild an existing website?",
+        answer:
+          "Yes. We keep what works, then clarify the structure, wording, contacts, useful pages and user journeys.",
+      },
+      {
+        question: "Can you build a custom tool?",
+        answer:
+          "Yes. It can be an advanced form, dashboard, client area, management tool or a more complete application.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote5,
-    client: "Alice Smith",
-    role: "Marketing Director, BrightWave",
-    image: "/profile.jpg",
+};
+
+const visuals = {
+  fr: {
+    site: siteFr,
+    source: sourceFr,
+    modern: modernFr,
+    creative: creativeFr,
   },
-];
+  en: {
+    site: siteEn,
+    source: sourceEn,
+    modern: modernEn,
+    creative: creativeEn,
+  },
+  nl: {
+    site: siteNl,
+    source: sourceNl,
+    modern: modernNl,
+    creative: creativeNl,
+  },
+  kiny: {
+    site: siteEn,
+    source: sourceEn,
+    modern: modernEn,
+    creative: creativeEn,
+  },
+};
 
-export function TestimonialSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const iconMap = {
+  site: FaDesktop,
+  pages: FaLayerGroup,
+  platform: FaGlobe,
+  app: FaMobileAlt,
+  system: FaTools,
+};
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex + 1 >= testimonials.length ? 0 : prevIndex + 1
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+const getCopy = () => {
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
+  return {
+    market,
+    locale,
+    copy: copies[locale] ?? copies.en,
+    visual: visuals[locale as keyof typeof visuals] ?? visuals.en,
   };
+};
 
-  return (
-    <section className="testimonial-slider hidden min-h-screen w-full md:w-[80%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
-      <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">
-        What Our Clients Say
-      </h2>
+const SectionTitle = ({
+  eyebrow,
+  title,
+  text,
+}: {
+  eyebrow: string;
+  title: string;
+  text?: string;
+}) => (
+  <div className="mx-auto mb-8 max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+    <div className="mb-3 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white">
+      <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
+      {eyebrow}
+    </div>
+    <h2 className="max-w-5xl font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-lg phone:text-5xl laptop:text-6xl">
+      {title}
+    </h2>
+    {text ? (
+      <p className="mt-5 max-w-4xl text-base font-bold leading-8 text-white/90 phone:text-lg">
+        {text}
+      </p>
+    ) : null}
+  </div>
+);
 
-      <div className="overflow-hidden relative w-full">
-        <div
-          className="flex transition-transform duration-1000"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="w-full flex-shrink-0 flex flex-col items-center text-center px-4"
-              style={{ flex: "0 0 100%" }}>
-              <svg
-                className="w-12 h-12 text-[#EEBA2B] mb-4"
-                fill="currentColor"
-                viewBox="0 0 24 24">
-                <FaQuoteLeft />
-              </svg>
-
-              <p className="text-md md:text-lg italic px-4 lg:px-16 max-w-xl mx-auto leading-relaxed">
-                "{testimonial.quote} "
-              </p>
-
-              <div className="mt-6 flex flex-col items-center">
-                <img
-                  src={testimonial.image}
-                  alt={`${testimonial.client}`}
-                  className="w-16 h-16 rounded-full shadow-lg mb-2"
-                />
-                <p className="text-lg font-semibold">{testimonial.client}</p>
-                <p className="text-sm text-gray-400">{testimonial.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex justify-center mt-8 space-x-4">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-[#EEBA2B]" : "bg-gray-500"
-            }`}></button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const relatedServices = [
-  {
-    title: DesignLocale[lang].title1,
-    description: DesignLocale[lang].description1,
-    icon: "/digital-marketing.jpg",
-    link: "/services/digital-marketing",
-  },
-  {
-    title: DesignLocale[lang].title2,
-    description: DesignLocale[lang].description2,
-    icon: "/content-writting.png",
-    link: "/services/content-writing",
-  },
-  {
-    title: DesignLocale[lang].title3,
-    description: DesignLocale[lang].description3,
-    icon: "/content-writting.png",
-    link: "/services/content-writing",
-  },
-  {
-    title: DesignLocale[lang].title4,
-    description: DesignLocale[lang].description4,
-    icon: "/videoProd.png",
-    link: "/services/video-creation",
-  },
-];
-
-export function RelatedServices() {
-  return (
-    <section className="related-services-section hidden w-full md:w-[95%] py-16 px-8  text-center z-10">
-      <h2 className="text-2xl text-[#EEBA2B]  font-bold mb-8">
-        {DesignLocale[lang].relatedServTitle}
-      </h2>
-      <div className="grid gap-8  laptop:grid-cols-4 md:grid-cols-2">
-        {relatedServices.map((service, index) => (
-          <div
-            key={index}
-            className="service-card p-6 bg-white text-black rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-            <img
-              src={service.icon}
-              alt={`${service.title} Icon`}
-              className="w-12 h-12 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-            <p className="text-md md:text-lg mb-4">{service.description}</p>
-            <a
-              href={service.link}
-              className="text-[#EEBA2B] font-semibold hover:text-black border-2 border-[#EEBA2B] py-2 px-4 rounded transition-colors duration-300">
-              Learn More
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const faqs = [
-
-{ question: WebappLocale[lang]?.question1 || WebappLocale.en.question1,answer: WebappLocale[lang]?.answer1 || WebappLocale.en.answer1 },
-   { question: WebappLocale[lang]?.question2 || WebappLocale.en.question2,answer: WebappLocale[lang]?.answer2 || WebappLocale.en.answer2  },
-   { question: WebappLocale[lang]?.question3 || WebappLocale.en.question3,answer: WebappLocale[lang]?.answer3 || WebappLocale.en.answer3  },
-   { question: WebappLocale[lang]?.question4 || WebappLocale.en.question4,answer: WebappLocale[lang]?.answer4 || WebappLocale.en.answer4  },
-   { question: WebappLocale[lang]?.question5 || WebappLocale.en.question5,answer: WebappLocale[lang]?.answer5 || WebappLocale.en.answer5  },
-   { question: WebappLocale[lang]?.question6 || WebappLocale.en.question6,answer: WebappLocale[lang]?.answer6 || WebappLocale.en.answer6  },
-   { question: WebappLocale[lang]?.question7 || WebappLocale.en.question7,answer: WebappLocale[lang]?.answer7 || WebappLocale.en.answer7  },
-   { question: WebappLocale[lang]?.question8 || WebappLocale.en.question8,answer: WebappLocale[lang]?.answer8 || WebappLocale.en.answer8  },
-   { question: WebappLocale[lang]?.question9 || WebappLocale.en.question9,answer: WebappLocale[lang]?.answer9 || WebappLocale.en.answer9  },
-  { question: WebappLocale[lang]?.question10 || WebappLocale.en.question10,answer: WebappLocale[lang]?.answer10 || WebappLocale.en.answer10  },
-
-];
-
-export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleFAQ = (index: any) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <section className="faq-section w-full md:w-[95%] mx-auto my-12 p-8 text-gray-800  rounded-lg shadow-lg z-10">
-      <h2 className="text-2xl font-bold text-center text-[#EEBA2B] mb-8">
-        {DesignLocale[lang].faqTitle}
-      </h2>
-
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-300 pb-4">
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="flex items-center justify-between w-full text-left text-md md:text-lg text-white font-bold focus:outline-none">
-              {faq.question}
-              <span className="text-2xl text-[#EEBA2B]">
-                {openIndex === index ? "-" : "+"}
-              </span>
-            </button>
-            <div
-              className={`mt-2 overflow-hidden transition-all duration-300 ${
-                openIndex === index ? "max-h-screen" : "max-h-0"
-              }`}>
-              <p className="text-gray-100 mt-2 text-md md:text-lg">
-                {faq.answer}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+const ImagePanel = ({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => (
+  <div
+    className={`overflow-hidden rounded-[1.6rem] border border-white/45 bg-[#071a33]/70 p-2 shadow-[0_20px_60px_rgba(0,0,0,.25)] backdrop-blur-sm ${className}`}
+  >
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      className="h-full w-full rounded-[1.2rem] object-contain"
+    />
+  </div>
+);
 
 const WebApp = () => {
+  const { market, locale, copy, visual } = getCopy();
+  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const contactPath = buildLocalLocalePath(market, locale, "/contact");
+
   return (
-    <div
-      className="relative min-h-screen bg-white flex flex-col bg-transparent justify-center items-center "
-      style={{
-        backgroundImage: image2
-          ? `url(${image2})`
-          : "none",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        transition: "background 0.9s ease-in-out",
-        animation: "slideAnimation 0.9s ease-in-out",
-        animationName: "slideAnimation",
-      }}
-      id="design-graphique">
-      <div className="absolute inset-0 bg-black bg-opacity-70 z-0"></div>
-
-      <Link to="/">
-        <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl z-20">
-          <img
-            src={logo}
-            alt="logo"
-            className="w-[50%] h-[100%] md:w-[85%] md:h-[95%]"
-          />
-        </div>
-      </Link>
-
-<section className="min-h-fit h-screen justify-center  w-[95%] mt-28 md:mt-16 m-auto  px-4 flex flex-col items-center relative">
-  <div className="flex flex-col md:gap-10 laptop:flex-row items-center justify-between w-full space-y-8 md:space-y-0 laptop:space-x-8 z-10">
-    <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
-      <div className="flex flex-col space-y-2 gap-6 text-white w-full">
-        <div className="w-fit">
-          {/* <h1 className="text-xl md:text-3xl font-bold">
-          Web & app development
-          </h1> */}
-          <h1>{DesignLocale[lang].webAppTitle}</h1>
-          <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
-        </div>
-        {/* <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        Innovative digital solutions, tailored for your needs.
-        </p> */}
-        <p>{DesignLocale[lang].webAppSubtitle}</p>
-      </div>
-
-      <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
-        {/* <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-        In the ever-evolving digital landscape, a robust and engaging online presence is essential. At Creativa Poeta, we transform your ideas into digital realities by crafting modern websites, powerful applications, and custom software solutions designed to elevate your business.
-</p> */}
-       
-       <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-  {DesignLocale[lang].webAppIntro}
-</p>
-        <button
-          onClick={handleNavigate}
-          className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
-          {DesignLocale[lang].action}
-        </button>
-      </div>
-    </div>
-
-    <div className="laptop:w-[45%] w-full h-ful md:height-[2rem] flex items-center justify-center">
-      <img
-        src="/webApp.webp"
-        alt="Web & App Development"
-        className="object-contain rounded-lg shadow-md"
-      />
-    </div>
-    
-  </div>
-</section>
-
-<section className="service-type-section mb-8 text-white w-full md:w-[92%] max-w-screen-lg mx-auto mt-12 p-6 md:p-0 laptop:p-8 rounded-lg flex flex-col z-10">
-    
-    {/* <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    Services offered
-    </h2> */}
-    <h2>{DesignLocale[lang].servicesOfferedWebApp}</h2>
-    {/* <p className="text-md md:text-lg text-center mb-8">
-    Our web & app development includes the following services:
-    </p> */}
-    <p>{DesignLocale[lang].servicesDescWebApp}</p>
-
-    <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/webdev.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-          />    
-         
-             {/* <h3 className="text-xl font-semibold mb-2">
-          Web development
-          </h3>
-          <p className="md:w-[70%] text-center">Development and maintenance of showcase websites, e-commerce platforms, and web applications.</p>  */}
-       <h3 className="text-xl font-semibold mb-2">
-      {DesignLocale[lang].webDevTitle}
-    </h3>
-    <p className="md:w-[70%] text-center">
-      {DesignLocale[lang].webDevDesc}
-    </p>
-     
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-        <img
-          src="/app.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        {/* <h3 className="text-xl font-semibold mb-2">
-        App development
-        </h3>
-        <p className="md:w-[70%] text-center">Creation of interactive mobile and web applications that deliver seamless user experiences.</p> */}
-     <h3 className="text-xl font-semibold mb-2">
-      {DesignLocale[lang].appDevTitle}
-    </h3>
-    <p className="md:w-[70%] text-center">
-      {DesignLocale[lang].appDevDesc}
-    </p>
-    
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/software.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        {/* <h3 className="text-xl font-semibold mb-2">
-        Software development
-        </h3>
-        <p className="md:w-[70%] text-center">Tailored software solutions such as ERP, CRM, and internal systems (e.g., intranets, project management tools).</p> */}
-       <h3 className="text-xl font-semibold mb-2">
-      {DesignLocale[lang].softwareDevTitle}
-    </h3>
-    <p className="md:w-[70%] text-center">
-      {DesignLocale[lang].softwareDevDesc}
-    </p>
-      
-      
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/UI.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        {/* <h3 className="text-xl font-semibold mb-2">
-        Web/App design (UI/UX)
-        </h3>
-        <p className="md:w-[70%] text-center">Designing intuitive and visually appealing interfaces for websites and applications.</p> */}
-        <h3 className="text-xl font-semibold mb-2">
-      {DesignLocale[lang].uiUxTitle}
-    </h3>
-    <p className="md:w-[70%] text-center">
-      {DesignLocale[lang].uiUxDesc}
-    </p>
-      
-      </div>
-    </div>
-  </section>
-
-
-<section className="relative w-[89%] md:w-[93%] min-h-screen flex items-center justify-center bg-white rounded-md">
-  {/* Container */}
-  <div className="relative md:w-[70%] p-8 flex flex-col laptop:flex-row items-center gap-12">
-    {/* Left side - Main circle */}
-    <div className="w-52 md:w-64 shrink-0">
-      <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
-        <div className="text-black text-center">
-          {/* <h2 className="font-bold text-xl md:text-3xl leading-tight">KEY</h2> */}
-            <h2 className="font-bold text-xl md:text-3xl leading-tight">
-        {DesignLocale[lang].keyCompTitle1}
-      </h2>
-          {/* <h2 className="font-bold text-xl md:text-3xl leading-tight">COMPETENCIES</h2> */}
-           <h2 className="font-bold text-xl md:text-3xl leading-tight">
-        {DesignLocale[lang].keyCompTitle2}
-      </h2>
-        </div>
-      </div>
-    </div>
-
-    {/* Right side - Competency items */}
-    <div className="flex-1 space-y-6 md:space-y-8">
-      {[
-         { number: "1", text: DesignLocale[lang].comp1, bgColor: "bg-[#E265FF]" },
-    { number: "2", text: DesignLocale[lang].comp2, bgColor: "bg-[#8B3DFF]" },
-    { number: "3", text: DesignLocale[lang].comp3, bgColor: "bg-[#3DB9FF]" },
-    { number: "4", text: DesignLocale[lang].comp4, bgColor: "bg-[#FFA53D]" },
-    { number: "5", text: DesignLocale[lang].comp5, bgColor: "bg-[#76C56F]" },
-      ].map(({ number, text, bgColor }, index) => (
-        <div key={index} className="flex items-center gap-4">
-          {/* Circle */}
-          <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-black font-bold text-lg md:text-2xl shadow-md shrink-0">
-            {number}
+    <main className="relative z-10 overflow-hidden text-white">
+      <section className="px-5 pb-12 pt-28 phone:px-7 tablet:px-12 laptop:px-20 laptop:pt-36">
+        <div className="mx-auto grid max-w-6xl gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-center">
+          <div>
+            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white">
+              <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
+              {copy.eyebrow}
+            </div>
+            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-xl phone:text-5xl laptop:text-7xl">
+              {copy.title}
+            </h1>
+            <p className="mt-6 text-base font-bold leading-8 text-white/90 phone:text-lg">
+              {copy.intro}
+            </p>
+            <div className="mt-7 grid grid-cols-2 gap-3">
+              {copy.promises.map((item) => (
+                <div
+                  key={item}
+                  className="flex min-h-20 items-center gap-3 rounded-2xl border border-[#EEBA2B]/45 bg-[#071a33]/75 p-3 text-sm font-black backdrop-blur-sm"
+                >
+                  <FaCheckCircle className="shrink-0 text-xl text-[#fff200]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-row flex-wrap gap-3">
+              <Link
+                to={startPath}
+                className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border-2 border-[#EEBA2B] bg-[#EEBA2B] px-5 py-4 text-xs font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:flex-none"
+              >
+                {copy.primary}
+                <FaArrowRight />
+              </Link>
+              <Link
+                to={contactPath}
+                className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border-2 border-white px-5 py-4 text-xs font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:flex-none"
+              >
+                {copy.secondary}
+              </Link>
+            </div>
           </div>
-          {/* Text Item */}
-          <div
-            className={`flex-1 py-3 px-4 md:py-4 md:px-6 rounded-lg text-white text-sm md:text-lg shadow-lg ${bgColor}`}
-          >
-            {text}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-      
-<section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse laptop:flex-row z-10">
-        <div className="yellow-lines-container laptop:flex laptop:w-1/2 h-full">
-          <img
-            src="/graphic-skills.jpg"
-            alt=""
-            className=" w-[100%] laptop:w-[70%] md:h-[22rem] rounded-md"
-          />
-        </div>
-        <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-        <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-  {DesignLocale[lang].whyChooseTitle}
-</h2>
-          
-          <ul className="space-y-4 md:space-x-0 list-disc p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
-            {/* <li>
-              <strong className="text-md md:text-lg mr-3">
-                Tailored solutions
-                              </strong>
-               Every project is uniquely designed to meet your specific business needs
-            </li> */}
-              <li>
-    <strong className=" text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong1}</strong>
-    {DesignLocale[lang].whyChooseText1}
-  </li>
-           
-            <li>
-    <strong className="text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong2}</strong>
-    {DesignLocale[lang].whyChooseText2}
-  </li>
-           <li>
-    <strong className=" text-md md-text-lg mr-3">{DesignLocale[lang].whyChooseStrong3}</strong>
-    {DesignLocale[lang].whyChooseText3}
-  </li>
-            {/* <li>
-              <strong className="text-md md:text-lg mr-3">
-                
-                Customer-centric approach
-              </strong>
-              Your satisfaction is our priority, and we ensure your vision becomes a reality.
-            </li> */}
-            <li>
-    <strong className="text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong4}</strong>
-    {DesignLocale[lang].whyChooseText4}
-  </li>
-
-            {/* <li>
-              <strong className="text-md md:text-lg mr-3">
-                
-                Scalable and future-ready
-              </strong>
-              We build solutions that grow with your business and adapt to future needs.
-            </li> */}
-             <li>
-    <strong className=" text-md md:text-lg mr-3">{DesignLocale[lang].whyChooseStrong5}</strong>
-    {DesignLocale[lang].whyChooseText5}
-  </li>
-          </ul>
+          <ImagePanel src={visual.site} alt={copy.title} className="laptop:rotate-1" />
         </div>
       </section>
 
-
-      <section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
-    
-        <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-          {" "}
-          {/* Who are these services for? */}
-           {DesignLocale[lang].whoForTitle}
-          {" "}
-        </h2>
-
-        <p className="text-md md:text-lg text-center mb-8">
-        {/* Our web & app development services cater to: */}
-        {DesignLocale[lang].whoForIntro}
-        </p>
-
-        <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
-            <h3 className="text-xl font-semibold mb-2">
-              {" "}
-              {/* Startups */}
-              {DesignLocale[lang].serviceTitle1}
-              {" "}
-            </h3>
-            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText1}</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/content.webp"
-              alt="Content Creators Icon"
-              className="w-36 h-24 mb-4 rounded-md"
-            />
-            <h3 className="text-xl font-semibold mb-2">
-            {/* Small to Medium Enterprises (SMEs) */}
-            {DesignLocale[lang].serviceTitle2}
-            </h3>
-            <p className="md:w-[70%] text-center"> {DesignLocale[lang].serviceText2}</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/individual.png"
-              alt="Individuals Icon"
-              className="w-24 h-24 mb-4 rounded-md"
-              />
-            <h3 className="text-xl font-semibold mb-2">
-            {/* Enterprises */}
-            {DesignLocale[lang].serviceTitle3}
-            </h3>
-            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText3}</p>
-          </div>
-
-          <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-            <img
-              src="/associations.png"
-              alt="Associations Icon"
-              className="w-32 h-24 mb-4 rounded-md"
-              />
-            <h3 className="text-xl font-semibold mb-2">
-            {/* Freelancers and Creatives  */}
-              {DesignLocale[lang].serviceTitle4}
-            </h3>
-            <p className="md:w-[70%] text-center">{DesignLocale[lang].serviceText4}</p>
-          </div>
+      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+        <SectionTitle
+          eyebrow={copy.baseEyebrow}
+          title={copy.baseTitle}
+          text={copy.baseText}
+        />
+        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+          <ImagePanel src={visual.source} alt={copy.baseTitle} />
         </div>
       </section>
 
-      <section className="web-development-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
-  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    {/* Process Workflow */} {DesignLocale[lang].processTitle1}
-  </h2>
-  
-  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
-    {/* Step 1 */}
-     
-      <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
-        1
-      </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full"> {DesignLocale[lang].step1Title}</h3>
-        <p className="text-sm">
-          {DesignLocale[lang].step1Text}
-        </p>
-      </div>
-    {/* Step 1 */}
-     
-      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
-        2
-      </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full"> {DesignLocale[lang].step2Title}</h3>
-        <p className="text-sm">
-        {DesignLocale[lang].step2Text}
-        </p>
-      </div>
-    {/* Step 1 */}
-     
-      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
-        3
-      </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step3Title}</h3>
-        <p className="text-sm">
-              {DesignLocale[lang].step3Text}</p>
-      </div>
-    {/* Step 1 */}
-     
-      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
-        4
-      </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step4Title}</h3>
-        <p className="text-sm">
-         {DesignLocale[lang].step4Text}</p>
-      </div>
-    {/* Step 1 */}
-     
-      <div className="bg-[#ffffff] text-black p-6  shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center  border-2 border-black  rounded-full  text-black font-bold mb-4">
-        5
-      </div>
-        <h3 className="text-lg font-semibold mb-2  p-3 border-2 border-black w-full">{DesignLocale[lang].step5Title}</h3>
-        <p className="text-sm">
-         {DesignLocale[lang].step5Text}</p>
-      </div>
-  </div>
-</section>
-
-
-      <section className="portfolio-section hidden w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
-        <h2 className="text-2xl font-bold text-[#EEBA2B] mb-8">
-          {DesignLocale[lang].portifolioTitle}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-6">
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/beauty.jpg"
-              alt="Portfolio Item"
-              className="w-[100%] h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Creative Logo
-              </h3>
-              <p className="text-white text-sm">For Tech Startup</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/card2.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Business card
-              </h3>
-              <p className="text-gray-300 text-sm">For a Company</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port1.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Flyer</h3>
-              <p className="text-gray-300 text-sm">For a Business</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port2.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Poster</h3>
-              <p className="text-gray-300 text-sm">For A business</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port3.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Poster</h3>
-              <p className="text-gray-300 text-sm">For business advertising</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port4.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Book Covers
-              </h3>
-              <p className="text-gray-300 text-sm">
-                For individual or a business
+      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+        <SectionTitle
+          eyebrow={copy.buildEyebrow}
+          title={copy.buildTitle}
+          text={copy.buildText}
+        />
+        <div className="mx-auto grid max-w-6xl gap-5 px-5 phone:px-7 tablet:px-12 laptop:grid-cols-[.95fr_1.05fr] laptop:px-0">
+          <div className="rounded-[1.7rem] border border-[#EEBA2B]/55 bg-[#071a33]/80 p-5 backdrop-blur-md phone:p-7">
+            <div className="mb-5 flex items-center gap-3 text-[#fff200]">
+              <FaClipboardList className="text-3xl" />
+              <p className="text-sm font-black uppercase tracking-wide">
+                {copy.productsEyebrow}
               </p>
             </div>
+            <h3 className="font-['Black_Ops_One'] text-3xl leading-tight text-white phone:text-4xl">
+              {copy.productsTitle}
+            </h3>
+            <p className="mt-5 text-base font-bold leading-8 text-white/85">
+              {copy.productsText}
+            </p>
           </div>
-        </div>
-
-        <div className="mt-12">
-          <a
-            href="/contact"
-            className="px-6 py-3 bg-[#EEBA2B] text-black font-semibold rounded-lg hover:bg-yellow-600">
-            {DesignLocale[lang].ctaCaption}
-          </a>
+          <ImagePanel src={visual.modern} alt={copy.productsTitle} />
         </div>
       </section>
 
-      <TestimonialSlider />
-      <RelatedServices />
-      <FAQSection />
-      <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
-        <h2 className="text-xl font-semibold p-4 mb-4">
-       {DesignLocale[lang]?.contactTitle || DesignLocale.en.contactTitle} 
-        </h2>
-        <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-         {DesignLocale[lang]?.contactText || DesignLocale.en.contactText}
-        </p> 
-
-          {/* <button
-            onClick={handleNavigate}  
-           className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] md:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-            Digitize your idea with us
-          </button> */}
-          <button>{DesignLocale[lang].ctaButtonWebApp}</button>
+      <section className="border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-4 laptop:grid-cols-5">
+            {copy.products.map((product) => {
+              const Icon = iconMap[product.icon];
+              return (
+                <article
+                  key={product.title}
+                  className="rounded-[1.4rem] border border-white/25 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(6,17,29,.82)),repeating-linear-gradient(135deg,rgba(238,186,43,.14)_0,rgba(238,186,43,.14)_1px,transparent_1px,transparent_10px)] p-5 shadow-xl backdrop-blur-sm"
+                >
+                  <Icon className="mb-4 text-4xl text-[#EEBA2B]" />
+                  <h3 className="font-['Black_Ops_One'] text-2xl leading-none text-white">
+                    {product.title}
+                  </h3>
+                  <div className="my-4 h-1 w-16 bg-[#EEBA2B]" />
+                  <p className="text-sm font-bold leading-7 text-white/85">
+                    {product.text}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
-      <section className="visual-elements w-[95%] hidden  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex-col items-center z-10">
-        <h2 className="text-2xl font-semibold text-center text-[#EEBA2B]  mb-12">
-          {DesignLocale[lang].expTitle}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
-          <div className="skill-item text-center">
-            <img
-              src="/logodesign.png"
-              alt="Logo Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">
-              {DesignLocale[lang].exp1}
-            </h3>
-            <p>{DesignLocale[lang].expdesc1}</p>
-          </div>
-
-          <div className="skill-item text-center">
-            <img
-              src="/businessCarddesign.png"
-              alt="Business Card Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-md font-bold text-[#EEBA2B] mb-2">
-              {DesignLocale[lang].exp2}
-            </h3>
-            <p>{DesignLocale[lang].expdesc2}</p>
-          </div>
-
-          <div className="skill-item text-center">
-            <img
-              src="/posterdesign.jpg"
-              alt="Poster Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">
-              {" "}
-              {DesignLocale[lang].exp3}{" "}
-            </h3>
-            <p>{DesignLocale[lang].expdesc3}</p>
-          </div>
-
-          <div className="col-span-full">
-            <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-6 text-center">
-              {DesignLocale[lang].projTitle}
-            </h3>
-            <div className="carousel flex overflow-x-scroll space-x-4">
-              <img
-                src="/beauty.jpg"
-                alt="Project 1"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/logos.webp"
-                alt="Project 2"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/card1.webp"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/poster1.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/card2.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/poster2.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
+      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+        <SectionTitle
+          eyebrow={copy.methodEyebrow}
+          title={copy.methodTitle}
+          text={copy.methodText}
+        />
+        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+          <div className="rounded-[1.7rem] border border-[#EEBA2B]/55 bg-[#071a33]/80 p-5 backdrop-blur-md phone:p-7">
+            <div className="grid gap-4 laptop:grid-cols-5">
+              {copy.steps.map((step, index) => (
+                <div
+                  key={step}
+                  className="rounded-2xl border border-white/20 bg-white/8 p-4"
+                >
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#EEBA2B] text-lg font-black text-[#071a33]">
+                    {index + 1}
+                  </div>
+                  <p className="text-sm font-black leading-6 text-white">
+                    {step}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="social-sharing flex space-x-4 mt-8">
-        <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaFacebook className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.instagram.com/creativapoeta_/">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaInstagram className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
-          <button className="text-black hover:text-[#EEBA2B]">
-          <FaTiktok className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.linkedin.com/company/105066709/">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaLinkedinIn className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaTwitter className="text-2xl" />
-          </button>
-          </a>
-          
+      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+        <SectionTitle
+          eyebrow={copy.creativeEyebrow}
+          title={copy.creativeTitle}
+          text={copy.creativeText}
+        />
+        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+          <ImagePanel src={visual.creative} alt={copy.creativeTitle} />
         </div>
+      </section>
 
-        {/* Links to Other Services */}
-        <div className="related-services mt-12 text-center">
-          <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-4">
-            {DesignLocale[lang].explore}
-          </h3>
-          <div className="flex justify-center space-x-8">
-            <a
-              href="/services/digital-marketing"
-              className="text-[#EEBA2B] hover:underline">
-              {DesignLocale[lang].dm}
-            </a>
-            <a
-              href="/services/content-writing"
-              className="text-[#EEBA2B] hover:underline">
-              {DesignLocale[lang].cw}
-            </a>
+      <section className="border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            {copy.faqTitle}
+          </h2>
+          <div className="mt-7 grid gap-4 laptop:grid-cols-3">
+            {copy.faqs.map((item) => (
+              <article
+                key={item.question}
+                className="rounded-[1.4rem] border border-white/25 bg-[#071a33]/80 p-5 backdrop-blur-md"
+              >
+                <h3 className="text-lg font-black text-[#fff200]">
+                  {item.question}
+                </h3>
+                <p className="mt-4 text-sm font-bold leading-7 text-white/85">
+                  {item.answer}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-    </div>
+
+      <ServiceFinalCTA />
+    </main>
   );
 };
 

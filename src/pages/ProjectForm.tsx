@@ -13,6 +13,7 @@ import {
   FaPalette,
   FaRegCommentDots,
   FaRobot,
+  FaTools,
 } from "react-icons/fa";
 import image8 from "../assets/flags/image8.jpg";
 import "../styles/custom-inputs.css";
@@ -217,6 +218,23 @@ const copies: Record<LocaleKey, ProjectCopy> = {
           "Alignement site, maps et reseaux",
           "Conseil pour etre cite comme source fiable",
           "Creation d'un assistant ou outil IA simple",
+        ],
+      },
+      {
+        id: "tech",
+        icon: FaTools,
+        title: "Assistance numerique et depannage",
+        description:
+          "Installer, configurer, reparer ou apprendre a utiliser vos outils et appareils numeriques.",
+        services: [
+          "Depannage ordinateur, smartphone, tablette ou imprimante",
+          "Installation et configuration d'appareils",
+          "Wi-Fi, email, comptes, sauvegardes et cloud",
+          "Securite, mots de passe et protection des donnees",
+          "Aide pour demarches en ligne ou achats internet",
+          "Accompagnement reseaux sociaux et outils du quotidien",
+          "Configuration multimedia, TV, audio ou objets connectes",
+          "Formation pas a pas pour gagner en autonomie",
         ],
       },
       {
@@ -475,6 +493,16 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Advice to be seen as a reliable source",
       "Creation of a simple AI assistant or tool",
     ],
+    tech: [
+      "Computer, smartphone, tablet or printer troubleshooting",
+      "Device installation and setup",
+      "Wi-Fi, email, accounts, backups and cloud",
+      "Security, passwords and data protection",
+      "Help with online services or internet purchases",
+      "Social media and everyday digital tools guidance",
+      "Multimedia, TV, audio or connected device setup",
+      "Step-by-step training to become more autonomous",
+    ],
     advice: [
       "Review of your current situation",
       "Priorities to start without spreading yourself thin",
@@ -533,6 +561,16 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Afstemming tussen website, maps en sociale profielen",
       "Advies om als betrouwbare bron gezien te worden",
       "Creatie van een eenvoudige AI-assistent of tool",
+    ],
+    tech: [
+      "Computer, smartphone, tablet of printer herstellen",
+      "Installatie en configuratie van apparaten",
+      "Wi-Fi, e-mail, accounts, backups en cloud",
+      "Beveiliging, wachtwoorden en gegevensbescherming",
+      "Hulp bij online diensten of internetaankopen",
+      "Begeleiding voor sociale media en dagelijkse tools",
+      "Multimedia, TV, audio of verbonden apparaten instellen",
+      "Stap-voor-stap begeleiding om zelfstandiger te worden",
     ],
     advice: [
       "Analyse van uw huidige situatie",
@@ -593,6 +631,16 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Inama zo kuba isoko yizewe",
       "Gukora assistant cyangwa outil AI yoroshye",
     ],
+    tech: [
+      "Gukemura ibibazo bya computer, smartphone, tablet cyangwa printer",
+      "Installation na configuration y'ibikoresho",
+      "Wi-Fi, email, accounts, backups na cloud",
+      "Security, passwords no kurinda data",
+      "Gufasha muri services online cyangwa kugura kuri internet",
+      "Gufasha kuri social media n'ibikoresho bya buri munsi",
+      "Gutunganya multimedia, TV, audio cyangwa connected devices",
+      "Training intambwe ku yindi kugira ngo wigire",
+    ],
     advice: [
       "Gusuzuma aho ugeze ubu",
       "Iby'ibanze byo gutangiriraho",
@@ -617,7 +665,9 @@ copies.en.groups = copies.fr.groups.map((group) => ({
             ? "Make your business visible"
             : group.id === "ai"
               ? "Prepare your presence for AI tools"
-              : "I am not sure yet, advise me",
+              : group.id === "tech"
+                ? "Digital assistance and troubleshooting"
+                : "I am not sure yet, advise me",
   description:
     group.id === "creative"
       ? "Give a strong shape to your idea: logo, image, message, support or campaign."
@@ -629,7 +679,9 @@ copies.en.groups = copies.fr.groups.map((group) => ({
             ? "Align your presence so clients find you where they actually search."
             : group.id === "ai"
               ? "Help assistants like ChatGPT understand who you are, what you do and why they should recommend you."
-              : "You have an idea, a blocker or a wish, but not yet the right path.",
+              : group.id === "tech"
+                ? "Install, configure, fix or learn to use your digital devices and tools."
+                : "You have an idea, a blocker or a wish, but not yet the right path.",
 }));
 
 copies.nl.groups = copies.fr.groups.map((group) => ({
@@ -646,7 +698,13 @@ copies.nl.groups = copies.fr.groups.map((group) => ({
             ? "Uw bedrijf zichtbaar maken"
             : group.id === "ai"
               ? "Uw aanwezigheid voorbereiden voor AI-tools"
-              : "Ik weet het nog niet, adviseer mij",
+              : group.id === "tech"
+                ? "Digitale hulp en technische ondersteuning"
+                : "Ik weet het nog niet, adviseer mij",
+  description:
+    group.id === "tech"
+      ? "Apparaten installeren, configureren, herstellen of leren gebruiken."
+      : group.description,
 }));
 
 copies.kiny.groups = copies.fr.groups.map((group) => ({
@@ -663,7 +721,13 @@ copies.kiny.groups = copies.fr.groups.map((group) => ({
             ? "Gutuma business yawe iboneka"
             : group.id === "ai"
               ? "Gutegura uko ugaragara kuri AI"
-              : "Sinzi neza, mungire inama",
+              : group.id === "tech"
+                ? "Digital assistance na depannage"
+                : "Sinzi neza, mungire inama",
+  description:
+    group.id === "tech"
+      ? "Installation, configuration, depannage no kwiga gukoresha ibikoresho bya digital."
+      : group.description,
 }));
 
 const ProjectForm = () => {
@@ -676,6 +740,8 @@ const ProjectForm = () => {
   const [step, setStep] = useState(1);
   const [showError, setShowError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openGroupId, setOpenGroupId] = useState<string | null>(null);
+  const [expandedService, setExpandedService] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -704,6 +770,7 @@ const ProjectForm = () => {
   };
 
   const toggleService = (service: string) => {
+    setExpandedService((current) => (current === service ? null : service));
     setFormData((current) => ({
       ...current,
       selectedServices: current.selectedServices.includes(service)
@@ -722,12 +789,17 @@ const ProjectForm = () => {
   };
 
   const chooseGroup = (group: ServiceGroup) => {
-    setFormData((current) => ({
-      ...current,
-      serviceType: group.title,
-      selectedServices: [],
-      customServiceDescription: "",
-    }));
+    setOpenGroupId((current) => (current === group.id ? null : group.id));
+    setExpandedService(null);
+    setFormData((current) => {
+      if (current.serviceType === group.title) return current;
+      return {
+        ...current,
+        serviceType: group.title,
+        selectedServices: [],
+        customServiceDescription: "",
+      };
+    });
     setShowError(false);
   };
 
@@ -810,37 +882,43 @@ const ProjectForm = () => {
     if (step === 1) {
       return (
         <div>
-          <div className="mb-8 max-w-3xl">
-            <p className="mb-3 flex items-center gap-3 text-sm font-black uppercase tracking-wide text-[#fff200]">
-              <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
+          <div className="mb-3 max-w-3xl tablet:mb-5">
+            <p className="mb-2 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] tablet:text-sm">
+              <span className="h-3 w-7 skew-x-[-14deg] bg-[#EEBA2B]" />
               {copy.eyebrow}
             </p>
-            <h1 className="font-['Black_Ops_One'] text-3xl leading-tight text-white phone:text-4xl laptop:text-5xl">
+            <h1 className="font-['Black_Ops_One'] text-2xl leading-tight text-white tablet:text-4xl laptop:text-5xl">
               {copy.title}
             </h1>
-            <p className="mt-5 text-base font-semibold leading-8 text-white/80 phone:text-lg">
+            <p className="mt-3 hidden text-base font-semibold leading-7 text-white/80 tablet:block">
               {copy.intro}
             </p>
           </div>
-          <h2 className="mb-5 text-xl font-black text-[#fff200]">{copy.chooseOne}</h2>
-          <div className="grid gap-4 tablet:grid-cols-2">
+          <h2 className="mb-2 text-base font-black text-[#fff200] tablet:mb-4 tablet:text-xl">{copy.chooseOne}</h2>
+          <div className="grid gap-2 tablet:grid-cols-2">
             {copy.groups.map((group) => {
               const Icon = group.icon;
               const active = formData.serviceType === group.title;
+              const open = openGroupId === group.id;
               return (
                 <button
                   key={group.id}
                   type="button"
                   onClick={() => chooseGroup(group)}
-                  className={`group rounded-[1.5rem] border p-5 text-left transition duration-300 hover:-translate-y-1 ${
+                  className={`grid grid-cols-[2.25rem_1fr_1.1rem] items-center gap-3 border px-3 text-left transition duration-300 hover:border-[#EEBA2B] tablet:rounded-[1.1rem] tablet:px-4 tablet:py-2 ${
+                    open ? "rounded-2xl py-3" : "rounded-full py-2"
+                  } ${
                     active
                       ? "border-[#EEBA2B] bg-[#EEBA2B] text-[#071a33]"
                       : "border-white/20 bg-white/10 text-white hover:border-[#EEBA2B]"
                   }`}
                 >
-                  <Icon className={`mb-4 text-4xl ${active ? "text-[#071a33]" : "text-[#fff200]"}`} />
-                  <h3 className="text-lg font-black">{group.title}</h3>
-                  <p className={`mt-3 text-sm font-semibold leading-6 ${active ? "text-[#071a33]/80" : "text-white/75"}`}>
+                  <Icon className={`text-xl tablet:text-2xl ${active ? "text-[#071a33]" : "text-[#fff200]"}`} />
+                  <div className="min-w-0">
+                    <h3 className="truncate text-sm font-black tablet:text-base">{group.title}</h3>
+                  </div>
+                  <span className={`h-4 w-4 rounded-full border-2 ${active ? "border-[#071a33] bg-[#071a33]" : "border-white/40"}`} />
+                  <p className={`${open ? "block" : "hidden"} col-span-3 text-xs font-semibold leading-5 tablet:block tablet:leading-4 ${active ? "text-[#071a33]/80" : "text-white/70"}`}>
                     {group.description}
                   </p>
                 </button>
@@ -854,43 +932,46 @@ const ProjectForm = () => {
     if (step === 2) {
       return (
         <div>
-          <h1 className="font-['Black_Ops_One'] text-3xl text-[#fff200]">
+          <h1 className="font-['Black_Ops_One'] text-2xl text-[#fff200] tablet:text-3xl">
             {copy.chooseServices}
           </h1>
-          <p className="mt-4 max-w-3xl text-base font-semibold leading-8 text-white/80">
+          <p className="mt-2 hidden max-w-3xl text-base font-semibold leading-7 text-white/80 tablet:block">
             {selectedGroup?.description}
           </p>
-          <div className="mt-8 grid gap-3 tablet:grid-cols-2">
+          <div className="mt-3 grid grid-cols-2 gap-2 tablet:mt-5 tablet:gap-3">
             {(selectedGroup?.services ?? []).map((service) => {
               const active = formData.selectedServices.includes(service);
+              const expanded = expandedService === service;
               return (
                 <button
                   key={service}
                   type="button"
                   onClick={() => toggleService(service)}
-                  className={`flex items-start gap-3 rounded-2xl border p-4 text-left font-semibold leading-6 transition ${
+                  className={`flex items-start gap-2 rounded-xl border p-2 text-left text-xs font-semibold leading-4 transition tablet:min-h-0 tablet:gap-3 tablet:p-3 tablet:text-sm tablet:leading-5 ${
+                    expanded ? "col-span-2 min-h-0" : "min-h-[3.2rem]"
+                  } ${
                     active
                       ? "border-[#EEBA2B] bg-white text-[#071a33]"
                       : "border-white/20 bg-white/10 text-white hover:border-[#EEBA2B]"
                   }`}
                 >
-                  <FaCheckCircle className={`mt-1 flex-none ${active ? "text-[#EEBA2B]" : "text-white/30"}`} />
-                  <span>{service}</span>
+                  <FaCheckCircle className={`mt-0.5 flex-none ${active ? "text-[#EEBA2B]" : "text-white/30"}`} />
+                  <span className={`${expanded ? "max-h-none" : "max-h-8"} overflow-hidden tablet:max-h-none`}>{service}</span>
                 </button>
               );
             })}
           </div>
-          <div className="mt-6">
-            <label className="mb-2 block text-sm font-black uppercase text-white">
+          <div className="mt-3">
+            <label className="mb-1 block text-xs font-black uppercase text-white tablet:text-sm">
               {copy.otherLabel}
             </label>
             <textarea
               name="customServiceDescription"
               value={formData.customServiceDescription}
               onChange={updateField}
-              rows={4}
+              rows={2}
               placeholder={copy.otherPlaceholder}
-              className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none"
+              className="w-full rounded-xl border border-white/20 bg-white/10 p-2 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl tablet:p-3"
             />
           </div>
         </div>
@@ -900,22 +981,22 @@ const ProjectForm = () => {
     if (step === 3) {
       return (
         <div>
-          <h1 className="font-['Black_Ops_One'] text-3xl text-[#fff200]">
+          <h1 className="font-['Black_Ops_One'] text-2xl text-[#fff200] tablet:text-3xl">
             {copy.contextTitle}
           </h1>
-          <p className="mt-4 max-w-3xl text-base font-semibold leading-8 text-white/80">
+          <p className="mt-2 hidden max-w-3xl text-base font-semibold leading-7 text-white/80 tablet:block">
             {copy.contextIntro}
           </p>
-          <div className="mt-8 grid gap-6 laptop:grid-cols-2">
+          <div className="mt-4 grid gap-3 tablet:mt-5 tablet:grid-cols-2 tablet:gap-4 laptop:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm font-black uppercase text-white">
+              <label className="mb-1 block text-[10px] font-black uppercase leading-tight text-white tablet:text-sm">
                 {copy.websiteLabel}
               </label>
               <select
                 name="websiteStatus"
                 value={formData.websiteStatus}
                 onChange={updateField}
-                className="w-full rounded-2xl border border-white/20 bg-[#071a33] p-4 font-semibold text-white focus:border-[#EEBA2B] focus:outline-none"
+                className="w-full rounded-xl border border-white/20 bg-[#071a33] p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               >
                 <option value="">--</option>
                 {copy.websiteOptions.map((option) => (
@@ -926,14 +1007,14 @@ const ProjectForm = () => {
               </select>
             </div>
             <div>
-              <label className="mb-2 block text-sm font-black uppercase text-white">
+              <label className="mb-1 block text-[10px] font-black uppercase leading-tight text-white tablet:text-sm">
                 {copy.urgencyLabel}
               </label>
               <select
                 name="urgency"
                 value={formData.urgency}
                 onChange={updateField}
-                className="w-full rounded-2xl border border-white/20 bg-[#071a33] p-4 font-semibold text-white focus:border-[#EEBA2B] focus:outline-none"
+                className="w-full rounded-xl border border-white/20 bg-[#071a33] p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               >
                 <option value="">--</option>
                 {copy.urgencyOptions.map((option) => (
@@ -944,7 +1025,7 @@ const ProjectForm = () => {
               </select>
             </div>
             <div>
-              <label className="mb-2 block text-sm font-black uppercase text-white">
+              <label className="mb-1 block text-[10px] font-black uppercase leading-tight text-white tablet:text-sm">
                 {copy.zoneLabel}
               </label>
               <input
@@ -953,11 +1034,11 @@ const ProjectForm = () => {
                 value={formData.targetZone}
                 onChange={updateField}
                 placeholder={copy.zonePlaceholder}
-                className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none"
+                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
             <div>
-              <label className="mb-2 block text-sm font-black uppercase text-white">
+              <label className="mb-1 block text-[10px] font-black uppercase leading-tight text-white tablet:text-sm">
                 {copy.languagesLabel}
               </label>
               <input
@@ -966,15 +1047,15 @@ const ProjectForm = () => {
                 value={formData.languages}
                 onChange={updateField}
                 placeholder={copy.languagesPlaceholder}
-                className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none"
+                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
           </div>
-          <div className="mt-7">
-            <label className="mb-3 block text-sm font-black uppercase text-white">
+          <div className="mt-3">
+            <label className="mb-2 block text-[10px] font-black uppercase text-white tablet:text-sm">
               {copy.channelsLabel}
             </label>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-2 gap-2 tablet:flex tablet:flex-wrap tablet:gap-2">
               {copy.channels.map((channel) => {
                 const active = formData.currentChannels.includes(channel);
                 return (
@@ -982,7 +1063,7 @@ const ProjectForm = () => {
                     key={channel}
                     type="button"
                     onClick={() => toggleChannel(channel)}
-                    className={`rounded-full border px-4 py-2 text-sm font-black transition ${
+                    className={`rounded-full border px-3 py-2 text-[10px] font-black leading-tight transition tablet:text-xs ${
                       active
                         ? "border-[#EEBA2B] bg-[#EEBA2B] text-[#071a33]"
                         : "border-white/20 bg-white/10 text-white hover:border-[#EEBA2B]"
@@ -1000,13 +1081,13 @@ const ProjectForm = () => {
 
     return (
       <div>
-        <h1 className="font-['Black_Ops_One'] text-3xl text-[#fff200]">
+        <h1 className="font-['Black_Ops_One'] text-2xl text-[#fff200] tablet:text-3xl">
           {copy.contactTitle}
         </h1>
-        <p className="mt-4 max-w-3xl text-base font-semibold leading-8 text-white/80">
+        <p className="mt-2 hidden max-w-3xl text-base font-semibold leading-7 text-white/80 tablet:block">
           {copy.contactIntro}
         </p>
-        <div className="mt-8 grid gap-5 tablet:grid-cols-2">
+        <div className="mt-4 grid gap-3 tablet:mt-5 tablet:grid-cols-2 tablet:gap-4">
           {[
             ["name", copy.name, "text"],
             ["email", copy.email, "email"],
@@ -1014,7 +1095,7 @@ const ProjectForm = () => {
             ["company", copy.company, "text"],
           ].map(([name, label, type]) => (
             <div key={name}>
-              <label className="mb-2 block text-sm font-black uppercase text-white">
+              <label className="mb-1 block text-[10px] font-black uppercase text-white tablet:text-sm">
                 {label}
               </label>
               <input
@@ -1022,22 +1103,22 @@ const ProjectForm = () => {
                 name={name}
                 value={formData[name as keyof typeof formData] as string}
                 onChange={updateField}
-                className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none"
+                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
           ))}
         </div>
-        <div className="mt-5">
-          <label className="mb-2 block text-sm font-black uppercase text-white">
+        <div className="mt-3">
+          <label className="mb-1 block text-[10px] font-black uppercase text-white tablet:text-sm">
             {copy.message}
           </label>
           <textarea
             name="additionalInfo"
             value={formData.additionalInfo}
             onChange={updateField}
-            rows={5}
+            rows={4}
             placeholder={copy.messagePlaceholder}
-            className="w-full rounded-2xl border border-white/20 bg-white/10 p-4 font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none"
+            className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
           />
         </div>
       </div>
@@ -1046,50 +1127,53 @@ const ProjectForm = () => {
 
   return (
     <main
-      className="min-h-screen bg-cover bg-left bg-fixed px-4 py-28 text-white phone:px-6 laptop:px-10"
+      className="h-[100dvh] overflow-hidden bg-cover bg-left px-2 py-2 text-white tablet:bg-fixed tablet:px-6 tablet:py-8 laptop:px-10"
       style={{
         backgroundImage: `linear-gradient(rgba(7, 26, 51, 0.88), rgba(0, 0, 0, 0.82)), url(${image8})`,
       }}
     >
-      <section className="relative mx-auto max-w-6xl rounded-[2rem] border border-white/15 bg-[#071a33]/85 p-5 shadow-2xl backdrop-blur-md phone:p-8 laptop:p-10">
+      <section className="relative mx-auto flex h-[calc(100dvh-1rem)] max-w-6xl flex-col overflow-hidden rounded-[1.4rem] border border-white/15 bg-[#071a33]/85 p-4 shadow-2xl backdrop-blur-md tablet:rounded-[2rem] tablet:p-6 laptop:p-8">
         <button
           type="button"
           onClick={() => navigate(homePath)}
           aria-label={copy.close}
-          className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition hover:border-[#EEBA2B] hover:text-[#fff200]"
+          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition hover:border-[#EEBA2B] hover:text-[#fff200] tablet:right-5 tablet:top-5 tablet:h-10 tablet:w-10"
         >
           <FaTimes />
         </button>
         <button
           type="button"
           onClick={() => navigate(homePath)}
-          className="mb-8 inline-flex items-center gap-2 text-sm font-black uppercase text-white/70 transition hover:text-[#fff200]"
+          className="mb-2 inline-flex items-center gap-2 text-xs font-black uppercase text-white/70 transition hover:text-[#fff200] tablet:mb-5 tablet:text-sm"
         >
           <FaChevronLeft />
           {copy.close}
         </button>
 
-        <div className="mb-8 flex flex-col gap-5 laptop:flex-row laptop:items-center laptop:justify-between">
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-3 flex flex-col gap-2 tablet:mb-5 laptop:flex-row laptop:items-center laptop:justify-between">
+          <div className="flex items-center gap-1.5 tablet:gap-2">
             {copy.steps.map((label, index) => {
               const stepNumber = index + 1;
               const active = step >= stepNumber;
+              const current = step === stepNumber;
               return (
                 <div
                   key={label}
-                  className={`flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-black uppercase ${
+                  className={`flex h-8 min-w-8 items-center justify-center gap-1 rounded-full border px-2 text-xs font-black uppercase transition-all ${
                     active
                       ? "border-[#EEBA2B] bg-[#EEBA2B] text-[#071a33]"
                       : "border-white/20 bg-white/10 text-white/55"
                   }`}
                 >
                   <span>{stepNumber}</span>
-                  <span className="hidden phone:inline">{label}</span>
+                  <span className={`${current ? "inline max-w-[7rem]" : "hidden"} truncate`}>
+                    {label}
+                  </span>
                 </div>
               );
             })}
           </div>
-          <div className="text-sm font-black uppercase text-white/60">
+          <div className="hidden text-sm font-black uppercase text-white/60 tablet:block">
             {copy.stepLabel} {step} / {totalSteps}
           </div>
         </div>
@@ -1100,14 +1184,14 @@ const ProjectForm = () => {
           </div>
         )}
 
-        {renderStep()}
+        <div className="min-h-0 flex-1 overflow-hidden">{renderStep()}</div>
 
-        <div className="mt-10 flex flex-col justify-between gap-4 phone:flex-row">
+        <div className="mt-3 grid grid-cols-2 justify-between gap-2 tablet:flex tablet:flex-row tablet:gap-4">
           <button
             type="button"
             onClick={handleBack}
             disabled={step === 1 || isSubmitting}
-            className="inline-flex items-center justify-center gap-3 border-2 border-white px-6 py-4 text-sm font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex items-center justify-center gap-2 border-2 border-white px-4 py-3 text-xs font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] disabled:cursor-not-allowed disabled:opacity-40 tablet:gap-3 tablet:px-6 tablet:py-4 tablet:text-sm"
           >
             <FaChevronLeft />
             {copy.back}
@@ -1116,7 +1200,7 @@ const ProjectForm = () => {
             type="button"
             onClick={handleNext}
             disabled={isSubmitting}
-            className="inline-flex items-center justify-center gap-3 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-6 py-4 text-sm font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-4 py-3 text-xs font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] disabled:cursor-not-allowed disabled:opacity-60 tablet:gap-3 tablet:px-6 tablet:py-4 tablet:text-sm"
           >
             {step === totalSteps ? copy.submit : copy.next}
             {step === totalSteps ? <FaRegCommentDots /> : <FaArrowRight />}

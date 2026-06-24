@@ -13,6 +13,7 @@ import{
   FaLinkedinIn,
   FaFacebook,
 } from "react-icons/fa";
+import { localizePath } from "../../data/marketRuntime";
 
 export const handleNavigate = () => {
   window.location.href = "/start-project";
@@ -269,7 +270,7 @@ const DigitalMarketings = () => {
       id="design-graphique">
       <div className="absolute inset-0 bg-black bg-opacity-70 z-0"></div>
 
-      <Link to="/">
+      <Link to={localizePath("/")}>
         <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl z-20">
           <img
             src={logo}

@@ -135,6 +135,48 @@ export const seoConfig = {
       },
     },
 
+    aiAutomation: {
+      title: "Assistants IA, GPT personnalises et agents | Creativa Poeta",
+      description:
+        "Creez des assistants IA, GPT personnalises, chatbots et agents simples adaptes a votre metier, vos contenus et vos clients.",
+      keywords:
+        "assistant IA, GPT personnalise, chatbot entreprise, agent IA, automatisation simple, Creativa Poeta",
+      url: "https://creativapoeta.com/services/ia-automatisation",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Assistants IA et agents intelligents",
+        description:
+          "Creation d'assistants IA, GPT personnalises, chatbots et agents simples pour clients ou equipes internes.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "AI assistants",
+      },
+    },
+
+    digitalAssistance: {
+      title: "Assistance numerique et depannage tech | Creativa Poeta",
+      description:
+        "Depannage informatique, configuration d'appareils, aide aux demarches en ligne, securite et accompagnement numerique pas a pas.",
+      keywords:
+        "assistance numerique, depannage informatique, configuration appareil, aide technologie, accompagnement digital, Creativa Poeta",
+      url: "https://creativapoeta.com/services/assistance-numerique",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Assistance numerique et depannage tech",
+        description:
+          "Assistance pour installer, configurer, depanner et utiliser les outils numeriques, appareils et services en ligne.",
+        provider: {
+          "@type": "Organization",
+          name: "Creativa Poeta",
+        },
+        serviceType: "Digital assistance",
+      },
+    },
+
     webDevelopment: {
       title: "Clear official websites | Creativa Poeta",
       description:

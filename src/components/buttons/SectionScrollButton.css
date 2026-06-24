@@ -1,10 +1,12 @@
 .cp-scroll-button {
   --cp-scroll-top: #eeba2b;
   --cp-scroll-bottom: #071a33;
+  --cp-scroll-line-gap: 0.9rem;
+  --cp-scroll-button-height: 1.75rem;
   align-items: center;
   background: transparent;
   border: 0;
-  bottom: 1.05rem;
+  bottom: 1.75rem;
   cursor: pointer;
   display: inline-flex;
   font-size: 0.72rem;
@@ -12,9 +14,10 @@
   gap: 0.45rem;
   letter-spacing: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
+  right: clamp(1.6rem, 4vw, 4.5rem);
   text-transform: uppercase;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .cp-scroll-button::before {
@@ -24,35 +27,55 @@
     var(--cp-scroll-bottom) 50% 100%
   );
   content: "";
-  height: 5.8rem;
+  height: 4.4rem;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 2px;
 }
 
+.cp-scroll-button::after {
+  display: none;
+}
+
+.cp-scroll-button > span {
+  position: relative;
+  z-index: 1;
+}
+
 .cp-scroll-button-left {
-  left: clamp(1.6rem, 7vw, 7.5rem);
+  left: auto;
+  right: clamp(1.6rem, 4vw, 4.5rem);
 }
 
 .cp-scroll-button-left::before {
-  left: -0.85rem;
+  left: auto;
+  right: -0.85rem;
+}
+
+.cp-scroll-button-left::after {
+  left: auto;
+  right: calc(-1 * clamp(1.6rem, 4vw, 4.5rem));
 }
 
 .cp-scroll-button-right {
-  right: clamp(1.6rem, 7vw, 7.5rem);
+  right: clamp(1.6rem, 4vw, 4.5rem);
 }
 
 .cp-scroll-button-right::before {
   right: -0.85rem;
 }
 
+.cp-scroll-button-right::after {
+  right: calc(-1 * clamp(1.6rem, 4vw, 4.5rem));
+}
+
 .cp-scroll-button-light {
-  color: #ffffff;
+  color: #ffff00;
 }
 
 .cp-scroll-button-dark {
-  color: #071a33;
+  color: #ffff00;
 }
 
 .cp-scroll-button-icon {
@@ -70,16 +93,16 @@
 }
 
 .cp-refonte-section > .cp-scroll-button {
-  bottom: 5.6rem;
+  bottom: 1.75rem;
 }
 
 .cp-refonte-final > .cp-scroll-button {
-  bottom: 4.4rem;
+  bottom: 1.75rem;
 }
 
 #services > .cp-scroll-button,
 .faq > .cp-scroll-button {
-  bottom: 3rem;
+  bottom: 1.75rem;
 }
 
 .cp-scroll-fade-target {
@@ -115,7 +138,8 @@
   }
 
   .cp-scroll-button {
-    bottom: 1.6rem;
+    --cp-scroll-line-gap: 0.82rem;
+    bottom: 1.25rem;
     color: #ffff00;
     font-size: 0.72rem;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
@@ -128,19 +152,29 @@
       #ffff00 0 50%,
       rgba(255, 255, 255, 0.95) 50% 100%
     );
-    height: 5.8rem;
+    height: 4.2rem;
   }
 
   .cp-refonte-section > .cp-scroll-button,
   .cp-refonte-final > .cp-scroll-button {
-    bottom: 4.8rem;
+    bottom: 1.25rem;
   }
 
   .cp-scroll-button-left {
-    left: 3.2rem;
+    left: auto;
+    right: 2.2rem;
   }
 
   .cp-scroll-button-right {
-    right: 3.2rem;
+    right: 2.2rem;
+  }
+
+  .cp-scroll-button-left::after {
+    left: auto;
+    right: -2.2rem;
+  }
+
+  .cp-scroll-button-right::after {
+    right: -2.2rem;
   }
 }

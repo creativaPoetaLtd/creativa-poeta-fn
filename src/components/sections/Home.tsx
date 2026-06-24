@@ -12,45 +12,48 @@ import SlideLeft from "../buttons/SlideLeft";
 import SlideRight from "../buttons/SlideRight";
 import logopoeta1 from "../../assets/flags/logopoeta1.png";
 import Confirm from "../unUsedComponents/Confirm";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import HomeLocale from "../../i18n/HomeLocale";
-import getLangFromLocalStorage from "../../../utils/Lang";
-import { localizePath } from "../../data/marketRuntime";
-
-const lang: any = getLangFromLocalStorage();
-
-const backgrounds = [
-  {
-    image: "",
-    content: {
-      title: HomeLocale[lang].title1,
-      description: HomeLocale[lang].description1,
-    },
-  },
-  {
-    image: "",
-    content: {
-      title: HomeLocale[lang].title2,
-      description: HomeLocale[lang].description2,
-    },
-  },
-  {
-    image: "",
-    content: {
-      title: HomeLocale[lang].title3,
-      description: HomeLocale[lang].description3,
-    },
-  },
-  {
-    image: "",
-    content: {
-      title: HomeLocale[lang].title4,
-      description: HomeLocale[lang].description4,
-    },
-  },
-];
+import {
+  getCurrentLocale,
+  getCurrentMarket,
+  localizePath,
+} from "../../data/marketRuntime";
 
 const Home = () => {
+  const market = getCurrentMarket();
+  const lang = getCurrentLocale(market);
+  const homeCopy = HomeLocale[lang] ?? HomeLocale.en;
+  const backgrounds = [
+    {
+      image: "",
+      content: {
+        title: homeCopy.title1,
+        description: homeCopy.description1,
+      },
+    },
+    {
+      image: "",
+      content: {
+        title: homeCopy.title2,
+        description: homeCopy.description2,
+      },
+    },
+    {
+      image: "",
+      content: {
+        title: homeCopy.title3,
+        description: homeCopy.description3,
+      },
+    },
+    {
+      image: "",
+      content: {
+        title: homeCopy.title4,
+        description: homeCopy.description4,
+      },
+    },
+  ];
   const [hoveredIcon, setHoveredIcon] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTitle, setShowTitle] = useState(false);
@@ -158,7 +161,7 @@ const Home = () => {
   };
   const currentBackground = backgrounds[currentIndex];
   const handleVisibilityTest = () => {
-    window.location.href = `${localizePath("/")}#audit-form`;
+    window.location.href = localizePath("/tester-visibilite");
   };
 
   return (
@@ -179,13 +182,17 @@ const Home = () => {
         animationName: "slideAnimation",
       }}
     >
-      <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
+      <Link
+        to={localizePath("/")}
+        aria-label="Retour a l'accueil Creativa Poeta"
+        className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5 laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1"
+      >
         <img
           src={logopoeta1}
-          alt="logo"
+          alt="Creativa Poeta"
           className="laptop:w-[85%] desktop:w-[85%] laptop:h-[95%] desktop:h-[95%] h-[100%] w-[50%]"
         />
-      </div>
+      </Link>
       <div className="">
         <div className="flex justify-between">
           <div className="flex flex-col laptop:w-[72%] tablet:w-[80%] w-full justify-center laptop:m-0 items-center">
@@ -212,14 +219,14 @@ const Home = () => {
                 onClick={handleVisibilityTest}
                 className="hover:bg-white hover:text-black text-white laptop:w-[300px] min-w-0 flex-1 max-w-[300px] px-2 phone:px-5 laptop:px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-2 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-xs border-2 border-white animate-fade-in whitespace-nowrap"
               >
-                {HomeLocale[lang].action1}
+                {homeCopy.action1}
               </button>
 
               <button
                 onClick={handleNavigateToServices}
                 className="hover:bg-white hover:text-black text-white laptop:w-[300px] min-w-0 flex-1 max-w-[300px] px-2 phone:px-5 laptop:px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-2 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-xs border-2 border-white animate-fade-in whitespace-nowrap"
               >
-                {HomeLocale[lang].action2}
+                {homeCopy.action2}
               </button>
             </div>
 
@@ -336,8 +343,8 @@ const Home = () => {
         </div>
       </div>
       <SectionScrollButton
-        label={HomeLocale[lang].scroll}
-        targetId="about"
+        label={homeCopy.scroll}
+        targetId="__next-section"
         side="right"
         tone="light"
         topColor="#EEBA2B"

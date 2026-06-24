@@ -1,5 +1,6 @@
-import { Box, Grid, Paper } from "@mui/material";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { useEffect, useMemo, useState } from "react";
+import { Alert, Box, Grid, Paper, Skeleton, Typography } from "@mui/material";
+import { Bar, Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import {
   DashboardCard,
@@ -7,117 +8,25 @@ import {
   ProgressCard,
 } from "./components/DashboardComponents";
 import {
-  People as PeopleIcon,
-  Work as WorkIcon,
-  Article as ArticleIcon,
-  Email as EmailIcon,
-  TrendingUp as TrendingUpIcon,
   Assessment as AssessmentIcon,
+  Email as EmailIcon,
+  Inbox as InboxIcon,
+  PendingActions as PendingActionsIcon,
+  Work as WorkIcon,
 } from "@mui/icons-material";
+import { ContactQuery, getContactQueries } from "../APIs/Contact";
+import { getProjects, ProjectRequest } from "../APIs/projectForm";
 
 Chart.register(...registerables);
 
-// Enhanced dummy data with more realistic values
-const dashboardStats = {
-  users: {
-    total: 1247,
-    active: 892,
-    new: 156,
-    growth: "+12.5%",
-  },
-  projects: {
-    total: 89,
-    pending: 23,
-    inProgress: 15,
-    completed: 45,
-    cancelled: 6,
-    completion: 73.6,
-  },
-  blogs: {
-    total: 342,
-    published: 298,
-    drafts: 44,
-    views: 15420,
-    growth: "+8.3%",
-  },
-  contactQueries: {
-    total: 156,
-    pending: 23,
-    replied: 98,
-    closed: 35,
-    responseRate: 86.5,
-  },
-  jobs: {
-    total: 78,
-    open: 23,
-    closed: 55,
-    applications: 432,
-  },
-};
-
-// Enhanced Chart Data with better styling
 const theme = {
   primary: "#EEBA2B",
-  secondary: "#4CAF50",
-  tertiary: "#2196F3",
-  quaternary: "#FF9800",
-  error: "#F44336",
+  slate: "#071a33",
   success: "#10b981",
+  info: "#2563eb",
   warning: "#f59e0b",
-};
-
-const userGrowthData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-  datasets: [
-    {
-      label: "New Users",
-      data: [45, 52, 38, 67, 73, 89, 95],
-      backgroundColor: theme.primary,
-      borderRadius: 6,
-      borderSkipped: false,
-    },
-    {
-      label: "Active Users",
-      data: [78, 85, 92, 88, 94, 102, 108],
-      backgroundColor: theme.secondary,
-      borderRadius: 6,
-      borderSkipped: false,
-    },
-  ],
-};
-
-const projectStatusData = {
-  labels: ["Completed", "In Progress", "Pending", "Cancelled"],
-  datasets: [
-    {
-      data: [45, 15, 23, 6],
-      backgroundColor: [
-        theme.success,
-        theme.warning,
-        theme.primary,
-        theme.error,
-      ],
-      borderWidth: 0,
-      hoverOffset: 8,
-    },
-  ],
-};
-
-const revenueData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "Revenue ($)",
-      data: [12400, 19000, 15600, 22100, 18900, 25300],
-      borderColor: theme.primary,
-      backgroundColor: `${theme.primary}20`,
-      tension: 0.4,
-      fill: true,
-      pointBackgroundColor: theme.primary,
-      pointBorderWidth: 2,
-      pointRadius: 6,
-    },
-  ],
+  error: "#ef4444",
+  muted: "#64748b",
 };
 
 const chartOptions = {
@@ -127,129 +36,275 @@ const chartOptions = {
     legend: {
       position: "bottom" as const,
       labels: {
-        padding: 20,
+        padding: 18,
         usePointStyle: true,
       },
     },
   },
   scales: {
     x: {
-      grid: {
-        display: false,
-      },
+      grid: { display: false },
     },
     y: {
-      grid: {
-        color: "#f1f5f9",
-      },
+      beginAtZero: true,
+      ticks: { precision: 0 },
+      grid: { color: "#f1f5f9" },
     },
   },
 };
 
+const normalizeProjectStatus = (status?: string, isReplied?: boolean) => {
+  if (isReplied && !status) return "In-Progress";
+  const normalized = (status || "Pending").toLowerCase();
+  if (normalized === "completed") return "Completed";
+  if (normalized === "cancelled" || normalized === "canceled") return "Cancelled";
+  if (normalized === "in-progress" || normalized === "in progress") return "In-Progress";
+  return "Pending";
+};
+
+const normalizeContactStatus = (query: ContactQuery) => {
+  if (query.isReplied && !query.status) return "replied";
+  return (query.status || "pending").toLowerCase();
+};
+
+const monthKey = (dateString?: string) => {
+  const date = new Date(dateString || "");
+  if (Number.isNaN(date.getTime())) return "Unknown";
+  return date.toLocaleDateString("fr-BE", { month: "short", year: "2-digit" });
+};
+
+const countByMonth = (items: Array<{ createdAt?: string }>) => {
+  const buckets = new Map<string, number>();
+
+  items.forEach((item) => {
+    const key = monthKey(item.createdAt);
+    buckets.set(key, (buckets.get(key) || 0) + 1);
+  });
+
+  return Array.from(buckets.entries()).slice(-6);
+};
+
 export default function Analytics() {
+  const [projects, setProjects] = useState<ProjectRequest[]>([]);
+  const [contacts, setContacts] = useState<ContactQuery[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const [projectData, contactData] = await Promise.all([
+        getProjects(1, 100, "all"),
+        getContactQueries(1, 100, "all"),
+      ]);
+
+      setProjects(projectData.requests || projectData.projects || []);
+      setContacts(contactData.queries || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load dashboard data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    void fetchDashboardData();
+  }, []);
+
+  const metrics = useMemo(() => {
+    const projectStatuses = projects.map((project) =>
+      normalizeProjectStatus(project.status, project.isReplied)
+    );
+    const contactStatuses = contacts.map(normalizeContactStatus);
+    const totalIncoming = projects.length + contacts.length;
+    const replied =
+      projects.filter((project) => project.isReplied).length +
+      contacts.filter((query) => normalizeContactStatus(query) === "replied").length;
+    const pending =
+      projectStatuses.filter((status) => status === "Pending").length +
+      contactStatuses.filter((status) => status === "pending").length;
+    const active = projectStatuses.filter((status) => status === "In-Progress").length;
+    const responseRate = totalIncoming > 0 ? Math.round((replied / totalIncoming) * 100) : 0;
+
+    return {
+      totalIncoming,
+      projectTotal: projects.length,
+      contactTotal: contacts.length,
+      pending,
+      active,
+      replied,
+      responseRate,
+      completed: projectStatuses.filter((status) => status === "Completed").length,
+      cancelled: projectStatuses.filter((status) => status === "Cancelled").length,
+      closedContacts: contactStatuses.filter((status) => status === "closed").length,
+    };
+  }, [contacts, projects]);
+
+  const monthlyEntries = useMemo(() => {
+    const projectMonths = new Map(countByMonth(projects));
+    const contactMonths = new Map(countByMonth(contacts));
+    const keys = Array.from(new Set([...projectMonths.keys(), ...contactMonths.keys()]));
+
+    return keys.map((key) => ({
+      key,
+      projects: projectMonths.get(key) || 0,
+      contacts: contactMonths.get(key) || 0,
+    }));
+  }, [contacts, projects]);
+
+  const incomingChartData = {
+    labels: monthlyEntries.map((entry) => entry.key),
+    datasets: [
+      {
+        label: "Project requests",
+        data: monthlyEntries.map((entry) => entry.projects),
+        backgroundColor: theme.primary,
+        borderRadius: 6,
+      },
+      {
+        label: "Contact messages",
+        data: monthlyEntries.map((entry) => entry.contacts),
+        backgroundColor: theme.info,
+        borderRadius: 6,
+      },
+    ],
+  };
+
+  const projectStatusData = {
+    labels: ["Pending", "In Progress", "Completed", "Cancelled"],
+    datasets: [
+      {
+        data: [
+          projects.filter((project) => normalizeProjectStatus(project.status, project.isReplied) === "Pending").length,
+          metrics.active,
+          metrics.completed,
+          metrics.cancelled,
+        ],
+        backgroundColor: [theme.warning, theme.info, theme.success, theme.error],
+        borderWidth: 0,
+        hoverOffset: 8,
+      },
+    ],
+  };
+
+  const contactStatusData = {
+    labels: ["Pending", "Replied", "Closed"],
+    datasets: [
+      {
+        data: [
+          contacts.filter((query) => normalizeContactStatus(query) === "pending").length,
+          contacts.filter((query) => normalizeContactStatus(query) === "replied").length,
+          metrics.closedContacts,
+        ],
+        backgroundColor: [theme.warning, theme.success, theme.muted],
+        borderWidth: 0,
+        hoverOffset: 8,
+      },
+    ],
+  };
+
+  if (loading) {
+    return (
+      <Box>
+        <PageHeader title="Admin Overview" subtitle="Loading live inbox metrics..." />
+        <Grid container spacing={3} sx={{ mb: 4 }}>
+          {[1, 2, 3, 4].map((item) => (
+            <Grid item xs={12} sm={6} lg={3} key={item}>
+              <Skeleton variant="rounded" height={140} />
+            </Grid>
+          ))}
+        </Grid>
+        <Skeleton variant="rounded" height={420} />
+      </Box>
+    );
+  }
+
   return (
     <Box>
       <PageHeader
-        title="Dashboard Analytics"
-        subtitle="Overview of your system performance and key metrics"
+        title="Admin Overview"
+        subtitle="Live view of website requests, contact messages and response activity."
       />
 
-      {/* Key Metrics Cards */}
+      {error && (
+        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
+          {error}
+        </Alert>
+      )}
+
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} lg={3}>
           <DashboardCard
-            title="Total Users"
-            value={dashboardStats.users.total.toLocaleString()}
-            subtitle={`${dashboardStats.users.active} active users`}
-            icon={<PeopleIcon />}
-            color="#4CAF50"
-            trend="up"
-            trendValue={dashboardStats.users.growth}
+            title="Incoming Requests"
+            value={metrics.totalIncoming}
+            subtitle={`${metrics.projectTotal} projects, ${metrics.contactTotal} contacts`}
+            icon={<InboxIcon />}
+            color={theme.slate}
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <DashboardCard
-            title="Total Projects"
-            value={dashboardStats.projects.total}
-            subtitle={`${dashboardStats.projects.completed} completed`}
+            title="Project Requests"
+            value={metrics.projectTotal}
+            subtitle={`${metrics.active} in progress`}
             icon={<WorkIcon />}
-            color="#2196F3"
-            trend="up"
-            trendValue="+5.2%"
+            color={theme.primary}
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <DashboardCard
-            title="Blog Posts"
-            value={dashboardStats.blogs.total}
-            subtitle={`${dashboardStats.blogs.views.toLocaleString()} total views`}
-            icon={<ArticleIcon />}
-            color="#FF9800"
-            trend="up"
-            trendValue={dashboardStats.blogs.growth}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <DashboardCard
-            title="Contact Queries"
-            value={dashboardStats.contactQueries.total}
-            subtitle={`${dashboardStats.contactQueries.responseRate}% response rate`}
+            title="Contact Messages"
+            value={metrics.contactTotal}
+            subtitle={`${contacts.filter((query) => normalizeContactStatus(query) === "pending").length} pending`}
             icon={<EmailIcon />}
-            color="#9C27B0"
-            trend="up"
-            trendValue="+3.1%"
+            color={theme.info}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
+          <DashboardCard
+            title="Pending Follow-Up"
+            value={metrics.pending}
+            subtitle={`${metrics.replied} already replied`}
+            icon={<PendingActionsIcon />}
+            color={theme.warning}
           />
         </Grid>
       </Grid>
 
-      {/* Progress Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={6} lg={4}>
+          <ProgressCard
+            title="Response Rate"
+            current={metrics.responseRate}
+            total={100}
+            subtitle="Incoming requests already replied"
+            color={theme.success}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
           <ProgressCard
             title="Project Completion"
-            current={dashboardStats.projects.completed}
-            total={dashboardStats.projects.total}
-            subtitle="Projects completed this quarter"
-            color="#4CAF50"
+            current={metrics.completed}
+            total={Math.max(metrics.projectTotal, 1)}
+            subtitle="Completed project requests"
+            color={theme.primary}
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={6} lg={4}>
           <ProgressCard
-            title="Query Response Rate"
-            current={Math.round(
-              (dashboardStats.contactQueries.replied /
-                dashboardStats.contactQueries.total) *
-                100
-            )}
-            total={100}
-            subtitle="Queries responded to"
-            color="#2196F3"
-          />
-        </Grid>
-        <Grid item xs={12} md={6} lg={3}>
-          <ProgressCard
-            title="Active Jobs"
-            current={dashboardStats.jobs.open}
-            total={dashboardStats.jobs.total}
-            subtitle="Currently open positions"
-            color="#FF9800"
-          />
-        </Grid>
-        <Grid item xs={12} md={6} lg={3}>
-          <ProgressCard
-            title="Published Blogs"
-            current={dashboardStats.blogs.published}
-            total={dashboardStats.blogs.total}
-            subtitle="Published vs drafts"
-            color="#9C27B0"
+            title="Contact Closure"
+            current={metrics.closedContacts}
+            total={Math.max(metrics.contactTotal, 1)}
+            subtitle="Contact messages closed"
+            color={theme.muted}
           />
         </Grid>
       </Grid>
 
-      {/* Charts Section */}
       <Grid container spacing={3}>
-        {/* User Growth Chart */}
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12} lg={7}>
           <Paper
             sx={{
               p: 3,
@@ -260,28 +315,23 @@ export default function Analytics() {
             }}
           >
             <Box sx={{ mb: 2 }}>
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
-              >
-                <TrendingUpIcon sx={{ color: "#EEBA2B" }} />
-                <Box
-                  sx={{ fontWeight: 600, fontSize: "1.1rem", color: "#1e293b" }}
-                >
-                  User Growth Trends
-                </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+                <AssessmentIcon sx={{ color: theme.primary }} />
+                <Typography fontWeight={700} color="#1e293b">
+                  Incoming Activity
+                </Typography>
               </Box>
-              <Box sx={{ color: "#64748b", fontSize: "0.875rem" }}>
-                Monthly user acquisition and activity patterns
-              </Box>
+              <Typography color="#64748b" fontSize="0.875rem">
+                Project requests and contact messages by month.
+              </Typography>
             </Box>
             <Box sx={{ height: 300 }}>
-              <Bar data={userGrowthData} options={chartOptions} />
+              <Bar data={incomingChartData} options={chartOptions} />
             </Box>
           </Paper>
         </Grid>
 
-        {/* Project Status Distribution */}
-        <Grid item xs={12} lg={4}>
+        <Grid item xs={12} md={6} lg={2.5}>
           <Paper
             sx={{
               p: 3,
@@ -291,56 +341,16 @@ export default function Analytics() {
               height: 400,
             }}
           >
-            <Box sx={{ mb: 2 }}>
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
-              >
-                <AssessmentIcon sx={{ color: "#EEBA2B" }} />
-                <Box
-                  sx={{ fontWeight: 600, fontSize: "1.1rem", color: "#1e293b" }}
-                >
-                  Project Status
-                </Box>
-              </Box>
-              <Box sx={{ color: "#64748b", fontSize: "0.875rem" }}>
-                Current project distribution
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                height: 300,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Box sx={{ width: "80%", height: "80%" }}>
-                <Doughnut
-                  data={projectStatusData}
-                  options={{
-                    ...chartOptions,
-                    plugins: {
-                      ...chartOptions.plugins,
-                      legend: {
-                        position: "bottom" as const,
-                        labels: {
-                          padding: 15,
-                          usePointStyle: true,
-                          font: {
-                            size: 12,
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </Box>
+            <Typography fontWeight={700} color="#1e293b" sx={{ mb: 1 }}>
+              Project Status
+            </Typography>
+            <Box sx={{ height: 310, display: "flex", alignItems: "center" }}>
+              <Doughnut data={projectStatusData} options={{ ...chartOptions, scales: undefined }} />
             </Box>
           </Paper>
         </Grid>
 
-        {/* Revenue Chart */}
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6} lg={2.5}>
           <Paper
             sx={{
               p: 3,
@@ -350,23 +360,11 @@ export default function Analytics() {
               height: 400,
             }}
           >
-            <Box sx={{ mb: 2 }}>
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
-              >
-                <TrendingUpIcon sx={{ color: "#EEBA2B" }} />
-                <Box
-                  sx={{ fontWeight: 600, fontSize: "1.1rem", color: "#1e293b" }}
-                >
-                  Revenue Performance
-                </Box>
-              </Box>
-              <Box sx={{ color: "#64748b", fontSize: "0.875rem" }}>
-                Monthly revenue trends and projections
-              </Box>
-            </Box>
-            <Box sx={{ height: 300 }}>
-              <Line data={revenueData} options={chartOptions} />
+            <Typography fontWeight={700} color="#1e293b" sx={{ mb: 1 }}>
+              Contact Status
+            </Typography>
+            <Box sx={{ height: 310, display: "flex", alignItems: "center" }}>
+              <Doughnut data={contactStatusData} options={{ ...chartOptions, scales: undefined }} />
             </Box>
           </Paper>
         </Grid>

@@ -1,93 +1,188 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useEffect, useMemo, useState } from "react";
 import {
+  Alert,
   Box,
-  Typography,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Grid,
   Card,
   CardContent,
-  Alert,
-  Snackbar,
-  Skeleton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Skeleton,
+  Snackbar,
+  TextField,
+  Typography,
 } from "@mui/material";
 import {
-  Email,
-  Phone,
-  Business,
-  ExpandMore,
-  Timeline,
-  Person,
   Assignment,
-  Reply,
-  Refresh,
+  Business,
   Delete,
+  Email,
+  MarkEmailRead,
+  Person,
+  Phone,
+  Refresh,
+  Reply,
+  Schedule,
+  Work,
 } from "@mui/icons-material";
+import { useAuth } from "../contexts/AuthContext";
 import {
-  DashboardCard,
-  PageHeader,
-  DataTable,
-  StatusChip,
+  deleteProject,
+  getProjectById,
+  getProjects,
+  ProjectRequest,
+  replyToProject,
+  updateProjectStatus,
+} from "../APIs/projectForm";
+import {
   ActionButton,
+  DashboardCard,
+  DataTable,
   MenuAction,
+  PageHeader,
+  StatusChip,
 } from "./components/DashboardComponents";
 
-interface Project {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  serviceType: string;
-  selectedServices: string[];
-  customServiceDescription: string;
-  customServiceNeeds: string;
-  serviceSpecificOtherDescription: string;
-  additionalInfo: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  isReplied?: boolean;
-  repliedAt?: string;
-  repliedBy?: string;
-  replyMessage?: string;
-}
+const statusOptions = ["Pending", "In-Progress", "Completed", "Cancelled"];
+type RequestKind = "projects" | "visibility" | "assistance";
 
-export default function Projects() {
+type ProjectsProps = {
+  kind?: RequestKind;
+};
+
+const requestKindCopy: Record<
+  RequestKind,
+  {
+    title: string;
+    subtitle: string;
+    loading: string;
+    empty: string;
+    totalLabel: string;
+  }
+> = {
+  projects: {
+    title: "Project Requests",
+    subtitle: "Inbox for requests submitted from the Start Project form.",
+    loading: "Loading incoming project requests...",
+    empty: "No project requests found",
+    totalLabel: "Project Requests",
+  },
+  visibility: {
+    title: "Visibility Tests",
+    subtitle: "Inbox for visibility tests submitted from Tester ma visibilite.",
+    loading: "Loading visibility tests...",
+    empty: "No visibility tests found",
+    totalLabel: "Visibility Tests",
+  },
+  assistance: {
+    title: "Assistance Requests",
+    subtitle: "Inbox for digital assistance, troubleshooting and setup requests.",
+    loading: "Loading assistance requests...",
+    empty: "No assistance requests found",
+    totalLabel: "Assistance Requests",
+  },
+};
+
+const getServiceType = (project: ProjectRequest) =>
+  (project.serviceType || "").trim().toLowerCase();
+
+const isVisibilityRequest = (project: ProjectRequest) => {
+  const serviceType = getServiceType(project);
+  const selected = (project.selectedServices || []).join(" ").toLowerCase();
+  return (
+    serviceType.includes("diagnostic visibilite") ||
+    serviceType.includes("visibility test") ||
+    selected.includes("test visibilite")
+  );
+};
+
+const isAssistanceRequest = (project: ProjectRequest) => {
+  const serviceType = getServiceType(project);
+  const selected = (project.selectedServices || []).join(" ").toLowerCase();
+  return (
+    serviceType.includes("assistance numerique") ||
+    serviceType.includes("digital assistance") ||
+    serviceType.includes("depannage") ||
+    selected.includes("depannage") ||
+    selected.includes("troubleshooting")
+  );
+};
+
+const matchesRequestKind = (project: ProjectRequest, kind: RequestKind) => {
+  if (kind === "visibility") return isVisibilityRequest(project);
+  if (kind === "assistance") return isAssistanceRequest(project);
+  return !isVisibilityRequest(project) && !isAssistanceRequest(project);
+};
+
+const normalizeStatus = (status?: string, isReplied?: boolean) => {
+  if (isReplied && !status) return "In-Progress";
+  const normalized = (status || "Pending").toLowerCase();
+  if (normalized === "in-progress" || normalized === "in progress") return "In-Progress";
+  if (normalized === "completed") return "Completed";
+  if (normalized === "cancelled" || normalized === "canceled") return "Cancelled";
+  return "Pending";
+};
+
+const getStatusVariant = (status: string) => {
+  switch (normalizeStatus(status).toLowerCase()) {
+    case "completed":
+      return "success";
+    case "in-progress":
+      return "info";
+    case "cancelled":
+      return "error";
+    default:
+      return "warning";
+  }
+};
+
+const formatDate = (dateString?: string) => {
+  if (!dateString) return "Unknown date";
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return "Unknown date";
+  return date.toLocaleString("fr-BE", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+const getProjectDateValue = (project: ProjectRequest) => {
+  const date = new Date(project.createdAt || 0);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+};
+
+export default function Projects({ kind = "projects" }: ProjectsProps) {
   const { isAuthenticated, token } = useAuth();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const pageCopy = requestKindCopy[kind];
+  const [projects, setProjects] = useState<ProjectRequest[]>([]);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [serviceTypeFilter, setServiceTypeFilter] = useState("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectRequest | null>(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [serviceTypeFilter, setServiceTypeFilter] = useState("");
   const [replyModalOpen, setReplyModalOpen] = useState(false);
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
   const [replyLoading, setReplyLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">(
-    "success"
-  );
+  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
 
-  const showMessage = (
-    message: string,
-    severity: "success" | "error" = "success"
-  ) => {
+  const showMessage = (message: string, severity: "success" | "error" = "success") => {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
     setSnackbarOpen(true);
@@ -98,22 +193,15 @@ export default function Projects() {
       setLoading(true);
       setError(null);
 
-      // Check authentication first
       if (!isAuthenticated || !token) {
-        throw new Error("Please login to access this feature");
+        throw new Error("Please login to access project requests.");
       }
 
-      const module = await import("../APIs/projectForm");
-
-      if (typeof module.getProjects !== "function") {
-        throw new Error("getProjects function not found in module");
-      }
-
-      const data = await module.getProjects();
-      setProjects(data.requests || []);
+      const data = await getProjects(1, 100, "all");
+      const receivedProjects = data.requests || data.projects || [];
+      setProjects([...receivedProjects].sort((a, b) => getProjectDateValue(b) - getProjectDateValue(a)));
     } catch (err) {
-      console.error("Error fetching projects:", err);
-      setError(err instanceof Error ? err.message : "Failed to fetch projects");
+      setError(err instanceof Error ? err.message : "Failed to fetch project requests.");
     } finally {
       setLoading(false);
     }
@@ -121,750 +209,463 @@ export default function Projects() {
 
   useEffect(() => {
     if (isAuthenticated && token) {
-      fetchProjects();
+      void fetchProjects();
     }
   }, [isAuthenticated, token]);
 
-  const filteredProjects = projects.filter((project) => {
-    const matchesSearch =
-      project.name.toLowerCase().includes(search.toLowerCase()) ||
-      project.email.toLowerCase().includes(search.toLowerCase()) ||
-      project.company.toLowerCase().includes(search.toLowerCase()) ||
-      project.serviceType.toLowerCase().includes(search.toLowerCase());
+  const serviceTypes = useMemo(
+    () =>
+      Array.from(new Set(projects
+        .filter((project) => matchesRequestKind(project, kind))
+        .map((project) => project.serviceType || "Not specified")))
+        .filter(Boolean)
+        .sort(),
+    [kind, projects]
+  );
 
-    const matchesServiceType =
-      serviceTypeFilter === "" || project.serviceType === serviceTypeFilter;
+  const scopedProjects = useMemo(
+    () => projects.filter((project) => matchesRequestKind(project, kind)),
+    [kind, projects]
+  );
 
-    return matchesSearch && matchesServiceType;
-  });
+  const filteredProjects = useMemo(() => {
+    const query = search.trim().toLowerCase();
 
-  const handleView = async (project: Project) => {
+    return scopedProjects.filter((project) => {
+      const status = normalizeStatus(project.status, project.isReplied);
+      const serviceType = project.serviceType || "Not specified";
+      const searchPool = [
+        project.name,
+        project.email,
+        project.phone,
+        project.company,
+        serviceType,
+        project.customServiceDescription,
+        project.customServiceNeeds,
+        project.additionalInfo,
+        ...(project.selectedServices || []),
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const matchesSearch = !query || searchPool.includes(query);
+      const matchesStatus = statusFilter === "all" || status === statusFilter;
+      const matchesServiceType = serviceTypeFilter === "all" || serviceType === serviceTypeFilter;
+
+      return matchesSearch && matchesStatus && matchesServiceType;
+    });
+  }, [scopedProjects, search, serviceTypeFilter, statusFilter]);
+
+  const metrics = useMemo(() => {
+    const total = scopedProjects.length;
+    const pending = scopedProjects.filter((p) => normalizeStatus(p.status, p.isReplied) === "Pending").length;
+    const active = scopedProjects.filter((p) => normalizeStatus(p.status, p.isReplied) === "In-Progress").length;
+    const replied = scopedProjects.filter((p) => p.isReplied).length;
+
+    return { total, pending, active, replied };
+  }, [scopedProjects]);
+
+  const handleView = async (project: ProjectRequest) => {
     try {
-      // Check authentication first
-      if (!isAuthenticated || !token) {
-        throw new Error("Please login to access this feature");
-      }
-
-      const module = await import("../APIs/projectForm");
-
-      if (typeof module.getProjectById !== "function") {
-        throw new Error("getProjectById function not found in module");
-      }
-
-      const detailedProject = await module.getProjectById(project._id);
-      setSelectedProject(detailedProject.request || detailedProject);
+      const response = await getProjectById(project._id);
+      const detailedProject = (response as { request?: ProjectRequest }).request ?? (response as ProjectRequest);
+      setSelectedProject(detailedProject);
       setViewModalOpen(true);
     } catch (err) {
-      console.error("Error fetching project details:", err);
-      setError(
-        err instanceof Error ? err.message : "Failed to fetch project details"
-      );
+      showMessage(err instanceof Error ? err.message : "Failed to fetch project details.", "error");
     }
   };
 
   const handleStatusUpdate = async (projectId: string, newStatus: string) => {
     try {
-      const module = await import("../APIs/projectForm");
-
-      if (typeof module.updateProjectStatus !== "function") {
-        throw new Error("updateProjectStatus function not found in module");
-      }
-
-      await module.updateProjectStatus(projectId, newStatus);
-      fetchProjects(); // Refresh the list
-      showMessage(`Project status updated to ${newStatus}`, "success");
-    } catch (err) {
-      console.error("Error updating project status:", err);
-      showMessage(
-        err instanceof Error ? err.message : "Failed to update project status",
-        "error"
+      await updateProjectStatus(projectId, newStatus);
+      setProjects((current) =>
+        current.map((project) =>
+          project._id === projectId ? { ...project, status: newStatus } : project
+        )
       );
+      setSelectedProject((current) =>
+        current?._id === projectId ? { ...current, status: newStatus } : current
+      );
+      showMessage(`Status updated to ${newStatus}.`);
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to update status.", "error");
     }
   };
 
   const handleDelete = async (projectId: string) => {
-    if (
-      window.confirm("Are you sure you want to delete this project request?")
-    ) {
-      try {
-        const module = await import("../APIs/projectForm");
+    if (!window.confirm("Delete this project request?")) return;
 
-        if (typeof module.deleteProject !== "function") {
-          throw new Error("deleteProject function not found in module");
-        }
-
-        await module.deleteProject(projectId);
-        fetchProjects(); // Refresh the list
-        showMessage("Project deleted successfully", "success");
-      } catch (err) {
-        console.error("Error deleting project:", err);
-        showMessage(
-          err instanceof Error ? err.message : "Failed to delete project",
-          "error"
-        );
-      }
+    try {
+      await deleteProject(projectId);
+      setProjects((current) => current.filter((project) => project._id !== projectId));
+      setViewModalOpen(false);
+      showMessage("Project request deleted.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to delete project request.", "error");
     }
   };
 
-  const handleReply = (project: Project) => {
+  const handleReply = (project: ProjectRequest) => {
     setSelectedProject(project);
-    setReplySubject(`Re: ${project.serviceType} Service Inquiry`);
+    setReplySubject(`Re: ${project.serviceType || "Project request"}`);
     setReplyMessage(
-      `Dear ${project.name},\n\nThank you for your interest in our services. I have reviewed your project requirements and would like to discuss this further.\n\nBest regards,\nCreativa Poeta Team`
+      `Bonjour ${project.name},\n\nMerci pour votre demande. Nous l'avons bien recue et nous allons revenir vers vous avec les prochaines etapes.\n\nCreativa Poeta`
     );
     setReplyModalOpen(true);
   };
 
   const submitReply = async () => {
     if (!selectedProject || !replySubject.trim() || !replyMessage.trim()) {
-      showMessage("Please fill in all required fields", "error");
+      showMessage("Subject and message are required.", "error");
       return;
     }
 
     try {
       setReplyLoading(true);
-      const module = await import("../APIs/projectForm");
-
-      if (typeof module.replyToProject !== "function") {
-        throw new Error("replyToProject function not found in module");
-      }
-
-      await module.replyToProject(
-        selectedProject._id,
-        replyMessage,
-        replySubject
+      await replyToProject(selectedProject._id, replyMessage, replySubject);
+      await handleStatusUpdate(selectedProject._id, "In-Progress");
+      setProjects((current) =>
+        current.map((project) =>
+          project._id === selectedProject._id
+            ? { ...project, isReplied: true, replyMessage, status: "In-Progress" }
+            : project
+        )
       );
       setReplyModalOpen(false);
-      setReplySubject("");
-      setReplyMessage("");
-      setError(null);
-      showMessage("Reply sent successfully!", "success");
-      // Optionally update project status to "In-Progress" after reply
-      await handleStatusUpdate(selectedProject._id, "In-Progress");
-      fetchProjects(); // Refresh the list to show updated reply status
+      showMessage("Reply sent.");
     } catch (err) {
-      console.error("Error sending reply:", err);
-      showMessage(
-        err instanceof Error ? err.message : "Failed to send reply",
-        "error"
-      );
+      showMessage(err instanceof Error ? err.message : "Failed to send reply.", "error");
     } finally {
       setReplyLoading(false);
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
-  };
+  const tableRows = filteredProjects.map((project) => {
+    const status = normalizeStatus(project.status, project.isReplied);
+    const serviceType = project.serviceType || "Not specified";
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "pending":
-        return "warning";
-      case "in-progress":
-        return "info";
-      case "completed":
-        return "success";
-      case "cancelled":
-        return "error";
-      default:
-        return "default";
-    }
-  };
-
-  const getServiceTypeColor = (serviceType: string) => {
-    const colors = {
-      "Graphic Design": "#e91e63",
-      "Content Writing": "#4caf50",
-      "Digital Marketing": "#ff9800",
-      "Web Development": "#2196f3",
-      Other: "#795548",
+    return {
+      id: project._id,
+      Client: (
+        <Box>
+          <Typography fontWeight={700}>{project.name || "Unknown client"}</Typography>
+          <Typography variant="caption" color="text.secondary">
+            {project.email}
+          </Typography>
+        </Box>
+      ),
+      Company: project.company || "Personal request",
+      Service: (
+        <Chip
+          label={serviceType}
+          size="small"
+          sx={{ bgcolor: "#071a33", color: "white", fontWeight: 700, maxWidth: 260 }}
+        />
+      ),
+      Needs: (
+        <Box sx={{ maxWidth: 360 }}>
+          {(project.selectedServices || []).slice(0, 2).map((service) => (
+            <Chip
+              key={service}
+              label={service}
+              size="small"
+              variant="outlined"
+              sx={{ mr: 0.5, mb: 0.5, maxWidth: 220 }}
+            />
+          ))}
+          {(project.selectedServices?.length || 0) > 2 && (
+            <Chip label={`+${(project.selectedServices?.length || 0) - 2}`} size="small" />
+          )}
+          {!project.selectedServices?.length && (
+            <Typography variant="caption" color="text.secondary">
+              {project.customServiceDescription || "No specific service selected"}
+            </Typography>
+          )}
+        </Box>
+      ),
+      Status: <StatusChip status={status} variant={getStatusVariant(status) as any} />,
+      Date: formatDate(project.createdAt),
     };
-    return colors[serviceType as keyof typeof colors] || "#EEBA2B";
-  };
+  });
 
   if (loading) {
     return (
-      <Box sx={{ flexGrow: 1, p: 3 }}>
-        <PageHeader
-          title="Project Requests Management"
-          subtitle="Loading project data..."
-        />
+      <Box sx={{ p: 3 }}>
+        <PageHeader title={pageCopy.title} subtitle={pageCopy.loading} />
         <Grid container spacing={3} sx={{ mb: 4 }}>
           {[1, 2, 3, 4].map((item) => (
             <Grid item xs={12} sm={6} md={3} key={item}>
-              <Card sx={{ textAlign: "center", bgcolor: "#f8f9fa" }}>
-                <CardContent>
-                  <Skeleton
-                    variant="text"
-                    width={80}
-                    height={40}
-                    sx={{ mx: "auto" }}
-                  />
-                  <Skeleton
-                    variant="text"
-                    width={120}
-                    height={20}
-                    sx={{ mx: "auto" }}
-                  />
-                </CardContent>
-              </Card>
+              <Skeleton variant="rounded" height={130} />
             </Grid>
           ))}
         </Grid>
-        <Box sx={{ mb: 3 }}>
-          <Skeleton variant="rectangular" height={56} sx={{ mb: 2 }} />
-        </Box>
-        <Skeleton variant="rectangular" height={400} />
+        <Skeleton variant="rounded" height={420} />
       </Box>
     );
   }
 
-  if (error) return <Typography color="error">Error: {error}</Typography>;
-
-  // Calculate metrics for dashboard cards
-  const totalProjects = projects.length;
-  const repliedProjects = projects.filter((p) => p.isReplied).length;
-  const pendingProjects = projects.filter((p) => p.status === "Pending").length;
-  const completedProjects = projects.filter(
-    (p) => p.status === "Completed"
-  ).length;
-
-  // Calculate trends (mock data for demonstration)
-  const totalTrend = "up" as const;
-  const repliedTrend = "up" as const;
-  const pendingTrend = "down" as const;
-  const completedTrend = "up" as const;
-
-  // Prepare table data for DataTable component
-  const tableHeaders = [
-    "Client Name",
-    "Company",
-    "Service Type",
-    "Services",
-    "Status",
-    "Created",
-  ];
-
-  const tableRows = filteredProjects.map((project) => ({
-    id: project._id,
-    "Client Name": (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Person fontSize="small" />
-        {project.name}
-      </Box>
-    ),
-    Company: (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Business fontSize="small" />
-        {project.company || "N/A"}
-      </Box>
-    ),
-    "Service Type": (
-      <Chip
-        label={project.serviceType}
-        size="small"
-        sx={{
-          bgcolor: getServiceTypeColor(project.serviceType),
-          color: "white",
-          fontWeight: "bold",
-          maxWidth: "200px",
-        }}
-      />
-    ),
-    Services: (
-      <Box sx={{ maxWidth: "250px" }}>
-        {project.selectedServices && project.selectedServices.length > 0 ? (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-            {project.selectedServices.slice(0, 2).map((service, index) => (
-              <Chip
-                key={index}
-                label={
-                  service.length > 30
-                    ? service.substring(0, 30) + "..."
-                    : service
-                }
-                size="small"
-                variant="outlined"
-                sx={{ fontSize: "0.7rem", height: "20px" }}
-              />
-            ))}
-            {project.selectedServices.length > 2 && (
-              <Chip
-                label={`+${project.selectedServices.length - 2} more`}
-                size="small"
-                variant="outlined"
-                sx={{ fontSize: "0.7rem", height: "20px" }}
-              />
-            )}
-          </Box>
-        ) : project.customServiceDescription ? (
-          <Typography variant="caption" sx={{ fontStyle: "italic" }}>
-            Custom: {project.customServiceDescription.substring(0, 50)}...
-          </Typography>
-        ) : (
-          <Typography variant="caption" color="textSecondary">
-            No services specified
-          </Typography>
-        )}
-      </Box>
-    ),
-    Status: (
-      <StatusChip
-        status={project.isReplied ? "Replied" : "Pending"}
-        variant={project.isReplied ? "success" : "warning"}
-      />
-    ),
-    Created: formatDate(project.createdAt),
-  }));
-
-  const handleViewProject = (id: string) => {
-    const project = projects.find((p) => p._id === id);
-    if (project) handleView(project);
-  };
-
-  const customActions = (row: any) => {
-    const project = projects.find((p) => p._id === row.id);
-    if (!project) return null;
-
-    return (
-      <>
-        <MenuAction
-          icon={<Reply />}
-          label={project.isReplied ? "Replied" : "Reply"}
-          onClick={() => handleReply(project)}
-          disabled={project.isReplied}
-          color="#EEBA2B"
-        />
-        <MenuAction
-          icon={<Delete />}
-          label="Delete"
-          onClick={() => handleDelete(project._id)}
-          color="#ef4444"
-        />
-      </>
-    );
-  };
-
   return (
     <Box sx={{ p: 3 }}>
       <PageHeader
-        title="Project Requests Management"
-        subtitle="Manage client project requests and communications"
+        title={pageCopy.title}
+        subtitle={pageCopy.subtitle}
         action={
-          <ActionButton
-            variant="secondary"
-            startIcon={<Refresh />}
-            onClick={fetchProjects}
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Refresh"}
+          <ActionButton variant="secondary" startIcon={<Refresh />} onClick={fetchProjects}>
+            Refresh
           </ActionButton>
         }
       />
 
-      {/* Summary Cards */}
+      {error && (
+        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
+          {error}
+        </Alert>
+      )}
+
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard
-            title="Total Projects"
-            value={totalProjects.toString()}
-            icon={<Assignment />}
-            trend={totalTrend}
-            trendValue="+8.2%"
-            color="#EEBA2B"
-          />
+          <DashboardCard title={pageCopy.totalLabel} value={metrics.total} icon={<Assignment />} color="#071a33" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard
-            title="Replied"
-            value={repliedProjects.toString()}
-            icon={<Reply />}
-            trend={repliedTrend}
-            trendValue="+12.5%"
-            color="#4caf50"
-          />
+          <DashboardCard title="Pending" value={metrics.pending} icon={<Schedule />} color="#f59e0b" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard
-            title="Pending"
-            value={pendingProjects.toString()}
-            icon={<Timeline />}
-            trend={pendingTrend}
-            trendValue="-3.1%"
-            color="#ff9800"
-          />
+          <DashboardCard title="In Progress" value={metrics.active} icon={<Work />} color="#2563eb" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard
-            title="Completed"
-            value={completedProjects.toString()}
-            icon={<Assignment />}
-            trend={completedTrend}
-            trendValue="+15.3%"
-            color="#2196f3"
-          />
+          <DashboardCard title="Replied" value={metrics.replied} icon={<MarkEmailRead />} color="#16a34a" />
         </Grid>
       </Grid>
 
-      {/* Search and Filter Controls */}
-      <Card sx={{ mb: 3 }}>
+      <Card sx={{ mb: 3, borderRadius: 3 }}>
         <CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <TextField
-              label="Search projects..."
-              variant="outlined"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              sx={{
-                flexGrow: 1,
-                minWidth: 250,
-                maxWidth: 400,
-                "& .MuiOutlinedInput-root": {
-                  "&:hover fieldset": { borderColor: "#EEBA2B" },
-                  "&.Mui-focused fieldset": { borderColor: "#EEBA2B" },
-                },
-                "& .MuiInputLabel-root.Mui-focused": { color: "#EEBA2B" },
-              }}
-            />
-            <FormControl sx={{ minWidth: 200 }}>
-              <InputLabel>Filter by Type</InputLabel>
-              <Select
-                value={serviceTypeFilter}
-                label="Filter by Type"
-                onChange={(e) => setServiceTypeFilter(e.target.value)}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "&:hover fieldset": { borderColor: "#EEBA2B" },
-                    "&.Mui-focused fieldset": { borderColor: "#EEBA2B" },
-                  },
-                }}
-              >
-                <MenuItem value="">All Types</MenuItem>
-                {Array.from(new Set(projects.map((p) => p.serviceType)))
-                  .sort()
-                  .map((type) => (
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} md={5}>
+              <TextField
+                label="Search name, email, service, message..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormControl fullWidth>
+                <InputLabel>Status</InputLabel>
+                <Select
+                  value={statusFilter}
+                  label="Status"
+                  onChange={(event) => setStatusFilter(event.target.value)}
+                >
+                  <MenuItem value="all">All statuses</MenuItem>
+                  {statusOptions.map((status) => (
+                    <MenuItem key={status} value={status}>
+                      {status}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormControl fullWidth>
+                <InputLabel>Service</InputLabel>
+                <Select
+                  value={serviceTypeFilter}
+                  label="Service"
+                  onChange={(event) => setServiceTypeFilter(event.target.value)}
+                >
+                  <MenuItem value="all">All services</MenuItem>
+                  {serviceTypes.map((type) => (
                     <MenuItem key={type} value={type}>
                       {type}
                     </MenuItem>
                   ))}
-              </Select>
-            </FormControl>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ display: "flex", alignItems: "center", gap: 1 }}
-            >
-              Total: {filteredProjects.length} project
-              {filteredProjects.length !== 1 ? "s" : ""}
-            </Typography>
-          </Box>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={1}>
+              <Typography variant="body2" color="text.secondary">
+                {filteredProjects.length} shown
+              </Typography>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
 
-      {/* Projects Table */}
       <DataTable
-        headers={tableHeaders}
+        headers={["Client", "Company", "Service", "Needs", "Status", "Date"]}
         hiddenFields={["id"]}
         rows={tableRows}
-        onView={handleViewProject}
-        customActions={customActions}
-        emptyMessage="No projects found"
+        onView={(id) => {
+          const project = projects.find((item) => item._id === id);
+          if (project) void handleView(project);
+        }}
+        customActions={(row) => {
+          const project = projects.find((item) => item._id === row.id);
+          if (!project) return null;
+
+          return (
+            <>
+              <MenuAction icon={<Reply />} label="Reply" onClick={() => handleReply(project)} color="#EEBA2B" />
+              <MenuAction icon={<Delete />} label="Delete" onClick={() => void handleDelete(project._id)} color="#ef4444" />
+            </>
+          );
+        }}
+        emptyMessage={pageCopy.empty}
       />
 
-      {/* Project Details Modal */}
-      <Dialog
-        open={viewModalOpen}
-        onClose={() => setViewModalOpen(false)}
-        maxWidth="md"
-        fullWidth
-      >
-        <DialogTitle sx={{ bgcolor: "#EEBA2B", color: "black" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Assignment />
-            Project Request Details
-          </Box>
+      <Dialog open={viewModalOpen} onClose={() => setViewModalOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>
+          Project Request Details
         </DialogTitle>
-        <DialogContent sx={{ mt: 2 }}>
+        <DialogContent sx={{ pt: 3 }}>
           {selectedProject && (
-            <Grid container spacing={3}>
-              {/* Client Information */}
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6" sx={{ mb: 2, color: "#EEBA2B" }}>
-                      👤 Client Information
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Paper sx={{ p: 2.5, height: "100%" }}>
+                    <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
+                      Client
                     </Typography>
-                    <Box
-                      sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-                    >
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                      >
-                        <Person fontSize="small" />
-                        <Typography>
-                          <strong>Name:</strong> {selectedProject.name}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                      >
-                        <Email fontSize="small" />
-                        <Typography>
-                          <strong>Email:</strong> {selectedProject.email}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                      >
-                        <Phone fontSize="small" />
-                        <Typography>
-                          <strong>Phone:</strong> {selectedProject.phone}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                      >
-                        <Business fontSize="small" />
-                        <Typography>
-                          <strong>Company:</strong>{" "}
-                          {selectedProject.company || "N/A"}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-
-              {/* Project Overview */}
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6" sx={{ mb: 2, color: "#EEBA2B" }}>
-                      📋 Service Overview
+                    <Typography sx={{ display: "flex", gap: 1, mb: 1 }}>
+                      <Person fontSize="small" /> {selectedProject.name}
                     </Typography>
-                    <Box
-                      sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-                    >
-                      <Typography>
-                        <strong>Service Type:</strong>{" "}
-                        {selectedProject.serviceType}
-                      </Typography>
-                      {selectedProject.customServiceDescription && (
-                        <Typography>
-                          <strong>Custom Service:</strong>{" "}
-                          {selectedProject.customServiceDescription}
-                        </Typography>
-                      )}
-                      {selectedProject.customServiceNeeds && (
-                        <Typography>
-                          <strong>Specific Needs:</strong>{" "}
-                          {selectedProject.customServiceNeeds}
-                        </Typography>
-                      )}
-                      {selectedProject.serviceSpecificOtherDescription && (
-                        <Typography>
-                          <strong>Additional Requirements:</strong>{" "}
-                          {selectedProject.serviceSpecificOtherDescription}
-                        </Typography>
-                      )}
-                      <Chip
-                        label={selectedProject.status}
-                        color={getStatusColor(selectedProject.status) as any}
-                        size="small"
+                    <Typography sx={{ display: "flex", gap: 1, mb: 1 }}>
+                      <Email fontSize="small" /> {selectedProject.email}
+                    </Typography>
+                    <Typography sx={{ display: "flex", gap: 1, mb: 1 }}>
+                      <Phone fontSize="small" /> {selectedProject.phone || "No phone"}
+                    </Typography>
+                    <Typography sx={{ display: "flex", gap: 1 }}>
+                      <Business fontSize="small" /> {selectedProject.company || "No company"}
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Paper sx={{ p: 2.5, height: "100%" }}>
+                    <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
+                      Request
+                    </Typography>
+                    <Typography fontWeight={700}>{selectedProject.serviceType || "Not specified"}</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                      Sent: {formatDate(selectedProject.createdAt)}
+                    </Typography>
+                    <Box sx={{ mt: 2 }}>
+                      <StatusChip
+                        status={normalizeStatus(selectedProject.status, selectedProject.isReplied)}
+                        variant={getStatusVariant(selectedProject.status || "") as any}
                       />
                     </Box>
-                  </CardContent>
-                </Card>
+                  </Paper>
+                </Grid>
               </Grid>
 
-              {/* Selected Services */}
-              {selectedProject.selectedServices &&
-                selectedProject.selectedServices.length > 0 && (
-                  <Grid item xs={12}>
-                    <Accordion>
-                      <AccordionSummary expandIcon={<ExpandMore />}>
-                        <Typography variant="h6">
-                          🛠️ Selected Services (
-                          {selectedProject.selectedServices.length})
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                          {selectedProject.selectedServices.map(
-                            (service, index) => (
-                              <Chip
-                                key={index}
-                                label={service}
-                                variant="outlined"
-                                sx={{
-                                  borderColor: "#EEBA2B",
-                                  color: "#EEBA2B",
-                                }}
-                              />
-                            )
-                          )}
-                        </Box>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Grid>
-                )}
-
-              {/* Additional Information */}
-              {selectedProject.additionalInfo && (
-                <Grid item xs={12}>
-                  <Card>
-                    <CardContent>
-                      <Typography variant="h6" sx={{ mb: 2, color: "#EEBA2B" }}>
-                        📝 Additional Information
-                      </Typography>
-                      <Typography>{selectedProject.additionalInfo}</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+              {!!selectedProject.selectedServices?.length && (
+                <Paper sx={{ p: 2.5 }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
+                    Selected Services
+                  </Typography>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                    {selectedProject.selectedServices.map((service) => (
+                      <Chip key={service} label={service} variant="outlined" sx={{ borderColor: "#EEBA2B" }} />
+                    ))}
+                  </Box>
+                </Paper>
               )}
 
-              {/* Reply Information */}
-              {selectedProject?.isReplied && selectedProject?.replyMessage && (
-                <Grid item xs={12}>
-                  <Card
-                    sx={{ bgcolor: "#f8f9fa", border: "1px solid #EEBA2B" }}
-                  >
-                    <CardContent>
-                      <Typography variant="h6" sx={{ mb: 2, color: "#EEBA2B" }}>
-                        📧 Reply Information
-                      </Typography>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 2,
-                        }}
-                      >
-                        <Typography>
-                          <strong>Replied by:</strong>{" "}
-                          {selectedProject?.repliedBy || "Admin"}
-                        </Typography>
-                        <Typography>
-                          <strong>Replied on:</strong>{" "}
-                          {selectedProject?.repliedAt
-                            ? formatDate(selectedProject.repliedAt)
-                            : "N/A"}
-                        </Typography>
-                        <Box sx={{ mt: 1 }}>
-                          <Typography
-                            variant="subtitle2"
-                            sx={{ fontWeight: "bold", mb: 1 }}
-                          >
-                            Reply Message:
-                          </Typography>
-                          <Typography
-                            sx={{
-                              bgcolor: "white",
-                              p: 2,
-                              borderRadius: 1,
-                              border: "1px solid #e0e0e0",
-                              whiteSpace: "pre-wrap",
-                            }}
-                          >
-                            {selectedProject?.replyMessage}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              )}
-            </Grid>
+              {[
+                ["Other need", selectedProject.customServiceDescription],
+                ["Context", selectedProject.customServiceNeeds],
+                ["Additional info", selectedProject.additionalInfo],
+                ["Reply sent", selectedProject.replyMessage],
+              ]
+                .filter(([, value]) => Boolean(value))
+                .map(([label, value]) => (
+                  <Paper key={label} sx={{ p: 2.5 }}>
+                    <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+                      {label}
+                    </Typography>
+                    <Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{value}</Typography>
+                  </Paper>
+                ))}
+
+              <Paper sx={{ p: 2.5, bgcolor: "#f8fafc" }}>
+                <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
+                  Update status
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {statusOptions.map((status) => (
+                    <ActionButton
+                      key={status}
+                      size="small"
+                      variant={normalizeStatus(selectedProject.status, selectedProject.isReplied) === status ? "primary" : "secondary"}
+                      onClick={() => void handleStatusUpdate(selectedProject._id, status)}
+                    >
+                      {status}
+                    </ActionButton>
+                  ))}
+                </Box>
+              </Paper>
+            </Box>
           )}
         </DialogContent>
-        <DialogActions>
-          <ActionButton
-            variant="secondary"
-            onClick={() => setViewModalOpen(false)}
-          >
+        <Divider />
+        <DialogActions sx={{ p: 2 }}>
+          <ActionButton variant="secondary" onClick={() => setViewModalOpen(false)}>
             Close
           </ActionButton>
+          {selectedProject && (
+            <ActionButton variant="primary" startIcon={<Reply />} onClick={() => handleReply(selectedProject)}>
+              Reply
+            </ActionButton>
+          )}
         </DialogActions>
       </Dialog>
 
-      {/* Reply Modal */}
-      <Dialog
-        open={replyModalOpen}
-        onClose={() => setReplyModalOpen(false)}
-        maxWidth="md"
-        fullWidth
-      >
-        <DialogTitle sx={{ bgcolor: "#EEBA2B", color: "black" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Reply />
-            Reply to {selectedProject?.name}
-          </Box>
+      <Dialog open={replyModalOpen} onClose={() => setReplyModalOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle sx={{ bgcolor: "#EEBA2B", color: "#071a33" }}>
+          Reply to {selectedProject?.name}
         </DialogTitle>
-        <DialogContent sx={{ mt: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <TextField
-              label="Subject"
-              value={replySubject}
-              onChange={(e) => setReplySubject(e.target.value)}
-              fullWidth
-              required
-            />
-            <TextField
-              label="Message"
-              value={replyMessage}
-              onChange={(e) => setReplyMessage(e.target.value)}
-              multiline
-              rows={8}
-              fullWidth
-              required
-              placeholder="Type your reply message here..."
-            />
-            {selectedProject && (
-              <Typography variant="body2" color="text.secondary">
-                This email will be sent to: {selectedProject.email}
-              </Typography>
-            )}
-          </Box>
+        <DialogContent sx={{ pt: 3 }}>
+          <TextField
+            label="Subject"
+            value={replySubject}
+            onChange={(event) => setReplySubject(event.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Message"
+            value={replyMessage}
+            onChange={(event) => setReplyMessage(event.target.value)}
+            fullWidth
+            multiline
+            rows={8}
+          />
+          {selectedProject && (
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+              This email will be sent to {selectedProject.email}.
+            </Typography>
+          )}
         </DialogContent>
-        <DialogActions>
-          <ActionButton
-            variant="secondary"
-            onClick={() => setReplyModalOpen(false)}
-            disabled={replyLoading}
-          >
+        <DialogActions sx={{ p: 2 }}>
+          <ActionButton variant="secondary" disabled={replyLoading} onClick={() => setReplyModalOpen(false)}>
             Cancel
           </ActionButton>
-          <ActionButton
-            variant="primary"
-            onClick={submitReply}
-            disabled={replyLoading}
-          >
-            {replyLoading ? "Sending..." : "Send Reply"}
+          <ActionButton variant="primary" disabled={replyLoading} onClick={() => void submitReply()}>
+            {replyLoading ? "Sending..." : "Send reply"}
           </ActionButton>
         </DialogActions>
       </Dialog>
 
-      {/* Success/Error Snackbar */}
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={() => setSnackbarOpen(false)}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
-          onClose={() => setSnackbarOpen(false)}
-          severity={snackbarSeverity}
-          sx={{ width: "100%" }}
-        >
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>
           {snackbarMessage}
         </Alert>
       </Snackbar>

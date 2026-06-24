@@ -1,169 +1,108 @@
-import axios from "axios";
+import { authRequest, publicRequest } from "./client";
 
-const BASE_URL = "https://creativa-poeta-bn-phi.vercel.app/api/contact";
+export interface ContactPayload {
+  fullName?: string;
+  name?: string;
+  email: string;
+  message: string;
+}
 
-// Public endpoint for contact form submission
-export const contactUs = async (data: any) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/send`, data);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to submit contact form"
-      );
-    }
-    throw error;
-  }
+export interface ContactQuery {
+  _id: string;
+  name: string;
+  fullName?: string;
+  email: string;
+  message: string;
+  status?: "pending" | "replied" | "closed" | string;
+  isReplied?: boolean;
+  replyMessage?: string;
+  repliedAt?: string;
+  repliedBy?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ContactQueriesResponse {
+  queries: ContactQuery[];
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    totalQueries: number;
+    limit: number;
+  };
+}
+
+export const contactUs = async (data: ContactPayload) => {
+  return publicRequest<{ message?: string }>(
+    {
+      method: "POST",
+      url: "/api/contact/send",
+      data,
+    },
+    "Failed to submit contact form."
+  );
 };
 
-// Admin endpoints for contact management
-
-// Get all contact queries (admin only)
 export const getContactQueries = async (
   page = 1,
-  limit = 10,
+  limit = 25,
   status = "all"
 ) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.get(`${BASE_URL}`, {
+  return authRequest<ContactQueriesResponse>(
+    {
+      method: "GET",
+      url: "/api/contact",
       params: { page, limit, status },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      // Token is invalid/expired - clear storage and redirect to secure login
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to fetch contact queries"
-      );
-    }
-    throw error;
-  }
+    },
+    "Failed to fetch contact queries."
+  );
 };
 
-// Get single contact query (admin only)
 export const getContactQuery = async (queryId: string) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.get(`${BASE_URL}/${queryId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to fetch contact query"
-      );
-    }
-    throw error;
-  }
+  return authRequest<{ query?: ContactQuery } | ContactQuery>(
+    {
+      method: "GET",
+      url: `/api/contact/${queryId}`,
+    },
+    "Failed to fetch contact query."
+  );
 };
 
-// Reply to contact query (admin only)
 export const replyToContactQuery = async (
   queryId: string,
   replyMessage: string,
   subject: string
 ) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.post(
-      `${BASE_URL}/${queryId}/reply`,
-      { replyMessage, subject },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || "Failed to send reply");
-    }
-    throw error;
-  }
+  return authRequest(
+    {
+      method: "POST",
+      url: `/api/contact/${queryId}/reply`,
+      data: { replyMessage, subject },
+    },
+    "Failed to send reply."
+  );
 };
 
-// Update contact query status (admin only)
 export const updateContactQueryStatus = async (
   queryId: string,
   status: string
 ) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.put(
-      `${BASE_URL}/${queryId}/status`,
-      { status },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to update query status"
-      );
-    }
-    throw error;
-  }
+  return authRequest(
+    {
+      method: "PUT",
+      url: `/api/contact/${queryId}/status`,
+      data: { status },
+    },
+    "Failed to update query status."
+  );
 };
 
-// Delete contact query (admin only)
 export const deleteContactQuery = async (queryId: string) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.delete(`${BASE_URL}/${queryId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/secure-admin-login-2024";
-      throw new Error("Session expired. Please login again.");
-    }
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || "Failed to delete contact query"
-      );
-    }
-    throw error;
-  }
+  return authRequest(
+    {
+      method: "DELETE",
+      url: `/api/contact/${queryId}`,
+    },
+    "Failed to delete contact query."
+  );
 };

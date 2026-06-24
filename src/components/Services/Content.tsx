@@ -1,849 +1,843 @@
-import { useEffect, useState } from "react";
-import { FaQuoteLeft, FaTiktok } from "react-icons/fa";
-import { IoBusinessOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import image2 from "../../assets/flags/image2.jpg";
-import logo from "../../assets/flags/logopoeta1.png";
-import DesignLocale from "../../i18n/Services/Subservices/DesignLocale";
-import ContentLocale from "../../i18n/ContentLocale";
-import getLangFromLocalStorage from "../../../utils/Lang";
 import {
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-  FaFacebook,
+  FaArrowRight,
+  FaCheckCircle,
+  FaClipboardCheck,
+  FaEdit,
+  FaFileAlt,
+  FaImages,
+  FaPenNib,
+  FaQuestionCircle,
+  FaShareAlt,
+  FaUserTie,
 } from "react-icons/fa";
-import { handleNavigate } from "./DigitalMarketing";
+import {
+  buildLocalLocalePath,
+  getCurrentLocale,
+  getCurrentMarket,
+} from "../../data/marketRuntime";
+import ServiceFAQAccordion from "./ServiceFAQAccordion";
+import ServiceFinalCTA from "./ServiceFinalCTA";
 
-// const lang: string = getLangFromLocalStorage();
-// const t = ContentLocale[lang] ?? ContentLocale["en"];
-const lang:any = getLangFromLocalStorage();
- 
-const testimonials = [
-  {
-    quote: DesignLocale[lang].quote1,
-    client: "Sarah Johnson",
-    role: "CEO, TechNova",
-    image: "/profile.jpg",
+type ContentCopy = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  primary: string;
+  secondary: string;
+  promises: string[];
+  imageBriefs: Array<{ label: string; title: string; description: string }>;
+  whyEyebrow: string;
+  whyTitle: string;
+  whyText: string;
+  rolesEyebrow: string;
+  rolesTitle: string;
+  rolesText: string;
+  roles: Array<{ title: string; text: string }>;
+  formatsEyebrow: string;
+  formatsTitle: string;
+  formats: Array<{ title: string; text: string }>;
+  deliverEyebrow: string;
+  deliverTitle: string;
+  deliverText: string;
+  deliver: string[];
+  methodEyebrow: string;
+  methodTitle: string;
+  methodText: string;
+  steps: string[];
+  faqTitle: string;
+  faqs: Array<{ question: string; answer: string }>;
+};
+
+const copies: Record<string, ContentCopy> = {
+  fr: {
+    eyebrow: "Contenu & documents",
+    title: "Nous transformons vos idees en mots, documents et supports professionnels.",
+    intro:
+      "Redaction professionnelle, ghostwriting, articles, textes web, CV, lettres, profils LinkedIn, rapports, ebooks et guides : nous structurons vos idees pour qu'elles soient claires, utiles et credibles.",
+    primary: "Creer mon document",
+    secondary: "Demarrer un projet",
+    promises: [
+      "Textes clairs",
+      "Documents professionnels",
+      "Ton adapte",
+      "Message mieux structure",
+    ],
+    imageBriefs: [
+      {
+        label: "Image principale",
+        title: "Des idees transformees en documents clairs",
+        description:
+          "Image montrant des notes, idees, post-it et brouillons qui deviennent un document professionnel, un article web, un rapport et une presentation. Style premium bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
+      },
+      {
+        label: "Formats",
+        title: "Des contenus pour chaque usage",
+        description:
+          "Image montrant plusieurs formats: page web, article de blog, CV, lettre, profil LinkedIn, ebook, rapport et guide pratique. Mettre en scene des documents propres et lisibles.",
+      },
+      {
+        label: "Processus",
+        title: "Un document bien pense du brouillon a la version finale",
+        description:
+          "Image montrant un flux clair: collecte des idees, plan, redaction, correction, mise en forme et livraison finale. Le visuel doit faire sentir le serieux et la methode.",
+      },
+    ],
+    whyEyebrow: "Pourquoi c'est important",
+    whyTitle: "Un bon document fait comprendre plus vite, decide plus facilement et inspire plus confiance.",
+    whyText:
+      "Vos idees peuvent etre bonnes, mais si elles sont mal formulees, elles perdent de la force. Un contenu bien structure aide vos clients, partenaires, recruteurs ou lecteurs a comprendre votre valeur sans effort.",
+    rolesEyebrow: "Ce que le contenu doit faire",
+    rolesTitle: "Chaque texte doit avoir un objectif clair.",
+    rolesText:
+      "On n'ecrit pas seulement pour remplir une page. On ecrit pour expliquer, convaincre, guider, vendre, presenter ou documenter quelque chose d'important.",
+    roles: [
+      {
+        title: "Clarifier",
+        text: "Mettre de l'ordre dans vos idees pour rendre le message simple et direct.",
+      },
+      {
+        title: "Convaincre",
+        text: "Construire des arguments solides pour rassurer et pousser a l'action.",
+      },
+      {
+        title: "Presenter",
+        text: "Valoriser une personne, une entreprise, un projet ou une offre avec le bon ton.",
+      },
+      {
+        title: "Documenter",
+        text: "Creer des supports utiles: rapports, guides, procedures, ebooks ou dossiers.",
+      },
+    ],
+    formatsEyebrow: "Ce que nous pouvons rediger",
+    formatsTitle: "On choisit le bon format selon votre objectif.",
+    formats: [
+      {
+        title: "Textes business et web",
+        text: "Pages services, articles, blogs, descriptions, FAQ, textes de site et contenus qui expliquent votre activite.",
+      },
+      {
+        title: "Documents professionnels",
+        text: "Rapports, dossiers, guides, ebooks, presentations, notes, propositions et documents internes.",
+      },
+      {
+        title: "Profils et parcours",
+        text: "CV, lettres de motivation, biographies, profils LinkedIn, pitch personnel et documents de candidature.",
+      },
+    ],
+    deliverEyebrow: "Livrables",
+    deliverTitle: "Des contenus prets a utiliser, pas seulement des phrases jolies.",
+    deliverText:
+      "Le resultat doit pouvoir etre publie, envoye, presente ou reutilise selon votre besoin.",
+    deliver: [
+      "Un texte structure avec titre, sections et progression logique.",
+      "Un ton adapte a votre public: professionnel, simple, humain ou commercial.",
+      "Une version corrigee, propre et facile a lire.",
+      "Des reformulations pour rendre le message plus clair et plus fort.",
+      "Des formats adaptes au web, PDF, presentation ou reseaux sociaux.",
+      "Des versions multilingues si le projet le demande.",
+    ],
+    methodEyebrow: "Notre methode",
+    methodTitle: "Comprendre, structurer, rediger, affiner.",
+    methodText:
+      "On commence par comprendre ce que le contenu doit accomplir. Ensuite on organise les idees, on redige une version claire, puis on ajuste le ton, la precision et la mise en forme.",
+    steps: [
+      "Recueillir vos idees, documents existants et objectifs.",
+      "Definir le lecteur, le message central et le format.",
+      "Construire un plan clair avant la redaction.",
+      "Rediger, corriger et rendre le contenu plus fluide.",
+      "Livrer une version finale prete a publier ou partager.",
+    ],
+    faqTitle: "Questions frequentes",
+    faqs: [
+      {
+        question: "Est-ce que vous pouvez ecrire a partir de quelques idees seulement ?",
+        answer:
+          "Oui. Vous pouvez nous donner des notes, audios, brouillons ou explications simples. Nous les structurons pour creer un contenu clair.",
+      },
+      {
+        question: "Pouvez-vous corriger un document deja ecrit ?",
+        answer:
+          "Oui. Nous pouvons corriger, reformuler, reorganiser et ameliorer un document existant sans repartir de zero.",
+      },
+      {
+        question: "Faites-vous du ghostwriting ?",
+        answer:
+          "Oui. Nous pouvons ecrire dans votre ton pour des articles, biographies, publications, discours, documents ou contenus professionnels.",
+      },
+      {
+        question: "Pouvez-vous aider pour un CV ou un profil LinkedIn ?",
+        answer:
+          "Oui. Nous pouvons clarifier votre parcours, valoriser vos competences et creer un CV, une lettre ou un profil LinkedIn plus convaincant.",
+      },
+      {
+        question: "Les contenus peuvent-ils etre adaptes au SEO ?",
+        answer:
+          "Oui. Pour les textes web, nous pouvons structurer les titres, questions, mots importants et reponses pour aider Google, les moteurs de recherche et les assistants IA a comprendre le contenu.",
+      },
+      {
+        question: "Pouvez-vous preparer le contenu en plusieurs langues ?",
+        answer:
+          "Oui. Nous pouvons travailler en francais, anglais, neerlandais ou kinyarwanda selon le public vise et les versions necessaires.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote2,
-    client: "James Lee",
-    role: "Marketing Director, BrightWave",
-    image: "/delivery.png",
+  en: {
+    eyebrow: "Content & documents",
+    title: "We turn your ideas into words, documents and professional materials.",
+    intro:
+      "Professional writing, ghostwriting, articles, web copy, resumes, letters, LinkedIn profiles, reports, ebooks and guides: we structure your ideas so they become clear, useful and credible.",
+    primary: "Create my document",
+    secondary: "Start a project",
+    promises: [
+      "Clear copy",
+      "Professional documents",
+      "Adapted tone",
+      "Better structured message",
+    ],
+    imageBriefs: [
+      {
+        label: "Main image",
+        title: "Ideas transformed into clear documents",
+        description:
+          "Image showing notes, ideas, post-its and drafts becoming a professional document, web article, report and presentation. Premium dark blue and CP yellow style. Text inside the image translated by language.",
+      },
+      {
+        label: "Formats",
+        title: "Content for every use",
+        description:
+          "Image showing several formats: web page, blog article, resume, letter, LinkedIn profile, ebook, report and practical guide. Documents should look clean and readable.",
+      },
+      {
+        label: "Process",
+        title: "A document built from draft to final version",
+        description:
+          "Image showing a clear flow: collecting ideas, outline, writing, editing, formatting and final delivery. The visual should feel serious and methodical.",
+      },
+    ],
+    whyEyebrow: "Why it matters",
+    whyTitle: "A good document helps people understand faster, decide easier and trust you more.",
+    whyText:
+      "Your ideas may be strong, but if they are poorly expressed, they lose impact. Well-structured content helps clients, partners, recruiters or readers understand your value without effort.",
+    rolesEyebrow: "What content should do",
+    rolesTitle: "Every text needs a clear goal.",
+    rolesText:
+      "We do not write just to fill a page. We write to explain, convince, guide, sell, present or document something important.",
+    roles: [
+      {
+        title: "Clarify",
+        text: "Organize your ideas so the message becomes simple and direct.",
+      },
+      {
+        title: "Convince",
+        text: "Build strong arguments that reassure and push people to act.",
+      },
+      {
+        title: "Present",
+        text: "Showcase a person, business, project or offer with the right tone.",
+      },
+      {
+        title: "Document",
+        text: "Create useful materials: reports, guides, procedures, ebooks or files.",
+      },
+    ],
+    formatsEyebrow: "What we can write",
+    formatsTitle: "We choose the right format according to your goal.",
+    formats: [
+      {
+        title: "Business and web copy",
+        text: "Service pages, articles, blogs, descriptions, FAQ, website copy and content that explains your activity.",
+      },
+      {
+        title: "Professional documents",
+        text: "Reports, files, guides, ebooks, presentations, notes, proposals and internal documents.",
+      },
+      {
+        title: "Profiles and career materials",
+        text: "Resumes, cover letters, biographies, LinkedIn profiles, personal pitch and application documents.",
+      },
+    ],
+    deliverEyebrow: "Deliverables",
+    deliverTitle: "Content ready to use, not only nice sentences.",
+    deliverText:
+      "The result should be ready to publish, send, present or reuse according to your need.",
+    deliver: [
+      "A structured text with title, sections and logical progression.",
+      "A tone adapted to your audience: professional, simple, human or commercial.",
+      "A corrected, clean and easy-to-read version.",
+      "Rewording to make the message clearer and stronger.",
+      "Formats adapted to web, PDF, presentation or social media.",
+      "Multilingual versions if the project requires them.",
+    ],
+    methodEyebrow: "Our method",
+    methodTitle: "Understand, structure, write, refine.",
+    methodText:
+      "We start by understanding what the content must achieve. Then we organize the ideas, write a clear version, and refine tone, precision and formatting.",
+    steps: [
+      "Collect your ideas, existing documents and goals.",
+      "Define the reader, central message and format.",
+      "Build a clear outline before writing.",
+      "Write, edit and make the content smoother.",
+      "Deliver a final version ready to publish or share.",
+    ],
+    faqTitle: "Common questions",
+    faqs: [
+      {
+        question: "Can you write from only a few ideas?",
+        answer:
+          "Yes. You can give us notes, audio, drafts or simple explanations. We structure them into clear content.",
+      },
+      {
+        question: "Can you edit a document that already exists?",
+        answer:
+          "Yes. We can correct, rewrite, reorganize and improve an existing document without starting from zero.",
+      },
+      {
+        question: "Do you offer ghostwriting?",
+        answer:
+          "Yes. We can write in your tone for articles, biographies, publications, speeches, documents or professional content.",
+      },
+      {
+        question: "Can you help with a resume or LinkedIn profile?",
+        answer:
+          "Yes. We can clarify your experience, highlight your skills and create a stronger resume, letter or LinkedIn profile.",
+      },
+      {
+        question: "Can content be adapted for SEO?",
+        answer:
+          "Yes. For web copy, we can structure titles, questions, important terms and answers to help Google, search engines and AI assistants understand the content.",
+      },
+      {
+        question: "Can you prepare content in multiple languages?",
+        answer:
+          "Yes. We can work in French, English, Dutch or Kinyarwanda depending on the target audience and required versions.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote3,
-    client: "Emma Brown",
-    role: "Founder, GreenNest",
-    image: "/profile.jpg",
+  nl: {
+    eyebrow: "Content & documenten",
+    title: "Wij zetten uw ideeen om in woorden, documenten en professionele materialen.",
+    intro:
+      "Professionele redactie, ghostwriting, artikels, webteksten, CV's, brieven, LinkedIn-profielen, rapporten, ebooks en gidsen: we structureren uw ideeen zodat ze duidelijk, nuttig en geloofwaardig worden.",
+    primary: "Maak mijn document",
+    secondary: "Start een project",
+    promises: [
+      "Duidelijke teksten",
+      "Professionele documenten",
+      "Aangepaste toon",
+      "Beter gestructureerde boodschap",
+    ],
+    imageBriefs: [
+      {
+        label: "Hoofdbeeld",
+        title: "Ideeen omgezet in duidelijke documenten",
+        description:
+          "Afbeelding met notities, ideeen, post-its en kladversies die veranderen in een professioneel document, webartikel, rapport en presentatie. Premium stijl in donkerblauw en CP-geel. Tekst in de afbeelding vertaald per taal.",
+      },
+      {
+        label: "Formaten",
+        title: "Content voor elk gebruik",
+        description:
+          "Afbeelding met verschillende formaten: webpagina, blogartikel, CV, brief, LinkedIn-profiel, ebook, rapport en praktische gids. Documenten moeten proper en leesbaar ogen.",
+      },
+      {
+        label: "Proces",
+        title: "Een document van kladversie tot finale versie",
+        description:
+          "Afbeelding met een duidelijke flow: ideeen verzamelen, plan, redactie, correctie, vormgeving en finale levering. De visual moet serieus en methodisch aanvoelen.",
+      },
+    ],
+    whyEyebrow: "Waarom dit telt",
+    whyTitle: "Een goed document laat mensen sneller begrijpen, makkelijker beslissen en meer vertrouwen voelen.",
+    whyText:
+      "Uw ideeen kunnen sterk zijn, maar slecht geformuleerd verliezen ze impact. Goed gestructureerde content helpt klanten, partners, recruiters of lezers uw waarde zonder moeite te begrijpen.",
+    rolesEyebrow: "Wat content moet doen",
+    rolesTitle: "Elke tekst heeft een duidelijk doel nodig.",
+    rolesText:
+      "We schrijven niet om een pagina te vullen. We schrijven om iets belangrijks uit te leggen, te overtuigen, te begeleiden, te verkopen, te presenteren of te documenteren.",
+    roles: [
+      {
+        title: "Verhelderen",
+        text: "Uw ideeen ordenen zodat de boodschap eenvoudig en direct wordt.",
+      },
+      {
+        title: "Overtuigen",
+        text: "Sterke argumenten bouwen die geruststellen en aanzetten tot actie.",
+      },
+      {
+        title: "Presenteren",
+        text: "Een persoon, bedrijf, project of aanbod tonen met de juiste toon.",
+      },
+      {
+        title: "Documenteren",
+        text: "Nuttige materialen maken: rapporten, gidsen, procedures, ebooks of dossiers.",
+      },
+    ],
+    formatsEyebrow: "Wat we kunnen schrijven",
+    formatsTitle: "We kiezen het juiste formaat volgens uw doel.",
+    formats: [
+      {
+        title: "Business- en webteksten",
+        text: "Servicepagina's, artikels, blogs, beschrijvingen, FAQ, websiteteksten en content die uw activiteit uitlegt.",
+      },
+      {
+        title: "Professionele documenten",
+        text: "Rapporten, dossiers, gidsen, ebooks, presentaties, nota's, voorstellen en interne documenten.",
+      },
+      {
+        title: "Profielen en loopbaanmateriaal",
+        text: "CV's, motivatiebrieven, biografieen, LinkedIn-profielen, persoonlijke pitch en sollicitatiedocumenten.",
+      },
+    ],
+    deliverEyebrow: "Oplevering",
+    deliverTitle: "Content klaar voor gebruik, niet alleen mooie zinnen.",
+    deliverText:
+      "Het resultaat moet klaar zijn om te publiceren, te verzenden, te presenteren of opnieuw te gebruiken volgens uw behoefte.",
+    deliver: [
+      "Een gestructureerde tekst met titel, secties en logische opbouw.",
+      "Een toon aangepast aan uw publiek: professioneel, eenvoudig, menselijk of commercieel.",
+      "Een gecorrigeerde, propere en makkelijk leesbare versie.",
+      "Herformuleringen om de boodschap duidelijker en sterker te maken.",
+      "Formaten aangepast aan web, PDF, presentatie of sociale media.",
+      "Meertalige versies als het project dat vraagt.",
+    ],
+    methodEyebrow: "Onze methode",
+    methodTitle: "Begrijpen, structureren, schrijven, verfijnen.",
+    methodText:
+      "We beginnen met begrijpen wat de content moet bereiken. Daarna ordenen we de ideeen, schrijven we een duidelijke versie en verfijnen we toon, precisie en vormgeving.",
+    steps: [
+      "Uw ideeen, bestaande documenten en doelen verzamelen.",
+      "De lezer, centrale boodschap en formaat bepalen.",
+      "Een duidelijk plan maken voor het schrijven.",
+      "Schrijven, corrigeren en de content vlotter maken.",
+      "Een finale versie leveren die klaar is om te publiceren of delen.",
+    ],
+    faqTitle: "Veelgestelde vragen",
+    faqs: [
+      {
+        question: "Kunnen jullie schrijven op basis van enkele ideeen?",
+        answer:
+          "Ja. U kunt notities, audio, kladversies of eenvoudige uitleg geven. Wij structureren dat tot duidelijke content.",
+      },
+      {
+        question: "Kunnen jullie een bestaand document verbeteren?",
+        answer:
+          "Ja. We kunnen een bestaand document corrigeren, herschrijven, reorganiseren en verbeteren zonder vanaf nul te starten.",
+      },
+      {
+        question: "Doen jullie ghostwriting?",
+        answer:
+          "Ja. We kunnen in uw toon schrijven voor artikels, biografieen, publicaties, speeches, documenten of professionele content.",
+      },
+      {
+        question: "Kunnen jullie helpen met een CV of LinkedIn-profiel?",
+        answer:
+          "Ja. We kunnen uw ervaring verduidelijken, uw vaardigheden sterker tonen en een overtuigender CV, brief of LinkedIn-profiel maken.",
+      },
+      {
+        question: "Kan content aangepast worden voor SEO?",
+        answer:
+          "Ja. Voor webteksten kunnen we titels, vragen, belangrijke termen en antwoorden structureren zodat Google, zoekmachines en AI-assistenten de content beter begrijpen.",
+      },
+      {
+        question: "Kunnen jullie content in meerdere talen voorbereiden?",
+        answer:
+          "Ja. We kunnen werken in het Frans, Engels, Nederlands of Kinyarwanda volgens het doelpubliek en de nodige versies.",
+      },
+    ],
   },
-
-  {
-    quote: DesignLocale[lang].quote4,
-    client: "John Doe",
-    role: "CEO, TechNova",
-    image: "/profile.jpg",
+  kiny: {
+    eyebrow: "Content na documents",
+    title: "Duhindura ibitekerezo byanyu amagambo, documents n'ibikoresho bya professional.",
+    intro:
+      "Professional writing, ghostwriting, articles, web copy, CV, letters, LinkedIn profiles, reports, ebooks na guides: dutegura ibitekerezo byanyu bikaba content isobanutse, ifite akamaro kandi yizerwa.",
+    primary: "Gukora document yanjye",
+    secondary: "Gutangira project",
+    promises: [
+      "Texts zisobanutse",
+      "Documents za professional",
+      "Tone ihuye na public",
+      "Message iteguye neza",
+    ],
+    imageBriefs: [
+      {
+        label: "Ishusho nyamukuru",
+        title: "Ibitekerezo bihinduka documents zisobanutse",
+        description:
+          "Ishusho yerekana notes, ideas, post-its na drafts bihinduka professional document, web article, report na presentation. Style premium dark blue na CP yellow. Amagambo ahindurwe mu rurimi rwa page.",
+      },
+      {
+        label: "Formats",
+        title: "Content kuri buri usage",
+        description:
+          "Ishusho yerekana formats zitandukanye: web page, blog article, CV, letter, LinkedIn profile, ebook, report na practical guide. Documents zigaragare zisukuye kandi zisomeka.",
+      },
+      {
+        label: "Process",
+        title: "Document iva kuri draft ikagera kuri final version",
+        description:
+          "Ishusho yerekana flow: gukusanya ideas, outline, writing, editing, formatting na final delivery. Visual igaragaze serious na method.",
+      },
+    ],
+    whyEyebrow: "Impamvu bifite akamaro",
+    whyTitle: "Document nziza ituma abantu bumva vuba, bafata decision byoroshye kandi bakakwizera.",
+    whyText:
+      "Ibitekerezo byawe bishobora kuba bikomeye, ariko iyo bitanditse neza bitakaza impact. Content iteguye neza ifasha clients, partners, recruiters cyangwa readers kumva value yawe nta mbaraga nyinshi.",
+    rolesEyebrow: "Icyo content igomba gukora",
+    rolesTitle: "Buri text igomba kugira intego isobanutse.",
+    rolesText:
+      "Ntitwandika ngo page yuzure gusa. Twandika kugira ngo dusobanure, twemeze, tuyobore, tugurishe, twerekane cyangwa dukore documentation y'ikintu cy'ingenzi.",
+    roles: [
+      {
+        title: "Gusobanura",
+        text: "Gutondeka ibitekerezo kugira ngo message ibe simple kandi direct.",
+      },
+      {
+        title: "Kwemeza",
+        text: "Kubaka arguments zikomeye zitanga icyizere kandi ziganisha kuri action.",
+      },
+      {
+        title: "Kwerekana",
+        text: "Kwerekana umuntu, business, project cyangwa offer ukoresheje tone ikwiye.",
+      },
+      {
+        title: "Gukora documentation",
+        text: "Gukora reports, guides, procedures, ebooks cyangwa dossiers bifite akamaro.",
+      },
+    ],
+    formatsEyebrow: "Ibyo dushobora kwandika",
+    formatsTitle: "Duhitamo format ikwiye dukurikije intego yawe.",
+    formats: [
+      {
+        title: "Business na web copy",
+        text: "Service pages, articles, blogs, descriptions, FAQ, website copy na content isobanura activity yawe.",
+      },
+      {
+        title: "Professional documents",
+        text: "Reports, files, guides, ebooks, presentations, notes, proposals na internal documents.",
+      },
+      {
+        title: "Profiles na career materials",
+        text: "CV, cover letters, biographies, LinkedIn profiles, personal pitch na application documents.",
+      },
+    ],
+    deliverEyebrow: "Ibyo dutanga",
+    deliverTitle: "Content yiteguye gukoreshwa, si sentences nziza gusa.",
+    deliverText:
+      "Ibisohoka bigomba kuba biteguye gupublishwa, koherezwa, kwerekanwa cyangwa kongera gukoreshwa bitewe n'icyo ukeneye.",
+    deliver: [
+      "Text ifite structure, title, sections na progression yumvikana.",
+      "Tone ihuye na public: professional, simple, human cyangwa commercial.",
+      "Version ikosoye, isukuye kandi yoroshye gusoma.",
+      "Reformulations zituma message isobanuka kandi ikomera.",
+      "Formats zihuye na web, PDF, presentation cyangwa social media.",
+      "Versions mu ndimi nyinshi niba project ibikeneye.",
+    ],
+    methodEyebrow: "Uko dukora",
+    methodTitle: "Kumva, gutegura, kwandika, kunoza.",
+    methodText:
+      "Dutangirira ku kumva icyo content igomba kugeraho. Hanyuma dutondeka ideas, tukandika version isobanutse, tukanoza tone, precision na formatting.",
+    steps: [
+      "Gukusanya ideas, documents zihari n'intego.",
+      "Kumenya reader, central message na format.",
+      "Kubaka outline isobanutse mbere yo kwandika.",
+      "Kwandika, gukosora no gutuma content igenda neza.",
+      "Gutanga final version yiteguye gupublishwa cyangwa gusangizwa abandi.",
+    ],
+    faqTitle: "Ibibazo bikunze kubazwa",
+    faqs: [
+      {
+        question: "Mushobora kwandika mufite ideas nke gusa?",
+        answer:
+          "Yego. Ushobora kuduha notes, audio, drafts cyangwa explanations zoroshye. Turabitegura bikaba content isobanutse.",
+      },
+      {
+        question: "Mushobora gukosora document isanzwe ihari?",
+        answer:
+          "Yego. Dushobora gukosora, rewriting, reorganizing no kunoza document iriho tutatangiriye kuri zero.",
+      },
+      {
+        question: "Mukora ghostwriting?",
+        answer:
+          "Yego. Dushobora kwandika mu tone yawe kuri articles, biographies, publications, speeches, documents cyangwa professional content.",
+      },
+      {
+        question: "Mushobora gufasha kuri CV cyangwa LinkedIn profile?",
+        answer:
+          "Yego. Dushobora gusobanura experience yawe, kugaragaza skills zawe no gukora CV, letter cyangwa LinkedIn profile ikomeye.",
+      },
+      {
+        question: "Content ishobora gutegurwa kuri SEO?",
+        answer:
+          "Yego. Kuri web copy, dushobora gutegura titles, questions, important terms na answers kugira ngo Google, search engines na AI assistants bibyumve neza.",
+      },
+      {
+        question: "Mushobora gutegura content mu ndimi nyinshi?",
+        answer:
+          "Yego. Dushobora gukora mu gifaransa, icyongereza, nederlands cyangwa kinyarwanda bitewe na public igamijwe na versions zikenewe.",
+      },
+    ],
   },
-  {
-    quote: DesignLocale[lang].quote5,
-    client: "Alice Smith",
-    role: "Marketing Director, BrightWave",
-    image: "/profile.jpg",
-  },
-];
+};
 
-export function TestimonialSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const roleIcons = [FaEdit, FaPenNib, FaUserTie, FaClipboardCheck];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex + 1 >= testimonials.length ? 0 : prevIndex + 1
-      );
-    }, 5000);
+const SectionLabel = ({ children }: { children: string }) => (
+  <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] phone:text-sm">
+    <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
+    {children}
+  </div>
+);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  return (
-    <section className="testimonial-slider hidden min-h-screen w-full md:w-[80%] items-center justify-center  flex-col max-w-screen-lg mx-auto mt-12 text-center  text-white rounded-lg shadow-lg relative z-10">
-      <h2 className="text-2xl font-bold mb-8 text-[#EEBA2B]">
-        What Our Clients Say 
-        
-      </h2>
-
-      <div className="overflow-hidden relative w-full">
-        <div
-          className="flex transition-transform duration-1000"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="w-full flex-shrink-0 flex flex-col items-center text-center px-4"
-              style={{ flex: "0 0 100%" }}>
-              <svg
-                className="w-12 h-12 text-[#EEBA2B] mb-4"
-                fill="currentColor"
-                viewBox="0 0 24 24">
-                <FaQuoteLeft />
-              </svg>
-
-              <p className="text-md md:text-lg italic px-4 lg:px-16 max-w-xl mx-auto leading-relaxed">
-                "{testimonial.quote} "
-              </p>
-
-              <div className="mt-6 flex flex-col items-center">
-                <img
-                  src={testimonial.image}
-                  alt={`${testimonial.client}`}
-                  className="w-16 h-16 rounded-full shadow-lg mb-2"
-                />
-                <p className="text-lg font-semibold">{testimonial.client}</p>
-                <p className="text-sm text-gray-400">{testimonial.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-           
-      <div className="flex justify-center mt-8 space-x-4">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-[#EEBA2B]" : "bg-gray-500"
-            }`}></button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const relatedServices = [
-  {
-    title: DesignLocale[lang].title1,
-    description: DesignLocale[lang].description1,
-    icon: "/digital-marketing.jpg",
-    link: "/services/digital-marketing",
-  },
-  {
-    title: DesignLocale[lang].title2,
-    description: DesignLocale[lang].description2,
-    icon: "/content-writting.png",
-    link: "/services/content-writing",
-  },
-  {
-    title: DesignLocale[lang].title3,
-    description: DesignLocale[lang].description3,
-    icon: "/content-writting.png",
-    link: "/services/content-writing",
-  },
-  {
-    title: DesignLocale[lang].title4,
-    description: DesignLocale[lang].description4,
-    icon: "/videoProd.png",
-    link: "/services/video-creation",
-  },
-];
-
-export function RelatedServices() {
-  return (
-    <section className="related-services-section hidden w-full md:w-[95%] py-16 px-8  text-center z-10">
-      <h2 className="text-2xl text-[#EEBA2B]  font-bold mb-8">
-        {DesignLocale[lang].relatedServTitle}
-      </h2>
-      <div className="grid gap-8  laptop:grid-cols-4 md:grid-cols-2">
-        {relatedServices.map((service, index) => (
-          <div
-            key={index}
-            className="service-card p-6 bg-white text-black rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-            <img
-              src={service.icon}
-              alt={`${service.title} Icon`}
-              className="w-12 h-12 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-            <p className="text-md md:text-lg mb-4">{service.description}</p>
-            <a
-              href={service.link}
-              className="text-[#EEBA2B] font-semibold hover:text-black border-2 border-[#EEBA2B] py-2 px-4 rounded transition-colors duration-300">
-              Learn More
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const faqs = [
-    { question: ContentLocale[lang].question1, answer: ContentLocale[lang].answer1 },
-   { question: ContentLocale[lang].question2, answer: ContentLocale[lang].answer2 },
-   { question: ContentLocale[lang].question3, answer: ContentLocale[lang].answer3 },
-   { question: ContentLocale[lang].question4, answer: ContentLocale[lang].answer4 },
-
-];
-
-
-export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleFAQ = (index: any) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <section className="faq-section w-full md:w-[95%] mx-auto my-12 p-8 text-gray-800  rounded-lg shadow-lg z-10">
-      <h2 className="text-2xl font-bold text-center text-[#EEBA2B] mb-8">
-        {DesignLocale[lang].faqTitle}
-      </h2>
-
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-300 pb-4">
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="flex items-center justify-between w-full text-left text-md md:text-lg text-white font-bold focus:outline-none">
-              {faq.question}
-              <span className="text-2xl text-[#EEBA2B]">
-                {openIndex === index ? "-" : "+"}
-              </span>
-            </button>
-            <div
-              className={`mt-2 overflow-hidden transition-all duration-300 ${
-                openIndex === index ? "max-h-screen" : "max-h-0"
-              }`}>
-              <p className="text-gray-100 mt-2 text-md md:text-lg">
-                {faq.answer}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+const ImagePlaceholder = ({
+  title,
+  description,
+  className = "",
+}: {
+  title: string;
+  description: string;
+  className?: string;
+}) => (
+  <figure
+    className={`overflow-hidden rounded-[1.5rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_12px)] text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
+  >
+    <div className="flex min-h-[18rem] flex-col justify-center p-5 phone:min-h-[22rem] laptop:p-7">
+      <FaImages className="mb-5 text-4xl text-[#fff200]" />
+      <p className="text-xs font-black uppercase text-[#fff200]">
+        Placeholder image
+      </p>
+      <p className="mt-4 text-sm font-black leading-7 text-white/85">
+        {description}
+      </p>
+    </div>
+    <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
+      <h3 className="text-lg font-black leading-tight">{title}</h3>
+    </figcaption>
+  </figure>
+);
 
 const ContentWritting = () => {
-  return (
-    <div
-      className="relative min-h-screen bg-white flex flex-col bg-transparent justify-center items-center "
-      style={{
-        backgroundImage: image2
-          ? `url(${image2})`
-          : "none",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        transition: "background 0.9s ease-in-out",
-        animation: "slideAnimation 0.9s ease-in-out",
-        animationName: "slideAnimation",
-      }}
-      id="design-graphique">
-      <div className="absolute inset-0 bg-black bg-opacity-70 z-0"></div>
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
+  const copy = copies[locale] ?? copies.en;
+  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
-      <Link to="/">
-        <div className="logo top-5 text-white text-xl left-6 absolute ml-0 p-1 md:top-3 md:left-0 md:ml-11 md:text-4xl z-20">
-          <img
-            src={logo}
-            alt="logo"
-            className="w-[50%] h-[100%] md:w-[85%] md:h-[95%]"
+  return (
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#071a33]/55 text-white">
+      <section className="relative px-4 pb-12 pt-28 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
+          <div>
+            <SectionLabel>{copy.eyebrow}</SectionLabel>
+            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,.35)] phone:text-5xl laptop:text-7xl">
+              {copy.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-base font-black leading-8 text-white/90 phone:text-xl">
+              {copy.intro}
+            </p>
+            <div className="mt-8 grid gap-3 phone:grid-cols-2">
+              {copy.promises.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-2xl border border-[#EEBA2B]/35 bg-[#071a33]/75 px-4 py-3 text-sm font-black backdrop-blur-sm"
+                >
+                  <FaCheckCircle className="text-[#fff200]" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-2 phone:gap-3">
+              <Link
+                to={startPath}
+                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] phone:px-5 phone:text-xs"
+              >
+                <span className="truncate">{copy.primary}</span>
+                <FaArrowRight className="flex-none" />
+              </Link>
+              <Link
+                to={contactPath}
+                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:px-5 phone:text-xs"
+              >
+                <span className="truncate">{copy.secondary}</span>
+                <FaFileAlt className="flex-none" />
+              </Link>
+            </div>
+          </div>
+
+          <ImagePlaceholder
+            {...copy.imageBriefs[0]}
+            className="min-h-[24rem] laptop:min-h-[32rem]"
           />
         </div>
-      </Link>
+      </section>
 
-
-<section className="min-h-fit h-screen justify-center  w-[95%] mt-28 md:mt-16 m-auto  px-4 flex flex-col items-center relative">
-  <div className="flex flex-col md:gap-10 laptop:flex-row items-center justify-between w-full space-y-8 md:space-y-0 laptop:space-x-8 z-10">
-    <div className="laptop:w-[45%] w-full flex flex-col items-start space-y-4 px-2 md:px-0 laptop:gap-16">
-      <div className="flex flex-col space-y-2 gap-6 text-white w-full">
-        <div className="w-fit">
-          <h1 className="text-xl md:text-3xl font-bold">
-           {ContentLocale[lang].header11}  
-          </h1>
-          <div className="bg-yellow-400 h-1 mt-2 w-full"></div>
-        </div>
-        <p className="text-[#EEBA2B] text-start text-lg md:text-xl italic">
-        {ContentLocale[lang].paragraph11}
-        </p>
-      </div>
-
-      <div className="flex flex-col space-y-10 laptop:space-y-16 w-full mt-12">
-        <p className="text-md md:text-lg text-justify leading-relaxed text-white">
-          {ContentLocale[lang].paragraph22}
-        </p>
-        <button
-          onClick={handleNavigate}
-          className="contact us bg-[#EEBA2B] text-[#EEBA2B] w-full full md:w-1/4 flex text-center justify-center font-bold py-2 rounded-lg border-2 border-[#FFE533] hover:bg-yellow-400 hover:text-white transition-all">
-          {DesignLocale[lang].action}
-        </button>
-      </div>
-    </div>
-
-    <div className="laptop:w-[45%] w-full h-ful md:height-[2rem] flex items-center justify-center">
-      <img
-        src="/content.jpg"
-        alt="Content writting"
-        className="object-contain rounded-lg shadow-md"
-      />
-    </div>
-    
-  </div>
-</section>
-
-<section className="service-type-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-6 md:p-8 rounded-lg flex flex-col z-10">
-    
-    <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    {ContentLocale[lang].service11}
-    </h2>
-
-    <p className="text-md md:text-lg text-center mb-8">
-    {ContentLocale[lang].paragraph33}
-    </p>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-8 text-black">
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/webdev.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />        <h3 className="text-xl font-semibold mb-2">
-         {ContentLocale[lang].header22}
-        </h3>
-        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph44}
-       </p>
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-        <img
-          src="/app.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-       {ContentLocale[lang].header33}
-        </h3>
-        <p className="md:w-[70%] text-center">
-          {ContentLocale[lang].paragraph55}
-</p>
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/software.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-         {ContentLocale[lang].header44}
-        </h3>
-        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph66}</p>
-      </div>
-
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/UI.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-        {ContentLocale[lang].header55}
-        </h3>
-        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph77}</p>
-        
-      </div>
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/UI.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-        {ContentLocale[lang].header66}
-        </h3>
-        <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph88}</p>
-      </div>
-      <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-          src="/consult.jpeg"
-          alt="Content Creators Icon"
-          className="w-36 h-24 mb-4 rounded-md"
-        />
-        <h3 className="text-xl font-semibold mb-2">
-           {ContentLocale[lang].header77} </h3>
-        <p className="md:w-[70%] text-center">	
-         {ContentLocale[lang].paragraph99}
-        </p>
-      </div>
-    </div>
-    {/* other writting service */}
-    
-  </section>
-
-
-<section className="relative w-[89%] md:w-[87%] laptop:w-[92%] min-h-screen flex items-center justify-center bg-white rounded-md">
-  {/* Container */}
-  <div className="relative md:w-[70%] p-8 flex flex-col laptop:flex-row items-center gap-12">
-    {/* Left side - Main circle */}
-    <div className="w-52 md:w-64 shrink-0">
-      <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
-        <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">{ContentLocale[lang].header88}</h2>
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">{ContentLocale[lang].header99}</h2>
-        </div>
-      </div>
-    </div>
-
-    {/* Right side - Competency items */}
-    <div className="flex-1 space-y-6 md:space-y-8">
-      {[
-        
-       
-             { number: "1", text: ContentLocale[lang].comp1, bgColor: "bg-[#E265FF]" },
-    { number: "2", text: ContentLocale[lang].comp2, bgColor: "bg-[#8B3DFF]" },
-    { number: "3", text: ContentLocale[lang].comp3, bgColor: "bg-[#3DB9FF]" },
-    { number: "4", text: ContentLocale[lang].comp4, bgColor: "bg-[#FFA53D]" },
-    { number: "5", text: ContentLocale[lang].comp5, bgColor: "bg-[#76C56F]" },
-
-
-
-
-      ].map(({ number, text, bgColor }, index) => (
-        <div key={index} className="flex items-center gap-4">
-          {/* Circle */}
-          <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-black font-bold text-lg md:text-2xl shadow-md shrink-0">
-            {number}
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
+          <div>
+            <SectionLabel>{copy.whyEyebrow}</SectionLabel>
+            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+              {copy.whyTitle}
+            </h2>
+            <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
+              {copy.whyText}
+            </p>
           </div>
-          {/* Text Item */}
-          <div
-            className={`flex-1 py-3 px-4 md:py-4 md:px-6 rounded-lg text-white text-sm md:text-lg shadow-lg ${bgColor}`}
-          >
-            {text}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-      
-<section className="why-choose-us-section  relative w-full md:w-[95%] max-w-screen-lg mx-auto mt-6 p-6 gap-5 md:gap-24 text-white rounded-lg mb-12 flex flex-col-reverse laptop:flex-row z-10">
-<div className="yellow-lines-container laptop:flex laptop:w-1/2 h-full">
-    <img
-      src="/content-why.webp"
-      alt=""
-      className=" w-[100%] md:w-[100%] md:h-auto rounded-md"
-    />
-  </div>
-  <div className="content-container w-full md:w-full laptop:w-1/2 flex flex-col justify-center">
-    <h2 className="text-2xl font-bold text-[#EEBA2B] mb-6">
-       {ContentLocale[lang].header100}
-    </h2>
-    <ul className="space-y-4 md:space-x-0 list-disc  p-4 h-full flex flex-col text-center md:text-start laptop:text-center justify-between">
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong1} </strong>
-       {ContentLocale[lang].list1}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong2} </strong>
-         {ContentLocale[lang].list2}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong3}</strong>
-        {ContentLocale[lang].list3}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong4}</strong>
-        {ContentLocale[lang].list4}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong5}</strong>
-         {ContentLocale[lang].list5}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong6} </strong>
-           {ContentLocale[lang].list6}
-      </li>
-      <li>
-        <strong className="text-md md:text-lg">{ContentLocale[lang].liststrong7}</strong>
-        {ContentLocale[lang].list7}
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-<section className="who-is-this-service-for-section text-white w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 rounded-lg flex flex-col z-10">
-  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-     {ContentLocale[lang].header101}
-  </h2>
-
-  <p className="text-md md:text-lg text-center mb-8">
-    {ContentLocale[lang].paragraph100}
-  </p>
-
-  <div className="grid md:grid-cols-2 grid-cols-1 laptop:grid-cols-4 gap-8 text-black">
-    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <IoBusinessOutline className="w-24 h-24 mb-4 text-black" />
-      <h3 className="text-xl font-semibold mb-2">
-       {ContentLocale[lang].header102}
-      </h3>
-      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph101}</p>
-    </div>
-
-    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-        src="/content.webp"
-        alt="Content Creators Icon"
-        className="w-36 h-24 mb-4 rounded-md"
-      />
-      <h3 className="text-xl font-semibold mb-2">
-        {ContentLocale[lang].header103}
-      </h3>
-      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph102}</p>
-    </div>
-
-    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-        src="/individual.png"
-        alt="Individuals Icon"
-        className="w-24 h-24 mb-4 rounded-md"
-      />
-      <h3 className="text-xl font-semibold mb-2">
-       {ContentLocale[lang].header104}
-      </h3>
-      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph103} </p>
-    </div>
-
-    <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
-      <img
-        src="/associations.png"
-        alt="Associations Icon"
-        className="w-32 h-24 mb-4 rounded-md"
-      />
-      <h3 className="text-xl font-semibold mb-2">
-       {ContentLocale[lang].header105}
-      </h3>
-      <p className="md:w-[70%] text-center">{ContentLocale[lang].paragraph104}</p>
-    </div>
-  </div>
-</section>
-
-
-<section className="content-creation-process-section w-[94%] max-w-screen-lg mx-auto mt-12 p-6 rounded-lg text-black shadow-lg relative z-10">
-  <h2 className="text-2xl font-bold text-center mb-12 text-[#EEBA2B]">
-    {ContentLocale[lang].header106}
-  </h2>
-  
-  <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-5 gap-5 justify-between items-center space-y-12 md:space-y-0 laptop:space-x-4">
-    {/* Step 1 */}
-    <div className="bg-[#ffffff] text-black p-6 w-full shadow-lg rounded-lg items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
-        1
-      </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header107}</h3>
-      <p className="text-sm">
-       {ContentLocale[lang].paragraph105}
-      </p>
-    </div>
-
-    {/* Step 2 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
-        2
-      </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header108}</h3>
-      <p className="text-sm">
-        {ContentLocale[lang].paragraph106}
-      </p>
-    </div>
-
-    {/* Step 3 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
-        3
-      </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].heading109}</h3>
-      <p className="text-sm">
-        {ContentLocale[lang].paragraph107}
-      </p>
-    </div>
-
-    {/* Step 4 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
-        4
-      </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header200}</h3>
-      <p className="text-sm">
-       {ContentLocale[lang].paragraph108}
-      </p>
-    </div>
-
-    {/* Step 5 */}
-    <div className="bg-[#ffffff] text-black p-6 shadow-lg rounded-lg w-full items-center text-center flex flex-col">
-      <div className="w-10 h-10 flex items-center justify-center border-2 border-black rounded-full text-black font-bold mb-4">
-        5
-      </div>
-      <h3 className="text-lg font-semibold mb-2 p-3 border-2 border-black w-full">{ContentLocale[lang].header201}</h3>
-      <p className="text-sm">
-       {ContentLocale[lang].paragraph109}
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-      <section className="portfolio-section hidden w-full md:w-[95%] max-w-screen-lg mx-auto mt-12 p-8 text-center  text-white z-10">
-        <h2 className="text-2xl font-bold text-[#EEBA2B] mb-8">
-          {DesignLocale[lang].portifolioTitle}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 gap-6">
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/beauty.jpg"
-              alt="Portfolio Item"
-              className="w-[100%] h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                {ContentLocale[lang].header202}
-              </h3>
-              <p className="text-white text-sm">{ContentLocale[lang].paragraph110}</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/card2.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                {ContentLocale[lang].header203}
-              </h3>
-              <p className="text-gray-300 text-sm">{ContentLocale[lang].paragraph111}</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port1.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Flyer</h3>
-              <p className="text-gray-300 text-sm">For a Business</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port2.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Poster</h3>
-              <p className="text-gray-300 text-sm">For A business</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port3.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">Poster</h3>
-              <p className="text-gray-300 text-sm">For business advertising</p>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg bg-white">
-            <img
-              src="/port4.jpg"
-              alt="Portfolio Item"
-              className="w-full h-full transform group-hover:scale-105 transition duration-300 object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 className="text-lg font-semibold text-[#EEBA2B]">
-                Book Covers
-              </h3>
-              <p className="text-gray-300 text-sm">
-                For individual or a business
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <a
-            href="/contact"
-            className="px-6 py-3 bg-[#EEBA2B] text-black font-semibold rounded-lg hover:bg-yellow-600">
-            {DesignLocale[lang].ctaCaption}
-          </a>
+          <ImagePlaceholder {...copy.imageBriefs[1]} />
         </div>
       </section>
 
-      <TestimonialSlider />
-      <RelatedServices />
-      <FAQSection />
-      <section className="contact-section w-full md:w-[95%] py-16 px-6 text-white text-center flex flex-col items-center z-10">
-  <h2 className="text-xl font-semibold p-4 mb-4">
-    {ContentLocale[lang].header204}
-  </h2>
-  <p className="text-md md:text-lg text-center mb-8 max-w-4xl mx-auto">
-    {ContentLocale[lang].paragraph112}
-  </p>
-
-  <button
-    onClick={handleNavigate}
-    className="main-cta-btn bg-[#EEBA2B] text-black w-[90%] laptop:w-[30%] font-bold py-4 px-8 rounded-lg text-md md:text-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-    {ContentLocale[lang].button1}
-  </button>
-</section>
-
-
-      <section className="visual-elements w-[95%] hidden  md:w-[95%] rounded-md mb-4 bg-white py-16 px-4 text-gray-800 flex-col items-center z-10">
-        <h2 className="text-2xl font-semibold text-center text-[#EEBA2B]  mb-12">
-          {DesignLocale[lang].expTitle}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
-          <div className="skill-item text-center">
-            <img
-              src="/logodesign.png"
-              alt="Logo Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">
-              {DesignLocale[lang].exp1}
-            </h3>
-            <p>{DesignLocale[lang].expdesc1}</p>
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto max-w-7xl">
+          <SectionLabel>{copy.rolesEyebrow}</SectionLabel>
+          <div className="max-w-5xl">
+            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl laptop:text-6xl">
+              {copy.rolesTitle}
+            </h2>
+            <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
+              {copy.rolesText}
+            </p>
           </div>
 
-          <div className="skill-item text-center">
-            <img
-              src="/businessCarddesign.png"
-              alt="Business Card Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-md font-bold text-[#EEBA2B] mb-2">
-              {DesignLocale[lang].exp2}
-            </h3>
-            <p>{DesignLocale[lang].expdesc2}</p>
-          </div>
+          <div className="mt-7 grid grid-cols-2 gap-3 tablet:gap-5 laptop:grid-cols-4">
+            {copy.roles.map((item, index) => {
+              const Icon = roleIcons[index] ?? FaEdit;
 
-          <div className="skill-item text-center">
-            <img
-              src="/posterdesign.jpg"
-              alt="Poster Design"
-              className="w-16 h-16 mx-auto mb-4"
-            />
-            <h3 className="text-xl font-bold text-[#EEBA2B] mb-2">
-              {" "}
-              {DesignLocale[lang].exp3}{" "}
-            </h3>
-            <p>{DesignLocale[lang].expdesc3}</p>
-          </div>
-
-          <div className="col-span-full">
-            <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-6 text-center">
-              {DesignLocale[lang].projTitle}
-            </h3>
-            <div className="carousel flex overflow-x-scroll space-x-4">
-              <img
-                src="/beauty.jpg"
-                alt="Project 1"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/logos.webp"
-                alt="Project 2"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/card1.webp"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/poster1.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/card2.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-              <img
-                src="/poster2.jpg"
-                alt="Project 3"
-                className="w-64 h-48 object-cover rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="social-sharing flex space-x-4 mt-8">
-          <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaFacebook className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaInstagram className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.instagram.com/creativapoeta_/">
-          <button className="text-black hover:text-[#EEBA2B]">
-          <FaTiktok className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://www.linkedin.com/company/105066709/">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaLinkedinIn className="text-2xl" />
-          </button>
-          </a>
-          <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09">
-          <button className="text-black hover:text-[#EEBA2B]">
-            <FaTwitter className="text-2xl" />
-          </button>
-          </a>
-        
-        </div>
-
-        {/* Links to Other Services */}
-        <div className="related-services mt-12 text-center">
-          <h3 className="text-2xl font-semibold text-[#1e1e2f] mb-4">
-            {DesignLocale[lang].explore}
-          </h3>
-          <div className="flex justify-center space-x-8">
-            <a
-              href="/services/digital-marketing"
-              className="text-[#EEBA2B] hover:underline">
-              {DesignLocale[lang].dm}
-            </a>
-            <a
-              href="/services/content-writing"
-              className="text-[#EEBA2B] hover:underline">
-              {DesignLocale[lang].cw}
-            </a>
+              return (
+                <article
+                  key={item.title}
+                  className="min-h-[10.5rem] rounded-[1.1rem] border border-white/20 bg-[#071a33]/80 p-3 text-white backdrop-blur-sm transition duration-300 hover:-translate-y-1 phone:min-h-[11rem] phone:p-4 laptop:rounded-[1.4rem] laptop:p-5"
+                >
+                  <Icon className="mb-3 text-2xl text-[#fff200] phone:text-3xl laptop:mb-5 laptop:text-4xl" />
+                  <h3 className="text-base font-black leading-tight phone:text-lg laptop:text-xl">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-[11px] font-black leading-5 text-white/85 phone:text-xs phone:leading-6 laptop:mt-3 laptop:text-sm laptop:leading-7">
+                    {item.text}
+                  </p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
-    </div>
+
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[1.05fr_.95fr] laptop:items-start">
+          <div>
+            <SectionLabel>{copy.formatsEyebrow}</SectionLabel>
+            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+              {copy.formatsTitle}
+            </h2>
+            <div className="mt-7 grid gap-3 tablet:gap-5">
+              {copy.formats.map((format) => (
+                <article
+                  key={format.title}
+                  className="rounded-[1.1rem] border border-[#EEBA2B]/40 bg-[#071a33]/80 p-4 backdrop-blur-sm phone:p-5 laptop:rounded-[1.4rem] laptop:p-6"
+                >
+                  <h3 className="text-xl font-black leading-tight text-[#fff200] laptop:text-2xl">
+                    {format.title}
+                  </h3>
+                  <p className="mt-2 text-xs font-black leading-6 text-white/85 phone:text-sm laptop:mt-3 laptop:text-base laptop:leading-7">
+                    {format.text}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <ImagePlaceholder {...copy.imageBriefs[2]} />
+        </div>
+      </section>
+
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-start">
+          <div>
+            <SectionLabel>{copy.deliverEyebrow}</SectionLabel>
+            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+              {copy.deliverTitle}
+            </h2>
+            <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
+              {copy.deliverText}
+            </p>
+          </div>
+          <div className="rounded-[1.6rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 p-5 backdrop-blur-sm phone:p-7">
+            <ul className="space-y-4">
+              {copy.deliver.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 text-sm font-black leading-7 text-white/90 phone:text-base"
+                >
+                  <FaCheckCircle className="mt-1 flex-none text-[#fff200]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-start">
+          <div>
+            <SectionLabel>{copy.methodEyebrow}</SectionLabel>
+            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+              {copy.methodTitle}
+            </h2>
+            <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
+              {copy.methodText}
+            </p>
+          </div>
+          <div className="rounded-[1.6rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.86),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_10px)] p-5 backdrop-blur-sm phone:p-7">
+            <ol className="space-y-4">
+              {copy.steps.map((item, index) => (
+                <li
+                  key={item}
+                  className="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-2xl border border-white/15 bg-black/20 p-4"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#fff200] text-lg font-black text-[#fff200]">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm font-black leading-6 text-white phone:text-base">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto max-w-5xl">
+          <SectionLabel>{copy.faqTitle}</SectionLabel>
+          <ServiceFAQAccordion
+            items={copy.faqs}
+            icon={<FaQuestionCircle aria-hidden="true" />}
+          />
+        </div>
+      </section>
+
+      <section className="px-4 pb-16 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto max-w-7xl rounded-[1.6rem] border border-white/15 bg-[#071a33]/80 p-5 backdrop-blur-sm phone:p-7">
+          <div className="flex flex-col gap-5 laptop:flex-row laptop:items-center laptop:justify-between">
+            <div>
+              <SectionLabel>{copy.eyebrow}</SectionLabel>
+              <h2 className="font-['Black_Ops_One'] text-3xl leading-tight text-white phone:text-4xl">
+                {copy.methodTitle}
+              </h2>
+            </div>
+            <Link
+              to={startPath}
+              className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-[#fff200] bg-[#fff200] px-6 py-4 text-xs font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#fff200]"
+            >
+              {copy.primary}
+              <FaShareAlt />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <ServiceFinalCTA />
+    </main>
   );
 };
 

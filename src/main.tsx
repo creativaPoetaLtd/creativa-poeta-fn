@@ -22,14 +22,17 @@ import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
 import OfficialWebsitePage from "./pages/Services/OfficialWebsitePage.tsx";
 import LocalVisibilityPage from "./pages/Services/LocalVisibilityPage.tsx";
 import UsefulContentPage from "./pages/Services/UsefulContentPage.tsx";
+import AIAutomationPage from "./pages/Services/AIAutomationPage.tsx";
+import DigitalAssistancePage from "./pages/Services/DigitalAssistancePage.tsx";
 import Dashboard from "./Dashboard/Dashboard.tsx";
 import BlogsPage from "./pages/BlogsPage.tsx";
 import SingleBlogPage from "./pages/SingleBlogPage.tsx";
-import Signup from "./components/Signup.tsx";
 import Login from "./components/Login.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import RefontePreviewPage from "./pages/RefontePreviewPage.tsx";
+import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
+import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -60,11 +63,29 @@ const appElement = (
             <Route path="/fr/start-project" element={<ProjectFormPage />} />
             <Route path="/nl/start-project" element={<ProjectFormPage />} />
             <Route path="/rw/start-project" element={<ProjectFormPage />} />
+            <Route path="/tester-visibilite" element={<VisibilityAuditToolPage />} />
+            <Route path="/en/tester-visibilite" element={<VisibilityAuditToolPage />} />
+            <Route path="/fr/tester-visibilite" element={<VisibilityAuditToolPage />} />
+            <Route path="/nl/tester-visibilite" element={<VisibilityAuditToolPage />} />
+            <Route path="/rw/tester-visibilite" element={<VisibilityAuditToolPage />} />
+            <Route path="/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
+            <Route path="/en/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
+            <Route path="/fr/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
+            <Route path="/nl/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
+            <Route path="/rw/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
             <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
-            {/* <Route path="/blogs" element={<BlogsPage />} /> */}
-            {/* <Route path="/blogs/:id" element={<SingleBlogPage />} /> */}
+            <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/en/blogs" element={<BlogsPage />} />
+            <Route path="/fr/blogs" element={<BlogsPage />} />
+            <Route path="/nl/blogs" element={<BlogsPage />} />
+            <Route path="/rw/blogs" element={<BlogsPage />} />
+            <Route path="/blogs/:slug" element={<SingleBlogPage />} />
+            <Route path="/en/blogs/:slug" element={<SingleBlogPage />} />
+            <Route path="/fr/blogs/:slug" element={<SingleBlogPage />} />
+            <Route path="/nl/blogs/:slug" element={<SingleBlogPage />} />
+            <Route path="/rw/blogs/:slug" element={<SingleBlogPage />} />
             {/* <Route path="/register" element={<Signup />} /> */}
             {/* <Route path="/login" element={<Login />} /> */}
 
@@ -93,7 +114,6 @@ const appElement = (
                 </ProtectedRoute>
               }
             />
-            <Route path="/secure-admin-register-2024" element={<Signup />} />
             <Route path="/secure-admin-login-2024" element={<Login />} />
 
             {/* Valid servicessss */}
@@ -117,6 +137,16 @@ const appElement = (
             <Route path="/fr/services/contenus-utiles" element={<UsefulContentPage />} />
             <Route path="/nl/services/contenus-utiles" element={<UsefulContentPage />} />
             <Route path="/rw/services/contenus-utiles" element={<UsefulContentPage />} />
+            <Route path="/services/ia-automatisation" element={<AIAutomationPage />} />
+            <Route path="/en/services/ia-automatisation" element={<AIAutomationPage />} />
+            <Route path="/fr/services/ia-automatisation" element={<AIAutomationPage />} />
+            <Route path="/nl/services/ia-automatisation" element={<AIAutomationPage />} />
+            <Route path="/rw/services/ia-automatisation" element={<AIAutomationPage />} />
+            <Route path="/services/assistance-numerique" element={<DigitalAssistancePage />} />
+            <Route path="/en/services/assistance-numerique" element={<DigitalAssistancePage />} />
+            <Route path="/fr/services/assistance-numerique" element={<DigitalAssistancePage />} />
+            <Route path="/nl/services/assistance-numerique" element={<DigitalAssistancePage />} />
+            <Route path="/rw/services/assistance-numerique" element={<DigitalAssistancePage />} />
             <Route path="/services/web-app" element={<WebPage />} />
             <Route path="/en/services/web-app" element={<WebPage />} />
             <Route path="/fr/services/web-app" element={<WebPage />} />

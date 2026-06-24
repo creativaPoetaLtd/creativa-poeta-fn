@@ -18,6 +18,23 @@ function Footer() {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const homePath = buildLocalLocalePath(market, locale, "/");
+  const linkPath = (path: string) => buildLocalLocalePath(market, locale, path);
+  const assistanceLabel =
+    locale === "nl"
+      ? "Digitale hulp aanvragen"
+      : locale === "en"
+      ? "Request digital assistance"
+      : locale === "kiny"
+      ? "Saba assistance numerique"
+      : "Demander une assistance numerique";
+  const blogLabel =
+    locale === "nl"
+      ? "Advies & bronnen"
+      : locale === "en"
+      ? "Advice & resources"
+      : locale === "kiny"
+      ? "Inama & resources"
+      : "Journal & conseils";
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -77,29 +94,35 @@ function Footer() {
       {FooterLocale[lang].key}
     </p>
 
-    <Link to="/services/graphic-design">
+    <Link to={linkPath("/services/graphic-design")}>
       <p className='flex justify-start items-start text-start mt-3 text-slate-400'>{FooterLocale[lang].competence1}</p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence2}</p>
     </Link>
-    <Link to="/services/website-creation">
+    <Link to={linkPath("/services/site-officiel")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence3}</p>
     </Link>
-    <Link to="/services/graphic-design">
+    <Link to={linkPath("/services/graphic-design")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence23}</p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence4}</p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence5}</p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence6}</p>
     </Link>
-     <Link to="/services/content-writing">
+     <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence20}</p>
+    </Link>
+    <Link to={linkPath("/demander-assistance-numerique")}>
+      <p className='flex justify-start items-start text-start mt-1 font-bold text-[#EEBA2B]'>{assistanceLabel}</p>
+    </Link>
+    <Link to={linkPath("/blogs")}>
+      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{blogLabel}</p>
     </Link>
   </div>
 
@@ -107,22 +130,22 @@ function Footer() {
   <div className='flex flex-col justify-start items-start pr-5 laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
 
     {/* moved from left to balance */}
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start laptop:mt-12 desktop:mt-12 tablet:mt-12 mt-1 text-slate-400'>
         {FooterLocale[lang].competence7}
       </p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
         {FooterLocale[lang].competence8}
       </p>
     </Link>
-    <Link to="/services/graphic-design">
+    <Link to={linkPath("/services/graphic-design")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
         {FooterLocale[lang].competence9}
       </p>
     </Link>
-    <Link to="/services/digital-marketing">
+    <Link to={linkPath("/services/visibilite-locale")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
         {FooterLocale[lang].competence10}
       </p>
@@ -130,19 +153,19 @@ function Footer() {
     
 
     {/* original right column links */}
-    <Link to="/services/digital-marketing">
+    <Link to={linkPath("/services/visibilite-locale")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence11}</p>
     </Link>
-    <Link to="/services/digital-marketing">
+    <Link to={linkPath("/services/visibilite-locale")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence12}</p>
     </Link>
-    <Link to="/services/digital-marketing">
+    <Link to={linkPath("/services/ia-automatisation")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence13}</p>
     </Link>
-    <Link to="/services/graphic-design">
+    <Link to={linkPath("/services/graphic-design")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence18}</p>
     </Link>
-    <Link to="/services/content-writing">
+    <Link to={linkPath("/services/content-writing")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence19}</p>
     </Link>
    

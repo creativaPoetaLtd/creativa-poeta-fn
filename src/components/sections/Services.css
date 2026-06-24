@@ -1,0 +1,325 @@
+.cp-services-section {
+  --cp-blue: #071a33;
+  --cp-yellow: #eeba2b;
+  background: transparent;
+  color: #ffffff;
+  margin-top: -4rem;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 5.8rem 1rem 8.5rem;
+  position: relative;
+  scroll-margin-top: 2.2rem;
+}
+
+.cp-services-section::before {
+  background: linear-gradient(90deg, var(--cp-blue), var(--cp-yellow), var(--cp-blue));
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: auto;
+  z-index: 4;
+}
+
+.cp-services-shell {
+  margin: 0 auto;
+  max-width: 1120px;
+  position: relative;
+  z-index: 1;
+}
+
+.cp-services-heading {
+  margin: 0 0 3rem;
+  max-width: 880px;
+  text-align: left;
+}
+
+.cp-services-heading p {
+  align-items: center;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 900;
+  gap: 0.6rem;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.cp-services-heading p::before {
+  background: var(--cp-yellow);
+  content: "";
+  display: inline-block;
+  height: 0.75rem;
+  transform: skewX(-18deg);
+  width: 1.4rem;
+}
+
+.cp-services-heading h2 {
+  color: #ffffff;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+  max-width: 860px;
+}
+
+.cp-services-heading span {
+  color: rgba(255, 255, 255, 0.96);
+  display: block;
+  font-size: clamp(1rem, 1.9vw, 1.22rem);
+  font-weight: 700;
+  line-height: 1.55;
+  margin-top: 1rem;
+  max-width: 760px;
+  text-shadow: 0 0.16rem 0.85rem rgba(0, 0, 0, 0.44);
+}
+
+.cp-services-list {
+  background:
+    radial-gradient(circle at 62% 8%, rgba(238, 186, 43, 0.16), transparent 19rem),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 9px
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.66), rgba(7, 26, 51, 0.7));
+  border: 1px solid rgba(238, 186, 43, 0.26);
+  border-radius: 1.7rem 0.45rem 1.7rem 0.45rem;
+  display: grid;
+  gap: clamp(1.1rem, 2.2vw, 1.7rem);
+  padding: clamp(1rem, 2.8vw, 2rem);
+}
+
+.cp-service-line {
+  align-items: start;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(238, 186, 43, 0.11), transparent 8rem),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 8px
+    ),
+    rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(238, 186, 43, 0.2);
+  border-radius: 1.45rem 0.35rem 1.45rem 0.35rem;
+  color: #ffffff;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 5.8rem minmax(0, 1fr);
+  min-height: 19rem;
+  overflow: hidden;
+  padding: clamp(1.15rem, 2.2vw, 1.65rem);
+  position: relative;
+  text-decoration: none;
+}
+
+.cp-service-line::after {
+  background: var(--cp-yellow);
+  bottom: 1rem;
+  content: "";
+  height: 0.48rem;
+  left: 7.95rem;
+  position: absolute;
+  width: clamp(7rem, 12vw, 12rem);
+}
+
+.cp-service-line:hover .cp-service-icon,
+.cp-service-line:focus-visible .cp-service-icon {
+  transform: translateY(-4px) rotate(-2deg);
+}
+
+.cp-service-icon {
+  align-items: center;
+  color: var(--cp-yellow);
+  display: inline-flex;
+  justify-content: center;
+  transition: transform 180ms ease;
+}
+
+.cp-service-icon img {
+  filter: drop-shadow(0 0 12px rgba(238, 186, 43, 0.3));
+  height: 5.25rem;
+  object-fit: contain;
+  width: 5.25rem;
+}
+
+.cp-service-name {
+  display: grid;
+  line-height: 0.98;
+}
+
+.cp-service-name em {
+  color: #eaffff;
+  font-size: clamp(1.15rem, 2.4vw, 2rem);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.cp-service-name strong {
+  color: #ffffff;
+  font-size: clamp(1.55rem, 3.2vw, 2.7rem);
+  font-weight: 900;
+}
+
+.cp-service-divider {
+  background: var(--cp-yellow);
+  display: none;
+}
+
+.cp-service-content {
+  display: grid;
+  gap: 1rem;
+  grid-column: 2;
+}
+
+.cp-service-description {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.05rem, 1.7vw, 1.36rem);
+  font-weight: 500;
+  line-height: 1.48;
+}
+
+.cp-service-includes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.6rem;
+}
+
+.cp-service-includes small {
+  background: rgba(7, 26, 51, 0.55);
+  border: 1px solid rgba(238, 186, 43, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0.42rem 0.58rem;
+}
+
+@media (min-width: 900px) {
+  .cp-services-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cp-service-line:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-template-columns: 6rem minmax(15rem, 0.75fr) minmax(0, 1.25fr);
+    min-height: 15rem;
+  }
+
+  .cp-service-line:nth-child(3) .cp-service-content {
+    border-left: 0.45rem solid var(--cp-yellow);
+    grid-column: 3;
+    padding-left: 1.25rem;
+  }
+
+  .cp-service-line:nth-child(3)::after {
+    left: 8.2rem;
+  }
+
+  .cp-service-line:hover,
+  .cp-service-line:focus-visible {
+    transform: translateY(-0.25rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .cp-services-section {
+    margin-top: -2rem;
+    padding: 3.9rem 0.85rem 6.4rem;
+    scroll-margin-top: 2.35rem;
+  }
+
+  .cp-services-heading {
+    margin-bottom: 1.35rem;
+    text-align: left;
+  }
+
+  .cp-services-heading p {
+    font-size: 0.8rem;
+  }
+
+  .cp-services-heading h2 {
+    font-size: clamp(2rem, 10vw, 3.1rem);
+  }
+
+  .cp-services-heading span {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .cp-services-list {
+    gap: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .cp-service-line {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(238, 186, 43, 0.18);
+    border-radius: 1rem 0.35rem 1rem 0.35rem;
+    align-items: center;
+    gap: 0.55rem;
+    grid-template-columns: 3.1rem minmax(5.1rem, 0.75fr) 0.32rem minmax(0, 1.25fr);
+    min-height: 6.1rem;
+    overflow: visible;
+    padding: 0.65rem;
+  }
+
+  .cp-service-line::after {
+    display: none;
+  }
+
+  .cp-service-icon img {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+
+  .cp-service-name em {
+    font-size: 0.9rem;
+  }
+
+  .cp-service-name strong {
+    font-size: 1.18rem;
+  }
+
+  .cp-service-divider {
+    display: block;
+    height: 3.4rem;
+    width: 0.32rem;
+  }
+
+  .cp-service-content {
+    gap: 0.45rem;
+    grid-column: auto;
+  }
+
+  .cp-service-description {
+    font-size: 0.76rem;
+    line-height: 1.32;
+  }
+
+  .cp-service-includes {
+    display: none;
+  }
+}
+
+.cp-services-section,
+.cp-services-section p,
+.cp-services-section h2,
+.cp-services-section h3,
+.cp-services-section span,
+.cp-services-section strong,
+.cp-services-section em,
+.cp-services-section small,
+.cp-services-section a {
+  color: #ffffff !important;
+}
+
+.cp-services-heading p::before,
+.cp-service-divider {
+  background: var(--cp-yellow) !important;
+}

@@ -4,11 +4,69 @@ import path from "node:path";
 const rootDir = process.cwd();
 const distDir = path.join(rootDir, "dist");
 const baseHtmlPath = path.join(distDir, "index.html");
-const baseHtml = fs.readFileSync(baseHtmlPath, "utf8");
+const baseHtml = fs
+  .readFileSync(baseHtmlPath, "utf8")
+  .replace(/<div id="root">[\s\S]*?<\/body>/i, '<div id="root"></div>\n</body>');
 
 const siteUrl = "https://creativapoeta.com";
 const imageUrl = `${siteUrl}/poeta.jpeg`;
-const generatedAt = "2026-06-05";
+const generatedAt = new Date().toISOString().slice(0, 10);
+const blogApiBase = (
+  process.env.SEO_BLOG_API_URL ||
+  process.env.VITE_API_BASE_URL ||
+  "https://creativa-poeta-bn-phi.vercel.app"
+).replace(/\/$/, "");
+const maxBlogPages = Math.max(1, Number(process.env.SEO_MAX_BLOG_PAGES) || 20);
+
+function normalizePublishedBlog(blog) {
+  if (!blog || typeof blog !== "object" || !blog.slug || !blog.title) return null;
+  const language = blog.language === "kiny" ? "rw" : blog.language || "fr";
+  if (!['en', 'fr', 'nl', 'rw'].includes(language)) return null;
+  return {
+    ...blog,
+    language,
+    slug: String(blog.slug).replace(/^\/+|\/+$/g, ""),
+    title: String(blog.title),
+    excerpt: String(blog.excerpt || blog.seoDescription || ""),
+    content: String(blog.content || ""),
+    seoTitle: String(blog.seoTitle || blog.title).slice(0, 70),
+    seoDescription: String(blog.seoDescription || blog.excerpt || "").slice(0, 180),
+    tags: Array.isArray(blog.tags) ? blog.tags.map(String) : [],
+  };
+}
+
+async function fetchPublishedBlogs() {
+  if (process.env.SEO_FETCH_BLOGS === "false") return [];
+  const blogs = [];
+  try {
+    for (let page = 1; page <= maxBlogPages; page += 1) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8_000);
+      let response;
+      try {
+        response = await fetch(`${blogApiBase}/api/blogs?limit=50&page=${page}`, {
+          signal: controller.signal,
+        });
+      } finally {
+        clearTimeout(timeout);
+      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const payload = await response.json();
+      const pageBlogs = Array.isArray(payload) ? payload : payload.blogs || [];
+      blogs.push(...pageBlogs.map(normalizePublishedBlog).filter(Boolean));
+      const totalPages = Number(payload?.pagination?.pages) || 1;
+      if (page >= totalPages || pageBlogs.length === 0) break;
+    }
+  } catch (error) {
+    console.warn(
+      `Blog pre-render skipped: ${error instanceof Error ? error.message : "API unavailable"}`
+    );
+    return [];
+  }
+  return blogs;
+}
+
+const publishedBlogs = await fetchPublishedBlogs();
 const marketHosts = {
   global: {
     baseUrl: "https://creativapoeta.com",
@@ -688,7 +746,35 @@ const pageTemplates = {
       ],
     ],
   },
-};
+  blogs: {
+    path: "/blogs",
+    title: (lang) =>
+      lang === "fr"
+        ? "Conseils visibilite, design et outils digitaux | Creativa Poeta"
+        : lang === "nl"
+          ? "Advies over zichtbaarheid, design en digitale tools | Creativa Poeta"
+          : lang === "rw"
+            ? "Inama kuri visibility, design na digital tools | Creativa Poeta"
+            : "Visibility, design and digital tools advice | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Guides pratiques sur la visibilite locale, le design, les sites, applications, contenus, IA et outils numeriques."
+        : lang === "nl"
+          ? "Praktische gidsen over lokale zichtbaarheid, design, websites, apps, content, AI en digitale tools."
+          : lang === "rw"
+            ? "Guides kuri local visibility, design, websites, applications, content, AI na digital tools."
+            : "Practical guides about local visibility, design, websites, apps, content, AI and digital tools.",
+    keywords:
+      "digital visibility, graphic design tools, websites, applications, AI, technology support, Creativa Poeta blog",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Des conseils faits pour agir" : "Practical advice built for action",
+        lang === "fr"
+          ? "Nos articles expliquent les choix, outils et methodes utiles avant de lancer un projet digital."
+          : "Our articles explain the choices, tools and methods that matter before starting a digital project.",
+      ],
+    ],
+  },};
 
 const routeDefinitions = [];
 
@@ -756,6 +842,81 @@ for (const [market, config] of Object.entries(marketHosts)) {
   }
 }
 
+function blogGroup(blog) {
+  const key = blog.translationKey || `${blog.language}:${blog.slug}`;
+  return publishedBlogs.filter(
+    (candidate) => (candidate.translationKey || `${candidate.language}:${candidate.slug}`) === key
+  );
+}
+
+function globalBlogPath(blog) {
+  const prefix = blog.language === "en" ? "" : `/${blog.language}`;
+  return `${prefix}/blogs/${blog.slug}`;
+}
+
+function globalBlogAlternates(blog) {
+  return blogGroup(blog).map((translation) => ({
+    lang: translation.language,
+    href: `${siteUrl}${globalBlogPath(translation)}`,
+  }));
+}
+
+function xDefaultBlogUrl(blog) {
+  const group = blogGroup(blog);
+  const preferred =
+    group.find((translation) => translation.language === "en") ||
+    group.find((translation) => translation.language === "fr") ||
+    group[0] ||
+    blog;
+  return `${siteUrl}${globalBlogPath(preferred)}`;
+}
+
+for (const blog of publishedBlogs) {
+  const publicPath = globalBlogPath(blog);
+  routeDefinitions.push({
+    outputPath: publicPath,
+    canonicalPath: publicPath,
+    canonicalUrl: `${siteUrl}${publicPath}`,
+    lang: blog.language,
+    template: pageTemplates.blogs,
+    blog,
+    alternates: globalBlogAlternates(blog),
+    xDefaultUrl: xDefaultBlogUrl(blog),
+  });
+
+  for (const [market, config] of Object.entries(marketHosts)) {
+    if (market === "global" || !config.locales.includes(blog.language)) continue;
+    const defaultLocale = config.locales[0];
+    const marketPath = localizedMarketPath(
+      blog.language,
+      defaultLocale,
+      `/blogs/${blog.slug}`
+    );
+    const translations = blogGroup(blog).filter((translation) =>
+      config.locales.includes(translation.language)
+    );
+    routeDefinitions.push({
+      outputPath: `/__markets/${market}${marketPath}`,
+      canonicalUrl: `${config.baseUrl}${marketPath}`,
+      market,
+      lang: blog.language,
+      template: pageTemplates.blogs,
+      blog,
+      alternates: translations.map((translation) => {
+        const translationPath = localizedMarketPath(
+          translation.language,
+          defaultLocale,
+          `/blogs/${translation.slug}`
+        );
+        return {
+          lang: hreflangFor(config, translation.language),
+          href: `${config.baseUrl}${translationPath}`,
+        };
+      }),
+      xDefaultUrl: xDefaultBlogUrl(blog),
+    });
+  }
+}
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -841,6 +1002,8 @@ function stripOldSeo(html) {
   return html
     .replace(/<link rel="canonical"[^>]*>\s*/gi, "")
     .replace(/<link rel="alternate"[^>]*>\s*/gi, "")
+    .replace(/<script>document\.documentElement\.classList\.add\("cp-js"\);<\/script>\s*/gi, "")
+    .replace(/<style>[\s\S]*?\.cp-prerender[\s\S]*?<\/style>\s*/gi, "")
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/gi, "");
 }
 
@@ -882,8 +1045,10 @@ function applyMeta(html, page) {
   const escapedDescription = escapeHtml(page.description);
   const escapedKeywords = escapeHtml(page.keywords);
   const escapedUrl = escapeHtml(page.url);
+  const socialImage = page.blog?.image || imageUrl;
+  const escapedSocialImage = escapeHtml(socialImage);
   const escapedXDefaultUrl = escapeHtml(
-    `${siteUrl}${page.template.path || "/"}`
+    page.xDefaultUrl || `${siteUrl}${page.template.path || "/"}`
   );
 
   next = next.replace(/<html[^>]*>/i, `<html lang="${page.lang}">`);
@@ -910,7 +1075,7 @@ function applyMeta(html, page) {
     /<meta property="og:description"[^>]*>/i,
     `<meta property="og:description" content="${escapedDescription}" />`
   );
-  next = updateTag(next, /<meta property="og:image"[^>]*>/i, `<meta property="og:image" content="${imageUrl}" />`);
+  next = updateTag(next, /<meta property="og:image"[^>]*>/i, `<meta property="og:image" content="${escapedSocialImage}" />`);
   next = updateTag(next, /<meta property="twitter:url"[^>]*>/i, `<meta property="twitter:url" content="${escapedUrl}" />`);
   next = updateTag(
     next,
@@ -922,7 +1087,7 @@ function applyMeta(html, page) {
     /<meta property="twitter:description"[^>]*>/i,
     `<meta property="twitter:description" content="${escapedDescription}" />`
   );
-  next = updateTag(next, /<meta property="twitter:image"[^>]*>/i, `<meta property="twitter:image" content="${imageUrl}" />`);
+  next = updateTag(next, /<meta property="twitter:image"[^>]*>/i, `<meta property="twitter:image" content="${escapedSocialImage}" />`);
 
   const alternateLinks = page.alternates
     .map(
@@ -932,7 +1097,11 @@ function applyMeta(html, page) {
     .join("\n    ");
 
   const marketConfig = page.market ? marketHosts[page.market] : marketHosts.global;
-  const pageType = page.template === pageTemplates.contact ? "ContactPage" : "WebPage";
+  const pageType = page.blog
+    ? "BlogPosting"
+    : page.template === pageTemplates.contact
+      ? "ContactPage"
+      : "WebPage";
   const serviceArea =
     marketConfig.countryCode === "Global"
       ? "Global"
@@ -959,6 +1128,28 @@ function applyMeta(html, page) {
         description: page.description,
         url: page.url,
         inLanguage: page.lang,
+        ...(page.blog
+          ? {
+              headline: page.blog.title,
+              image: socialImage,
+              datePublished: page.blog.publishedAt || page.blog.createdAt,
+              dateModified: page.blog.updatedAt || page.blog.publishedAt || page.blog.createdAt,
+              articleSection: page.blog.category || "Conseils",
+              keywords: page.blog.tags || [],
+              wordCount: page.blog.generation?.wordCount,
+              author: {
+                "@type": "Person",
+                name: page.blog.author?.name || "Creativa Poeta",
+              },
+              publisher: {
+                "@id": `${marketConfig.baseUrl}/#professionalservice`,
+              },
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": page.url,
+              },
+            }
+          : {}),
         isPartOf: {
           "@id": `${marketConfig.baseUrl}/#website`,
         },
@@ -1011,6 +1202,11 @@ function applyMeta(html, page) {
       .cp-prerender p { max-width: 760px; color: #f6f6f6; font-size: 1.1rem; line-height: 1.75; }
       .cp-prerender section { margin-top: 34px; }
       .cp-prerender h2 { color: #fff; font-size: 1.55rem; margin: 0 0 10px; }
+      .cp-prerender__article { max-width: 820px; }
+      .cp-prerender__meta { color: #fff200 !important; font-weight: 700; text-transform: uppercase; }
+      .cp-prerender__excerpt { font-size: 1.25rem !important; font-weight: 700; }
+      .cp-prerender__content h2, .cp-prerender__content h3 { margin-top: 34px; }
+      .cp-prerender__content li { margin: 8px 0; line-height: 1.65; }
       .cp-prerender a { display: inline-block; margin-top: 28px; color: #101a29; background: #fff200; padding: 14px 22px; font-weight: 700; text-decoration: none; }
       .cp-js .cp-prerender { display: none; }
     </style>
@@ -1020,7 +1216,44 @@ function applyMeta(html, page) {
   return next.replace("</head>", `${injected}\n  </head>`);
 }
 
+function sanitizeArticleHtml(html) {
+  return String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<(iframe|object|embed)[\s\S]*?<\/\1>/gi, "")
+    .replace(/\son\w+\s*=\s*(["']).*?\1/gi, "")
+    .replace(/\s(href|src)\s*=\s*(["'])\s*javascript:[\s\S]*?\2/gi, "");
+}
+
+function safeLink(value, fallback) {
+  const link = String(value || "").trim();
+  return /^(https?:\/\/|\/)/i.test(link) ? link : fallback;
+}
+
 function renderFallback(page) {
+  if (page.blog) {
+    const ctaPath = page.lang === "en" ? "/start-project" : `/${page.lang}/start-project`;
+    const ctaUrl = safeLink(page.blog.cta?.url, ctaPath);
+    const ctaLabel = page.blog.cta?.label || languages[page.lang].cta;
+    const publishedDate = String(
+      page.blog.publishedAt || page.blog.createdAt || generatedAt
+    ).slice(0, 10);
+    const affiliateRel =
+      page.blog.cta?.type === "affiliate" ? ' rel="sponsored noopener"' : "";
+
+    return `<div id="root">
+      <main class="cp-prerender" data-cp-prerender="true">
+        <article class="cp-prerender__inner cp-prerender__article">
+          <p class="cp-prerender__meta">${escapeHtml(page.blog.category || "Conseils")} - ${escapeHtml(publishedDate)}</p>
+          <h1>${escapeHtml(page.blog.title)}</h1>
+          <p class="cp-prerender__excerpt">${escapeHtml(page.blog.excerpt || page.description)}</p>
+          <div class="cp-prerender__content">${sanitizeArticleHtml(page.blog.content)}</div>
+          <a href="${escapeHtml(ctaUrl)}"${affiliateRel}>${escapeHtml(ctaLabel)}</a>
+        </article>
+      </main>
+    </div>`;
+  }
+
   const sections = page.sections
     .map(
       ([title, body]) => `
@@ -1042,7 +1275,6 @@ function renderFallback(page) {
       </main>
     </div>`;
 }
-
 function applyFallback(html, page) {
   return html.replace(/<div id="root"><\/div>/i, renderFallback(page));
 }
@@ -1050,10 +1282,12 @@ function applyFallback(html, page) {
 for (const route of routeDefinitions) {
   const page = {
     ...route,
-    title: titleForRoute(route),
-    description: descriptionForRoute(route),
-    keywords: keywordsForRoute(route),
-    sections: route.template.sections(route.lang),
+    title: route.blog?.seoTitle || route.blog?.title || titleForRoute(route),
+    description:
+      route.blog?.seoDescription || route.blog?.excerpt || descriptionForRoute(route),
+    keywords: route.blog?.tags?.join(", ") || keywordsForRoute(route),
+    sections: route.blog ? [] : route.template.sections(route.lang),
+    image: route.blog?.image || imageUrl,
     url: route.canonicalUrl ?? absoluteUrl(route.canonicalPath),
     alternates: route.alternates ?? alternatesFor(route.template),
   };
@@ -1069,6 +1303,7 @@ const sitemapPagePaths = [
   "/contact",
   "/start-project",
   "/terms-and-conditions",
+  "/blogs",
   "/services/audit-visibilite",
   "/services/site-officiel",
   "/services/visibilite-locale",
@@ -1079,6 +1314,41 @@ function localePathForSitemap(locale, defaultLocale, pagePath) {
   return localizedMarketPath(locale, defaultLocale, pagePath);
 }
 
+function blogSitemapUrls(config) {
+  const defaultLocale = config.locales[0];
+  return publishedBlogs
+    .filter((blog) => config.locales.includes(blog.language))
+    .map((blog) => {
+      const locPath = localizedMarketPath(
+        blog.language,
+        defaultLocale,
+        `/blogs/${blog.slug}`
+      );
+      const alternates = blogGroup(blog)
+        .filter((translation) => config.locales.includes(translation.language))
+        .map((translation) => {
+          const altPath = localizedMarketPath(
+            translation.language,
+            defaultLocale,
+            `/blogs/${translation.slug}`
+          );
+          return `    <xhtml:link rel="alternate" hreflang="${hreflangFor(config, translation.language)}" href="${escapeHtml(`${config.baseUrl}${altPath}`)}" />`;
+        })
+        .join("\n");
+      const lastmod = String(
+        blog.updatedAt || blog.publishedAt || blog.createdAt || generatedAt
+      ).slice(0, 10);
+
+      return `  <url>
+    <loc>${escapeHtml(`${config.baseUrl}${locPath}`)}</loc>
+${alternates}
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeHtml(xDefaultBlogUrl(blog))}" />
+    <lastmod>${escapeHtml(lastmod)}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+    });
+}
 function writeSitemapFiles() {
   const sitemapDir = path.join(distDir, "sitemaps");
   fs.mkdirSync(sitemapDir, { recursive: true });
@@ -1109,6 +1379,7 @@ ${alternates}
   </url>`;
       })
     );
+    urls.push(...blogSitemapUrls(config));
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -1158,4 +1429,4 @@ Sitemap: ${siteUrl}/sitemap.xml
 
 writeSitemapFiles();
 
-console.log(`Pre-rendered ${routeDefinitions.length} SEO pages.`);
+console.log(`Pre-rendered ${routeDefinitions.length} SEO pages (${publishedBlogs.length} published blog article(s)).`);

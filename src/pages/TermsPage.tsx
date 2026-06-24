@@ -4,6 +4,7 @@ import Footer from "../components/sections/Footer";
 import MainFooter from "../components/sections/MainFooter";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import Term from "../components/Terms";
+import BrandHomeLink from "../components/NavBars/BrandHomeLink";
 
 const TermsPage = () => {
     useEffect(() => {
@@ -17,7 +18,8 @@ const TermsPage = () => {
                 keywords="Creativa Poeta terms, terms and conditions, service terms"
                 path="/terms-and-conditions"
             />
-            <div className="w-full ml-6 right-2 left flex justify-end">
+            <div className="relative w-full ml-6 right-2 left flex justify-end">
+                <BrandHomeLink />
                 <NavBar />
                 <Term />
             </div>

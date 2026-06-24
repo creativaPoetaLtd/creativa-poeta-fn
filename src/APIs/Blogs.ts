@@ -1,102 +1,196 @@
-import axios from "axios";
+import { authRequest, publicRequest } from "./client";
 
-const API_BASE_URL = "https://creativa-poeta-bn-phi.vercel.app";
+export type BlogLanguage = "fr" | "en" | "nl" | "kiny";
+export type BlogStatus = "draft" | "published" | "archived";
 
-export async function CreateBlog(formData: FormData) {
-  const token = localStorage.getItem("token"); // Ensure token is retrieved
+export type SeoRebuildResult = {
+  status: "queued" | "disabled" | "failed";
+  message: string;
+  providerStatus?: number;
+};
 
-  if (!token) {
-    throw new Error("User is not authenticated");
-  }
+export type BlogPost = {
+  _id: string;
+  title: string;
+  slug?: string;
+  excerpt?: string;
+  content: string;
+  author?: { name?: string; email?: string };
+  image?: string;
+  imageAlt?: string;
+  category?: string;
+  tags?: string[];
+  language?: BlogLanguage;
+  translationKey?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  focusKeyword?: string;
+  status?: BlogStatus;
+  publishedAt?: string;
+  cta?: {
+    label?: string;
+    url?: string;
+    type?: "service" | "affiliate" | "contact";
+  };
+  affiliateDisclosure?: boolean;
+  generation?: {
+    source: "manual" | "openai" | "template";
+    batchId?: string;
+    seed?: string;
+    qualityScore?: number;
+    qualityIssues?: string[];
+    wordCount?: number;
+    generatedAt?: string;
+  };
+  comments?: Array<{
+    _id: string;
+    name: string;
+    text: string;
+    createdAt: string;
+  }>;
+  createdAt: string;
+  updatedAt?: string;
+};
 
-  try {
-    const response = await axios.post(`${API_BASE_URL}/api/blogs/`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+export type BlogListResponse = {
+  blogs: BlogPost[];
+  categories: string[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+};
 
-    return response.data;
-  } catch (error) {
-    console.error("Error creating blog:", error);
-    if (axios.isAxiosError(error)) {
-      throw error.response?.data || "Failed to create blog";
-    } else {
-      throw "Failed to create blog";
-    }
-  }
-}
+export const CreateBlog = async (formData: FormData) =>
+  authRequest<{ message: string; blog: BlogPost; seoRebuild?: SeoRebuildResult }>(
+    {
+      method: "POST",
+      url: "/api/blogs",
+      data: formData,
+    },
+    "Impossible de creer l'article."
+  );
 
-// Fetch all blogs (no authentication required)
-export async function fetchBlogs() {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/api/blogs`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    if (axios.isAxiosError(error)) {
-      throw error.response?.data || "Failed to fetch blogs";
-    } else {
-      throw "Failed to fetch blogs";
-    }
-  }
-}
+export const UpdateBlog = async (id: string, formData: FormData) =>
+  authRequest<{ message: string; blog: BlogPost; seoRebuild?: SeoRebuildResult }>(
+    {
+      method: "PATCH",
+      url: `/api/blogs/${id}`,
+      data: formData,
+    },
+    "Impossible de modifier l'article."
+  );
 
-// Fetch single blog (no authentication required)
-export async function fetchSingleBlog(blogId: string) {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/api/blogs/${blogId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blog:", error);
-    if (axios.isAxiosError(error)) {
-      throw error.response?.data || "Failed to fetch blog";
-    } else {
-      throw "Failed to fetch blog";
-    }
-  }
-}
+export const deleteBlog = async (id: string) =>
+  authRequest<{ message: string; seoRebuild?: SeoRebuildResult }>(
+    {
+      method: "DELETE",
+      url: `/api/blogs/${id}`,
+    },
+    "Impossible de supprimer l'article."
+  );
 
-// Add comment to blog (no authentication required)
-export async function addCommentToBlog(
+export const rebuildBlogSeo = async () =>
+  authRequest<{ seoRebuild: SeoRebuildResult }>(
+    {
+      method: "POST",
+      url: "/api/blogs/admin/rebuild",
+    },
+    "Impossible de lancer la reconstruction SEO."
+  );
+export const fetchAdminBlogs = async () =>
+  authRequest<{ blogs: BlogPost[] }>(
+    {
+      method: "GET",
+      url: "/api/blogs/admin",
+    },
+    "Impossible de charger les articles."
+  );
+
+export type GenerateBlogBatchInput = {
+  topic: string;
+  keywords: string;
+  audience: string;
+  location: string;
+  intent: "informational" | "commercial" | "comparison" | "local";
+  language: BlogLanguage;
+  category: string;
+  count: number;
+  ctaLabel: string;
+  ctaUrl: string;
+  ctaType: "service" | "affiliate" | "contact";
+};
+
+export const generateBlogBatch = async (data: GenerateBlogBatchInput) =>
+  authRequest<{
+    message: string;
+    source: "openai" | "template";
+    batchId: string;
+    created: BlogPost[];
+    skipped: Array<{ title: string; reason: string }>;
+  }>(
+    {
+      method: "POST",
+      url: "/api/blogs/admin/generate",
+      data,
+    },
+    "Impossible de generer les brouillons."
+  );
+export const fetchBlogs = async (params?: {
+  language?: BlogLanguage;
+  category?: string;
+  search?: string;
+  page?: number;
+  limit?: number;
+}) =>
+  publicRequest<BlogListResponse>(
+    {
+      method: "GET",
+      url: "/api/blogs",
+      params,
+    },
+    "Impossible de charger les articles."
+  );
+
+export const fetchSingleBlog = async (
+  identifier: string,
+  language?: BlogLanguage
+) =>
+  publicRequest<{
+    blog: BlogPost;
+    translations: Array<Pick<BlogPost, "title" | "slug" | "language">>;
+  }>(
+    {
+      method: "GET",
+      url: `/api/blogs/${encodeURIComponent(identifier)}`,
+      params: { language },
+    },
+    "Article introuvable."
+  );
+
+export const addCommentToBlog = async (
   blogId: string,
   commentData: { name: string; email: string; text: string }
-) {
-  try {
-    const response = await axios.post(
-      `${API_BASE_URL}/api/blogs/${blogId}/comment`,
-      commentData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error adding comment:", error);
-    if (axios.isAxiosError(error)) {
-      throw error.response?.data || "Failed to add comment";
-    } else {
-      throw "Failed to add comment";
-    }
-  }
-}
+) =>
+  publicRequest<{ message: string; totalComments: number }>(
+    {
+      method: "POST",
+      url: `/api/blogs/${blogId}/comment`,
+      data: commentData,
+    },
+    "Impossible d'ajouter le commentaire."
+  );
 
-// Get comments for a blog (no authentication required)
-export async function getBlogComments(blogId: string) {
-  try {
-    const response = await axios.get(
-      `${API_BASE_URL}/api/blogs/${blogId}/comments`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching comments:", error);
-    if (axios.isAxiosError(error)) {
-      throw error.response?.data || "Failed to fetch comments";
-    } else {
-      throw "Failed to fetch comments";
-    }
-  }
-}
+export const getBlogComments = async (blogId: string) =>
+  publicRequest<{
+    comments: NonNullable<BlogPost["comments"]>;
+    totalComments: number;
+  }>(
+    {
+      method: "GET",
+      url: `/api/blogs/${blogId}/comments`,
+    },
+    "Impossible de charger les commentaires."
+  );

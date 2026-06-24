@@ -291,7 +291,7 @@ const AuditVisibility = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const auditToolPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (
@@ -315,7 +315,7 @@ const AuditVisibility = () => {
             </p>
             <div className="mt-9 flex flex-col gap-4 phone:flex-row">
               <Link
-                to={startPath}
+                to={auditToolPath}
                 className="inline-flex items-center justify-center gap-3 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-6 py-4 text-sm font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B]"
               >
                 {copy.cta}

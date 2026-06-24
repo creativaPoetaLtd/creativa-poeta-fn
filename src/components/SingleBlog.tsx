@@ -3,37 +3,18 @@ import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { toast } from "react-toastify";
 import { User, MessageSquare, Send } from "lucide-react";
-import { fetchSingleBlog, addCommentToBlog } from "../APIs/Blogs";
+import { fetchSingleBlog, addCommentToBlog, BlogPost as BlogPostType } from "../APIs/Blogs";
 import "../styles/custom-inputs.css";
-
-interface Blog {
-  image: string;
-  title: string;
-  author: {
-    name: string;
-  };
-  createdAt: string;
-  content: string;
-  comments: Comment[];
-}
-
-interface Comment {
-  _id: string;
-  name: string;
-  email: string;
-  text: string;
-  createdAt: string;
-}
 
 const BlogPost = () => {
   const { id } = useParams();
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const [blog, setBlog] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [commentText, setCommentText] = useState("");
   const [commentName, setCommentName] = useState("");
   const [commentEmail, setCommentEmail] = useState("");
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<NonNullable<BlogPostType["comments"]>>([]);
   const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 
   useEffect(() => {
@@ -150,7 +131,7 @@ const BlogPost = () => {
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <User className="w-5 h-5" />
-                <span>{blog?.author.name}</span>
+                <span>{blog?.author?.name}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <span>

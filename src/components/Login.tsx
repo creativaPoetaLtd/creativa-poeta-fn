@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { API_BASE_URL } from "../APIs/client";
 
 type LoginFormInputs = {
   email: string;
@@ -46,13 +47,10 @@ const Login: React.FC = () => {
       setError(null);
       setLoading(true);
 
-      const response = await axios.post(
-        "https://creativa-poeta-bn-phi.vercel.app/api/auth/login",
-        {
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+        email: data.email,
+        password: data.password,
+      });
 
       const { token, user } = response.data;
 
@@ -159,17 +157,6 @@ const Login: React.FC = () => {
             </Button>
           </form>
 
-          <Typography variant="body2" textAlign="center" mt={2}>
-            Don't have an account?{" "}
-            <span
-              style={{ color: "#EEBA2B", cursor: "pointer" }}
-              onClick={() => navigate("/secure-admin-register-2024")}
-            >
-              Sign Up
-            </span>
-          </Typography>
-
-          {/* Homepage Return Option */}
           <Box sx={{ mt: 3, textAlign: "center" }}>
             <Typography
               variant="body2"

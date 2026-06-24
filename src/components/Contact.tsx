@@ -7,6 +7,7 @@ import getLangFromLocalStorage from "../../utils/Lang";
 import { FaArrowRight } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { contactUs } from "../APIs/Contact";
+import { localizePath } from "../data/marketRuntime";
 
 const lang: any = getLangFromLocalStorage();
 const Contact = () => {
@@ -73,7 +74,7 @@ const Contact = () => {
         className="min-h-screen bg-cover "
         style={{ backgroundImage: `url(${image8})` }}
       >
-        <Link to="/">
+        <Link to={localizePath("/")}>
           <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5  text-white laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
             <img
               src={logo}

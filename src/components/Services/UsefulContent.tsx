@@ -296,7 +296,7 @@ const UsefulContent = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const startPath = buildLocalLocalePath(market, locale, "/start-project");
-  const auditPath = buildLocalLocalePath(market, locale, "/services/audit-visibilite");
+  const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#071a33]/80 text-white">

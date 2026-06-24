@@ -4,6 +4,7 @@ import { jobs, Job } from '../data/jobData';
 import phonvid from '../assets/phonevid.mp4';
 import { Link } from 'react-router-dom';
 import logo from '../assets/flags/logopoeta1.png';
+import { localizePath } from '../data/marketRuntime';
 
 const JobList: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const JobList: React.FC = () => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
       </div>
 
-      <Link to="/">
+      <Link to={localizePath("/")}>
           <div className="logo laptop:top-0 desktop:top-0 tablet:top-3 md:top-3 top-5  text-white laptop:text-4xl desktop:text-4xl text-xl  phone:left-8 tablet:left-8 desktop:left-8 md:left-8 laptop:left-8 left-4 laptop:ml-11 desktop:ml-11 ml-0 absolute laptop:p-1 desktop:p-1">
             <img
               src={logo}

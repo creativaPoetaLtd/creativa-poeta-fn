@@ -50,7 +50,7 @@ const ServiceFinalCTA = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = ctaCopy[locale] ?? ctaCopy.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (
@@ -70,20 +70,20 @@ const ServiceFinalCTA = () => {
           <p className="mt-5 max-w-3xl text-base font-semibold leading-8 text-white/85 phone:text-lg">
             {copy.text}
           </p>
-          <div className="mt-8 flex flex-col gap-4 phone:flex-row">
+          <div className="mt-6 grid grid-cols-2 gap-2 phone:gap-4">
             <Link
-              to={startPath}
-              className="inline-flex items-center justify-center gap-3 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-6 py-4 text-sm font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B]"
+              to={auditPath}
+              className="inline-flex min-w-0 items-center justify-center gap-2 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
             >
-              {copy.primary}
-              <FaArrowRight />
+              <span className="truncate">{copy.primary}</span>
+              <FaArrowRight className="flex-none" />
             </Link>
             <Link
               to={contactPath}
-              className="inline-flex items-center justify-center gap-3 border-2 border-white px-6 py-4 text-sm font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B]"
+              className="inline-flex min-w-0 items-center justify-center gap-2 border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
             >
-              {copy.secondary}
-              <FaComments />
+              <span className="truncate">{copy.secondary}</span>
+              <FaComments className="flex-none" />
             </Link>
           </div>
         </div>

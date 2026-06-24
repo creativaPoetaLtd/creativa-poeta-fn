@@ -174,6 +174,18 @@ body{
   animation: "slideAnimation 0.9s ease-in-out", 
 
 }
+
+#home::after {
+  background: linear-gradient(90deg, #071a33, #eeba2b, #071a33);
+  bottom: 0;
+  content: "";
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 4;
+}
+
 @keyframes slideAnimation {
   0% {
     transform: translateX(-100000%);

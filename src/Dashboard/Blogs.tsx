@@ -1,324 +1,908 @@
-import { useState, useEffect } from "react";
 import {
-  Box,
-  Typography,
-  TextField,
-  Grid,
-  Card,
-  CardContent,
-} from "@mui/material";
-import {
-  Edit,
-  Article,
   Add,
-  Person,
-  CalendarToday,
-  Visibility,
+  AutoAwesome,
   Delete,
+  Edit,
+  OpenInNew,
+  PublishedWithChanges,
+  Refresh,
 } from "@mui/icons-material";
-import AddBlogModal from "./AddBlog";
-import EditBlogModal from "./EditBlog";
-import axios from "axios";
 import {
-  DashboardCard,
-  PageHeader,
-  DataTable,
-  StatusChip,
-  ActionButton,
-  MenuAction,
-} from "./components/DashboardComponents";
+  Alert,
+  Box,
+  Button,
+  Checkbox,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import {
+  BlogLanguage,
+  BlogPost,
+  BlogStatus,
+  CreateBlog,
+  GenerateBlogBatchInput,
+  UpdateBlog,
+  deleteBlog,
+  fetchAdminBlogs,
+  generateBlogBatch,
+  rebuildBlogSeo,
+} from "../APIs/Blogs";
 
-const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/blogs";
+type BlogForm = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  tags: string;
+  language: BlogLanguage;
+  translationKey: string;
+  seoTitle: string;
+  seoDescription: string;
+  focusKeyword: string;
+  status: BlogStatus;
+  imageAlt: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  ctaType: "service" | "affiliate" | "contact";
+  affiliateDisclosure: boolean;
+};
 
-export default function Blogs() {
-  const [blogs, setBlogs] = useState<
-    {
-      _id: string;
-      title: string;
-      content: string;
-      coverImage?: string;
-      author?: { name: string };
-      createdAt: string;
-      status: string;
-    }[]
-  >([]);
+const emptyForm: BlogForm = {
+  title: "",
+  slug: "",
+  excerpt: "",
+  content: "",
+  category: "Conseils",
+  tags: "",
+  language: "fr",
+  translationKey: "",
+  seoTitle: "",
+  seoDescription: "",
+  focusKeyword: "",
+  status: "draft",
+  imageAlt: "",
+  ctaLabel: "",
+  ctaUrl: "",
+  ctaType: "service",
+  affiliateDisclosure: false,
+};
 
+const emptyGenerationForm: GenerateBlogBatchInput = {
+  topic: "",
+  keywords: "",
+  audience: "PME, independants et associations",
+  location: "Belgique",
+  intent: "informational",
+  language: "fr",
+  category: "Conseils",
+  count: 3,
+  ctaLabel: "Decouvrir nos services",
+  ctaUrl: "/services",
+  ctaType: "service",
+};
+const formFromBlog = (blog: BlogPost): BlogForm => ({
+  title: blog.title,
+  slug: blog.slug || "",
+  excerpt: blog.excerpt || "",
+  content: blog.content,
+  category: blog.category || "Conseils",
+  tags: (blog.tags || []).join(", "),
+  language: blog.language || "fr",
+  translationKey: blog.translationKey || "",
+  seoTitle: blog.seoTitle || "",
+  seoDescription: blog.seoDescription || "",
+  focusKeyword: blog.focusKeyword || "",
+  status: blog.status || "published",
+  imageAlt: blog.imageAlt || "",
+  ctaLabel: blog.cta?.label || "",
+  ctaUrl: blog.cta?.url || "",
+  ctaType: blog.cta?.type || "service",
+  affiliateDisclosure: blog.affiliateDisclosure || false,
+});
+
+const statusColor = (status?: BlogStatus) => {
+  if (status === "published") return "success";
+  if (status === "archived") return "default";
+  return "warning";
+};
+
+const Blogs = () => {
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [search, setSearch] = useState("");
-  const [open, setOpen] = useState(false);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [selectedBlog, setSelectedBlog] = useState<{
-    _id: string;
-    title: string;
-    content: string;
-    coverImage?: string;
-  } | null>(null);
+  const [status, setStatus] = useState<"all" | BlogStatus>("all");
+  const [loading, setLoading] = useState(true);
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editing, setEditing] = useState<BlogPost | null>(null);
+  const [form, setForm] = useState<BlogForm>(emptyForm);
+  const [image, setImage] = useState<File | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [rebuildingSeo, setRebuildingSeo] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [generatorOpen, setGeneratorOpen] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [generationForm, setGenerationForm] = useState<GenerateBlogBatchInput>(
+    emptyGenerationForm
+  );
 
-  // Fetch all blogs from the backend
+  const loadBlogs = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetchAdminBlogs();
+      setBlogs(response.blogs || []);
+    } catch (loadError) {
+      setError(
+        loadError instanceof Error
+          ? loadError.message
+          : "Impossible de charger les articles."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await axios.get(API_URL);
-        setBlogs(response.data.blogs);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      }
-    };
-    fetchBlogs();
+    void loadBlogs();
   }, []);
 
-  // Open/Close Modal
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const filtered = useMemo(() => {
+    const needle = search.trim().toLowerCase();
+    return blogs.filter((blog) => {
+      const matchesStatus =
+        status === "all" || (blog.status || "published") === status;
+      const matchesSearch =
+        !needle ||
+        blog.title.toLowerCase().includes(needle) ||
+        blog.slug?.toLowerCase().includes(needle) ||
+        blog.category?.toLowerCase().includes(needle);
+      return matchesStatus && matchesSearch;
+    });
+  }, [blogs, search, status]);
 
-  const handleEditOpen = (blog: {
-    _id: string;
-    title: string;
-    content: string;
-    coverImage?: string;
-  }) => {
-    setSelectedBlog(blog);
-    console.log("selected blog", blog);
-    setEditModalOpen(true);
+  const openCreate = () => {
+    setEditing(null);
+    setForm(emptyForm);
+    setImage(null);
+    setError("");
+    setMessage("");
+    setEditorOpen(true);
   };
 
-  const handleEditClose = () => {
-    setSelectedBlog(null);
-    setEditModalOpen(false);
+  const openEdit = (blog: BlogPost) => {
+    setEditing(blog);
+    setForm(formFromBlog(blog));
+    setImage(null);
+    setError("");
+    setMessage("");
+    setEditorOpen(true);
   };
-  const token = localStorage.getItem("token"); // Ensure token is retrieved
 
-  // 🔹 Handle Blog Update
-  const handleUpdate = async (updatedBlog: {
-    title: string;
-    content: string;
-    coverImage: File | null;
-  }) => {
-    if (!selectedBlog || !selectedBlog._id) return; // Ensure selectedBlog and its _id are defined
+  const setField = <K extends keyof BlogForm>(
+    key: K,
+    value: BlogForm[K]
+  ) => {
+    setForm((current) => ({ ...current, [key]: value }));
+  };
 
-    const formData = new FormData();
-    formData.append("title", updatedBlog.title);
-    formData.append("content", updatedBlog.content);
-    if (updatedBlog.coverImage) {
-      formData.append("image", updatedBlog.coverImage);
+  const setGenerationField = <K extends keyof GenerateBlogBatchInput>(
+    key: K,
+    value: GenerateBlogBatchInput[K]
+  ) => {
+    setGenerationForm((current) => ({ ...current, [key]: value }));
+  };
+
+  const rebuildStatusMessage = (status?: "queued" | "disabled" | "failed") => {
+    if (status === "queued") return " Reconstruction SEO lancee.";
+    if (status === "disabled") return " Hook de reconstruction non configure.";
+    if (status === "failed") return " Reconstruction SEO non lancee; utilisez le bouton de secours.";
+    return "";
+  };
+
+  const requestSeoRebuild = async () => {
+    setRebuildingSeo(true);
+    setError("");
+    setMessage("");
+    try {
+      const response = await rebuildBlogSeo();
+      if (response.seoRebuild.status === "queued") {
+        setMessage("Reconstruction du frontend et des sitemaps lancee.");
+      } else {
+        setError(response.seoRebuild.message);
+      }
+    } catch (rebuildError) {
+      setError(
+        rebuildError instanceof Error
+          ? rebuildError.message
+          : "Impossible de lancer la reconstruction SEO."
+      );
+    } finally {
+      setRebuildingSeo(false);
     }
+  };
+  const generateDrafts = async () => {
+    if (generationForm.topic.trim().length < 3) {
+      setError("Indiquez un sujet principal suffisamment precis.");
+      return;
+    }
+
+    setGenerating(true);
+    setError("");
+    setMessage("");
+    try {
+      const result = await generateBlogBatch(generationForm);
+      await loadBlogs();
+      setGeneratorOpen(false);
+      setStatus("draft");
+      setMessage(
+        `${result.created.length} brouillon(s) genere(s) via ${
+          result.source === "openai" ? "OpenAI" : "le modele local"
+        }. ${result.skipped.length} doublon(s) ignore(s).`
+      );
+    } catch (generationError) {
+      setError(
+        generationError instanceof Error
+          ? generationError.message
+          : "Impossible de generer les brouillons."
+      );
+    } finally {
+      setGenerating(false);
+    }
+  };
+  const saveBlog = async () => {
+    if (!form.title.trim() || !form.content.trim()) {
+      setError("Le titre et le contenu sont obligatoires.");
+      return;
+    }
+
+    setSaving(true);
+    setError("");
+    setMessage("");
+
+    const data = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      data.append(key, String(value));
+    });
+    if (image) data.append("image", image);
 
     try {
-      const response = await axios.patch(
-        `${API_URL}/${selectedBlog._id}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      if (response.status !== 200) {
-        throw new Error("Failed to update blog.");
+      if (editing) {
+        const response = await UpdateBlog(editing._id, data);
+        setMessage(
+          `Article mis a jour.${rebuildStatusMessage(response.seoRebuild?.status)}`
+        );
+      } else {
+        const response = await CreateBlog(data);
+        setMessage(`Article cree.${rebuildStatusMessage(response.seoRebuild?.status)}`);
       }
-
-      setBlogs((prevBlogs) =>
-        prevBlogs.map((blog) =>
-          blog._id === selectedBlog._id
-            ? {
-                ...blog,
-                ...updatedBlog,
-                coverImage: updatedBlog.coverImage
-                  ? URL.createObjectURL(updatedBlog.coverImage)
-                  : blog.coverImage,
-              }
-            : blog
-        )
+      await loadBlogs();
+      setTimeout(() => setEditorOpen(false), 600);
+    } catch (saveError) {
+      setError(
+        saveError instanceof Error
+          ? saveError.message
+          : "Impossible d'enregistrer l'article."
       );
-    } catch (error) {
-      console.error("Error updating blog:", error);
-      throw error;
+    } finally {
+      setSaving(false);
     }
-
-    handleEditClose();
   };
 
-  const handleDelete = async (id: string) => {
-    console.log("Delete blog:", id);
-    // TODO: Implement delete blog functionality
+  const removeBlog = async (blog: BlogPost) => {
+    if (!window.confirm(`Supprimer definitivement « ${blog.title} » ?`)) return;
+    try {
+      const response = await deleteBlog(blog._id);
+      setBlogs((current) => current.filter((item) => item._id !== blog._id));
+      setMessage(
+        `Article supprime.${rebuildStatusMessage(response.seoRebuild?.status)}`
+      );
+    } catch (deleteError) {
+      setError(
+        deleteError instanceof Error
+          ? deleteError.message
+          : "Impossible de supprimer l'article."
+      );
+    }
   };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
-  };
-
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(search.toLowerCase())
-  );
 
   return (
-    <Box sx={{ p: 3 }}>
-      <PageHeader
-        title="📖 Blog Management"
-        subtitle="Create, edit, and manage your blog content"
-        action={
-          <ActionButton
-            variant="primary"
-            onClick={handleOpen}
-            startIcon={<Add />}
-          >
-            Add New Blog
-          </ActionButton>
-        }
-      />
-
-      {/* Summary Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={3}>
-          <DashboardCard
-            title="Total Blogs"
-            value={blogs.length.toString()}
-            icon={<Article />}
-            trend="up"
-            trendValue="12% from last month"
-            color="#2196F3"
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <DashboardCard
-            title="Published"
-            value={blogs
-              .filter((b) => b.status === "published")
-              .length.toString()}
-            icon={<Visibility />}
-            trend="up"
-            trendValue="8% from last month"
-            color="#4CAF50"
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <DashboardCard
-            title="Draft"
-            value={blogs.filter((b) => b.status === "draft").length.toString()}
-            icon={<Edit />}
-            trend="neutral"
-            trendValue="3 pending review"
-            color="#FF9800"
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <DashboardCard
-            title="This Month"
-            value={blogs
-              .filter((b) => {
-                const blogDate = new Date(b.createdAt);
-                const currentMonth = new Date().getMonth();
-                return blogDate.getMonth() === currentMonth;
-              })
-              .length.toString()}
-            icon={<CalendarToday />}
-            trend="up"
-            trendValue="5 new posts"
-            color="#9C27B0"
-          />
-        </Grid>
-      </Grid>
-
-      {/* Search */}
-      <Card sx={{ mb: 3 }}>
-        <CardContent>
-          <TextField
-            label="Search Blogs"
+    <Box sx={{ p: { xs: 2, md: 3 } }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "stretch", sm: "center" }}
+        gap={2}
+        mb={3}
+      >
+        <Box>
+          <Typography variant="h4" fontWeight={800}>
+            Articles
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            Redaction, SEO, traductions et publication.
+          </Typography>
+        </Box>
+        <Stack direction="row" gap={1} flexWrap="wrap">
+          <Button
             variant="outlined"
-            size="small"
-            fullWidth
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "&:hover fieldset": { borderColor: "#EEBA2B" },
-                "&.Mui-focused fieldset": { borderColor: "#EEBA2B" },
-              },
-              "& .MuiInputLabel-root.Mui-focused": { color: "#EEBA2B" },
+            startIcon={<Refresh />}
+            onClick={() => void loadBlogs()}
+          >
+            Actualiser
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<PublishedWithChanges />}
+            onClick={() => void requestSeoRebuild()}
+            disabled={rebuildingSeo}
+          >
+            {rebuildingSeo ? "Lancement..." : "Reconstruire le SEO"}
+          </Button>
+          <Button
+            variant="outlined"
+            startIcon={<AutoAwesome />}
+            onClick={() => {
+              setError("");
+              setMessage("");
+              setGeneratorOpen(true);
             }}
-          />
-        </CardContent>
-      </Card>
+            sx={{ fontWeight: 800 }}
+          >
+            Generer des brouillons
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            onClick={openCreate}
+            sx={{ bgcolor: "#EEBA2B", color: "#071a33", fontWeight: 800 }}
+          >
+            Nouvel article
+          </Button>
+        </Stack>
+      </Stack>
 
-      {/* Blogs Table */}
-      <DataTable
-        headers={["Title", "Author", "Date", "Status"]}
-        hiddenFields={["id"]}
-        rows={filteredBlogs.map((blog) => ({
-          id: blog._id,
-          title: (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Article sx={{ fontSize: 20, color: "#EEBA2B" }} />
-              <Typography variant="body2" fontWeight="medium">
-                {blog.title}
-              </Typography>
-            </Box>
-          ),
-          author: (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Person sx={{ fontSize: 20, color: "#EEBA2B" }} />
-              <Typography variant="body2">
-                {blog.author?.name || "Unknown"}
-              </Typography>
-            </Box>
-          ),
-          date: (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <CalendarToday sx={{ fontSize: 16, color: "text.secondary" }} />
-              <Typography variant="body2">
-                {formatDate(blog.createdAt)}
-              </Typography>
-            </Box>
-          ),
-          status: (
-            <StatusChip
-              status={blog.status || "draft"}
-              variant={
-                blog.status === "published"
-                  ? "success"
-                  : blog.status === "draft"
-                  ? "warning"
-                  : "default"
-              }
-            />
-          ),
-        }))}
-        customActions={(row) => {
-          const blog = blogs.find((b) => b._id === row.id);
-          if (!blog) return null;
-
-          return (
-            <>
-              <MenuAction
-                icon={<Edit />}
-                label="Edit"
-                onClick={() => handleEditOpen(blog)}
-                color="#EEBA2B"
-              />
-              <MenuAction
-                icon={<Delete />}
-                label="Delete"
-                onClick={() => handleDelete(blog._id)}
-                color="#ef4444"
-              />
-            </>
-          );
-        }}
-        emptyMessage="No blogs found"
-      />
-
-      {/* Modals */}
-      <AddBlogModal open={open} handleClose={handleClose} />
-      {selectedBlog && (
-        <EditBlogModal
-          open={isEditModalOpen}
-          handleClose={handleEditClose}
-          handleUpdate={handleUpdate}
-          existingBlog={selectedBlog}
-        />
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError("")}>
+          {error}
+        </Alert>
       )}
+
+      {message && (
+        <Alert severity="success" sx={{ mb: 2 }} onClose={() => setMessage("")}>
+          {message}
+        </Alert>
+      )}
+      <Stack direction={{ xs: "column", md: "row" }} gap={2} mb={2}>
+        <TextField
+          size="small"
+          label="Rechercher"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          fullWidth
+        />
+        <FormControl size="small" sx={{ minWidth: 180 }}>
+          <InputLabel>Statut</InputLabel>
+          <Select
+            value={status}
+            label="Statut"
+            onChange={(event) =>
+              setStatus(event.target.value as "all" | BlogStatus)
+            }
+          >
+            <MenuItem value="all">Tous</MenuItem>
+            <MenuItem value="draft">Brouillons</MenuItem>
+            <MenuItem value="published">Publies</MenuItem>
+            <MenuItem value="archived">Archives</MenuItem>
+          </Select>
+        </FormControl>
+      </Stack>
+
+      <Box
+        sx={{
+          border: "1px solid",
+          borderColor: "divider",
+          borderRadius: 1,
+          overflow: "hidden",
+          bgcolor: "background.paper",
+        }}
+      >
+        {loading ? (
+          <Typography p={3} color="text.secondary">
+            Chargement...
+          </Typography>
+        ) : filtered.length === 0 ? (
+          <Typography p={3} color="text.secondary">
+            Aucun article.
+          </Typography>
+        ) : (
+          filtered.map((blog, index) => (
+            <Stack
+              key={blog._id}
+              direction={{ xs: "column", md: "row" }}
+              alignItems={{ xs: "stretch", md: "center" }}
+              gap={2}
+              p={2}
+              sx={{
+                borderTop: index ? "1px solid" : "none",
+                borderColor: "divider",
+              }}
+            >
+              <Box sx={{ flex: 1, minWidth: 0 }}>
+                <Stack direction="row" gap={1} alignItems="center" flexWrap="wrap">
+                  <Typography fontWeight={800} noWrap>
+                    {blog.title}
+                  </Typography>
+                  <Chip
+                    size="small"
+                    label={blog.status || "published"}
+                    color={statusColor(blog.status)}
+                  />
+                  <Chip
+                    size="small"
+                    variant="outlined"
+                    label={(blog.language || "fr").toUpperCase()}
+                  />
+                  {blog.generation?.source && blog.generation.source !== "manual" && (
+                    <Chip
+                      size="small"
+                      variant="outlined"
+                      icon={<AutoAwesome />}
+                      label={blog.generation.source === "openai" ? "OpenAI" : "Modele local"}
+                    />
+                  )}
+                  {typeof blog.generation?.qualityScore === "number" && (
+                    <Chip
+                      size="small"
+                      color={blog.generation.qualityScore >= 80 ? "success" : "warning"}
+                      label={`Qualite ${blog.generation.qualityScore}/100`}
+                    />
+                  )}
+                </Stack>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  display="block"
+                  mt={0.5}
+                >
+                  /blogs/{blog.slug || blog._id} · {blog.category || "Conseils"}
+                </Typography>
+              </Box>
+
+              <Stack direction="row" gap={1} flexWrap="wrap">
+                {(blog.status || "published") === "published" && (
+                  <Button
+                    size="small"
+                    startIcon={<OpenInNew />}
+                    href={`/blogs/${blog.slug || blog._id}`}
+                    target="_blank"
+                  >
+                    Voir
+                  </Button>
+                )}
+                <Button
+                  size="small"
+                  startIcon={<Edit />}
+                  onClick={() => openEdit(blog)}
+                >
+                  Modifier
+                </Button>
+                <Button
+                  size="small"
+                  color="error"
+                  startIcon={<Delete />}
+                  onClick={() => void removeBlog(blog)}
+                >
+                  Supprimer
+                </Button>
+              </Stack>
+            </Stack>
+          ))
+        )}
+      </Box>
+
+      <Dialog
+        open={generatorOpen}
+        onClose={() => !generating && setGeneratorOpen(false)}
+        fullWidth
+        maxWidth="md"
+      >
+        <DialogTitle fontWeight={800}>Generer des brouillons SEO</DialogTitle>
+        <DialogContent dividers>
+          <Stack gap={2}>
+            <Alert severity="info">
+              Les articles sont crees en brouillon. Verifiez les faits, le style,
+              les liens et les indicateurs de qualite avant publication.
+            </Alert>
+            {error && <Alert severity="error">{error}</Alert>}
+            <TextField
+              label="Sujet principal"
+              value={generationForm.topic}
+              onChange={(event) => setGenerationField("topic", event.target.value)}
+              placeholder="Ex. visibilite locale pour restaurants"
+              required
+              fullWidth
+            />
+            <TextField
+              label="Mots-cles ou sujets secondaires"
+              value={generationForm.keywords}
+              onChange={(event) => setGenerationField("keywords", event.target.value)}
+              placeholder="Un mot-cle par ligne"
+              helperText="Chaque mot-cle peut devenir un angle distinct."
+              multiline
+              minRows={3}
+              fullWidth
+            />
+            <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+              <TextField
+                label="Public vise"
+                value={generationForm.audience}
+                onChange={(event) => setGenerationField("audience", event.target.value)}
+                fullWidth
+              />
+              <TextField
+                label="Zone geographique"
+                value={generationForm.location}
+                onChange={(event) => setGenerationField("location", event.target.value)}
+                fullWidth
+              />
+            </Stack>
+            <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+              <TextField
+                select
+                label="Langue"
+                value={generationForm.language}
+                onChange={(event) =>
+                  setGenerationField("language", event.target.value as BlogLanguage)
+                }
+                fullWidth
+              >
+                <MenuItem value="fr">Francais</MenuItem>
+                <MenuItem value="en">English</MenuItem>
+                <MenuItem value="nl">Nederlands</MenuItem>
+                <MenuItem value="kiny">Kinyarwanda</MenuItem>
+              </TextField>
+              <TextField
+                select
+                label="Intention"
+                value={generationForm.intent}
+                onChange={(event) =>
+                  setGenerationField(
+                    "intent",
+                    event.target.value as GenerateBlogBatchInput["intent"]
+                  )
+                }
+                fullWidth
+              >
+                <MenuItem value="informational">Informer</MenuItem>
+                <MenuItem value="commercial">Aider a choisir</MenuItem>
+                <MenuItem value="comparison">Comparer</MenuItem>
+                <MenuItem value="local">Recherche locale</MenuItem>
+              </TextField>
+              <TextField
+                label="Nombre"
+                type="number"
+                value={generationForm.count}
+                onChange={(event) =>
+                  setGenerationField(
+                    "count",
+                    Math.min(6, Math.max(1, Number(event.target.value) || 1))
+                  )
+                }
+                inputProps={{ min: 1, max: 6 }}
+                sx={{ minWidth: 120 }}
+              />
+            </Stack>
+            <TextField
+              label="Categorie"
+              value={generationForm.category}
+              onChange={(event) => setGenerationField("category", event.target.value)}
+              fullWidth
+            />
+            <Typography variant="subtitle2" fontWeight={800}>
+              Conversion
+            </Typography>
+            <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+              <TextField
+                label="Texte du CTA"
+                value={generationForm.ctaLabel}
+                onChange={(event) => setGenerationField("ctaLabel", event.target.value)}
+                fullWidth
+              />
+              <TextField
+                label="URL du CTA"
+                value={generationForm.ctaUrl}
+                onChange={(event) => setGenerationField("ctaUrl", event.target.value)}
+                placeholder="/services/..."
+                fullWidth
+              />
+              <TextField
+                select
+                label="Type"
+                value={generationForm.ctaType}
+                onChange={(event) =>
+                  setGenerationField(
+                    "ctaType",
+                    event.target.value as GenerateBlogBatchInput["ctaType"]
+                  )
+                }
+                sx={{ minWidth: 145 }}
+              >
+                <MenuItem value="service">Service</MenuItem>
+                <MenuItem value="contact">Contact</MenuItem>
+                <MenuItem value="affiliate">Affilie</MenuItem>
+              </TextField>
+            </Stack>
+          </Stack>
+        </DialogContent>
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={() => setGeneratorOpen(false)} disabled={generating}>
+            Annuler
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<AutoAwesome />}
+            onClick={() => void generateDrafts()}
+            disabled={generating}
+            sx={{ bgcolor: "#EEBA2B", color: "#071a33", fontWeight: 800 }}
+          >
+            {generating ? "Generation..." : "Creer les brouillons"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={editorOpen}
+        onClose={() => !saving && setEditorOpen(false)}
+        fullWidth
+        maxWidth="lg"
+        PaperProps={{ sx: { maxHeight: "94vh" } }}
+      >
+        <DialogTitle fontWeight={800}>
+          {editing ? "Modifier l'article" : "Nouvel article"}
+        </DialogTitle>
+        <DialogContent dividers>
+          <Stack gap={2}>
+            {error && <Alert severity="error">{error}</Alert>}
+            {message && <Alert severity="success">{message}</Alert>}
+            {editing?.generation?.source && editing.generation.source !== "manual" && (
+              <Alert
+                severity={
+                  (editing.generation.qualityScore || 0) >= 80 ? "success" : "warning"
+                }
+              >
+                Brouillon genere via {editing.generation.source === "openai" ? "OpenAI" : "le modele local"}
+                {typeof editing.generation.qualityScore === "number"
+                  ? ` - qualite ${editing.generation.qualityScore}/100`
+                  : ""}
+                {editing.generation.qualityIssues?.length
+                  ? ` - A verifier : ${editing.generation.qualityIssues.join(" ")}`
+                  : " - Les controles automatiques sont satisfaits; une relecture humaine reste requise."}
+              </Alert>
+            )}
+
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <TextField
+                label="Titre"
+                value={form.title}
+                onChange={(event) => setField("title", event.target.value)}
+                fullWidth
+                required
+              />
+              <TextField
+                label="Slug"
+                value={form.slug}
+                onChange={(event) => setField("slug", event.target.value)}
+                helperText="Laisser vide pour le generer depuis le titre."
+                fullWidth
+              />
+            </Stack>
+
+            <TextField
+              label="Resume"
+              value={form.excerpt}
+              onChange={(event) => setField("excerpt", event.target.value)}
+              multiline
+              minRows={2}
+              inputProps={{ maxLength: 420 }}
+              helperText={`${form.excerpt.length}/420`}
+            />
+
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <TextField
+                select
+                label="Langue"
+                value={form.language}
+                onChange={(event) =>
+                  setField("language", event.target.value as BlogLanguage)
+                }
+                fullWidth
+              >
+                <MenuItem value="fr">Francais</MenuItem>
+                <MenuItem value="en">English</MenuItem>
+                <MenuItem value="nl">Nederlands</MenuItem>
+                <MenuItem value="kiny">Kinyarwanda</MenuItem>
+              </TextField>
+              <TextField
+                select
+                label="Statut"
+                value={form.status}
+                onChange={(event) =>
+                  setField("status", event.target.value as BlogStatus)
+                }
+                fullWidth
+              >
+                <MenuItem value="draft">Brouillon</MenuItem>
+                <MenuItem value="published">Publie</MenuItem>
+                <MenuItem value="archived">Archive</MenuItem>
+              </TextField>
+              <TextField
+                label="Categorie"
+                value={form.category}
+                onChange={(event) => setField("category", event.target.value)}
+                fullWidth
+              />
+            </Stack>
+
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <TextField
+                label="Tags"
+                value={form.tags}
+                onChange={(event) => setField("tags", event.target.value)}
+                helperText="Separes par des virgules"
+                fullWidth
+              />
+              <TextField
+                label="Cle de traduction"
+                value={form.translationKey}
+                onChange={(event) =>
+                  setField("translationKey", event.target.value)
+                }
+                helperText="Identique pour les versions traduites"
+                fullWidth
+              />
+            </Stack>
+
+            <Box>
+              <Typography variant="subtitle2" fontWeight={800} mb={1}>
+                Contenu
+              </Typography>
+              <ReactQuill
+                theme="snow"
+                value={form.content}
+                onChange={(value) => setField("content", value)}
+                style={{ minHeight: 260, marginBottom: 44 }}
+              />
+            </Box>
+
+            <Typography variant="h6" fontWeight={800} mt={1}>
+              SEO
+            </Typography>
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <TextField
+                label="Titre SEO"
+                value={form.seoTitle}
+                onChange={(event) => setField("seoTitle", event.target.value)}
+                inputProps={{ maxLength: 70 }}
+                helperText={`${form.seoTitle.length}/70`}
+                fullWidth
+              />
+              <TextField
+                label="Mot-cle principal"
+                value={form.focusKeyword}
+                onChange={(event) =>
+                  setField("focusKeyword", event.target.value)
+                }
+                fullWidth
+              />
+            </Stack>
+            <TextField
+              label="Description SEO"
+              value={form.seoDescription}
+              onChange={(event) =>
+                setField("seoDescription", event.target.value)
+              }
+              multiline
+              minRows={2}
+              inputProps={{ maxLength: 180 }}
+              helperText={`${form.seoDescription.length}/180`}
+            />
+
+            <Typography variant="h6" fontWeight={800} mt={1}>
+              Image et conversion
+            </Typography>
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <Button variant="outlined" component="label" sx={{ minHeight: 56 }}>
+                {image ? image.name : "Choisir une image"}
+                <input
+                  hidden
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) =>
+                    setImage(event.target.files?.[0] || null)
+                  }
+                />
+              </Button>
+              <TextField
+                label="Texte alternatif de l'image"
+                value={form.imageAlt}
+                onChange={(event) => setField("imageAlt", event.target.value)}
+                fullWidth
+              />
+            </Stack>
+            <Stack direction={{ xs: "column", md: "row" }} gap={2}>
+              <TextField
+                label="Texte du CTA"
+                value={form.ctaLabel}
+                onChange={(event) => setField("ctaLabel", event.target.value)}
+                fullWidth
+              />
+              <TextField
+                label="URL du CTA"
+                value={form.ctaUrl}
+                onChange={(event) => setField("ctaUrl", event.target.value)}
+                placeholder="/services/... ou https://..."
+                fullWidth
+              />
+              <TextField
+                select
+                label="Type de CTA"
+                value={form.ctaType}
+                onChange={(event) =>
+                  setField(
+                    "ctaType",
+                    event.target.value as BlogForm["ctaType"]
+                  )
+                }
+                sx={{ minWidth: 170 }}
+              >
+                <MenuItem value="service">Service</MenuItem>
+                <MenuItem value="contact">Contact</MenuItem>
+                <MenuItem value="affiliate">Affilie</MenuItem>
+              </TextField>
+            </Stack>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={form.affiliateDisclosure}
+                  onChange={(event) =>
+                    setField("affiliateDisclosure", event.target.checked)
+                  }
+                />
+              }
+              label="Afficher la mention de liens affilies"
+            />
+          </Stack>
+        </DialogContent>
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={() => setEditorOpen(false)} disabled={saving}>
+            Annuler
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => void saveBlog()}
+            disabled={saving}
+            sx={{ bgcolor: "#EEBA2B", color: "#071a33", fontWeight: 800 }}
+          >
+            {saving ? "Enregistrement..." : "Enregistrer"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
-}
+};
+
+export default Blogs;

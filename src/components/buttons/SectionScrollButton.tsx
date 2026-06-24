@@ -20,7 +20,10 @@ const SectionScrollButton = ({
   bottomColor = "#071a33",
 }: SectionScrollButtonProps) => {
   const handleClick = () => {
-    const target = document.getElementById(targetId);
+    const target =
+      targetId === "__next-section"
+        ? getNextSection()
+        : document.getElementById(targetId);
     if (!target) return;
 
     target.classList.remove("cp-scroll-fade-target");
@@ -33,6 +36,31 @@ const SectionScrollButton = ({
     window.setTimeout(() => {
       target.classList.remove("cp-scroll-fade-target");
     }, 1100);
+  };
+
+  const getNextSection = () => {
+    const ids = [
+      "home",
+      "about",
+      "probleme-actuel",
+      "visibilite-moderne",
+      "source-officielle",
+      "canaux",
+      "voix-ia",
+      "confiance",
+      "services",
+      "creativite-services",
+      "cta-final",
+      "faq",
+      "footer",
+    ];
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    const currentY = window.scrollY + 120;
+    const next = sections.find((section) => section.offsetTop > currentY);
+
+    return next || sections[0] || null;
   };
 
   return (

@@ -1,97 +1,87 @@
-import axios from "axios";
+import { authRequest, publicRequest } from "./client";
 
-const BASE_URL = "https://creativa-poeta-bn-phi.vercel.app/api/project";
+export interface ProjectInquiryPayload {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  serviceType: string;
+  selectedServices: string[];
+  customServiceDescription?: string;
+  customServiceNeeds?: string;
+  serviceSpecificOtherDescription?: string;
+  additionalInfo?: string;
+}
 
-// Helper function to handle auth errors gracefully
-const handleAuthError = (error: any) => {
-  if (axios.isAxiosError(error) && error.response?.status === 401) {
-    // Check if the error is specifically about token signature/expiration
-    const errorMessage = error.response?.data?.message || "";
+export interface ProjectRequest {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  serviceType?: string;
+  selectedServices?: string[];
+  customServiceDescription?: string;
+  customServiceNeeds?: string;
+  serviceSpecificOtherDescription?: string;
+  additionalInfo?: string;
+  status?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isReplied?: boolean;
+  repliedAt?: string;
+  repliedBy?: string;
+  replyMessage?: string;
+}
 
-    if (
-      errorMessage.includes("signature") ||
-      errorMessage.includes("expired")
-    ) {
-      // Only clear storage and redirect for genuine token issues
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+export interface ProjectListResponse {
+  message: string;
+  requests: ProjectRequest[];
+  projects?: ProjectRequest[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalProjects?: number;
+    totalRequests: number;
+    limit: number;
+  };
+}
 
-      // Use a more gentle approach - don't immediately redirect
-      console.warn(
-        "Authentication token expired. Please refresh and login again."
-      );
-      throw new Error(
-        "Session expired. Please refresh the page and login again."
-      );
-    } else {
-      // For other 401 errors, just throw without auto-logout
-      throw new Error(
-        errorMessage || "Authentication failed. Please try again."
-      );
-    }
-  }
-
-  if (axios.isAxiosError(error)) {
-    throw new Error(
-      error.response?.data?.message || "Request failed. Please try again."
-    );
-  }
-  throw error;
+export const projectForm = async (data: ProjectInquiryPayload) => {
+  return publicRequest<{ message?: string }>(
+    {
+      method: "POST",
+      url: "/api/project/send-inquiry",
+      data,
+    },
+    "Failed to submit project request."
+  );
 };
 
-// Public endpoint for project inquiries
-export const projectForm = async (data: any) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/send-inquiry`, data);
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
-};
-
-// Admin endpoints for project management
-export const getProjects = async (page = 1, limit = 10, status = "all") => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No authentication token found. Please login.");
-    }
-
-    const response = await axios.get(`${BASE_URL}`, {
+export const getProjects = async (
+  page = 1,
+  limit = 25,
+  status = "all"
+): Promise<any> => {
+  return authRequest(
+    {
+      method: "GET",
+      url: "/api/project",
       params: { page, limit, status },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
+    },
+    "Failed to fetch project requests."
+  );
 };
 
-export const updateProjectStatus = async (
-  projectId: string,
-  status: string
-) => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No authentication token found. Please login.");
-    }
-
-    const response = await axios.put(
-      `${BASE_URL}/${projectId}/status`,
-      { status },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
+export const updateProjectStatus = async (projectId: string, status: string) => {
+  return authRequest(
+    {
+      method: "PUT",
+      url: `/api/project/${projectId}/status`,
+      data: { status },
+    },
+    "Failed to update project status."
+  );
 };
 
 export const replyToProject = async (
@@ -99,59 +89,32 @@ export const replyToProject = async (
   replyMessage: string,
   subject: string
 ) => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No authentication token found. Please login.");
-    }
-
-    const response = await axios.post(
-      `${BASE_URL}/${projectId}/reply`,
-      { replyMessage, subject },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
+  return authRequest(
+    {
+      method: "POST",
+      url: `/api/project/${projectId}/reply`,
+      data: { replyMessage, subject },
+    },
+    "Failed to send reply."
+  );
 };
 
 export const deleteProject = async (projectId: string) => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No authentication token found. Please login.");
-    }
-
-    const response = await axios.delete(`${BASE_URL}/${projectId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
+  return authRequest(
+    {
+      method: "DELETE",
+      url: `/api/project/${projectId}`,
+    },
+    "Failed to delete project request."
+  );
 };
 
 export const getProjectById = async (projectId: string) => {
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No authentication token found. Please login.");
-    }
-
-    const response = await axios.get(`${BASE_URL}/${projectId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    handleAuthError(error);
-  }
+  return authRequest<{ request?: ProjectRequest } | ProjectRequest>(
+    {
+      method: "GET",
+      url: `/api/project/${projectId}`,
+    },
+    "Failed to fetch project details."
+  );
 };

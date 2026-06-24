@@ -2,7 +2,6 @@ import faqData from "../../data/faq";
 import phonevid from "../../assets/phonevid.mp4";
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import SectionScrollButton from "../buttons/SectionScrollButton";
 
 // About.tsx
 const Faq = () => {
@@ -71,13 +70,6 @@ const Faq = () => {
           ))}
         </div>
       </div>
-      <SectionScrollButton
-        targetId="footer"
-        side="right"
-        tone="light"
-        topColor="#ffffff"
-        bottomColor="#EEBA2B"
-      />
     </section>
   );
 };
