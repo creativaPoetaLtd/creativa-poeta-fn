@@ -849,11 +849,74 @@ function blogGroup(blog) {
   );
 }
 
+function normalizeRelatedTerm(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function relatedWords(blog) {
+  return new Set(
+    normalizeRelatedTerm(
+      `${blog.title || ""} ${blog.focusKeyword || ""} ${(blog.tags || []).join(" ")}`
+    )
+      .split(/[^a-z0-9]+/)
+      .filter((word) => word.length >= 4)
+  );
+}
+
+function relatedBlogScore(source, candidate) {
+  let score = 0;
+  const sourceCategory = normalizeRelatedTerm(source.category);
+  const sourceKeyword = normalizeRelatedTerm(source.focusKeyword);
+  const sourceTags = new Set((source.tags || []).map(normalizeRelatedTerm).filter(Boolean));
+
+  if (sourceCategory && sourceCategory === normalizeRelatedTerm(candidate.category)) score += 8;
+  if (sourceKeyword && sourceKeyword === normalizeRelatedTerm(candidate.focusKeyword)) score += 10;
+  for (const tag of candidate.tags || []) {
+    if (sourceTags.has(normalizeRelatedTerm(tag))) score += 4;
+  }
+
+  const sourceTerms = relatedWords(source);
+  for (const term of relatedWords(candidate)) {
+    if (sourceTerms.has(term)) score += 1;
+  }
+  return score;
+}
+
+function relatedBlogsFor(blog, limit = 3) {
+  return publishedBlogs
+    .filter(
+      (candidate) =>
+        candidate.slug !== blog.slug && candidate.language === blog.language
+    )
+    .map((candidate) => ({ candidate, score: relatedBlogScore(blog, candidate) }))
+    .sort((left, right) => {
+      if (right.score !== left.score) return right.score - left.score;
+      return String(right.candidate.publishedAt || right.candidate.createdAt || "").localeCompare(
+        String(left.candidate.publishedAt || left.candidate.createdAt || "")
+      );
+    })
+    .slice(0, limit)
+    .map(({ candidate }) => candidate);
+}
 function globalBlogPath(blog) {
   const prefix = blog.language === "en" ? "" : `/${blog.language}`;
   return `${prefix}/blogs/${blog.slug}`;
 }
 
+function relatedBlogPath(page, blog) {
+  if (!page.market) return globalBlogPath(blog);
+  const config = marketHosts[page.market];
+  return localizedMarketPath(blog.language, config.locales[0], `/blogs/${blog.slug}`);
+}
+
+function relatedBlogUrl(page, blog) {
+  const baseUrl = page.market ? marketHosts[page.market].baseUrl : siteUrl;
+  return `${baseUrl}${relatedBlogPath(page, blog)}`;
+}
 function globalBlogAlternates(blog) {
   return blogGroup(blog).map((translation) => ({
     lang: translation.language,
@@ -1137,6 +1200,11 @@ function applyMeta(html, page) {
               articleSection: page.blog.category || "Conseils",
               keywords: page.blog.tags || [],
               wordCount: page.blog.generation?.wordCount,
+              isRelatedTo: relatedBlogsFor(page.blog).map((related) => ({
+                "@type": "BlogPosting",
+                headline: related.title,
+                url: relatedBlogUrl(page, related),
+              })),
               author: {
                 "@type": "Person",
                 name: page.blog.author?.name || "Creativa Poeta",
@@ -1207,6 +1275,9 @@ function applyMeta(html, page) {
       .cp-prerender__excerpt { font-size: 1.25rem !important; font-weight: 700; }
       .cp-prerender__content h2, .cp-prerender__content h3 { margin-top: 34px; }
       .cp-prerender__content li { margin: 8px 0; line-height: 1.65; }
+      .cp-prerender__related { margin-top: 38px; padding-top: 24px; border-top: 1px solid #526174; }
+      .cp-prerender__related ul { padding: 0; list-style: none; }
+      .cp-prerender .cp-prerender__related a { display: block; margin-top: 10px; padding: 12px 0; color: #fff200; background: transparent; }
       .cp-prerender a { display: inline-block; margin-top: 28px; color: #101a29; background: #fff200; padding: 14px 22px; font-weight: 700; text-decoration: none; }
       .cp-js .cp-prerender { display: none; }
     </style>
@@ -1240,6 +1311,17 @@ function renderFallback(page) {
     ).slice(0, 10);
     const affiliateRel =
       page.blog.cta?.type === "affiliate" ? ' rel="sponsored noopener"' : "";
+    const relatedTitle = {
+      fr: "A lire aussi",
+      en: "Related articles",
+      nl: "Lees ook",
+      rw: "Soma kandi",
+    }[page.lang] || "Related articles";
+    const relatedMarkup = relatedBlogsFor(page.blog)
+      .map((related) =>
+        `<li><a href="${escapeHtml(relatedBlogPath(page, related))}">${escapeHtml(related.title)}</a></li>`
+      )
+      .join("");
 
     return `<div id="root">
       <main class="cp-prerender" data-cp-prerender="true">
@@ -1248,6 +1330,7 @@ function renderFallback(page) {
           <h1>${escapeHtml(page.blog.title)}</h1>
           <p class="cp-prerender__excerpt">${escapeHtml(page.blog.excerpt || page.description)}</p>
           <div class="cp-prerender__content">${sanitizeArticleHtml(page.blog.content)}</div>
+          ${relatedMarkup ? `<nav class="cp-prerender__related" aria-label="${escapeHtml(relatedTitle)}"><h2>${escapeHtml(relatedTitle)}</h2><ul>${relatedMarkup}</ul></nav>` : ""}
           <a href="${escapeHtml(ctaUrl)}"${affiliateRel}>${escapeHtml(ctaLabel)}</a>
         </article>
       </main>

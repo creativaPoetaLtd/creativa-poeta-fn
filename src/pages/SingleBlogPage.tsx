@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   BlogLanguage,
   BlogPost,
+  RelatedBlogPost,
   fetchSingleBlog,
 } from "../APIs/Blogs";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
@@ -35,6 +36,7 @@ const copyByLocale = {
     visibility: "Tester ma visibilite",
     project: "Demarrer un projet",
     updated: "Mis a jour",
+    related: "A lire aussi",
   },
   en: {
     back: "All articles",
@@ -47,6 +49,7 @@ const copyByLocale = {
     visibility: "Test my visibility",
     project: "Start a project",
     updated: "Updated",
+    related: "Related articles",
   },
   nl: {
     back: "Alle artikelen",
@@ -59,6 +62,7 @@ const copyByLocale = {
     visibility: "Test mijn zichtbaarheid",
     project: "Start een project",
     updated: "Bijgewerkt",
+    related: "Lees ook",
   },
   kiny: {
     back: "Articles zose",
@@ -71,6 +75,7 @@ const copyByLocale = {
     visibility: "Gupima visibility",
     project: "Tangira project",
     updated: "Yavuguruwe",
+    related: "Soma kandi",
   },
 } satisfies Record<LocaleKey, Record<string, string>>;
 
@@ -90,6 +95,7 @@ const SingleBlogPage = () => {
   const [translations, setTranslations] = useState<
     Array<Pick<BlogPost, "title" | "slug" | "language">>
   >([]);
+  const [relatedArticles, setRelatedArticles] = useState<RelatedBlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -101,6 +107,7 @@ const SingleBlogPage = () => {
         if (!active) return;
         setBlog(data.blog);
         setTranslations(data.translations || []);
+        setRelatedArticles(data.relatedArticles || []);
       })
       .catch(() => {
         if (active) setBlog(null);
@@ -135,8 +142,13 @@ const SingleBlogPage = () => {
         "@type": "Organization",
         name: "Creativa Poeta",
       },
+      isRelatedTo: relatedArticles.map((article) => ({
+        "@type": "BlogPosting",
+        headline: article.title,
+        url: localizePath(`/blogs/${article.slug || article._id}`),
+      })),
     };
-  }, [blog, locale]);
+  }, [blog, locale, relatedArticles]);
 
   if (loading) {
     return (
@@ -334,6 +346,32 @@ const SingleBlogPage = () => {
               )}
             </aside>
           </div>
+
+          {relatedArticles.length > 0 && (
+            <section className="mx-auto max-w-6xl border-t border-white/15 px-4 py-8 phone:px-6 laptop:py-12">
+              <div className="mb-5 flex items-center justify-between gap-4">
+                <h2 className="text-xl font-black text-white phone:text-2xl">{copy.related}</h2>
+                <Link to={localizePath("/blogs")} className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-[#fff200]">
+                  {copy.back}<ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="grid gap-3 phone:grid-cols-2 laptop:grid-cols-3">
+                {relatedArticles.map((article) => (
+                  <Link key={article._id} to={localizePath(`/blogs/${article.slug || article._id}`)} className="group grid min-h-28 grid-cols-[5.5rem_1fr] overflow-hidden border border-white/15 bg-white/[.05] transition hover:border-[#EEBA2B] phone:block">
+                    {article.image ? (
+                      <img src={article.image} alt={article.imageAlt || article.title} loading="lazy" className="h-full min-h-28 w-full object-cover phone:aspect-[16/8] phone:min-h-0" />
+                    ) : (
+                      <div className="h-full min-h-28 bg-[#102640] phone:aspect-[16/8] phone:min-h-0" />
+                    )}
+                    <div className="flex min-w-0 flex-col justify-center p-3 phone:p-4">
+                      <span className="text-[9px] font-black uppercase text-[#EEBA2B]">{article.category || "Conseils"}</span>
+                      <h3 className="mt-1 line-clamp-3 text-sm font-black leading-5 text-white group-hover:text-[#fff200]">{article.title}</h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </article>
       </main>
     </PageLayout>

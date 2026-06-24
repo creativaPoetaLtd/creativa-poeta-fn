@@ -52,6 +52,19 @@ export type BlogPost = {
   updatedAt?: string;
 };
 
+export type RelatedBlogPost = Pick<
+  BlogPost,
+  | "_id"
+  | "title"
+  | "slug"
+  | "excerpt"
+  | "image"
+  | "imageAlt"
+  | "category"
+  | "language"
+  | "publishedAt"
+  | "createdAt"
+>;
 export type BlogListResponse = {
   blogs: BlogPost[];
   categories: string[];
@@ -161,6 +174,7 @@ export const fetchSingleBlog = async (
   publicRequest<{
     blog: BlogPost;
     translations: Array<Pick<BlogPost, "title" | "slug" | "language">>;
+    relatedArticles: RelatedBlogPost[];
   }>(
     {
       method: "GET",
