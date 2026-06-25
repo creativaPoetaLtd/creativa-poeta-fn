@@ -16,6 +16,15 @@ import {
 } from "../../data/marketRuntime";
 import ServiceFAQAccordion from "./ServiceFAQAccordion";
 import ServiceFinalCTA from "./ServiceFinalCTA";
+import assistantAiEn from "../../assets/services/ai-automation/assistant-ai-en.webp";
+import assistantAiFr from "../../assets/services/ai-automation/assistant-ai-fr.webp";
+import assistantAiNl from "../../assets/services/ai-automation/assistant-ai-nl.webp";
+import knowledgeBaseEn from "../../assets/services/ai-automation/knowledge-base-en.webp";
+import knowledgeBaseFr from "../../assets/services/ai-automation/knowledge-base-fr.webp";
+import knowledgeBaseNl from "../../assets/services/ai-automation/knowledge-base-nl.webp";
+import connectedAgentEn from "../../assets/services/ai-automation/connected-agent-en.webp";
+import connectedAgentFr from "../../assets/services/ai-automation/connected-agent-fr.webp";
+import connectedAgentNl from "../../assets/services/ai-automation/connected-agent-nl.webp";
 
 type AICopy = {
   eyebrow: string;
@@ -323,6 +332,13 @@ const copies: Record<string, AICopy> = {
   },
 };
 
+const serviceImages: Record<string, string[]> = {
+  fr: [assistantAiFr, knowledgeBaseFr, connectedAgentFr],
+  en: [assistantAiEn, knowledgeBaseEn, connectedAgentEn],
+  nl: [assistantAiNl, knowledgeBaseNl, connectedAgentNl],
+  kiny: [assistantAiEn, knowledgeBaseEn, connectedAgentEn],
+};
+
 const roleIcons = [FaComments, FaSearch, FaTasks, FaDatabase];
 
 const SectionLabel = ({ children }: { children: string }) => (
@@ -332,36 +348,37 @@ const SectionLabel = ({ children }: { children: string }) => (
   </div>
 );
 
-const ImagePlaceholder = ({
-  label,
+const ServiceImage = ({
   title,
   description,
+  src,
   className = "",
 }: {
-  label: string;
   title: string;
   description: string;
+  src: string;
   className?: string;
 }) => (
-  <article
-    className={`flex min-h-[17rem] flex-col justify-between rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_12px)] p-4 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] phone:p-5 ${className}`}
+  <figure
+    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
-    <div>
-      <span className="inline-flex rounded-full border border-[#fff200]/60 px-3 py-1 text-[10px] font-black uppercase text-[#fff200] phone:text-xs">
-        {label}
-      </span>
-      <h3 className="mt-4 text-xl font-black phone:text-2xl">{title}</h3>
-    </div>
-    <p className="mt-5 text-xs font-black leading-6 text-white/85 phone:text-sm phone:leading-7">
-      {description}
-    </p>
-  </article>
+    <img
+      src={src}
+      alt={`${title}. ${description}`}
+      className="aspect-square h-auto w-full object-contain"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
+      <h3 className="text-lg font-black leading-tight">{title}</h3>
+    </figcaption>
+  </figure>
 );
-
 const AIAutomation = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
+  const images = serviceImages[locale] ?? serviceImages.en;
   const startPath = buildLocalLocalePath(market, locale, "/start-project");
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
@@ -405,9 +422,9 @@ const AIAutomation = () => {
               </Link>
             </div>
           </div>
-          <ImagePlaceholder
+          <ServiceImage
             {...copy.imageBriefs[0]}
-            className="min-h-[22rem] laptop:min-h-[31rem]"
+            src={images[0]}
           />
         </div>
       </section>
@@ -470,8 +487,8 @@ const AIAutomation = () => {
             </div>
           </div>
           <div className="grid gap-3">
-            <ImagePlaceholder {...copy.imageBriefs[1]} />
-            <ImagePlaceholder {...copy.imageBriefs[2]} />
+            <ServiceImage {...copy.imageBriefs[1]} src={images[1]} />
+            <ServiceImage {...copy.imageBriefs[2]} src={images[2]} />
           </div>
         </div>
       </section>

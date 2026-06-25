@@ -90,7 +90,7 @@ const emptyGenerationForm: GenerateBlogBatchInput = {
   intent: "informational",
   language: "fr",
   category: "Conseils",
-  count: 3,
+  count: 10,
   ctaLabel: "Decouvrir nos services",
   ctaUrl: "/services",
   ctaType: "service",
@@ -525,8 +525,7 @@ const Blogs = () => {
         <DialogContent dividers>
           <Stack gap={2}>
             <Alert severity="info">
-              Les articles sont crees en brouillon. Verifiez les faits, le style,
-              les liens et les indicateurs de qualite avant publication.
+              Le generateur cree des brouillons, pas des articles publies. Workflow: generer 10 idees, ouvrir chaque brouillon, verifier les faits et les liens, passer le statut sur Publie, puis reconstruire le SEO.
             </Alert>
             {error && <Alert severity="error">{error}</Alert>}
             <TextField
@@ -600,10 +599,10 @@ const Blogs = () => {
                 onChange={(event) =>
                   setGenerationField(
                     "count",
-                    Math.min(6, Math.max(1, Number(event.target.value) || 1))
+                    Math.min(10, Math.max(1, Number(event.target.value) || 1))
                   )
                 }
-                inputProps={{ min: 1, max: 6 }}
+                inputProps={{ min: 1, max: 10 }}
                 sx={{ minWidth: 120 }}
               />
             </Stack>

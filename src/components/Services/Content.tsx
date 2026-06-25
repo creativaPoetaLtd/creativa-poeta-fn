@@ -5,7 +5,6 @@ import {
   FaClipboardCheck,
   FaEdit,
   FaFileAlt,
-  FaImages,
   FaPenNib,
   FaQuestionCircle,
   FaShareAlt,
@@ -18,6 +17,15 @@ import {
 } from "../../data/marketRuntime";
 import ServiceFAQAccordion from "./ServiceFAQAccordion";
 import ServiceFinalCTA from "./ServiceFinalCTA";
+import clearDocumentsEn from "../../assets/services/content-writing/clear-documents-en.webp";
+import clearDocumentsFr from "../../assets/services/content-writing/clear-documents-fr.webp";
+import clearDocumentsNl from "../../assets/services/content-writing/clear-documents-nl.webp";
+import contentUsesEn from "../../assets/services/content-writing/content-uses-en.webp";
+import contentUsesFr from "../../assets/services/content-writing/content-uses-fr.webp";
+import contentUsesNl from "../../assets/services/content-writing/content-uses-nl.webp";
+import finalDocumentEn from "../../assets/services/content-writing/final-document-en.webp";
+import finalDocumentFr from "../../assets/services/content-writing/final-document-fr.webp";
+import finalDocumentNl from "../../assets/services/content-writing/final-document-nl.webp";
 
 type ContentCopy = {
   eyebrow: string;
@@ -582,6 +590,13 @@ const copies: Record<string, ContentCopy> = {
 
 const roleIcons = [FaEdit, FaPenNib, FaUserTie, FaClipboardCheck];
 
+const serviceImages: Record<string, string[]> = {
+  fr: [clearDocumentsFr, contentUsesFr, finalDocumentFr],
+  en: [clearDocumentsEn, contentUsesEn, finalDocumentEn],
+  nl: [clearDocumentsNl, contentUsesNl, finalDocumentNl],
+  kiny: [clearDocumentsEn, contentUsesEn, finalDocumentEn],
+};
+
 const SectionLabel = ({ children }: { children: string }) => (
   <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] phone:text-sm">
     <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
@@ -589,37 +604,37 @@ const SectionLabel = ({ children }: { children: string }) => (
   </div>
 );
 
-const ImagePlaceholder = ({
+const ServiceImage = ({
   title,
   description,
+  src,
   className = "",
 }: {
   title: string;
   description: string;
+  src: string;
   className?: string;
 }) => (
   <figure
-    className={`overflow-hidden rounded-[1.5rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_12px)] text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
+    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
-    <div className="flex min-h-[18rem] flex-col justify-center p-5 phone:min-h-[22rem] laptop:p-7">
-      <FaImages className="mb-5 text-4xl text-[#fff200]" />
-      <p className="text-xs font-black uppercase text-[#fff200]">
-        Placeholder image
-      </p>
-      <p className="mt-4 text-sm font-black leading-7 text-white/85">
-        {description}
-      </p>
-    </div>
+    <img
+      src={src}
+      alt={`${title}. ${description}`}
+      className="aspect-square h-auto w-full object-contain"
+      loading="lazy"
+      decoding="async"
+    />
     <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
       <h3 className="text-lg font-black leading-tight">{title}</h3>
     </figcaption>
   </figure>
 );
-
 const ContentWritting = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
+  const images = serviceImages[locale] ?? serviceImages.en;
   const startPath = buildLocalLocalePath(market, locale, "/start-project");
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
@@ -664,8 +679,9 @@ const ContentWritting = () => {
             </div>
           </div>
 
-          <ImagePlaceholder
+          <ServiceImage
             {...copy.imageBriefs[0]}
+            src={images[0]}
             className="min-h-[24rem] laptop:min-h-[32rem]"
           />
         </div>
@@ -682,7 +698,7 @@ const ContentWritting = () => {
               {copy.whyText}
             </p>
           </div>
-          <ImagePlaceholder {...copy.imageBriefs[1]} />
+          <ServiceImage {...copy.imageBriefs[1]} src={images[1]} />
         </div>
       </section>
 
@@ -744,7 +760,7 @@ const ContentWritting = () => {
               ))}
             </div>
           </div>
-          <ImagePlaceholder {...copy.imageBriefs[2]} />
+          <ServiceImage {...copy.imageBriefs[2]} src={images[2]} />
         </div>
       </section>
 

@@ -5,7 +5,6 @@ import {
   FaCheckCircle,
   FaDraftingCompass,
   FaEye,
-  FaImages,
   FaLayerGroup,
   FaPalette,
   FaQuestionCircle,
@@ -18,6 +17,15 @@ import {
 } from "../../data/marketRuntime";
 import ServiceFAQAccordion from "./ServiceFAQAccordion";
 import ServiceFinalCTA from "./ServiceFinalCTA";
+import brandUniverseEn from "../../assets/services/graphic-design/brand-universe-en.webp";
+import brandUniverseFr from "../../assets/services/graphic-design/brand-universe-fr.webp";
+import brandUniverseNl from "../../assets/services/graphic-design/brand-universe-nl.webp";
+import publishReadyEn from "../../assets/services/graphic-design/publish-ready-en.webp";
+import publishReadyFr from "../../assets/services/graphic-design/publish-ready-fr.webp";
+import publishReadyNl from "../../assets/services/graphic-design/publish-ready-nl.webp";
+import recognizableBrandEn from "../../assets/services/graphic-design/recognizable-brand-en.webp";
+import recognizableBrandFr from "../../assets/services/graphic-design/recognizable-brand-fr.webp";
+import recognizableBrandNl from "../../assets/services/graphic-design/recognizable-brand-nl.webp";
 
 type GraphicCopy = {
   eyebrow: string;
@@ -582,6 +590,13 @@ const copies: Record<string, GraphicCopy> = {
 
 const workIcons = [FaEye, FaDraftingCompass, FaLayerGroup, FaBullhorn];
 
+const serviceImages: Record<string, string[]> = {
+  fr: [brandUniverseFr, publishReadyFr, recognizableBrandFr],
+  en: [brandUniverseEn, publishReadyEn, recognizableBrandEn],
+  nl: [brandUniverseNl, publishReadyNl, recognizableBrandNl],
+  kiny: [brandUniverseEn, publishReadyEn, recognizableBrandEn],
+};
+
 const SectionLabel = ({ children }: { children: string }) => (
   <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] phone:text-sm">
     <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
@@ -589,37 +604,37 @@ const SectionLabel = ({ children }: { children: string }) => (
   </div>
 );
 
-const ImagePlaceholder = ({
+const ServiceImage = ({
   title,
   description,
+  src,
   className = "",
 }: {
   title: string;
   description: string;
+  src: string;
   className?: string;
 }) => (
   <figure
-    className={`overflow-hidden rounded-[1.5rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_12px)] text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
+    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
-    <div className="flex min-h-[18rem] flex-col justify-center p-5 phone:min-h-[22rem] laptop:p-7">
-      <FaImages className="mb-5 text-4xl text-[#fff200]" />
-      <p className="text-xs font-black uppercase text-[#fff200]">
-        Placeholder image
-      </p>
-      <p className="mt-4 text-sm font-black leading-7 text-white/85">
-        {description}
-      </p>
-    </div>
+    <img
+      src={src}
+      alt={`${title}. ${description}`}
+      className="aspect-square h-auto w-full object-contain"
+      loading="lazy"
+      decoding="async"
+    />
     <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
       <h3 className="text-lg font-black leading-tight">{title}</h3>
     </figcaption>
   </figure>
 );
-
 const GraphicDesign = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
+  const images = serviceImages[locale] ?? serviceImages.en;
   const startPath = buildLocalLocalePath(market, locale, "/start-project");
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
@@ -664,8 +679,9 @@ const GraphicDesign = () => {
             </div>
           </div>
 
-          <ImagePlaceholder
+          <ServiceImage
             {...copy.imageBriefs[0]}
+            src={images[0]}
             className="min-h-[24rem] laptop:min-h-[32rem]"
           />
         </div>
@@ -682,7 +698,7 @@ const GraphicDesign = () => {
               {copy.whyText}
             </p>
           </div>
-          <ImagePlaceholder {...copy.imageBriefs[1]} />
+          <ServiceImage {...copy.imageBriefs[1]} src={images[1]} />
         </div>
       </section>
 
@@ -744,7 +760,7 @@ const GraphicDesign = () => {
               ))}
             </div>
           </div>
-          <ImagePlaceholder {...copy.imageBriefs[2]} />
+          <ServiceImage {...copy.imageBriefs[2]} src={images[2]} />
         </div>
       </section>
 

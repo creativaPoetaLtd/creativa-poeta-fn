@@ -16,6 +16,15 @@ import {
 } from "../../data/marketRuntime";
 import ServiceFAQAccordion from "./ServiceFAQAccordion";
 import ServiceFinalCTA from "./ServiceFinalCTA";
+import humanSupportEn from "../../assets/services/digital-assistance/human-support-en.webp";
+import humanSupportFr from "../../assets/services/digital-assistance/human-support-fr.webp";
+import humanSupportNl from "../../assets/services/digital-assistance/human-support-nl.webp";
+import multiDeviceEn from "../../assets/services/digital-assistance/multi-device-en.webp";
+import multiDeviceFr from "../../assets/services/digital-assistance/multi-device-fr.webp";
+import multiDeviceNl from "../../assets/services/digital-assistance/multi-device-nl.webp";
+import simplerLifeEn from "../../assets/services/digital-assistance/simpler-life-en.webp";
+import simplerLifeFr from "../../assets/services/digital-assistance/simpler-life-fr.webp";
+import simplerLifeNl from "../../assets/services/digital-assistance/simpler-life-nl.webp";
 
 type AssistanceCopy = {
   eyebrow: string;
@@ -315,36 +324,44 @@ const SectionLabel = ({ children }: { children: string }) => (
   </div>
 );
 
-const ImagePlaceholder = ({
-  label,
+const serviceImages: Record<string, string[]> = {
+  fr: [humanSupportFr, multiDeviceFr, simplerLifeFr],
+  en: [humanSupportEn, multiDeviceEn, simplerLifeEn],
+  nl: [humanSupportNl, multiDeviceNl, simplerLifeNl],
+  kiny: [humanSupportEn, multiDeviceEn, simplerLifeEn],
+};
+
+const ServiceImage = ({
   title,
   description,
+  src,
   className = "",
 }: {
-  label: string;
   title: string;
   description: string;
+  src: string;
   className?: string;
 }) => (
-  <article
-    className={`flex min-h-[17rem] flex-col justify-between rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[linear-gradient(135deg,rgba(7,26,51,.92),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(238,186,43,.16)_0,rgba(238,186,43,.16)_1px,transparent_1px,transparent_12px)] p-4 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] phone:p-5 ${className}`}
+  <figure
+    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
-    <div>
-      <span className="inline-flex rounded-full border border-[#fff200]/60 px-3 py-1 text-[10px] font-black uppercase text-[#fff200] phone:text-xs">
-        {label}
-      </span>
-      <h3 className="mt-4 text-xl font-black phone:text-2xl">{title}</h3>
-    </div>
-    <p className="mt-5 text-xs font-black leading-6 text-white/85 phone:text-sm phone:leading-7">
-      {description}
-    </p>
-  </article>
+    <img
+      src={src}
+      alt={`${title}. ${description}`}
+      className="aspect-square h-auto w-full object-contain"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
+      <h3 className="text-lg font-black leading-tight">{title}</h3>
+    </figcaption>
+  </figure>
 );
-
 const DigitalAssistance = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
+  const images = serviceImages[locale] ?? serviceImages.en;
   const requestPath = buildLocalLocalePath(market, locale, "/demander-assistance-numerique");
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
@@ -388,9 +405,10 @@ const DigitalAssistance = () => {
               </Link>
             </div>
           </div>
-          <ImagePlaceholder
+          <ServiceImage
             {...copy.imageBriefs[0]}
-            className="min-h-[22rem] laptop:min-h-[31rem]"
+            src={images[0]}
+            className="laptop:self-center"
           />
         </div>
       </section>
@@ -453,8 +471,8 @@ const DigitalAssistance = () => {
             </div>
           </div>
           <div className="grid gap-3">
-            <ImagePlaceholder {...copy.imageBriefs[1]} />
-            <ImagePlaceholder {...copy.imageBriefs[2]} />
+            <ServiceImage {...copy.imageBriefs[1]} src={images[1]} />
+            <ServiceImage {...copy.imageBriefs[2]} src={images[2]} />
           </div>
         </div>
       </section>
