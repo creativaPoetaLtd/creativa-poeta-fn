@@ -10,3 +10,7 @@ Disallow: /thank-you-for-applying
 
 # Sitemap location
 Sitemap: https://creativapoeta.com/sitemap.xml
+
+# AI-readable site summary
+Llms-Txt: https://creativapoeta.com/llms.txt
+Llms-Full: https://creativapoeta.com/llms-full.txt

@@ -27,6 +27,24 @@ function Footer() {
       : locale === "kiny"
       ? "Saba assistance numerique"
       : "Demander une assistance numerique";
+  const answersLabel =
+    locale === "nl"
+      ? "Nuttige antwoorden"
+      : locale === "en"
+      ? "Useful answers"
+      : locale === "kiny"
+      ? "Useful answers"
+      : "Reponses utiles";
+
+  const knowledgeLabel =
+    locale === "nl"
+      ? "Kennisbank zichtbaarheid"
+      : locale === "en"
+      ? "Knowledge base"
+      : locale === "kiny"
+      ? "Knowledge base"
+      : "Glossaire visibilite";
+
   const blogLabel =
     locale === "nl"
       ? "Advies & bronnen"
@@ -121,6 +139,12 @@ function Footer() {
     <Link to={linkPath("/demander-assistance-numerique")}>
       <p className='flex justify-start items-start text-start mt-1 font-bold text-[#EEBA2B]'>{assistanceLabel}</p>
     </Link>
+    <Link to={linkPath("/answers")}> 
+      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{answersLabel}</p>
+    </Link>
+    <Link to={linkPath("/knowledge")}>
+      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{knowledgeLabel}</p>
+    </Link>
     <Link to={linkPath("/blogs")}>
       <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{blogLabel}</p>
     </Link>
@@ -201,10 +225,10 @@ function Footer() {
       {/* </div> */}
       {/* <div className='flex w-full bg-white h-[1px] mt-5'></div>
       <div className="grid laptop:grid-cols-5 desktop:grid-cols-5 tablet:grid-cols-3 grid-cols-2  mt-5 justify-center items-center basis-full text-slate-400">
-          <a href='' className='text-xs font-bold'>Clause de non-responsabilité</a>
-          <a href='' className='text-xs font-bold'>Politique de confidentialité</a>
-          <a href='' className='text-xs font-bold'>Mentions legalès </a>
-          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions gèneralès  </Link>
+          <a href='' className='text-xs font-bold'>Clause de non-responsabilitÃ©</a>
+          <a href='' className='text-xs font-bold'>Politique de confidentialitÃ©</a>
+          <a href='' className='text-xs font-bold'>Mentions legalÃ¨s </a>
+          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions gÃ¨neralÃ¨s  </Link>
           <a href='' className='text-xs font-bold'>Cookes policy</a>
         </div>
         <div className="flex laptop:flex-row desktop:flex-row tablet:flex-row flex-col  space-x-10 mt-16 justify-center items-center basis-full text-slate-400">

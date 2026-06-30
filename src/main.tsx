@@ -33,6 +33,8 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import RefontePreviewPage from "./pages/RefontePreviewPage.tsx";
 import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
 import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
+import KnowledgePage from "./pages/KnowledgePage.tsx";
+import AnswersPage from "./pages/AnswersPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -81,6 +83,16 @@ const appElement = (
             <Route path="/fr/blogs" element={<BlogsPage />} />
             <Route path="/nl/blogs" element={<BlogsPage />} />
             <Route path="/rw/blogs" element={<BlogsPage />} />
+            <Route path="/knowledge" element={<KnowledgePage />} />
+            <Route path="/en/knowledge" element={<KnowledgePage />} />
+            <Route path="/fr/knowledge" element={<KnowledgePage />} />
+            <Route path="/nl/knowledge" element={<KnowledgePage />} />
+            <Route path="/rw/knowledge" element={<KnowledgePage />} />
+            <Route path="/answers" element={<AnswersPage />} />
+            <Route path="/en/answers" element={<AnswersPage />} />
+            <Route path="/fr/answers" element={<AnswersPage />} />
+            <Route path="/nl/answers" element={<AnswersPage />} />
+            <Route path="/rw/answers" element={<AnswersPage />} />
             <Route path="/blogs/:slug" element={<SingleBlogPage />} />
             <Route path="/en/blogs/:slug" element={<SingleBlogPage />} />
             <Route path="/fr/blogs/:slug" element={<SingleBlogPage />} />

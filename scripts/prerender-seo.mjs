@@ -11,6 +11,234 @@ const baseHtml = fs
 const siteUrl = "https://creativapoeta.com";
 const imageUrl = `${siteUrl}/poeta.jpeg`;
 const generatedAt = new Date().toISOString().slice(0, 10);
+const brandSameAs = [
+  "https://www.linkedin.com/company/creativa-poeta",
+  "https://www.facebook.com/creativapoeta",
+  "https://www.instagram.com/creativapoeta",
+  "https://www.tiktok.com/@creativapoeta",
+];
+const serviceCatalog = [
+  {
+    name: "Visibility on Google, maps, voice search and AI tools",
+    serviceType: "AI visibility, GEO, AEO and local discovery",
+    description:
+      "Alignment of websites, maps, public profiles, reviews and useful answers so clients and AI tools can find and understand the business.",
+  },
+  {
+    name: "AI-ready websites, apps and digital tools",
+    serviceType: "Website, application and internal software",
+    description:
+      "Clear official websites, client applications, dashboards and internal tools structured around services, contact paths, data and useful content.",
+  },
+  {
+    name: "AI assistants, GPTs, chatbots and connected agents",
+    serviceType: "AI automation",
+    description:
+      "Custom AI assistants and connected agents trained around business knowledge, documents, workflows and client questions.",
+  },
+  {
+    name: "Visual identity and graphic design",
+    serviceType: "Brand and visual communication",
+    description:
+      "Logos, brand systems, social visuals, presentations, documents and publish-ready visual supports.",
+  },
+  {
+    name: "Content writing, documents and useful pages",
+    serviceType: "Copywriting and content system",
+    description:
+      "Professional writing, articles, service pages, documents, reports, guides and answer-focused content for clients and search engines.",
+  },
+  {
+    name: "Digital assistance, troubleshooting and technology support",
+    serviceType: "Digital assistance",
+    description:
+      "Setup, troubleshooting, device configuration, online procedures, security support and step-by-step digital guidance.",
+  },
+];
+const servicePathCatalogIndex = {
+  "/services/visibilite-locale": 0,
+  "/services/audit-visibilite": 0,
+  "/services/digital-marketing": 0,
+  "/services/web-app": 1,
+  "/services/site-officiel": 1,
+  "/services/ia-automatisation": 2,
+  "/services/graphic-design": 3,
+  "/services/content-writing": 4,
+  "/services/contenus-utiles": 4,
+  "/services/assistance-numerique": 5,
+};
+
+function serviceForPath(pagePath) {
+  const index = servicePathCatalogIndex[pagePath];
+  return Number.isInteger(index) ? serviceCatalog[index] : null;
+}
+
+const fallbackFaqs = {
+  en: [
+    ["What does Creativa Poeta help with?", "Creativa Poeta helps businesses become easier to find, understand and contact through clear websites, maps, useful content, AI-ready structure and digital tools."],
+    ["Can you help with Google, maps, voice search and AI visibility?", "Yes. We align public information, service pages, local profiles, answers and technical signals so search engines and AI tools can understand the business more clearly."],
+    ["Do you guarantee that Google or an AI tool will recommend a business?", "No serious provider can guarantee that. We build the conditions that make the business easier to find, understand, cite and recommend."],
+    ["Can the work be done in several languages?", "Yes. Creativa Poeta can prepare content and pages in English, French, Dutch and Kinyarwanda depending on the audience and market."],
+  ],
+  fr: [
+    ["A quoi sert Creativa Poeta ?", "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees grace a des sites clairs, des maps alignees, du contenu utile, une structure prete pour les IA et des outils digitaux."],
+    ["Pouvez-vous aider pour Google, maps, recherche vocale et visibilite IA ?", "Oui. Nous alignons les informations publiques, pages services, profils locaux, reponses et signaux techniques pour aider les moteurs et outils IA a mieux comprendre l'entreprise."],
+    ["Garantissez-vous que Google ou une IA va recommander une entreprise ?", "Non. Personne ne peut le garantir serieusement. Nous mettons en place les conditions pour que l'entreprise soit plus facile a trouver, comprendre, citer et recommander."],
+    ["Pouvez-vous travailler en plusieurs langues ?", "Oui. Creativa Poeta peut preparer des contenus et pages en francais, anglais, neerlandais et kinyarwanda selon le public et le marche vise."],
+  ],
+  nl: [
+    ["Waarmee helpt Creativa Poeta?", "Creativa Poeta helpt bedrijven makkelijker gevonden, begrepen en gecontacteerd te worden via duidelijke websites, maps, nuttige content, AI-ready structuur en digitale tools."],
+    ["Helpen jullie met Google, maps, voice search en AI-zichtbaarheid?", "Ja. We stemmen publieke informatie, servicepagina's, lokale profielen, antwoorden en technische signalen af zodat zoekmachines en AI-tools het bedrijf beter begrijpen."],
+    ["Garanderen jullie dat Google of AI een bedrijf aanbeveelt?", "Nee. Niemand kan dat serieus garanderen. We bouwen wel de voorwaarden waardoor het bedrijf makkelijker te vinden, begrijpen, citeren en aanbevelen is."],
+    ["Kunnen jullie in meerdere talen werken?", "Ja. Creativa Poeta kan content en pagina's voorbereiden in Engels, Frans, Nederlands en Kinyarwanda volgens publiek en markt."],
+  ],
+  rw: [
+    ["Creativa Poeta ifasha iki?", "Creativa Poeta ifasha business kuboneka, kumvikana no kuvugishwa biciye kuri websites zisobanutse, maps, content ifasha, AI-ready structure na digital tools."],
+    ["Mufasha kuri Google, maps, voice search na AI visibility?", "Yego. Duhuza amakuru agaragara, service pages, local profiles, answers na technical signals kugira ngo search engines na AI tools zibyumve neza."],
+    ["Mwemeza ko Google cyangwa AI izatanga recommendation?", "Oya. Nta muntu wabisezeranya neza. Dushyiraho ishingiro rituma business iboneka, yumvikana kandi ishobora gukoreshwa nk'isoko."],
+    ["Mushobora gukora mu ndimi nyinshi?", "Yego. Creativa Poeta ishobora gutegura content na pages mu cyongereza, igifaransa, nederlands na kinyarwanda bitewe n'isoko."],
+  ],
+};
+
+const serviceFaqs = {
+  "/services/web-app": {
+    en: [
+      ["Do I need to start with a large website?", "No. The most important thing is to start with a clear base. It can later grow with pages, tools or languages."],
+      ["Can you rebuild an existing website?", "Yes. We keep what works, then clarify the structure, wording, contacts, useful pages and user journeys."],
+      ["Can you build a custom tool?", "Yes. It can be an advanced form, dashboard, client area, management tool or a more complete application."],
+      ["Can a website also support AI and voice search visibility?", "Yes. We structure service pages, answers, schema and contact paths so search engines and assistants can understand the business."],
+      ["What pages does a professional website need?", "At minimum, a clear home page, service pages, contact paths, useful answers, trust signals and pages that explain who the business helps."],
+      ["How do I know if I need a website, an app or internal software?", "A website helps people understand and contact you, an app serves users repeatedly, and internal software helps your team manage work."],
+    ],
+    fr: [
+      ["Est-ce que je dois commencer par un grand site ?", "Non. Le plus important est de commencer par une base claire. Elle peut grandir ensuite avec des pages, des outils ou des langues."],
+      ["Est-ce que vous refondez aussi un site existant ?", "Oui. On garde ce qui fonctionne, puis on clarifie la structure, les textes, les contacts, les pages utiles et les parcours."],
+      ["Est-ce que vous pouvez construire un outil sur mesure ?", "Oui. Cela peut etre un formulaire avance, un tableau de bord, un espace client, un outil de gestion ou une application plus complete."],
+      ["Un site peut-il aider la visibilite IA et recherche vocale ?", "Oui. Nous structurons les pages services, reponses, schema et chemins de contact pour que les moteurs et assistants comprennent l'entreprise."],
+      ["Quelles pages faut-il pour un site professionnel ?", "Au minimum: une home claire, des pages services, des chemins de contact, des reponses utiles, des preuves et des pages qui expliquent qui l'entreprise aide."],
+      ["Comment savoir si j'ai besoin d'un site, d'une app ou d'un logiciel interne ?", "Un site aide a comprendre et contacter l'entreprise, une app sert des utilisateurs reguliers, et un logiciel interne aide l'equipe a gerer le travail."],
+    ],
+  },
+  "/services/visibilite-locale": {
+    en: [
+      ["What is local visibility?", "Local visibility means making your business easy to find on Google, maps, profiles, reviews and voice searches when people look for a nearby service."],
+      ["Which information must be aligned?", "Name, address, phone, opening hours, service areas, links, photos, reviews, categories and service descriptions must tell the same story everywhere."],
+      ["Does this help AI tools understand a business?", "Yes. Consistent public information and clear service answers make the business easier for search engines and AI tools to interpret."],
+      ["Can you improve a Google Business Profile?", "Yes. We can help clarify categories, services, descriptions, photos, links, reviews and the connection with the website."],
+      ["Can voice assistants recommend a local business?", "They can use public signals such as maps, websites, categories, reviews and clear answers. We help make those signals more coherent."],
+      ["Why is consistency important across Google, maps and social profiles?", "Consistent names, contacts, services, areas and links reduce confusion and make the business easier to understand."],
+    ],
+    fr: [
+      ["C'est quoi la visibilite locale ?", "C'est le fait de rendre une entreprise facile a trouver sur Google, les maps, profils, avis et recherches vocales quand quelqu'un cherche un service proche."],
+      ["Quelles informations faut-il aligner ?", "Nom, adresse, telephone, horaires, zones, liens, photos, avis, categories et descriptions de services doivent raconter la meme chose partout."],
+      ["Est-ce utile pour les outils IA ?", "Oui. Des informations publiques coherentes et des reponses claires aident les moteurs et outils IA a interpreter l'entreprise."],
+      ["Pouvez-vous ameliorer une fiche Google ?", "Oui. Nous pouvons clarifier categories, services, descriptions, photos, liens, avis et connexion avec le site."],
+      ["Les assistants vocaux peuvent-ils recommander une entreprise locale ?", "Ils peuvent utiliser des signaux publics comme maps, site, categories, avis et reponses claires. Nous aidons a rendre ces signaux coherents."],
+      ["Pourquoi la coherence entre Google, maps et reseaux sociaux est importante ?", "Des noms, contacts, services, zones et liens coherents reduisent la confusion et rendent l'entreprise plus facile a comprendre."],
+    ],
+  },
+  "/services/ia-automatisation": {
+    en: [
+      ["Can an AI assistant replace a person?", "No. It helps answer faster and organize information, but important decisions and sensitive cases should stay human."],
+      ["What do you need to create an assistant?", "Your pages, documents, FAQ, services, offers, brand tone and limits: what the assistant can and cannot say."],
+      ["Can it speak multiple languages?", "Yes. We can prepare instructions, content and examples in the languages useful to clients or teams."],
+      ["Can the assistant take actions?", "Yes, progressively: collect a request, route to a form, prepare an email or connect to selected tools."],
+      ["What is the difference between a chatbot, a custom GPT and an AI agent?", "A chatbot answers in a controlled conversation, a custom GPT uses specific instructions and knowledge, and an agent can connect to tools and actions."],
+      ["How do you avoid wrong AI answers?", "We define sources, limits, approved answers, human review points and clear rules for what the assistant can or cannot say."],
+    ],
+    fr: [
+      ["Est-ce qu'un assistant IA peut remplacer une personne ?", "Non. Il aide a repondre plus vite et a organiser l'information, mais les decisions importantes et les cas sensibles doivent rester humains."],
+      ["De quoi avez-vous besoin pour creer un assistant ?", "De vos pages, documents, FAQ, services, offres, ton de marque et limites: ce que l'assistant peut dire ou ne doit pas dire."],
+      ["Peut-il parler plusieurs langues ?", "Oui. On peut preparer les instructions, contenus et exemples dans les langues utiles a vos clients ou votre equipe."],
+      ["Est-ce que l'assistant peut faire des actions ?", "Oui, progressivement: collecter une demande, orienter vers un formulaire, preparer un email ou se connecter a certains outils."],
+      ["Quelle difference entre chatbot, GPT personnalise et agent IA ?", "Un chatbot repond dans une conversation controlee, un GPT personnalise utilise des instructions et connaissances specifiques, et un agent peut se connecter a des outils et actions."],
+      ["Comment eviter que l'IA donne de mauvaises reponses ?", "Nous definissons les sources, limites, reponses validees, points de controle humain et regles claires sur ce que l'assistant peut ou ne peut pas dire."],
+    ],
+  },
+  "/services/graphic-design": {
+    en: [
+      ["What can Creativa Poeta design for a brand?", "We can create logos, visual identity, social media visuals, presentations, documents, flyers, posters and publish-ready supports."],
+      ["Can you refresh an existing identity?", "Yes. We can keep what is recognizable and improve colors, typography, layouts and visual consistency."],
+      ["Do you prepare visuals for social media?", "Yes. We can create formats for posts, stories, covers, ads and recurring content templates."],
+      ["Can the visuals be prepared in several languages?", "Yes. Visuals with text can be adapted by language so each version matches the correct audience."],
+      ["Do I need only a logo or a complete visual identity?", "A logo is only one element. A stronger identity also includes colors, typography, layouts, visual rules and reusable supports."],
+      ["How can a brand stay recognizable everywhere?", "By using consistent visual rules across the website, social media, documents, presentations, packaging and local supports."],
+    ],
+    fr: [
+      ["Que pouvez-vous creer pour une marque ?", "Nous pouvons creer logos, identite visuelle, visuels reseaux sociaux, presentations, documents, flyers, affiches et supports prets a publier."],
+      ["Pouvez-vous rafraichir une identite existante ?", "Oui. Nous pouvons garder ce qui est reconnaissable et ameliorer couleurs, typographies, mises en page et coherence visuelle."],
+      ["Preparez-vous des visuels pour les reseaux sociaux ?", "Oui. Nous pouvons creer des formats pour posts, stories, couvertures, publicites et modeles recurrents."],
+      ["Les visuels peuvent-ils exister en plusieurs langues ?", "Oui. Les visuels avec texte peuvent etre adaptes par langue pour correspondre au bon public."],
+      ["Ai-je besoin seulement d'un logo ou d'une identite visuelle complete ?", "Un logo est seulement un element. Une identite plus forte inclut aussi couleurs, typographies, mises en page, regles visuelles et supports reutilisables."],
+      ["Comment garder une marque reconnaissable partout ?", "En utilisant des regles visuelles coherentes sur le site, les reseaux sociaux, documents, presentations, packaging et supports locaux."],
+    ],
+  },
+  "/services/content-writing": {
+    en: [
+      ["Can you write from only a few ideas?", "Yes. You can give notes, audio, drafts or simple explanations. We structure them into clear content."],
+      ["Can you edit an existing document?", "Yes. We can correct, rewrite, reorganize and improve an existing document without starting from zero."],
+      ["Can content be adapted for SEO?", "Yes. For web copy, we structure titles, questions, important terms and answers to help search engines and AI assistants understand the content."],
+      ["Can you prepare content in multiple languages?", "Yes. We can work in French, English, Dutch or Kinyarwanda depending on the target audience and required versions."],
+      ["Can an article bring clients to a service?", "Yes, when it answers a real question, links to the right service and gives the reader a clear next action."],
+      ["Can you write for both Google and AI assistants?", "Yes. We write clear answers, structured headings, natural wording and internal links so humans, search engines and assistants can understand the content."],
+    ],
+    fr: [
+      ["Pouvez-vous ecrire a partir de quelques idees seulement ?", "Oui. Vous pouvez nous donner des notes, audios, brouillons ou explications simples. Nous les structurons pour creer un contenu clair."],
+      ["Pouvez-vous corriger un document deja ecrit ?", "Oui. Nous pouvons corriger, reformuler, reorganiser et ameliorer un document existant sans repartir de zero."],
+      ["Les contenus peuvent-ils etre adaptes au SEO ?", "Oui. Pour les textes web, nous structurons les titres, questions, mots importants et reponses pour aider les moteurs et assistants IA a comprendre."],
+      ["Pouvez-vous preparer le contenu en plusieurs langues ?", "Oui. Nous pouvons travailler en francais, anglais, neerlandais ou kinyarwanda selon le public vise."],
+      ["Un article peut-il amener des clients vers un service ?", "Oui, s'il repond a une vraie question, renvoie vers le bon service et donne au lecteur une action claire a faire."],
+      ["Pouvez-vous ecrire pour Google et pour les assistants IA ?", "Oui. Nous ecrivons des reponses claires, titres structures, formulations naturelles et liens internes pour aider humains, moteurs et assistants a comprendre."],
+    ],
+  },
+  "/services/assistance-numerique": {
+    en: [
+      ["Is this only for businesses?", "No. This service is also for individuals, families, seniors, students, freelancers and small teams."],
+      ["Can you help if I do not understand technology?", "Yes. The service is designed to explain calmly, without jargon and without judgment."],
+      ["Which devices can you help configure?", "Computers, smartphones, tablets, printers, internet routers, email accounts, cloud, apps and common work tools."],
+      ["Can you help secure my accounts?", "Yes. We can review passwords, backups, two-factor authentication and simple habits against scams."],
+      ["Can you help with online procedures or purchases?", "Yes. We can guide you step by step for forms, online accounts, payments, orders, administrative tasks and safe habits."],
+      ["Can the support happen remotely or at home?", "Depending on the need, support can be prepared remotely, explained step by step, or organized with local assistance."],
+    ],
+    fr: [
+      ["Est-ce seulement pour les entreprises ?", "Non. Ce service est aussi pour les particuliers, familles, seniors, etudiants, independants et petites structures."],
+      ["Pouvez-vous m'aider meme si je ne comprends rien a la technologie ?", "Oui. Le service est pense pour expliquer calmement, sans jargon et sans jugement."],
+      ["Quels appareils pouvez-vous aider a configurer ?", "Ordinateurs, smartphones, tablettes, imprimantes, box internet, comptes email, cloud, applications et outils courants."],
+      ["Pouvez-vous m'aider a securiser mes comptes ?", "Oui. Nous pouvons revoir les mots de passe, sauvegardes, double authentification et bonnes pratiques contre les arnaques."],
+      ["Pouvez-vous aider pour les demarches ou achats en ligne ?", "Oui. Nous pouvons guider pas a pas pour formulaires, comptes en ligne, paiements, commandes, demarches administratives et bonnes pratiques."],
+      ["L'aide peut-elle se faire a distance ou a domicile ?", "Selon le besoin, l'aide peut etre preparee a distance, expliquee pas a pas, ou organisee avec un accompagnement local."],
+    ],
+  },
+  "/services/audit-visibilite": {
+    en: [
+      ["Is this useful if I do not have a website yet?", "Yes. We can review your Google Maps page, social profiles and public information, then explain which official base to build first."],
+      ["Is this useful if I already have a website?", "Yes. We check whether your website clearly explains your services, contacts, areas, languages and important answers."],
+      ["Do you guarantee that Google or an AI tool will recommend me?", "No. Nobody can seriously guarantee that. We build the conditions that make your business easier to find, understand and cite."],
+      ["What does the audit check?", "It checks website clarity, local profiles, maps, public information, useful answers, contact paths and AI-readiness signals."],
+      ["What result do I receive after the visibility test?", "You receive a clearer view of weak points, useful improvements and the next actions to make the business easier to find and understand."],
+      ["Can the audit help choose the right service?", "Yes. It helps decide whether the priority is local visibility, website structure, content, design, AI readiness or a digital tool."],
+    ],
+    fr: [
+      ["Est-ce utile si je n'ai pas encore de site ?", "Oui. Nous pouvons analyser votre page Google Maps, vos reseaux sociaux, vos informations publiques et vous dire quelle base officielle construire en premier."],
+      ["Est-ce utile si j'ai deja un site ?", "Oui. Nous regardons si votre site explique vraiment vos services, contacts, zones, langues et reponses importantes."],
+      ["Garantissez-vous que Google ou une IA va me recommander ?", "Non. Personne ne peut garantir cela serieusement. Nous mettons en place les conditions pour etre plus facile a trouver, comprendre et citer."],
+      ["Que verifie l'audit ?", "Il verifie la clarte du site, profils locaux, maps, informations publiques, reponses utiles, chemins de contact et signaux AI-ready."],
+      ["Quel resultat recoit-on apres le test de visibilite ?", "Vous obtenez une vision plus claire des points faibles, ameliorations utiles et prochaines actions pour rendre l'entreprise plus facile a trouver et comprendre."],
+      ["L'audit peut-il aider a choisir le bon service ?", "Oui. Il aide a savoir si la priorite est la visibilite locale, la structure du site, le contenu, le design, la preparation IA ou un outil digital."],
+    ],
+  },
+};
+
+function faqsForPage(pagePath, lang) {
+  const aliasPath = {
+    "/services/site-officiel": "/services/web-app",
+    "/services/contenus-utiles": "/services/content-writing",
+    "/services/digital-marketing": "/services/visibilite-locale",
+  }[pagePath] || pagePath;
+  const localized = serviceFaqs[aliasPath]?.[lang];
+  const source = localized || fallbackFaqs[lang] || serviceFaqs[aliasPath]?.en || fallbackFaqs.en;
+  return source.map(([question, answer]) => ({ question, answer }));
+}
 const blogApiBase = (
   process.env.SEO_BLOG_API_URL ||
   process.env.VITE_API_BASE_URL ||
@@ -746,6 +974,228 @@ const pageTemplates = {
       ],
     ],
   },
+  aiAutomation: {
+    path: "/services/ia-automatisation",
+    title: (lang) =>
+      lang === "fr"
+        ? "Assistants IA, GPT personnalises et agents | Creativa Poeta"
+        : lang === "nl"
+          ? "AI-assistenten, GPTs en verbonden agents | Creativa Poeta"
+          : lang === "rw"
+            ? "AI assistants, GPT na agents | Creativa Poeta"
+            : "AI assistants, custom GPTs and connected agents | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Creez des assistants IA, GPT personnalises, chatbots et agents connectes capables de comprendre vos informations et d'aider vos clients ou vos equipes."
+        : lang === "nl"
+          ? "Maak AI-assistenten, aangepaste GPTs, chatbots en verbonden agents die uw informatie begrijpen en uw klanten of teams helpen."
+          : lang === "rw"
+            ? "Dukora AI assistants, GPT, chatbots na agents zifasha abakiriya cyangwa team yawe gukoresha amakuru ya business."
+            : "Create AI assistants, custom GPTs, chatbots and connected agents that understand your information and support your clients or teams.",
+    keywords:
+      "AI assistant, custom GPT, chatbot, connected agent, business automation, knowledge base, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Un assistant IA base sur vos vraies informations" : "An AI assistant based on your real information",
+        lang === "fr"
+          ? "Nous structurons vos documents, services, questions frequentes et processus pour creer un assistant utile, clair et controle."
+          : "We structure your documents, services, frequently asked questions and processes to create a useful, clear and controlled assistant.",
+      ],
+      [
+        lang === "fr" ? "Des agents qui peuvent passer a l'action" : "Agents that can take action",
+        lang === "fr"
+          ? "Selon votre besoin, l'agent peut aider a repondre, qualifier une demande, preparer un message, creer une fiche ou guider une etape."
+          : "Depending on your need, the agent can help answer, qualify a request, prepare a message, create a record or guide a step.",
+      ],
+    ],
+  },
+  digitalAssistance: {
+    path: "/services/assistance-numerique",
+    title: (lang) =>
+      lang === "fr"
+        ? "Assistance numerique et depannage tech | Creativa Poeta"
+        : lang === "nl"
+          ? "Digitale hulp en technische ondersteuning | Creativa Poeta"
+          : lang === "rw"
+            ? "Assistance numerique na depannage | Creativa Poeta"
+            : "Digital assistance and technology support | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Depannage informatique, configuration d'appareils, securite, achats en ligne, demarches administratives et accompagnement numerique pas a pas."
+        : lang === "nl"
+          ? "Hulp met apparaten, installatie, beveiliging, online aankopen, administratie en stap-voor-stap digitale begeleiding."
+          : lang === "rw"
+            ? "Ubufasha mu gukoresha devices, installation, security, online services no gukoresha technology intambwe ku yindi."
+            : "Troubleshooting, device setup, security, online shopping, administrative procedures and step-by-step digital guidance.",
+    keywords:
+      "digital assistance, computer troubleshooting, device setup, online help, technology support, digital guidance, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Une aide numerique humaine et claire" : "Human and clear digital support",
+        lang === "fr"
+          ? "Nous aidons a installer, configurer, securiser et comprendre les outils numeriques sans jargon inutile."
+          : "We help install, configure, secure and understand digital tools without unnecessary jargon.",
+      ],
+      [
+        lang === "fr" ? "Pour les appareils, comptes et demarches" : "For devices, accounts and online tasks",
+        lang === "fr"
+          ? "Ordinateur, smartphone, imprimante, Wi-Fi, comptes, sauvegardes, documents, achats en ligne ou reseaux sociaux."
+          : "Computer, smartphone, printer, Wi-Fi, accounts, backups, documents, online shopping or social media.",
+      ],
+    ],
+  },
+  visibilityTool: {
+    path: "/tester-visibilite",
+    title: (lang) =>
+      lang === "fr"
+        ? "Tester ma visibilite Google, maps et IA | Creativa Poeta"
+        : lang === "nl"
+          ? "Test mijn zichtbaarheid op Google, maps en AI | Creativa Poeta"
+          : lang === "rw"
+            ? "Suzuma visibility yawe kuri Google, maps na AI | Creativa Poeta"
+            : "Test my Google, maps and AI visibility | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Testez rapidement votre presence actuelle sur Google, maps, profils publics et outils IA, puis envoyez votre demande a Creativa Poeta."
+        : "Quickly test your current presence on Google, maps, public profiles and AI tools, then send your request to Creativa Poeta.",
+    keywords:
+      "visibility test, AI visibility audit, Google Maps audit, local SEO audit, voice search audit, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Un premier diagnostic de visibilite" : "A first visibility diagnosis",
+        lang === "fr"
+          ? "Le test aide a voir si votre entreprise est facile a trouver, comprendre et contacter sur les canaux importants."
+          : "The test helps check whether your business is easy to find, understand and contact across important channels.",
+      ],
+    ],
+  },
+  digitalAssistanceRequest: {
+    path: "/demander-assistance-numerique",
+    title: (lang) =>
+      lang === "fr"
+        ? "Demander une assistance numerique | Creativa Poeta"
+        : lang === "nl"
+          ? "Digitale hulp aanvragen | Creativa Poeta"
+          : lang === "rw"
+            ? "Saba assistance numerique | Creativa Poeta"
+            : "Request digital assistance | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Envoyez une demande d'aide pour depannage, configuration d'appareil, securite, comptes, achats en ligne ou demarches numeriques."
+        : "Send a request for troubleshooting, device setup, security, accounts, online shopping or digital procedures.",
+    keywords:
+      "request digital assistance, technology help, computer support, device setup, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Expliquez votre besoin numerique" : "Explain your digital need",
+        lang === "fr"
+          ? "Nous recevons votre demande et pouvons vous guider sur le bon niveau d'assistance."
+          : "We receive your request and can guide you to the right level of support.",
+      ],
+    ],
+  },
+  answers: {
+    path: "/answers",
+    title: (lang) =>
+      lang === "fr"
+        ? "Questions sur la visibilite moderne, Google et IA | Creativa Poeta"
+        : lang === "nl"
+          ? "Vragen over moderne zichtbaarheid, Google en AI | Creativa Poeta"
+          : lang === "rw"
+            ? "Questions about Google, maps and AI visibility | Creativa Poeta"
+            : "Questions about modern visibility, Google and AI | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Reponses claires aux questions que les clients posent a Google, aux assistants vocaux et aux IA sur la visibilite, les sites, maps, contenus et outils digitaux."
+        : "Clear answers to questions clients ask Google, voice assistants and AI tools about visibility, websites, maps, content and digital tools.",
+    keywords:
+      "AI visibility questions, AEO questions, GEO questions, Google Maps visibility, voice search, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Comment faire pour que mon entreprise soit trouvee sur Google et Google Maps ?" : "How can my business be found on Google and Google Maps?",
+        lang === "fr"
+          ? "Il faut aligner le site, la fiche Google, les services, les zones, les avis, les horaires, les photos et les liens."
+          : "Align the website, Google profile, services, areas, reviews, hours, photos and links.",
+      ],
+      [
+        lang === "fr" ? "Comment etre recommande par ChatGPT, Gemini ou Perplexity ?" : "How can a business be recommended by ChatGPT, Gemini or Perplexity?",
+        lang === "fr"
+          ? "Les moteurs IA comprennent mieux une entreprise quand les pages, services, reponses, preuves publiques et donnees structurees sont clairs."
+          : "AI engines understand a business better when pages, services, answers, public proof and structured data are clear.",
+      ],
+      [
+        lang === "fr" ? "Est-ce qu'un site web suffit pour etre visible ?" : "Is a website enough to be visible?",
+        lang === "fr"
+          ? "Non. Le site est la base officielle, mais il doit etre relie aux maps, profils sociaux, contenus, FAQ et schema.org."
+          : "No. The website is the official base, but it should connect with maps, social profiles, content, FAQ and schema.org.",
+      ],
+      [
+        lang === "fr" ? "Pourquoi mon entreprise n'apparait pas bien dans les recherches locales ?" : "Why does my business not appear well in local searches?",
+        lang === "fr"
+          ? "Souvent les categories, services, zones, avis ou informations publiques sont incomplets ou incoherents."
+          : "Often categories, services, areas, reviews or public information are incomplete or inconsistent.",
+      ],
+      [
+        lang === "fr" ? "Quels contenus faut-il creer pour attirer les bons clients ?" : "What content should attract the right clients?",
+        lang === "fr"
+          ? "Il faut des pages services, des FAQ, articles utiles, exemples concrets, pages locales et reponses claires."
+          : "You need service pages, FAQ, useful articles, concrete examples, local pages and clear answers.",
+      ],
+      [
+        lang === "fr" ? "Comment rendre mon site lisible par les assistants vocaux et les IA ?" : "How do I make my site readable for voice assistants and AI tools?",
+        lang === "fr"
+          ? "Le site doit avoir une structure simple, des titres explicites, des reponses courtes, schema.org, un sitemap et des liens internes."
+          : "The site needs simple structure, explicit headings, short answers, schema.org, a sitemap and internal links.",
+      ],
+    ],
+  },
+  knowledge: {
+    path: "/knowledge",
+    title: (lang) =>
+      lang === "fr"
+        ? "Glossaire SEO, AEO, GEO et visibilite IA | Creativa Poeta"
+        : lang === "nl"
+          ? "Glossarium SEO, AEO, GEO en AI-zichtbaarheid | Creativa Poeta"
+          : lang === "rw"
+            ? "Glossary ya SEO, AEO, GEO na AI visibility | Creativa Poeta"
+            : "SEO, AEO, GEO and AI visibility glossary | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Definitions claires sur le SEO, AEO, GEO, visibilite locale, sites AI-ready, schema.org, assistants IA et contenu utile."
+        : lang === "nl"
+          ? "Duidelijke definities over SEO, AEO, GEO, lokale zichtbaarheid, AI-klare websites, schema.org, AI-assistenten en nuttige content."
+          : lang === "rw"
+            ? "Ibisobanuro bigufi kuri SEO, AEO, GEO, local visibility, AI-ready websites, schema.org, AI assistants na useful content."
+            : "Clear definitions about SEO, AEO, GEO, local visibility, AI-ready websites, schema.org, AI assistants and useful content.",
+    keywords:
+      "SEO, AEO, GEO, AI visibility, schema.org, local visibility, AI-ready website, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Qu'est-ce que le SEO ?" : "What is SEO?",
+        lang === "fr"
+          ? "Le SEO aide une page a etre trouvee dans les moteurs de recherche grace a sa structure, son contenu, ses liens et sa credibilite."
+          : "SEO helps a page be found in search engines through structure, content, links, performance and credibility.",
+      ],
+      [
+        lang === "fr" ? "Qu'est-ce que l'AEO ?" : "What is AEO?",
+        lang === "fr"
+          ? "L'AEO consiste a formuler des reponses directes aux questions des utilisateurs pour les moteurs de reponse et assistants vocaux."
+          : "AEO creates direct answers to user questions for answer engines, voice assistants and featured results.",
+      ],
+      [
+        lang === "fr" ? "Qu'est-ce que le GEO ?" : "What is GEO?",
+        lang === "fr"
+          ? "Le GEO optimise une marque pour etre comprise, citee ou recommandee par les moteurs generatifs comme ChatGPT, Gemini ou Perplexity."
+          : "GEO prepares a brand to be understood, cited or recommended by generative engines such as ChatGPT, Gemini or Perplexity.",
+      ],
+      [
+        lang === "fr" ? "C'est quoi un site AI-ready ?" : "What is an AI-ready website?",
+        lang === "fr"
+          ? "Un site AI-ready contient des textes lisibles, des pages services claires, des donnees structurees et des chemins de contact faciles."
+          : "An AI-ready website has readable content, clear service pages, structured data and simple contact paths.",
+      ],
+    ],
+  },
   blogs: {
     path: "/blogs",
     title: (lang) =>
@@ -1181,6 +1631,27 @@ function applyMeta(html, page) {
     "AI answer readiness",
     "Clear service pages",
   ];
+  const pathSegments = new URL(page.url).pathname
+    .split("/")
+    .filter(Boolean)
+    .filter((segment) => !["en", "fr", "nl", "rw"].includes(segment));
+  const servicePage = serviceForPath(page.template.path);
+  const breadcrumbItems = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: marketConfig.baseUrl,
+    },
+    ...pathSegments.map((segment, index) => ({
+      "@type": "ListItem",
+      position: index + 2,
+      name: segment
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) => letter.toUpperCase()),
+      item: `${marketConfig.baseUrl}/${pathSegments.slice(0, index + 1).join("/")}`,
+    })),
+  ];
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1224,7 +1695,59 @@ function applyMeta(html, page) {
         about: {
           "@id": `${marketConfig.baseUrl}/#professionalservice`,
         },
+        breadcrumb: {
+          "@id": `${page.url}#breadcrumb`,
+        },
       },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${page.url}#breadcrumb`,
+        itemListElement: breadcrumbItems,
+      },
+      ...(page.faqs?.length
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${page.url}#faq`,
+              mainEntity: page.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+      ...(servicePage
+        ? [
+            {
+              "@type": "Service",
+              "@id": `${page.url}#service`,
+              name: servicePage.name,
+              serviceType: servicePage.serviceType,
+              description: servicePage.description,
+              url: page.url,
+              provider: {
+                "@id": `${marketConfig.baseUrl}/#professionalservice`,
+              },
+              areaServed: serviceArea,
+              availableLanguage: marketConfig.locales.map(languageName),
+              mainEntityOfPage: {
+                "@id": `${page.url}#webpage`,
+              },
+              offers: {
+                "@type": "Offer",
+                availability: "https://schema.org/InStock",
+                url: page.url,
+                seller: {
+                  "@id": `${marketConfig.baseUrl}/#professionalservice`,
+                },
+              },
+            },
+          ]
+        : []),
       {
         "@type": "WebSite",
         "@id": `${marketConfig.baseUrl}/#website`,
@@ -1249,6 +1772,26 @@ function applyMeta(html, page) {
         availableLanguage: marketConfig.locales.map(languageName),
         knowsAbout: serviceNames,
         serviceType: serviceNames,
+        sameAs: brandSameAs,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Creativa Poeta service catalog",
+          itemListElement: serviceCatalog.map((service, index) => ({
+            "@type": "Offer",
+            position: index + 1,
+            itemOffered: {
+              "@type": "Service",
+              name: service.name,
+              serviceType: service.serviceType,
+              description: service.description,
+              provider: {
+                "@id": `${marketConfig.baseUrl}/#professionalservice`,
+              },
+              areaServed: serviceArea,
+              availableLanguage: marketConfig.locales.map(languageName),
+            },
+          })),
+        },
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer service",
@@ -1373,6 +1916,11 @@ for (const route of routeDefinitions) {
     image: route.blog?.image || imageUrl,
     url: route.canonicalUrl ?? absoluteUrl(route.canonicalPath),
     alternates: route.alternates ?? alternatesFor(route.template),
+    faqs: !route.blog && route.template.path === "/answers"
+      ? route.template.sections(route.lang).map(([question, answer]) => ({ question, answer }))
+      : !route.blog && route.template.path.startsWith("/services/")
+        ? faqsForPage(route.template.path, route.lang)
+        : [],
   };
 
   const output = applyFallback(applyMeta(baseHtml, page), page);
@@ -1381,17 +1929,7 @@ for (const route of routeDefinitions) {
   fs.writeFileSync(filePath, output, "utf8");
 }
 
-const sitemapPagePaths = [
-  "",
-  "/contact",
-  "/start-project",
-  "/terms-and-conditions",
-  "/blogs",
-  "/services/audit-visibilite",
-  "/services/site-officiel",
-  "/services/visibilite-locale",
-  "/services/contenus-utiles",
-];
+const sitemapPagePaths = [...new Set(Object.values(pageTemplates).map((template) => template.path))];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {
   return localizedMarketPath(locale, defaultLocale, pagePath);
@@ -1505,6 +2043,8 @@ Disallow: /thank-you
 Disallow: /thank-you-for-applying
 
 Sitemap: ${siteUrl}/sitemap.xml
+Llms-Txt: ${siteUrl}/llms.txt
+Llms-Full: ${siteUrl}/llms-full.txt
 `,
     "utf8"
   );

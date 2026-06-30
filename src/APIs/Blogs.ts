@@ -136,6 +136,48 @@ export type GenerateBlogBatchInput = {
   ctaType: "service" | "affiliate" | "contact";
 };
 
+
+export type SeoAssistantTopicInput = {
+  seed: string;
+  audience: string;
+  location: string;
+  goal: string;
+  language: BlogLanguage;
+  count: number;
+  includeAffiliate: boolean;
+};
+
+export type SeoAssistantIdea = {
+  title: string;
+  topic: string;
+  keyword: string;
+  intent: GenerateBlogBatchInput["intent"];
+  category: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  ctaType: GenerateBlogBatchInput["ctaType"];
+  articleType: string;
+  imageBrief: string;
+  affiliateAngle: string;
+  rationale: string;
+  internalLinks: Array<{ label: string; url: string }>;
+};
+
+export const planSeoTopics = async (data: SeoAssistantTopicInput) =>
+  authRequest<{
+    source: "openai" | "template";
+    batchId: string;
+    ideas: SeoAssistantIdea[];
+    marketSignals: string[];
+  }>(
+    {
+      method: "POST",
+      url: "/api/blogs/admin/assistant/topics",
+      data,
+    },
+    "Impossible de proposer des sujets SEO."
+  );
+
 export const generateBlogBatch = async (data: GenerateBlogBatchInput) =>
   authRequest<{
     message: string;

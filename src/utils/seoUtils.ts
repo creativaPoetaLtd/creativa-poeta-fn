@@ -2,8 +2,8 @@
 
 export const SEO_CONSTANTS = {
   SITE_NAME: "Creativa Poeta",
-  SITE_URL: "https://creativapoeta.rw",
-  DEFAULT_IMAGE: "https://creativapoeta.rw/poeta.jpeg",
+  SITE_URL: "https://creativapoeta.com",
+  DEFAULT_IMAGE: "https://creativapoeta.com/poeta.jpeg",
   TWITTER_HANDLE: "@creativapoeta",
   FACEBOOK_APP_ID: "", // Add when available
   GOOGLE_SITE_VERIFICATION: "", // Add when available
