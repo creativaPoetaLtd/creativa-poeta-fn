@@ -13,10 +13,8 @@ import {
   getMarketAlternateLinks,
   getPathWithoutLocale,
 } from "./data/marketRuntime";
-import {
-  HomeRefonteAfterServices,
-  HomeRefonteBeforeServices,
-} from "./components/sections/HomeRefonteSections";
+import { HomeRefonteAfterServices } from "./components/sections/HomeRefonteSections";
+import HomeServiceStorySections from "./components/sections/HomeServiceStorySections";
 import { LocaleCode, MarketCode } from "./data/markets";
 // import Projects from './components/sections/Projects'
 
@@ -118,7 +116,7 @@ const App = () => {
       <NavBar />
       <div className="w-full flex flex-col scroll-smooth snap-x">
         <Home />
-        <HomeRefonteBeforeServices />
+        <HomeServiceStorySections />
         <Services />
         <HomeRefonteAfterServices />
         {/* <Projects /> */}

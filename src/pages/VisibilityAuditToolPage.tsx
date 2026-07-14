@@ -23,6 +23,7 @@ import {
   getCurrentMarket,
   localizePath,
 } from "../data/marketRuntime";
+import { getExampleCity, getExampleEmail, getExampleLanguages, getExampleName, getExamplePhone } from "../utils/localExamples";
 
 type LocaleKey = "fr" | "en" | "nl" | "kiny";
 
@@ -145,11 +146,11 @@ const copies: Record<
       message: "Precision utile",
     },
     placeholders: {
-      name: "Ex. Deo",
+      name: "John Doe",
       email: "vous@email.com",
       phone: "+32 ...",
       company: "Nom de votre activite",
-      city: "Bruxelles, Kigali, Paris...",
+      city: "Bruxelles",
       website: "https://...",
       languages: "francais, neerlandais, anglais...",
       message: "Ajoutez ce que vous voulez qu'on verifie en priorite.",
@@ -219,11 +220,11 @@ const copies: Record<
       message: "Useful detail",
     },
     placeholders: {
-      name: "Ex. Deo",
+      name: "John Doe",
       email: "you@email.com",
       phone: "+32 ...",
       company: "Business name",
-      city: "Brussels, Kigali, Paris...",
+      city: "Brussels",
       website: "https://...",
       languages: "French, Dutch, English...",
       message: "Add what you want us to check first.",
@@ -293,11 +294,11 @@ const copies: Record<
       message: "Nuttige toelichting",
     },
     placeholders: {
-      name: "Ex. Deo",
+      name: "John Doe",
       email: "u@email.com",
       phone: "+32 ...",
       company: "Naam van uw activiteit",
-      city: "Brussel, Kigali, Parijs...",
+      city: "Amsterdam",
       website: "https://...",
       languages: "Frans, Nederlands, Engels...",
       message: "Voeg toe wat we eerst moeten controleren.",
@@ -367,11 +368,11 @@ const copies: Record<
       message: "Icyo mwongeraho",
     },
     placeholders: {
-      name: "Urugero: Deo",
+      name: "John Doe",
       email: "wowe@email.com",
       phone: "+250 ...",
       company: "Izina rya business",
-      city: "Kigali, Bruxelles...",
+      city: "Kigali",
       website: "https://...",
       languages: "Kinyarwanda, francais, English...",
       message: "Andika icyo wifuza ko tubanza kureba.",
@@ -729,7 +730,18 @@ const InterpretationResult = ({
 const VisibilityAuditToolPage = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market) as LocaleKey;
-  const copy = copies[locale] ?? copies.fr;
+  const baseCopy = copies[locale] ?? copies.fr;
+  const copy = {
+    ...baseCopy,
+    placeholders: {
+      ...baseCopy.placeholders,
+      name: getExampleName(locale),
+      email: getExampleEmail(locale),
+      phone: getExamplePhone(market),
+      city: getExampleCity(market, locale),
+      languages: getExampleLanguages(market, locale),
+    },
+  };
   const [form, setForm] = useState<AuditForm>(initialForm);
   const [result, setResult] = useState<AuditResult | null>(null);
   const [technicalAudit, setTechnicalAudit] =
@@ -1372,3 +1384,5 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
 };
 
 export default VisibilityAuditToolPage;
+
+

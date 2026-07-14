@@ -499,8 +499,8 @@ export const HomeRefonteBeforeServices = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = getHomeRefonteCopy(locale);
-  const visuals = getLocalizedVisuals(locale);
   const channelImages = getChannelImages(locale, copy);
+  const visuals = getLocalizedVisuals(locale);
   const aiImages = getAiImages(locale, copy);
   const problemImage =
     locale === "fr"
@@ -706,7 +706,6 @@ export const HomeRefonteAfterServices = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = getHomeRefonteCopy(locale);
-  const visuals = getLocalizedVisuals(locale);
   const assistanceLabel =
     locale === "nl"
       ? "Digitale hulp"
@@ -718,23 +717,6 @@ export const HomeRefonteAfterServices = () => {
 
   return (
     <>
-      <section id="creativite-services" className="cp-refonte-section cp-refonte-dark cp-creative-services-section">
-        <div className="cp-refonte-shell">
-          <div className="cp-refonte-heading cp-refonte-heading-dark cp-floating-heading cp-title-on-bg">
-            <p>{copy.creative.eyebrow}</p>
-            <h2>{copy.creative.title}</h2>
-            <span>{copy.creative.body}</span>
-          </div>
-          <figure className="cp-creative-services-frame">
-            <img
-              src={visuals.creativeServices}
-              alt={copy.creative.alt}
-              loading="lazy"
-            />
-          </figure>
-        </div>
-      </section>
-
       <section id="cta-final" className="cp-refonte-final">
         <div className="cp-shape-stripes cp-shape-stripes-left" aria-hidden="true" />
         <div className="cp-refonte-shell">
@@ -755,3 +737,6 @@ export const HomeRefonteAfterServices = () => {
     </>
   );
 };
+
+
+

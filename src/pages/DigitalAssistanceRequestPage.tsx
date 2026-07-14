@@ -14,6 +14,7 @@ import PageLayout from "../components/layout/PageLayout";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { projectForm } from "../APIs/projectForm";
 import { getCurrentLocale, getCurrentMarket, localizePath } from "../data/marketRuntime";
+import { getExampleCity, getExampleEmail, getExampleName, getExamplePhone } from "../utils/localExamples";
 
 type LocaleKey = "fr" | "en" | "nl" | "kiny";
 
@@ -87,10 +88,10 @@ const copies: Record<
       message: "Expliquez votre besoin",
     },
     placeholders: {
-      name: "Votre nom",
+      name: "Jane Doe",
       email: "vous@email.com",
       phone: "+32 ...",
-      city: "Bruxelles, Kigali, Paris...",
+      city: "Bruxelles",
       device: "PC, smartphone, imprimante, TV, compte email...",
       message: "Ex. Je dois configurer mon email sur mon telephone et securiser mon compte.",
     },
@@ -134,10 +135,10 @@ const copies: Record<
       message: "Explain your need",
     },
     placeholders: {
-      name: "Your name",
+      name: "John Doe",
       email: "you@email.com",
       phone: "+32 ...",
-      city: "Brussels, Kigali, Paris...",
+      city: "Brussels",
       device: "PC, smartphone, printer, TV, email account...",
       message: "Ex. I need to configure email on my phone and secure my account.",
     },
@@ -181,10 +182,10 @@ const copies: Record<
       message: "Leg uw behoefte uit",
     },
     placeholders: {
-      name: "Uw naam",
+      name: "Jane Doe",
       email: "u@email.com",
       phone: "+32 ...",
-      city: "Brussel, Kigali, Parijs...",
+      city: "Amsterdam",
       device: "PC, smartphone, printer, TV, emailaccount...",
       message: "Ex. Ik wil mijn email op mijn telefoon instellen en mijn account beveiligen.",
     },
@@ -228,10 +229,10 @@ const copies: Record<
       message: "Sobanura icyo ukeneye",
     },
     placeholders: {
-      name: "Izina ryawe",
+      name: "John Doe",
       email: "wowe@email.com",
       phone: "+250 ...",
-      city: "Kigali, Bruxelles...",
+      city: "Kigali",
       device: "PC, smartphone, printer, TV, email...",
       message: "Urugero: nshaka gushyira email kuri telefone no kurinda konti yanjye.",
     },
@@ -262,7 +263,17 @@ const icons = {
 export default function DigitalAssistanceRequestPage() {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market) as LocaleKey;
-  const copy = copies[locale] ?? copies.fr;
+  const baseCopy = copies[locale] ?? copies.fr;
+  const copy = {
+    ...baseCopy,
+    placeholders: {
+      ...baseCopy.placeholders,
+      name: getExampleName(locale),
+      email: getExampleEmail(locale),
+      phone: getExamplePhone(market),
+      city: getExampleCity(market, locale),
+    },
+  };
   const [form, setForm] = useState<AssistanceForm>(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -525,3 +536,4 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
     </main>
   );
 };
+

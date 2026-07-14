@@ -263,7 +263,7 @@ const RefontePreviewPage = () => {
             </label>
             <label>
               Pays ou zone visee
-              <input type="text" placeholder="Ex. Bruxelles, Kigali, Paris..." />
+              <input type="text" placeholder="Ex. Bruxelles" />
             </label>
             <label>
               Email
@@ -317,3 +317,4 @@ const RefontePreviewPage = () => {
 };
 
 export default RefontePreviewPage;
+

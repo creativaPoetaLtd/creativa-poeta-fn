@@ -35,6 +35,7 @@ import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
 import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
 import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
+import CookieConsent from "./components/cookies/CookieConsent.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -49,11 +50,21 @@ const appElement = (
             <Route path="/nl" element={<App />} />
             <Route path="/rw" element={<App />} />
             <Route path="/refonte" element={<RefontePreviewPage />} />
+            <Route path="/mentions-legales" element={<TermsPage />} />
+            <Route path="/en/mentions-legales" element={<TermsPage />} />
+            <Route path="/fr/mentions-legales" element={<TermsPage />} />
+            <Route path="/nl/mentions-legales" element={<TermsPage />} />
+            <Route path="/rw/mentions-legales" element={<TermsPage />} />
             <Route path="/terms-and-conditions" element={<TermsPage />} />
             <Route path="/en/terms-and-conditions" element={<TermsPage />} />
             <Route path="/fr/terms-and-conditions" element={<TermsPage />} />
             <Route path="/nl/terms-and-conditions" element={<TermsPage />} />
             <Route path="/rw/terms-and-conditions" element={<TermsPage />} />
+            <Route path="/confidentialite-cookies" element={<TermsPage />} />
+            <Route path="/en/confidentialite-cookies" element={<TermsPage />} />
+            <Route path="/fr/confidentialite-cookies" element={<TermsPage />} />
+            <Route path="/nl/confidentialite-cookies" element={<TermsPage />} />
+            <Route path="/rw/confidentialite-cookies" element={<TermsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/en/contact" element={<ContactPage />} />
             <Route path="/fr/contact" element={<ContactPage />} />
@@ -233,6 +244,7 @@ const appElement = (
         </AuthProvider>
       </Router>
       <ToastContainer />
+      <CookieConsent />
     </HelmetProvider>
   </React.StrictMode>
 );
@@ -240,3 +252,8 @@ const appElement = (
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container!);
 root.render(appElement);
+
+
+
+
+

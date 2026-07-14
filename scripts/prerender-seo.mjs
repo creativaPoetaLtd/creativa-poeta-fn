@@ -712,6 +712,32 @@ const pageTemplates = {
       ],
     ],
   },
+  legalNotice: {
+    path: "/mentions-legales",
+    title: () => "Legal notice | Creativa Poeta",
+    description: () =>
+      "Legal notice, publisher information, hosting and contact details for Creativa Poeta.",
+    keywords: "Creativa Poeta legal notice, legal mentions, publisher information",
+    sections: () => [
+      [
+        "Legal notice",
+        "This page presents the publisher, hosting information, intellectual property rules and contact details for Creativa Poeta.",
+      ],
+    ],
+  },
+  privacyCookies: {
+    path: "/confidentialite-cookies",
+    title: () => "Privacy and cookies | Creativa Poeta",
+    description: () =>
+      "Privacy policy, personal data, cookie choices and user rights for Creativa Poeta.",
+    keywords: "Creativa Poeta privacy, cookies, personal data, GDPR",
+    sections: () => [
+      [
+        "Privacy and cookies",
+        "This page explains how Creativa Poeta handles personal data, cookie preferences, analytics and user rights.",
+      ],
+    ],
+  },
   auditVisibility: {
     path: "/services/audit-visibilite",
     title: (lang) =>
@@ -2053,3 +2079,4 @@ Llms-Full: ${siteUrl}/llms-full.txt
 writeSitemapFiles();
 
 console.log(`Pre-rendered ${routeDefinitions.length} SEO pages (${publishedBlogs.length} published blog article(s)).`);
+

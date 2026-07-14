@@ -49,7 +49,6 @@ const SectionScrollButton = ({
       "voix-ia",
       "confiance",
       "services",
-      "creativite-services",
       "cta-final",
       "faq",
       "footer",

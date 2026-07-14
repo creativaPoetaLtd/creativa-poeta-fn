@@ -137,16 +137,16 @@ function Footer() {
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence20}</p>
     </Link>
     <Link to={linkPath("/demander-assistance-numerique")}>
-      <p className='flex justify-start items-start text-start mt-1 font-bold text-[#EEBA2B]'>{assistanceLabel}</p>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{assistanceLabel}</p>
     </Link>
     <Link to={linkPath("/answers")}> 
-      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{answersLabel}</p>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{answersLabel}</p>
     </Link>
     <Link to={linkPath("/knowledge")}>
-      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{knowledgeLabel}</p>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{knowledgeLabel}</p>
     </Link>
     <Link to={linkPath("/blogs")}>
-      <p className='flex justify-start items-start text-start mt-2 font-bold text-white'>{blogLabel}</p>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{blogLabel}</p>
     </Link>
   </div>
 
@@ -249,3 +249,4 @@ function Footer() {
 }
 
 export default Footer;
+

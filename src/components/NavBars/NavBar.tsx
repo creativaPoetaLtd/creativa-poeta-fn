@@ -134,42 +134,6 @@ const blogCopy: Record<string, { label: string; text: string }> = {
 };
 
 
-const answersCopy: Record<string, { label: string; text: string }> = {
-  fr: {
-    label: "Reponses",
-    text: "Questions utiles sur Google, IA, maps et visibilite",
-  },
-  en: {
-    label: "Answers",
-    text: "Useful questions about Google, AI, maps and visibility",
-  },
-  nl: {
-    label: "Antwoorden",
-    text: "Vragen over Google, AI, maps en zichtbaarheid",
-  },
-  kiny: {
-    label: "Answers",
-    text: "Questions about Google, AI, maps and visibility",
-  },
-};
-const knowledgeCopy: Record<string, { label: string; text: string }> = {
-  fr: {
-    label: "Glossaire",
-    text: "Definitions SEO, AEO, GEO et visibilite IA",
-  },
-  en: {
-    label: "Knowledge",
-    text: "SEO, AEO, GEO and AI visibility definitions",
-  },
-  nl: {
-    label: "Kennisbank",
-    text: "Definities over SEO, AEO, GEO en AI-zichtbaarheid",
-  },
-  kiny: {
-    label: "Knowledge",
-    text: "SEO, AEO, GEO na AI visibility definitions",
-  },
-};
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [servicesSubMenuVisible, setServicesSubMenuVisible] = useState(true);
@@ -200,18 +164,6 @@ function NavBar() {
       text: copy.assistanceRequestText,
       href: localizePath("/demander-assistance-numerique"),
       featured: true,
-    },
-    {
-      label: (answersCopy[lang] ?? answersCopy.en).label,
-      text: (answersCopy[lang] ?? answersCopy.en).text,
-      href: localizePath("/answers"),
-      featured: false,
-    },
-    {
-      label: (knowledgeCopy[lang] ?? knowledgeCopy.en).label,
-      text: (knowledgeCopy[lang] ?? knowledgeCopy.en).text,
-      href: localizePath("/knowledge"),
-      featured: false,
     },
     {
       label: (blogCopy[lang] ?? blogCopy.en).label,
@@ -458,3 +410,4 @@ function NavBar() {
 }
 
 export default NavBar;
+

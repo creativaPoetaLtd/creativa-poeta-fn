@@ -22,6 +22,7 @@ import {
   getCurrentLocale,
   getCurrentMarket,
 } from "../data/marketRuntime";
+import { getExampleCity, getExampleEmail, getExampleLanguages, getExampleName, getExamplePhone } from "../utils/localExamples";
 
 type LocaleKey = "fr" | "en" | "nl" | "kiny";
 
@@ -110,9 +111,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "Aucun ou presque",
     ],
     zoneLabel: "Pays, ville ou zone visee",
-    zonePlaceholder: "Ex. Bruxelles, Kigali, Paris, Pays-Bas, monde entier...",
+    zonePlaceholder: "Ex. Bruxelles",
     languagesLabel: "Langues importantes",
-    languagesPlaceholder: "Ex. francais, neerlandais, anglais, kinyarwanda...",
+    languagesPlaceholder: "Ex. francais, neerlandais...",
     urgencyLabel: "Delai souhaite",
     urgencyOptions: [
       "Le plus tot possible",
@@ -289,9 +290,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "Almost nowhere",
     ],
     zoneLabel: "Target country, city or area",
-    zonePlaceholder: "Ex. Brussels, Kigali, Paris, Netherlands, worldwide...",
+    zonePlaceholder: "Ex. Brussels",
     languagesLabel: "Important languages",
-    languagesPlaceholder: "Ex. French, Dutch, English, Kinyarwanda...",
+    languagesPlaceholder: "Ex. French, Dutch...",
     urgencyLabel: "Desired timing",
     urgencyOptions: [
       "As soon as possible",
@@ -351,9 +352,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "Bijna nergens",
     ],
     zoneLabel: "Doelland, stad of regio",
-    zonePlaceholder: "Bijv. Brussel, Kigali, Parijs, Nederland, wereldwijd...",
+    zonePlaceholder: "Bijv. Amsterdam",
     languagesLabel: "Belangrijke talen",
-    languagesPlaceholder: "Bijv. Frans, Nederlands, Engels, Kinyarwanda...",
+    languagesPlaceholder: "Bijv. Nederlands...",
     urgencyLabel: "Gewenste timing",
     urgencyOptions: [
       "Zo snel mogelijk",
@@ -413,9 +414,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "Hafi nta hantu",
     ],
     zoneLabel: "Igihugu, umujyi cyangwa aho ushaka kugera",
-    zonePlaceholder: "Urugero: Bruxelles, Kigali, Paris, Netherlands...",
+    zonePlaceholder: "Urugero: Kigali",
     languagesLabel: "Indimi zikenewe",
-    languagesPlaceholder: "Urugero: francais, Nederlands, English, Kinyarwanda...",
+    languagesPlaceholder: "Urugero: Kinyarwanda, francais, English...",
     urgencyLabel: "Igihe wifuza",
     urgencyOptions: [
       "Vuba bishoboka",
@@ -761,6 +762,12 @@ const ProjectForm = () => {
 
   const selectedGroup = copy.groups.find((group) => group.title === formData.serviceType);
   const totalSteps = 4;
+  const contactPlaceholders: Record<string, string> = {
+    name: getExampleName(locale),
+    email: getExampleEmail(locale),
+    phone: getExamplePhone(market),
+    company: locale === "nl" ? "Voorbeeld BV" : locale === "en" ? "Example Company" : locale === "kiny" ? "Business yawe" : "Entreprise exemple",
+  };
 
   const updateField = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -1033,7 +1040,7 @@ const ProjectForm = () => {
                 name="targetZone"
                 value={formData.targetZone}
                 onChange={updateField}
-                placeholder={copy.zonePlaceholder}
+                placeholder={getExampleCity(market, locale)}
                 className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
@@ -1046,7 +1053,7 @@ const ProjectForm = () => {
                 name="languages"
                 value={formData.languages}
                 onChange={updateField}
-                placeholder={copy.languagesPlaceholder}
+                placeholder={getExampleLanguages(market, locale)}
                 className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
@@ -1102,6 +1109,7 @@ const ProjectForm = () => {
                 type={type}
                 name={name}
                 value={formData[name as keyof typeof formData] as string}
+                placeholder={contactPlaceholders[name]}
                 onChange={updateField}
                 className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
@@ -1212,3 +1220,7 @@ const ProjectForm = () => {
 };
 
 export default ProjectForm;
+
+
+
+
