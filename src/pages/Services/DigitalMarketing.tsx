@@ -1,27 +1,5 @@
+import { Navigate } from "react-router-dom";
 
-import DigitalMarketings from "../../components/Services/DigitalMarketing";
-import NavBar from "../../components/NavBars/NavBar";
-import Footer from "../../components/sections/Footer";
-import MainFooter from "../../components/sections/MainFooter";
-import MarketSEOHead from "../../components/SEO/MarketSEOHead";
-import { seoConfig } from "../../components/SEO/seoConfig";
-const DigitalMarketingPage = () => {
-    return (
-        <div className="App w-full flex flex-col snap-x scroll-smooth">
-            <MarketSEOHead
-                {...seoConfig.services.digitalMarketing}
-                path="/services/digital-marketing"
-            />
-            <div className="w-full ml-6 right-2 left flex justify-end">
-                <NavBar />
-            </div>
-            <DigitalMarketings />
-            <div className="w-full flex flex-col scroll-smooth snap-x">
-                <Footer />
-                <MainFooter />
-            </div>
-        </div>
-    )
-}
+const DigitalMarketingPage = () => <Navigate to="/services/visibilite-locale" replace />;
 
 export default DigitalMarketingPage;

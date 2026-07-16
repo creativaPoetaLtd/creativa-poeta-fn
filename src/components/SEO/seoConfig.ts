@@ -12,7 +12,7 @@ export const seoConfig = {
       "@type": "ProfessionalService",
       name: "Creativa Poeta",
       url: "https://creativapoeta.com",
-      logo: "https://creativapoeta.com/poeta.jpeg",
+      logo: "https://creativapoeta.com/cp-logo.png",
       description:
         "Creativa Poeta helps businesses become easier to find, understand and contact by aligning websites, maps, social profiles and useful content.",
       foundingDate: "2023",
@@ -216,27 +216,6 @@ export const seoConfig = {
           name: "Creativa Poeta",
         },
         serviceType: "Brand and content",
-      },
-    },
-
-    digitalMarketing: {
-      title: "Visibility on Google, maps and AI tools | Creativa Poeta",
-      description:
-        "Make your business easier to find and understand on Google, maps, voice search and tools like ChatGPT.",
-      keywords:
-        "local visibility, Google Maps, voice search, AI tools, ChatGPT visibility, digital presence",
-      url: "https://creativapoeta.com/services/digital-marketing",
-      structuredData: {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        name: "Visibility on Google, maps and AI tools",
-        description:
-          "Alignment of business information across Google, maps, social profiles and modern search tools.",
-        provider: {
-          "@type": "Organization",
-          name: "Creativa Poeta",
-        },
-        serviceType: "Local visibility",
       },
     },
 

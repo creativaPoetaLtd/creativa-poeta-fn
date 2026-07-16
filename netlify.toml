@@ -3,6 +3,42 @@ path = "/*"
 function = "market-rewrite"
 
 [[redirects]]
+from = "/services/digital-marketing"
+to = "/services/visibilite-locale"
+status = 301
+force = true
+
+[[redirects]]
+from = "/en/services/digital-marketing"
+to = "/en/services/visibilite-locale"
+status = 301
+force = true
+
+[[redirects]]
+from = "/fr/services/digital-marketing"
+to = "/fr/services/visibilite-locale"
+status = 301
+force = true
+
+[[redirects]]
+from = "/nl/services/digital-marketing"
+to = "/nl/services/visibilite-locale"
+status = 301
+force = true
+
+[[redirects]]
+from = "/rw/services/digital-marketing"
+to = "/rw/services/visibilite-locale"
+status = 301
+force = true
+
+[[redirects]]
+from = "/refonte"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200

@@ -9,7 +9,7 @@ const baseHtml = fs
   .replace(/<div id="root">[\s\S]*?<\/body>/i, '<div id="root"></div>\n</body>');
 
 const siteUrl = "https://creativapoeta.com";
-const imageUrl = `${siteUrl}/poeta.jpeg`;
+const imageUrl = `${siteUrl}/cp-logo.png`;
 const generatedAt = new Date().toISOString().slice(0, 10);
 const brandSameAs = [
   "https://www.linkedin.com/company/creativa-poeta",
@@ -58,7 +58,6 @@ const serviceCatalog = [
 const servicePathCatalogIndex = {
   "/services/visibilite-locale": 0,
   "/services/audit-visibilite": 0,
-  "/services/digital-marketing": 0,
   "/services/web-app": 1,
   "/services/site-officiel": 1,
   "/services/ia-automatisation": 2,
@@ -233,7 +232,6 @@ function faqsForPage(pagePath, lang) {
   const aliasPath = {
     "/services/site-officiel": "/services/web-app",
     "/services/contenus-utiles": "/services/content-writing",
-    "/services/digital-marketing": "/services/visibilite-locale",
   }[pagePath] || pagePath;
   const localized = serviceFaqs[aliasPath]?.[lang];
   const source = localized || fallbackFaqs[lang] || serviceFaqs[aliasPath]?.en || fallbackFaqs.en;
@@ -594,33 +592,6 @@ const richFrenchServices = {
       ],
     ],
   },
-  digitalMarketing: {
-    title: "Visibilite IA & Recherche Locale | Creativa Poeta",
-    description:
-      "Rendez votre entreprise visible dans Google, ChatGPT, Siri, Apple Maps, Bing et les moteurs IA grace a une strategie locale, technique et structuree.",
-    sections: [
-      [
-        "Soyez visible la ou vos clients cherchent maintenant.",
-        "Vos clients ne cherchent plus seulement sur Google. Ils demandent a ChatGPT, Perplexity, Siri, Apple Maps, Bing, Google Maps et aux nouveaux moteurs IA de leur recommander une entreprise proche, fiable et adaptee a leur besoin.",
-      ],
-      [
-        "Etre visible sur Google ne suffit plus.",
-        "Les clients posent des questions plus precises, souvent par voix ou via une IA. Si vos informations sont incompletes, mal structurees, incoherentes ou invisibles sur les bonnes plateformes, les moteurs modernes risquent de ne pas vous proposer.",
-      ],
-      [
-        "Nous structurons votre presence pour les humains, les moteurs et les IA.",
-        "Creativa Poeta met en place une base de visibilite locale et IA: site lisible, informations claires, profils locaux, contenus sous forme de reponses, coherence des donnees et signaux de confiance.",
-      ],
-      [
-        "Ce que nous livrons",
-        "Audit de visibilite IA et locale, rapport des blocages prioritaires, plan de correction, optimisation des profils Google, Apple et Bing, questions et reponses pretes a integrer, checklist de coherence.",
-      ],
-      [
-        "Questions utiles",
-        "Qu'est-ce que la visibilite IA ? C'est la capacite d'une entreprise a etre trouvee, comprise et recommandee par les moteurs de recherche, les maps et les assistants IA. Est-ce garanti ? Non, mais une bonne base augmente les chances d'etre trouve et compris.",
-      ],
-    ],
-  },
   contentWriting: {
     title: "Croissance Programmatique | Creativa Poeta",
     description:
@@ -963,23 +934,6 @@ const pageTemplates = {
       [
         "A clearer message",
         "We turn your expertise into simple words, useful content and visual identity that clients can understand quickly.",
-      ],
-    ],
-  },
-  digitalMarketing: {
-    path: "/services/digital-marketing",
-    title: (lang) =>
-      lang === "fr" ? richFrenchServices.digitalMarketing.title : "Visibility on Google, maps and AI tools | Creativa Poeta",
-    description: (lang) =>
-      lang === "fr"
-        ? richFrenchServices.digitalMarketing.description
-        : "Make your business easier to find and understand on Google, maps, voice search and tools like ChatGPT.",
-    keywords:
-      "local visibility, Google Maps, voice search, AI tools, ChatGPT visibility, digital presence",
-    sections: (lang) => lang === "fr" ? richFrenchServices.digitalMarketing.sections : [
-      [
-        "Modern visibility",
-        "We align your information across Google, maps, social profiles, contact channels and tools that answer client questions.",
       ],
     ],
   },

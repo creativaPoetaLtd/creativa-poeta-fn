@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HelmetProvider } from "react-helmet-async";
@@ -16,7 +16,6 @@ import ThankYouPage from "./pages/ThankYouPage.tsx";
 import WebPage from "./pages/Services/WebAppPage.tsx";
 import ContentPage from "./pages/Services/ContentPage.tsx";
 import GetBackToYou from "./components/getBackToYou.tsx";
-import DigitalMarketingPage from "./pages/Services/DigitalMarketing.tsx";
 import GraphicDesignPage from "./pages/Services/GraphicDesignPage.tsx";
 import AuditVisibilityPage from "./pages/Services/AuditVisibilityPage.tsx";
 import OfficialWebsitePage from "./pages/Services/OfficialWebsitePage.tsx";
@@ -30,7 +29,6 @@ import SingleBlogPage from "./pages/SingleBlogPage.tsx";
 import Login from "./components/Login.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import RefontePreviewPage from "./pages/RefontePreviewPage.tsx";
 import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
 import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
 import KnowledgePage from "./pages/KnowledgePage.tsx";
@@ -49,7 +47,7 @@ const appElement = (
             <Route path="/fr" element={<App />} />
             <Route path="/nl" element={<App />} />
             <Route path="/rw" element={<App />} />
-            <Route path="/refonte" element={<RefontePreviewPage />} />
+            <Route path="/refonte" element={<Navigate to="/" replace />} />
             <Route path="/mentions-legales" element={<TermsPage />} />
             <Route path="/en/mentions-legales" element={<TermsPage />} />
             <Route path="/fr/mentions-legales" element={<TermsPage />} />
@@ -200,26 +198,11 @@ const appElement = (
               path="/rw/services/graphic-design"
               element={<GraphicDesignPage />}
             />
-            <Route
-              path="/services/digital-marketing"
-              element={<DigitalMarketingPage />}
-            />
-            <Route
-              path="/en/services/digital-marketing"
-              element={<DigitalMarketingPage />}
-            />
-            <Route
-              path="/fr/services/digital-marketing"
-              element={<DigitalMarketingPage />}
-            />
-            <Route
-              path="/nl/services/digital-marketing"
-              element={<DigitalMarketingPage />}
-            />
-            <Route
-              path="/rw/services/digital-marketing"
-              element={<DigitalMarketingPage />}
-            />
+            <Route path="/services/digital-marketing" element={<Navigate to="/services/visibilite-locale" replace />} />
+            <Route path="/en/services/digital-marketing" element={<Navigate to="/en/services/visibilite-locale" replace />} />
+            <Route path="/fr/services/digital-marketing" element={<Navigate to="/fr/services/visibilite-locale" replace />} />
+            <Route path="/nl/services/digital-marketing" element={<Navigate to="/nl/services/visibilite-locale" replace />} />
+            <Route path="/rw/services/digital-marketing" element={<Navigate to="/rw/services/visibilite-locale" replace />} />
 
             {/* Admin Dashboard Routes - moved here and consolidated */}
             <Route

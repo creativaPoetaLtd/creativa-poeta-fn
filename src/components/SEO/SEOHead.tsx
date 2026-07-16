@@ -19,10 +19,10 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = "Creativa Poeta - Creative Digital Solutions | Web Development, Design & Marketing",
-  description = "Creativa Poeta offers professional web development, graphic design, content writing, and digital marketing services. Transform your business with our creative solutions and expert team.",
-  keywords = "web development, graphic design, digital marketing, content writing, creative solutions, business growth, professional services, Rwanda, East Africa",
-  image = "https://creativapoeta.com/poeta.jpeg",
+  title = "Creativa Poeta | Visibility, websites, AI, design and digital tools",
+  description = "Creativa Poeta helps businesses become easier to find, understand and contact with local visibility, clear websites, AI assistants, visual identity, content and digital assistance.",
+  keywords = "Creativa Poeta, local visibility, Google Maps visibility, AI visibility, business website, AI assistants, graphic design, content writing, digital assistance",
+  image = "https://creativapoeta.com/cp-logo.png",
   url = "https://creativapoeta.com/",
   type = "website",
   siteName = "Creativa Poeta",
