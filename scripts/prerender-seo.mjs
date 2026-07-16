@@ -353,57 +353,57 @@ const marketHosts = {
 const marketHomeMeta = {
   global: {
     en: {
-      title: "Creativa Poeta | Be found where clients search",
+      title: "Creativa Poeta | Digital services for visibility, websites, AI and content",
       description:
-        "Creativa Poeta helps businesses build a clear official presence for Google, maps, voice search and tools like ChatGPT.",
+        "Creativa Poeta helps businesses become easier to find, understand and contact with clear websites, local visibility, AI assistants, visual identity, content and digital assistance.",
     },
     fr: {
-      title: "Creativa Poeta | Visibilite digitale claire et utile",
+      title: "Creativa Poeta | Services digitaux pour visibilite, sites, IA et contenu",
       description:
-        "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees via leur site, les maps, la recherche vocale et les moteurs IA.",
+        "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees grace a des sites clairs, la visibilite locale, les assistants IA, l'identite visuelle, le contenu et l'assistance numerique.",
     },
   },
   be: {
     fr: {
-      title: "Creativa Poeta Belgique | Visibilite locale en francais et neerlandais",
+      title: "Creativa Poeta Belgique | Sites, visibilite, IA, design et contenu",
       description:
-        "Creativa Poeta aide les entreprises en Belgique a clarifier leur site, leurs profils locaux, leurs maps et leurs reponses clients.",
+        "Creativa Poeta aide les entreprises en Belgique avec sites web, visibilite locale, assistants IA, design, contenus utiles et assistance numerique.",
     },
     nl: {
-      title: "Creativa Poeta Belgie | Lokale zichtbaarheid in Frans en Nederlands",
+      title: "Creativa Poeta Belgie | Websites, zichtbaarheid, AI, design en content",
       description:
-        "Creativa Poeta helpt bedrijven in Belgie hun website, lokale profielen, maps en klantinformatie duidelijk en betrouwbaar te maken.",
+        "Creativa Poeta helpt bedrijven in Belgie met websites, lokale zichtbaarheid, AI-assistenten, design, nuttige content en digitale ondersteuning.",
     },
   },
   fr: {
     fr: {
-      title: "Creativa Poeta France | Site clair, maps et visibilite moderne",
+      title: "Creativa Poeta France | Sites, visibilite, IA, design et contenu",
       description:
-        "Creativa Poeta aide les entreprises en France a creer une presence officielle claire pour leur site, leurs maps et les recherches modernes.",
+        "Creativa Poeta aide les entreprises en France avec sites web, visibilite moderne, assistants IA, identite visuelle, contenu et outils digitaux.",
     },
   },
   rw: {
     rw: {
-      title: "Creativa Poeta Rwanda | Garagara aho abakiriya bagushakira",
+      title: "Creativa Poeta Rwanda | Websites, visibility, AI, design and content",
       description:
-        "Creativa Poeta ifasha ubucuruzi mu Rwanda kugira amakuru asobanutse kuri website, maps, imbuga nkoranyambaga n'ibikoresho bya AI.",
+        "Creativa Poeta ifasha business gutegura websites, visibility, AI assistants, visual identity, content na digital tools.",
     },
     fr: {
-      title: "Creativa Poeta Rwanda | Site, maps et visibilite locale",
+      title: "Creativa Poeta Rwanda | Sites, visibilite, IA, design et contenu",
       description:
-        "Creativa Poeta aide les entreprises au Rwanda a clarifier leur site, leurs profils locaux, leurs contacts et leurs reponses clients.",
+        "Creativa Poeta aide les entreprises au Rwanda avec sites web, visibilite, assistants IA, design, contenu et outils digitaux.",
     },
     en: {
-      title: "Creativa Poeta Rwanda | Website, maps and local visibility",
+      title: "Creativa Poeta Rwanda | Websites, visibility, AI, design and content",
       description:
-        "Creativa Poeta helps businesses in Rwanda make their website, maps, profiles and contact information clear and easy to find.",
+        "Creativa Poeta helps businesses in Rwanda with websites, visibility, AI assistants, visual identity, content and digital tools.",
     },
   },
   nl: {
     nl: {
-      title: "Creativa Poeta Nederland | Website, maps en moderne zichtbaarheid",
+      title: "Creativa Poeta Nederland | Websites, zichtbaarheid, AI, design en content",
       description:
-        "Creativa Poeta helpt bedrijven in Nederland hun website, maps, lokale profielen en klantinformatie duidelijker te maken.",
+        "Creativa Poeta helpt bedrijven in Nederland met websites, moderne zichtbaarheid, AI-assistenten, design, content en digitale tools.",
     },
   },
 };
@@ -435,107 +435,108 @@ const languages = {
     label: "English",
     prefix: "/en",
     homePath: "/",
-    homeTitle: "Creativa Poeta | Be found where clients search",
+    homeTitle: "Creativa Poeta | Digital services for visibility, websites, AI and content",
     homeDescription:
-      "Creativa Poeta helps businesses become easier to find, understand and contact by aligning websites, maps, social profiles and useful content.",
-    problemTitle: "Clients no longer search in one place.",
+      "Creativa Poeta helps businesses become easier to find, understand and contact with clear websites, local visibility, AI assistants, visual identity, useful content and digital assistance.",
+    problemTitle: "One clear digital base for every service you offer.",
     problem:
-      "A client can search on Google, ask a voice assistant, check maps, compare reviews, visit social profiles or ask an AI tool. If your information is scattered or unclear, your business can be missed.",
-    officialSourceTitle: "Your website becomes your official source.",
+      "Creativa Poeta brings together the foundations clients expect: a clear website, searchable services, local visibility, trustworthy visuals, useful content, AI-ready structure and simple ways to contact you.",
+    officialSourceTitle: "Your services become clear, useful and easy to act on.",
     officialSource:
-      "Your website explains your services, contacts, questions, languages, zones and proofs of trust. Your maps and social profiles remain useful, but your website becomes the reference.",
+      "We structure your visibility, website, AI assistants, visual identity, documents and support paths so clients understand what you do and what to do next.",
     cta: "Test my visibility",
   },
   fr: {
     label: "Francais",
     prefix: "/fr",
     homePath: "/fr",
-    homeTitle: "Creativa Poeta | Soyez visible la ou vos clients cherchent",
+    homeTitle: "Creativa Poeta | Services digitaux pour visibilite, sites, IA et contenu",
     homeDescription:
-      "Creativa Poeta aide les entreprises a etre plus faciles a trouver, comprendre et contacter en alignant site, maps, profils sociaux et contenus utiles.",
-    problemTitle: "Vos clients ne cherchent plus comme avant.",
+      "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees avec des sites clairs, la visibilite locale, des assistants IA, une identite visuelle, du contenu utile et une assistance numerique.",
+    problemTitle: "Une base digitale claire pour tous vos services.",
     problem:
-      "Un client peut vous chercher sur Google, demander une recommandation a un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question a une IA. Si vos informations sont dispersees ou peu claires, vous pouvez etre invisible au moment important.",
-    officialSourceTitle: "Votre site devient votre source officielle.",
+      "Creativa Poeta rassemble les bases dont une entreprise a besoin: site clair, services faciles a comprendre, visibilite locale, visuels coherents, contenu utile, structure prete pour les IA et chemins de contact simples.",
+    officialSourceTitle: "Vos services deviennent clairs, utiles et actionnables.",
     officialSource:
-      "Votre site explique vos services, vos contacts, vos questions frequentes, vos langues, vos zones et vos preuves de confiance. Les maps et les reseaux restent utiles, mais votre site devient la reference.",
+      "Nous structurons votre visibilite, votre site, vos assistants IA, votre identite visuelle, vos documents et vos parcours d'assistance pour que le client comprenne vite quoi faire.",
     cta: "Tester ma visibilite",
   },
   nl: {
     label: "Nederlands",
     prefix: "/nl",
     homePath: "/nl",
-    homeTitle: "Creativa Poeta | Word gevonden waar klanten zoeken",
+    homeTitle: "Creativa Poeta | Digitale diensten voor zichtbaarheid, websites, AI en content",
     homeDescription:
-      "Creativa Poeta helpt bedrijven makkelijker gevonden, begrepen en gecontacteerd te worden via website, maps, sociale profielen en duidelijke inhoud.",
-    problemTitle: "Klanten zoeken niet meer op een plaats.",
+      "Creativa Poeta helpt bedrijven makkelijker gevonden, begrepen en gecontacteerd te worden met duidelijke websites, lokale zichtbaarheid, AI-assistenten, visuele identiteit, nuttige content en digitale ondersteuning.",
+    problemTitle: "Een duidelijke digitale basis voor al uw diensten.",
     problem:
-      "Een klant kan zoeken via Google, een spraakassistent, maps, reviews, sociale profielen of een AI-tool. Als uw informatie verspreid of onduidelijk is, kan uw bedrijf gemist worden.",
-    officialSourceTitle: "Uw website wordt uw officiele bron.",
+      "Creativa Poeta brengt de basis samen die klanten verwachten: een duidelijke website, vindbare diensten, lokale zichtbaarheid, herkenbare visuals, nuttige content, AI-ready structuur en eenvoudige contactpaden.",
+    officialSourceTitle: "Uw diensten worden duidelijk, nuttig en makkelijk te gebruiken.",
     officialSource:
-      "Uw website legt uw diensten, contactgegevens, vragen, talen, regio's en vertrouwen uit. Maps en sociale profielen blijven nuttig, maar de website wordt de referentie.",
+      "We structureren uw zichtbaarheid, website, AI-assistenten, visuele identiteit, documenten en ondersteuning zodat klanten snel begrijpen wat u doet.",
     cta: "Test mijn zichtbaarheid",
   },
   rw: {
     label: "Kinyarwanda",
     prefix: "/rw",
     homePath: "/rw",
-    homeTitle: "Creativa Poeta | Garagara aho abakiriya bagushakira",
+    homeTitle: "Creativa Poeta | Websites, visibility, AI, design na content",
     homeDescription:
-      "Creativa Poeta ifasha ubucuruzi gusobanuka no kuboneka neza kuri website, maps, imbuga nkoranyambaga n'ibisubizo bifasha abakiriya.",
-    problemTitle: "Abakiriya ntibagishakira ahantu hamwe gusa.",
+      "Creativa Poeta ifasha business gukora websites zisobanutse, visibility, AI assistants, visual identity, content na digital assistance.",
+    problemTitle: "Digital base isobanutse kuri service zanyu.",
     problem:
-      "Umukiriya ashobora kugushakira kuri Google, maps, imbuga nkoranyambaga cyangwa akabaza igikoresho cya AI. Niba amakuru yawe atatanye cyangwa adasobanutse, ushobora kutagaragara.",
-    officialSourceTitle: "Website yawe iba isoko y'amakuru yizewe.",
+      "Creativa Poeta ihuza ibikenewe: website isobanutse, services zigaragara, local visibility, visuals, content ifasha, AI-ready structure n'inzira zoroshye zo kubavugisha.",
+    officialSourceTitle: "Services zanyu ziba zisobanutse kandi zoroshye gukoresha.",
     officialSource:
-      "Website yawe isobanura serivisi, aho bakubariza, ibibazo bisanzwe, indimi, aho ukorera n'ibimenyetso bitanga icyizere. Maps n'imbuga nkoranyambaga birafasha, ariko website iba isoko nyamukuru.",
+      "Dutunganya visibility, website, AI assistants, visual identity, documents na digital support kugira ngo abakiriya basobanukirwe vuba ibyo mukora.",
     cta: "Reba uko ugaragara",
   },
 };
 
 const richFrenchHome = {
-  title: "Creativa Poeta | Visibilite digitale pour Google, maps et moteurs IA",
+  title: "Creativa Poeta | Services digitaux pour visibilite, sites, IA et contenu",
   description:
-    "Creativa Poeta aide les entreprises a etre trouvees, comprises et recommandees dans Google, les maps, les recherches vocales et les moteurs IA.",
+    "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees grace a des sites clairs, la visibilite locale, les assistants IA, l'identite visuelle, le contenu et l'assistance numerique.",
   sections: [
     [
-      "Vos clients ne cherchent plus comme avant.",
-      "Aujourd'hui, un client peut vous chercher sur Google, demander une recommandation a un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question a une IA. Si vos informations sont dispersees, contradictoires ou difficiles a comprendre, vous pouvez etre invisible au moment precis ou le client a besoin de vous.",
+      "Une base digitale claire pour tous vos services.",
+      "Creativa Poeta rassemble les bases dont une entreprise a besoin: site clair, services faciles a comprendre, visibilite locale, visuels coherents, contenu utile, structure prete pour les IA et chemins de contact simples.",
     ],
     [
-      "Exemples de recherches qui doivent trouver votre entreprise",
-      "Quelle agence peut refaire mon site pour etre visible dans Google et les moteurs IA ? Quel service proche de moi est ouvert maintenant ? Quelle entreprise parle francais et neerlandais ? Qui peut m'aider a etre visible dans Google Maps, Apple Maps et ChatGPT ?",
+      "Visibilite locale, Google, maps et assistants IA",
+      "Nous alignons vos informations publiques, vos pages services, vos profils locaux, vos questions-reponses et vos signaux techniques pour que les clients, moteurs de recherche et assistants modernes comprennent mieux votre activite.",
     ],
     [
-      "Nous alignons votre site, vos profils locaux et vos contenus.",
-      "Votre presence digitale doit etre claire partout. Votre site explique votre offre. Vos profils locaux aident les clients a vous trouver. Vos reseaux sociaux montrent votre activite. Vos contenus repondent aux questions.",
+      "Sites web, applications et outils digitaux",
+      "Nous construisons ou refondons des sites, pages officielles, applications, tableaux de bord et outils internes qui presentent clairement vos services et transforment les demandes en actions.",
     ],
     [
-      "Une source officielle claire",
-      "Nous construisons un site ou une page officielle qui presente vos services, vos contacts, vos langues, vos zones, vos questions frequentes et vos reponses importantes.",
+      "Assistants IA, GPT personnalises et agents connectes",
+      "Nous preparons des assistants capables de repondre avec vos informations, guider les clients, resumer vos documents, collecter les demandes et aider votre equipe sans remplacer le controle humain.",
     ],
     [
-      "Une presence locale coherente",
-      "Vos informations doivent etre fiables sur Google, Apple Maps, Bing Maps et les plateformes que vos clients utilisent. Le but est que les maps, les reseaux sociaux et le site racontent la meme chose.",
+      "Identite visuelle, design et supports prets a publier",
+      "Nous donnons une forme claire et reconnaissable a votre univers: logo, direction visuelle, posts, presentations, documents, affiches, brochures et supports adaptes a vos langues.",
     ],
     [
-      "Avec ou sans site aujourd'hui",
-      "Si vous avez deja un site, nous analysons ce qui bloque votre visibilite puis nous le refondons. Si vous n'avez pas encore de site, nous pouvons commencer par une page officielle simple qui presente vos services et permet aux clients de vous contacter.",
+      "Contenus, documents, articles et reponses utiles",
+      "Nous transformons vos idees en textes, pages, FAQ, articles, guides, rapports et documents professionnels qui expliquent votre valeur aux clients comme aux moteurs de recherche.",
     ],
     [
-      "Une base prete a grandir",
-      "La structure peut s'adapter a plusieurs langues, regions, services et offres sans refaire tout le travail. C'est utile pour garder une base commune tout en adaptant certains details au public vise.",
+      "Assistance numerique et depannage technologique",
+      "Nous aidons a installer, configurer, reparer, securiser ou mieux utiliser les appareils, comptes, outils en ligne, documents, achats, demarches et usages numeriques du quotidien.",
     ],
     [
-      "Commencez par savoir ou vous en etes",
-      "Notre audit donne une premiere lecture de votre presence actuelle. Il montre si vos informations sont claires, coherentes et faciles a comprendre par les clients, les maps et les moteurs modernes.",
+      "Commencez par le bon chemin",
+      "Un projet peut commencer par un test de visibilite, une demande d'assistance, une page officielle, une refonte, un outil ou un contenu. Le but est de choisir la priorite utile, pas d'ajouter du bruit.",
     ],
     [
       "Questions frequentes",
-      "Est-ce que j'ai besoin d'un site si j'ai deja Google Maps ou Instagram ? Oui, si vous voulez une base officielle que vous controlez. Est-ce que vous garantissez une premiere position sur Google ? Non, personne ne peut le garantir serieusement. Nous mettons en place les fondations qui augmentent vos chances d'etre trouve, compris et contacte.",
+      "Creativa Poeta fait-il seulement de la visibilite ? Non. La visibilite est une base importante, mais nous travaillons aussi sur sites web, IA, design, contenu, outils digitaux et assistance numerique. Peut-on commencer petit ? Oui, avec une action prioritaire claire.",
     ],
   ],
 };
+
 
 const richFrenchServices = {
   webApp: {
@@ -628,17 +629,17 @@ const pageTemplates = {
     description: (lang) =>
       lang === "fr" ? richFrenchHome.description : languages[lang].homeDescription,
     keywords:
-      "Creativa Poeta, business visibility, website, maps, Google, AI tools, local presence",
+      "Creativa Poeta, local visibility, websites, apps, AI assistants, graphic design, content writing, digital assistance, business digital tools",
     sections: (lang) => lang === "fr" ? richFrenchHome.sections : [
       [languages[lang].problemTitle, languages[lang].problem],
       [languages[lang].officialSourceTitle, languages[lang].officialSource],
       [
-        "What we align",
-        "Your website, maps, social profiles, contact details, service pages and useful answers must tell the same clear story.",
+        "Six connected service families",
+        "Visibility, websites, AI assistants, visual identity, content and digital assistance work better when they share the same clear business information.",
       ],
       [
-        "Visibility test",
-        "We can check your current presence and show the first improvements before a full project starts.",
+        "Start with the useful next step",
+        "You can test your visibility, start a project, request digital assistance or explore a service page depending on the most urgent need.",
       ],
     ],
   },
@@ -1604,12 +1605,13 @@ function applyMeta(html, page) {
           identifier: marketConfig.countryCode,
         };
   const serviceNames = [
-    "Official business website",
-    "Local visibility",
-    "Maps profile alignment",
-    "Voice search readiness",
-    "AI answer readiness",
-    "Clear service pages",
+    "Local visibility and Google Maps",
+    "AI visibility and answer engine readiness",
+    "Websites, apps and digital tools",
+    "AI assistants, GPTs and automation",
+    "Visual identity and graphic design",
+    "Content writing, documents and useful pages",
+    "Digital assistance and technology support",
   ];
   const pathSegments = new URL(page.url).pathname
     .split("/")
