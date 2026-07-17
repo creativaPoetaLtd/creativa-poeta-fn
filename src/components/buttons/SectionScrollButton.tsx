@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { AiOutlineDown } from "react-icons/ai";
+import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import "./SectionScrollButton.css";
 
 type SectionScrollButtonProps = {
@@ -10,6 +11,9 @@ type SectionScrollButtonProps = {
   topColor?: string;
   bottomColor?: string;
 };
+
+const phoneHref = "tel:+32473297112";
+const whatsappHref = "https://wa.me/32473297112";
 
 const SectionScrollButton = ({
   label = "Faire defiler",
@@ -63,22 +67,38 @@ const SectionScrollButton = ({
   };
 
   return (
-    <button
-      type="button"
-      className={`cp-scroll-button cp-scroll-button-${side} cp-scroll-button-${tone}`}
-      style={
-        {
-          "--cp-scroll-top": topColor,
-          "--cp-scroll-bottom": bottomColor,
-        } as CSSProperties
-      }
-      onClick={handleClick}
-    >
-      <span className="cp-scroll-button-icon" aria-hidden="true">
-        <AiOutlineDown />
-      </span>
-      <span>{label}</span>
-    </button>
+    <div className={`cp-scroll-actions cp-scroll-actions-${side}`}>
+      <a className="cp-scroll-contact" href={phoneHref} aria-label="Appeler Creativa Poeta">
+        <FaPhoneAlt />
+        <span>Tel</span>
+      </a>
+      <a
+        className="cp-scroll-contact cp-scroll-contact-whatsapp"
+        href={whatsappHref}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Contacter Creativa Poeta sur WhatsApp"
+      >
+        <FaWhatsapp />
+        <span>WhatsApp</span>
+      </a>
+      <button
+        type="button"
+        className={`cp-scroll-button cp-scroll-button-${side} cp-scroll-button-${tone}`}
+        style={
+          {
+            "--cp-scroll-top": topColor,
+            "--cp-scroll-bottom": bottomColor,
+          } as CSSProperties
+        }
+        onClick={handleClick}
+      >
+        <span className="cp-scroll-button-icon" aria-hidden="true">
+          <AiOutlineDown />
+        </span>
+        <span>{label}</span>
+      </button>
+    </div>
   );
 };
 

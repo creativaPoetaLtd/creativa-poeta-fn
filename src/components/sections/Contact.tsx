@@ -2,14 +2,17 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
+  FaPhoneAlt,
   FaTiktok,
   FaTwitter,
+  FaWhatsapp,
 } from "react-icons/fa";
 import Popup from "../unUsedComponents/MailConfirm";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
-import contactLocale from "../../i18n/contactLocale"; // ✅ import your translations
+import contactLocale from "../../i18n/contactLocale";
+import { getCurrentMarket } from "../../data/marketRuntime";
 
 const Contact = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -24,7 +27,12 @@ const Contact = () => {
       ? window.localStorage.getItem("selectedLang") || "en"
       : "en";
 
-  const t = contactLocale[lang] ?? contactLocale["en"]; 
+  const t = contactLocale[lang] ?? contactLocale["en"];
+  const market = getCurrentMarket();
+  const contactEmail = market.email ?? "contact@creativapoeta.com";
+  const contactPhone = "+32 473 29 71 12";
+  const contactPhoneHref = "tel:+32473297112";
+  const contactWhatsappHref = "https://wa.me/32473297112"; 
 
   const handleEmailChange = (e: { target: { value: string } }) => {
     setEmail(e.target.value);
@@ -146,59 +154,26 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex flex-col basis-1/4 backdrop-blur-2xl h-full text-gray-500">
-                <div className="contactInfo py-9 px-6 flex flex-col space-y-10 text-gray-500">
-                  <h1 className="text-2xl font-bold text-white ">
-                    Contact Info
-                  </h1>
-                  <div className="contactInfoItem ">
-                    <h2 className="text-xl font-bold text-[#FFFF00] ">
-                      Address
-                    </h2>
-                    <p className="text-gray-500">123 Street, New York, USA</p>
-                    <p className="text-gray-500">123 Street, New York, USA</p>
-                  </div>
-                  <div className="emailsInformation">
-                    <h2 className="text-xl font-bold text-[#FFFF00]">Email</h2>
-                    <p className="text-gray-500">test@gmail.com</p>
-                    <p className="text-gray-500">capital@gmail.com</p>
-                  </div>
-                  <div className="callUsinfo">
-                    <h2 className="text-xl font-bold text-[#FFFF00]">
-                      Call Us
-                    </h2>
-                    <p className="text-gray-500">+1 234 56 78</p>
-                  </div>
-                  <div className="flex space-x-4 bottom-0 text-xl pb-4">
-                    <a
-                      href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#"
-                      className="text-white"
-                    >
-                      <FaFacebook />
-                    </a>
-                    <a
-                      href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09"
-                      className="text-white"
-                    >
-                      <FaTwitter />
-                    </a>
-                    <a
-                      href="https://www.instagram.com/creativapoeta_/"
-                      className="text-white"
-                    >
-                      <FaInstagram />
-                    </a>
-                    <a
-                      href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1"
-                      className="text-white"
-                    >
-                      <FaTiktok />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/company/105066709/"
-                      className="text-white"
-                    >
-                      <FaLinkedin />
-                    </a>
+                <div className="contactInfo py-9 px-6 flex flex-col space-y-7 text-gray-300">
+                  <h1 className="text-2xl font-bold text-white">Contact</h1>
+                  <a href={`mailto:${contactEmail}`} className="rounded-2xl border border-white/15 bg-white/[.04] p-4 transition hover:border-[#fff200] hover:text-[#fff200]">
+                    <span className="block text-xs font-black uppercase text-[#FFFF00]">Email</span>
+                    <span className="mt-1 block break-all text-sm font-black text-white">{contactEmail}</span>
+                  </a>
+                  <a href={contactPhoneHref} className="rounded-2xl border border-white/15 bg-white/[.04] p-4 transition hover:border-[#fff200] hover:text-[#fff200]">
+                    <span className="flex items-center gap-2 text-xs font-black uppercase text-[#FFFF00]"><FaPhoneAlt /> Telephone</span>
+                    <span className="mt-1 block text-sm font-black text-white">{contactPhone}</span>
+                  </a>
+                  <a href={contactWhatsappHref} target="_blank" rel="noreferrer" className="rounded-2xl border border-[#25D366]/55 bg-[#25D366]/10 p-4 transition hover:bg-[#25D366] hover:text-black">
+                    <span className="flex items-center gap-2 text-xs font-black uppercase text-[#FFFF00]"><FaWhatsapp /> WhatsApp</span>
+                    <span className="mt-1 block text-sm font-black text-white">{contactPhone}</span>
+                  </a>
+                  <div className="flex space-x-4 pt-3 text-xl">
+                    <a href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#" className="text-white"><FaFacebook /></a>
+                    <a href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09" className="text-white"><FaTwitter /></a>
+                    <a href="https://www.instagram.com/creativapoeta_/" className="text-white"><FaInstagram /></a>
+                    <a href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1" className="text-white"><FaTiktok /></a>
+                    <a href="https://www.linkedin.com/company/105066709/" className="text-white"><FaLinkedin /></a>
                   </div>
                 </div>
               </div>

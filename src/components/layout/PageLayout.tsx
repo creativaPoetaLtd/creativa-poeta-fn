@@ -20,7 +20,7 @@ const PageLayout = ({
   return (
     <div className={`App w-full max-w-full overflow-x-hidden flex flex-col snap-x scroll-smooth ${className}`}>
       {showHeader ? (
-        <header className="relative z-50 w-full flex justify-end">
+        <header className="pointer-events-none absolute left-0 top-0 z-40 w-full">
           <BrandHomeLink />
           <NavBar />
         </header>
@@ -37,3 +37,4 @@ const PageLayout = ({
 };
 
 export default PageLayout;
+

@@ -4,7 +4,7 @@ import Cont from '../unUsedComponents/Cont';
 // import { SetStateAction, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { Link } from 'react-router-dom';
-import { FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
+import LanguageSwitcher from '../NavBars/LanguageSwitcher';
 import getLangFromLocalStorage from '../../../utils/Lang';
 import FooterLocale from '../../i18n/FooterLocale';
 import { Link } from 'react-router-dom';
@@ -105,23 +105,9 @@ function Footer() {
           <p className='flex justify-start text-start  items-start pr-7 float-left mt-3 text-slate-400'>
              {FooterLocale[lang].desc}          
              </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href="tel:+32473297112"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-black uppercase text-slate-200 transition hover:border-[#fff200] hover:text-[#fff200]"
-            >
-              <FaPhoneAlt />
-              +32 473 29 71 12
-            </a>
-            <a
-              href="https://wa.me/32473297112"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#25D366]/60 bg-[#25D366]/10 px-4 py-2 text-xs font-black uppercase text-slate-200 transition hover:bg-[#25D366] hover:text-black"
-            >
-              <FaWhatsapp />
-              WhatsApp
-            </a>
+          <div className="mt-4">
+            <p className="mb-2 text-[11px] font-black uppercase tracking-[.18em] text-slate-500">Langue</p>
+            <LanguageSwitcher variant="text" showCurrent />
           </div>  
          <div className='flex desktop:flex-row laptop:flex-row tablet:flex-row flex-col w-full justify-start items-start laptop:mt-3 desktop:mt-3 tablet:mt-3 mt-3 h-fit'>
 
@@ -268,4 +254,7 @@ function Footer() {
 }
 
 export default Footer;
+
+
+
 

@@ -342,7 +342,7 @@ const serviceImages: Record<string, string[]> = {
 const roleIcons = [FaComments, FaSearch, FaTasks, FaDatabase];
 
 const SectionLabel = ({ children }: { children: string }) => (
-  <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] phone:text-sm">
+  <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-[#fff200] phone:text-sm [overflow-wrap:anywhere]">
     <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
     {children}
   </div>
@@ -360,17 +360,17 @@ const ServiceImage = ({
   className?: string;
 }) => (
   <figure
-    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
+    className={`max-w-full overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
     <img
       src={src}
       alt={`${title}. ${description}`}
-      className="aspect-square h-auto w-full object-contain"
+      className="aspect-square h-auto max-w-full w-full object-contain"
       loading="lazy"
       decoding="async"
     />
     <figcaption className="border-t border-[#EEBA2B]/35 bg-black/25 p-4">
-      <h3 className="text-lg font-black leading-tight">{title}</h3>
+      <h3 className="text-lg font-black leading-tight [overflow-wrap:anywhere]">{title}</h3>
     </figcaption>
   </figure>
 );
@@ -383,39 +383,39 @@ const AIAutomation = () => {
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#071a33]/55 text-white">
-      <section className="relative px-4 pb-10 pt-28 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-6 laptop:grid-cols-[.85fr_1.15fr] laptop:items-center">
+    <main className="relative isolate min-h-screen max-w-full overflow-x-hidden bg-[#071a33]/55 text-white">
+      <section className="max-w-full overflow-x-hidden relative px-4 pb-10 pt-28 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid min-w-0 max-w-7xl gap-6 laptop:grid-cols-[.85fr_1.15fr] laptop:items-center">
           <div>
             <SectionLabel>{copy.eyebrow}</SectionLabel>
-            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,.35)] phone:text-5xl laptop:text-7xl">
+            <h1 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,.35)] phone:text-5xl laptop:text-7xl">
               {copy.title}
             </h1>
-            <p className="mt-5 max-w-2xl text-base font-black leading-8 text-white/90 phone:text-xl">
+            <p className="mt-5 max-w-2xl text-base font-black leading-8 text-white/90 phone:text-xl [overflow-wrap:anywhere]">
               {copy.intro}
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-2">
+            <div className="mt-6 grid grid-cols-2 min-w-0 gap-2">
               {copy.promises.map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2 rounded-2xl border border-[#EEBA2B]/35 bg-[#071a33]/75 px-3 py-3 text-xs font-black backdrop-blur-sm phone:text-sm"
+                  className="flex items-center gap-2 rounded-2xl border border-[#EEBA2B]/35 bg-[#071a33]/75 px-3 py-3 text-xs font-black backdrop-blur-sm phone:text-sm [overflow-wrap:anywhere]"
                 >
                   <FaCheckCircle className="flex-none text-[#fff200]" />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-6 grid grid-cols-2 gap-2 phone:gap-3">
+            <div className="mt-6 grid grid-cols-2 min-w-0 gap-2 phone:gap-3">
               <Link
                 to={startPath}
-                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] phone:px-5 phone:text-xs"
+                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] phone:px-5 phone:text-xs [overflow-wrap:anywhere]"
               >
                 <span className="truncate">{copy.primary}</span>
                 <FaArrowRight className="flex-none" />
               </Link>
               <Link
                 to={auditPath}
-                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:px-5 phone:text-xs"
+                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:px-5 phone:text-xs [overflow-wrap:anywhere]"
               >
                 <span className="truncate">{copy.secondary}</span>
                 <FaSearch className="flex-none" />
@@ -429,18 +429,18 @@ const AIAutomation = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto max-w-7xl">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto min-w-0 max-w-7xl">
           <SectionLabel>{copy.rolesEyebrow}</SectionLabel>
           <div className="max-w-5xl">
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl laptop:text-6xl">
+            <h2 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white phone:text-5xl laptop:text-6xl">
               {copy.rolesTitle}
             </h2>
-            <p className="mt-4 text-sm font-black leading-7 text-white/90 phone:text-lg phone:leading-8">
+            <p className="mt-4 text-sm font-black leading-7 text-white/90 phone:text-lg phone:leading-8 [overflow-wrap:anywhere]">
               {copy.rolesText}
             </p>
           </div>
-          <div className="mt-7 grid grid-cols-2 gap-3 tablet:gap-5 laptop:grid-cols-4">
+          <div className="mt-7 grid grid-cols-2 min-w-0 gap-3 tablet:gap-5 laptop:grid-cols-4">
             {copy.roles.map((role, index) => {
               const Icon = roleIcons[index] ?? FaRobot;
 
@@ -450,10 +450,10 @@ const AIAutomation = () => {
                   className="min-h-[10.5rem] rounded-[1.1rem] border border-white/20 bg-[#071a33]/80 p-3 text-white backdrop-blur-sm phone:min-h-[11rem] phone:p-4 laptop:rounded-[1.4rem] laptop:p-5"
                 >
                   <Icon className="mb-3 text-2xl text-[#fff200] phone:text-3xl laptop:text-4xl" />
-                  <h3 className="text-base font-black leading-tight phone:text-lg laptop:text-xl">
+                  <h3 className="text-base font-black leading-tight phone:text-lg laptop:text-xl [overflow-wrap:anywhere]">
                     {role.title}
                   </h3>
-                  <p className="mt-2 text-[11px] font-black leading-5 text-white/85 phone:text-xs phone:leading-6 laptop:text-sm laptop:leading-7">
+                  <p className="mt-2 text-[11px] font-black leading-5 text-white/85 phone:text-xs phone:leading-6 laptop:text-sm laptop:leading-7 [overflow-wrap:anywhere]">
                     {role.text}
                   </p>
                 </article>
@@ -463,11 +463,11 @@ const AIAutomation = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-6 laptop:grid-cols-[1.05fr_.95fr] laptop:items-start">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid min-w-0 max-w-7xl gap-6 laptop:grid-cols-[1.05fr_.95fr] laptop:items-start">
           <div>
             <SectionLabel>{copy.examplesEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white phone:text-5xl">
               {copy.examplesTitle}
             </h2>
             <div className="mt-7 grid gap-3">
@@ -476,10 +476,10 @@ const AIAutomation = () => {
                   key={example.title}
                   className="rounded-[1.1rem] border border-[#EEBA2B]/40 bg-[#071a33]/80 p-4 backdrop-blur-sm phone:p-5 laptop:rounded-[1.4rem]"
                 >
-                  <h3 className="text-xl font-black leading-tight text-[#fff200] laptop:text-2xl">
+                  <h3 className="text-xl font-black leading-tight text-[#fff200] laptop:text-2xl [overflow-wrap:anywhere]">
                     {example.title}
                   </h3>
-                  <p className="mt-2 text-xs font-black leading-6 text-white/85 phone:text-sm laptop:text-base laptop:leading-7">
+                  <p className="mt-2 text-xs font-black leading-6 text-white/85 phone:text-sm laptop:text-base laptop:leading-7 [overflow-wrap:anywhere]">
                     {example.text}
                   </p>
                 </article>
@@ -493,14 +493,14 @@ const AIAutomation = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-6 laptop:grid-cols-[.85fr_1.15fr] laptop:items-start">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto grid min-w-0 max-w-7xl gap-6 laptop:grid-cols-[.85fr_1.15fr] laptop:items-start">
           <div>
             <SectionLabel>{copy.methodEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white phone:text-5xl">
               {copy.methodTitle}
             </h2>
-            <p className="mt-4 text-sm font-black leading-7 text-white/90 phone:text-lg phone:leading-8">
+            <p className="mt-4 text-sm font-black leading-7 text-white/90 phone:text-lg phone:leading-8 [overflow-wrap:anywhere]">
               {copy.methodText}
             </p>
           </div>
@@ -511,10 +511,10 @@ const AIAutomation = () => {
                   key={item}
                   className="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-2xl border border-white/15 bg-black/20 p-3 phone:grid-cols-[3rem_1fr] phone:p-4"
                 >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#fff200] text-sm font-black text-[#fff200] phone:h-12 phone:w-12 phone:text-lg">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#fff200] text-sm font-black text-[#fff200] phone:h-12 phone:w-12 phone:text-lg [overflow-wrap:anywhere]">
                     {index + 1}
                   </span>
-                  <span className="text-xs font-black leading-5 text-white phone:text-sm phone:leading-6">
+                  <span className="text-xs font-black leading-5 text-white phone:text-sm phone:leading-6 [overflow-wrap:anywhere]">
                     {item}
                   </span>
                 </li>
@@ -524,8 +524,8 @@ const AIAutomation = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto max-w-5xl">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B] px-4 py-12 phone:px-5 tablet:px-10 laptop:px-16">
+        <div className="mx-auto min-w-0 max-w-5xl">
           <SectionLabel>{copy.faqTitle}</SectionLabel>
           <ServiceFAQAccordion
             items={copy.faqs}

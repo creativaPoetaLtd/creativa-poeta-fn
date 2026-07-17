@@ -9,11 +9,11 @@ const Term = () => {
                 <p className='mt-[3rem]'>These Terms of Service (“Terms”, “Terms of Service”) govern your use of our website located at creativa-poeta.com (together or individually “Service”) operated by Creativa-poeta.</p>
                 <p>Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages.</p>
                 <p>Your agreement with us includes these Terms and our Privacy Policy (“Agreements”). You acknowledge that you have read and understood Agreements, and agree to be bound of them.</p>
-                <p>If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at creativapoeta@gmail.com so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>
+                <p>If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at contact@creativapoeta.com so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>
             </div>
             <p className='mt-[3rem] text-xl font-bold'>Communications</p>
             <div className='mt-[3rem]'>
-                <p>By using our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at creativapoeta@gmail.com.</p>
+                <p>By using our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at contact@creativapoeta.com.</p>
             </div>
             <p className='mt-[3rem] text-xl font-bold'>Contests, Sweepstakes and Promotions</p>
             <div className='mt-[3rem]'>
@@ -76,7 +76,7 @@ const Term = () => {
             </div>
 
             <div className='mt-[3rem]'>
-                <p>If you are a copyright owner, or authorised on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to creativapoeta@gmail.com, with the subject line: “Copyright Infringement” and include in your claim a detailed description of the alleged Infringement as detailed below, under “DMCA Notice and Procedure for Copyright Infringement Claims”
+                <p>If you are a copyright owner, or authorised on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to contact@creativapoeta.com, with the subject line: “Copyright Infringement” and include in your claim a detailed description of the alleged Infringement as detailed below, under “DMCA Notice and Procedure for Copyright Infringement Claims”
                 </p>
             </div>
             <div className='mt-[3rem]'>
@@ -100,10 +100,10 @@ const Term = () => {
                     </li>
                 </ol>
             </div>
-            <p>You can contact our Copyright Agent via email at creativapoeta@gmail.com.</p>
+            <p>You can contact our Copyright Agent via email at contact@creativapoeta.com.</p>
             <p className='mt-[3rem] text-xl font-bold'>Error Reporting and Feedback</p>
             <div className='mt-[3rem]'>
-                <p>You may provide us either directly at creativapoeta@gmail.com or via third party sites and tools with information and feedback concerning errors, suggestions for improvements, ideas, problems, complaints, and other matters related to our Service (“Feedback”). You acknowledge and agree that: (i) you shall not retain, acquire or assert any intellectual property right or other right, title or interest in or to the Feedback; (ii) Company may have development ideas similar to the Feedback; (iii) Feedback does not contain confidential information or proprietary information from you or any third party; and (iv) Company is not under any obligation of confidentiality with respect to the Feedback. In the event the transfer of the ownership to the Feedback is not possible due to applicable mandatory laws, you grant Company and its affiliates an exclusive, transferable, irrevocable, free-of-charge, sub-licensable, unlimited and perpetual right to use (including copy, modify, create derivative works, publish, distribute and commercialise) Feedback in any manner and for any purpose.</p>
+                <p>You may provide us either directly at contact@creativapoeta.com or via third party sites and tools with information and feedback concerning errors, suggestions for improvements, ideas, problems, complaints, and other matters related to our Service (“Feedback”). You acknowledge and agree that: (i) you shall not retain, acquire or assert any intellectual property right or other right, title or interest in or to the Feedback; (ii) Company may have development ideas similar to the Feedback; (iii) Feedback does not contain confidential information or proprietary information from you or any third party; and (iv) Company is not under any obligation of confidentiality with respect to the Feedback. In the event the transfer of the ownership to the Feedback is not possible due to applicable mandatory laws, you grant Company and its affiliates an exclusive, transferable, irrevocable, free-of-charge, sub-licensable, unlimited and perpetual right to use (including copy, modify, create derivative works, publish, distribute and commercialise) Feedback in any manner and for any purpose.</p>
             </div>
             <p className='mt-[3rem] text-xl font-bold'>Links To Other Websites</p>
             <div className='mt-[3rem]'>

@@ -27,7 +27,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
           heading: "Editeur du site",
           body: [
             "Le site creativapoeta.com est edite par Creativa Poeta, service de creation digitale, visibilite moderne, design, contenu, outils digitaux, automatisation IA et assistance numerique.",
-            "Contact principal : creativapoeta@gmail.com. Telephone : 0479 08 99 25."
+            "Contact principal : contact@creativapoeta.com. Telephone : +32 473 29 71 12."
           ]
         },
         {
@@ -59,7 +59,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Contact",
           body: [
-            "Pour toute question concernant le site, une demande de correction, une reclamation ou une demande liee aux donnees personnelles, contactez-nous a : creativapoeta@gmail.com."
+            "Pour toute question concernant le site, une demande de correction, une reclamation ou une demande liee aux donnees personnelles, contactez-nous a : contact@creativapoeta.com."
           ]
         }
       ]
@@ -159,7 +159,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         },
         {
           heading: "Contact confidentialite",
-          body: ["Pour toute demande concernant vos donnees ou vos cookies : creativapoeta@gmail.com." ]
+          body: ["Pour toute demande concernant vos donnees ou vos cookies : contact@creativapoeta.com." ]
         }
       ]
     }
@@ -171,12 +171,12 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       intro: "This page provides the main information about the Creativa Poeta website, its publisher and contact channels.",
       updated: "Last updated: July 14, 2026",
       sections: [
-        { heading: "Website publisher", body: ["creativapoeta.com is published by Creativa Poeta, a digital creation, modern visibility, design, content, digital tools, AI automation and digital assistance service.", "Main contact: creativapoeta@gmail.com. Phone: 0479 08 99 25."] },
+        { heading: "Website publisher", body: ["creativapoeta.com is published by Creativa Poeta, a digital creation, modern visibility, design, content, digital tools, AI automation and digital assistance service.", "Main contact: contact@creativapoeta.com. Phone: +32 473 29 71 12."] },
         { heading: "Publication manager", body: ["The publication manager is the representative of Creativa Poeta. For questions about the website, published content or correction requests, contact us by email."] },
         { heading: "Hosting", body: ["The frontend may be hosted by Netlify. Backend services and forms may be hosted by Vercel or equivalent technical providers used by Creativa Poeta.", "These providers support website display, security, forms and related features."] },
         { heading: "Intellectual property", body: ["Texts, visuals, images, logos, page structures, service content, graphic elements and other published materials belong to Creativa Poeta or are used with permission.", "Any reproduction, adaptation, distribution or reuse without prior written permission is prohibited."] },
         { heading: "External links", body: ["The website may contain links to external services, social networks, third-party tools or partner platforms. Creativa Poeta is not responsible for their content, operation or privacy policies."] },
-        { heading: "Contact", body: ["For website questions, correction requests, complaints or personal data requests, contact: creativapoeta@gmail.com."] }
+        { heading: "Contact", body: ["For website questions, correction requests, complaints or personal data requests, contact: contact@creativapoeta.com."] }
       ]
     },
     terms: {
@@ -208,7 +208,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         { heading: "Service providers", body: ["Some data may be processed by technical providers: hosting, forms, email, database, administration tools, security, analytics or AI services when required by a feature."] },
         { heading: "Cookies", body: ["Strictly necessary cookies make the website work and store your choices. Preference, analytics or marketing cookies are used only according to your choices when enabled."], bullets: ["Necessary: website operation and cookie choice storage", "Preferences: language or comfort settings", "Analytics: audience measurement", "Marketing: campaigns, remarketing or personalized content if enabled"] },
         { heading: "Your rights", body: ["You may request access, correction, deletion, restriction or objection to the processing of your data. You may also withdraw consent when processing is based on consent."] },
-        { heading: "Privacy contact", body: ["For data or cookie requests: creativapoeta@gmail.com."] }
+        { heading: "Privacy contact", body: ["For data or cookie requests: contact@creativapoeta.com."] }
       ]
     }
   },
@@ -219,12 +219,12 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       intro: "Deze pagina geeft de belangrijkste informatie over de website van Creativa Poeta, de uitgever en de contactkanalen.",
       updated: "Laatst bijgewerkt: 14 juli 2026",
       sections: [
-        { heading: "Uitgever van de website", body: ["creativapoeta.com wordt uitgegeven door Creativa Poeta, een dienst voor digitale creatie, moderne zichtbaarheid, design, content, digitale tools, AI-automatisering en digitale hulp.", "Hoofdcontact: creativapoeta@gmail.com. Telefoon: 0479 08 99 25."] },
+        { heading: "Uitgever van de website", body: ["creativapoeta.com wordt uitgegeven door Creativa Poeta, een dienst voor digitale creatie, moderne zichtbaarheid, design, content, digitale tools, AI-automatisering en digitale hulp.", "Hoofdcontact: contact@creativapoeta.com. Telefoon: +32 473 29 71 12."] },
         { heading: "Verantwoordelijke publicatie", body: ["De publicatieverantwoordelijke is de vertegenwoordiger van Creativa Poeta. Voor vragen over de website, gepubliceerde inhoud of correcties kunt u ons per e-mail contacteren."] },
         { heading: "Hosting", body: ["De frontend kan worden gehost door Netlify. Backenddiensten en formulieren kunnen worden gehost door Vercel of gelijkwaardige technische leveranciers die Creativa Poeta gebruikt.", "Deze leveranciers ondersteunen weergave, veiligheid, formulieren en bijhorende functies."] },
         { heading: "Intellectuele eigendom", body: ["Teksten, visuals, beelden, logo's, paginaregels, service-inhoud, grafische elementen en andere gepubliceerde materialen behoren toe aan Creativa Poeta of worden met toestemming gebruikt.", "Reproductie, aanpassing, distributie of hergebruik zonder voorafgaande schriftelijke toestemming is verboden."] },
         { heading: "Externe links", body: ["De website kan links bevatten naar externe diensten, sociale netwerken, tools of partnerplatformen. Creativa Poeta is niet verantwoordelijk voor hun inhoud, werking of privacybeleid."] },
-        { heading: "Contact", body: ["Voor vragen over de website, correcties, klachten of persoonsgegevens: creativapoeta@gmail.com."] }
+        { heading: "Contact", body: ["Voor vragen over de website, correcties, klachten of persoonsgegevens: contact@creativapoeta.com."] }
       ]
     },
     terms: {
@@ -256,7 +256,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         { heading: "Dienstverleners", body: ["Sommige gegevens kunnen worden verwerkt door technische leveranciers: hosting, formulieren, e-mail, database, administratie, veiligheid, analyse of AI-diensten wanneer een functie dat vereist."] },
         { heading: "Cookies", body: ["Noodzakelijke cookies laten de website werken en bewaren uw keuzes. Voorkeuren-, analyse- of marketingcookies worden alleen gebruikt volgens uw keuzes."], bullets: ["Noodzakelijk: werking van de site en bewaren van cookie-keuze", "Voorkeuren: taal of comfortinstellingen", "Analyse: publieksmeting", "Marketing: campagnes of gepersonaliseerde inhoud indien actief"] },
         { heading: "Uw rechten", body: ["U kunt toegang, correctie, verwijdering, beperking of bezwaar vragen. U kunt toestemming intrekken wanneer verwerking daarop steunt."] },
-        { heading: "Privacycontact", body: ["Voor gegevens- of cookievragen: creativapoeta@gmail.com."] }
+        { heading: "Privacycontact", body: ["Voor gegevens- of cookievragen: contact@creativapoeta.com."] }
       ]
     }
   },
@@ -267,12 +267,12 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       intro: "Iyi page isobanura amakuru y'ibanze yerekeye urubuga rwa Creativa Poeta, uwurukora n'uko mwatwandikira.",
       updated: "Byavuguruwe: 14 Nyakanga 2026",
       sections: [
-        { heading: "Ushinzwe urubuga", body: ["creativapoeta.com ikoreshwa na Creativa Poeta, service ikora creation digitale, visibility, design, content, tools, AI automation na assistance numerique.", "Contact: creativapoeta@gmail.com. Telephone: 0479 08 99 25."] },
+        { heading: "Ushinzwe urubuga", body: ["creativapoeta.com ikoreshwa na Creativa Poeta, service ikora creation digitale, visibility, design, content, tools, AI automation na assistance numerique.", "Contact: contact@creativapoeta.com. Telephone: +32 473 29 71 12."] },
         { heading: "Ushinzwe publication", body: ["Ushinzwe publication ni representant wa Creativa Poeta. Ku bibazo byerekeye site cyangwa gukosora content, twandikire kuri email."] },
         { heading: "Hosting", body: ["Frontend ishobora kuba kuri Netlify. Backend na forms bishobora kuba kuri Vercel cyangwa abandi providers ba technical dukoresha."] },
         { heading: "Intellectual property", body: ["Texts, visuals, images, logos, page structures na content biri kuri site ni ibya Creativa Poeta cyangwa bikoreshwa dufite permission.", "Kubikoresha utabanje kubona uruhushya rwanditse ntibyemewe."] },
         { heading: "External links", body: ["Site ishobora kugira links zijya kuri services zo hanze. Creativa Poeta ntabwo ishinzwe content cyangwa privacy policies z'izo sites."] },
-        { heading: "Contact", body: ["Ku bibazo byerekeye site cyangwa personal data: creativapoeta@gmail.com."] }
+        { heading: "Contact", body: ["Ku bibazo byerekeye site cyangwa personal data: contact@creativapoeta.com."] }
       ]
     },
     terms: {
@@ -304,7 +304,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         { heading: "Providers", body: ["Data zimwe zishobora kunyuzwa kuri technical providers: hosting, forms, email, database, admin tools, security, analytics cyangwa AI services."] },
         { heading: "Cookies", body: ["Necessary cookies zituma site ikora kandi zikabika choices. Preferences, analytics na marketing cookies zikoreshwa gusa niba ubyemeye."], bullets: ["Necessary: site operation", "Preferences: language/settings", "Analytics: audience measurement", "Marketing: campaigns or personalized content"] },
         { heading: "Rights", body: ["Ushobora gusaba access, correction, deletion cyangwa withdrawal of consent aho bikenewe."] },
-        { heading: "Contact", body: ["Ku bibazo bya data cyangwa cookies: creativapoeta@gmail.com."] }
+        { heading: "Contact", body: ["Ku bibazo bya data cyangwa cookies: contact@creativapoeta.com."] }
       ]
     }
   }

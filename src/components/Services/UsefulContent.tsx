@@ -299,18 +299,18 @@ const UsefulContent = () => {
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#071a33]/80 text-white">
-      <section className="relative px-5 pb-16 pt-28 phone:px-7 tablet:px-12 laptop:px-20">
+    <main className="relative isolate min-h-screen max-w-full overflow-x-hidden bg-[#071a33]/80 text-white">
+      <section className="max-w-full overflow-x-hidden relative px-5 pb-16 pt-28 phone:px-7 tablet:px-12 laptop:px-20">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-black/95 via-[#071a33]/85 to-[#123b30]/85" />
         <div className="absolute left-[-4rem] top-32 -z-10 h-56 w-56 rounded-full border-[2.5rem] border-[#EEBA2B]/20" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 laptop:min-h-[78vh] laptop:grid-cols-[1fr_.9fr]">
+        <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-10 laptop:min-h-[78vh] laptop:grid-cols-[1fr_.9fr]">
           <div>
-            <div className="mb-5 flex items-center gap-3 text-sm font-black uppercase tracking-wide">
+            <div className="mb-5 flex items-center gap-3 text-sm font-black uppercase tracking-wide [overflow-wrap:anywhere]">
               <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
               {copy.eyebrow}
             </div>
-            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-[#fff200] phone:text-5xl laptop:text-7xl">
+            <h1 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-[#fff200] phone:text-5xl laptop:text-7xl">
               {copy.title}
             </h1>
             <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-white/90 phone:text-xl">
@@ -319,14 +319,14 @@ const UsefulContent = () => {
             <div className="mt-9 flex flex-col gap-4 phone:flex-row">
               <Link
                 to={startPath}
-                className="inline-flex items-center justify-center gap-3 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-6 py-4 text-sm font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B]"
+                className="inline-flex items-center justify-center gap-3 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-6 py-4 text-sm font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] [overflow-wrap:anywhere]"
               >
                 {copy.cta}
                 <FaShareAlt />
               </Link>
               <Link
                 to={auditPath}
-                className="inline-flex items-center justify-center gap-3 border-2 border-white px-6 py-4 text-sm font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B]"
+                className="inline-flex items-center justify-center gap-3 border-2 border-white px-6 py-4 text-sm font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] [overflow-wrap:anywhere]"
               >
                 {copy.secondaryCta}
               </Link>
@@ -335,7 +335,7 @@ const UsefulContent = () => {
 
           <div className="rounded-[2rem] border border-white/20 bg-white/12 p-6 shadow-2xl backdrop-blur-md phone:p-8">
             <FaLightbulb className="mb-5 text-5xl text-[#EEBA2B]" />
-            <h2 className="text-2xl font-black phone:text-3xl">{copy.whyTitle}</h2>
+            <h2 className="text-2xl font-black phone:text-3xl [overflow-wrap:anywhere]">{copy.whyTitle}</h2>
             <p className="mt-5 text-base font-semibold leading-8 text-white/85">
               {copy.whyText}
             </p>
@@ -343,9 +343,9 @@ const UsefulContent = () => {
         </div>
       </section>
 
-      <section className="px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-9 flex items-center gap-3 text-sm font-black uppercase">
+      <section className="max-w-full overflow-x-hidden px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
+        <div className="mx-auto min-w-0 max-w-7xl">
+          <div className="mb-9 flex items-center gap-3 text-sm font-black uppercase [overflow-wrap:anywhere]">
             <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
             {copy.blocksTitle}
           </div>
@@ -359,7 +359,7 @@ const UsefulContent = () => {
                 >
                   <Icon className="mb-5 text-5xl text-[#071a33]" />
                   <div className="mb-5 h-1.5 w-16 bg-[#EEBA2B]" />
-                  <h3 className="text-xl font-black">{block.title}</h3>
+                  <h3 className="text-xl font-black [overflow-wrap:anywhere]">{block.title}</h3>
                   <p className="mt-4 text-base font-semibold leading-7 text-slate-700">
                     {block.text}
                   </p>
@@ -370,10 +370,10 @@ const UsefulContent = () => {
         </div>
       </section>
 
-      <section className="px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.8fr_1fr]">
+      <section className="max-w-full overflow-x-hidden px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
+        <div className="mx-auto grid min-w-0 max-w-7xl gap-8 laptop:grid-cols-[.8fr_1fr]">
           <div>
-            <div className="mb-5 flex items-center gap-3 text-sm font-black uppercase">
+            <div className="mb-5 flex items-center gap-3 text-sm font-black uppercase [overflow-wrap:anywhere]">
               <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
               {copy.examplesTitle}
             </div>
@@ -383,7 +383,7 @@ const UsefulContent = () => {
             {copy.examples.map((example) => (
               <article
                 key={example}
-                className="rounded-[1.5rem] border border-[#EEBA2B]/30 bg-[#071a33]/80 p-5 font-black leading-7 text-white backdrop-blur-md"
+                className="rounded-[1.5rem] border border-[#EEBA2B]/30 bg-[#071a33]/80 p-5 font-black leading-7 text-white backdrop-blur-md [overflow-wrap:anywhere]"
               >
                 {example}
               </article>
@@ -392,9 +392,9 @@ const UsefulContent = () => {
         </div>
       </section>
 
-      <section className="px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
-        <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/20 bg-white/90 p-7 text-[#071a33] phone:p-9">
-          <h2 className="text-3xl font-black">{copy.deliverTitle}</h2>
+      <section className="max-w-full overflow-x-hidden px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
+        <div className="mx-auto min-w-0 max-w-5xl rounded-[2rem] border border-white/20 bg-white/90 p-7 text-[#071a33] phone:p-9">
+          <h2 className="text-3xl font-black [overflow-wrap:anywhere]">{copy.deliverTitle}</h2>
           <ul className="mt-7 space-y-4">
             {copy.deliver.map((item) => (
               <li key={item} className="flex gap-3 text-lg font-semibold leading-8">
@@ -406,9 +406,9 @@ const UsefulContent = () => {
         </div>
       </section>
 
-      <section className="px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-3xl font-black text-[#fff200] phone:text-4xl">
+      <section className="max-w-full overflow-x-hidden px-5 py-16 phone:px-7 tablet:px-12 laptop:px-20">
+        <div className="mx-auto min-w-0 max-w-5xl">
+          <h2 className="text-3xl font-black text-[#fff200] phone:text-4xl [overflow-wrap:anywhere]">
             {copy.faqTitle}
           </h2>
           <div className="mt-8 space-y-5">
@@ -417,7 +417,7 @@ const UsefulContent = () => {
                 key={faq.question}
                 className="rounded-[1.5rem] border border-white/20 bg-white/90 p-6 text-[#071a33]"
               >
-                <h3 className="text-xl font-black">{faq.question}</h3>
+                <h3 className="text-xl font-black [overflow-wrap:anywhere]">{faq.question}</h3>
                 <p className="mt-3 text-base font-semibold leading-7 text-slate-700">
                   {faq.answer}
                 </p>

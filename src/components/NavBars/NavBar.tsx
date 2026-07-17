@@ -19,6 +19,7 @@ import NavLocale from "../../i18n/NavLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
 import { useAuth } from "../../contexts/AuthContext";
 import BurgerButton from "./BurgerButton";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { localizePath } from "../../data/marketRuntime";
 
 type MenuService = [string, string, string];
@@ -213,7 +214,7 @@ function NavBar() {
 
   return (
     <>
-      <div className="cp-nav-actions fixed left-0 right-0 top-5 z-50 flex items-center justify-end gap-1 px-2 phone:gap-4 phone:px-4">
+      <div className="cp-nav-actions pointer-events-auto fixed left-0 right-0 top-5 z-[80] flex items-center justify-end gap-1 px-2 phone:gap-4 phone:px-4">
         {isAuthenticated && (
           <div className="relative" ref={adminDropdownRef}>
             <button
@@ -259,7 +260,7 @@ function NavBar() {
       </div>
 
       <aside
-        className={`sidebar fixed z-50 mx-auto w-[86%] max-w-[27rem] justify-end border-l border-[#EEBA2B]/30 bg-[linear-gradient(155deg,rgba(0,0,0,.98),rgba(7,26,51,.98))] shadow-[0_0_60px_rgba(0,0,0,.65)] tablet:w-[25rem] laptop:w-[27rem] desktop:w-[28rem] ${
+        className={`sidebar pointer-events-auto fixed z-[90] mx-auto w-[86%] max-w-[27rem] justify-end border-l border-[#EEBA2B]/30 bg-[linear-gradient(155deg,rgba(0,0,0,.98),rgba(7,26,51,.98))] shadow-[0_0_60px_rgba(0,0,0,.65)] tablet:w-[25rem] laptop:w-[27rem] desktop:w-[28rem] ${
           sidebarVisible ? "visible" : "sidebar-closing"
         }`}
       >
@@ -384,6 +385,13 @@ function NavBar() {
                 WhatsApp
               </a>
             </div>
+
+            <div className="rounded-[1.35rem] border border-white/10 bg-white/[.04] p-3">
+              <p className="mb-2 text-[11px] font-black uppercase tracking-[.18em] text-white/55">
+                Langue
+              </p>
+              <LanguageSwitcher variant="text" showCurrent />
+            </div>
           </div>
 
           <img
@@ -431,4 +439,7 @@ function NavBar() {
 }
 
 export default NavBar;
+
+
+
 

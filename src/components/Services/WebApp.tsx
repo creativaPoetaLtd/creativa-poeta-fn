@@ -459,11 +459,11 @@ const SectionTitle = ({
   text?: string;
 }) => (
   <div className="mx-auto mb-8 max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
-    <div className="mb-3 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white">
+    <div className="mb-3 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white [overflow-wrap:anywhere]">
       <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
       {eyebrow}
     </div>
-    <h2 className="max-w-5xl font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-lg phone:text-5xl laptop:text-6xl">
+    <h2 className="max-w-5xl font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white drop-shadow-lg phone:text-5xl laptop:text-6xl">
       {title}
     </h2>
     {text ? (
@@ -484,13 +484,13 @@ const ImagePanel = ({
   className?: string;
 }) => (
   <div
-    className={`overflow-hidden rounded-[1.6rem] border border-white/45 bg-[#071a33]/70 p-2 shadow-[0_20px_60px_rgba(0,0,0,.25)] backdrop-blur-sm ${className}`}
+    className={`max-w-full overflow-hidden rounded-[1.6rem] border border-white/45 bg-[#071a33]/70 p-2 shadow-[0_20px_60px_rgba(0,0,0,.25)] backdrop-blur-sm ${className}`}
   >
     <img
       src={src}
       alt={alt}
       loading="lazy"
-      className="h-full w-full rounded-[1.2rem] object-contain"
+      className="h-full max-w-full w-full rounded-[1.2rem] object-contain"
     />
   </div>
 );
@@ -501,42 +501,42 @@ const WebApp = () => {
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (
-    <main className="relative z-10 overflow-hidden text-white">
-      <section className="px-5 pb-12 pt-28 phone:px-7 tablet:px-12 laptop:px-20 laptop:pt-36">
-        <div className="mx-auto grid max-w-6xl gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-center">
+    <main className="relative z-10 max-w-full overflow-x-hidden text-white">
+      <section className="max-w-full overflow-x-hidden px-5 pb-12 pt-28 phone:px-7 tablet:px-12 laptop:px-20 laptop:pt-36">
+        <div className="mx-auto grid min-w-0 max-w-6xl gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-center">
           <div>
-            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white">
+            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-wide text-white [overflow-wrap:anywhere]">
               <span className="h-4 w-8 skew-x-[-14deg] bg-[#EEBA2B]" />
               {copy.eyebrow}
             </div>
-            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-xl phone:text-5xl laptop:text-7xl">
+            <h1 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white drop-shadow-xl phone:text-5xl laptop:text-7xl">
               {copy.title}
             </h1>
             <p className="mt-6 text-base font-bold leading-8 text-white/90 phone:text-lg">
               {copy.intro}
             </p>
-            <div className="mt-7 grid grid-cols-2 gap-3">
+            <div className="mt-7 grid grid-cols-2 min-w-0 gap-3">
               {copy.promises.map((item) => (
                 <div
                   key={item}
-                  className="flex min-h-20 items-center gap-3 rounded-2xl border border-[#EEBA2B]/45 bg-[#071a33]/75 p-3 text-sm font-black backdrop-blur-sm"
+                  className="flex min-h-20 items-center gap-3 rounded-2xl border border-[#EEBA2B]/45 bg-[#071a33]/75 p-3 text-sm font-black backdrop-blur-sm [overflow-wrap:anywhere]"
                 >
                   <FaCheckCircle className="shrink-0 text-xl text-[#fff200]" />
                   {item}
                 </div>
               ))}
             </div>
-            <div className="mt-8 flex flex-row flex-wrap gap-3">
+            <div className="mt-8 flex min-w-0 flex-row flex-wrap gap-3">
               <Link
                 to={startPath}
-                className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border-2 border-[#EEBA2B] bg-[#EEBA2B] px-5 py-4 text-xs font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:flex-none"
+                className="inline-flex min-w-0 flex-1 items-center justify-center gap-3 rounded-full border-2 border-[#EEBA2B] bg-[#EEBA2B] px-5 py-4 text-xs font-black uppercase text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:flex-none [overflow-wrap:anywhere]"
               >
                 {copy.primary}
                 <FaArrowRight />
               </Link>
               <Link
                 to={contactPath}
-                className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border-2 border-white px-5 py-4 text-xs font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:flex-none"
+                className="inline-flex min-w-0 flex-1 items-center justify-center gap-3 rounded-full border-2 border-white px-5 py-4 text-xs font-black uppercase text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:flex-none [overflow-wrap:anywhere]"
               >
                 {copy.secondary}
               </Link>
@@ -546,28 +546,28 @@ const WebApp = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
         <SectionTitle
           eyebrow={copy.baseEyebrow}
           title={copy.baseTitle}
           text={copy.baseText}
         />
-        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+        <div className="mx-auto min-w-0 max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
           <ImagePanel src={visual.source} alt={copy.baseTitle} />
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
         <SectionTitle
           eyebrow={copy.buildEyebrow}
           title={copy.buildTitle}
           text={copy.buildText}
         />
-        <div className="mx-auto grid max-w-6xl gap-5 px-5 phone:px-7 tablet:px-12 laptop:grid-cols-[.95fr_1.05fr] laptop:px-0">
+        <div className="mx-auto grid min-w-0 max-w-6xl gap-5 px-5 phone:px-7 tablet:px-12 laptop:grid-cols-[.95fr_1.05fr] laptop:px-0">
           <div className="rounded-[1.7rem] border border-[#EEBA2B]/55 bg-[#071a33]/80 p-5 backdrop-blur-md phone:p-7">
             <div className="mb-5 flex items-center gap-3 text-[#fff200]">
               <FaClipboardList className="text-3xl" />
-              <p className="text-sm font-black uppercase tracking-wide">
+              <p className="text-sm font-black uppercase tracking-wide [overflow-wrap:anywhere]">
                 {copy.productsEyebrow}
               </p>
             </div>
@@ -582,8 +582,8 @@ const WebApp = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
-        <div className="mx-auto max-w-6xl">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
+        <div className="mx-auto min-w-0 max-w-6xl">
           <div className="grid gap-4 laptop:grid-cols-5">
             {copy.products.map((product) => {
               const Icon = iconMap[product.icon];
@@ -607,13 +607,13 @@ const WebApp = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
         <SectionTitle
           eyebrow={copy.methodEyebrow}
           title={copy.methodTitle}
           text={copy.methodText}
         />
-        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+        <div className="mx-auto min-w-0 max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
           <div className="rounded-[1.7rem] border border-[#EEBA2B]/55 bg-[#071a33]/80 p-5 backdrop-blur-md phone:p-7">
             <div className="grid gap-4 laptop:grid-cols-5">
               {copy.steps.map((step, index) => (
@@ -621,10 +621,10 @@ const WebApp = () => {
                   key={step}
                   className="rounded-2xl border border-white/20 bg-white/8 p-4"
                 >
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#EEBA2B] text-lg font-black text-[#071a33]">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#EEBA2B] text-lg font-black text-[#071a33] [overflow-wrap:anywhere]">
                     {index + 1}
                   </div>
-                  <p className="text-sm font-black leading-6 text-white">
+                  <p className="text-sm font-black leading-6 text-white [overflow-wrap:anywhere]">
                     {step}
                   </p>
                 </div>
@@ -634,20 +634,20 @@ const WebApp = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-0 py-12 laptop:py-20">
         <SectionTitle
           eyebrow={copy.creativeEyebrow}
           title={copy.creativeTitle}
           text={copy.creativeText}
         />
-        <div className="mx-auto max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
+        <div className="mx-auto min-w-0 max-w-6xl px-5 phone:px-7 tablet:px-12 laptop:px-0">
           <ImagePanel src={visual.creative} alt={copy.creativeTitle} />
         </div>
       </section>
 
-      <section className="border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+      <section className="max-w-full overflow-x-hidden border-t border-[#EEBA2B]/70 px-5 py-12 phone:px-7 tablet:px-12 laptop:px-20 laptop:py-20">
+        <div className="mx-auto min-w-0 max-w-6xl">
+          <h2 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white phone:text-5xl">
             {copy.faqTitle}
           </h2>
           <div className="mt-7 grid gap-4 laptop:grid-cols-3">
@@ -656,7 +656,7 @@ const WebApp = () => {
                 key={item.question}
                 className="rounded-[1.4rem] border border-white/25 bg-[#071a33]/80 p-5 backdrop-blur-md"
               >
-                <h3 className="text-lg font-black text-[#fff200]">
+                <h3 className="text-lg font-black text-[#fff200] [overflow-wrap:anywhere]">
                   {item.question}
                 </h3>
                 <p className="mt-4 text-sm font-bold leading-7 text-white/85">

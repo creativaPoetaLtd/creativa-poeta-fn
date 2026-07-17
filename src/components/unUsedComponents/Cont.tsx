@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaLinkedin, FaRegEnvelope, FaTiktok, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaPhoneAlt, FaRegEnvelope, FaTiktok, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import Popup from "./MailConfirm";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -11,6 +11,9 @@ const lang:any = getLangFromLocalStorage();
 const Cont = () => {
   const market = getCurrentMarket();
   const contactEmail = market.email ?? "contact@creativapoeta.com";
+  const contactPhone = "+32 473 29 71 12";
+  const contactPhoneHref = "tel:+32473297112";
+  const contactWhatsappHref = "https://wa.me/32473297112";
 
   const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState('');
@@ -127,6 +130,17 @@ const Cont = () => {
                       <h1 className="laptop:text-2xl desktop:text-xl text-xl ">
                         {contactEmail}
                       </h1>
+                    </div>
+
+                    <div className="mt-4 grid gap-2 text-sm font-black uppercase text-slate-200">
+                      <a href={contactPhoneHref} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-4 py-3 transition hover:border-[#fff200] hover:text-[#fff200]">
+                        <FaPhoneAlt className="text-[#EEBA2B]" />
+                        {contactPhone}
+                      </a>
+                      <a href={contactWhatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#25D366]/55 bg-[#25D366]/10 px-4 py-3 transition hover:bg-[#25D366] hover:text-black">
+                        <FaWhatsapp />
+                        WhatsApp
+                      </a>
                     </div>
 
                     <div className="flex space-x-4  bottom-0 mt-20 text-xl pb-4">
