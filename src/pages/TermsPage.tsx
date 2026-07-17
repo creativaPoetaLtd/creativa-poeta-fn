@@ -6,6 +6,7 @@ import MainFooter from "../components/sections/MainFooter";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import LegalContent from "../components/legal/LegalContent";
 import { LegalPageKind } from "../components/legal/legalCopies";
+import FixedContactActions from "../components/buttons/FixedContactActions";
 
 const getLegalKind = (pathname: string): LegalPageKind => {
   if (pathname.includes("mentions-legales")) return "legal";
@@ -49,6 +50,7 @@ const TermsPage = () => {
         path={seo.path}
       />
       <NavBar />
+      <FixedContactActions />
       <LegalContent kind={kind} />
       <Footer />
       <MainFooter />
@@ -57,4 +59,3 @@ const TermsPage = () => {
 };
 
 export default TermsPage;
-

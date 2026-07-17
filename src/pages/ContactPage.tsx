@@ -4,6 +4,7 @@ import Footer from "../components/sections/Footer";
 import MainFooter from "../components/sections/MainFooter";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { seoConfig } from "../components/SEO/seoConfig";
+import FixedContactActions from "../components/buttons/FixedContactActions";
 
 const ContactPage = () => {
   return (
@@ -12,6 +13,7 @@ const ContactPage = () => {
       <div className="w-full ml-6 right-2 left flex justify-end">
         <NavBar />
       </div>
+      <FixedContactActions />
       <Contact />
       <div className="w-full flex flex-col scroll-smooth snap-x">
         <Footer />

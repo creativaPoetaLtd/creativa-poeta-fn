@@ -4,6 +4,7 @@ import Faq from "./components/sections/Faq";
 import Services from "./components/sections/Services";
 import Footer from "./components/sections/Footer";
 import MainFooter from "./components/sections/MainFooter";
+import FixedContactActions from "./components/buttons/FixedContactActions";
 import SEOHead from "./components/SEO/SEOHead";
 import { seoConfig } from "./components/SEO/seoConfig";
 import {
@@ -114,6 +115,7 @@ const App = () => {
         }}
       />
       <NavBar />
+      <FixedContactActions />
       <div className="w-full flex flex-col scroll-smooth snap-x">
         <Home />
         <HomeServiceStorySections />

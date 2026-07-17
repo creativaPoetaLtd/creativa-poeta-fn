@@ -3,6 +3,7 @@ import BrandHomeLink from "../NavBars/BrandHomeLink";
 import NavBar from "../NavBars/NavBar";
 import Footer from "../sections/Footer";
 import MainFooter from "../sections/MainFooter";
+import FixedContactActions from "../buttons/FixedContactActions";
 
 type PageLayoutProps = {
   children: ReactNode;
@@ -25,6 +26,7 @@ const PageLayout = ({
           <NavBar />
         </header>
       ) : null}
+      <FixedContactActions />
       {children}
       {showFooter ? (
         <div className="w-full flex flex-col scroll-smooth snap-x">
@@ -37,4 +39,3 @@ const PageLayout = ({
 };
 
 export default PageLayout;
-

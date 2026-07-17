@@ -6,6 +6,7 @@ import JobApplicationForm from "../components/JobApplicationForm";
 import { Link } from "react-router-dom";
 import logo from "../assets/flags/logopoeta1.png";
 import { localizePath } from "../data/marketRuntime";
+import FixedContactActions from "../components/buttons/FixedContactActions";
 
 const LeaveInfoPage = () => {
     return (
@@ -18,6 +19,7 @@ const LeaveInfoPage = () => {
             </Link>
                 <NavBar />
             </div>
+            <FixedContactActions />
             <div className="h-screen  items-center flex justify-center p-10 ">
             <JobApplicationForm />
             </div>

@@ -1,13 +1,18 @@
+.cp-fixed-contact-actions,
 .cp-scroll-actions {
   align-items: center;
   bottom: 1.75rem;
   display: inline-flex;
   gap: 0.65rem;
   position: fixed;
-  right: clamp(1.6rem, 4vw, 4.5rem);
   z-index: 9999;
 }
 
+.cp-fixed-contact-actions {
+  right: clamp(10.8rem, 14vw, 14rem);
+}
+
+.cp-scroll-actions,
 .cp-scroll-actions-left,
 .cp-scroll-actions-right {
   right: clamp(1.6rem, 4vw, 4.5rem);
@@ -157,6 +162,12 @@
     padding-bottom: 6.8rem;
   }
 
+  .cp-fixed-contact-actions {
+    bottom: 1.25rem;
+    gap: 0.35rem;
+    right: 8.4rem;
+  }
+
   .cp-scroll-actions,
   .cp-refonte-section > .cp-scroll-actions,
   .cp-refonte-final > .cp-scroll-actions {
@@ -197,6 +208,3 @@
     font-size: 0.98rem;
   }
 }
-
-
-

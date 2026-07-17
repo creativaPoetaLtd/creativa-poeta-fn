@@ -6,6 +6,7 @@ import JobPage from "../components/JobPage";
 import { Link } from "react-router-dom";
 import logo from "../assets/flags/logopoeta1.png";
 import { localizePath } from "../data/marketRuntime";
+import FixedContactActions from "../components/buttons/FixedContactActions";
 
 const JobsPages = () => {
     return (
@@ -18,6 +19,7 @@ const JobsPages = () => {
             </Link>
                 <NavBar />
             </div>
+            <FixedContactActions />
             <JobPage />
             <div className="w-full flex flex-col scroll-smooth snap-x">
                 <Footer />
