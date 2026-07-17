@@ -18,9 +18,9 @@ const PageLayout = ({
   className = "",
 }: PageLayoutProps) => {
   return (
-    <div className={`App w-full flex flex-col snap-x scroll-smooth ${className}`}>
+    <div className={`App w-full max-w-full overflow-x-hidden flex flex-col snap-x scroll-smooth ${className}`}>
       {showHeader ? (
-        <header className="relative w-full ml-6 right-2 left flex justify-end">
+        <header className="relative z-50 w-full flex justify-end">
           <BrandHomeLink />
           <NavBar />
         </header>

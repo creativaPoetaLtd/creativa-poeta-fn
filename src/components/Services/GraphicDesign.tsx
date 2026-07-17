@@ -616,12 +616,12 @@ const ServiceImage = ({
   className?: string;
 }) => (
   <figure
-    className={`overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
+    className={`max-w-full overflow-hidden rounded-[1.4rem] border border-[#EEBA2B]/45 bg-[#071a33]/80 text-white shadow-[0_20px_70px_rgba(0,0,0,.28)] ${className}`}
   >
     <img
       src={src}
       alt={`${title}. ${description}`}
-      className="aspect-square h-auto w-full object-contain"
+      className="aspect-square h-auto w-full max-w-full object-contain"
       loading="lazy"
       decoding="async"
     />
@@ -639,15 +639,15 @@ const GraphicDesign = () => {
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#071a33]/55 text-white">
+    <main className="relative isolate min-h-screen max-w-full overflow-x-hidden bg-[#071a33]/55 text-white">
       <section className="relative px-4 pb-12 pt-28 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
+        <div className="mx-auto grid max-w-7xl min-w-0 gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
           <div>
             <SectionLabel>{copy.eyebrow}</SectionLabel>
-            <h1 className="font-['Black_Ops_One'] text-4xl leading-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,.35)] phone:text-5xl laptop:text-7xl">
+            <h1 className="max-w-full break-words font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white drop-shadow-[0_4px_14px_rgba(0,0,0,.35)] [overflow-wrap:anywhere] phone:text-5xl laptop:text-7xl">
               {copy.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-base font-black leading-8 text-white/90 phone:text-xl">
+            <p className="mt-6 max-w-2xl break-words text-base font-black leading-8 text-white/90 [overflow-wrap:anywhere] phone:text-xl">
               {copy.intro}
             </p>
             <div className="mt-8 grid gap-3 phone:grid-cols-2">
@@ -688,10 +688,10 @@ const GraphicDesign = () => {
       </section>
 
       <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
+        <div className="mx-auto grid max-w-7xl min-w-0 gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-center">
           <div>
             <SectionLabel>{copy.whyEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="max-w-full break-words font-['Black_Ops_One'] text-4xl leading-tight text-white [overflow-wrap:anywhere] phone:text-5xl">
               {copy.whyTitle}
             </h2>
             <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
@@ -706,7 +706,7 @@ const GraphicDesign = () => {
         <div className="mx-auto max-w-7xl">
           <SectionLabel>{copy.worksEyebrow}</SectionLabel>
           <div className="max-w-5xl">
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl laptop:text-6xl">
+            <h2 className="max-w-full break-words font-['Black_Ops_One'] text-4xl leading-tight text-white [overflow-wrap:anywhere] phone:text-5xl laptop:text-6xl">
               {copy.worksTitle}
             </h2>
             <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
@@ -738,10 +738,10 @@ const GraphicDesign = () => {
       </section>
 
       <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[1.05fr_.95fr] laptop:items-start">
+        <div className="mx-auto grid max-w-7xl min-w-0 gap-8 laptop:grid-cols-[1.05fr_.95fr] laptop:items-start">
           <div>
             <SectionLabel>{copy.packsEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="max-w-full break-words font-['Black_Ops_One'] text-4xl leading-tight text-white [overflow-wrap:anywhere] phone:text-5xl">
               {copy.packsTitle}
             </h2>
             <div className="mt-7 grid gap-3 tablet:gap-5">
@@ -765,10 +765,10 @@ const GraphicDesign = () => {
       </section>
 
       <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-start">
+        <div className="mx-auto grid max-w-7xl min-w-0 gap-8 laptop:grid-cols-[.82fr_1.18fr] laptop:items-start">
           <div>
             <SectionLabel>{copy.deliverEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="max-w-full break-words font-['Black_Ops_One'] text-4xl leading-tight text-white [overflow-wrap:anywhere] phone:text-5xl">
               {copy.deliverTitle}
             </h2>
             <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">
@@ -792,10 +792,10 @@ const GraphicDesign = () => {
       </section>
 
       <section className="border-t border-[#EEBA2B] px-4 py-14 phone:px-5 tablet:px-10 laptop:px-16">
-        <div className="mx-auto grid max-w-7xl gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-start">
+        <div className="mx-auto grid max-w-7xl min-w-0 gap-8 laptop:grid-cols-[.85fr_1.15fr] laptop:items-start">
           <div>
             <SectionLabel>{copy.methodEyebrow}</SectionLabel>
-            <h2 className="font-['Black_Ops_One'] text-4xl leading-tight text-white phone:text-5xl">
+            <h2 className="max-w-full break-words font-['Black_Ops_One'] text-4xl leading-tight text-white [overflow-wrap:anywhere] phone:text-5xl">
               {copy.methodTitle}
             </h2>
             <p className="mt-5 text-base font-black leading-8 text-white/90 phone:text-lg">

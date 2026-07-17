@@ -5,6 +5,8 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
+  FaPhoneAlt,
+  FaWhatsapp,
   FaSignOutAlt,
   FaTachometerAlt,
   FaTimes,
@@ -362,6 +364,25 @@ function NavBar() {
               >
                 {copy.contact}
               </Link>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 rounded-[1.35rem] border border-white/10 bg-white/[.04] p-2">
+              <a
+                href="tel:+32473297112"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-3 py-3 text-[11px] font-black uppercase text-white transition hover:border-[#fff200] hover:text-[#fff200]"
+              >
+                <FaPhoneAlt />
+                Tel
+              </a>
+              <a
+                href="https://wa.me/32473297112"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/60 bg-[#25D366]/15 px-3 py-3 text-[11px] font-black uppercase text-white transition hover:bg-[#25D366] hover:text-black"
+              >
+                <FaWhatsapp />
+                WhatsApp
+              </a>
             </div>
           </div>
 

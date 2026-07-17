@@ -21,6 +21,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
   toggleSidebar,
 }) => {
   const [selectedLang, setSelectedLang] = useState<string>("en");
+  const [languageVisible, setLanguageVisible] = useState(false);
   const market = getCurrentMarket();
   const showLanguageSwitcher = market.locales.length > 1;
 
@@ -41,6 +42,23 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     }
   }, [market]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let hideTimer: number | undefined;
+    const revealLanguage = () => {
+      setLanguageVisible(true);
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => setLanguageVisible(false), 1600);
+    };
+
+    window.addEventListener("scroll", revealLanguage, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", revealLanguage);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
+
   const handleLanguageChange = (lang: string) => {
     const selected =
       lang === "English"
@@ -51,7 +69,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
         ? "kiny"
         : lang === "Dutch"
         ? "nl"
-        : "en"; // fallback to English if not recognized
+        : "en";
 
     setSelectedLang(selected);
 
@@ -65,21 +83,24 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
     }
   };
 
+  const currentLocale = (selectedLang in languageOptions ? selectedLang : "en") as LocaleCode;
+  const alternativeLocales = market.locales.filter((locale) => locale !== currentLocale);
+
   const langMenu = {
     onClick: ({ key }: { key: string }) => handleLanguageChange(key),
     style: {
       backgroundColor: "rgba(0, 0, 0, 0)",
-      marginTop: "1rem",
+      marginTop: "0.75rem",
       width: "50px",
     },
-    items: market.locales.map((locale) => ({
+    items: alternativeLocales.map((locale) => ({
       key: languageOptions[locale].key,
       label: (
         <div className="flagAndLang flex items-center">
           <img
             src={languageOptions[locale].flag}
             alt={languageOptions[locale].label}
-            className="w-6 h-4"
+            className="h-4 w-6 rounded-[2px] object-cover"
           />
         </div>
       ),
@@ -87,41 +108,42 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
   };
 
   return (
-    <div
-      className={`font-bold z-30 text-2xl phone:text-3xl md:text-4xl text-white flex space-x-1 phone:space-x-3 justify-end text-center items-center p-0 phone:p-1 md:p-1`}
-    >
-      {showLanguageSwitcher && (
-        <div className="localizationButtonSwitcher justify-start ">
+    <div className="z-30 flex items-center justify-end gap-1 p-0 text-center text-2xl font-bold text-white phone:gap-3 phone:p-1 phone:text-3xl md:p-1 md:text-4xl">
+      {showLanguageSwitcher && alternativeLocales.length > 0 && (
+        <div
+          className={`localizationButtonSwitcher justify-start transition duration-300 ${
+            sidebarVisible || languageVisible
+              ? "opacity-100"
+              : "pointer-events-none opacity-0 laptop:pointer-events-auto laptop:opacity-100"
+          }`}
+        >
           <Dropdown menu={langMenu} trigger={["click"]}>
-            <button className="currentLocal flex items-center space-x-2">
+            <button
+              type="button"
+              className="currentLocal flex items-center space-x-1 rounded-full bg-black/45 px-1.5 py-1 backdrop-blur-sm phone:space-x-2"
+              aria-label="Changer de langue"
+            >
               <img
-                src={
-                  selectedLang === "en"
-                    ? languageOptions.en.flag
-                    : selectedLang === "fr"
-                    ? languageOptions.fr.flag
-                    : selectedLang === "nl"
-                    ? languageOptions.nl.flag
-                    : languageOptions.kiny.flag
-                }
-                alt="flag"
-                className="w-6 h-4"
+                src={languageOptions[currentLocale].flag}
+                alt={languageOptions[currentLocale].label}
+                className="h-4 w-6 rounded-[2px] object-cover"
               />
-              <span className="text-white text-sm">
+              <span className="text-sm text-white">
                 <IoMdArrowDropdown />
               </span>
             </button>
           </Dropdown>
         </div>
       )}
-      <div className="flex justify-center items-center menus bg-black backdrop-blur-lg gap-1 phone:gap-2 px-1.5 phone:px-2 rounded-md">
-        <p className="menu text-[#FFFF00] text-xs phone:text-base font-thin">MENU</p>
-        {sidebarVisible ? (
-          <FaTimes onClick={toggleSidebar} />
-        ) : (
-          <LiaBarsSolid onClick={toggleSidebar} />
-        )}
-      </div>
+      <button
+        type="button"
+        onClick={toggleSidebar}
+        className="flex items-center justify-center gap-1 rounded-md bg-black/85 px-1.5 py-0.5 backdrop-blur-lg phone:gap-2 phone:px-2"
+        aria-label={sidebarVisible ? "Fermer le menu" : "Ouvrir le menu"}
+      >
+        <span className="text-xs font-black text-[#FFFF00] phone:text-base">MENU</span>
+        {sidebarVisible ? <FaTimes /> : <LiaBarsSolid />}
+      </button>
     </div>
   );
 };

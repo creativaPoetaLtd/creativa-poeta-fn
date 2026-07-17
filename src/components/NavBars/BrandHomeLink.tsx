@@ -15,9 +15,9 @@ const BrandHomeLink = () => {
     <Link
       to={homePath}
       aria-label="Retour a l'accueil Creativa Poeta"
-      className="absolute left-4 top-5 z-40 block w-[150px] phone:left-8 phone:w-[190px] laptop:left-16 laptop:w-[260px]"
+      className="fixed left-4 top-5 z-[60] block w-[156px] pointer-events-auto phone:left-8 phone:w-[190px] laptop:left-16 laptop:w-[260px]"
     >
-      <img src={logo} alt="Creativa Poeta" className="h-auto w-full" />
+      <img src={logo} alt="Creativa Poeta" className="h-auto w-full object-contain" />
     </Link>
   );
 };
