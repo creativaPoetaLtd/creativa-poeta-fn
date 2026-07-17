@@ -4,7 +4,6 @@ import Cont from '../unUsedComponents/Cont';
 // import { SetStateAction, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { Link } from 'react-router-dom';
-import LanguageSwitcher from '../NavBars/LanguageSwitcher';
 import getLangFromLocalStorage from '../../../utils/Lang';
 import FooterLocale from '../../i18n/FooterLocale';
 import { Link } from 'react-router-dom';
@@ -105,10 +104,6 @@ function Footer() {
           <p className='flex justify-start text-start  items-start pr-7 float-left mt-3 text-slate-400'>
              {FooterLocale[lang].desc}          
              </p>
-          <div className="mt-4">
-            <p className="mb-2 text-[11px] font-black uppercase tracking-[.18em] text-slate-500">Langue</p>
-            <LanguageSwitcher variant="text" showCurrent />
-          </div>  
          <div className='flex desktop:flex-row laptop:flex-row tablet:flex-row flex-col w-full justify-start items-start laptop:mt-3 desktop:mt-3 tablet:mt-3 mt-3 h-fit'>
 
   {/* LEFT COLUMN */}
@@ -254,7 +249,5 @@ function Footer() {
 }
 
 export default Footer;
-
-
 
 

@@ -18,6 +18,8 @@ type LanguageSwitcherProps = {
   variant?: "compact" | "text";
   className?: string;
   showCurrent?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  textButtonClassName?: string;
 };
 
 const goToLocale = (locale: LocaleCode) => {
@@ -33,6 +35,8 @@ const LanguageSwitcher = ({
   variant = "compact",
   className = "",
   showCurrent = false,
+  onOpenChange,
+  textButtonClassName,
 }: LanguageSwitcherProps) => {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -53,6 +57,10 @@ const LanguageSwitcher = ({
     return () => document.removeEventListener("mousedown", closeOnOutsideClick);
   }, [open]);
 
+  useEffect(() => {
+    onOpenChange?.(open);
+  }, [onOpenChange, open]);
+
   if (market.locales.length < 2 || availableLocales.length === 0) return null;
 
   if (variant === "text") {
@@ -66,7 +74,7 @@ const LanguageSwitcher = ({
               key={locale}
               type="button"
               onClick={() => goToLocale(locale)}
-              className={`rounded-full border px-3 py-2 text-[11px] font-black uppercase transition ${
+              className={`${textButtonClassName ?? "rounded-full border px-3 py-2 text-[11px] font-black uppercase"} transition ${
                 active
                   ? "border-[#fff200] bg-[#fff200] text-[#071a33]"
                   : "border-white/20 bg-white/[.04] text-white hover:border-[#fff200] hover:text-[#fff200]"
@@ -103,7 +111,7 @@ const LanguageSwitcher = ({
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1 flex flex-col items-end gap-1 rounded-full bg-black/40 p-1 backdrop-blur-sm">
+        <div className="absolute right-0 top-full mt-1 flex flex-col items-end gap-1 rounded-full bg-black/55 p-1 backdrop-blur-sm">
           {otherLocales.map((locale) => (
             <button
               key={locale}
@@ -126,3 +134,4 @@ const LanguageSwitcher = ({
 };
 
 export default LanguageSwitcher;
+

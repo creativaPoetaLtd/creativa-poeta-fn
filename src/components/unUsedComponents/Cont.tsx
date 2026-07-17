@@ -132,12 +132,12 @@ const Cont = () => {
                       </h1>
                     </div>
 
-                    <div className="mt-4 grid gap-2 text-sm font-black uppercase text-slate-200">
-                      <a href={contactPhoneHref} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-4 py-3 transition hover:border-[#fff200] hover:text-[#fff200]">
+                    <div className="mt-4 grid grid-cols-2 gap-2 text-sm font-black uppercase text-slate-200">
+                      <a href={contactPhoneHref} className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-3 text-center transition hover:border-[#fff200] hover:text-[#fff200]">
                         <FaPhoneAlt className="text-[#EEBA2B]" />
                         {contactPhone}
                       </a>
-                      <a href={contactWhatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#25D366]/55 bg-[#25D366]/10 px-4 py-3 transition hover:bg-[#25D366] hover:text-black">
+                      <a href={contactWhatsappHref} target="_blank" rel="noreferrer" className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-3 py-3 text-center text-[#04120a] transition hover:bg-[#1fb858] hover:text-[#04120a]">
                         <FaWhatsapp />
                         WhatsApp
                       </a>
@@ -196,3 +196,5 @@ const Cont = () => {
     );
   };
 export default Cont;  
+
+

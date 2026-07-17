@@ -15,6 +15,7 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
   toggleSidebar,
 }) => {
   const [languageVisible, setLanguageVisible] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const market = getCurrentMarket();
   const showLanguageSwitcher = market.locales.length > 1;
 
@@ -36,16 +37,16 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
   }, []);
 
   return (
-    <div className="flex items-center justify-end gap-2 p-0 text-center text-2xl font-bold text-white phone:gap-3 phone:text-3xl">
+    <div className="pointer-events-auto flex items-center justify-end gap-2 p-0 text-center text-2xl font-bold text-white phone:gap-3 phone:text-3xl">
       {showLanguageSwitcher && (
         <div
           className={`transition duration-300 ${
-            sidebarVisible || languageVisible
+            sidebarVisible || languageVisible || languageOpen
               ? "opacity-100"
               : "pointer-events-none opacity-0 laptop:pointer-events-auto laptop:opacity-100"
           }`}
         >
-          <LanguageSwitcher />
+          <LanguageSwitcher onOpenChange={setLanguageOpen} />
         </div>
       )}
       <button
@@ -62,3 +63,4 @@ const BurgerButton: React.FC<BurgerButtonProps> = ({
 };
 
 export default BurgerButton;
+

@@ -137,6 +137,13 @@ const blogCopy: Record<string, { label: string; text: string }> = {
 };
 
 
+const navLanguageTitles: Record<string, string> = {
+  en: "Language",
+  fr: "Langue",
+  nl: "Taal",
+  kiny: "Ururimi",
+};
+
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [servicesSubMenuVisible, setServicesSubMenuVisible] = useState(true);
@@ -149,6 +156,7 @@ function NavBar() {
   const lang = getLangFromLocalStorage();
   const navCopy = NavLocale[lang] ?? NavLocale.en;
   const copy = menuCopy[lang] ?? menuCopy.en;
+  const languageTitle = navLanguageTitles[lang] ?? navLanguageTitles.en;
   const primaryLinks = [
     {
       label: navCopy.home ?? "Home",
@@ -214,9 +222,9 @@ function NavBar() {
 
   return (
     <>
-      <div className="cp-nav-actions pointer-events-auto fixed left-0 right-0 top-5 z-[80] flex items-center justify-end gap-1 px-2 phone:gap-4 phone:px-4">
+      <div className="cp-nav-actions pointer-events-none fixed left-0 right-0 top-5 z-[80] flex items-center justify-end gap-1 px-2 phone:gap-4 phone:px-4">
         {isAuthenticated && (
-          <div className="relative" ref={adminDropdownRef}>
+          <div className="pointer-events-auto relative" ref={adminDropdownRef}>
             <button
               onClick={toggleAdminDropdown}
               className="flex items-center space-x-2 rounded-full bg-[#EEBA2B] px-3 py-2 font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:bg-[#FFE533]"
@@ -379,7 +387,7 @@ function NavBar() {
                 href="https://wa.me/32473297112"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366]/60 bg-[#25D366]/15 px-3 py-3 text-[11px] font-black uppercase text-white transition hover:bg-[#25D366] hover:text-black"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-3 py-3 text-[11px] font-black uppercase text-[#04120a] transition hover:bg-[#1fb858] hover:text-[#04120a]"
               >
                 <FaWhatsapp />
                 WhatsApp
@@ -388,7 +396,7 @@ function NavBar() {
 
             <div className="rounded-[1.35rem] border border-white/10 bg-white/[.04] p-3">
               <p className="mb-2 text-[11px] font-black uppercase tracking-[.18em] text-white/55">
-                Langue
+                {languageTitle}
               </p>
               <LanguageSwitcher variant="text" showCurrent />
             </div>
@@ -439,7 +447,4 @@ function NavBar() {
 }
 
 export default NavBar;
-
-
-
 
