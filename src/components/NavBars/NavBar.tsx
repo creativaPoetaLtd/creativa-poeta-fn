@@ -291,7 +291,7 @@ function NavBar() {
             </button>
           </div>
 
-          <div className="flex h-fit flex-col gap-3 pb-32 pt-5">
+          <div className="flex h-fit flex-col gap-3 pb-8 pt-5">
             <div className="grid gap-2">
               {primaryLinks.map((item) => (
                 <a
@@ -394,12 +394,7 @@ function NavBar() {
               </a>
             </div>
 
-            <div className="rounded-[1.35rem] border border-white/10 bg-white/[.04] p-3">
-              <p className="mb-2 text-[11px] font-black uppercase tracking-[.18em] text-white/55">
-                {languageTitle}
-              </p>
-              <LanguageSwitcher variant="text" showCurrent />
-            </div>
+
           </div>
 
           <img
@@ -408,37 +403,47 @@ function NavBar() {
             className="pointer-events-none mx-auto -mt-24 w-[58%] max-w-[13rem] object-cover opacity-90"
           />
 
-          <div className="absolute bottom-5 left-5 flex space-x-4 text-xl phone:left-7">
-            <a
-              href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#"
-              className="text-white transition hover:text-[#fff200]"
-            >
-              <FaFacebook />
-            </a>
-            <a
-              href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09"
-              className="text-white transition hover:text-[#fff200]"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href="https://www.instagram.com/creativapoeta_/"
-              className="text-white transition hover:text-[#fff200]"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1"
-              className="text-white transition hover:text-[#fff200]"
-            >
-              <FaTiktok />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/105066709/"
-              className="text-white transition hover:text-[#fff200]"
-            >
-              <FaLinkedin />
-            </a>
+          <div className="mt-6 flex flex-col items-start gap-3 pb-6">
+            <div className="flex space-x-4 text-lg">
+              <a
+                href="https://web.facebook.com/profile.php?id=61550577241125&_rdc=1&_rdr#"
+                className="text-white transition hover:text-[#fff200]"
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href="https://x.com/CreativaPoeta?t=-5QmeRVUl_M7lQbSOhC7JA&s=09"
+                className="text-white transition hover:text-[#fff200]"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://www.instagram.com/creativapoeta_/"
+                className="text-white transition hover:text-[#fff200]"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://www.tiktok.com/@creativapoeta?_t=ZM-8sjgBGfxZna&_r=1"
+                className="text-white transition hover:text-[#fff200]"
+              >
+                <FaTiktok />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/105066709/"
+                className="text-white transition hover:text-[#fff200]"
+              >
+                <FaLinkedin />
+              </a>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 text-[10px] text-white/50">
+              <span className="font-black uppercase tracking-[.18em]">{languageTitle}</span>
+              <LanguageSwitcher
+                variant="text"
+                showCurrent
+                textButtonClassName="rounded-full border px-2 py-1 text-[10px] font-black uppercase"
+              />
+            </div>
           </div>
         </nav>
       </aside>
@@ -447,4 +452,5 @@ function NavBar() {
 }
 
 export default NavBar;
+
 

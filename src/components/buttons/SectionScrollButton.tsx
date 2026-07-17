@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import "./SectionScrollButton.css";
 
@@ -11,7 +11,6 @@ type SectionScrollButtonProps = {
   bottomColor?: string;
 };
 
-
 const SectionScrollButton = ({
   label = "Faire defiler",
   targetId,
@@ -20,24 +19,20 @@ const SectionScrollButton = ({
   topColor = "#EEBA2B",
   bottomColor = "#071a33",
 }: SectionScrollButtonProps) => {
-  const handleClick = () => {
-    const target =
-      targetId === "__next-section"
-        ? getNextSection()
-        : document.getElementById(targetId);
-    if (!target) return;
+  const [footerVisible, setFooterVisible] = useState(false);
 
-    target.classList.remove("cp-scroll-fade-target");
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  useEffect(() => {
+    const footer = document.getElementById("footer") || document.querySelector("footer");
+    if (!footer) return;
 
-    window.setTimeout(() => {
-      target.classList.add("cp-scroll-fade-target");
-    }, 220);
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.02 }
+    );
 
-    window.setTimeout(() => {
-      target.classList.remove("cp-scroll-fade-target");
-    }, 1100);
-  };
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   const getNextSection = () => {
     const ids = [
@@ -63,8 +58,30 @@ const SectionScrollButton = ({
     return next || sections[0] || null;
   };
 
+  const handleClick = () => {
+    const target =
+      targetId === "__next-section"
+        ? getNextSection()
+        : document.getElementById(targetId);
+    if (!target) return;
+
+    target.classList.remove("cp-scroll-fade-target");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    window.setTimeout(() => {
+      target.classList.add("cp-scroll-fade-target");
+    }, 220);
+
+    window.setTimeout(() => {
+      target.classList.remove("cp-scroll-fade-target");
+    }, 1100);
+  };
+
   return (
-    <div className={`cp-scroll-actions cp-scroll-actions-${side}`}>
+    <div
+      className={`cp-scroll-actions cp-scroll-actions-${side}${footerVisible ? " cp-fixed-actions-hidden" : ""}`}
+      aria-hidden={footerVisible}
+    >
       <button
         type="button"
         className={`cp-scroll-button cp-scroll-button-${side} cp-scroll-button-${tone}`}
