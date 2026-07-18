@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
+import { AiOutlineDown } from "react-icons/ai";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import HomeLocale from "../../i18n/HomeLocale";
+import {
+  getCurrentLocale,
+  getCurrentMarket,
+} from "../../data/marketRuntime";
 import "./SectionScrollButton.css";
 
 const phoneHref = "tel:+32473297112";
@@ -7,22 +13,9 @@ const whatsappHref = "https://wa.me/32473297112";
 
 const FixedContactActions = () => {
   const [footerVisible, setFooterVisible] = useState(false);
-  const [hasScrollButton, setHasScrollButton] = useState(false);
-
-  useEffect(() => {
-    const detectScrollButton = () => {
-      setHasScrollButton(Boolean(document.querySelector(".cp-scroll-actions")));
-    };
-
-    detectScrollButton();
-    const timer = window.setTimeout(detectScrollButton, 250);
-    window.addEventListener("resize", detectScrollButton);
-
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("resize", detectScrollButton);
-    };
-  }, []);
+  const market = getCurrentMarket();
+  const lang = getCurrentLocale(market);
+  const scrollLabel = HomeLocale[lang]?.scroll ?? HomeLocale.en.scroll;
 
   useEffect(() => {
     const footer = document.getElementById("footer") || document.querySelector("footer");
@@ -37,9 +30,54 @@ const FixedContactActions = () => {
     return () => observer.disconnect();
   }, []);
 
+  const getScrollableSections = () => {
+    const selectors = [
+      "#home",
+      "main > section",
+      "main > div[id]",
+      "section[id]",
+      ".cp-refonte-section",
+      ".cp-refonte-final",
+      "#services",
+      "#faq",
+      "#footer",
+      "footer",
+    ];
+
+    return Array.from(document.querySelectorAll<HTMLElement>(selectors.join(",")))
+      .filter((section, index, sections) => sections.indexOf(section) === index)
+      .filter((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.height > 40 && rect.width > 40;
+      })
+      .sort((a, b) => a.offsetTop - b.offsetTop);
+  };
+
+  const handleScrollNext = () => {
+    const sections = getScrollableSections();
+    const currentY = window.scrollY + 120;
+    const target = sections.find((section) => section.offsetTop > currentY);
+
+    if (!target) {
+      window.scrollBy({ top: window.innerHeight * 0.82, behavior: "smooth" });
+      return;
+    }
+
+    target.classList.remove("cp-scroll-fade-target");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    window.setTimeout(() => {
+      target.classList.add("cp-scroll-fade-target");
+    }, 220);
+
+    window.setTimeout(() => {
+      target.classList.remove("cp-scroll-fade-target");
+    }, 1100);
+  };
+
   return (
     <div
-      className={`cp-fixed-contact-actions${hasScrollButton ? " cp-fixed-contact-actions-with-scroll" : ""}${footerVisible ? " cp-fixed-actions-hidden" : ""}`}
+      className={`cp-fixed-contact-actions${footerVisible ? " cp-fixed-actions-hidden" : ""}`}
       aria-label="Contacts rapides Creativa Poeta"
       aria-hidden={footerVisible}
     >
@@ -57,6 +95,16 @@ const FixedContactActions = () => {
         <FaWhatsapp />
         <span>WhatsApp</span>
       </a>
+      <button
+        type="button"
+        className="cp-scroll-button cp-scroll-button-right cp-scroll-button-light"
+        onClick={handleScrollNext}
+      >
+        <span className="cp-scroll-button-icon" aria-hidden="true">
+          <AiOutlineDown />
+        </span>
+        <span>{scrollLabel}</span>
+      </button>
     </div>
   );
 };

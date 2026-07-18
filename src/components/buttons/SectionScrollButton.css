@@ -1,20 +1,12 @@
-.cp-fixed-contact-actions,
-.cp-scroll-actions {
+.cp-fixed-contact-actions {
   align-items: center;
   bottom: 1.75rem;
   display: inline-flex;
-  gap: 0.85rem;
+  gap: 0.7rem;
   position: fixed;
+  right: clamp(1.6rem, 4vw, 4.5rem);
   transition: opacity 180ms ease, visibility 180ms ease;
   z-index: 70;
-}
-
-.cp-fixed-contact-actions {
-  right: clamp(1.6rem, 4vw, 4.5rem);
-}
-
-.cp-fixed-contact-actions-with-scroll {
-  right: clamp(11.8rem, 15vw, 15.5rem);
 }
 
 .cp-fixed-actions-hidden {
@@ -23,29 +15,29 @@
   visibility: hidden;
 }
 
-.cp-scroll-actions,
-.cp-scroll-actions-left,
-.cp-scroll-actions-right {
-  right: clamp(1.6rem, 4vw, 4.5rem);
+.cp-scroll-actions {
+  display: none;
 }
 
 .cp-scroll-button {
   --cp-scroll-top: #eeba2b;
   --cp-scroll-bottom: #071a33;
-  --cp-scroll-line-gap: 0.9rem;
-  --cp-scroll-button-height: 1.75rem;
   align-items: center;
   background: transparent;
   border: 0;
+  color: #ffff00;
   cursor: pointer;
   display: inline-flex;
+  flex: 0 0 auto;
   font-size: 0.72rem;
   font-weight: 900;
   gap: 0.45rem;
   letter-spacing: 0;
   padding: 0;
   position: relative;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .cp-scroll-button::before {
@@ -63,24 +55,16 @@
   width: 2px;
 }
 
-.cp-scroll-button::after {
-  display: none;
-}
-
 .cp-scroll-button > span {
   position: relative;
   z-index: 1;
 }
 
-.cp-scroll-button-left,
-.cp-scroll-button-right {
-  left: auto;
-  right: auto;
-}
-
-.cp-scroll-button-light,
-.cp-scroll-button-dark {
-  color: #ffff00;
+.cp-scroll-button > span:last-child {
+  max-width: min(10.5rem, 34vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cp-scroll-button-icon {
@@ -88,6 +72,7 @@
   border: 2px solid currentColor;
   border-radius: 999px;
   display: inline-flex;
+  flex: 0 0 auto;
   height: 2.05rem;
   justify-content: center;
   width: 2.05rem;
@@ -105,6 +90,7 @@
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.92);
   display: inline-flex;
+  flex: 0 0 auto;
   font-size: 0.76rem;
   font-weight: 900;
   gap: 0.42rem;
@@ -114,6 +100,7 @@
   padding: 0.62rem 0.95rem;
   text-transform: uppercase;
   transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+  white-space: nowrap;
 }
 
 .cp-scroll-contact:hover {
@@ -134,15 +121,20 @@
   color: #04120a;
 }
 
-.cp-refonte-section > .cp-scroll-actions,
-.cp-refonte-final > .cp-scroll-actions,
-#services > .cp-scroll-actions,
-.faq > .cp-scroll-actions {
-  bottom: 1.75rem;
-}
-
 .cp-scroll-fade-target {
   animation: cpScrollFadeTarget 720ms ease both;
+}
+
+.cp-home-hero-action {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  line-height: 1;
+  min-height: 3rem;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @keyframes cpScrollArrow {
@@ -174,27 +166,16 @@
   }
 
   .cp-fixed-contact-actions {
-    bottom: 1.25rem;
-    gap: 0.42rem;
-    right: 1rem;
-  }
-
-  .cp-fixed-contact-actions-with-scroll {
-    right: 8.8rem;
-  }
-
-  .cp-scroll-actions,
-  .cp-refonte-section > .cp-scroll-actions,
-  .cp-refonte-final > .cp-scroll-actions {
-    bottom: 1.25rem;
-    gap: 0.42rem;
-    right: 1rem;
+    bottom: 1.1rem;
+    gap: 0.35rem;
+    max-width: calc(100vw - 1.8rem);
+    right: 0.9rem;
   }
 
   .cp-scroll-button {
-    --cp-scroll-line-gap: 0.82rem;
     color: #ffff00;
-    font-size: 0.74rem;
+    font-size: clamp(0.6rem, 2.35vw, 0.72rem);
+    gap: 0.28rem;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
   }
 
@@ -205,7 +186,16 @@
       rgba(255, 255, 255, 0.95) 50% 100%
     );
     height: 4.2rem;
-    right: -0.65rem;
+    right: -0.5rem;
+  }
+
+  .cp-scroll-button > span:last-child {
+    max-width: 6.9rem;
+  }
+
+  .cp-scroll-button-icon {
+    height: 1.95rem;
+    width: 1.95rem;
   }
 
   .cp-scroll-contact {
@@ -220,5 +210,43 @@
 
   .cp-scroll-contact svg {
     font-size: 1.05rem;
+  }
+
+  .cp-home-hero-action {
+    flex-basis: 0;
+    font-size: clamp(0.62rem, 3vw, 0.82rem) !important;
+    min-height: 2.9rem;
+    padding-left: 0.35rem !important;
+    padding-right: 0.35rem !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .cp-fixed-contact-actions {
+    gap: 0.26rem;
+    right: 0.72rem;
+  }
+
+  .cp-scroll-contact {
+    height: 2.2rem;
+    min-height: 2.2rem;
+    width: 2.2rem;
+  }
+
+  .cp-scroll-button {
+    font-size: 0.6rem;
+  }
+
+  .cp-scroll-button > span:last-child {
+    max-width: 6.25rem;
+  }
+
+  .cp-scroll-button-icon {
+    height: 1.85rem;
+    width: 1.85rem;
+  }
+
+  .cp-home-hero-action {
+    font-size: clamp(0.55rem, 2.9vw, 0.72rem) !important;
   }
 }
