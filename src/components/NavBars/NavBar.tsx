@@ -267,6 +267,15 @@ function NavBar() {
         />
       </div>
 
+      {sidebarVisible && (
+        <button
+          type="button"
+          aria-label={copy.close}
+          className="fixed inset-0 z-[85] cursor-default bg-black/35 backdrop-blur-[1px]"
+          onClick={closeSidebar}
+        />
+      )}
+
       <aside
         className={`sidebar pointer-events-auto fixed z-[90] mx-auto w-[86%] max-w-[27rem] justify-end border-l border-[#EEBA2B]/30 bg-[linear-gradient(155deg,rgba(0,0,0,.98),rgba(7,26,51,.98))] shadow-[0_0_60px_rgba(0,0,0,.65)] tablet:w-[25rem] laptop:w-[27rem] desktop:w-[28rem] ${
           sidebarVisible ? "visible" : "sidebar-closing"
@@ -400,7 +409,7 @@ function NavBar() {
           <img
             src={logoBurger}
             alt="Creativa Poeta"
-            className="pointer-events-none mx-auto -mt-24 w-[58%] max-w-[13rem] object-cover opacity-90"
+            className="pointer-events-none mx-auto mt-2 w-[58%] max-w-[13rem] object-cover opacity-90"
           />
 
           <div className="mt-6 flex flex-col items-start gap-3 pb-6">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import HomeLocale from "../../i18n/HomeLocale";
@@ -10,6 +10,27 @@ import "./SectionScrollButton.css";
 
 const phoneHref = "tel:+32473297112";
 const whatsappHref = "https://wa.me/32473297112";
+
+const sectionSelectors = [
+  "#home",
+  "#about",
+  "#probleme-actuel",
+  "#visibilite-moderne",
+  "#source-officielle",
+  "#canaux",
+  "#voix-ia",
+  "#confiance",
+  "#services",
+  "#cta-final",
+  "#faq",
+  "main > section",
+  "main > div[id]",
+  "section[id]",
+  ".cp-refonte-section",
+  ".cp-refonte-final",
+  "#footer",
+  "footer",
+];
 
 const FixedContactActions = () => {
   const [footerVisible, setFooterVisible] = useState(false);
@@ -31,48 +52,37 @@ const FixedContactActions = () => {
   }, []);
 
   const getScrollableSections = () => {
-    const selectors = [
-      "#home",
-      "main > section",
-      "main > div[id]",
-      "section[id]",
-      ".cp-refonte-section",
-      ".cp-refonte-final",
-      "#services",
-      "#faq",
-      "#footer",
-      "footer",
-    ];
+    const seen = new Set<HTMLElement>();
 
-    return Array.from(document.querySelectorAll<HTMLElement>(selectors.join(",")))
-      .filter((section, index, sections) => sections.indexOf(section) === index)
+    return Array.from(document.querySelectorAll<HTMLElement>(sectionSelectors.join(",")))
       .filter((section) => {
+        if (seen.has(section)) return false;
+        seen.add(section);
         const rect = section.getBoundingClientRect();
-        return rect.height > 40 && rect.width > 40;
+        const style = window.getComputedStyle(section);
+        return rect.height > 60 && rect.width > 60 && style.display !== "none" && style.visibility !== "hidden";
       })
-      .sort((a, b) => a.offsetTop - b.offsetTop);
+      .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+  };
+
+  const highlightTarget = (target: HTMLElement) => {
+    target.classList.remove("cp-scroll-fade-target");
+    window.setTimeout(() => target.classList.add("cp-scroll-fade-target"), 180);
+    window.setTimeout(() => target.classList.remove("cp-scroll-fade-target"), 1100);
   };
 
   const handleScrollNext = () => {
     const sections = getScrollableSections();
-    const currentY = window.scrollY + 120;
-    const target = sections.find((section) => section.offsetTop > currentY);
+    const viewportOffset = 96;
+    const target = sections.find((section) => section.getBoundingClientRect().top > viewportOffset);
 
     if (!target) {
       window.scrollBy({ top: window.innerHeight * 0.82, behavior: "smooth" });
       return;
     }
 
-    target.classList.remove("cp-scroll-fade-target");
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    window.setTimeout(() => {
-      target.classList.add("cp-scroll-fade-target");
-    }, 220);
-
-    window.setTimeout(() => {
-      target.classList.remove("cp-scroll-fade-target");
-    }, 1100);
+    highlightTarget(target);
   };
 
   return (
