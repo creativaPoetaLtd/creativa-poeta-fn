@@ -29,20 +29,20 @@ const marketHomeSeo: Partial<
     en: {
       title: "Creativa Poeta | Be found where clients search",
       description:
-        "Creativa Poeta helps businesses build a clear official presence for Google, maps, voice search and tools like ChatGPT.",
+        "Creativa Poeta helps businesses build a clear official présence for Google, maps, voice search and tools like ChatGPT.",
     },
     fr: {
-      title: "Creativa Poeta | Visibilite digitale claire et utile",
+      title: "Creativa Poeta | Visibilité digitale claire et utile",
       description:
-        "Creativa Poeta aide les entreprises a etre trouvees, comprises et contactees via leur site, les maps, la recherche vocale et les moteurs IA.",
+        "Creativa Poeta aide les entreprises à être trouvées, comprises et contactées via leur site, les maps, la recherche vocale et les moteurs IA.",
     },
   },
   be: {
     fr: {
       title:
-        "Creativa Poeta Belgique | Visibilite locale en francais et neerlandais",
+        "Creativa Poeta Belgique | Visibilité locale en français et néerlandais",
       description:
-        "Creativa Poeta aide les entreprises en Belgique a clarifier leur site, leurs profils locaux, leurs maps et leurs reponses clients.",
+        "Creativa Poeta aide les entreprises en Belgique à clarifier leur site, leurs profils locaux, leurs maps et leurs réponses clients.",
     },
     nl: {
       title:
@@ -53,9 +53,9 @@ const marketHomeSeo: Partial<
   },
   fr: {
     fr: {
-      title: "Creativa Poeta France | Site clair, maps et visibilite moderne",
+      title: "Creativa Poeta France | Site clair, maps et visibilité moderne",
       description:
-        "Creativa Poeta aide les entreprises en France a creer une presence officielle claire pour leur site, leurs maps et les recherches modernes.",
+        "Creativa Poeta aide les entreprises en France à créer une présence officielle claire pour leur site, leurs maps et les recherches modernes.",
     },
   },
   rw: {
@@ -65,9 +65,9 @@ const marketHomeSeo: Partial<
         "Creativa Poeta ifasha ubucuruzi mu Rwanda kugira amakuru asobanutse kuri website, maps, imbuga nkoranyambaga n'ibikoresho bya AI.",
     },
     fr: {
-      title: "Creativa Poeta Rwanda | Site, maps et visibilite locale",
+      title: "Creativa Poeta Rwanda | Site, maps et visibilité locale",
       description:
-        "Creativa Poeta aide les entreprises au Rwanda a clarifier leur site, leurs profils locaux, leurs contacts et leurs reponses clients.",
+        "Creativa Poeta aide les entreprises au Rwanda à clarifier leur site, leurs profils locaux, leurs contacts et leurs réponses clients.",
     },
     en: {
       title: "Creativa Poeta Rwanda | Website, maps and local visibility",

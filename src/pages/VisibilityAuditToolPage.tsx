@@ -118,17 +118,17 @@ const copies: Record<
     eyebrow: "Diagnostic rapide",
     title: "Testez votre visibilité avant de depenser plus.",
     intro:
-      "Repondez a quelques questions. Vous obtenez une premiere lecture et nous recevons les infos pour vous conseiller proprement.",
+      "Répondez à quelques questions. Vous obtenez une première lecture et nous recevons les infos pour vous conseiller proprement.",
     scoreTitle: "Ce que le test regarde",
     scoreText:
-      "Site, Google Maps, coherence des infos, réseaux, avis, langues et lisibilite pour les outils modernes.",
+      "Site, Google Maps, cohérence des infos, réseaux, avis, langues et lisibilite pour les outils modernes.",
     fieldsTitle: "Votre présence actuelle",
     contactTitle: "Pour recevoir le retour",
     resultTitle: "Premiere lecture",
-    resultIntro: "Ce score reste indicatif. Il sert a savoir par ou commencer.",
+    resultIntro: "Ce score reste indicatif. Il sert à savoir par où commencer.",
     submit: "Tester et envoyer",
     submitting: "Envoi...",
-    startProject: "Demarrer un projet",
+    startProject: "Démarrer un projet",
     talk: "Parler a CP",
     labels: {
       name: "Votre nom",
@@ -160,7 +160,7 @@ const copies: Record<
       no: "Non",
       notSure: "Je ne sais pas",
       goals: [
-        "Être trouve sur Google",
+        "Être trouvé sur Google",
         "Ameliorer Google Maps",
         "Clarifier mes services",
         "Être mieux compris par les IA",
@@ -196,7 +196,7 @@ const copies: Record<
     scoreTitle: "What the test checks",
     scoreText:
       "Website, Google Maps, information consistency, social profiles, reviews, languages and readability for modern tools.",
-    fieldsTitle: "Your current presence",
+    fieldsTitle: "Your current présence",
     contactTitle: "To receive feedback",
     resultTitle: "First reading",
     resultIntro: "This score is indicative. It helps define where to start.",
@@ -238,13 +238,13 @@ const copies: Record<
         "Improve Google Maps",
         "Clarify my services",
         "Be understood by AI tools",
-        "Review my full presence",
+        "Review my full présence",
       ],
     },
     scoreLabels: {
-      low: "Fragile presence",
+      low: "Fragile présence",
       medium: "Good base, needs work",
-      high: "Solid presence",
+      high: "Solid présence",
     },
     priorities: {
       website: "Create or clarify an official page explaining your services.",
@@ -282,7 +282,7 @@ const copies: Record<
       name: "Uw naam",
       email: "Email",
       phone: "Telefoon",
-      company: "Bedrijf of activiteit",
+      company: "Bedrijf of activitéit",
       city: "Stad / regio",
       website: "Website of officiele pagina",
       hasGoogleProfile: "Google Maps / Google-profiel",
@@ -297,11 +297,11 @@ const copies: Record<
       name: "John Doe",
       email: "u@email.com",
       phone: "+32 ...",
-      company: "Naam van uw activiteit",
+      company: "Naam van uw activitéit",
       city: "Amsterdam",
       website: "https://...",
       languages: "Frans, Nederlands, Engels...",
-      message: "Voeg toe wat we eerst moeten controleren.",
+      message: "Voeg toe wat we eerst moeten contrôleren.",
     },
     options: {
       yes: "Ja",
@@ -386,7 +386,7 @@ const copies: Record<
         "Gukosora Google Maps",
         "Gusobanura serivisi",
         "Kumvikana kuri AI tools",
-        "Kureba presence yose",
+        "Kureba présence yose",
       ],
     },
     scoreLabels: {
@@ -483,10 +483,10 @@ const technicalCopy = {
   fr: {
     title: "Diagnostic technique",
     unavailable:
-      "Le diagnostic technique n'a pas pu etre realise. Le score affiche repose uniquement sur vos reponses.",
+      "Le diagnostic technique n'a pas pu être réalisé. Le score affiché repose uniquement sur vos réponses.",
     status: "Statut HTTP",
     response: "Temps de reponse",
-    details: "Voir les controles",
+    details: "Voir les contrôles",
   },
   en: {
     title: "Technical diagnosis",
@@ -613,12 +613,12 @@ const requestInterpretation = async (
       : null,
   });
 
-  return response.interpretation;
+  return response.interprétation;
 };
 
-const interpretationCopy = {
+const interprétationCopy = {
   fr: {
-    title: "Analyse personnalisee",
+    title: "Analyse personnalisée",
     ai: "IA",
     rules: "Synthese automatique",
     strengths: "Points d'appui",
@@ -648,18 +648,18 @@ const interpretationCopy = {
 } satisfies Record<LocaleKey, Record<string, string>>;
 
 type InterpretationResultProps = {
-  interpretation: VisibilityInterpretation | null;
+  interprétation: VisibilityInterpretation | null;
   locale: LocaleKey;
   compact?: boolean;
 };
 
 const InterpretationResult = ({
-  interpretation,
+  interprétation,
   locale,
   compact = false,
 }: InterpretationResultProps) => {
-  if (!interpretation) return null;
-  const labels = interpretationCopy[locale] ?? interpretationCopy.fr;
+  if (!interprétation) return null;
+  const labels = interprétationCopy[locale] ?? interprétationCopy.fr;
 
   return (
     <details
@@ -672,25 +672,25 @@ const InterpretationResult = ({
             {labels.title}
           </span>
           <span className="rounded-full border border-[#EEBA2B]/40 px-2 py-1 text-[9px] font-black uppercase text-white/70">
-            {interpretation.source === "openai" ? labels.ai : labels.rules}
+            {interprétation.source === "openai" ? labels.ai : labels.rules}
           </span>
         </span>
         <span className="mt-2 block text-sm font-black leading-5 text-white">
-          {interpretation.headline}
+          {interprétation.headline}
         </span>
       </summary>
 
       <p className="mt-3 text-xs font-bold leading-5 text-white/70">
-        {interpretation.summary}
+        {interprétation.summary}
       </p>
 
-      {interpretation.strengths.length > 0 && (
+      {interprétation.strengths.length > 0 && (
         <div className="mt-3">
           <p className="text-[10px] font-black uppercase text-emerald-300">
             {labels.strengths}
           </p>
           <ul className="mt-2 grid gap-1">
-            {interpretation.strengths.map((strength) => (
+            {interprétation.strengths.map((strength) => (
               <li key={strength} className="text-[11px] font-bold text-white/80">
                 + {strength}
               </li>
@@ -704,7 +704,7 @@ const InterpretationResult = ({
           {labels.actions}
         </p>
         <ol className={`mt-2 grid gap-2 ${compact ? "" : "tablet:grid-cols-2"}`}>
-          {interpretation.actions.map((action, index) => (
+          {interprétation.actions.map((action, index) => (
             <li
               key={`${action.title}-${index}`}
               className="rounded-lg border border-white/10 bg-black/20 px-3 py-2"
@@ -721,7 +721,7 @@ const InterpretationResult = ({
       </div>
 
       <p className="mt-3 text-[9px] font-bold leading-4 text-white/45">
-        {interpretation.caution}
+        {interprétation.caution}
       </p>
     </details>
   );
@@ -747,7 +747,7 @@ const VisibilityAuditToolPage = () => {
   const [technicalAudit, setTechnicalAudit] =
     useState<TechnicalVisibilityAudit | null>(null);
   const [technicalError, setTechnicalError] = useState("");
-  const [interpretation, setInterpretation] =
+  const [interprétation, setInterpretation] =
     useState<VisibilityInterpretation | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -804,23 +804,23 @@ const VisibilityAuditToolPage = () => {
         email: form.email,
         phone: form.phone,
         company: form.company,
-        serviceType: "Diagnostic visibilite",
+        serviceType: "Diagnostic visibilité",
         selectedServices: [
-          "Test visibilite",
-          form.mainGoal || "Objectif non precise",
+          "Test visibilité",
+          form.mainGoal || "Objectif non précise",
           `Score final: ${computed.score}/100 - ${computed.label}`,
           technical
             ? `Score technique: ${technical.score}/100`
             : "Audit technique non disponible",
         ],
         customServiceDescription: [
-          `Ville / zone: ${form.city || "Non precisee"}`,
-          `Site: ${form.website || "Aucun / non precise"}`,
+          `Ville / zone: ${form.city || "Non précisee"}`,
+          `Site: ${form.website || "Aucun / non précise"}`,
           `Google Maps: ${form.hasGoogleProfile}`,
           `Reseaux sociaux: ${form.hasSocial}`,
-          `Infos coherentes: ${form.infoConsistent}`,
+          `Infos cohérentes: ${form.infoConsistent}`,
           `Avis clients: ${form.hasReviews}`,
-          `Langues: ${form.languages || "Non precisees"}`,
+          `Langues: ${form.languages || "Non précisees"}`,
           technical ? `URL finale: ${technical.finalUrl}` : "",
           technical
             ? `Reponse du site: HTTP ${technical.http.status} en ${technical.http.responseTimeMs} ms`
@@ -837,7 +837,7 @@ const VisibilityAuditToolPage = () => {
         ].join("\n"),
         serviceSpecificOtherDescription: [
           generatedInterpretation
-            ? `Analyse personnalisee (${generatedInterpretation.source}): ${generatedInterpretation.headline}\n${generatedInterpretation.summary}`
+            ? `Analyse personnalisée (${generatedInterpretation.source}): ${generatedInterpretation.headline}\n${generatedInterpretation.summary}`
             : "",
           technical
             ? technical.checks
@@ -863,7 +863,7 @@ const VisibilityAuditToolPage = () => {
       <MarketSEOHead
         title={copy.seoTitle}
         description={copy.seoDescription}
-        keywords="test visibilite, audit Google Maps, visibilite locale, ChatGPT, Creativa Poeta"
+        keywords="test visibilité, audit Google Maps, visibilité locale, ChatGPT, Creativa Poeta"
         path="/tester-visibilite"
       />
 
@@ -1069,7 +1069,7 @@ const VisibilityAuditToolPage = () => {
                     ))}
                   </ul>
                   <InterpretationResult
-                    interpretation={interpretation}
+                    interprétation={interprétation}
                     locale={locale}
                   />
                   <TechnicalResult
@@ -1197,7 +1197,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
   const [technicalAudit, setTechnicalAudit] =
     useState<TechnicalVisibilityAudit | null>(null);
   const [technicalError, setTechnicalError] = useState("");
-  const [interpretation, setInterpretation] =
+  const [interprétation, setInterpretation] =
     useState<VisibilityInterpretation | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const labels = locale === "nl" ? ["Aanwezigheid", "Signalen", "Contact"] : locale === "en" ? ["Presence", "Signals", "Contact"] : locale === "kiny" ? ["Presence", "Ibimenyetso", "Contact"] : ["Presence", "Signaux", "Contact"];
@@ -1259,23 +1259,23 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
         email: form.email,
         phone: form.phone,
         company: form.company,
-        serviceType: "Diagnostic visibilite",
+        serviceType: "Diagnostic visibilité",
         selectedServices: [
-          "Test visibilite",
-          form.mainGoal || "Objectif non precise",
+          "Test visibilité",
+          form.mainGoal || "Objectif non précise",
           `Score final: ${computed.score}/100 - ${computed.label}`,
           technical
             ? `Score technique: ${technical.score}/100`
             : "Audit technique non disponible",
         ],
         customServiceDescription: [
-          `Ville / zone: ${form.city || "Non precisee"}`,
+          `Ville / zone: ${form.city || "Non précisee"}`,
           `Site: ${form.website || "Aucun"}`,
           `Google Maps: ${form.hasGoogleProfile}`,
           `Reseaux sociaux: ${form.hasSocial}`,
-          `Infos coherentes: ${form.infoConsistent}`,
+          `Infos cohérentes: ${form.infoConsistent}`,
           `Avis clients: ${form.hasReviews}`,
-          `Langues: ${form.languages || "Non precisees"}`,
+          `Langues: ${form.languages || "Non précisees"}`,
           technical ? `URL finale: ${technical.finalUrl}` : "",
           technical
             ? `Reponse du site: HTTP ${technical.http.status} en ${technical.http.responseTimeMs} ms`
@@ -1292,7 +1292,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
         ].join("\n"),
         serviceSpecificOtherDescription: [
           generatedInterpretation
-            ? `Analyse personnalisee (${generatedInterpretation.source}): ${generatedInterpretation.headline}\n${generatedInterpretation.summary}`
+            ? `Analyse personnalisée (${generatedInterpretation.source}): ${generatedInterpretation.headline}\n${generatedInterpretation.summary}`
             : "",
           technical
             ? technical.checks
@@ -1367,7 +1367,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
                   {copy.resultIntro}
                 </p>
                 <InterpretationResult
-                  interpretation={interpretation}
+                  interprétation={interprétation}
                   locale={locale}
                   compact
                 />

@@ -17,16 +17,16 @@ const ctaCopy: Record<
   }
 > = {
   fr: {
-    eyebrow: "Passer a l'action",
-    title: "Vous voulez savoir par ou commencer ?",
-    text: "On peut analyser votre presence actuelle, repérer ce qui bloque vos clients et vos outils IA, puis definir les premieres actions utiles.",
-    primary: "Tester ma visibilite",
-    secondary: "Parler a Creativa Poeta",
+    eyebrow: "Passer à l'action",
+    title: "Vous voulez savoir par où commencer ?",
+    text: "On peut analyser votre présence actuelle, repérer ce qui bloque vos clients et vos outils IA, puis définir les premières actions utiles.",
+    primary: "Tester ma visibilité",
+    secondary: "Parler à Creativa Poeta",
   },
   en: {
     eyebrow: "Take action",
     title: "Want to know where to start?",
-    text: "We can review your current presence, identify what blocks clients and AI tools, then define the first useful actions.",
+    text: "We can review your current présence, identify what blocks clients and AI tools, then define the first useful actions.",
     primary: "Test my visibility",
     secondary: "Talk to Creativa Poeta",
   },

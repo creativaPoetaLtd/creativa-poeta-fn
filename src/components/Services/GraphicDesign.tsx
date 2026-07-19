@@ -64,7 +64,7 @@ const copies: Record<string, GraphicCopy> = {
     intro:
       "Logo, charte visuelle, affiches, flyers, posts réseaux sociaux, présentations et supports publicitaires : nous créons des visuels qui rendent votre marque reconnaissable et facile à comprendre.",
     primary: "Créer mon identité visuelle",
-    secondary: "Demarrer un projet",
+    secondary: "Démarrer un projet",
     promises: [
       "Logo et style cohérent",
       "Supports pros",
@@ -80,9 +80,9 @@ const copies: Record<string, GraphicCopy> = {
       },
       {
         label: "Supports",
-        title: "Des supports prets a publier",
+        title: "Des supports prêts à publier",
         description:
-          "Image montrant des flyers, affiches, posts Instagram, banniere web et presentation reunis autour d'une même identité visuelle. Faire sentir la cohérence entre print et digital.",
+          "Image montrant des flyers, affiches, posts Instagram, bannière web et présentation reunis autour d'une même identité visuelle. Faire sentir la cohérence entre print et digital.",
       },
       {
         label: "Application",
@@ -92,21 +92,21 @@ const copies: Record<string, GraphicCopy> = {
       },
     ],
     whyEyebrow: "Pourquoi c'est important",
-    whyTitle: "Avant de lire votre message, les gens voient dejà votre image.",
+    whyTitle: "Avant de lire votre message, les gens voient déjà votre image.",
     whyText:
-      "Un bon design aide votre public a vous reconnaitre, vous prendre au serieux et comprendre rapidement ce que vous proposez. L'objectif n'est pas seulement de faire beau, mais de rendre votre communication plus claire, plus fiable et plus memorisable.",
+      "Un bon design aide votre public à vous reconnaitre, vous prendre au sérieux et comprendre rapidement ce que vous proposez. L'objectif n'est pas seulement de faire beau, mais de rendre votre communication plus claire, plus fiable et plus mémorisable.",
     worksEyebrow: "Ce que le design doit faire",
-    worksTitle: "Chaque visuel doit avoir un role précis.",
+    worksTitle: "Chaque visuel doit avoir un rôle précis.",
     worksText:
-      "Une identité visuelle forte ne se limite pas a un logo. Elle guide tout ce que les gens voient de vous: vos posts, documents, affiches, pages, présentations et publicités.",
+      "Une identité visuelle forte ne se limite pas à un logo. Elle guide tout ce que les gens voient de vous: vos posts, documents, affiches, pages, présentations et publicités.",
     works: [
       {
-        title: "Reconnaitre",
+        title: "Reconnaître",
         text: "Créer un style visuel que les gens associent rapidement à votre marque.",
       },
       {
         title: "Expliquer",
-        text: "Transformer vos offres, messages ou etapes en visuels faciles à comprendre.",
+        text: "Transformer vos offres, messages ou étapes en visuels faciles à comprendre.",
       },
       {
         title: "Rassurer",
@@ -138,11 +138,11 @@ const copies: Record<string, GraphicCopy> = {
     deliverText:
       "Le but est que vous puissiez vraiment utiliser votre identité et vos supports sur vos canaux de communication.",
     deliver: [
-      "Logo ou elements graphiques dans les formats adaptés.",
-      "Palette de couleurs, polices et regles d'utilisation.",
-      "Visuels prets pour impression ou publication digitale.",
+      "Logo ou éléments graphiques dans les formats adaptés.",
+      "Palette de couleurs, polices et règles d'utilisation.",
+      "Visuels prêts pour impression ou publication digitale.",
       "Versions adaptées aux langues et formats nécessaires.",
-      "Templates reutilisables pour garder une communication cohérente.",
+      "Templates réutilisables pour garder une communication cohérente.",
       "Conseils simples pour utiliser les visuels sans casser l'identité.",
     ],
     methodEyebrow: "Notre méthode",
@@ -166,22 +166,22 @@ const copies: Record<string, GraphicCopy> = {
       {
         question: "Puis-je demander seulement quelques visuels ?",
         answer:
-          "Oui. On peut travailler sur un besoin ponctuel, par exemple un flyer, une affiche, un carrousel ou une presentation, sans refaire toute l'identité.",
+          "Oui. On peut travailler sur un besoin ponctuel, par exemple un flyer, une affiche, un carrousel ou une présentation, sans refaire toute l'identité.",
       },
       {
         question: "Pouvez-vous moderniser une identité existante ?",
         answer:
-          "Oui. On peut garder ce qui est reconnaissable et corriger ce qui manque de clarte, de cohérence ou de qualité visuelle.",
+          "Oui. On peut garder ce qui est reconnaissable et corriger ce qui manque de clarté, de cohérence ou de qualité visuelle.",
       },
       {
         question: "Les fichiers seront-ils utilisables pour impression et web ?",
         answer:
-          "Oui. On prépare les formats selon l'usage: réseaux sociaux, site web, PDF, impression, presentation ou autres supports.",
+          "Oui. On prépare les formats selon l'usage: réseaux sociaux, site web, PDF, impression, présentation ou autres supports.",
       },
       {
         question: "Pouvez-vous créer les visuels en plusieurs langues ?",
         answer:
-          "Oui. On peut prevoir les versions français, anglais, néerlandais ou kinyarwanda si les textes sont disponibles ou si nous les preparons avec vous.",
+          "Oui. On peut prévoir les versions français, anglais, néerlandais ou kinyarwanda si les textes sont disponibles ou si nous les préparons avec vous.",
       },
       {
         question: "Est-ce que vous aidez aussi avec le message du visuel ?",
@@ -206,7 +206,7 @@ const copies: Record<string, GraphicCopy> = {
     imageBriefs: [
       {
         label: "Main visual",
-        title: "A coherent brand universe",
+        title: "A cohérent brand universe",
         description:
           "Image showing a brand moodboard with logo, colors, typography, business card, poster and mobile screen. Modern premium style, dark blue and CP yellow. Text inside the image translated by language.",
       },
@@ -228,7 +228,7 @@ const copies: Record<string, GraphicCopy> = {
     whyText:
       "Good design helps your audience recognize you, take you seriously and understand what you offer faster. The goal is not only to look beautiful, but to make your communication clearer, more trustworthy and easier to remember.",
     worksEyebrow: "What design should do",
-    worksTitle: "Every visual needs a precise role.",
+    worksTitle: "Every visual needs a précise role.",
     worksText:
       "A strong visual identity is more than a logo. It guides everything people see from you: posts, documents, posters, pages, presentations and ads.",
     works: [
@@ -280,7 +280,7 @@ const copies: Record<string, GraphicCopy> = {
     methodEyebrow: "Our method",
     methodTitle: "Clarify, design, adapt, deliver.",
     methodText:
-      "We start from your message and audience. Then we create a coherent visual style and adapt it to the materials that matter most for your activity.",
+      "We start from your message and audience. Then we create a cohérent visual style and adapt it to the materials that matter most for your activity.",
     steps: [
       "Understand your brand, audience and goals.",
       "Define a clear visual direction: colors, mood and style.",
@@ -338,7 +338,7 @@ const copies: Record<string, GraphicCopy> = {
     imageBriefs: [
       {
         label: "Hoofdbeeld",
-        title: "Een coherent merkuniversum",
+        title: "Een cohérent merkuniversum",
         description:
           "Afbeelding met brand moodboard: logo, kleuren, typografie, visitekaartje, affiche en mobiel scherm. Moderne premium stijl, donkerblauw en CP-geel. Tekst in de afbeelding vertaald per taal.",
       },
@@ -406,13 +406,13 @@ const copies: Record<string, GraphicCopy> = {
       "Kleurenpalet, lettertypes en gebruiksregels.",
       "Visuals klaar voor drukwerk of digitale publicatie.",
       "Versies aangepast aan de nodige talen en formaten.",
-      "Herbruikbare templates om communicatie coherent te houden.",
+      "Herbruikbare templates om communicatie cohérent te houden.",
       "Eenvoudige tips om de visuals goed te gebruiken.",
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Verhelderen, ontwerpen, toepassen, leveren.",
     methodText:
-      "We vertrekken van uw boodschap en publiek. Daarna maken we een coherente visuele stijl en passen die toe op de materialen die het meeste waarde hebben voor uw activiteit.",
+      "We vertrekken van uw boodschap en publiek. Daarna maken we een cohérente visuele stijl en passen die toe op de materialen die het meeste waarde hebben voor uw activitéit.",
     steps: [
       "Uw merk, publiek en doelen begrijpen.",
       "Een duidelijke visuele richting bepalen: kleuren, sfeer en stijl.",
@@ -538,7 +538,7 @@ const copies: Record<string, GraphicCopy> = {
       "Color palette, fonts na rules zo gukoresha.",
       "Visuals ziteguye print cyangwa digital publishing.",
       "Versions zihuye n'indimi na formats zikenewe.",
-      "Templates zongera gukoreshwa kugira ngo communication igume coherent.",
+      "Templates zongera gukoreshwa kugira ngo communication igume cohérent.",
       "Inama zoroshye zo gukoresha visuals utangije identity.",
     ],
     methodEyebrow: "Uko dukora",

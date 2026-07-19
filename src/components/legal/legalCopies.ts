@@ -26,7 +26,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Editeur du site",
           body: [
-            "Le site creativapoeta.com est edite par Creativa Poeta, service de creation digitale, visibilite moderne, design, contenu, outils digitaux, automatisation IA et assistance numerique.",
+            "Le site creativapoeta.com est edite par Creativa Poeta, service de creation digitale, visibilité moderne, design, contenu, outils digitaux, automatisation IA et assistance numérique.",
             "Contact principal : contact@creativapoeta.com. Telephone : +32 473 29 71 12."
           ]
         },
@@ -39,27 +39,27 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Hebergement",
           body: [
-            "Le frontend du site peut etre heberge par Netlify. Les services backend et formulaires peuvent etre heberges par Vercel ou par des prestataires techniques equivalents utilises par Creativa Poeta.",
-            "Ces prestataires assurent l'infrastructure technique necessaire a l'affichage du site, a la securite, aux formulaires et aux fonctionnalites associees."
+            "Le frontend du site peut être hébergé par Netlify. Les services backend et formulaires peuvent être hébergés par Vercel ou par des prestataires techniques equivalents utilisés par Creativa Poeta.",
+            "Ces prestataires assurent l'infrastructure technique necessaire a l'affichage du site, a la sécurité, aux formulaires et aux fonctionnalites associees."
           ]
         },
         {
           heading: "Propriete intellectuelle",
           body: [
-            "Les textes, visuels, images, logos, structures de pages, contenus de service, elements graphiques et tout autre element publie sur ce site appartiennent a Creativa Poeta ou sont utilises avec autorisation.",
+            "Les textes, visuels, images, logos, structures de pages, contenus de service, éléments graphiques et tout autre élément publié sur ce site appartiennent à Creativa Poeta ou sont utilisés avec autorisation.",
             "Toute reproduction, adaptation, distribution ou reutilisation sans autorisation ecrite prealable est interdite."
           ]
         },
         {
           heading: "Liens externes",
           body: [
-            "Le site peut contenir des liens vers des services externes, reseaux sociaux, outils tiers ou plateformes partenaires. Creativa Poeta n'est pas responsable du contenu, du fonctionnement ou des politiques de confidentialite de ces sites externes."
+            "Le site peut contenir des liens vers des services externes, réseaux sociaux, outils tiers ou plateformes partenaires. Creativa Poeta n'est pas responsable du contenu, du fonctionnement ou des politiques de confidentialite de ces sites externes."
           ]
         },
         {
           heading: "Contact",
           body: [
-            "Pour toute question concernant le site, une demande de correction, une reclamation ou une demande liee aux donnees personnelles, contactez-nous a : contact@creativapoeta.com."
+            "Pour toute question concernant le site, une demande de correction, une reclamation ou une demande liee aux données personnelles, contactez-nous a : contact@creativapoeta.com."
           ]
         }
       ]
@@ -73,8 +73,8 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Objet",
           body: [
-            "Creativa Poeta propose des services de presence locale, sites web, applications, outils digitaux, assistants IA, design graphique, contenu professionnel, documents et assistance numerique.",
-            "Le site permet de consulter nos services, de demander un projet, de demander une assistance, de tester une visibilite et de nous contacter."
+            "Creativa Poeta propose des services de présence locale, sites web, applications, outils digitaux, assistants IA, design graphique, contenu professionnel, documents et assistance numérique.",
+            "Le site permet de consulter nos services, de demander un projet, de demander une assistance, de tester une visibilité et de nous contacter."
           ]
         },
         {
@@ -87,14 +87,14 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Informations transmises par l'utilisateur",
           body: [
-            "L'utilisateur s'engage a fournir des informations exactes, utiles et non trompeuses. Creativa Poeta ne peut pas etre responsable d'une mauvaise execution causee par des informations incompletes, fausses ou tardives.",
-            "Les contenus, documents, images ou acces transmis par le client doivent lui appartenir ou etre utilises avec autorisation."
+            "L'utilisateur s'engage à fournir des informations exactes, utiles et non trompeuses. Creativa Poeta ne peut pas etre responsable d'une mauvaise exécution causee par des informations incomplètes, fausses ou tardives.",
+            "Les contenus, documents, images ou accès transmis par le client doivent lui appartenir ou etre utilisés avec autorisation."
           ]
         },
         {
           heading: "Delais et livrables",
           body: [
-            "Les delais sont indiques selon la complexite du projet et les informations disponibles. Ils peuvent evoluer si le perimetre change, si des validations sont retardees ou si des elements necessaires ne sont pas fournis a temps.",
+            "Les delais sont indiques selon la complexite du projet et les informations disponibles. Ils peuvent evoluer si le perimetre change, si des validations sont retardees ou si des éléments nécessaires ne sont pas fournis a temps.",
             "Les livrables exacts sont definis dans l'accord de projet, le devis ou les messages de validation."
           ]
         },
@@ -107,8 +107,8 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         {
           heading: "Limites de garantie",
           body: [
-            "Creativa Poeta s'engage a travailler avec soin, clarte et professionnalisme. Toutefois, aucun resultat commercial, positionnement Google, recommandation IA, volume de trafic ou nombre de clients ne peut etre garanti de maniere absolue.",
-            "Nos services visent a ameliorer la clarte, la coherence, la structure et la visibilite, mais les resultats dependent aussi du marche, de la concurrence, du contenu fourni, de la reputation et de facteurs externes."
+            "Creativa Poeta s'engage à travailler avec soin, clarté et professionnalisme. Toutefois, aucun resultat commercial, positionnement Google, recommandation IA, volume de trafic ou nombre de clients ne peut être garanti de maniere absolue.",
+            "Nos services visent à améliorer la clarté, la cohérence, la structure et la visibilité, mais les résultats dépendent aussi du marché, de la concurrence, du contenu fourni, de la réputation et de facteurs externes."
           ]
         },
         {
@@ -124,42 +124,42 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
     privacy: {
       eyebrow: "Donnees personnelles et cookies",
       title: "Confidentialite et cookies",
-      intro: "Cette page explique quelles donnees peuvent etre collectees, pourquoi elles sont utilisees et comment vous pouvez gerer vos choix de cookies.",
+      intro: "Cette page explique quelles données peuvent etre collectees, pourquoi elles sont utilisées et comment vous pouvez gerer vos choix de cookies.",
       updated: "Derniere mise a jour : 14 juillet 2026",
       sections: [
         {
           heading: "Donnees collectees",
-          body: ["Nous pouvons collecter les donnees que vous nous transmettez via les formulaires du site."],
-          bullets: ["Nom et prenom", "Adresse email", "Telephone", "Entreprise ou activite", "Ville ou zone visee", "Message, besoin, service demande", "Informations techniques utiles a une demande d'assistance ou de visibilite"]
+          body: ["Nous pouvons collecter les données que vous nous transmettez via les formulaires du site."],
+          bullets: ["Nom et prenom", "Adresse email", "Telephone", "Entreprise ou activité", "Ville ou zone visee", "Message, besoin, service demande", "Informations techniques utiles a une demande d'assistance ou de visibilité"]
         },
         {
           heading: "Finalites",
-          body: ["Ces donnees sont utilisees pour repondre a vos demandes, preparer un devis, analyser un besoin, assurer le suivi d'un projet, fournir une assistance numerique ou ameliorer nos services." ]
+          body: ["Ces données sont utilisées pour répondre à vos demandes, préparer un devis, analyser un besoin, assurer le suivi d'un projet, fournir une assistance numérique ou améliorer nos services." ]
         },
         {
           heading: "Base legale",
-          body: ["Selon le cas, le traitement repose sur votre consentement, l'execution de mesures precontractuelles, l'execution d'un contrat, notre interet legitime a repondre aux demandes, ou une obligation legale." ]
+          body: ["Selon le cas, le traitement repose sur votre consentement, l'exécution de mesures précontractuelles, l'exécution d'un contrat, notre intérêt légitime à répondre aux demandes, ou une obligation légale." ]
         },
         {
           heading: "Conservation",
-          body: ["Les donnees sont conservees pendant la duree necessaire au traitement de la demande, au suivi commercial ou projet, puis archivees ou supprimees selon les obligations applicables et les besoins raisonnables de preuve." ]
+          body: ["Les données sont conservees pendant la duree necessaire au traitement de la demande, au suivi commercial ou projet, puis archivees ou supprimees selon les obligations applicables et les besoins raisonnables de preuve." ]
         },
         {
           heading: "Partage avec des prestataires",
-          body: ["Certaines donnees peuvent etre traitees par nos prestataires techniques : hebergement, formulaires, email, base de donnees, outils d'administration, securite, analyse ou services IA si une fonctionnalite le necessite." ]
+          body: ["Certaines données peuvent etre traitees par nos prestataires techniques : hebergement, formulaires, email, base de données, outils d'administration, sécurité, analyse ou services IA si une fonctionnalite le necessite." ]
         },
         {
           heading: "Cookies",
-          body: ["Les cookies strictement necessaires permettent au site de fonctionner et de memoriser vos choix. Les cookies de preferences, d'analyse ou de marketing ne sont utilises que selon vos choix lorsque ces categories sont activees."],
+          body: ["Les cookies strictement nécessaires permettent au site de fonctionner et de mémoriser vos choix. Les cookies de préférences, d'analyse ou de marketing ne sont utilisés que selon vos choix lorsque ces categories sont activees."],
           bullets: ["Necessaires : fonctionnement du site et sauvegarde du choix cookies", "Preferences : langue, confort d'utilisation ou reglages", "Analyse : statistiques anonymisees ou mesure d'audience", "Marketing : campagnes, remarketing ou contenus personnalises si actives"]
         },
         {
           heading: "Vos droits",
-          body: ["Vous pouvez demander l'acces, la rectification, la suppression, la limitation ou l'opposition au traitement de vos donnees. Vous pouvez aussi retirer votre consentement lorsque le traitement repose sur celui-ci." ]
+          body: ["Vous pouvez demander l'accès, la rectification, la suppression, la limitation ou l'opposition au traitement de vos données. Vous pouvez aussi retirer votre consentement lorsque le traitement repose sur celui-ci." ]
         },
         {
           heading: "Contact confidentialite",
-          body: ["Pour toute demande concernant vos donnees ou vos cookies : contact@creativapoeta.com." ]
+          body: ["Pour toute demande concernant vos données ou vos cookies : contact@creativapoeta.com." ]
         }
       ]
     }
@@ -187,10 +187,10 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       sections: [
         { heading: "Purpose", body: ["Creativa Poeta provides local presence, websites, apps, digital tools, AI assistants, graphic design, professional content, documents and digital assistance services.", "The website lets users discover services, start a project, request assistance, test visibility and contact us."] },
         { heading: "Requests and quotes", body: ["Submitting a form does not automatically create a final order. It allows Creativa Poeta to review the request and contact the user.", "A mission starts only after clear validation of needs, budget, timelines and agreed conditions."] },
-        { heading: "Information provided by users", body: ["Users must provide accurate, useful and non-misleading information. Creativa Poeta is not responsible for poor execution caused by incomplete, false or late information.", "Content, documents, images or access credentials provided by the client must belong to the client or be used with permission."] },
+        { heading: "Information provided by users", body: ["Users must provide accurate, useful and non-misleading information. Creativa Poeta is not responsible for poor exécution caused by incomplete, false or late information.", "Content, documents, images or accèss credentials provided by the client must belong to the client or be used with permission."] },
         { heading: "Timelines and deliverables", body: ["Timelines depend on project complexity and available information. They may change if the scope changes, validations are delayed or required materials are not provided on time.", "Exact deliverables are defined in the project agreement, quote or validation messages."] },
         { heading: "Payment", body: ["Depending on the project, a deposit may be requested before work begins. The balance is due under the agreed conditions. Late payment may suspend work or final delivery."] },
-        { heading: "Limits of guarantee", body: ["Creativa Poeta works carefully and professionally. However, no commercial result, Google ranking, AI recommendation, traffic volume or number of clients can be absolutely guaranteed.", "Our services improve clarity, consistency, structure and visibility, but results also depend on market conditions, competition, content, reputation and external factors."] },
+        { heading: "Limits of guarantee", body: ["Creativa Poeta works carefully and professionally. However, no commercial result, Google ranking, AI recommendation, traffic volume or number of clients can be absolutely guaranteed.", "Our services improve clarity, consistency, structure and visibility, but results also depend on market conditions, competition, content, réputation and external factors."] },
         { heading: "Prohibited use", body: ["The website must not be used to submit illegal, harmful, fraudulent, abusive, automated or third-party-infringing content."] },
         { heading: "Changes", body: ["Creativa Poeta may update these terms as services, tools or obligations evolve. The published version is the applicable version at the time of consultation."] }
       ]
@@ -207,7 +207,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         { heading: "Retention", body: ["Data is kept for the time needed to process the request and project follow-up, then archived or deleted according to applicable obligations and reasonable evidence needs."] },
         { heading: "Service providers", body: ["Some data may be processed by technical providers: hosting, forms, email, database, administration tools, security, analytics or AI services when required by a feature."] },
         { heading: "Cookies", body: ["Strictly necessary cookies make the website work and store your choices. Preference, analytics or marketing cookies are used only according to your choices when enabled."], bullets: ["Necessary: website operation and cookie choice storage", "Preferences: language or comfort settings", "Analytics: audience measurement", "Marketing: campaigns, remarketing or personalized content if enabled"] },
-        { heading: "Your rights", body: ["You may request access, correction, deletion, restriction or objection to the processing of your data. You may also withdraw consent when processing is based on consent."] },
+        { heading: "Your rights", body: ["You may request accèss, correction, deletion, restriction or objection to the processing of your data. You may also withdraw consent when processing is based on consent."] },
         { heading: "Privacy contact", body: ["For data or cookie requests: contact@creativapoeta.com."] }
       ]
     }
@@ -249,7 +249,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       intro: "Deze pagina legt uit welke gegevens kunnen worden verzameld, waarom ze worden gebruikt en hoe u cookies beheert.",
       updated: "Laatst bijgewerkt: 14 juli 2026",
       sections: [
-        { heading: "Verzamelde gegevens", body: ["Wij kunnen gegevens verzamelen die u via formulieren verzendt."], bullets: ["Naam", "E-mailadres", "Telefoonnummer", "Bedrijf of activiteit", "Stad of doelgebied", "Bericht, behoefte of gevraagde dienst", "Technische informatie voor hulp- of zichtbaarheidsvragen"] },
+        { heading: "Verzamelde gegevens", body: ["Wij kunnen gegevens verzamelen die u via formulieren verzendt."], bullets: ["Naam", "E-mailadres", "Telefoonnummer", "Bedrijf of activitéit", "Stad of doelgebied", "Bericht, behoefte of gevraagde dienst", "Technische informatie voor hulp- of zichtbaarheidsvragen"] },
         { heading: "Doeleinden", body: ["Gegevens worden gebruikt om aanvragen te beantwoorden, offertes op te stellen, behoeften te analyseren, projecten op te volgen, digitale hulp te bieden of onze diensten te verbeteren."] },
         { heading: "Rechtsgrond", body: ["Afhankelijk van de situatie steunt verwerking op toestemming, precontractuele stappen, uitvoering van een overeenkomst, gerechtvaardigd belang om te antwoorden of wettelijke verplichtingen."] },
         { heading: "Bewaring", body: ["Gegevens worden bewaard zolang nodig voor behandeling, opvolging en redelijke bewijsnoden, daarna gearchiveerd of verwijderd volgens toepasselijke verplichtingen."] },
@@ -267,7 +267,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
       intro: "Iyi page isobanura amakuru y'ibanze yerekeye urubuga rwa Creativa Poeta, uwurukora n'uko mwatwandikira.",
       updated: "Byavuguruwe: 14 Nyakanga 2026",
       sections: [
-        { heading: "Ushinzwe urubuga", body: ["creativapoeta.com ikoreshwa na Creativa Poeta, service ikora creation digitale, visibility, design, content, tools, AI automation na assistance numerique.", "Contact: contact@creativapoeta.com. Telephone: +32 473 29 71 12."] },
+        { heading: "Ushinzwe urubuga", body: ["creativapoeta.com ikoreshwa na Creativa Poeta, service ikora creation digitale, visibility, design, content, tools, AI automation na assistance numérique.", "Contact: contact@creativapoeta.com. Telephone: +32 473 29 71 12."] },
         { heading: "Ushinzwe publication", body: ["Ushinzwe publication ni representant wa Creativa Poeta. Ku bibazo byerekeye site cyangwa gukosora content, twandikire kuri email."] },
         { heading: "Hosting", body: ["Frontend ishobora kuba kuri Netlify. Backend na forms bishobora kuba kuri Vercel cyangwa abandi providers ba technical dukoresha."] },
         { heading: "Intellectual property", body: ["Texts, visuals, images, logos, page structures na content biri kuri site ni ibya Creativa Poeta cyangwa bikoreshwa dufite permission.", "Kubikoresha utabanje kubona uruhushya rwanditse ntibyemewe."] },
@@ -303,7 +303,7 @@ export const legalCopies: Record<LegalLocale, Record<LegalPageKind, LegalPageCop
         { heading: "Kubika data", body: ["Data ibikwa igihe gikenewe kugira ngo demande ikurikiranwe, hanyuma igasibwa cyangwa ikabikwa nk'archive hakurikijwe obligations."] },
         { heading: "Providers", body: ["Data zimwe zishobora kunyuzwa kuri technical providers: hosting, forms, email, database, admin tools, security, analytics cyangwa AI services."] },
         { heading: "Cookies", body: ["Necessary cookies zituma site ikora kandi zikabika choices. Preferences, analytics na marketing cookies zikoreshwa gusa niba ubyemeye."], bullets: ["Necessary: site operation", "Preferences: language/settings", "Analytics: audience measurement", "Marketing: campaigns or personalized content"] },
-        { heading: "Rights", body: ["Ushobora gusaba access, correction, deletion cyangwa withdrawal of consent aho bikenewe."] },
+        { heading: "Rights", body: ["Ushobora gusaba accèss, correction, deletion cyangwa withdrawal of consent aho bikenewe."] },
         { heading: "Contact", body: ["Ku bibazo bya data cyangwa cookies: contact@creativapoeta.com."] }
       ]
     }

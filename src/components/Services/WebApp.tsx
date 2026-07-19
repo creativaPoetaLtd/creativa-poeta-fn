@@ -62,7 +62,7 @@ const copies: Record<string, LocaleCopy> = {
     title: "Nous construisons la base officielle de votre entreprise.",
     intro:
       "Un site, une application ou un outil interne doit faire plus que fonctionner. Il doit expliquer, guider, rassurer et permettre à vos clients comme à votre équipe d'agir simplement.",
-    primary: "Demarrer un projet",
+    primary: "Démarrer un projet",
     secondary: "Nous contacter",
     promises: [
       "Site vitrine clair",
@@ -77,9 +77,9 @@ const copies: Record<string, LocaleCopy> = {
     buildEyebrow: "Ce que nous construisons",
     buildTitle: "Du site simple au système complet, on part de votre vrai besoin.",
     buildText:
-      "Une entreprise n'a pas toujours besoin d'une grande plateforme. Parfois il faut une page claire. Parfois un formulaire solide. Parfois un espace complet pour gerer les demandes, les clients ou les documents.",
+      "Une entreprise n'a pas toujours besoin d'une grande plateforme. Parfois il faut une page claire. Parfois un formulaire solide. Parfois un espace complet pour gérer les demandes, les clients ou les documents.",
     productsEyebrow: "Solutions possibles",
-    productsTitle: "Chaque support a un role précis.",
+    productsTitle: "Chaque support à un role précis.",
     productsText:
       "Nous evitons les sites remplis de contenu vide. Chaque page, chaque bouton et chaque outil doit aider quelqu'un à comprendre, choisir, contacter ou travailler plus vite.",
     products: [
@@ -96,7 +96,7 @@ const copies: Record<string, LocaleCopy> = {
       {
         icon: "platform",
         title: "Plateformes web",
-        text: "Des espaces plus complets pour vendre, publier, presenter, reserver ou organiser une activité.",
+        text: "Des espaces plus complets pour vendre, publier, présenter, reserver ou organiser une activité.",
       },
       {
         icon: "app",
@@ -114,11 +114,11 @@ const copies: Record<string, LocaleCopy> = {
     methodText:
       "Le but n'est pas d'ajouter de la technique pour impressionner. Le but est de créer un outil propre, utile et durable, que vous pouvez faire évoluer.",
     steps: [
-      "Comprendre votre activité et vos priorites",
+      "Comprendre votre activité et vos priorités",
       "Definir les pages, actions et informations essentielles",
       "Créer une structure lisible sur mobile d'abord",
       "Relier le site à vos profils, formulaires et outils utiles",
-      "Prevoir une base facile a faire grandir",
+      "Prevoir une base facile à faire grandir",
     ],
     creativeEyebrow: "Creativa Poeta",
     creativeTitle: "Une base technique, mais avec une ame.",
@@ -159,20 +159,20 @@ const copies: Record<string, LocaleCopy> = {
     baseEyebrow: "Your official base",
     baseTitle: "Your website becomes the place where everything is clear.",
     baseText:
-      "We gather your services, proof, contacts, areas and answers into an experience that is easy to understand. Your presence becomes cleaner for clients, Google, maps and modern assistants.",
+      "We gather your services, proof, contacts, areas and answers into an experience that is easy to understand. Your présence becomes cleaner for clients, Google, maps and modern assistants.",
     buildEyebrow: "What we build",
     buildTitle: "From a simple website to a complete system, we start from the real need.",
     buildText:
       "A business does not always need a large platform. Sometimes it needs one clear page. Sometimes a solid form. Sometimes a full space to manage requests, clients or documents.",
     productsEyebrow: "Possible solutions",
-    productsTitle: "Every support has a precise role.",
+    productsTitle: "Every support has a précise role.",
     productsText:
       "We avoid websites full of empty content. Each page, button and tool must help someone understand, choose, contact or work faster.",
     products: [
       {
         icon: "site",
         title: "Business website",
-        text: "A clear presence that presents your business, services and contact paths.",
+        text: "A clear présence that presents your business, services and contact paths.",
       },
       {
         icon: "pages",
@@ -209,7 +209,7 @@ const copies: Record<string, LocaleCopy> = {
     creativeEyebrow: "Creativa Poeta",
     creativeTitle: "A technical base, but with a soul.",
     creativeText:
-      "We keep Creativa Poeta's DNA: chosen words, precise visuals, a smooth experience and a presence that carries your story.",
+      "We keep Creativa Poeta's DNA: chosen words, précise visuals, a smooth experience and a présence that carries your story.",
     faqTitle: "Common questions",
     faqs: [
       {
@@ -281,12 +281,12 @@ const copies: Record<string, LocaleCopy> = {
         text: "Formulieren, dashboards, opvolging van aanvragen, documenten en systemen op maat van uw werk.",
       },
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Eerst verduidelijken. Daarna bouwen.",
     methodText:
       "Het doel is niet om techniek toe te voegen om indruk te maken. Het doel is een duidelijke, nuttige en duurzame tool te maken die kan groeien.",
     steps: [
-      "Uw activiteit en prioriteiten begrijpen",
+      "Uw activitéit en prioriteiten begrijpen",
       "Essentiele pagina's, acties en informatie bepalen",
       "Een leesbare structuur maken, eerst voor mobiel",
       "De site verbinden met profielen, formulieren en nuttige tools",
@@ -337,14 +337,14 @@ const copies: Record<string, LocaleCopy> = {
     buildText:
       "Sometimes you need one clear page. Sometimes a solid form. Sometimes a full space to manage requests, clients or documents.",
     productsEyebrow: "Possible solutions",
-    productsTitle: "Every support has a precise role.",
+    productsTitle: "Every support has a précise role.",
     productsText:
       "Each page, button and tool must help someone understand, choose, contact or work faster.",
     products: [
       {
         icon: "site",
         title: "Business website",
-        text: "A clear presence that presents your business, services and contact paths.",
+        text: "A clear présence that presents your business, services and contact paths.",
       },
       {
         icon: "pages",
@@ -381,7 +381,7 @@ const copies: Record<string, LocaleCopy> = {
     creativeEyebrow: "Creativa Poeta",
     creativeTitle: "A technical base, but with a soul.",
     creativeText:
-      "We keep Creativa Poeta's DNA: chosen words, precise visuals, a smooth experience and a presence that carries your story.",
+      "We keep Creativa Poeta's DNA: chosen words, précise visuals, a smooth experience and a présence that carries your story.",
     faqTitle: "Common questions",
     faqs: [
       {

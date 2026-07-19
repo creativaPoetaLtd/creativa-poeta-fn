@@ -76,10 +76,10 @@ type ProjectCopy = {
 
 const copies: Record<LocaleKey, ProjectCopy> = {
   fr: {
-    eyebrow: "Votre creativite, notre passion",
+    eyebrow: "Votre créativité, notre passion",
     title: "Dites-nous ce que vous voulez créer, améliorer ou rendre visible.",
     intro:
-      "Creativa Poeta rassemble création, contenu, sites web, présence locale et visibilité moderne. Choisissez une porte d'entree, puis précisez les services qui vous intéressent.",
+      "Creativa Poeta rassemble création, contenu, sites web, présence locale et visibilité moderne. Choisissez une porte d'entrée, puis précisez les services qui vous intéressent.",
     stepLabel: "Etape",
     steps: ["Orientation", "Services", "Contexte", "Contact"],
     chooseOne: "Quelle famille de besoin correspond le mieux à votre projet ?",
@@ -89,7 +89,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "Ces informations nous aident à comprendre votre base actuelle avant de vous répondre.",
     contactTitle: "Comment pouvons-nous vous recontacter ?",
     contactIntro:
-      "Laissez vos coordonnees et un court message. Nous reviendrons vers vous avec une premiere lecture claire.",
+      "Laissez vos coordonnées et un court message. Nous reviendrons vers vous avec une première lecture claire.",
     otherLabel: "Autre besoin",
     otherPlaceholder: "Expliquez le service ou l'idée que vous avez en tête...",
     websiteLabel: "Avez-vous déjà un site ou une page officielle ?",
@@ -114,7 +114,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
     zonePlaceholder: "Ex. Bruxelles",
     languagesLabel: "Langues importantes",
     languagesPlaceholder: "Ex. français, néerlandais...",
-    urgencyLabel: "Délai souhaite",
+    urgencyLabel: "Délai souhaité",
     urgencyOptions: [
       "Le plus tôt possible",
       "Dans les prochaines semaines",
@@ -139,7 +139,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "creative",
         icon: FaPalette,
-        title: "Créer une identité ou un visuel",
+        title: "Identité visuelle, logo et design",
         description:
           "Donner une forme forte à votre idée : logo, image, message, support ou campagne.",
         services: [
@@ -156,12 +156,12 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "content",
         icon: FaFeatherAlt,
-        title: "Ecrire, raconter ou clarifier",
+        title: "Contenu, rédaction et documents",
         description:
           "Transformer vos idées en mots simples, utiles et mémorables.",
         services: [
           "Textes pour site web",
-          "Pages utiles qui repondent aux questions clients",
+          "Pages utiles qui répondent aux questions clients",
           "Articles, histoires et contenus longs",
           "Descriptions de services ou produits",
           "Traduction et adaptation de contenu",
@@ -173,9 +173,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "website",
         icon: FaGlobe,
-        title: "Construire votre présence officielle",
+        title: "Sites, apps, logiciels et outils digitaux",
         description:
-          "Créer ou refondre la base que vos clients, Google, maps et outils IA peuvent comprendre.",
+          "Créer ou refondre un site, une app, un logiciel interne, un dashboard, un formulaire ou un système digital utile.",
         services: [
           "Site vitrine ou page officielle",
           "Refonte d'un site existant",
@@ -195,7 +195,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "visibility",
         icon: FaMapMarkedAlt,
-        title: "Rendre votre entreprise visible",
+        title: "Visibilité locale, Google, Maps et IA",
         description:
           "Aligner votre présence pour que vos clients vous trouvent là où ils cherchent vraiment.",
         services: [
@@ -212,7 +212,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "ai",
         icon: FaRobot,
-        title: "Préparer votre présence pour les outils IA",
+        title: "Assistants IA, GPT et automatisations",
         description:
           "Aider les assistants comme ChatGPT à comprendre qui vous êtes, ce que vous faites et pourquoi vous recommander.",
         services: [
@@ -229,9 +229,9 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       {
         id: "tech",
         icon: FaTools,
-        title: "Assistance numérique et dépannage",
+        title: "Assistance numérique, installation et dépannage",
         description:
-          "Installer, configurer, reparer ou apprendre à utiliser vos outils et appareils numeriques.",
+          "Installer, configurer, réparer ou apprendre à utiliser vos outils et appareils numériques.",
         services: [
           "Dépannage ordinateur, smartphone, tablette ou imprimante",
           "Installation et configuration d'appareils",
@@ -239,8 +239,8 @@ const copies: Record<LocaleKey, ProjectCopy> = {
           "Sécurité, mots de passe et protection des données",
           "Aide pour démarches en ligne ou achats internet",
           "Accompagnement réseaux sociaux et outils du quotidien",
-          "Configuration multimedia, TV, audio ou objets connectes",
-          "Formation pas a pas pour gagner en autonomie",
+          "Configuration multimédia, TV, audio ou objets connectés",
+          "Formation pas à pas pour gagner en autonomie",
         ],
       },
       {
@@ -251,10 +251,10 @@ const copies: Record<LocaleKey, ProjectCopy> = {
           "Vous avez une idée, un blocage ou une envie, mais pas encore le bon chemin.",
         services: [
           "Analyse de votre situation actuelle",
-          "Priorites pour commencer sans se disperser",
+          "Priorités pour commencer sans se disperser",
           "Choix entre site, maps, contenu, visuels ou IA",
-          "Plan simple par etapes",
-          "Accompagnement creatif et digital",
+          "Plan simple par étapes",
+          "Accompagnement créatif et digital",
         ],
       },
     ],
@@ -678,13 +678,13 @@ copies.en.groups = copies.fr.groups.map((group) => ({
       : group.id === "content"
         ? "Write, tell or clarify"
         : group.id === "website"
-          ? "Build your official presence"
+          ? "Websites, apps, software and digital tools"
           : group.id === "visibility"
             ? "Make your business visible"
             : group.id === "ai"
-              ? "Prepare your presence for AI tools"
+              ? "AI assistants, GPT and automations"
               : group.id === "tech"
-                ? "Digital assistance and troubleshooting"
+                ? "Digital assistance, setup and troubleshooting"
                 : "I am not sure yet, advise me",
   description:
     group.id === "creative"
@@ -711,13 +711,13 @@ copies.nl.groups = copies.fr.groups.map((group) => ({
       : group.id === "content"
         ? "Schrijven, vertellen of verduidelijken"
         : group.id === "website"
-          ? "Uw officiele aanwezigheid bouwen"
+          ? "Websites, apps, software en digitale tools"
           : group.id === "visibility"
             ? "Uw bedrijf zichtbaar maken"
             : group.id === "ai"
-              ? "Uw aanwezigheid voorbereiden voor AI-tools"
+              ? "AI-assistenten, GPT en automatisering"
               : group.id === "tech"
-                ? "Digitale hulp en technische ondersteuning"
+                ? "Digitale hulp, installatie en ondersteuning"
                 : "Ik weet het nog niet, adviseer mij",
   description:
     group.id === "tech"
@@ -734,13 +734,13 @@ copies.kiny.groups = copies.fr.groups.map((group) => ({
       : group.id === "content"
         ? "Kwandika no gusobanura"
         : group.id === "website"
-          ? "Kubaka presence yawe yemewe"
+          ? "Websites, apps, software n’ibikoresho bya digital"
           : group.id === "visibility"
             ? "Gutuma business yawe iboneka"
             : group.id === "ai"
-              ? "Gutegura uko ugaragara kuri AI"
+              ? "AI assistants, GPT na automations"
               : group.id === "tech"
-                ? "Digital assistance na depannage"
+                ? "Digital assistance, installation na depannage"
                 : "Sinzi neza, mungire inama",
   description:
     group.id === "tech"
@@ -899,12 +899,12 @@ const ProjectForm = () => {
     setIsSubmitting(true);
     try {
       const contextSummary = [
-        `Statut site: ${formData.websiteStatus || "Non precise"}`,
-        `Canaux actuels: ${formData.currentChannels.join(", ") || "Non precise"}`,
-        `Zone visee: ${formData.targetZone || "Non precise"}`,
-        `Langues: ${formData.languages || "Non precise"}`,
-        `Delai: ${formData.urgency || "Non precise"}`,
-        `Message: ${formData.additionalInfo || "Non precise"}`,
+        `Statut site: ${formData.websiteStatus || "Non précisé"}`,
+        `Canaux actuels: ${formData.currentChannels.join(", ") || "Non précisé"}`,
+        `Zone visée: ${formData.targetZone || "Non précisé"}`,
+        `Langues: ${formData.languages || "Non précisé"}`,
+        `Délai: ${formData.urgency || "Non précisé"}`,
+        `Message: ${formData.additionalInfo || "Non précisé"}`,
       ].join("\n");
 
       const payload = {

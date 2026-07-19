@@ -22,8 +22,8 @@ export const serviceSummariesFr: ServiceSummary[] = [
     shortTitle: "Etre trouve",
     slug: "/services/visibilite-ia-recherche-locale",
     summary:
-      "Nous aidons votre entreprise a etre plus facile a trouver dans Google, les maps, les recherches vocales et les moteurs IA.",
-    primaryCta: "Ameliorer ma visibilite",
+      "Nous aidons votre entreprise à être plus facile a trouver dans Google, les maps, les recherches vocales et les moteurs IA.",
+    primaryCta: "Ameliorer ma visibilité",
   },
   {
     code: "ai-ready-websites",
@@ -52,7 +52,7 @@ export const serviceSummariesFr: ServiceSummary[] = [
     shortTitle: "Pages utiles",
     slug: "/services/croissance-programmatique",
     summary:
-      "Nous creons des structures de pages utiles pour repondre a des recherches precises sans contenu inutile.",
+      "Nous creons des structures de pages utiles pour répondre à des recherches précises sans contenu inutile.",
     primaryCta: "Construire ma strategie",
   },
 ];

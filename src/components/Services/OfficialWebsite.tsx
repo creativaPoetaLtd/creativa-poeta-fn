@@ -68,7 +68,7 @@ const copies: Record<string, OfficialCopy> = {
       "Site clair",
       "Application utile",
       "Logiciel interne",
-      "Systeme relie à vos vrais besoins",
+      "Système relié à vos vrais besoins",
     ],
     whyEyebrow: "Pourquoi c'est important",
     whyTitle: "Un outil digital doit servir votre entreprise, pas seulement exister en ligne.",
@@ -117,15 +117,15 @@ const copies: Record<string, OfficialCopy> = {
       },
     ],
     pathsEyebrow: "Ce que nous pouvons construire",
-    pathsTitle: "On part du besoin reel, puis on choisit le bon format.",
+    pathsTitle: "On part du besoin réel, puis on choisit le bon format.",
     paths: [
       {
         title: "Site ou mini-site",
-        text: "Pour expliquer votre activité, presenter vos services, rassurer les visiteurs et créer une base officielle claire.",
+        text: "Pour expliquer votre activité, présenter vos services, rassurer les visiteurs et créer une base officielle claire.",
       },
       {
         title: "Application ou plateforme",
-        text: "Pour proposer une expérience plus interactive: espace client, reservations, demandes, profils, suivi ou contenus accessibles.",
+        text: "Pour proposer une expérience plus interactive: espace client, reservations, demandes, profils, suivi ou contenus accèssibles.",
       },
       {
         title: "Logiciel interne ou système",
@@ -135,13 +135,13 @@ const copies: Record<string, OfficialCopy> = {
     deliverEyebrow: "Livrables",
     deliverTitle: "Un outil utilisable, pas seulement une belle maquette.",
     deliverText:
-      "Le résultat doit pouvoir être utilisé par vos clients, votre équipe ou votre organisation, selon le problème a resoudre.",
+      "Le résultat doit pouvoir être utilisé par vos clients, votre équipe ou votre organisation, selon le problème à résoudre.",
     deliver: [
       "Une structure claire pour le site, l'app ou le logiciel.",
-      "Des ecrans et parcours faciles à comprendre.",
+      "Des écrans et parcours faciles à comprendre.",
       "Des formulaires, tableaux de bord ou espaces de gestion selon le besoin.",
       "Des contenus et messages clairs pour guider l'utilisateur.",
-      "Une base evolutive pour ajouter langues, services, roles ou fonctionnalites.",
+      "Une base évolutive pour ajouter langues, services, rôles ou fonctionnalités.",
       "Des connexions utiles avec vos contacts, profils, emails ou données existantes.",
     ],
     methodEyebrow: "Notre méthode",
@@ -151,9 +151,9 @@ const copies: Record<string, OfficialCopy> = {
     steps: [
       "Identifier les utilisateurs, les actions et les informations importantes.",
       "Choisir le bon format: site, app, dashboard, logiciel ou système.",
-      "Dessiner les ecrans et les parcours essentiels.",
+      "Dessiner les écrans et les parcours essentiels.",
       "Construire une interface claire, responsive et facile à utiliser.",
-      "Tester, ajuster et preparer l'outil pour évoluer.",
+      "Tester, ajuster et préparer l'outil pour évoluer.",
     ],
     faqTitle: "Questions fréquentes",
     faqs: [
@@ -165,7 +165,7 @@ const copies: Record<string, OfficialCopy> = {
       {
         question: "Comment savoir si j'ai besoin d'un site, d'une app ou d'un logiciel ?",
         answer:
-          "On regarde d'abord l'usage. Si vous devez expliquer, un site suffit souvent. Si l'utilisateur doit agir ou suivre quelque chose, une app ou un espace client peut être utile. Si votre équipe doit gerer, un logiciel interne devient pertinent.",
+          "On regarde d'abord l'usage. Si vous devez expliquer, un site suffit souvent. Si l'utilisateur doit agir ou suivre quelque chose, une app ou un espace client peut être utile. Si votre équipe doit gérer, un logiciel interne devient pertinent.",
       },
       {
         question: "Peut-on commencer petit ?",
@@ -178,14 +178,14 @@ const copies: Record<string, OfficialCopy> = {
           "Oui. On garde ce qui fonctionne, puis on corrige la structure, l'interface, les parcours et les parties qui bloquent les utilisateurs.",
       },
       {
-        question: "Est-ce que vous ecrivez aussi les textes et messages de l'outil ?",
+        question: "Est-ce que vous écrivez aussi les textes et messages de l'outil ?",
         answer:
-          "Oui. La clarte fait partie du service: textes de pages, boutons, messages d'erreur, instructions, FAQ et contenus qui guident l'utilisateur.",
+          "Oui. La clarté fait partie du service: textes de pages, boutons, messages d'erreur, instructions, FAQ et contenus qui guident l'utilisateur.",
       },
       {
-        question: "Peut-on preparer l'outil pour plusieurs langues ?",
+        question: "Peut-on préparer l'outil pour plusieurs langues ?",
         answer:
-          "Oui. On peut prevoir les contenus et images en français, anglais, néerlandais ou kinyarwanda selon le marche visé.",
+          "Oui. On peut prévoir les contenus et images en français, anglais, néerlandais ou kinyarwanda selon le marché visé.",
       },
     ],
   },
@@ -257,7 +257,7 @@ const copies: Record<string, OfficialCopy> = {
       },
       {
         title: "Application or platform",
-        text: "To offer a more interactive experience: client portal, bookings, requests, profiles, tracking or accessible content.",
+        text: "To offer a more interactive experience: client portal, bookings, requests, profiles, tracking or accèssible content.",
       },
       {
         title: "Internal software or system",
@@ -359,7 +359,7 @@ const copies: Record<string, OfficialCopy> = {
       },
     ],
     blocksEyebrow: "Wat de tool moet doen",
-    blocksTitle: "Elke tool moet een duidelijke rol hebben in uw activiteit.",
+    blocksTitle: "Elke tool moet een duidelijke rol hebben in uw activitéit.",
     blocksText:
       "We bouwen geen app of software om modern te lijken. We bouwen ze omdat ze een klant, team of operatie eenvoudiger vooruithelpt.",
     blocks: [
@@ -385,7 +385,7 @@ const copies: Record<string, OfficialCopy> = {
     paths: [
       {
         title: "Website of mini-site",
-        text: "Om uw activiteit uit te leggen, diensten te tonen, bezoekers gerust te stellen en een duidelijke officiele basis te maken.",
+        text: "Om uw activitéit uit te leggen, diensten te tonen, bezoekers gerust te stellen en een duidelijke officiele basis te maken.",
       },
       {
         title: "Applicatie of platform",
@@ -393,7 +393,7 @@ const copies: Record<string, OfficialCopy> = {
       },
       {
         title: "Interne software of systeem",
-        text: "Om uw werk te organiseren: aanvraagbeheer, dashboard, documenten, eenvoudige automatiseringen en activiteitsopvolging.",
+        text: "Om uw werk te organiseren: aanvraagbeheer, dashboard, documenten, eenvoudige automatiseringen en activitéitsopvolging.",
       },
     ],
     deliverEyebrow: "Wat we opleveren",
@@ -408,7 +408,7 @@ const copies: Record<string, OfficialCopy> = {
       "Een basis die kan groeien met talen, diensten, rollen of functies.",
       "Nuttige verbindingen met contacten, profielen, emails of bestaande data.",
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Begrijpen, structureren, bouwen, verbeteren.",
     methodText:
       "We starten bij het concrete probleem: informeren, verkopen, aanvragen ontvangen, klanten opvolgen of een team organiseren. Daarna bouwen we de eenvoudigste tool die echt helpt.",

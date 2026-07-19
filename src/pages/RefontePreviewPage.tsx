@@ -33,7 +33,7 @@ const proofPoints = [
   {
     icon: MessageCircle,
     title: "Voix",
-    body: "Un client peut chercher en parlant a son telephone ou dans sa voiture.",
+    body: "Un client peut chercher en parlant à son téléphone ou dans sa voiture.",
   },
   {
     icon: Bot,
@@ -44,9 +44,9 @@ const proofPoints = [
 
 const reassurance = [
   "On peut commencer meme si vous n'avez pas encore de site.",
-  "On peut refondre une presence existante sans tout jeter.",
+  "On peut refondre une présence existante sans tout jeter.",
   "On garde Google Maps, Instagram et Facebook quand ils sont utiles.",
-  "On construit une base que vous controlez vraiment.",
+  "On construit une base que vous contrôlez vraiment.",
 ];
 
 const visibleWithoutJargon = [
@@ -64,7 +64,7 @@ const visibleWithoutJargon = [
   },
   {
     label: "Vos chemins de contact",
-    text: "telephone, formulaire, WhatsApp, rendez-vous ou devis",
+    text: "téléphone, formulaire, WhatsApp, rendez-vous ou devis",
   },
 ];
 
@@ -74,7 +74,7 @@ const structuredData = {
   name: "Creativa Poeta",
   url: "https://creativapoeta.com",
   description:
-    "Creativa Poeta aide les entreprises a etre plus faciles a trouver, comprendre et contacter dans Google, les maps, les recherches vocales et les moteurs IA.",
+    "Creativa Poeta aide les entreprises à être plus faciles a trouver, comprendre et contacter dans Google, les maps, les recherches vocales et les moteurs IA.",
   serviceType: [
     "Visibilite digitale",
     "Creation de site web",
@@ -121,7 +121,7 @@ const RefontePreviewPage = () => {
             <img src={poetaImage} alt="Creativa Poeta" />
             <div className="refonte-hero-panel">
               <span>Base officielle</span>
-              <strong>Site, maps, reseaux et demandes clients alignes</strong>
+              <strong>Site, maps, réseaux et demandes clients alignes</strong>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@ const RefontePreviewPage = () => {
             <p className="refonte-eyebrow">La base que nous construisons</p>
             <h2>Un endroit fiable que vos clients et les moteurs modernes peuvent comprendre.</h2>
             <p>
-              Le site ne remplace pas vos reseaux sociaux. Il devient la base officielle
+              Le site ne remplace pas vos réseaux sociaux. Il devient la base officielle
               qui confirme vos informations et renvoie vers les bons chemins de contact.
             </p>
           </div>
@@ -219,7 +219,7 @@ const RefontePreviewPage = () => {
         <div className="refonte-shell">
           <div className="refonte-section-heading">
             <p className="refonte-eyebrow">Services</p>
-            <h2>Des services presentes comme des resultats, pas comme du jargon.</h2>
+            <h2>Des services presentes comme des résultats, pas comme du jargon.</h2>
             <p>
               Chaque service doit expliquer clairement le probleme du client, ce que nous
               faisons, et ce que cela change pour son entreprise.

@@ -52,16 +52,16 @@ type AICopy = {
 const copies: Record<string, AICopy> = {
   fr: {
     eyebrow: "Assistants IA",
-    title: "Des assistants IA utiles, entraines sur votre métier et vos vraies informations.",
+    title: "Des assistants IA utiles, entraînés sur votre métier et vos vraies informations.",
     intro:
-      "Nous créons des assistants IA, GPT personnalises, chatbots et agents simples qui aident vos clients ou votre équipe a obtenir des réponses plus vite.",
+      "Nous créons des assistants IA, GPT personnalisés, chatbots et agents simples qui aident vos clients ou votre équipe à obtenir des réponses plus vite.",
     primary: "Créer mon assistant IA",
     secondary: "Tester ma visibilité",
     promises: [
-      "Assistant prive",
-      "GPT personnalise",
+      "Assistant privé",
+      "GPT personnalisé",
       "Chatbot client",
-      "Agent connecte à vos contenus",
+      "Agent connecté à vos contenus",
     ],
     imageBriefs: [
       {
@@ -78,7 +78,7 @@ const copies: Record<string, AICopy> = {
       },
       {
         label: "Image 3",
-        title: "Agent connecte",
+        title: "Agent connecté",
         description:
           "Un visuel montrant un agent IA relie a formulaire, email, calendrier, CRM ou dashboard avec actions simples.",
       },
@@ -89,16 +89,16 @@ const copies: Record<string, AICopy> = {
       "On ne crée pas un assistant pour faire gadget. On le crée pour répondre, guider, filtrer, organiser ou aider une personne à avancer.",
     roles: [
       {
-        title: "Repondre",
+        title: "Répondre",
         text: "Questions fréquentes, informations de service, conditions, horaires, processus ou demandes simples.",
       },
       {
         title: "Guider",
-        text: "Aider un client a choisir une offre, preparer une demande ou comprendre les prochaines etapes.",
+        text: "Aider un client à choisir une offre, préparer une demande ou comprendre les prochaines étapes.",
       },
       {
         title: "Assister",
-        text: "Aider l'équipe a retrouver des informations, reformuler, trier ou produire des réponses.",
+        text: "Aider l'équipe à retrouver des informations, reformuler, trier ou produire des réponses.",
       },
       {
         title: "Connecter",
@@ -110,25 +110,25 @@ const copies: Record<string, AICopy> = {
     examples: [
       {
         title: "Assistant client",
-        text: "Repond aux questions courantes et oriente vers le bon service ou le bon contact.",
+        text: "Répond aux questions courantes et oriente vers le bon service ou le bon contact.",
       },
       {
         title: "Assistant interne",
-        text: "Aide l'équipe a retrouver des procedures, documents, offres, messages et informations utiles.",
+        text: "Aide l'équipe à retrouver des procédures, documents, offres, messages et informations utiles.",
       },
       {
-        title: "GPT personnalise",
+        title: "GPT personnalisé",
         text: "Un assistant configure avec votre ton, vos contenus et vos limites pour produire des réponses cohérentes.",
       },
     ],
     methodEyebrow: "Notre méthode",
-    methodTitle: "Definir, nourrir, tester, connecter.",
+    methodTitle: "Définir, nourrir, tester, connecter.",
     methodText:
       "La qualité d'un assistant depend surtout de ce qu'on lui donne: bonnes informations, bonnes limites, bons exemples et bon usage.",
     steps: [
-      "Definir le role exact de l'assistant.",
+      "Définir le rôle exact de l'assistant.",
       "Identifier les documents, pages, FAQ et données utiles.",
-      "Ecrire les instructions, limites et exemples de réponses.",
+      "Écrire les instructions, limites et exemples de réponses.",
       "Tester les cas sensibles avant de le publier.",
       "Connecter l'assistant aux bons canaux si nécessaire.",
     ],
@@ -145,24 +145,24 @@ const copies: Record<string, AICopy> = {
           "De vos pages, documents, FAQ, services, offres, ton de marque et limites: ce que l'assistant peut dire ou ne doit pas dire.",
       },
       {
-        question: "Peut-on créer un assistant prive pour l'équipe ?",
+        question: "Peut-on créer un assistant privé pour l'équipe ?",
         answer:
-          "Oui. Il peut aider a retrouver des procedures, reformuler des messages, preparer des réponses ou organiser des informations internes.",
+          "Oui. Il peut aider à retrouver des procedures, reformuler des messages, préparer des réponses ou organiser des informations internes.",
       },
       {
         question: "Peut-il parler plusieurs langues ?",
         answer:
-          "Oui. On peut preparer les instructions, contenus et exemples dans les langues utiles à vos clients ou votre équipe.",
+          "Oui. On peut préparer les instructions, contenus et exemples dans les langues utiles à vos clients ou votre équipe.",
       },
       {
         question: "Est-ce qu'on peut le mettre sur le site ?",
         answer:
-          "Oui, selon le besoin. On peut aussi commencer avec un GPT prive ou un assistant interne avant de l'exposer aux visiteurs.",
+          "Oui, selon le besoin. On peut aussi commencer avec un GPT privé ou un assistant interne avant de l'exposer aux visiteurs.",
       },
       {
         question: "Est-ce que l'assistant peut faire des actions ?",
         answer:
-          "Oui, progressivement: collecter une demande, orienter vers un formulaire, preparer un email ou se connecter a certains outils.",
+          "Oui, progressivement: collecter une demande, orienter vers un formulaire, préparer un email ou se connecter à certains outils.",
       },
     ],
   },
@@ -173,7 +173,7 @@ const copies: Record<string, AICopy> = {
       "We create AI assistants, custom GPTs, chatbots and simple agents that help clients or teams get answers faster.",
     primary: "Create my AI assistant",
     secondary: "Test visibility",
-    promises: ["Private assistant", "Custom GPT", "Client chatbot", "Agent connected to content"],
+    promises: ["Private assistant", "Custom GPT", "Client chatbot", "Agent connectéd to content"],
     imageBriefs: [
       {
         label: "Image 1",
@@ -195,7 +195,7 @@ const copies: Record<string, AICopy> = {
       },
     ],
     rolesEyebrow: "What AI should do",
-    rolesTitle: "An AI assistant needs a precise mission.",
+    rolesTitle: "An AI assistant needs a précise mission.",
     rolesText:
       "We do not create an assistant as a gimmick. We create it to answer, guide, filter, organize or help someone move forward.",
     roles: [
@@ -261,7 +261,7 @@ const copies: Record<string, AICopy> = {
       { title: "Interne assistent", text: "Helpt het team procedures, documenten, aanbiedingen, berichten en informatie vinden." },
       { title: "Aangepaste GPT", text: "Een assistent met uw toon, content en grenzen voor consistente antwoorden." },
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Bepalen, voeden, testen, verbinden.",
     methodText: "De kwaliteit hangt vooral af van wat we geven: goede informatie, duidelijke grenzen, voorbeelden en juist gebruik.",
     steps: [

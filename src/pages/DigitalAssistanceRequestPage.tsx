@@ -70,7 +70,7 @@ const copies: Record<
     eyebrow: "Assistance numérique",
     title: "Demandez une aide claire pour vos outils, appareils et démarches.",
     intro:
-      "Expliquez le problème ou le besoin. Nous recevons la demande dans l'espace admin et pouvons vous répondre avec les prochaines etapes.",
+      "Expliquez le problème ou le besoin. Nous recevons la demande dans l'espace admin et pouvons vous répondre àvec les prochaines étapes.",
     chooseTitle: "De quoi avez-vous besoin ?",
     detailsTitle: "Informations utiles",
     submit: "Envoyer la demande",
@@ -93,7 +93,7 @@ const copies: Record<
       phone: "+32 ...",
       city: "Bruxelles",
       device: "PC, smartphone, imprimante, TV, compte email...",
-      message: "Ex. Je dois configurer mon email sur mon telephone et securiser mon compte.",
+      message: "Ex. Je dois configurer mon email sur mon téléphone et sécuriser mon compte.",
     },
     urgency: [
       { value: "normal", label: "Normal" },
@@ -106,7 +106,7 @@ const copies: Record<
       { label: "Wi-Fi, email, comptes, sauvegardes et cloud", icon: "wifi" },
       { label: "Aide pour achats, formulaires ou démarches en ligne", icon: "mobile" },
       { label: "Sécurité, mots de passe et protection des données", icon: "shield" },
-      { label: "Formation pas a pas pour gagner en autonomie", icon: "laptop" },
+      { label: "Formation pas à pas pour gagner en autonomie", icon: "laptop" },
     ],
   },
   en: {
@@ -208,7 +208,7 @@ const copies: Record<
     seoDescription:
       "Saba ubufasha kuri mudasobwa, telefone, internet, konti, umutekano cyangwa gukoresha services zo kuri internet.",
     backHome: "Subira ahabanza",
-    eyebrow: "Assistance numerique",
+    eyebrow: "Assistance numérique",
     title: "Saba ubufasha bworoshye ku bikoresho, konti n'ibikorwa byo kuri internet.",
     intro:
       "Sobanura ikibazo cyangwa icyo ukeneye. Tuzakibona muri admin maze tugusubize intambwe zikurikira.",
@@ -300,9 +300,9 @@ export default function DigitalAssistanceRequestPage() {
         email: form.email,
         phone: form.phone,
         company: form.city,
-        serviceType: "Assistance numerique",
+        serviceType: "Assistance numérique",
         selectedServices: form.selectedNeeds,
-        customServiceDescription: `Appareil / outil: ${form.device || "Non precise"}\nUrgence: ${form.urgency}`,
+        customServiceDescription: `Appareil / outil: ${form.device || "Non précise"}\nUrgence: ${form.urgency}`,
         customServiceNeeds: form.message,
         additionalInfo: `Ville / zone: ${form.city}`,
       });
@@ -320,7 +320,7 @@ export default function DigitalAssistanceRequestPage() {
       <MarketSEOHead
         title={copy.seoTitle}
         description={copy.seoDescription}
-        keywords="assistance numerique, depannage informatique, configuration appareil, aide technologie, Creativa Poeta"
+        keywords="assistance numérique, depannage informatique, configuration appareil, aide technologie, Creativa Poeta"
         path="/demander-assistance-numerique"
       />
 
@@ -495,8 +495,8 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
     try {
       await projectForm({
         name: form.name, email: form.email, phone: form.phone, company: form.city,
-        serviceType: "Assistance numerique", selectedServices: form.selectedNeeds,
-        customServiceDescription: `Appareil / outil: ${form.device || "Non precise"}\nUrgence: ${form.urgency}`,
+        serviceType: "Assistance numérique", selectedServices: form.selectedNeeds,
+        customServiceDescription: `Appareil / outil: ${form.device || "Non précise"}\nUrgence: ${form.urgency}`,
         customServiceNeeds: form.message, additionalInfo: `Ville / zone: ${form.city}`,
       });
       toast.success(copy.success);

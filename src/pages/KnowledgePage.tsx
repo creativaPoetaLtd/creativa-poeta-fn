@@ -32,28 +32,28 @@ const copyByLocale: Record<
   }
 > = {
   fr: {
-    seoTitle: "Glossaire SEO, AEO, GEO et visibilite IA | Creativa Poeta",
+    seoTitle: "Glossaire SEO, AEO, GEO et visibilité IA | Creativa Poeta",
     seoDescription:
-      "Definitions claires sur le SEO, AEO, GEO, visibilite locale, sites AI-ready, schema.org, assistants IA et contenu utile.",
+      "Definitions claires sur le SEO, AEO, GEO, visibilité locale, sites AI-ready, schema.org, assistants IA et contenu utile.",
     eyebrow: "Knowledge base",
-    title: "Comprendre la visibilite moderne avant d'agir.",
+    title: "Comprendre la visibilité moderne avant d'agir.",
     intro:
       "Des definitions courtes pour savoir comment Google, les maps, les assistants vocaux et les moteurs IA comprennent une entreprise.",
     searchLabel: "Questions que cette page aide a clarifier",
     sectionsTitle: "Definitions utiles",
     ctaTitle: "Vous voulez appliquer ces principes a votre entreprise ?",
     ctaText:
-      "Commencez par un diagnostic de visibilite ou expliquez votre projet. On identifie ensuite le bon chemin: site, contenu, maps, IA ou outil digital.",
-    ctaPrimary: "Tester ma visibilite",
+      "Commencez par un diagnostic de visibilité ou expliquez votre projet. On identifie ensuite le bon chemin: site, contenu, maps, IA ou outil digital.",
+    ctaPrimary: "Tester ma visibilité",
     ctaSecondary: "Demarrer un projet",
     items: [
       {
         term: "Qu'est-ce que le SEO ?",
         answer:
-          "Le SEO aide une page a etre trouvee dans les moteurs de recherche grace a sa structure, son contenu, ses liens et sa credibilite.",
+          "Le SEO aide une page à être trouvée dans les moteurs de recherche grace a sa structure, son contenu, ses liens et sa credibilite.",
         points: ["Pages claires", "Mots et intentions de recherche", "Sitemap, liens internes et performance"],
         service: "/services/visibilite-locale",
-        serviceLabel: "Voir la visibilite locale",
+        serviceLabel: "Voir la visibilité locale",
       },
       {
         term: "Qu'est-ce que l'AEO ?",
@@ -67,14 +67,14 @@ const copyByLocale: Record<
         term: "Qu'est-ce que le GEO ?",
         answer:
           "Le GEO optimise une marque pour etre comprise, citee ou recommandee par les moteurs generatifs comme ChatGPT, Gemini ou Perplexity.",
-        points: ["Entite claire", "Mentions coherentes", "Sources lisibles par les IA"],
+        points: ["Entite claire", "Mentions cohérentes", "Sources lisibles par les IA"],
         service: "/services/ia-automatisation",
-        serviceLabel: "Preparer la visibilite IA",
+        serviceLabel: "Preparer la visibilité IA",
       },
       {
         term: "C'est quoi un site AI-ready ?",
         answer:
-          "Un site AI-ready contient des textes lisibles sans friction, des pages services claires, des donnees structurees et des chemins de contact faciles.",
+          "Un site AI-ready contient des textes lisibles sans friction, des pages services claires, des données structurees et des chemins de contact faciles.",
         points: ["HTML lisible", "Schema.org", "Pages services et FAQ"],
         service: "/services/web-app",
         serviceLabel: "Creer un site clair",
@@ -91,7 +91,7 @@ const copyByLocale: Record<
         term: "Pourquoi Google Maps compte pour l'IA ?",
         answer:
           "Les assistants peuvent s'appuyer sur les profils locaux, avis, categories, horaires et liens pour comprendre une entreprise proche.",
-        points: ["Google Business Profile", "Apple Maps et Bing Places", "Nom, adresse, telephone coherents"],
+        points: ["Google Business Profile", "Apple Maps et Bing Places", "Nom, adresse, téléphone cohérents"],
         service: "/services/visibilite-locale",
         serviceLabel: "Aligner mes profils",
       },

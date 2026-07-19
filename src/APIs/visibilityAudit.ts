@@ -103,13 +103,13 @@ export type VisibilityInterpretationInput = {
 export const runVisibilityAuditInterpretation = async (
   data: VisibilityInterpretationInput
 ) => {
-  return publicRequest<{ interpretation: VisibilityInterpretation }>(
+  return publicRequest<{ interprétation: VisibilityInterpretation }>(
     {
       method: "POST",
       url: `${VISIBILITY_AUDIT_BASE_URL}/api/visibility-audit/interpret`,
       data,
       timeout: 20_000,
     },
-    "Impossible de generer l'interpretation personnalisee."
+    "Impossible de générer l'interprétation personnalisée."
   );
 };

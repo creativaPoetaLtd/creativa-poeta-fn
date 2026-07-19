@@ -68,95 +68,95 @@ const homeRefonteCopy = {
     about: {
       eyebrow: "Qui sommes-nous",
       title: "Un souffle creatif, une main technique, une touche poetique.",
-      body: "Creativa Poeta donne vie aux idees. Nous melons design, mots, sites web, contenus, visibilite et intelligence artificielle pour creer des presences qui se voient, se comprennent et se retiennent. Votre creativite est notre passion.",
+      body: "Creativa Poeta donne vie aux idees. Nous melons design, mots, sites web, contenus, visibilité et intelligence artificielle pour créer des présences qui se voient, se comprennent et se retiennent. Votre creativite est notre passion.",
     },
     pillars: [
-      { icon: MessageCircle, title: "Une voix", body: "Des mots qui portent votre idee avec clarte, rythme et intention." },
+      { icon: MessageCircle, title: "Une voix", body: "Des mots qui portent votre idée avec clarté, rythme et intention." },
       { icon: Target, title: "Une image", body: "Des visuels, logos et supports qui donnent une forme visible a votre univers." },
-      { icon: Globe2, title: "Une presence", body: "Un site, des profils et des contenus qui relient votre creation au public." },
+      { icon: Globe2, title: "Une présence", body: "Un site, des profils et des contenus qui relient votre creation au public." },
       { icon: Bot, title: "Une intelligence", body: "Des assistants IA et outils sur mesure qui prolongent votre savoir-faire." },
     ],
     problem: {
       eyebrow: "Le probleme actuel",
       title: "Vos clients ne cherchent plus comme avant.",
-      body: "Aujourd'hui, un client peut vous chercher sur Google, demander une recommandation a un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question a une IA. Si vos informations sont dispersees, contradictoires ou difficiles a comprendre, vous pouvez etre invisible au moment precis ou le client a besoin de vous.",
-      alt: "Presence invisible ou visible au bon moment selon la coherence des informations",
+      body: "Aujourd'hui, un client peut vous chercher sur Google, demander une recommandation a un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question a une IA. Si vos informations sont dispersees, contradictoires ou difficiles à comprendre, vous pouvez etre invisible au moment precis ou le client a besoin de vous.",
+      alt: "Presence invisible ou visible au bon moment selon la cohérence des informations",
     },
     localCta: {
       first: "Quelle agence peut refaire mon site pour etre visible dans Google et les moteurs IA ?",
-      second: "Qui peut m'aider a etre visible dans Google Maps, Apple Maps et ChatGPT ?",
+      second: "Qui peut m'aider à être visible dans Google Maps, Apple Maps et ChatGPT ?",
       with: "avec Creativa Poeta",
       have: "vous avez",
-      line: "la bonne visibilite, au bon moment, sur tous les reseaux",
+      line: "la bonne visibilité, au bon moment, sur tous les réseaux",
       action: "Nous contacter",
       aria: "Contacter Creativa Poeta",
     },
     modern: {
       eyebrow: "Visibilite moderne",
       title: "Etre visible sur Google ne suffit plus.",
-      body: "Nous preparons votre presence pour Google, les maps, les reseaux, la voix et les outils IA.",
+      body: "Nous preparons votre présence pour Google, les maps, les réseaux, la voix et les outils IA.",
       alt: "Visibilite moderne sur Google, maps, voix et outils IA",
     },
     source: {
       eyebrow: "Votre base officielle",
       title: "Un site clair devient la source que tout le reste peut confirmer.",
-      body: "Vos profils, vos avis, vos reseaux et les assistants modernes doivent trouver les memes informations fiables.",
-      alt: "Site officiel relie a Google, maps, reseaux sociaux et assistants IA",
+      body: "Vos profils, vos avis, vos réseaux et les assistants modernes doivent trouver les memes informations fiables.",
+      alt: "Site officiel relie a Google, maps, réseaux sociaux et assistants IA",
     },
     channels: {
       eyebrow: "Vos canaux",
       title: "Chaque endroit ou l'on vous cherche doit raconter la meme histoire.",
-      body: "Site, Google, maps et reseaux sociaux travaillent ensemble pour rendre votre entreprise plus facile a trouver.",
+      body: "Site, Google, maps et réseaux sociaux travaillent ensemble pour rendre votre entreprise plus facile a trouver.",
     },
     ai: {
       eyebrow: "Voix et IA",
       title: "Vos clients ne tapent plus seulement des mots. Ils posent des questions.",
-      body: "Nous vous aidons a devenir une reponse claire dans les recherches vocales, les assistants et les moteurs conversationnels.",
+      body: "Nous vous aidons à devenir une reponse claire dans les recherches vocales, les assistants et les moteurs conversationnels.",
     },
     trust: {
       eyebrow: "Confiance",
-      title: "Plus de clarte. Plus de coherence. Plus de visibilite.",
+      title: "Plus de clarté. Plus de coherence. Plus de visibilité.",
       body: "Quand vos informations sont exactes et a jour partout, les clients et les moteurs modernes vous comprennent mieux.",
       coherenceAlt: "Coherence des informations et confiance client",
-      resultAlt: "Informations claires pour plus de visibilite et de clients",
+      resultAlt: "Informations claires pour plus de visibilité et de clients",
     },
     creative: {
       eyebrow: "Votre creativite",
       title: "Nos services creatifs restent au coeur de Creativa Poeta.",
-      body: "Design graphique, redaction, contenus, presentations, documents, videos, publications et supports professionnels : nous transformons vos idees en creations visibles, utiles et memorables.",
-      alt: "Services creatifs de Creativa Poeta : design, redaction, contenus, documents, presentations et visibilite",
+      body: "Design graphique, redaction, contenus, presentations, documents, videos, publications et supports professionnels : nous transformons vos idées en creations visibles, utiles et memorables.",
+      alt: "Services creatifs de Creativa Poeta : design, redaction, contenus, documents, presentations et visibilité",
     },
     final: {
       title: "Votre creativite, notre passion.",
-      body: "Que vous soyez entrepreneur, createur de contenu, entreprise ou particulier, nous sommes la pour donner vie a vos idees, renforcer votre presence en ligne et susciter l'engagement de votre public.",
+      body: "Que vous soyez entrepreneur, createur de contenu, entreprise ou particulier, nous sommes la pour donner vie a vos idées, renforcer votre présence en ligne et susciter l'engagement de votre public.",
       primary: "Demarrer un projet",
       secondary: "Parler a Creativa Poeta",
     },
     channelCards: {
       site: ["Votre site", "La base claire qui explique votre offre."],
       google: ["Google", "Etre trouve au moment ou le client cherche."],
-      local: ["Profils locaux", "Des informations coherentes la ou les clients regardent."],
+      local: ["Profils locaux", "Des informations cohérentes là où les clients regardent."],
       social: ["Reseaux sociaux", "Des preuves vivantes, des avis, des realisations."],
       maps: ["Google Maps", "Une fiche complete qui inspire confiance."],
       route: ["Itineraire", "Le chemin le plus court vers votre entreprise."],
     },
     aiCards: {
-      voiceQuestion: ["Questions vocales", "Vos clients parlent a leur telephone, leur voiture ou leur assistant."],
+      voiceQuestion: ["Questions vocales", "Vos clients parlent a leur téléphone, leur voiture ou leur assistant."],
       voiceSearch: ["Recherche vocale", "Votre entreprise doit pouvoir etre la reponse simple et utile."],
       recommendation: ["Recommandations IA", "Les outils comme ChatGPT doivent comprendre pourquoi vous recommander."],
-      conversation: ["Conversation", "Votre presence doit etre assez claire pour etre citee dans une reponse."],
+      conversation: ["Conversation", "Votre présence doit être assez claire pour etre citee dans une reponse."],
     },
   },
   en: {
     about: {
       eyebrow: "About us",
       title: "A creative breath, a technical hand, a poetic touch.",
-      body: "Creativa Poeta brings ideas to life. We blend design, words, websites, content, visibility and artificial intelligence to create presences people can find, understand and remember. Your creativity is our passion.",
+      body: "Creativa Poeta brings ideas to life. We blend design, words, websites, content, visibility and artificial intelligence to create présences people can find, understand and remember. Your creativity is our passion.",
     },
     pillars: [
       { icon: MessageCircle, title: "A voice", body: "Words that carry your idea with clarity, rhythm and intention." },
       { icon: Target, title: "An image", body: "Visuals, logos and supports that give your world a visible form." },
-      { icon: Globe2, title: "A presence", body: "A website, profiles and content that connect your creation to your audience." },
+      { icon: Globe2, title: "A présence", body: "A website, profiles and content that connect your creation to your audience." },
       { icon: Bot, title: "An intelligence", body: "Custom AI assistants and tools that extend your know-how." },
     ],
     problem: {
@@ -211,7 +211,7 @@ const homeRefonteCopy = {
     },
     final: {
       title: "Your creativity, our passion.",
-      body: "Whether you are an entrepreneur, content creator, company or individual, we help bring your ideas to life, strengthen your online presence and engage your audience.",
+      body: "Whether you are an entrepreneur, content creator, company or individual, we help bring your ideas to life, strengthen your online présence and engage your audience.",
       primary: "Start a project",
       secondary: "Talk to Creativa Poeta",
     },
@@ -227,7 +227,7 @@ const homeRefonteCopy = {
       voiceQuestion: ["Voice questions", "Your customers speak to their phone, car or assistant."],
       voiceSearch: ["Voice search", "Your business must become the simple, useful answer."],
       recommendation: ["AI recommendations", "Tools like ChatGPT need to understand why they should recommend you."],
-      conversation: ["Conversation", "Your presence must be clear enough to be cited in an answer."],
+      conversation: ["Conversation", "Your présence must be clear enough to be cited in an answer."],
     },
   },
   nl: {
@@ -594,7 +594,7 @@ export const HomeRefonteBeforeServices = () => {
       </section>
 
       <section
-        id="visibilite-moderne"
+        id="visibilité-moderne"
         className="cp-refonte-section cp-refonte-dark cp-visual-section"
         style={sectionStyleTwo}
       >
@@ -712,8 +712,8 @@ export const HomeRefonteAfterServices = () => {
       : locale === "en"
       ? "Digital assistance"
       : locale === "kiny"
-      ? "Assistance numerique"
-      : "Assistance numerique";
+      ? "Assistance numérique"
+      : "Assistance numérique";
 
   return (
     <>

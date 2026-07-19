@@ -42,20 +42,20 @@ const menuCopy: Record<
   fr: {
     menu: "Menu",
     close: "Fermer le menu",
-    audit: "Diagnostic visibilite",
+    audit: "Diagnostic visibilité",
     auditText: "Voir comment votre entreprise apparait sur Google et les outils IA",
     services: "Services",
-    start: "Demarrer un projet",
+    start: "Démarrer un projet",
     contact: "Contact",
     assistanceRequest: "Demander une assistance",
-    assistanceRequestText: "Depannage, configuration et aide numerique pas a pas",
+    assistanceRequestText: "Dépannage, configuration et aide numérique pas à pas",
     servicesList: [
-      ["Presence locale", "Google, Maps et visibilite IA", "/services/visibilite-locale"],
-      ["Outils digitaux", "Sites, apps, logiciels et systemes", "/services/site-officiel"],
-      ["Assistants IA", "GPT, chatbots et agents connectes", "/services/ia-automatisation"],
-      ["Identite visuelle", "Logo, design et supports de marque", "/services/graphic-design"],
+      ["Présence locale", "Google, Maps et visibilité IA", "/services/visibilite-locale"],
+      ["Outils digitaux", "Sites, apps, logiciels et systèmes", "/services/site-officiel"],
+      ["Assistants IA", "GPT, chatbots et agents connectés", "/services/ia-automatisation"],
+      ["Identité visuelle", "Logo, design et supports de marque", "/services/graphic-design"],
       ["Contenu documents", "Textes, CV, rapports et guides", "/services/content-writing"],
-      ["Assistance numerique", "Depannage, installation et accompagnement", "/services/assistance-numerique"],
+      ["Assistance numérique", "Dépannage, installation et accompagnement", "/services/assistance-numerique"],
     ],
   },
   en: {
@@ -69,7 +69,7 @@ const menuCopy: Record<
     assistanceRequest: "Request assistance",
     assistanceRequestText: "Troubleshooting, setup and step-by-step digital help",
     servicesList: [
-      ["Local presence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
+      ["Local présence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software and systems", "/services/site-officiel"],
       ["AI assistants", "GPTs, chatbots and connected agents", "/services/ia-automatisation"],
       ["Visual identity", "Logo, design and brand materials", "/services/graphic-design"],
@@ -107,7 +107,7 @@ const menuCopy: Record<
     assistanceRequest: "Saba assistance",
     assistanceRequestText: "Depannage, setup no kugufasha gukoresha digital",
     servicesList: [
-      ["Local presence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
+      ["Local présence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software na systems", "/services/site-officiel"],
       ["AI assistants", "GPTs, chatbots na agents", "/services/ia-automatisation"],
       ["Visual identity", "Logo, design na brand materials", "/services/graphic-design"],
@@ -120,7 +120,7 @@ const menuCopy: Record<
 const blogCopy: Record<string, { label: string; text: string }> = {
   fr: {
     label: "Blog",
-    text: "Guides pratiques sur la visibilite, le design et les outils digitaux",
+    text: "Guides pratiques sur la visibilité, le design et les outils digitaux",
   },
   en: {
     label: "Blog",

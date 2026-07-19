@@ -84,34 +84,34 @@ type VisualKey =
 
 const copies: Record<string, LocalCopy> = {
   fr: {
-    eyebrow: "VisibilitÃ© & prÃ©sence locale",
-    title: "ÃŠtre trouvÃ© au bon moment, lÃ  oÃ¹ vos clients cherchent vraiment.",
+    eyebrow: "Visibilité & présence locale",
+    title: "Être trouvé au bon moment, là où vos clients cherchent vraiment.",
     intro:
-      "Nous rendons votre entreprise claire sur Google, les maps, les rÃ©seaux, la recherche vocale et les outils IA. Le client doit trouver la mÃªme information partout, sans confusion.",
-    primary: "Tester ma visibilitÃ©",
+      "Nous rendons votre entreprise claire sur Google, les maps, les réseaux, la recherche vocale et les outils IA. Le client doit trouver la même information partout, sans confusion.",
+    primary: "Tester ma visibilité",
     secondary: "Nous contacter",
     promise: [
       "Informations exactes",
-      "Maps et profils locaux alignÃ©s",
-      "Avis, horaires et contacts cohÃ©rents",
-      "PrÃ©sence lisible par les outils modernes",
+      "Maps et profils locaux alignés",
+      "Avis, horaires et contacts cohérents",
+      "Présence lisible par les outils modernes",
     ],
-    problemEyebrow: "Le problÃ¨me actuel",
+    problemEyebrow: "Le problème actuel",
     problemTitle: "Une entreprise peut exister, mais rester invisible.",
     problemText:
-      "Nom different, ancienne adresse, horaires absents, avis non rÃ©pondus, rÃ©seaux pas Ã  jour : chaque petit flou peut faire perdre un client au moment decisif.",
+      "Nom différent, ancienne adresse, horaires absents, avis non répondus, réseaux pas à jour : chaque petit flou peut faire perdre un client au moment décisif.",
     sourceEyebrow: "Votre base officielle",
     sourceTitle: "Votre site devient le point clair que tout le reste confirme.",
     sourceText:
-      "Nous gardons ce qui existe dÃ©jÃ  quand c'est utile, puis nous relions votre site, vos profils, vos avis et vos chemins de contact autour d'une information fiable.",
-    channelsEyebrow: "Les canaux a aligner",
-    channelsTitle: "Google, maps, voix, rÃ©seaux et IA doivent raconter la mÃªme chose.",
+      "Nous gardons ce qui existe déjà quand c'est utile, puis nous relions votre site, vos profils, vos avis et vos chemins de contact autour d'une information fiable.",
+    channelsEyebrow: "Les canaux à aligner",
+    channelsTitle: "Google, maps, voix, réseaux et IA doivent raconter la même chose.",
     channelsText:
-      "Le but n'est pas d'Ãªtre partout pour faire joli. Le but est d'Ãªtre compris partout, avec des informations simples, rÃ©centes et faciles a vÃ©rifier.",
+      "Le but n'est pas d'être partout pour faire joli. Le but est d'être compris partout, avec des informations simples, récentes et faciles à vérifier.",
     channels: [
       {
         title: "Google",
-        text: "ÃŠtre visible quand le client cherche votre service.",
+        text: "Être visible quand le client cherche votre service.",
         imageKey: "google",
       },
       {
@@ -120,18 +120,18 @@ const copies: Record<string, LocalCopy> = {
         imageKey: "maps",
       },
       {
-        title: "ItinÃ©raire",
+        title: "Itinéraire",
         text: "Rendre le chemin vers vous simple et direct.",
         imageKey: "route",
       },
       {
-        title: "RÃ©seaux sociaux",
-        text: "Montrer des preuves vivantes, des avis et des rÃ©alisations.",
+        title: "Réseaux sociaux",
+        text: "Montrer des preuves vivantes, des avis et des réalisations.",
         imageKey: "social",
       },
       {
         title: "Recherche vocale",
-        text: "Repondre aux questions parlÃ©es, souvent trÃ¨s prÃ©cises.",
+        text: "Répondre aux questions parlées, souvent très précises.",
         imageKey: "voice",
       },
       {
@@ -140,52 +140,52 @@ const copies: Record<string, LocalCopy> = {
         imageKey: "chat",
       },
     ],
-    methodEyebrow: "Notre mÃ©thode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "On clarifie, on aligne, puis on garde vivant.",
     methodText:
-      "Nous ne jetons pas tout. Nous partons de votre prÃ©sence actuelle, nous corrigeons ce qui brouille le message et nous crÃ©ons une base que vous contrÃ´lez vraiment.",
+      "Nous ne jetons pas tout. Nous partons de votre présence actuelle, nous corrigeons ce qui brouille le message et nous créons une base que vous contrôlez vraiment.",
     method: [
-      "Audit de votre prÃ©sence actuelle",
-      "Correction du nom, adresse, horaires, tÃ©lÃ©phone et liens",
-      "Alignement Google, Maps, profils locaux et rÃ©seaux",
-      "Organisation des avis, photos, questions et rÃ©ponses utiles",
-      "Preparation pour les recherches vocales et les outils IA",
+      "Audit de votre présence actuelle",
+      "Correction du nom, adresse, horaires, téléphone et liens",
+      "Alignement Google, Maps, profils locaux et réseaux",
+      "Organisation des avis, photos, questions et réponses utiles",
+      "Préparation pour les recherches vocales et les outils IA",
     ],
-    resultsEyebrow: "RÃ©sultat attendu",
-    resultsTitle: "Plus de clarte. Plus de confiance. Plus de clients.",
+    resultsEyebrow: "Résultat attendu",
+    resultsTitle: "Plus de clarté. Plus de confiance. Plus de clients.",
     resultsText:
-      "Quand les informations sont cohÃ©rentes, vos clients comprennent plus vite, les moteurs modernes vous lisent mieux et votre entreprise devient plus facile Ã  recommander.",
-    faqTitle: "Questions frÃ©quentes",
+      "Quand les informations sont cohérentes, vos clients comprennent plus vite, les moteurs modernes vous lisent mieux et votre entreprise devient plus facile à recommander.",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
-        question: "Est-ce que je dois dÃ©jÃ  avoir un site ?",
+        question: "Est-ce que je dois déjà avoir un site ?",
         answer:
           "Non. On peut commencer avec vos profils existants, puis construire une base officielle si elle manque.",
       },
       {
         question: "Est-ce que Google Maps suffit ?",
         answer:
-          "Non. Google Maps est important, mais il doit Ãªtre relie Ã  votre site, vos avis, vos rÃ©seaux et vos informations officielles.",
+          "Non. Google Maps est important, mais il doit être relié à votre site, vos avis, vos réseaux et vos informations officielles.",
       },
       {
         question: "Est-ce utile pour les outils IA ?",
         answer:
-          "Oui. Les outils modernes ont besoin d'informations claires et cohÃ©rentes pour comprendre puis recommander une entreprise.",
+          "Oui. Les outils modernes ont besoin d'informations claires et cohérentes pour comprendre puis recommander une entreprise.",
       },
       {
         question: "Est-ce que vous corrigez aussi les horaires, adresses et liens ?",
         answer:
-          "Oui. C'est mÃªme une partie importante du travail. Nous alignons les informations essentielles pour eviter les contradictions entre votre site, vos maps et vos profils.",
+          "Oui. C'est même une partie importante du travail. Nous alignons les informations essentielles pour éviter les contradictions entre votre site, vos maps et vos profils.",
       },
       {
         question: "Est-ce que les avis clients comptent ?",
         answer:
-          "Oui. Les avis, les rÃ©ponses aux avis et les preuves rÃ©centes aident les clients a faire confiance et donnent aussi des signaux utiles aux plateformes.",
+          "Oui. Les avis, les réponses aux avis et les preuves récentes aident les clients à faire confiance et donnent aussi des signaux utiles aux plateformes.",
       },
       {
         question: "Est-ce un travail ponctuel ou continu ?",
         answer:
-          "On peut commencer par une correction ponctuelle, mais la visibilitÃ© locale doit rester vivante: horaires, photos, avis, services et informations doivent Ãªtre tenus Ã  jour.",
+          "On peut commencer par une correction ponctuelle, mais la visibilité locale doit rester vivante: horaires, photos, avis, services et informations doivent être tenus à jour.",
       },
     ],
   },
@@ -200,7 +200,7 @@ const copies: Record<string, LocalCopy> = {
       "Accurate information",
       "Aligned maps and local profiles",
       "Consistent reviews, hours and contacts",
-      "A presence modern tools can read",
+      "A présence modern tools can read",
     ],
     problemEyebrow: "The current problem",
     problemTitle: "A business can exist and still remain invisible.",
@@ -219,15 +219,15 @@ const copies: Record<string, LocalCopy> = {
       { title: "Maps", text: "Give clients a clear profile that builds trust.", imageKey: "maps" },
       { title: "Directions", text: "Make the path to your business simple and direct.", imageKey: "route" },
       { title: "Social media", text: "Show living proof, reviews and real work.", imageKey: "social" },
-      { title: "Voice search", text: "Answer spoken questions, often very precise.", imageKey: "voice" },
+      { title: "Voice search", text: "Answer spoken questions, often very précise.", imageKey: "voice" },
       { title: "AI tools", text: "Help modern assistants recommend your business.", imageKey: "chat" },
     ],
     methodEyebrow: "Our method",
     methodTitle: "We clarify, align, then keep it alive.",
     methodText:
-      "We do not throw everything away. We start from your current presence, correct what blurs the message and build a base you truly control.",
+      "We do not throw everything away. We start from your current présence, correct what blurs the message and build a base you truly control.",
     method: [
-      "Audit your current presence",
+      "Audit your current présence",
       "Fix name, address, hours, phone and links",
       "Align Google, maps, local profiles and social media",
       "Organize reviews, photos, useful questions and answers",
@@ -281,7 +281,7 @@ const copies: Record<string, LocalCopy> = {
     promise: [
       "Nauwkeurige informatie",
       "Maps en lokale profielen afgestemd",
-      "Reviews, openingsuren en contacten coherent",
+      "Reviews, openingsuren en contacten cohérent",
       "Een aanwezigheid die moderne tools kunnen lezen",
     ],
     problemEyebrow: "Het huidige probleem",
@@ -295,7 +295,7 @@ const copies: Record<string, LocalCopy> = {
     channelsEyebrow: "Kanalen om af te stemmen",
     channelsTitle: "Google, maps, stem, sociale media en AI moeten hetzelfde verhaal vertellen.",
     channelsText:
-      "Het doel is niet overal aanwezig zijn voor de show. Het doel is overal begrepen worden, met eenvoudige, actuele en controleerbare informatie.",
+      "Het doel is niet overal aanwezig zijn voor de show. Het doel is overal begrepen worden, met eenvoudige, actuele en contrôleerbare informatie.",
     channels: [
       { title: "Google", text: "Zichtbaar zijn wanneer klanten uw dienst zoeken.", imageKey: "google" },
       { title: "Maps", text: "Een duidelijke fiche geven die vertrouwen wekt.", imageKey: "maps" },
@@ -304,7 +304,7 @@ const copies: Record<string, LocalCopy> = {
       { title: "Spraakzoekopdracht", text: "Antwoorden op gesproken, vaak heel precieze vragen.", imageKey: "voice" },
       { title: "AI-tools", text: "Moderne assistenten helpen uw bedrijf aan te bevelen.", imageKey: "chat" },
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "We verduidelijken, stemmen af en houden het levend.",
     methodText:
       "We gooien niet alles weg. We starten met uw huidige aanwezigheid, corrigeren wat het verhaal vertroebelt en bouwen een basis die u echt beheert.",
@@ -318,7 +318,7 @@ const copies: Record<string, LocalCopy> = {
     resultsEyebrow: "Verwacht resultaat",
     resultsTitle: "Meer duidelijkheid. Meer vertrouwen. Meer klanten.",
     resultsText:
-      "Wanneer informatie coherent is, begrijpen klanten u sneller, lezen moderne zoekmachines u beter en wordt uw bedrijf makkelijker aanbevolen.",
+      "Wanneer informatie cohérent is, begrijpen klanten u sneller, lezen moderne zoekmachines u beter en wordt uw bedrijf makkelijker aanbevolen.",
     faqTitle: "Veelgestelde vragen",
     faqs: [
       {
@@ -334,7 +334,7 @@ const copies: Record<string, LocalCopy> = {
       {
         question: "Helpt dit voor AI-tools?",
         answer:
-          "Ja. Moderne tools hebben duidelijke en coherente informatie nodig om een bedrijf te begrijpen en aan te bevelen.",
+          "Ja. Moderne tools hebben duidelijke en cohérente informatie nodig om een bedrijf te begrijpen en aan te bevelen.",
       },
       {
         question: "Corrigeren jullie ook openingsuren, adressen en links?",

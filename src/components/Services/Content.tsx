@@ -62,21 +62,21 @@ const copies: Record<string, ContentCopy> = {
     eyebrow: "Contenu & documents",
     title: "Nous transformons vos idées en mots, documents et supports professionnels.",
     intro:
-      "Rédaction professionnelle, ghostwriting, articles, textes web, CV, lettres, profils LinkedIn, rapports, ebooks et guides : nous structurons vos idées pour qu'elles soient claires, utiles et credibles.",
+      "Rédaction professionnelle, ghostwriting, articles, textes web, CV, lettres, profils LinkedIn, rapports, ebooks et guides : nous structurons vos idées pour qu'elles soient claires, utiles et crédibles.",
     primary: "Créer mon document",
-    secondary: "Demarrer un projet",
+    secondary: "Démarrer un projet",
     promises: [
       "Textes clairs",
       "Documents professionnels",
-      "Ton adapte",
-      "Message mieux structure",
+      "Ton adapté",
+      "Message mieux structuré",
     ],
     imageBriefs: [
       {
         label: "Image principale",
-        title: "Des idées transformees en documents clairs",
+        title: "Des idées transformées en documents clairs",
         description:
-          "Image montrant des notes, idées, post-it et brouillons qui deviennent un document professionnel, un article web, un rapport et une presentation. Style premium bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
+          "Image montrant des notes, idées, post-it et brouillons qui deviennent un document professionnel, un article web, un rapport et une présentation. Style premium bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
       },
       {
         label: "Formats",
@@ -86,9 +86,9 @@ const copies: Record<string, ContentCopy> = {
       },
       {
         label: "Processus",
-        title: "Un document bien pensé du brouillon a la version finale",
+        title: "Un document bien pensé du brouillon à la version finale",
         description:
-          "Image montrant un flux clair: collecte des idées, plan, redaction, correction, mise en forme et livraison finale. Le visuel doit faire sentir le serieux et la méthode.",
+          "Image montrant un flux clair: collecte des idées, plan, rédaction, correction, mise en forme et livraison finale. Le visuel doit faire sentir le sérieux et la méthode.",
       },
     ],
     whyEyebrow: "Pourquoi c'est important",
@@ -98,7 +98,7 @@ const copies: Record<string, ContentCopy> = {
     rolesEyebrow: "Ce que le contenu doit faire",
     rolesTitle: "Chaque texte doit avoir un objectif clair.",
     rolesText:
-      "On n'écrit pas seulement pour remplir une page. On écrit pour expliquer, convaincre, guider, vendre, presenter ou documenter quelque chose d'important.",
+      "On n'écrit pas seulement pour remplir une page. On écrit pour expliquer, convaincre, guider, vendre, présenter ou documenter quelque chose d'important.",
     roles: [
       {
         title: "Clarifier",
@@ -134,15 +134,15 @@ const copies: Record<string, ContentCopy> = {
       },
     ],
     deliverEyebrow: "Livrables",
-    deliverTitle: "Des contenus prets à utiliser, pas seulement des phrases jolies.",
+    deliverTitle: "Des contenus prêts à utiliser, pas seulement des phrases jolies.",
     deliverText:
-      "Le résultat doit pouvoir être publie, envoyé, presente ou reutilise selon votre besoin.",
+      "Le résultat doit pouvoir être publié, envoyé, présenté ou réutilisé selon votre besoin.",
     deliver: [
-      "Un texte structure avec titre, sections et progression logique.",
-      "Un ton adapte à votre public: professionnel, simple, humain ou commercial.",
-      "Une version corrigee, propre et facile a lire.",
+      "Un texte structuré avec titre, sections et progression logique.",
+      "Un ton adapté à votre public: professionnel, simple, humain ou commercial.",
+      "Une version corrigée, propre et facile à lire.",
       "Des reformulations pour rendre le message plus clair et plus fort.",
-      "Des formats adaptés au web, PDF, presentation ou réseaux sociaux.",
+      "Des formats adaptés au web, PDF, présentation ou réseaux sociaux.",
       "Des versions multilingues si le projet le demande.",
     ],
     methodEyebrow: "Notre méthode",
@@ -151,10 +151,10 @@ const copies: Record<string, ContentCopy> = {
       "On commence par comprendre ce que le contenu doit accomplir. Ensuite on organise les idées, on rédige une version claire, puis on ajuste le ton, la précision et la mise en forme.",
     steps: [
       "Recueillir vos idées, documents existants et objectifs.",
-      "Definir le lecteur, le message central et le format.",
-      "Construire un plan clair avant la redaction.",
-      "Rediger, corriger et rendre le contenu plus fluide.",
-      "Livrer une version finale prete a publier ou partager.",
+      "Définir le lecteur, le message central et le format.",
+      "Construire un plan clair avant la rédaction.",
+      "Rédiger, corriger et rendre le contenu plus fluide.",
+      "Livrer une version finale prête à publier ou partager.",
     ],
     faqTitle: "Questions fréquentes",
     faqs: [
@@ -184,7 +184,7 @@ const copies: Record<string, ContentCopy> = {
           "Oui. Pour les textes web, nous pouvons structurer les titres, questions, mots importants et réponses pour aider Google, les moteurs de recherche et les assistants IA à comprendre le contenu.",
       },
       {
-        question: "Pouvez-vous preparer le contenu en plusieurs langues ?",
+        question: "Pouvez-vous préparer le contenu en plusieurs langues ?",
         answer:
           "Oui. Nous pouvons travailler en français, anglais, néerlandais ou kinyarwanda selon le public visé et les versions nécessaires.",
       },
@@ -386,7 +386,7 @@ const copies: Record<string, ContentCopy> = {
     formats: [
       {
         title: "Business- en webteksten",
-        text: "Servicepagina's, artikels, blogs, beschrijvingen, FAQ, websiteteksten en content die uw activiteit uitlegt.",
+        text: "Servicepagina's, artikels, blogs, beschrijvingen, FAQ, websiteteksten en content die uw activitéit uitlegt.",
       },
       {
         title: "Professionele documenten",
@@ -409,7 +409,7 @@ const copies: Record<string, ContentCopy> = {
       "Formaten aangepast aan web, PDF, presentatie of sociale media.",
       "Meertalige versies als het project dat vraagt.",
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Begrijpen, structureren, schrijven, verfijnen.",
     methodText:
       "We beginnen met begrijpen wat de content moet bereiken. Daarna ordenen we de ideeen, schrijven we een duidelijke versie en verfijnen we toon, precisie en vormgeving.",

@@ -30,50 +30,50 @@ const answersByLocale: Record<
   }
 > = {
   fr: {
-    title: "Questions sur la visibilite moderne, Google et IA | Creativa Poeta",
+    title: "Questions sur la visibilité moderne, Google et IA | Creativa Poeta",
     description:
-      "Reponses claires aux questions que les clients posent a Google, aux assistants vocaux et aux IA sur la visibilite, les sites, maps, contenus et outils digitaux.",
+      "Reponses claires aux questions que les clients posent a Google, aux assistants vocaux et aux IA sur la visibilité, les sites, maps, contenus et outils digitaux.",
     eyebrow: "Reponses utiles",
     hero: "Les vraies questions que vos clients peuvent poser a Google, Siri ou une IA.",
     intro:
       "Cette page rassemble les formulations naturelles qu'une personne peut taper ou demander a voix haute. Chaque reponse renvoie vers le service le plus logique.",
     label: "Questions prioritaires",
-    ctaTitle: "Vous voulez savoir ce qui bloque votre visibilite ?",
+    ctaTitle: "Vous voulez savoir ce qui bloque votre visibilité ?",
     ctaText:
-      "Commencez par un test simple. Ensuite on decide si la priorite est Google Maps, le site, les contenus, les donnees structurees ou l'IA.",
-    ctaPrimary: "Tester ma visibilite",
+      "Commencez par un test simple. Ensuite on decide si la priorite est Google Maps, le site, les contenus, les données structurees ou l'IA.",
+    ctaPrimary: "Tester ma visibilité",
     ctaSecondary: "Demarrer un projet",
     answers: [
       {
         question: "Comment faire pour que mon entreprise soit trouvee sur Google et Google Maps ?",
         answer:
-          "Il faut aligner votre site, votre fiche Google, vos services, vos zones, vos avis, vos horaires, vos photos et vos liens. Google comprend mieux une entreprise quand les informations sont coherentes partout.",
-        action: "Travailler ma visibilite locale",
+          "Il faut aligner votre site, votre fiche Google, vos services, vos zones, vos avis, vos horaires, vos photos et vos liens. Google comprend mieux une entreprise quand les informations sont cohérentes partout.",
+        action: "Travailler ma visibilité locale",
         href: "/services/visibilite-locale",
       },
       {
         question: "Comment etre recommande par ChatGPT, Gemini, Perplexity ou les moteurs IA ?",
         answer:
-          "Une IA recommande plus facilement une entreprise quand elle trouve des pages claires, des services bien nommes, des reponses utiles, des preuves publiques, des donnees structurees et des sources coherentes.",
-        action: "Preparer ma visibilite IA",
+          "Une IA recommande plus facilement une entreprise quand elle trouve des pages claires, des services bien nommes, des reponses utiles, des preuves publiques, des données structurees et des sources cohérentes.",
+        action: "Preparer ma visibilité IA",
         href: "/services/ia-automatisation",
       },
       {
         question: "Est-ce qu'un site web suffit pour etre visible ?",
         answer:
-          "Non. Le site est la base officielle, mais il doit etre relie aux maps, profils sociaux, contenus, FAQ, schema.org et chemins de contact. La visibilite moderne fonctionne comme un ecosysteme.",
+          "Non. Le site est la base officielle, mais il doit être relie aux maps, profils sociaux, contenus, FAQ, schema.org et chemins de contact. La visibilité moderne fonctionne comme un ecosysteme.",
         action: "Construire une base digitale claire",
         href: "/services/web-app",
       },
       {
         question: "Pourquoi mon entreprise n'apparait pas bien dans les recherches locales ?",
         answer:
-          "Souvent, les categories sont faibles, les textes ne disent pas clairement les services, les zones ne sont pas precisees, les avis sont peu exploites ou les informations publiques ne racontent pas la meme chose.",
+          "Souvent, les categories sont faibles, les textes ne disent pas clairement les services, les zones ne sont pas précisees, les avis sont peu exploites ou les informations publiques ne racontent pas la meme chose.",
         action: "Faire un diagnostic",
         href: "/tester-visibilite",
       },
       {
-        question: "Quels contenus faut-il creer pour attirer les bons clients ?",
+        question: "Quels contenus faut-il créer pour attirer les bons clients ?",
         answer:
           "Il faut des pages services, des reponses aux questions frequentes, des articles utiles, des exemples concrets, des pages locales et des contenus qui expliquent clairement pour qui vous travaillez.",
         action: "Creer des contenus utiles",
@@ -82,7 +82,7 @@ const answersByLocale: Record<
       {
         question: "Comment rendre mon site lisible par les assistants vocaux et les IA ?",
         answer:
-          "Le site doit avoir une structure simple, des titres explicites, des reponses courtes, du schema.org, un sitemap propre, des liens internes et des pages accessibles sans friction technique.",
+          "Le site doit avoir une structure simple, des titres explicites, des reponses courtes, du schema.org, un sitemap propre, des liens internes et des pages accèssibles sans friction technique.",
         action: "Structurer mon site",
         href: "/knowledge",
       },
@@ -141,7 +141,7 @@ const answersByLocale: Record<
       {
         question: "How do I make my website readable for voice assistants and AI tools?",
         answer:
-          "Use simple structure, explicit headings, short answers, schema.org, a clean sitemap, internal links and pages accessible without technical friction.",
+          "Use simple structure, explicit headings, short answers, schema.org, a clean sitemap, internal links and pages accèssible without technical friction.",
         action: "Structure my site",
         href: "/knowledge",
       },
@@ -259,7 +259,7 @@ const answersByLocale: Record<
       {
         question: "How do I make a site readable for AI?",
         answer:
-          "Use clear structure, short answers, schema.org, sitemap, internal links and accessible pages.",
+          "Use clear structure, short answers, schema.org, sitemap, internal links and accèssible pages.",
         action: "Structure my site",
         href: "/knowledge",
       },

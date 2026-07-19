@@ -37,14 +37,14 @@ type UsefulContentCopy = {
 const copies: Record<string, UsefulContentCopy> = {
   fr: {
     eyebrow: "Contenus utiles",
-    title: "Repondez aux vraies questions de vos clients avant qu'ils vous appellent.",
+    title: "Répondez aux vraies questions de vos clients avant qu'ils vous appellent.",
     intro:
       "Nous créons des pages claires pour vos services, vos questions fréquentes, vos zones et vos cas concrets afin que vos clients, Google et les outils IA comprennent mieux votre entreprise.",
     cta: "Créer mes contenus utiles",
     secondaryCta: "Tester ma visibilité",
     whyTitle: "Une page utile peut devenir une réponse.",
     whyText:
-      "Les clients ne cherchent pas toujours votre nom. Ils posent des questions précises : prix, disponibilite, zone, langue, problème, urgence ou comparaison. Votre site doit pouvoir répondre avec des mots simples et fiables.",
+      "Les clients ne cherchent pas toujours votre nom. Ils posent des questions précises : prix, disponibilite, zone, langue, problème, urgence ou comparaison. Votre site doit pouvoir répondre àvec des mots simples et fiables.",
     blocksTitle: "Ce que nous clarifions",
     blocks: [
       {
@@ -107,7 +107,7 @@ const copies: Record<string, UsefulContentCopy> = {
     secondaryCta: "Test my visibility",
     whyTitle: "A useful page can become an answer.",
     whyText:
-      "Clients do not always search your name. They ask precise questions about price, availability, area, language, problem, urgency or comparison. Your website should answer with simple and reliable words.",
+      "Clients do not always search your name. They ask précise questions about price, availability, area, language, problem, urgency or comparison. Your website should answer with simple and reliable words.",
     blocksTitle: "What we clarify",
     blocks: [
       {
@@ -199,7 +199,7 @@ const copies: Record<string, UsefulContentCopy> = {
     ],
     deliverTitle: "Wat u ontvangt",
     deliver: [
-      "Een lijst met belangrijke vragen voor uw activiteit.",
+      "Een lijst met belangrijke vragen voor uw activitéit.",
       "Korte, duidelijke pagina's verbonden met uw diensten.",
       "Eenvoudige antwoorden voor gewone klanten.",
       "Een structuur die kan groeien per taal, land, stad of dienst.",

@@ -15,7 +15,7 @@ const ServiceLocale: any = {
     description3:
       "We align maps, local profiles and public information so clients and AI tools see the same reliable facts.",
     service41: "Useful pages",
-    service42: "for precise searches",
+    service42: "for précise searches",
     description4:
       "We build useful pages for specific client questions, services or locations, without creating empty or repetitive content.",
     service51: "Custom",
@@ -27,25 +27,25 @@ const ServiceLocale: any = {
     title1: "NOS",
     title2: "SERVICES",
     service11: "Audit de",
-    service12: "visibilite",
+    service12: "visibilité",
     description1:
-      "Nous aidons votre entreprise a etre plus claire sur Google, les maps, la recherche vocale et les outils comme ChatGPT, avec des informations fiables et faciles a comprendre.",
+      "Nous aidons votre entreprise à être plus claire sur Google, les maps, la recherche vocale et les outils comme ChatGPT, avec des informations fiables et faciles à comprendre.",
     service21: "Un site clair",
     service22: "comme source officielle",
     description2:
-      "Nous creons ou ameliorons votre site pour qu'il devienne la source officielle comprise par vos clients, Google et les outils IA.",
+      "Nous créons ou améliorons votre site pour qu'il devienne la source officielle comprise par vos clients, Google et les outils IA.",
     service31: "Visibilite",
     service32: "locale",
     description3:
       "Nous alignons maps, profils locaux et informations publiques pour que vos clients et les outils IA voient les memes informations fiables.",
     service41: "Des pages utiles",
-    service42: "pour des recherches precises",
+    service42: "pour des recherches précises",
     description4:
-      "Nous creons des pages utiles pour des questions, services ou zones precises, sans remplir le site avec du contenu vide ou repetitif.",
+      "Nous creons des pages utiles pour des questions, services ou zones précises, sans remplir le site avec du contenu vide ou repetitif.",
     service51: "Assistants IA",
     service52: "sur mesure",
     description5:
-      "Nous vous aidons a creer ou configurer vos propres assistants IA, GPT personnalises et outils intelligents adaptes a votre metier.",
+      "Nous vous aidons à créer ou configurer vos propres assistants IA, GPT personnalises et outils intelligents adaptes a votre metier.",
   },
   kiny: {
     title1: "IBYO",

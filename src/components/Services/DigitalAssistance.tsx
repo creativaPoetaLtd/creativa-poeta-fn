@@ -52,16 +52,16 @@ type AssistanceCopy = {
 const copies: Record<string, AssistanceCopy> = {
   fr: {
     eyebrow: "Assistance numérique",
-    title: "Installez, configurez et utilisez vos outils numeriques sans stress.",
+    title: "Installez, configurez et utilisez vos outils numériques sans stress.",
     intro:
-      "Nous aidons les particuliers, entrepreneurs et petites structures a depanner leurs appareils, configurer leurs outils et gagner en autonomie dans le monde numérique.",
+      "Nous aidons les particuliers, entrepreneurs et petites structures à dépanner leurs appareils, configurer leurs outils et gagner en autonomie dans le monde numérique.",
     primary: "Demander une assistance",
     secondary: "Expliquer mon problème",
     promises: [
       "Dépannage tech",
       "Configuration d'appareils",
       "Aide administrative en ligne",
-      "Accompagnement pas a pas",
+      "Accompagnement pas à pas",
     ],
     imageBriefs: [
       {
@@ -74,7 +74,7 @@ const copies: Record<string, AssistanceCopy> = {
         label: "Image 2",
         title: "Configuration multi-appareils",
         description:
-          "Un visuel montrant Wi-Fi, imprimante, ordinateur, smartphone, cloud, email et comptes connectes dans une maison ou petit bureau.",
+          "Un visuel montrant Wi-Fi, imprimante, ordinateur, smartphone, cloud, email et comptes connectés dans une maison ou petit bureau.",
       },
       {
         label: "Image 3",
@@ -84,13 +84,13 @@ const copies: Record<string, AssistanceCopy> = {
       },
     ],
     pillarsEyebrow: "Ce que nous faisons",
-    pillarsTitle: "Une aide simple pour les problemes tech du quotidien.",
+    pillarsTitle: "Une aide simple pour les problèmes tech du quotidien.",
     pillarsText:
-      "Le but n'est pas de vous noyer dans la technique. Le but est de regler le problème, expliquer ce qui se passe et vous rendre plus autonome.",
+      "Le but n'est pas de vous noyer dans la technique. Le but est de régler le problème, expliquer ce qui se passe et vous rendre plus autonome.",
     pillars: [
       {
-        title: "Depanner",
-        text: "Ordinateur lent, email bloque, imprimante capricieuse, Wi-Fi instable, téléphone ou tablette difficile à utiliser.",
+        title: "Dépanner",
+        text: "Ordinateur lent, email bloqué, imprimante capricieuse, Wi-Fi instable, téléphone ou tablette difficile à utiliser.",
       },
       {
         title: "Installer",
@@ -130,14 +130,14 @@ const copies: Record<string, AssistanceCopy> = {
       "Verifier l'appareil, le compte ou l'outil concerne.",
       "Corriger ou configurer ce qui bloque.",
       "Expliquer les gestes importants sans jargon.",
-      "Laisser une mini-checklist pour eviter que le problème revienne.",
+      "Laisser une mini-checklist pour éviter que le problème revienne.",
     ],
     faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce seulement pour les entreprises ?",
         answer:
-          "Non. Ce service est aussi pour les particuliers, familles, seniors, etudiants, independants et petites structures.",
+          "Non. Ce service est aussi pour les particuliers, familles, seniors, étudiants, indépendants et petites structures.",
       },
       {
         question: "Pouvez-vous m'aider même si je ne comprends rien a la technologie ?",
@@ -145,17 +145,17 @@ const copies: Record<string, AssistanceCopy> = {
           "Oui. Le service est justement pensé pour expliquer calmement, sans jargon et sans jugement.",
       },
       {
-        question: "Quels appareils pouvez-vous aider a configurer ?",
+        question: "Quels appareils pouvez-vous aider à configurer ?",
         answer:
           "Ordinateurs, smartphones, tablettes, imprimantes, box internet, comptes email, cloud, applications et outils de travail courants.",
       },
       {
         question: "Est-ce que vous pouvez aider pour les démarches en ligne ?",
         answer:
-          "Oui, nous pouvons vous accompagner pas a pas, tout en gardant vos informations sensibles sous votre contrôle.",
+          "Oui, nous pouvons vous accompagner pas à pas, tout en gardant vos informations sensibles sous votre contrôle.",
       },
       {
-        question: "Pouvez-vous m'aider a securiser mes comptes ?",
+        question: "Pouvez-vous m'aider à sécuriser mes comptes ?",
         answer:
           "Oui. Nous pouvons revoir les mots de passe, sauvegardes, double authentification et bonnes pratiques contre les arnaques.",
       },
@@ -241,15 +241,15 @@ const copies: Record<string, AssistanceCopy> = {
     situationsTitle: "U kunt hulp vragen, ook als het probleem klein lijkt.",
     situations: [
       { title: "Thuis", text: "Internet instellen, printer verbinden, foto's ordenen, app installeren of een nieuwe telefoon begrijpen." },
-      { title: "Voor uw activiteit", text: "Professionele email, WhatsApp Business, cloudtools, video, documenten, sociale media of eenvoudige betalingen." },
+      { title: "Voor uw activitéit", text: "Professionele email, WhatsApp Business, cloudtools, video, documenten, sociale media of eenvoudige betalingen." },
       { title: "Om te leren", text: "ChatGPT, Canva, Google Drive, online aankopen, administratieve formulieren of basisveiligheid begrijpen." },
     ],
-    methodEyebrow: "Onze methode",
+    methodEyebrow: "Onze méthode",
     methodTitle: "Begrijpen, oplossen, uitleggen, netjes achterlaten.",
     methodText: "We werken geduldig en zonder oordeel. U vertrekt met een werkende tool en duidelijke uitleg.",
     steps: [
       "Het probleem en de context beluisteren.",
-      "Het toestel, account of tool controleren.",
+      "Het toestel, account of tool contrôleren.",
       "Configureren of herstellen wat blokkeert.",
       "Belangrijke handelingen zonder jargon uitleggen.",
       "Een mini-checklist achterlaten tegen herhaling.",
@@ -259,19 +259,19 @@ const copies: Record<string, AssistanceCopy> = {
       { question: "Is dit alleen voor bedrijven?", answer: "Nee. Ook voor particulieren, families, senioren, studenten, zelfstandigen en kleine teams." },
       { question: "Helpen jullie als ik niets van technologie begrijp?", answer: "Ja. De service is gemaakt om rustig, zonder jargon en zonder oordeel uit te leggen." },
       { question: "Welke toestellen kunnen jullie helpen configureren?", answer: "Computers, smartphones, tablets, printers, internetrouters, emailaccounts, cloud, apps en gewone werktools." },
-      { question: "Kunnen jullie helpen met online administratie?", answer: "Ja, we begeleiden stap voor stap terwijl gevoelige informatie onder uw controle blijft." },
+      { question: "Kunnen jullie helpen met online administratie?", answer: "Ja, we begeleiden stap voor stap terwijl gevoelige informatie onder uw contrôle blijft." },
       { question: "Kunnen jullie mijn accounts beveiligen?", answer: "Ja. We kunnen wachtwoorden, back-ups, tweestapsverificatie en gewoontes tegen fraude bekijken." },
       { question: "Geven jullie ook uitleg over tools?", answer: "Ja. Sociale media, cloud, AI, video, documenten, online aankopen of professionele tools." },
     ],
   },
   kiny: {
-    eyebrow: "Assistance numerique",
+    eyebrow: "Assistance numérique",
     title: "Shyiraho, tunganya kandi ukoreshe tools za digital nta stress.",
     intro:
       "Dufasha abantu, entrepreneurs na teams ntoya gukemura ibibazo by'ibikoresho, gutunganya tools no kugira confidence mu ikoranabuhanga.",
     primary: "Gusaba ubufasha",
     secondary: "Gusobanura ikibazo",
-    promises: ["Depannage tech", "Configuration", "Démarches online", "Ubufasha intambwe ku yindi"],
+    promises: ["Depannage tech", "Configuration", "Démarchés online", "Ubufasha intambwe ku yindi"],
     imageBriefs: [
       { label: "Ishusho 1", title: "Ubufasha tech bwa muntu", description: "Ishusho itanga icyizere y'umuntu afashwa kuri laptop, smartphone, tablet, printer na router. Professional ariko human. Amagambo ahindurwe ku rurimi." },
       { label: "Ishusho 2", title: "Configuration y'ibikoresho", description: "Ishusho yerekana Wi-Fi, printer, computer, smartphone, cloud, email na accounts bihujwe mu rugo cyangwa office nto." },
@@ -284,7 +284,7 @@ const copies: Record<string, AssistanceCopy> = {
       { title: "Gukemura", text: "Computer itinda, email ifunze, printer, Wi-Fi itagenda neza, telephone cyangwa tablet." },
       { title: "Gushyiraho", text: "Gutunganya appareil, software, account, printer, cloud, app cyangwa tool y'akazi." },
       { title: "Kurinda", text: "Passwords, backups, antivirus, accounts, online scams n'imyitwarire itekanye." },
-      { title: "Guherekeza", text: "Kugura online, demarches, social media, AI, tools nshya no kwigenga muri digital." },
+      { title: "Guherekeza", text: "Kugura online, demarchés, social media, AI, tools nshya no kwigenga muri digital." },
     ],
     situationsEyebrow: "Aho bikunze gukenerwa",
     situationsTitle: "Ushobora gusaba ubufasha n'iyo ikibazo gisa gito.",
@@ -308,7 +308,7 @@ const copies: Record<string, AssistanceCopy> = {
       { question: "Ni service y'abacuruzi gusa?", answer: "Oya. Ni n'iy'abantu ku giti cyabo, families, seniors, students, independants na teams ntoya." },
       { question: "Mwafasha umuntu utumva technology?", answer: "Yego. Iyi service igamije gusobanura buhoro, nta jargon kandi nta guca imanza." },
       { question: "Ni ibihe bikoresho mwafasha gutunganya?", answer: "Computers, smartphones, tablets, printers, routers, email accounts, cloud, apps na tools z'akazi zisanzwe." },
-      { question: "Mwafasha muri demarches online?", answer: "Yego, tugufasha intambwe ku yindi, ariko amakuru yawe sensitive akaguma mu maboko yawe." },
+      { question: "Mwafasha muri demarchés online?", answer: "Yego, tugufasha intambwe ku yindi, ariko amakuru yawe sensitive akaguma mu maboko yawe." },
       { question: "Mwafasha kurinda accounts?", answer: "Yego. Tureba passwords, backups, double authentification n'uko wirinda scams." },
       { question: "Munigisha gukoresha tools?", answer: "Yego. Social media, cloud, AI, visio, documents, kugura online cyangwa tools professionnels." },
     ],

@@ -73,47 +73,47 @@ const homeServiceCopy: Record<
   fr: {
     intro: {
       eyebrow: "Ce que nous faisons",
-      title: "Creativa Poeta ne fait pas seulement de la visibilite.",
+      title: "Creativa Poeta ne fait pas seulement de la visibilité.",
       body:
-        "Nous construisons toute la presence digitale autour de votre activite: etre trouve, expliquer clairement, creer des outils, automatiser, presenter votre image et accompagner vos besoins numeriques.",
+        "Nous construisons toute la présence digitale autour de votre activité: être trouvé, expliquer clairement, créer des outils, automatiser, présenter votre image et accompagner vos besoins numériques.",
     },
     services: [
       {
-        sectionName: "Presence locale",
-        imageTitle: "Etre trouve au bon moment",
+        sectionName: "Présence locale",
+        imageTitle: "Être trouvé au bon moment",
         imageText: "Votre entreprise devient plus claire pour Google, Maps, les recherches vocales et les assistants IA.",
-        title: "Visibilite locale, Google, maps et IA",
+        title: "Visibilité locale, Google, maps et IA",
         body:
-          "Nous alignons votre site, vos profils, vos maps, vos avis et vos reponses pour que les clients et les moteurs modernes comprennent mieux qui vous etes.",
-        bullets: ["Google Maps", "Recherche vocale", "AEO, GEO et presence IA"],
+          "Nous alignons votre site, vos profils, vos maps, vos avis et vos réponses pour que les clients et les moteurs modernes comprennent mieux qui vous êtes.",
+        bullets: ["Google Maps", "Recherche vocale", "AEO, GEO et présence IA"],
         path: "/services/visibilite-locale",
-        action: "Voir la visibilite",
+        action: "Voir la visibilité",
         image: { fr: modernVisibilityFr, en: modernVisibilityEn, nl: modernVisibilityNl },
-        alt: "Visibilite moderne sur Google, maps, voix et outils IA",
+        alt: "Visibilité moderne sur Google, maps, voix et outils IA",
         icon: MapPin,
       },
       {
         sectionName: "Outils digitaux",
         imageTitle: "Une base digitale utile",
-        imageText: "Site, application, formulaire, dashboard et donnees travaillent ensemble pour servir vos clients.",
+        imageText: "Site, application, formulaire, dashboard et données travaillent ensemble pour servir vos clients.",
         title: "Sites web, applications et outils digitaux",
         body:
-          "Nous creons la base officielle de votre entreprise: site clair, pages utiles, application client, tableau de bord ou logiciel interne.",
-        bullets: ["Site officiel", "Application ou portail", "Dashboard et systeme interne"],
+          "Nous créons la base officielle de votre entreprise: site clair, pages utiles, application client, tableau de bord ou logiciel interne.",
+        bullets: ["Site officiel", "Application ou portail", "Dashboard et système interne"],
         path: "/services/site-officiel",
         action: "Voir les outils digitaux",
         image: { fr: siteToolsFr, en: siteToolsEn, nl: siteToolsNl },
-        alt: "Ecosysteme digital avec site, application, formulaire, tableau de bord et base de donnees",
+        alt: "Écosystème digital avec site, application, formulaire, tableau de bord et base de données",
         icon: MonitorSmartphone,
       },
       {
         sectionName: "Voix et IA",
-        imageTitle: "Un assistant qui comprend votre activite",
-        imageText: "Vos documents et processus deviennent une base claire pour repondre plus vite et mieux guider vos utilisateurs.",
+        imageTitle: "Un assistant qui comprend votre activité",
+        imageText: "Vos documents et processus deviennent une base claire pour répondre plus vite et mieux guider vos utilisateurs.",
         title: "Assistants IA, GPT, chatbots et agents",
         body:
-          "Nous transformons vos documents, services et processus en assistants capables de repondre, guider, resumer ou preparer des actions.",
-        bullets: ["Assistant prive", "Base de connaissances", "Agent connecte aux outils"],
+          "Nous transformons vos documents, services et processus en assistants capables de répondre, guider, résumer ou préparer des actions.",
+        bullets: ["Assistant privé", "Base de connaissances", "Agent connecté aux outils"],
         path: "/services/ia-automatisation",
         action: "Voir les assistants IA",
         image: { fr: assistantFr, en: assistantEn, nl: assistantNl },
@@ -122,44 +122,44 @@ const homeServiceCopy: Record<
       },
       {
         sectionName: "Image de marque",
-        imageTitle: "Un univers visuel coherent",
-        imageText: "Vos couleurs, logos, supports et publications gardent la meme force partout ou votre marque apparait.",
-        title: "Design graphique et identite visuelle",
+        imageTitle: "Un univers visuel cohérent",
+        imageText: "Vos couleurs, logos, supports et publications gardent la même force partout où votre marque apparaît.",
+        title: "Design graphique et identité visuelle",
         body:
-          "Nous donnons une forme visible a votre univers: logo, couleurs, supports, publications, presentations et visuels coherents.",
-        bullets: ["Identite visuelle", "Supports prets a publier", "Marque reconnaissable"],
+          "Nous donnons une forme visible à votre univers: logo, couleurs, supports, publications, présentations et visuels cohérents.",
+        bullets: ["Identité visuelle", "Supports prêts à publier", "Marque reconnaissable"],
         path: "/services/graphic-design",
         action: "Voir le design",
         image: { fr: designFr, en: designEn, nl: designNl },
-        alt: "Univers de marque coherent avec logo, couleurs, typographies et supports",
+        alt: "Univers de marque cohérent avec logo, couleurs, typographies et supports",
         icon: Palette,
       },
       {
         sectionName: "Mots et documents",
-        imageTitle: "Des idees transformees en supports clairs",
-        imageText: "Vos contenus deviennent plus structures, plus lisibles et prets a etre utilises par vos clients.",
-        title: "Contenu, redaction et documents professionnels",
+        imageTitle: "Des idées transformées en supports clairs",
+        imageText: "Vos contenus deviennent plus structurés, plus lisibles et prêts à être utilisés par vos clients.",
+        title: "Contenu, rédaction et documents professionnels",
         body:
-          "Nous transformons vos idees en textes, articles, documents, rapports, guides, profils et supports clairs pour vos clients.",
+          "Nous transformons vos idées en textes, articles, documents, rapports, guides, profils et supports clairs pour vos clients.",
         bullets: ["Textes web et articles", "Rapports et guides", "CV, lettres et profils LinkedIn"],
         path: "/services/content-writing",
         action: "Voir le contenu",
         image: { fr: contentFr, en: contentEn, nl: contentNl },
-        alt: "Idees transformees en documents clairs et supports professionnels",
+        alt: "Idées transformées en documents clairs et supports professionnels",
         icon: FileText,
       },
       {
-        sectionName: "Assistance numerique",
-        imageTitle: "Une aide humaine et concrete",
-        imageText: "Installation, securite, comptes, appareils et demarches deviennent plus simples a gerer au quotidien.",
-        title: "Assistance numerique et depannage",
+        sectionName: "Assistance numérique",
+        imageTitle: "Une aide humaine et concrète",
+        imageText: "Installation, sécurité, comptes, appareils et démarches deviennent plus simples à gérer au quotidien.",
+        title: "Assistance numérique et dépannage",
         body:
-          "Nous aidons a installer, configurer, securiser, depanner et mieux utiliser les appareils, comptes, outils et demarches numeriques.",
-        bullets: ["Configuration appareils", "Securite et comptes", "Accompagnement pas a pas"],
+          "Nous aidons à installer, configurer, sécuriser, dépanner et mieux utiliser les appareils, comptes, outils et démarches numériques.",
+        bullets: ["Configuration appareils", "Sécurité et comptes", "Accompagnement pas à pas"],
         path: "/services/assistance-numerique",
         action: "Voir l'assistance",
         image: { fr: assistanceFr, en: assistanceEn, nl: assistanceNl },
-        alt: "Assistance numerique humaine pour simplifier la vie digitale",
+        alt: "Assistance numérique humaine pour simplifier la vie digitale",
         icon: Wrench,
       },
     ],
@@ -169,17 +169,17 @@ const homeServiceCopy: Record<
       eyebrow: "What we do",
       title: "Creativa Poeta is not only about visibility.",
       body:
-        "We build the full digital presence around your activity: being found, explaining clearly, creating tools, automating, shaping your image and supporting digital needs.",
+        "We build the full digital présence around your activity: being found, explaining clearly, creating tools, automating, shaping your image and supporting digital needs.",
     },
     services: [
       {
-        sectionName: "Local presence",
+        sectionName: "Local présence",
         imageTitle: "Be found at the right moment",
         imageText: "Your business becomes clearer for Google, Maps, voice searches and AI assistants.",
         title: "Local visibility, Google, maps and AI",
         body:
           "We align your website, profiles, maps, reviews and answers so customers and modern search tools understand who you are.",
-        bullets: ["Google Maps", "Voice search", "AEO, GEO and AI presence"],
+        bullets: ["Google Maps", "Voice search", "AEO, GEO and AI présence"],
         path: "/services/visibilite-locale",
         action: "See visibility",
         image: { fr: modernVisibilityFr, en: modernVisibilityEn, nl: modernVisibilityNl },
@@ -207,7 +207,7 @@ const homeServiceCopy: Record<
         title: "AI assistants, GPT, chatbots and agents",
         body:
           "We turn your documents, services and processes into assistants that can answer, guide, summarize and prepare actions.",
-        bullets: ["Private assistant", "Knowledge base", "Agent connected to tools"],
+        bullets: ["Private assistant", "Knowledge base", "Agent connectéd to tools"],
         path: "/services/ia-automatisation",
         action: "See AI assistants",
         image: { fr: assistantFr, en: assistantEn, nl: assistantNl },
@@ -216,7 +216,7 @@ const homeServiceCopy: Record<
       },
       {
         sectionName: "Brand image",
-        imageTitle: "A coherent visual universe",
+        imageTitle: "A cohérent visual universe",
         imageText: "Your colors, logos, assets and posts keep the same strength wherever your brand appears.",
         title: "Graphic design and visual identity",
         body:
@@ -263,7 +263,7 @@ const homeServiceCopy: Record<
       eyebrow: "Wat we doen",
       title: "Creativa Poeta gaat niet alleen over zichtbaarheid.",
       body:
-        "We bouwen de volledige digitale aanwezigheid rond uw activiteit: gevonden worden, duidelijk uitleggen, tools maken, automatiseren, uw beeld vormgeven en digitale ondersteuning bieden.",
+        "We bouwen de volledige digitale aanwezigheid rond uw activitéit: gevonden worden, duidelijk uitleggen, tools maken, automatiseren, uw beeld vormgeven en digitale ondersteuning bieden.",
     },
     services: [
       {
@@ -296,7 +296,7 @@ const homeServiceCopy: Record<
       },
       {
         sectionName: "Voice en AI",
-        imageTitle: "Een assistent die uw activiteit begrijpt",
+        imageTitle: "Een assistent die uw activitéit begrijpt",
         imageText: "Uw documenten en processen worden een duidelijke basis om sneller te antwoorden en gebruikers beter te begeleiden.",
         title: "AI-assistenten, GPT, chatbots en agents",
         body:
@@ -310,7 +310,7 @@ const homeServiceCopy: Record<
       },
       {
         sectionName: "Merkbeeld",
-        imageTitle: "Een coherente visuele wereld",
+        imageTitle: "Een cohérente visuele wereld",
         imageText: "Uw kleuren, logo, materialen en posts behouden dezelfde kracht overal waar uw merk verschijnt.",
         title: "Grafisch design en visuele identiteit",
         body:

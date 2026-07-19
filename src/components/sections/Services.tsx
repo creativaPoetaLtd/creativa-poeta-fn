@@ -41,19 +41,19 @@ const servicesCopy: Record<
     eyebrow: "Nos services",
     title: "Ce que nous construisons avec vous.",
     intro:
-      "Des idees, des images, des mots, des sites, des outils intelligents et une presence plus claire la ou vos clients vous cherchent.",
+      "Des idées, des images, des mots, des sites, des outils intelligents et une présence plus claire là où vos clients vous cherchent.",
     services: [
       {
-        eyebrow: "Visibilite",
-        title: "presence locale",
+        eyebrow: "Visibilité",
+        title: "présence locale",
         description:
-          "Nous aidons votre entreprise a etre trouvee au bon moment, sur Google, les maps, la recherche vocale et les outils intelligents.",
+          "Nous aidons votre entreprise à être trouvée au bon moment, sur Google, les maps, la recherche vocale et les outils intelligents.",
         includes: [
-          "Audit de visibilite",
+          "Audit de visibilité",
           "Google, Maps et profils locaux",
-          "Avis, horaires et informations coherentes",
-          "Presence dans les moteurs IA",
-          "Referencement local",
+          "Avis, horaires et informations cohérentes",
+          "Présence dans les moteurs IA",
+          "Référencement local",
         ],
         image: serviceImages.visibility,
         path: "/services/visibilite-locale",
@@ -62,7 +62,7 @@ const servicesCopy: Record<
         eyebrow: "Sites, apps",
         title: "outils digitaux",
         description:
-          "Nous construisons la base officielle de votre entreprise: sites, pages utiles, applications, logiciels internes et systemes complets.",
+          "Nous construisons la base officielle de votre entreprise: sites, pages utiles, applications, logiciels internes et systèmes complets.",
         includes: [
           "Site vitrine et pages de service",
           "Landing pages",
@@ -77,28 +77,28 @@ const servicesCopy: Record<
         eyebrow: "IA",
         title: "assistants IA",
         description:
-          "Nous creons des assistants IA, GPT personnalises, chatbots et agents intelligents adaptes a votre metier.",
+          "Nous créons des assistants IA, GPT personnalisés, chatbots et agents intelligents adaptés à votre métier.",
         includes: [
-          "Assistant IA prive",
-          "GPT personnalise",
+          "Assistant IA privé",
+          "GPT personnalisé",
           "Chatbot pour entreprise",
-          "Automatisation de reponses",
-          "Agents IA et integrations API",
+          "Automatisation de réponses",
+          "Agents IA et intégrations API",
         ],
         image: serviceImages.ai,
         path: "/services/ia-automatisation",
       },
       {
         eyebrow: "Design",
-        title: "identite visuelle",
+        title: "identité visuelle",
         description:
-          "Nous donnons une forme visible a votre univers avec des visuels clairs, beaux et memorables.",
+          "Nous donnons une forme visible à votre univers avec des visuels clairs, beaux et mémorables.",
         includes: [
-          "Logo et identite visuelle",
+          "Logo et identité visuelle",
           "Affiches, flyers et brochures",
-          "Supports reseaux sociaux",
-          "Presentations",
-          "Infographies et publicites",
+          "Supports réseaux sociaux",
+          "Présentations",
+          "Infographies et publicités",
         ],
         image: serviceImages.design,
         path: "/services/graphic-design",
@@ -107,9 +107,9 @@ const servicesCopy: Record<
         eyebrow: "Contenu",
         title: "documents",
         description:
-          "Nous transformons vos idees en mots, documents et supports professionnels qui racontent clairement votre histoire.",
+          "Nous transformons vos idées en mots, documents et supports professionnels qui racontent clairement votre histoire.",
         includes: [
-          "Redaction professionnelle",
+          "Rédaction professionnelle",
           "Ghostwriting",
           "Articles, blogs et textes web",
           "CV, lettres et profils LinkedIn",
@@ -120,15 +120,15 @@ const servicesCopy: Record<
       },
       {
         eyebrow: "Aide tech",
-        title: "assistance numerique",
+        title: "assistance numérique",
         description:
-          "Nous aidons les particuliers, entrepreneurs et petites structures a installer, configurer, depanner et mieux utiliser leurs outils numeriques.",
+          "Nous aidons les particuliers, entrepreneurs et petites structures à installer, configurer, dépanner et mieux utiliser leurs outils numériques.",
         includes: [
-          "Depannage ordinateur, telephone et tablette",
+          "Dépannage ordinateur, téléphone et tablette",
           "Installation et configuration",
           "Comptes, emails, cloud et imprimantes",
-          "Démarches en ligne et reseaux sociaux",
-          "Securite, mots de passe et accompagnement pas a pas",
+          "Démarches en ligne et réseaux sociaux",
+          "Sécurité, mots de passe et accompagnement pas à pas",
         ],
         image: serviceImages.support,
         path: "/services/assistance-numerique",
@@ -139,7 +139,7 @@ const servicesCopy: Record<
     eyebrow: "Our services",
     title: "What we build with you.",
     intro:
-      "Ideas, visuals, words, websites, intelligent tools and a clearer presence where your customers search.",
+      "Ideas, visuals, words, websites, intelligent tools and a clearer présence where your customers search.",
     services: [
       {
         eyebrow: "Visibility",
@@ -421,7 +421,7 @@ const servicesCopy: Record<
           "Gukemura ibibazo bya computer, telephone na tablet",
           "Installation na configuration",
           "Accounts, email, cloud na printers",
-          "Démarches online na social media",
+          "Démarchés online na social media",
           "Security, passwords no kugufasha intambwe ku yindi",
         ],
         image: serviceImages.support,
