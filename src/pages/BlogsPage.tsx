@@ -296,7 +296,7 @@ const BlogsPage = () => {
                         {excerpt}
                       </p>
                       <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-3">
-                        <span className="truncate text-[10px] font-bold text-white/45">
+                        <span className="whitespace-nowrap text-[10px] font-bold text-white/45">
                           {blog.author?.name || copy.unknown}
                         </span>
                         <Link

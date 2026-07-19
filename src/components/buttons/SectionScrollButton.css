@@ -62,8 +62,8 @@
 
 .cp-scroll-button > span:last-child {
   max-width: min(10.5rem, 34vw);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  text-overflow: clip;
   white-space: nowrap;
 }
 
@@ -131,9 +131,9 @@
   justify-content: center;
   line-height: 1;
   min-height: 3rem;
-  overflow: hidden;
+  overflow: visible;
   text-align: center;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   white-space: nowrap;
 }
 

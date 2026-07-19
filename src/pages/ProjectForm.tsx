@@ -969,7 +969,7 @@ const ProjectForm = () => {
                 >
                   <Icon className={`text-xl tablet:text-2xl ${active ? "text-[#071a33]" : "text-[#fff200]"}`} />
                   <div className="min-w-0">
-                    <h3 className="truncate text-sm font-black tablet:text-base">{group.title}</h3>
+                    <h3 className="whitespace-nowrap text-[clamp(0.68rem,2.45vw,1rem)] font-black tablet:text-base">{group.title}</h3>
                   </div>
                   <span className={`h-4 w-4 rounded-full border-2 ${active ? "border-[#071a33] bg-[#071a33]" : "border-white/40"}`} />
                   <p className={`${open ? "block" : "hidden"} col-span-3 text-xs font-semibold leading-5 tablet:block tablet:leading-4 ${active ? "text-[#071a33]/80" : "text-white/70"}`}>
@@ -1222,7 +1222,7 @@ const ProjectForm = () => {
                   }`}
                 >
                   <span>{stepNumber}</span>
-                  <span className={`${current ? "inline max-w-[7rem]" : "hidden"} truncate`}>
+                  <span className={`${current ? "inline max-w-[7rem]" : "hidden"} whitespace-nowrap`}>
                     {label}
                   </span>
                 </div>

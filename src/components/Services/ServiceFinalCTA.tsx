@@ -73,16 +73,16 @@ const ServiceFinalCTA = () => {
           <div className="mt-6 grid grid-cols-2 gap-2 phone:gap-4">
             <Link
               to={auditPath}
-              className="inline-flex min-w-0 items-center justify-center gap-2 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
+              className="cp-one-line-button inline-flex min-w-0 items-center justify-center gap-2 border-2 border-[#EEBA2B] bg-[#EEBA2B] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
             >
-              <span className="truncate">{copy.primary}</span>
+              <span className="cp-one-line-label">{copy.primary}</span>
               <FaArrowRight className="flex-none" />
             </Link>
             <Link
               to={contactPath}
-              className="inline-flex min-w-0 items-center justify-center gap-2 border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
+              className="cp-one-line-button inline-flex min-w-0 items-center justify-center gap-2 border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#EEBA2B] hover:text-[#EEBA2B] phone:px-6 phone:py-4 phone:text-sm"
             >
-              <span className="truncate">{copy.secondary}</span>
+              <span className="cp-one-line-label">{copy.secondary}</span>
               <FaComments className="flex-none" />
             </Link>
           </div>

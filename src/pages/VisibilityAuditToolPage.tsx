@@ -1084,16 +1084,16 @@ const VisibilityAuditToolPage = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-4 text-[11px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] disabled:cursor-not-allowed disabled:opacity-60 phone:text-sm"
+                  className="cp-one-line-button inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-4 text-[11px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] disabled:cursor-not-allowed disabled:opacity-60 phone:text-sm"
                 >
-                  <span className="truncate">
+                  <span className="cp-one-line-label">
                     {isSubmitting ? copy.submitting : copy.submit}
                   </span>
                   <FaArrowRight className="flex-none" />
                 </button>
                 <Link
                   to={localizePath("/start-project")}
-                  className="inline-flex min-w-0 items-center justify-center rounded-full border-2 border-white px-3 py-4 text-center text-[11px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:text-sm"
+                  className="cp-one-line-button inline-flex min-w-0 items-center justify-center rounded-full border-2 border-white px-3 py-4 text-center text-[11px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:text-sm"
                 >
                   {copy.startProject}
                 </Link>

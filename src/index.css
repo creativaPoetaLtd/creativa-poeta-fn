@@ -63,6 +63,30 @@ body{
   background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black background */
 }
 
+.cp-one-line-button {
+  letter-spacing: 0 !important;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.cp-one-line-label {
+  display: inline-block;
+  max-width: none;
+  min-width: 0;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cp-one-line-button {
+    font-size: clamp(0.48rem, 2.05vw, 0.78rem) !important;
+    gap: 0.35rem !important;
+    padding-left: 0.42rem !important;
+    padding-right: 0.42rem !important;
+  }
+}
+
 @media (max-width: 640px) {
   body {
     background-position: left center;

@@ -664,16 +664,16 @@ const ContentWritting = () => {
             <div className="mt-6 grid grid-cols-2 gap-2 phone:gap-3">
               <Link
                 to={startPath}
-                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] phone:px-5 phone:text-xs"
+                className="cp-one-line-button inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-[#fff200] bg-[#fff200] px-3 py-3 text-[10px] font-black uppercase leading-tight text-[#071a33] transition hover:bg-transparent hover:text-[#fff200] phone:px-5 phone:text-xs"
               >
-                <span className="truncate">{copy.primary}</span>
+                <span className="cp-one-line-label">{copy.primary}</span>
                 <FaArrowRight className="flex-none" />
               </Link>
               <Link
                 to={contactPath}
-                className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:px-5 phone:text-xs"
+                className="cp-one-line-button inline-flex min-w-0 items-center justify-center gap-2 rounded-full border-2 border-white px-3 py-3 text-[10px] font-black uppercase leading-tight text-white transition hover:border-[#fff200] hover:text-[#fff200] phone:px-5 phone:text-xs"
               >
-                <span className="truncate">{copy.secondary}</span>
+                <span className="cp-one-line-label">{copy.secondary}</span>
                 <FaFileAlt className="flex-none" />
               </Link>
             </div>
