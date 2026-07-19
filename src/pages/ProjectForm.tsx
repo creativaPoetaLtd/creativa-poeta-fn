@@ -1104,6 +1104,7 @@ const ProjectForm = () => {
             <div key={name}>
               <label className="mb-1 block text-[10px] font-black uppercase text-white tablet:text-sm">
                 {label}
+              {["name", "email", "phone", "company"].includes(name) ? <span className="ml-1 text-[#fff200]" aria-hidden="true">*</span> : null}
               </label>
               <input
                 type={type}

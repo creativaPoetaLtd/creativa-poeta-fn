@@ -1126,6 +1126,7 @@ const Field = ({
   <label className="block">
     <span className="mb-2 block text-xs font-black uppercase text-white/75">
       {label}
+    {required ? <span className="ml-1 text-[#fff200]" aria-hidden="true">*</span> : null}
     </span>
     <input
       type={type}

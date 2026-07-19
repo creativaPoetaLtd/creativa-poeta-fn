@@ -12,7 +12,7 @@ const HomeLocale: any = {
     title4: "turn your ideas into reality",
     description4:
       "From words to visuals, from websites to intelligent tools, we craft the bridge between your vision and the people you want to reach.",
-    action1: "TEST MY VISIBILITY",
+    action1: "START A PROJECT",
     action2: "OUR SERVICES",
     scroll: "SCROLL DOWN",
   },
@@ -29,7 +29,7 @@ const HomeLocale: any = {
     title4: "transformez vos idees en realite",
     description4:
       "Des mots aux images, du site web aux outils intelligents, nous dessinons le chemin entre votre vision et ceux que vous voulez toucher.",
-    action1: "TESTER MA VISIBILITE",
+    action1: "DEMARRER UN PROJET",
     action2: "NOS SERVICES",
     scroll: "FAIRE DEFILER",
   },
@@ -46,7 +46,7 @@ const HomeLocale: any = {
     title4: "hindura ibitekerezo byawe bibe ukuri",
     description4:
       "Kuva ku magambo kugera ku mashusho, kuva kuri website kugera kuri outils zifite ubwenge, duha inzira igitekerezo cyawe.",
-    action1: "GERAGEZA UKO UBONEKA",
+    action1: "TANGIRA UMUSHINGA",
     action2: "IBYO DUKORA",
     scroll: "MANUKA HASI",
   },
@@ -63,7 +63,7 @@ const HomeLocale: any = {
     title4: "maak uw ideeen werkelijkheid",
     description4:
       "Van woorden tot beelden, van websites tot intelligente tools: wij bouwen de brug tussen uw visie en uw publiek.",
-    action1: "TEST MIJN ZICHTBAARHEID",
+    action1: "START EEN PROJECT",
     action2: "ONZE DIENSTEN",
     scroll: "SCROLL OMLAAG",
   },

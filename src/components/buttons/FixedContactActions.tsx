@@ -1,10 +1,12 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import HomeLocale from "../../i18n/HomeLocale";
 import {
   getCurrentLocale,
   getCurrentMarket,
+  getPathWithoutLocale,
 } from "../../data/marketRuntime";
 import "./SectionScrollButton.css";
 
@@ -34,9 +36,16 @@ const sectionSelectors = [
 
 const FixedContactActions = () => {
   const [footerVisible, setFooterVisible] = useState(false);
+  const location = useLocation();
   const market = getCurrentMarket();
   const lang = getCurrentLocale(market);
   const scrollLabel = HomeLocale[lang]?.scroll ?? HomeLocale.en.scroll;
+  const currentPath = getPathWithoutLocale(location.pathname);
+  const hideOnFormPages = [
+    "/start-project",
+    "/tester-visibilite",
+    "/demander-assistance-numerique",
+  ].includes(currentPath);
 
   useEffect(() => {
     const footer = document.getElementById("footer") || document.querySelector("footer");
@@ -84,6 +93,10 @@ const FixedContactActions = () => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     highlightTarget(target);
   };
+
+  if (hideOnFormPages) return null;
+
+
 
   return (
     <div

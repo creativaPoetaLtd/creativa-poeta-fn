@@ -159,8 +159,8 @@ const Home = () => {
     window.location.href = `${localizePath("/")}#services`;
   };
   const currentBackground = backgrounds[currentIndex];
-  const handleVisibilityTest = () => {
-    window.location.href = localizePath("/tester-visibilite");
+  const handleStartProject = () => {
+    window.location.href = localizePath("/start-project");
   };
 
   return (
@@ -215,7 +215,7 @@ const Home = () => {
             </div>
             <div className="flex animate-bounce flex-row gap-2 phone:gap-3 laptop:gap-5 mt-12 mx-auto laptop:mx-auto w-full justify-center items-center px-3">
               <button
-                onClick={handleVisibilityTest}
+                onClick={handleStartProject}
                 className="cp-home-hero-action hover:bg-white hover:text-black text-white laptop:w-[300px] min-w-0 flex-1 max-w-[300px] px-2 phone:px-5 laptop:px-10 laptop:py-3 desktop:py-3 phone:py-3 tablet:py-3 xs:py-2 laptop:text-base desktop:text-base tablet:text-base phone:text-base xs:text-xs border-2 border-white animate-fade-in whitespace-nowrap"
               >
                 {homeCopy.action1}

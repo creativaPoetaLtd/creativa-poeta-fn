@@ -394,7 +394,7 @@ export default function DigitalAssistanceRequestPage() {
                 <Field label={copy.labels.city} value={form.city} placeholder={copy.placeholders.city} onChange={(value) => setField("city", value)} />
                 <Field label={copy.labels.device} value={form.device} placeholder={copy.placeholders.device} onChange={(value) => setField("device", value)} />
                 <label>
-                  <span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.urgency}</span>
+                  <RequiredLabel required={false}>{copy.labels.urgency}</RequiredLabel>
                   <select
                     value={form.urgency}
                     onChange={(event) => setField("urgency", event.target.value)}
@@ -410,7 +410,7 @@ export default function DigitalAssistanceRequestPage() {
               </div>
 
               <label className="mt-3 block">
-                <span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.message}</span>
+                <RequiredLabel>{copy.labels.message}</RequiredLabel>
                 <textarea
                   value={form.message}
                   onChange={(event) => setField("message", event.target.value)}
@@ -448,16 +448,23 @@ type FieldProps = {
 
 const Field = ({ label, value, placeholder, type = "text", required = false, onChange }: FieldProps) => (
   <label className="block min-w-0">
-    <span className="mb-2 block text-xs font-black uppercase text-white/75">{label}</span>
+    <RequiredLabel required={required}>{label}</RequiredLabel>
     <input
       type={type}
       value={value}
       required={required}
       placeholder={placeholder}
       onChange={(event) => onChange(event.target.value)}
-      className="h-14 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-4 text-sm laptop:h-12 font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
+      className="h-11 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-xs font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200] tablet:h-14 tablet:px-4 tablet:text-sm laptop:h-12"
     />
   </label>
+);
+
+const RequiredLabel = ({ children, required = true }: { children: string; required?: boolean }) => (
+  <span className="mb-1.5 block text-xs font-black uppercase text-white/75">
+    {children}
+    {required ? <span className="ml-1 text-[#fff200]" aria-hidden="true">*</span> : null}
+  </span>
 );
 
 type MobileAssistanceRequestProps = {
@@ -516,15 +523,15 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
 
           {step === 2 && <section>
             <h1 className="mb-5 text-2xl font-black leading-tight text-[#fff200]">{copy.detailsTitle}</h1>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-4">
+            <div className="grid grid-cols-1 gap-2">
               <Field label={copy.labels.name} value={form.name} placeholder={copy.placeholders.name} onChange={(value) => setField("name", value)} required />
               <Field label={copy.labels.email} value={form.email} type="email" placeholder={copy.placeholders.email} onChange={(value) => setField("email", value)} required />
               <Field label={copy.labels.phone} value={form.phone} placeholder={copy.placeholders.phone} onChange={(value) => setField("phone", value)} />
               <Field label={copy.labels.city} value={form.city} placeholder={copy.placeholders.city} onChange={(value) => setField("city", value)} />
               <Field label={copy.labels.device} value={form.device} placeholder={copy.placeholders.device} onChange={(value) => setField("device", value)} />
-              <label><span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.urgency}</span><select value={form.urgency} onChange={(event) => setField("urgency", event.target.value)} className="h-14 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-sm font-bold text-white outline-none">{copy.urgency.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+              <label><RequiredLabel required={false}>{copy.labels.urgency}</RequiredLabel><select value={form.urgency} onChange={(event) => setField("urgency", event.target.value)} className="h-11 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-xs font-bold text-white outline-none">{copy.urgency.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
             </div>
-            <label className="mt-2 block"><span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.message}</span><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={3} required className="min-h-[7rem] w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
+            <label className="mt-2 block"><RequiredLabel>{copy.labels.message}</RequiredLabel><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={2} required className="min-h-[5rem] w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
           </section>}
         </div>
 
