@@ -39,12 +39,12 @@ const copies: Record<string, UsefulContentCopy> = {
     eyebrow: "Contenus utiles",
     title: "Repondez aux vraies questions de vos clients avant qu'ils vous appellent.",
     intro:
-      "Nous creons des pages claires pour vos services, vos questions frequentes, vos zones et vos cas concrets afin que vos clients, Google et les outils IA comprennent mieux votre entreprise.",
-    cta: "Creer mes contenus utiles",
-    secondaryCta: "Tester ma visibilite",
-    whyTitle: "Une page utile peut devenir une reponse.",
+      "Nous créons des pages claires pour vos services, vos questions fréquentes, vos zones et vos cas concrets afin que vos clients, Google et les outils IA comprennent mieux votre entreprise.",
+    cta: "Créer mes contenus utiles",
+    secondaryCta: "Tester ma visibilité",
+    whyTitle: "Une page utile peut devenir une réponse.",
     whyText:
-      "Les clients ne cherchent pas toujours votre nom. Ils posent des questions precises : prix, disponibilite, zone, langue, probleme, urgence ou comparaison. Votre site doit pouvoir repondre avec des mots simples et fiables.",
+      "Les clients ne cherchent pas toujours votre nom. Ils posent des questions précises : prix, disponibilite, zone, langue, problème, urgence ou comparaison. Votre site doit pouvoir répondre avec des mots simples et fiables.",
     blocksTitle: "Ce que nous clarifions",
     blocks: [
       {
@@ -57,29 +57,29 @@ const copies: Record<string, UsefulContentCopy> = {
       },
       {
         title: "Zones et langues",
-        text: "Des informations adaptees a la ville, au pays, a la langue ou au public vise.",
+        text: "Des informations adaptées a la ville, au pays, a la langue ou au public visé.",
       },
       {
         title: "Outils IA",
-        text: "Des contenus faciles a comprendre pour les assistants comme ChatGPT, sans texte vide ni repetitif.",
+        text: "Des contenus faciles à comprendre pour les assistants comme ChatGPT, sans texte vide ni repetitif.",
       },
     ],
     examplesTitle: "Exemples de pages utiles",
     examples: [
-      "Quelle agence peut refaire mon site pour etre visible dans Google et les outils IA ?",
+      "Quelle agence peut refaire mon site pour être visible dans Google et les outils IA ?",
       "Quel service proche de moi est ouvert maintenant ?",
       "Comment rendre mon entreprise claire sur Google Maps et Apple Maps ?",
       "Quels services proposez-vous pour une petite entreprise qui n'a pas encore de site ?",
     ],
     deliverTitle: "Ce que vous recevez",
     deliver: [
-      "Une liste de questions importantes pour votre activite.",
-      "Des pages courtes, claires et reliees a vos services.",
-      "Des reponses simples qui parlent a monsieur tout le monde.",
+      "Une liste de questions importantes pour votre activité.",
+      "Des pages courtes, claires et reliees à vos services.",
+      "Des réponses simples qui parlent a monsieur tout le monde.",
       "Une structure qui peut grandir par langue, pays, ville ou service.",
-      "Des contenus alignes avec votre site, vos maps et vos profils publics.",
+      "Des contenus alignés avec votre site, vos maps et vos profils publics.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce qu'il faut publier beaucoup de pages ?",
@@ -94,7 +94,7 @@ const copies: Record<string, UsefulContentCopy> = {
       {
         question: "Pourquoi c'est important pour les outils IA ?",
         answer:
-          "Ces outils cherchent des informations claires et coherentes. Si votre site repond bien aux questions, il devient plus facile a comprendre et a citer.",
+          "Ces outils cherchent des informations claires et cohérentes. Si votre site répond bien aux questions, il devient plus facile à comprendre et a citer.",
       },
     ],
   },
@@ -295,7 +295,7 @@ const UsefulContent = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=content`;
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (

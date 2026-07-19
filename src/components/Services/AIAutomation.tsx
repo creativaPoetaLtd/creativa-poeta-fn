@@ -52,23 +52,23 @@ type AICopy = {
 const copies: Record<string, AICopy> = {
   fr: {
     eyebrow: "Assistants IA",
-    title: "Des assistants IA utiles, entraines sur votre metier et vos vraies informations.",
+    title: "Des assistants IA utiles, entraines sur votre métier et vos vraies informations.",
     intro:
-      "Nous creons des assistants IA, GPT personnalises, chatbots et agents simples qui aident vos clients ou votre equipe a obtenir des reponses plus vite.",
-    primary: "Creer mon assistant IA",
-    secondary: "Tester ma visibilite",
+      "Nous créons des assistants IA, GPT personnalises, chatbots et agents simples qui aident vos clients ou votre équipe a obtenir des réponses plus vite.",
+    primary: "Créer mon assistant IA",
+    secondary: "Tester ma visibilité",
     promises: [
       "Assistant prive",
       "GPT personnalise",
       "Chatbot client",
-      "Agent connecte a vos contenus",
+      "Agent connecte à vos contenus",
     ],
     imageBriefs: [
       {
         label: "Image 1",
         title: "Assistant IA de marque",
         description:
-          "Un visuel montrant un assistant IA dans l'univers Creativa Poeta, avec bulles de conversation, documents de l'entreprise et reponses claires. Texte a traduire par langue.",
+          "Un visuel montrant un assistant IA dans l'univers Creativa Poeta, avec bulles de conversation, documents de l'entreprise et réponses claires. Texte a traduire par langue.",
       },
       {
         label: "Image 2",
@@ -84,13 +84,13 @@ const copies: Record<string, AICopy> = {
       },
     ],
     rolesEyebrow: "Ce que l'IA doit faire",
-    rolesTitle: "Un assistant IA doit avoir une mission precise.",
+    rolesTitle: "Un assistant IA doit avoir une mission précise.",
     rolesText:
-      "On ne cree pas un assistant pour faire gadget. On le cree pour repondre, guider, filtrer, organiser ou aider une personne a avancer.",
+      "On ne crée pas un assistant pour faire gadget. On le crée pour répondre, guider, filtrer, organiser ou aider une personne à avancer.",
     roles: [
       {
         title: "Repondre",
-        text: "Questions frequentes, informations de service, conditions, horaires, processus ou demandes simples.",
+        text: "Questions fréquentes, informations de service, conditions, horaires, processus ou demandes simples.",
       },
       {
         title: "Guider",
@@ -98,11 +98,11 @@ const copies: Record<string, AICopy> = {
       },
       {
         title: "Assister",
-        text: "Aider l'equipe a retrouver des informations, reformuler, trier ou produire des reponses.",
+        text: "Aider l'équipe a retrouver des informations, reformuler, trier ou produire des réponses.",
       },
       {
         title: "Connecter",
-        text: "Relier l'assistant a vos pages, documents, formulaires ou outils internes quand c'est utile.",
+        text: "Relier l'assistant à vos pages, documents, formulaires ou outils internes quand c'est utile.",
       },
     ],
     examplesEyebrow: "Cas d'usage",
@@ -114,45 +114,45 @@ const copies: Record<string, AICopy> = {
       },
       {
         title: "Assistant interne",
-        text: "Aide l'equipe a retrouver des procedures, documents, offres, messages et informations utiles.",
+        text: "Aide l'équipe a retrouver des procedures, documents, offres, messages et informations utiles.",
       },
       {
         title: "GPT personnalise",
-        text: "Un assistant configure avec votre ton, vos contenus et vos limites pour produire des reponses coherentes.",
+        text: "Un assistant configure avec votre ton, vos contenus et vos limites pour produire des réponses cohérentes.",
       },
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "Definir, nourrir, tester, connecter.",
     methodText:
-      "La qualite d'un assistant depend surtout de ce qu'on lui donne: bonnes informations, bonnes limites, bons exemples et bon usage.",
+      "La qualité d'un assistant depend surtout de ce qu'on lui donne: bonnes informations, bonnes limites, bons exemples et bon usage.",
     steps: [
       "Definir le role exact de l'assistant.",
-      "Identifier les documents, pages, FAQ et donnees utiles.",
-      "Ecrire les instructions, limites et exemples de reponses.",
+      "Identifier les documents, pages, FAQ et données utiles.",
+      "Ecrire les instructions, limites et exemples de réponses.",
       "Tester les cas sensibles avant de le publier.",
-      "Connecter l'assistant aux bons canaux si necessaire.",
+      "Connecter l'assistant aux bons canaux si nécessaire.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce qu'un assistant IA peut remplacer une personne ?",
         answer:
-          "Non. Il aide a repondre plus vite et a organiser l'information, mais les decisions importantes et les cas sensibles doivent rester humains.",
+          "Non. Il aide à répondre plus vite et à organiser l'information, mais les decisions importantes et les cas sensibles doivent rester humains.",
       },
       {
-        question: "De quoi avez-vous besoin pour creer un assistant ?",
+        question: "De quoi avez-vous besoin pour créer un assistant ?",
         answer:
           "De vos pages, documents, FAQ, services, offres, ton de marque et limites: ce que l'assistant peut dire ou ne doit pas dire.",
       },
       {
-        question: "Peut-on creer un assistant prive pour l'equipe ?",
+        question: "Peut-on créer un assistant prive pour l'équipe ?",
         answer:
-          "Oui. Il peut aider a retrouver des procedures, reformuler des messages, preparer des reponses ou organiser des informations internes.",
+          "Oui. Il peut aider a retrouver des procedures, reformuler des messages, preparer des réponses ou organiser des informations internes.",
       },
       {
         question: "Peut-il parler plusieurs langues ?",
         answer:
-          "Oui. On peut preparer les instructions, contenus et exemples dans les langues utiles a vos clients ou votre equipe.",
+          "Oui. On peut preparer les instructions, contenus et exemples dans les langues utiles à vos clients ou votre équipe.",
       },
       {
         question: "Est-ce qu'on peut le mettre sur le site ?",
@@ -379,7 +379,7 @@ const AIAutomation = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const images = serviceImages[locale] ?? serviceImages.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=ai`;
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (

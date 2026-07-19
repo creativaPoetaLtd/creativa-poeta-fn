@@ -63,25 +63,25 @@ const copies: Record<
   }
 > = {
   fr: {
-    seoTitle: "Demander une assistance numerique | Creativa Poeta",
+    seoTitle: "Demander une assistance numérique | Creativa Poeta",
     seoDescription:
-      "Demandez une aide pour depannage informatique, configuration d'appareils, Wi-Fi, comptes, securite ou accompagnement numerique.",
-    backHome: "Retour a l'accueil",
-    eyebrow: "Assistance numerique",
-    title: "Demandez une aide claire pour vos outils, appareils et demarches.",
+      "Demandez une aide pour dépannage informatique, configuration d'appareils, Wi-Fi, comptes, sécurité ou accompagnement numérique.",
+    backHome: "Retour à l'accueil",
+    eyebrow: "Assistance numérique",
+    title: "Demandez une aide claire pour vos outils, appareils et démarches.",
     intro:
-      "Expliquez le probleme ou le besoin. Nous recevons la demande dans l'espace admin et pouvons vous repondre avec les prochaines etapes.",
+      "Expliquez le problème ou le besoin. Nous recevons la demande dans l'espace admin et pouvons vous répondre avec les prochaines etapes.",
     chooseTitle: "De quoi avez-vous besoin ?",
     detailsTitle: "Informations utiles",
     submit: "Envoyer la demande",
     submitting: "Envoi...",
-    success: "Demande d'assistance envoyee.",
+    success: "Demande d'assistance envoyée.",
     error: "Impossible d'envoyer la demande pour le moment.",
     contact: "Contact direct",
     labels: {
       name: "Votre nom",
       email: "Email",
-      phone: "Telephone",
+      phone: "Téléphone",
       city: "Ville / zone",
       device: "Appareil ou outil concerne",
       urgency: "Urgence",
@@ -101,11 +101,11 @@ const copies: Record<
       { value: "urgent", label: "Urgent" },
     ],
     needs: [
-      { label: "Depannage ordinateur, smartphone ou tablette", icon: "tools" },
+      { label: "Dépannage ordinateur, smartphone ou tablette", icon: "tools" },
       { label: "Installation et configuration d'appareils", icon: "laptop" },
       { label: "Wi-Fi, email, comptes, sauvegardes et cloud", icon: "wifi" },
-      { label: "Aide pour achats, formulaires ou demarches en ligne", icon: "mobile" },
-      { label: "Securite, mots de passe et protection des donnees", icon: "shield" },
+      { label: "Aide pour achats, formulaires ou démarches en ligne", icon: "mobile" },
+      { label: "Sécurité, mots de passe et protection des données", icon: "shield" },
       { label: "Formation pas a pas pour gagner en autonomie", icon: "laptop" },
     ],
   },
@@ -482,6 +482,13 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
   const setField = (field: keyof AssistanceForm, value: string) => setForm((current) => ({ ...current, [field]: value }));
   const toggleNeed = (need: string) => setForm((current) => ({ ...current, selectedNeeds: current.selectedNeeds.includes(need) ? current.selectedNeeds.filter((item) => item !== need) : [...current.selectedNeeds, need] }));
 
+  const closeForm = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    window.location.href = localizePath("/");
+  };
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -503,7 +510,7 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
       <form onSubmit={submit} className="flex min-h-[calc(100dvh-1.5rem)] flex-col rounded-[1.4rem] border border-white/20 bg-black/20 p-4">
         <div className="flex items-center justify-between gap-2">
           <Link to={localizePath("/")} className="text-[10px] font-black uppercase text-white/65">&lt; {copy.backHome}</Link>
-          <Link to={localizePath("/")} aria-label={copy.backHome} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-xl font-black text-white">X</Link>
+          <button type="button" onClick={closeForm} aria-label={copy.backHome} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-xl font-black text-white">X</button>
         </div>
         <div className="mt-3 flex justify-center gap-2">
             {stepLabels.map((label, index) => { const number = index + 1; return <button key={label} type="button" onClick={() => setStep(number)} className={`h-8 rounded-full border text-[9px] font-black uppercase ${step === number ? "border-[#fff200] bg-[#fff200] px-3 text-[#071a33]" : "w-8 border-white/20 bg-white/10 text-white/70"}`}>{step === number ? `${number} ${label}` : number}</button>; })}

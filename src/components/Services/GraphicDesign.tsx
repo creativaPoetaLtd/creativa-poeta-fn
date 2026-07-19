@@ -59,22 +59,22 @@ type GraphicCopy = {
 
 const copies: Record<string, GraphicCopy> = {
   fr: {
-    eyebrow: "Design & identite visuelle",
-    title: "Nous donnons une forme claire et memorable a votre univers.",
+    eyebrow: "Design & identité visuelle",
+    title: "Nous donnons une forme claire et memorable à votre univers.",
     intro:
-      "Logo, charte visuelle, affiches, flyers, posts reseaux sociaux, presentations et supports publicitaires : nous creons des visuels qui rendent votre marque reconnaissable et facile a comprendre.",
-    primary: "Creer mon identite visuelle",
+      "Logo, charte visuelle, affiches, flyers, posts réseaux sociaux, présentations et supports publicitaires : nous créons des visuels qui rendent votre marque reconnaissable et facile à comprendre.",
+    primary: "Créer mon identité visuelle",
     secondary: "Demarrer un projet",
     promises: [
-      "Logo et style coherent",
+      "Logo et style cohérent",
       "Supports pros",
-      "Visuels pour reseaux sociaux",
+      "Visuels pour réseaux sociaux",
       "Marque plus reconnaissable",
     ],
     imageBriefs: [
       {
         label: "Visuel principal",
-        title: "Un univers de marque coherent",
+        title: "Un univers de marque cohérent",
         description:
           "Image montrant un moodboard de marque avec logo, couleurs, typographies, carte de visite, affiche et ecran mobile. Style moderne, premium, bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
       },
@@ -82,106 +82,106 @@ const copies: Record<string, GraphicCopy> = {
         label: "Supports",
         title: "Des supports prets a publier",
         description:
-          "Image montrant des flyers, affiches, posts Instagram, banniere web et presentation reunis autour d'une meme identite visuelle. Faire sentir la coherence entre print et digital.",
+          "Image montrant des flyers, affiches, posts Instagram, banniere web et presentation reunis autour d'une même identité visuelle. Faire sentir la cohérence entre print et digital.",
       },
       {
         label: "Application",
         title: "Une marque qui reste reconnaissable partout",
         description:
-          "Image montrant la meme identite appliquee sur reseaux sociaux, site web, packaging, document PDF, signature email et evenement local.",
+          "Image montrant la même identité appliquee sur réseaux sociaux, site web, packaging, document PDF, signature email et evenement local.",
       },
     ],
     whyEyebrow: "Pourquoi c'est important",
-    whyTitle: "Avant de lire votre message, les gens voient deja votre image.",
+    whyTitle: "Avant de lire votre message, les gens voient dejà votre image.",
     whyText:
       "Un bon design aide votre public a vous reconnaitre, vous prendre au serieux et comprendre rapidement ce que vous proposez. L'objectif n'est pas seulement de faire beau, mais de rendre votre communication plus claire, plus fiable et plus memorisable.",
     worksEyebrow: "Ce que le design doit faire",
-    worksTitle: "Chaque visuel doit avoir un role precis.",
+    worksTitle: "Chaque visuel doit avoir un role précis.",
     worksText:
-      "Une identite visuelle forte ne se limite pas a un logo. Elle guide tout ce que les gens voient de vous: vos posts, documents, affiches, pages, presentations et publicites.",
+      "Une identité visuelle forte ne se limite pas a un logo. Elle guide tout ce que les gens voient de vous: vos posts, documents, affiches, pages, présentations et publicités.",
     works: [
       {
         title: "Reconnaitre",
-        text: "Creer un style visuel que les gens associent rapidement a votre marque.",
+        text: "Créer un style visuel que les gens associent rapidement à votre marque.",
       },
       {
         title: "Expliquer",
-        text: "Transformer vos offres, messages ou etapes en visuels faciles a comprendre.",
+        text: "Transformer vos offres, messages ou etapes en visuels faciles à comprendre.",
       },
       {
         title: "Rassurer",
-        text: "Donner une apparence professionnelle qui inspire confiance avant meme le contact.",
+        text: "Donner une apparence professionnelle qui inspire confiance avant même le contact.",
       },
       {
         title: "Promouvoir",
         text: "Produire des supports qui attirent l'attention sur vos services, evenements ou campagnes.",
       },
     ],
-    packsEyebrow: "Ce que nous pouvons creer",
-    packsTitle: "On adapte le design a vos vrais besoins de communication.",
+    packsEyebrow: "Ce que nous pouvons créer",
+    packsTitle: "On adapte le design à vos vrais besoins de communication.",
     packs: [
       {
-        title: "Identite de marque",
+        title: "Identité de marque",
         text: "Logo, palette, typographies, style graphique, variantes et mini-guide d'utilisation.",
       },
       {
         title: "Supports commerciaux",
-        text: "Flyers, affiches, cartes, brochures, menus, catalogues, documents PDF et presentations.",
+        text: "Flyers, affiches, cartes, brochures, menus, catalogues, documents PDF et présentations.",
       },
       {
-        title: "Contenus reseaux sociaux",
-        text: "Templates de posts, stories, bannieres, carrousels, publicites et visuels de campagne.",
+        title: "Contenus réseaux sociaux",
+        text: "Templates de posts, stories, bannieres, carrousels, publicités et visuels de campagne.",
       },
     ],
     deliverEyebrow: "Livrables",
     deliverTitle: "Des fichiers utiles, pas seulement une belle image.",
     deliverText:
-      "Le but est que vous puissiez vraiment utiliser votre identite et vos supports sur vos canaux de communication.",
+      "Le but est que vous puissiez vraiment utiliser votre identité et vos supports sur vos canaux de communication.",
     deliver: [
-      "Logo ou elements graphiques dans les formats adaptes.",
+      "Logo ou elements graphiques dans les formats adaptés.",
       "Palette de couleurs, polices et regles d'utilisation.",
       "Visuels prets pour impression ou publication digitale.",
-      "Versions adaptees aux langues et formats necessaires.",
-      "Templates reutilisables pour garder une communication coherente.",
-      "Conseils simples pour utiliser les visuels sans casser l'identite.",
+      "Versions adaptées aux langues et formats nécessaires.",
+      "Templates reutilisables pour garder une communication cohérente.",
+      "Conseils simples pour utiliser les visuels sans casser l'identité.",
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "Clarifier, designer, decliner, livrer.",
     methodText:
-      "On part de votre message et de votre public. Ensuite on cree un style visuel coherent, puis on le decline sur les supports qui ont vraiment de la valeur pour votre activite.",
+      "On part de votre message et de votre public. Ensuite on crée un style visuel cohérent, puis on le decline sur les supports qui ont vraiment de la valeur pour votre activité.",
     steps: [
       "Comprendre votre marque, votre public et vos objectifs.",
       "Definir une direction visuelle claire: couleurs, ambiance, style.",
-      "Creer les premiers visuels et ajuster avec vos retours.",
+      "Créer les premiers visuels et ajuster avec vos retours.",
       "Decliner le design sur les supports prioritaires.",
       "Livrer les fichiers propres et organiser les versions utiles.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
-        question: "Est-ce que vous creez seulement des logos ?",
+        question: "Est-ce que vous créez seulement des logos ?",
         answer:
-          "Non. Le logo peut faire partie du service, mais nous pouvons aussi creer une identite complete, des supports imprimes, des contenus reseaux sociaux, des presentations et des visuels publicitaires.",
+          "Non. Le logo peut faire partie du service, mais nous pouvons aussi créer une identité complète, des supports imprimés, des contenus réseaux sociaux, des présentations et des visuels publicitaires.",
       },
       {
         question: "Puis-je demander seulement quelques visuels ?",
         answer:
-          "Oui. On peut travailler sur un besoin ponctuel, par exemple un flyer, une affiche, un carrousel ou une presentation, sans refaire toute l'identite.",
+          "Oui. On peut travailler sur un besoin ponctuel, par exemple un flyer, une affiche, un carrousel ou une presentation, sans refaire toute l'identité.",
       },
       {
-        question: "Pouvez-vous moderniser une identite existante ?",
+        question: "Pouvez-vous moderniser une identité existante ?",
         answer:
-          "Oui. On peut garder ce qui est reconnaissable et corriger ce qui manque de clarte, de coherence ou de qualite visuelle.",
+          "Oui. On peut garder ce qui est reconnaissable et corriger ce qui manque de clarte, de cohérence ou de qualité visuelle.",
       },
       {
         question: "Les fichiers seront-ils utilisables pour impression et web ?",
         answer:
-          "Oui. On prepare les formats selon l'usage: reseaux sociaux, site web, PDF, impression, presentation ou autres supports.",
+          "Oui. On prépare les formats selon l'usage: réseaux sociaux, site web, PDF, impression, presentation ou autres supports.",
       },
       {
-        question: "Pouvez-vous creer les visuels en plusieurs langues ?",
+        question: "Pouvez-vous créer les visuels en plusieurs langues ?",
         answer:
-          "Oui. On peut prevoir les versions francais, anglais, neerlandais ou kinyarwanda si les textes sont disponibles ou si nous les preparons avec vous.",
+          "Oui. On peut prevoir les versions français, anglais, néerlandais ou kinyarwanda si les textes sont disponibles ou si nous les preparons avec vous.",
       },
       {
         question: "Est-ce que vous aidez aussi avec le message du visuel ?",
@@ -635,7 +635,7 @@ const GraphicDesign = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const images = serviceImages[locale] ?? serviceImages.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=creative`;
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (

@@ -60,10 +60,10 @@ type ContentCopy = {
 const copies: Record<string, ContentCopy> = {
   fr: {
     eyebrow: "Contenu & documents",
-    title: "Nous transformons vos idees en mots, documents et supports professionnels.",
+    title: "Nous transformons vos idées en mots, documents et supports professionnels.",
     intro:
-      "Redaction professionnelle, ghostwriting, articles, textes web, CV, lettres, profils LinkedIn, rapports, ebooks et guides : nous structurons vos idees pour qu'elles soient claires, utiles et credibles.",
-    primary: "Creer mon document",
+      "Rédaction professionnelle, ghostwriting, articles, textes web, CV, lettres, profils LinkedIn, rapports, ebooks et guides : nous structurons vos idées pour qu'elles soient claires, utiles et credibles.",
+    primary: "Créer mon document",
     secondary: "Demarrer un projet",
     promises: [
       "Textes clairs",
@@ -74,9 +74,9 @@ const copies: Record<string, ContentCopy> = {
     imageBriefs: [
       {
         label: "Image principale",
-        title: "Des idees transformees en documents clairs",
+        title: "Des idées transformees en documents clairs",
         description:
-          "Image montrant des notes, idees, post-it et brouillons qui deviennent un document professionnel, un article web, un rapport et une presentation. Style premium bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
+          "Image montrant des notes, idées, post-it et brouillons qui deviennent un document professionnel, un article web, un rapport et une presentation. Style premium bleu nuit et jaune CP. Texte dans l'image traduit selon la langue.",
       },
       {
         label: "Formats",
@@ -86,23 +86,23 @@ const copies: Record<string, ContentCopy> = {
       },
       {
         label: "Processus",
-        title: "Un document bien pense du brouillon a la version finale",
+        title: "Un document bien pensé du brouillon a la version finale",
         description:
-          "Image montrant un flux clair: collecte des idees, plan, redaction, correction, mise en forme et livraison finale. Le visuel doit faire sentir le serieux et la methode.",
+          "Image montrant un flux clair: collecte des idées, plan, redaction, correction, mise en forme et livraison finale. Le visuel doit faire sentir le serieux et la méthode.",
       },
     ],
     whyEyebrow: "Pourquoi c'est important",
     whyTitle: "Un bon document fait comprendre plus vite, decide plus facilement et inspire plus confiance.",
     whyText:
-      "Vos idees peuvent etre bonnes, mais si elles sont mal formulees, elles perdent de la force. Un contenu bien structure aide vos clients, partenaires, recruteurs ou lecteurs a comprendre votre valeur sans effort.",
+      "Vos idées peuvent être bonnes, mais si elles sont mal formulees, elles perdent de la force. Un contenu bien structure aide vos clients, partenaires, recruteurs ou lecteurs à comprendre votre valeur sans effort.",
     rolesEyebrow: "Ce que le contenu doit faire",
     rolesTitle: "Chaque texte doit avoir un objectif clair.",
     rolesText:
-      "On n'ecrit pas seulement pour remplir une page. On ecrit pour expliquer, convaincre, guider, vendre, presenter ou documenter quelque chose d'important.",
+      "On n'écrit pas seulement pour remplir une page. On écrit pour expliquer, convaincre, guider, vendre, presenter ou documenter quelque chose d'important.",
     roles: [
       {
         title: "Clarifier",
-        text: "Mettre de l'ordre dans vos idees pour rendre le message simple et direct.",
+        text: "Mettre de l'ordre dans vos idées pour rendre le message simple et direct.",
       },
       {
         title: "Convaincre",
@@ -114,7 +114,7 @@ const copies: Record<string, ContentCopy> = {
       },
       {
         title: "Documenter",
-        text: "Creer des supports utiles: rapports, guides, procedures, ebooks ou dossiers.",
+        text: "Créer des supports utiles: rapports, guides, procedures, ebooks ou dossiers.",
       },
     ],
     formatsEyebrow: "Ce que nous pouvons rediger",
@@ -122,11 +122,11 @@ const copies: Record<string, ContentCopy> = {
     formats: [
       {
         title: "Textes business et web",
-        text: "Pages services, articles, blogs, descriptions, FAQ, textes de site et contenus qui expliquent votre activite.",
+        text: "Pages services, articles, blogs, descriptions, FAQ, textes de site et contenus qui expliquent votre activité.",
       },
       {
         title: "Documents professionnels",
-        text: "Rapports, dossiers, guides, ebooks, presentations, notes, propositions et documents internes.",
+        text: "Rapports, dossiers, guides, ebooks, présentations, notes, propositions et documents internes.",
       },
       {
         title: "Profils et parcours",
@@ -134,59 +134,59 @@ const copies: Record<string, ContentCopy> = {
       },
     ],
     deliverEyebrow: "Livrables",
-    deliverTitle: "Des contenus prets a utiliser, pas seulement des phrases jolies.",
+    deliverTitle: "Des contenus prets à utiliser, pas seulement des phrases jolies.",
     deliverText:
-      "Le resultat doit pouvoir etre publie, envoye, presente ou reutilise selon votre besoin.",
+      "Le résultat doit pouvoir être publie, envoyé, presente ou reutilise selon votre besoin.",
     deliver: [
       "Un texte structure avec titre, sections et progression logique.",
-      "Un ton adapte a votre public: professionnel, simple, humain ou commercial.",
+      "Un ton adapte à votre public: professionnel, simple, humain ou commercial.",
       "Une version corrigee, propre et facile a lire.",
       "Des reformulations pour rendre le message plus clair et plus fort.",
-      "Des formats adaptes au web, PDF, presentation ou reseaux sociaux.",
+      "Des formats adaptés au web, PDF, presentation ou réseaux sociaux.",
       "Des versions multilingues si le projet le demande.",
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "Comprendre, structurer, rediger, affiner.",
     methodText:
-      "On commence par comprendre ce que le contenu doit accomplir. Ensuite on organise les idees, on redige une version claire, puis on ajuste le ton, la precision et la mise en forme.",
+      "On commence par comprendre ce que le contenu doit accomplir. Ensuite on organise les idées, on rédige une version claire, puis on ajuste le ton, la précision et la mise en forme.",
     steps: [
-      "Recueillir vos idees, documents existants et objectifs.",
+      "Recueillir vos idées, documents existants et objectifs.",
       "Definir le lecteur, le message central et le format.",
       "Construire un plan clair avant la redaction.",
       "Rediger, corriger et rendre le contenu plus fluide.",
       "Livrer une version finale prete a publier ou partager.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
-        question: "Est-ce que vous pouvez ecrire a partir de quelques idees seulement ?",
+        question: "Est-ce que vous pouvez écrire à partir de quelques idées seulement ?",
         answer:
-          "Oui. Vous pouvez nous donner des notes, audios, brouillons ou explications simples. Nous les structurons pour creer un contenu clair.",
+          "Oui. Vous pouvez nous donner des notes, audios, brouillons ou explications simples. Nous les structurons pour créer un contenu clair.",
       },
       {
-        question: "Pouvez-vous corriger un document deja ecrit ?",
+        question: "Pouvez-vous corriger un document déjà écrit ?",
         answer:
-          "Oui. Nous pouvons corriger, reformuler, reorganiser et ameliorer un document existant sans repartir de zero.",
+          "Oui. Nous pouvons corriger, reformuler, reorganiser et améliorer un document existant sans repartir de zéro.",
       },
       {
         question: "Faites-vous du ghostwriting ?",
         answer:
-          "Oui. Nous pouvons ecrire dans votre ton pour des articles, biographies, publications, discours, documents ou contenus professionnels.",
+          "Oui. Nous pouvons écrire dans votre ton pour des articles, biographies, publications, discours, documents ou contenus professionnels.",
       },
       {
         question: "Pouvez-vous aider pour un CV ou un profil LinkedIn ?",
         answer:
-          "Oui. Nous pouvons clarifier votre parcours, valoriser vos competences et creer un CV, une lettre ou un profil LinkedIn plus convaincant.",
+          "Oui. Nous pouvons clarifier votre parcours, valoriser vos compétences et créer un CV, une lettre ou un profil LinkedIn plus convaincant.",
       },
       {
-        question: "Les contenus peuvent-ils etre adaptes au SEO ?",
+        question: "Les contenus peuvent-ils être adaptés au SEO ?",
         answer:
-          "Oui. Pour les textes web, nous pouvons structurer les titres, questions, mots importants et reponses pour aider Google, les moteurs de recherche et les assistants IA a comprendre le contenu.",
+          "Oui. Pour les textes web, nous pouvons structurer les titres, questions, mots importants et réponses pour aider Google, les moteurs de recherche et les assistants IA à comprendre le contenu.",
       },
       {
         question: "Pouvez-vous preparer le contenu en plusieurs langues ?",
         answer:
-          "Oui. Nous pouvons travailler en francais, anglais, neerlandais ou kinyarwanda selon le public vise et les versions necessaires.",
+          "Oui. Nous pouvons travailler en français, anglais, néerlandais ou kinyarwanda selon le public visé et les versions nécessaires.",
       },
     ],
   },
@@ -635,7 +635,7 @@ const ContentWritting = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const images = serviceImages[locale] ?? serviceImages.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=content`;
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (

@@ -16,7 +16,7 @@ import{
 import { localizePath } from "../../data/marketRuntime";
 
 export const handleNavigate = () => {
-  window.location.href = "/start-project";
+  window.location.href = "/start-project?service=visibility";
 };
 
 

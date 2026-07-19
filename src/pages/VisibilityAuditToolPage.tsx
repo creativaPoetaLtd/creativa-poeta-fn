@@ -111,18 +111,18 @@ const copies: Record<
   }
 > = {
   fr: {
-    seoTitle: "Tester ma visibilite | Creativa Poeta",
+    seoTitle: "Tester ma visibilité | Creativa Poeta",
     seoDescription:
-      "Test rapide de votre visibilite sur Google, maps, reseaux sociaux et outils IA, puis envoi de votre demande a Creativa Poeta.",
-    backHome: "Retour a l'accueil",
+      "Test rapide de votre visibilité sur Google, maps, réseaux sociaux et outils IA, puis envoi de votre demande a Creativa Poeta.",
+    backHome: "Retour à l'accueil",
     eyebrow: "Diagnostic rapide",
-    title: "Testez votre visibilite avant de depenser plus.",
+    title: "Testez votre visibilité avant de depenser plus.",
     intro:
       "Repondez a quelques questions. Vous obtenez une premiere lecture et nous recevons les infos pour vous conseiller proprement.",
     scoreTitle: "Ce que le test regarde",
     scoreText:
-      "Site, Google Maps, coherence des infos, reseaux, avis, langues et lisibilite pour les outils modernes.",
-    fieldsTitle: "Votre presence actuelle",
+      "Site, Google Maps, coherence des infos, réseaux, avis, langues et lisibilite pour les outils modernes.",
+    fieldsTitle: "Votre présence actuelle",
     contactTitle: "Pour recevoir le retour",
     resultTitle: "Premiere lecture",
     resultIntro: "Ce score reste indicatif. Il sert a savoir par ou commencer.",
@@ -133,13 +133,13 @@ const copies: Record<
     labels: {
       name: "Votre nom",
       email: "Email",
-      phone: "Telephone",
-      company: "Entreprise ou activite",
+      phone: "Téléphone",
+      company: "Entreprise ou activité",
       city: "Ville / zone",
       website: "Site web ou page officielle",
       hasGoogleProfile: "Google Maps / fiche Google",
-      hasSocial: "Reseaux sociaux actifs",
-      infoConsistent: "Infos coherentes partout",
+      hasSocial: "Réseaux sociaux actifs",
+      infoConsistent: "Infos cohérentes partout",
       hasReviews: "Avis clients visibles",
       languages: "Langues importantes",
       mainGoal: "Objectif principal",
@@ -149,10 +149,10 @@ const copies: Record<
       name: "John Doe",
       email: "vous@email.com",
       phone: "+32 ...",
-      company: "Nom de votre activite",
+      company: "Nom de votre activité",
       city: "Bruxelles",
       website: "https://...",
-      languages: "francais, neerlandais, anglais...",
+      languages: "français, néerlandais, anglais...",
       message: "Ajoutez ce que vous voulez qu'on verifie en priorite.",
     },
     options: {
@@ -160,28 +160,28 @@ const copies: Record<
       no: "Non",
       notSure: "Je ne sais pas",
       goals: [
-        "Etre trouve sur Google",
+        "Être trouve sur Google",
         "Ameliorer Google Maps",
         "Clarifier mes services",
-        "Etre mieux compris par les IA",
-        "Verifier toute ma presence",
+        "Être mieux compris par les IA",
+        "Verifier toute ma présence",
       ],
     },
     scoreLabels: {
-      low: "Presence fragile",
+      low: "Présence fragile",
       medium: "Base correcte, a renforcer",
-      high: "Presence solide",
+      high: "Présence solide",
     },
     priorities: {
-      website: "Creer ou clarifier une page officielle qui explique vos services.",
+      website: "Créer ou clarifier une page officielle qui explique vos services.",
       maps: "Mettre en place ou corriger votre fiche Google Maps.",
       consistency: "Aligner nom, horaires, contacts, zones et services partout.",
       social: "Rendre au moins un canal social propre et utile.",
       reviews: "Faire apparaitre des avis ou preuves de confiance.",
       languages: "Preciser les langues importantes pour vos clients.",
-      ai: "Structurer vos informations sous forme de reponses simples.",
+      ai: "Structurer vos informations sous forme de réponses simples.",
     },
-    success: "Test envoye. Votre demande est dans l'espace admin.",
+    success: "Test envoyé. Votre demande est dans l'espace admin.",
     error: "Impossible d'envoyer le test pour le moment.",
   },
   en: {
@@ -1205,6 +1205,13 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
   const next = locale === "nl" ? "Verder" : locale === "en" ? "Continue" : "Continuer";
   const setField = (field: keyof AuditForm, value: string) => setForm((current) => ({ ...current, [field]: value }));
 
+  const closeForm = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    window.location.href = localizePath("/");
+  };
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -1311,7 +1318,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
       <form onSubmit={submit} className="flex min-h-[calc(100dvh-1.5rem)] flex-col rounded-[1.4rem] border border-white/20 bg-black/20 p-4">
         <div className="flex items-center justify-between gap-2">
           <Link to={localizePath("/")} className="text-[10px] font-black uppercase text-white/65">&lt; {copy.backHome}</Link>
-          <Link to={localizePath("/")} aria-label={copy.backHome} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-xl font-black text-white">X</Link>
+          <button type="button" onClick={closeForm} aria-label={copy.backHome} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-xl font-black text-white">X</button>
         </div>
         <div className="mt-3 flex justify-center gap-2">
             {labels.map((label, index) => { const number = index + 1; return (

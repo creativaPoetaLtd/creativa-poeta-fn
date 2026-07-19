@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -84,34 +84,34 @@ type VisualKey =
 
 const copies: Record<string, LocalCopy> = {
   fr: {
-    eyebrow: "Visibilite & presence locale",
-    title: "Etre trouve au bon moment, la ou vos clients cherchent vraiment.",
+    eyebrow: "VisibilitÃ© & prÃ©sence locale",
+    title: "ÃŠtre trouvÃ© au bon moment, lÃ  oÃ¹ vos clients cherchent vraiment.",
     intro:
-      "Nous rendons votre entreprise claire sur Google, les maps, les reseaux, la recherche vocale et les outils IA. Le client doit trouver la meme information partout, sans confusion.",
-    primary: "Tester ma visibilite",
+      "Nous rendons votre entreprise claire sur Google, les maps, les rÃ©seaux, la recherche vocale et les outils IA. Le client doit trouver la mÃªme information partout, sans confusion.",
+    primary: "Tester ma visibilitÃ©",
     secondary: "Nous contacter",
     promise: [
       "Informations exactes",
-      "Maps et profils locaux alignes",
-      "Avis, horaires et contacts coherents",
-      "Presence lisible par les outils modernes",
+      "Maps et profils locaux alignÃ©s",
+      "Avis, horaires et contacts cohÃ©rents",
+      "PrÃ©sence lisible par les outils modernes",
     ],
-    problemEyebrow: "Le probleme actuel",
+    problemEyebrow: "Le problÃ¨me actuel",
     problemTitle: "Une entreprise peut exister, mais rester invisible.",
     problemText:
-      "Nom different, ancienne adresse, horaires absents, avis non repondus, reseaux pas a jour : chaque petit flou peut faire perdre un client au moment decisif.",
+      "Nom different, ancienne adresse, horaires absents, avis non rÃ©pondus, rÃ©seaux pas Ã  jour : chaque petit flou peut faire perdre un client au moment decisif.",
     sourceEyebrow: "Votre base officielle",
     sourceTitle: "Votre site devient le point clair que tout le reste confirme.",
     sourceText:
-      "Nous gardons ce qui existe deja quand c'est utile, puis nous relions votre site, vos profils, vos avis et vos chemins de contact autour d'une information fiable.",
+      "Nous gardons ce qui existe dÃ©jÃ  quand c'est utile, puis nous relions votre site, vos profils, vos avis et vos chemins de contact autour d'une information fiable.",
     channelsEyebrow: "Les canaux a aligner",
-    channelsTitle: "Google, maps, voix, reseaux et IA doivent raconter la meme chose.",
+    channelsTitle: "Google, maps, voix, rÃ©seaux et IA doivent raconter la mÃªme chose.",
     channelsText:
-      "Le but n'est pas d'etre partout pour faire joli. Le but est d'etre compris partout, avec des informations simples, recentes et faciles a verifier.",
+      "Le but n'est pas d'Ãªtre partout pour faire joli. Le but est d'Ãªtre compris partout, avec des informations simples, rÃ©centes et faciles a vÃ©rifier.",
     channels: [
       {
         title: "Google",
-        text: "Etre visible quand le client cherche votre service.",
+        text: "ÃŠtre visible quand le client cherche votre service.",
         imageKey: "google",
       },
       {
@@ -120,18 +120,18 @@ const copies: Record<string, LocalCopy> = {
         imageKey: "maps",
       },
       {
-        title: "Itineraire",
+        title: "ItinÃ©raire",
         text: "Rendre le chemin vers vous simple et direct.",
         imageKey: "route",
       },
       {
-        title: "Reseaux sociaux",
-        text: "Montrer des preuves vivantes, des avis et des realisations.",
+        title: "RÃ©seaux sociaux",
+        text: "Montrer des preuves vivantes, des avis et des rÃ©alisations.",
         imageKey: "social",
       },
       {
         title: "Recherche vocale",
-        text: "Repondre aux questions parlees, souvent tres precises.",
+        text: "Repondre aux questions parlÃ©es, souvent trÃ¨s prÃ©cises.",
         imageKey: "voice",
       },
       {
@@ -140,52 +140,52 @@ const copies: Record<string, LocalCopy> = {
         imageKey: "chat",
       },
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre mÃ©thode",
     methodTitle: "On clarifie, on aligne, puis on garde vivant.",
     methodText:
-      "Nous ne jetons pas tout. Nous partons de votre presence actuelle, nous corrigeons ce qui brouille le message et nous creons une base que vous controlez vraiment.",
+      "Nous ne jetons pas tout. Nous partons de votre prÃ©sence actuelle, nous corrigeons ce qui brouille le message et nous crÃ©ons une base que vous contrÃ´lez vraiment.",
     method: [
-      "Audit de votre presence actuelle",
-      "Correction du nom, adresse, horaires, telephone et liens",
-      "Alignement Google, Maps, profils locaux et reseaux",
-      "Organisation des avis, photos, questions et reponses utiles",
+      "Audit de votre prÃ©sence actuelle",
+      "Correction du nom, adresse, horaires, tÃ©lÃ©phone et liens",
+      "Alignement Google, Maps, profils locaux et rÃ©seaux",
+      "Organisation des avis, photos, questions et rÃ©ponses utiles",
       "Preparation pour les recherches vocales et les outils IA",
     ],
-    resultsEyebrow: "Resultat attendu",
+    resultsEyebrow: "RÃ©sultat attendu",
     resultsTitle: "Plus de clarte. Plus de confiance. Plus de clients.",
     resultsText:
-      "Quand les informations sont coherentes, vos clients comprennent plus vite, les moteurs modernes vous lisent mieux et votre entreprise devient plus facile a recommander.",
-    faqTitle: "Questions frequentes",
+      "Quand les informations sont cohÃ©rentes, vos clients comprennent plus vite, les moteurs modernes vous lisent mieux et votre entreprise devient plus facile Ã  recommander.",
+    faqTitle: "Questions frÃ©quentes",
     faqs: [
       {
-        question: "Est-ce que je dois deja avoir un site ?",
+        question: "Est-ce que je dois dÃ©jÃ  avoir un site ?",
         answer:
           "Non. On peut commencer avec vos profils existants, puis construire une base officielle si elle manque.",
       },
       {
         question: "Est-ce que Google Maps suffit ?",
         answer:
-          "Non. Google Maps est important, mais il doit etre relie a votre site, vos avis, vos reseaux et vos informations officielles.",
+          "Non. Google Maps est important, mais il doit Ãªtre relie Ã  votre site, vos avis, vos rÃ©seaux et vos informations officielles.",
       },
       {
         question: "Est-ce utile pour les outils IA ?",
         answer:
-          "Oui. Les outils modernes ont besoin d'informations claires et coherentes pour comprendre puis recommander une entreprise.",
+          "Oui. Les outils modernes ont besoin d'informations claires et cohÃ©rentes pour comprendre puis recommander une entreprise.",
       },
       {
         question: "Est-ce que vous corrigez aussi les horaires, adresses et liens ?",
         answer:
-          "Oui. C'est meme une partie importante du travail. Nous alignons les informations essentielles pour eviter les contradictions entre votre site, vos maps et vos profils.",
+          "Oui. C'est mÃªme une partie importante du travail. Nous alignons les informations essentielles pour eviter les contradictions entre votre site, vos maps et vos profils.",
       },
       {
         question: "Est-ce que les avis clients comptent ?",
         answer:
-          "Oui. Les avis, les reponses aux avis et les preuves recentes aident les clients a faire confiance et donnent aussi des signaux utiles aux plateformes.",
+          "Oui. Les avis, les rÃ©ponses aux avis et les preuves rÃ©centes aident les clients a faire confiance et donnent aussi des signaux utiles aux plateformes.",
       },
       {
         question: "Est-ce un travail ponctuel ou continu ?",
         answer:
-          "On peut commencer par une correction ponctuelle, mais la visibilite locale doit rester vivante: horaires, photos, avis, services et informations doivent etre tenus a jour.",
+          "On peut commencer par une correction ponctuelle, mais la visibilitÃ© locale doit rester vivante: horaires, photos, avis, services et informations doivent Ãªtre tenus Ã  jour.",
       },
     ],
   },
@@ -520,7 +520,7 @@ const LocalVisibility = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const visuals = visualSets[locale] ?? visualSets.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=visibility`;
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (
@@ -588,8 +588,8 @@ const LocalVisibility = () => {
         <div className="mx-auto min-w-0 max-w-7xl">
           <SectionLabel>{copy.sourceEyebrow}</SectionLabel>
           <div className="grid gap-7 laptop:grid-cols-[1.18fr_.82fr] laptop:items-center">
-            <VisualPanel src={visuals.source} alt={copy.sourceTitle} />
-            <div>
+            <VisualPanel className="order-2 laptop:order-1" src={visuals.source} alt={copy.sourceTitle} />
+            <div className="order-1 laptop:order-2">
               <h2 className="font-['Black_Ops_One'] text-[clamp(2.25rem,11vw,4rem)] leading-tight text-white phone:text-5xl">
                 {copy.sourceTitle}
               </h2>

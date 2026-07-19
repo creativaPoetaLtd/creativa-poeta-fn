@@ -51,14 +51,14 @@ type AssistanceCopy = {
 
 const copies: Record<string, AssistanceCopy> = {
   fr: {
-    eyebrow: "Assistance numerique",
+    eyebrow: "Assistance numérique",
     title: "Installez, configurez et utilisez vos outils numeriques sans stress.",
     intro:
-      "Nous aidons les particuliers, entrepreneurs et petites structures a depanner leurs appareils, configurer leurs outils et gagner en autonomie dans le monde numerique.",
+      "Nous aidons les particuliers, entrepreneurs et petites structures a depanner leurs appareils, configurer leurs outils et gagner en autonomie dans le monde numérique.",
     primary: "Demander une assistance",
-    secondary: "Expliquer mon probleme",
+    secondary: "Expliquer mon problème",
     promises: [
-      "Depannage tech",
+      "Dépannage tech",
       "Configuration d'appareils",
       "Aide administrative en ligne",
       "Accompagnement pas a pas",
@@ -78,19 +78,19 @@ const copies: Record<string, AssistanceCopy> = {
       },
       {
         label: "Image 3",
-        title: "Vie numerique plus simple",
+        title: "Vie numérique plus simple",
         description:
-          "Un visuel montrant achats en ligne, documents administratifs, reseaux sociaux, mots de passe et securite organises clairement.",
+          "Un visuel montrant achats en ligne, documents administratifs, réseaux sociaux, mots de passe et sécurité organises clairement.",
       },
     ],
     pillarsEyebrow: "Ce que nous faisons",
     pillarsTitle: "Une aide simple pour les problemes tech du quotidien.",
     pillarsText:
-      "Le but n'est pas de vous noyer dans la technique. Le but est de regler le probleme, expliquer ce qui se passe et vous rendre plus autonome.",
+      "Le but n'est pas de vous noyer dans la technique. Le but est de regler le problème, expliquer ce qui se passe et vous rendre plus autonome.",
     pillars: [
       {
         title: "Depanner",
-        text: "Ordinateur lent, email bloque, imprimante capricieuse, Wi-Fi instable, telephone ou tablette difficile a utiliser.",
+        text: "Ordinateur lent, email bloque, imprimante capricieuse, Wi-Fi instable, téléphone ou tablette difficile à utiliser.",
       },
       {
         title: "Installer",
@@ -102,37 +102,37 @@ const copies: Record<string, AssistanceCopy> = {
       },
       {
         title: "Accompagner",
-        text: "Achats en ligne, demarches administratives, reseaux sociaux, IA, outils modernes et autonomie numerique.",
+        text: "Achats en ligne, démarches administratives, réseaux sociaux, IA, outils modernes et autonomie numérique.",
       },
     ],
     situationsEyebrow: "Situations courantes",
-    situationsTitle: "Vous pouvez demander de l'aide meme si le probleme semble petit.",
+    situationsTitle: "Vous pouvez demander de l'aide même si le problème semble petit.",
     situations: [
       {
         title: "A la maison",
-        text: "Configurer internet, connecter une imprimante, organiser les photos, installer une application ou comprendre un nouveau telephone.",
+        text: "Configurer internet, connecter une imprimante, organiser les photos, installer une application ou comprendre un nouveau téléphone.",
       },
       {
-        title: "Pour votre activite",
-        text: "Mettre en place email professionnel, WhatsApp Business, outils cloud, visio, documents, reseaux sociaux ou paiements simples.",
+        title: "Pour votre activité",
+        text: "Mettre en place email professionnel, WhatsApp Business, outils cloud, visio, documents, réseaux sociaux ou paiements simples.",
       },
       {
         title: "Pour apprendre",
-        text: "Comprendre ChatGPT, Canva, Google Drive, les achats en ligne, les formulaires administratifs ou la securite de base.",
+        text: "Comprendre ChatGPT, Canva, Google Drive, les achats en ligne, les formulaires administratifs ou la sécurité de base.",
       },
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "Comprendre, corriger, expliquer, laisser une base propre.",
     methodText:
       "On avance avec patience et sans jugement. L'objectif est que vous repartiez avec un outil qui fonctionne et une explication claire.",
     steps: [
-      "Ecouter le probleme et le contexte.",
+      "Ecouter le problème et le contexte.",
       "Verifier l'appareil, le compte ou l'outil concerne.",
       "Corriger ou configurer ce qui bloque.",
       "Expliquer les gestes importants sans jargon.",
-      "Laisser une mini-checklist pour eviter que le probleme revienne.",
+      "Laisser une mini-checklist pour eviter que le problème revienne.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce seulement pour les entreprises ?",
@@ -140,9 +140,9 @@ const copies: Record<string, AssistanceCopy> = {
           "Non. Ce service est aussi pour les particuliers, familles, seniors, etudiants, independants et petites structures.",
       },
       {
-        question: "Pouvez-vous m'aider meme si je ne comprends rien a la technologie ?",
+        question: "Pouvez-vous m'aider même si je ne comprends rien a la technologie ?",
         answer:
-          "Oui. Le service est justement pense pour expliquer calmement, sans jargon et sans jugement.",
+          "Oui. Le service est justement pensé pour expliquer calmement, sans jargon et sans jugement.",
       },
       {
         question: "Quels appareils pouvez-vous aider a configurer ?",
@@ -150,9 +150,9 @@ const copies: Record<string, AssistanceCopy> = {
           "Ordinateurs, smartphones, tablettes, imprimantes, box internet, comptes email, cloud, applications et outils de travail courants.",
       },
       {
-        question: "Est-ce que vous pouvez aider pour les demarches en ligne ?",
+        question: "Est-ce que vous pouvez aider pour les démarches en ligne ?",
         answer:
-          "Oui, nous pouvons vous accompagner pas a pas, tout en gardant vos informations sensibles sous votre controle.",
+          "Oui, nous pouvons vous accompagner pas a pas, tout en gardant vos informations sensibles sous votre contrôle.",
       },
       {
         question: "Pouvez-vous m'aider a securiser mes comptes ?",
@@ -162,7 +162,7 @@ const copies: Record<string, AssistanceCopy> = {
       {
         question: "Est-ce que vous formez aussi a l'utilisation des outils ?",
         answer:
-          "Oui. Nous pouvons faire une prise en main simple: reseaux sociaux, cloud, IA, visio, documents, achats en ligne ou outils professionnels.",
+          "Oui. Nous pouvons faire une prise en main simple: réseaux sociaux, cloud, IA, visio, documents, achats en ligne ou outils professionnels.",
       },
     ],
   },

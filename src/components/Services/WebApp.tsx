@@ -61,7 +61,7 @@ const copies: Record<string, LocaleCopy> = {
     eyebrow: "Sites web, applications & outils digitaux",
     title: "Nous construisons la base officielle de votre entreprise.",
     intro:
-      "Un site, une application ou un outil interne doit faire plus que fonctionner. Il doit expliquer, guider, rassurer et permettre a vos clients comme a votre equipe d'agir simplement.",
+      "Un site, une application ou un outil interne doit faire plus que fonctionner. Il doit expliquer, guider, rassurer et permettre à vos clients comme à votre équipe d'agir simplement.",
     primary: "Demarrer un projet",
     secondary: "Nous contacter",
     promises: [
@@ -73,58 +73,58 @@ const copies: Record<string, LocaleCopy> = {
     baseEyebrow: "Votre base officielle",
     baseTitle: "Votre site devient l'endroit ou tout est clair.",
     baseText:
-      "Nous rassemblons vos services, vos preuves, vos contacts, vos zones et vos reponses dans une experience simple a comprendre. Votre presence devient plus propre pour vos clients, Google, les maps et les assistants modernes.",
+      "Nous rassemblons vos services, vos preuves, vos contacts, vos zones et vos réponses dans une expérience simple à comprendre. Votre présence devient plus propre pour vos clients, Google, les maps et les assistants modernes.",
     buildEyebrow: "Ce que nous construisons",
-    buildTitle: "Du site simple au systeme complet, on part de votre vrai besoin.",
+    buildTitle: "Du site simple au système complet, on part de votre vrai besoin.",
     buildText:
       "Une entreprise n'a pas toujours besoin d'une grande plateforme. Parfois il faut une page claire. Parfois un formulaire solide. Parfois un espace complet pour gerer les demandes, les clients ou les documents.",
     productsEyebrow: "Solutions possibles",
-    productsTitle: "Chaque support a un role precis.",
+    productsTitle: "Chaque support a un role précis.",
     productsText:
-      "Nous evitons les sites remplis de contenu vide. Chaque page, chaque bouton et chaque outil doit aider quelqu'un a comprendre, choisir, contacter ou travailler plus vite.",
+      "Nous evitons les sites remplis de contenu vide. Chaque page, chaque bouton et chaque outil doit aider quelqu'un à comprendre, choisir, contacter ou travailler plus vite.",
     products: [
       {
         icon: "site",
         title: "Site vitrine",
-        text: "Une presence claire qui presente votre entreprise, vos services et vos chemins de contact.",
+        text: "Une présence claire qui presente votre entreprise, vos services et vos chemins de contact.",
       },
       {
         icon: "pages",
         title: "Pages utiles",
-        text: "Des pages de service, zones, questions frequentes et cas concrets pour mieux repondre aux recherches.",
+        text: "Des pages de service, zones, questions fréquentes et cas concrets pour mieux répondre aux recherches.",
       },
       {
         icon: "platform",
         title: "Plateformes web",
-        text: "Des espaces plus complets pour vendre, publier, presenter, reserver ou organiser une activite.",
+        text: "Des espaces plus complets pour vendre, publier, presenter, reserver ou organiser une activité.",
       },
       {
         icon: "app",
         title: "Applications",
-        text: "Des interfaces web ou mobiles pensees pour une action precise, avec un parcours simple.",
+        text: "Des interfaces web ou mobiles pensées pour une action précise, avec un parcours simple.",
       },
       {
         icon: "system",
         title: "Outils internes",
-        text: "Formulaires, tableaux de bord, suivi de demandes, documents et systemes adaptes a votre travail.",
+        text: "Formulaires, tableaux de bord, suivi de demandes, documents et systèmes adaptés à votre travail.",
       },
     ],
-    methodEyebrow: "Notre methode",
+    methodEyebrow: "Notre méthode",
     methodTitle: "On clarifie d'abord. On construit ensuite.",
     methodText:
-      "Le but n'est pas d'ajouter de la technique pour impressionner. Le but est de creer un outil propre, utile et durable, que vous pouvez faire evoluer.",
+      "Le but n'est pas d'ajouter de la technique pour impressionner. Le but est de créer un outil propre, utile et durable, que vous pouvez faire évoluer.",
     steps: [
-      "Comprendre votre activite et vos priorites",
+      "Comprendre votre activité et vos priorites",
       "Definir les pages, actions et informations essentielles",
-      "Creer une structure lisible sur mobile d'abord",
-      "Relier le site a vos profils, formulaires et outils utiles",
+      "Créer une structure lisible sur mobile d'abord",
+      "Relier le site à vos profils, formulaires et outils utiles",
       "Prevoir une base facile a faire grandir",
     ],
     creativeEyebrow: "Creativa Poeta",
     creativeTitle: "Une base technique, mais avec une ame.",
     creativeText:
-      "Nous gardons l'ADN de Creativa Poeta : des mots choisis, des visuels justes, une experience fluide et une presence qui porte votre histoire.",
-    faqTitle: "Questions frequentes",
+      "Nous gardons l'ADN de Creativa Poeta : des mots choisis, des visuels justes, une expérience fluide et une présence qui porte votre histoire.",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce que je dois commencer par un grand site ?",
@@ -139,7 +139,7 @@ const copies: Record<string, LocaleCopy> = {
       {
         question: "Est-ce que vous pouvez construire un outil sur mesure ?",
         answer:
-          "Oui. Cela peut etre un formulaire avance, un tableau de bord, un espace client, un outil de gestion ou une application plus complete.",
+          "Oui. Cela peut être un formulaire avance, un tableau de bord, un espace client, un outil de gestion ou une application plus complète.",
       },
     ],
   },
@@ -497,7 +497,7 @@ const ImagePanel = ({
 
 const WebApp = () => {
   const { market, locale, copy, visual } = getCopy();
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=website`;
   const contactPath = buildLocalLocalePath(market, locale, "/contact");
 
   return (

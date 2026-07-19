@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   FaArrowRight,
@@ -77,29 +77,29 @@ type ProjectCopy = {
 const copies: Record<LocaleKey, ProjectCopy> = {
   fr: {
     eyebrow: "Votre creativite, notre passion",
-    title: "Dites-nous ce que vous voulez creer, ameliorer ou rendre visible.",
+    title: "Dites-nous ce que vous voulez créer, améliorer ou rendre visible.",
     intro:
-      "Creativa Poeta rassemble creation, contenu, sites web, presence locale et visibilite moderne. Choisissez une porte d'entree, puis precisez les services qui vous interessent.",
+      "Creativa Poeta rassemble création, contenu, sites web, présence locale et visibilité moderne. Choisissez une porte d'entree, puis précisez les services qui vous intéressent.",
     stepLabel: "Etape",
     steps: ["Orientation", "Services", "Contexte", "Contact"],
-    chooseOne: "Quelle famille de besoin correspond le mieux a votre projet ?",
+    chooseOne: "Quelle famille de besoin correspond le mieux à votre projet ?",
     chooseServices: "Quels sous-services voulez-vous explorer ?",
-    contextTitle: "Ou en est votre presence aujourd'hui ?",
+    contextTitle: "Où en est votre présence aujourd'hui ?",
     contextIntro:
-      "Ces informations nous aident a comprendre votre base actuelle avant de vous repondre.",
+      "Ces informations nous aident à comprendre votre base actuelle avant de vous répondre.",
     contactTitle: "Comment pouvons-nous vous recontacter ?",
     contactIntro:
       "Laissez vos coordonnees et un court message. Nous reviendrons vers vous avec une premiere lecture claire.",
     otherLabel: "Autre besoin",
-    otherPlaceholder: "Expliquez le service ou l'idee que vous avez en tete...",
-    websiteLabel: "Avez-vous deja un site ou une page officielle ?",
+    otherPlaceholder: "Expliquez le service ou l'idée que vous avez en tête...",
+    websiteLabel: "Avez-vous déjà un site ou une page officielle ?",
     websiteOptions: [
-      "Oui, j'ai deja un site",
+      "Oui, j'ai déjà un site",
       "Non, pas encore",
-      "J'ai seulement des reseaux sociaux ou une fiche Maps",
+      "J'ai seulement des réseaux sociaux ou une fiche Maps",
       "Je ne sais pas quoi choisir",
     ],
-    channelsLabel: "Ou etes-vous deja visible ?",
+    channelsLabel: "Où êtes-vous déjà visible ?",
     channels: [
       "Site web",
       "Google Maps",
@@ -110,46 +110,46 @@ const copies: Record<LocaleKey, ProjectCopy> = {
       "TikTok",
       "Aucun ou presque",
     ],
-    zoneLabel: "Pays, ville ou zone visee",
+    zoneLabel: "Pays, ville ou zone visée",
     zonePlaceholder: "Ex. Bruxelles",
     languagesLabel: "Langues importantes",
-    languagesPlaceholder: "Ex. francais, neerlandais...",
-    urgencyLabel: "Delai souhaite",
+    languagesPlaceholder: "Ex. français, néerlandais...",
+    urgencyLabel: "Délai souhaite",
     urgencyOptions: [
-      "Le plus tot possible",
+      "Le plus tôt possible",
       "Dans les prochaines semaines",
       "Dans les prochains mois",
       "Je veux d'abord un conseil",
     ],
     name: "Nom",
     email: "E-mail",
-    phone: "Telephone",
+    phone: "Téléphone",
     company: "Entreprise ou projet",
     message: "Message",
     messagePlaceholder:
-      "Ajoutez ce qui est important : objectif, probleme, public vise, liens existants, budget indicatif...",
+      "Ajoutez ce qui est important : objectif, problème, public visé, liens existants, budget indicatif...",
     next: "Continuer",
     back: "Retour",
     submit: "Envoyer ma demande",
-    close: "Retour a l'accueil",
-    required: "Veuillez remplir les informations necessaires avant de continuer.",
-    success: "Votre demande a bien ete envoyee.",
+    close: "Retour à l'accueil",
+    required: "Veuillez remplir les informations nécessaires avant de continuer.",
+    success: "Votre demande a bien été envoyée.",
     error: "Impossible d'envoyer la demande pour le moment.",
     groups: [
       {
         id: "creative",
         icon: FaPalette,
-        title: "Creer une identite ou un visuel",
+        title: "Créer une identité ou un visuel",
         description:
-          "Donner une forme forte a votre idee : logo, image, message, support ou campagne.",
+          "Donner une forme forte à votre idée : logo, image, message, support ou campagne.",
         services: [
-          "Creation ou refonte de logo",
-          "Identite visuelle complete",
-          "Affiches, flyers, brochures et supports imprimes",
-          "Visuels pour reseaux sociaux",
+          "Création ou refonte de logo",
+          "Identité visuelle complète",
+          "Affiches, flyers, brochures et supports imprimés",
+          "Visuels pour réseaux sociaux",
           "Infographies et messages visuels",
-          "Presentations, slides et dossiers commerciaux",
-          "Design pour emballages, vetements, vehicules ou objets",
+          "Présentations, slides et dossiers commerciaux",
+          "Design pour emballages, vêtements, véhicules ou objets",
           "Direction artistique pour une campagne",
         ],
       },
@@ -158,7 +158,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
         icon: FaFeatherAlt,
         title: "Ecrire, raconter ou clarifier",
         description:
-          "Transformer vos idees en mots simples, utiles et memorables.",
+          "Transformer vos idées en mots simples, utiles et mémorables.",
         services: [
           "Textes pour site web",
           "Pages utiles qui repondent aux questions clients",
@@ -167,24 +167,29 @@ const copies: Record<LocaleKey, ProjectCopy> = {
           "Traduction et adaptation de contenu",
           "Guides, ebooks et documents explicatifs",
           "Discours, lettres, CV ou dossiers",
-          "Messages pour reseaux sociaux et campagnes",
+          "Messages pour réseaux sociaux et campagnes",
         ],
       },
       {
         id: "website",
         icon: FaGlobe,
-        title: "Construire votre presence officielle",
+        title: "Construire votre présence officielle",
         description:
-          "Creer ou refondre la base que vos clients, Google, maps et outils IA peuvent comprendre.",
+          "Créer ou refondre la base que vos clients, Google, maps et outils IA peuvent comprendre.",
         services: [
           "Site vitrine ou page officielle",
           "Refonte d'un site existant",
           "Pages services claires",
-          "Formulaire de contact ou demande de devis",
+          "Application web ou espace client",
+          "Application mobile légère",
+          "Logiciel interne ou tableau de bord",
+          "Formulaire de contact, devis ou demande de service",
+          "Réservation, paiement, notifications ou portail client",
+          "Automatisation simple et intégrations API",
           "Landing page pour une campagne",
-          "Maintenance et mises a jour",
-          "Application web, outil interne ou systeme simple",
+          "Maintenance et mises à jour",
           "Structure multilingue ou multi-pays",
+
         ],
       },
       {
@@ -192,48 +197,48 @@ const copies: Record<LocaleKey, ProjectCopy> = {
         icon: FaMapMarkedAlt,
         title: "Rendre votre entreprise visible",
         description:
-          "Aligner votre presence pour que vos clients vous trouvent la ou ils cherchent vraiment.",
+          "Aligner votre présence pour que vos clients vous trouvent là où ils cherchent vraiment.",
         services: [
-          "Audit de visibilite",
+          "Audit de visibilité",
           "Google Maps et profils locaux",
           "Apple Maps, Bing et autres annuaires utiles",
-          "Reseaux sociaux et coherence des informations",
+          "Réseaux sociaux et cohérence des informations",
           "Avis clients, photos et preuves de confiance",
           "Recherche vocale et demandes locales",
           "Campagnes de promotion en ligne",
-          "Plan d'amelioration continue",
+          "Plan d'amélioration continue",
         ],
       },
       {
         id: "ai",
         icon: FaRobot,
-        title: "Preparer votre presence pour les outils IA",
+        title: "Préparer votre présence pour les outils IA",
         description:
-          "Aider les assistants comme ChatGPT a comprendre qui vous etes, ce que vous faites et pourquoi vous recommander.",
+          "Aider les assistants comme ChatGPT à comprendre qui vous êtes, ce que vous faites et pourquoi vous recommander.",
         services: [
-          "Audit de lisibilite pour les outils IA",
+          "Audit de lisibilité pour les outils IA",
           "Clarification des informations essentielles",
-          "Questions frequentes et reponses utiles",
-          "Organisation des pages pour etre mieux compris",
+          "Questions fréquentes et réponses utiles",
+          "Organisation des pages pour être mieux compris",
           "Contenus par service, ville, langue ou besoin",
-          "Alignement site, maps et reseaux",
-          "Conseil pour etre cite comme source fiable",
-          "Creation d'un assistant ou outil IA simple",
+          "Alignement site, maps et réseaux",
+          "Conseil pour être cité comme source fiable",
+          "Création d'un assistant ou outil IA simple",
         ],
       },
       {
         id: "tech",
         icon: FaTools,
-        title: "Assistance numerique et depannage",
+        title: "Assistance numérique et dépannage",
         description:
-          "Installer, configurer, reparer ou apprendre a utiliser vos outils et appareils numeriques.",
+          "Installer, configurer, reparer ou apprendre à utiliser vos outils et appareils numeriques.",
         services: [
-          "Depannage ordinateur, smartphone, tablette ou imprimante",
+          "Dépannage ordinateur, smartphone, tablette ou imprimante",
           "Installation et configuration d'appareils",
           "Wi-Fi, email, comptes, sauvegardes et cloud",
-          "Securite, mots de passe et protection des donnees",
-          "Aide pour demarches en ligne ou achats internet",
-          "Accompagnement reseaux sociaux et outils du quotidien",
+          "Sécurité, mots de passe et protection des données",
+          "Aide pour démarches en ligne ou achats internet",
+          "Accompagnement réseaux sociaux et outils du quotidien",
           "Configuration multimedia, TV, audio ou objets connectes",
           "Formation pas a pas pour gagner en autonomie",
         ],
@@ -243,7 +248,7 @@ const copies: Record<LocaleKey, ProjectCopy> = {
         icon: FaLightbulb,
         title: "Je ne sais pas encore, conseillez-moi",
         description:
-          "Vous avez une idee, un blocage ou une envie, mais pas encore le bon chemin.",
+          "Vous avez une idée, un blocage ou une envie, mais pas encore le bon chemin.",
         services: [
           "Analyse de votre situation actuelle",
           "Priorites pour commencer sans se disperser",
@@ -468,10 +473,14 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Business website or official page",
       "Redesign of an existing website",
       "Clear service pages",
-      "Contact or quote request form",
+      "Web app or client portal",
+      "Light mobile application",
+      "Internal software or dashboard",
+      "Contact, quote or service request form",
+      "Booking, payment, notifications or client portal",
+      "Simple automation and API integrations",
       "Landing page for a campaign",
       "Maintenance and updates",
-      "Web app, internal tool or simple system",
       "Multilingual or multi-country structure",
     ],
     visibility: [
@@ -534,13 +543,17 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Berichten voor sociale media en campagnes",
     ],
     website: [
-      "Website of officiele pagina",
+      "Website of officiële pagina",
       "Vernieuwing van een bestaande website",
       "Duidelijke dienstenpagina's",
-      "Contactformulier of offerte-aanvraag",
+      "Webapp of klantenportaal",
+      "Lichte mobiele applicatie",
+      "Interne software of dashboard",
+      "Contact-, offerte- of serviceaanvraagformulier",
+      "Reservatie, betaling, meldingen of klantenportaal",
+      "Eenvoudige automatisering en API-integraties",
       "Landingspagina voor een campagne",
       "Onderhoud en updates",
-      "Webapp, interne tool of eenvoudig systeem",
       "Structuur voor meerdere talen of landen",
     ],
     visibility: [
@@ -606,10 +619,14 @@ const serviceTranslations: Record<Exclude<LocaleKey, "fr">, Record<string, strin
       "Website cyangwa paji yemewe",
       "Kuvugurura website isanzwe",
       "Paji zisobanura serivisi",
-      "Form ya contact cyangwa gusaba igiciro",
+      "Web app cyangwa portal y'abakiriya",
+      "Application mobile yoroshye",
+      "Software interne cyangwa dashboard",
+      "Form ya contact, gusaba igiciro cyangwa service",
+      "Reservation, payment, notifications cyangwa portal y'abakiriya",
+      "Automation yoroshye na API integrations",
       "Landing page ya campagne",
       "Maintenance n'updates",
-      "Web app, outil interne cyangwa system yoroshye",
       "Imiterere y'indimi cyangwa ibihugu byinshi",
     ],
     visibility: [
@@ -736,6 +753,7 @@ const ProjectForm = () => {
   const locale = getCurrentLocale(market) as LocaleKey;
   const copy = copies[locale] ?? copies.en;
   const navigate = useNavigate();
+  const location = useLocation();
   const homePath = buildLocalLocalePath(market, locale, "/");
 
   const [step, setStep] = useState(1);
@@ -810,6 +828,35 @@ const ProjectForm = () => {
     setShowError(false);
   };
 
+  useEffect(() => {
+    const serviceParam = new URLSearchParams(location.search).get("service");
+    if (!serviceParam) return;
+
+    const targetGroup = copy.groups.find((group) => group.id === serviceParam);
+    if (!targetGroup) return;
+
+    setOpenGroupId(targetGroup.id);
+    setExpandedService(null);
+    setFormData((current) => {
+      if (current.serviceType === targetGroup.title) return current;
+      return {
+        ...current,
+        serviceType: targetGroup.title,
+        selectedServices: [],
+        customServiceDescription: "",
+      };
+    });
+    setStep(2);
+    setShowError(false);
+  }, [copy.groups, location.search]);
+
+  const closeForm = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    navigate(homePath);
+  };
   const isStepValid = () => {
     if (step === 1) return Boolean(formData.serviceType);
     if (step === 2) {
@@ -1144,7 +1191,7 @@ const ProjectForm = () => {
       <section className="relative mx-auto flex h-[calc(100dvh-1rem)] max-w-6xl flex-col overflow-hidden rounded-[1.4rem] border border-white/15 bg-[#071a33]/85 p-4 shadow-2xl backdrop-blur-md tablet:rounded-[2rem] tablet:p-6 laptop:p-8">
         <button
           type="button"
-          onClick={() => navigate(homePath)}
+          onClick={closeForm}
           aria-label={copy.close}
           className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white transition hover:border-[#EEBA2B] hover:text-[#fff200] tablet:right-5 tablet:top-5 tablet:h-10 tablet:w-10"
         >
@@ -1152,7 +1199,7 @@ const ProjectForm = () => {
         </button>
         <button
           type="button"
-          onClick={() => navigate(homePath)}
+          onClick={closeForm}
           className="mb-2 inline-flex items-center gap-2 text-xs font-black uppercase text-white/70 transition hover:text-[#fff200] tablet:mb-5 tablet:text-sm"
         >
           <FaChevronLeft />

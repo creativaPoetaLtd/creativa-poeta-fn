@@ -58,32 +58,32 @@ type OfficialCopy = {
 
 const copies: Record<string, OfficialCopy> = {
   fr: {
-    eyebrow: "Sites, apps & systemes",
-    title: "Nous construisons les outils digitaux qui rendent votre activite plus claire et plus simple.",
+    eyebrow: "Sites, apps & systèmes",
+    title: "Nous construisons les outils digitaux qui rendent votre activité plus claire et plus simple.",
     intro:
-      "Site vitrine, application, logiciel interne, espace client, formulaire avance ou systeme complet : nous construisons des outils utiles, clairs et adaptes a votre maniere de travailler.",
+      "Site vitrine, application, logiciel interne, espace client, formulaire avance ou système complet : nous construisons des outils utiles, clairs et adaptés à votre maniere de travailler.",
     cta: "Construire mon outil digital",
-    secondaryCta: "Tester d'abord ma visibilite",
+    secondaryCta: "Tester d'abord ma visibilité",
     promise: [
       "Site clair",
       "Application utile",
       "Logiciel interne",
-      "Systeme relie a vos vrais besoins",
+      "Systeme relie à vos vrais besoins",
     ],
     whyEyebrow: "Pourquoi c'est important",
     whyTitle: "Un outil digital doit servir votre entreprise, pas seulement exister en ligne.",
     whyText:
-      "Un site explique votre offre. Une application guide vos clients. Un logiciel interne fait gagner du temps a votre equipe. Un bon systeme relie les bonnes informations, les bonnes personnes et les bonnes actions.",
+      "Un site explique votre offre. Une application guide vos clients. Un logiciel interne fait gagner du temps à votre équipe. Un bon système relie les bonnes informations, les bonnes personnes et les bonnes actions.",
     imageBriefs: [
       {
         label: "Image 1",
         title: "L'ecosysteme digital",
         description:
-          "Un visuel montrant un ecosysteme avec site web, application mobile, tableau de bord, formulaire, base de donnees et notifications relies entre eux. Le texte dans l'image doit etre traduit selon la langue.",
+          "Un visuel montrant un ecosysteme avec site web, application mobile, tableau de bord, formulaire, base de données et notifications relies entre eux. Le texte dans l'image doit être traduit selon la langue.",
       },
       {
         label: "Image 2",
-        title: "Du site au systeme",
+        title: "Du site au système",
         description:
           "Une composition montrant trois niveaux: un site vitrine, une application client et un logiciel interne. L'image doit faire comprendre qu'on choisit l'outil selon le besoin.",
       },
@@ -95,9 +95,9 @@ const copies: Record<string, OfficialCopy> = {
       },
     ],
     blocksEyebrow: "Ce que l'outil doit faire",
-    blocksTitle: "Chaque outil doit avoir un role clair dans votre activite.",
+    blocksTitle: "Chaque outil doit avoir un role clair dans votre activité.",
     blocksText:
-      "On ne construit pas une app ou un logiciel pour faire moderne. On le construit parce qu'il aide un client, une equipe ou une operation a avancer plus simplement.",
+      "On ne construit pas une app ou un logiciel pour faire moderne. On le construit parce qu'il aide un client, une équipe ou une operation à avancer plus simplement.",
     blocks: [
       {
         title: "Presenter",
@@ -105,7 +105,7 @@ const copies: Record<string, OfficialCopy> = {
       },
       {
         title: "Convertir",
-        text: "Un formulaire, une demande de devis, une reservation ou un espace client transforme l'interet en action.",
+        text: "Un formulaire, une demande de devis, une reservation ou un espace client transforme l'intérêt en action.",
       },
       {
         title: "Gerer",
@@ -113,7 +113,7 @@ const copies: Record<string, OfficialCopy> = {
       },
       {
         title: "Relier",
-        text: "Un systeme bien pense connecte vos formulaires, emails, notifications, contenus et donnees importantes.",
+        text: "Un système bien pensé connecte vos formulaires, emails, notifications, contenus et données importantes.",
       },
     ],
     pathsEyebrow: "Ce que nous pouvons construire",
@@ -121,51 +121,51 @@ const copies: Record<string, OfficialCopy> = {
     paths: [
       {
         title: "Site ou mini-site",
-        text: "Pour expliquer votre activite, presenter vos services, rassurer les visiteurs et creer une base officielle claire.",
+        text: "Pour expliquer votre activité, presenter vos services, rassurer les visiteurs et créer une base officielle claire.",
       },
       {
         title: "Application ou plateforme",
-        text: "Pour proposer une experience plus interactive: espace client, reservations, demandes, profils, suivi ou contenus accessibles.",
+        text: "Pour proposer une expérience plus interactive: espace client, reservations, demandes, profils, suivi ou contenus accessibles.",
       },
       {
-        title: "Logiciel interne ou systeme",
-        text: "Pour organiser votre travail: gestion des demandes, dashboard, documents, automatisations simples et suivi d'activite.",
+        title: "Logiciel interne ou système",
+        text: "Pour organiser votre travail: gestion des demandes, dashboard, documents, automatisations simples et suivi d'activité.",
       },
     ],
     deliverEyebrow: "Livrables",
     deliverTitle: "Un outil utilisable, pas seulement une belle maquette.",
     deliverText:
-      "Le resultat doit pouvoir etre utilise par vos clients, votre equipe ou votre organisation, selon le probleme a resoudre.",
+      "Le résultat doit pouvoir être utilisé par vos clients, votre équipe ou votre organisation, selon le problème a resoudre.",
     deliver: [
       "Une structure claire pour le site, l'app ou le logiciel.",
-      "Des ecrans et parcours faciles a comprendre.",
+      "Des ecrans et parcours faciles à comprendre.",
       "Des formulaires, tableaux de bord ou espaces de gestion selon le besoin.",
       "Des contenus et messages clairs pour guider l'utilisateur.",
       "Une base evolutive pour ajouter langues, services, roles ou fonctionnalites.",
-      "Des connexions utiles avec vos contacts, profils, emails ou donnees existantes.",
+      "Des connexions utiles avec vos contacts, profils, emails ou données existantes.",
     ],
-    methodEyebrow: "Notre methode",
-    methodTitle: "Comprendre, structurer, construire, ameliorer.",
+    methodEyebrow: "Notre méthode",
+    methodTitle: "Comprendre, structurer, construire, améliorer.",
     methodText:
-      "On commence par le probleme concret: informer, vendre, recevoir des demandes, suivre des clients ou organiser une equipe. Ensuite on construit l'outil le plus simple qui peut vraiment servir.",
+      "On commence par le problème concret: informer, vendre, recevoir des demandes, suivre des clients ou organiser une équipe. Ensuite on construit l'outil le plus simple qui peut vraiment servir.",
     steps: [
       "Identifier les utilisateurs, les actions et les informations importantes.",
-      "Choisir le bon format: site, app, dashboard, logiciel ou systeme.",
+      "Choisir le bon format: site, app, dashboard, logiciel ou système.",
       "Dessiner les ecrans et les parcours essentiels.",
-      "Construire une interface claire, responsive et facile a utiliser.",
-      "Tester, ajuster et preparer l'outil pour evoluer.",
+      "Construire une interface claire, responsive et facile à utiliser.",
+      "Tester, ajuster et preparer l'outil pour évoluer.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce que ce service concerne seulement les sites web ?",
         answer:
-          "Non. Le site est une partie du service, mais nous pouvons aussi construire des applications, plateformes, logiciels internes, tableaux de bord et systemes simples.",
+          "Non. Le site est une partie du service, mais nous pouvons aussi construire des applications, plateformes, logiciels internes, tableaux de bord et systèmes simples.",
       },
       {
         question: "Comment savoir si j'ai besoin d'un site, d'une app ou d'un logiciel ?",
         answer:
-          "On regarde d'abord l'usage. Si vous devez expliquer, un site suffit souvent. Si l'utilisateur doit agir ou suivre quelque chose, une app ou un espace client peut etre utile. Si votre equipe doit gerer, un logiciel interne devient pertinent.",
+          "On regarde d'abord l'usage. Si vous devez expliquer, un site suffit souvent. Si l'utilisateur doit agir ou suivre quelque chose, une app ou un espace client peut être utile. Si votre équipe doit gerer, un logiciel interne devient pertinent.",
       },
       {
         question: "Peut-on commencer petit ?",
@@ -185,7 +185,7 @@ const copies: Record<string, OfficialCopy> = {
       {
         question: "Peut-on preparer l'outil pour plusieurs langues ?",
         answer:
-          "Oui. On peut prevoir les contenus et images en francais, anglais, neerlandais ou kinyarwanda selon le marche vise.",
+          "Oui. On peut prevoir les contenus et images en français, anglais, néerlandais ou kinyarwanda selon le marche visé.",
       },
     ],
   },
@@ -635,7 +635,7 @@ const OfficialWebsite = () => {
   const locale = getCurrentLocale(market);
   const copy = copies[locale] ?? copies.en;
   const images = serviceImages[locale] ?? serviceImages.en;
-  const startPath = buildLocalLocalePath(market, locale, "/start-project");
+  const startPath = `${buildLocalLocalePath(market, locale, "/start-project")}?service=website`;
   const auditPath = buildLocalLocalePath(market, locale, "/tester-visibilite");
 
   return (
