@@ -19,19 +19,19 @@ const HomeLocale: any = {
   fr: {
     title1: "inspired innovation",
     description1:
-      "Un souffle de creativite, une touche poetique, voila Creativa Poeta : l'endroit ou vos idees prennent forme et laissent une empreinte.",
-    title2: "donnez naissance a votre propre IA",
+      "Un souffle de créativité, une touche poétique, voilà Creativa Poeta : l'endroit où vos idées prennent forme et laissent une empreinte.",
+    title2: "donnez naissance à votre propre IA",
     description2:
-      "Nous vous aidons a imaginer, configurer et relier des assistants IA qui comprennent votre metier, votre ton et votre public.",
-    title3: "soyez visible la ou vos clients cherchent",
+      "Nous vous aidons à imaginer, configurer et relier des assistants IA qui comprennent votre métier, votre ton et votre public.",
+    title3: "soyez visible là où vos clients cherchent",
     description3:
-      "Des solutions sur mesure qui captivent votre public, clarifient votre presence et vous demarquent de la concurrence.",
-    title4: "transformez vos idees en realite",
+      "Des solutions sur mesure qui captivent votre public, clarifient votre présence et vous démarquent de la concurrence.",
+    title4: "transformez vos idées en réalité",
     description4:
       "Des mots aux images, du site web aux outils intelligents, nous dessinons le chemin entre votre vision et ceux que vous voulez toucher.",
-    action1: "DEMARRER UN PROJET",
+    action1: "DÉMARRER UN PROJET",
     action2: "NOS SERVICES",
-    scroll: "FAIRE DEFILER",
+    scroll: "FAIRE DÉFILER",
   },
   kiny: {
     title1: "inspired innovation",
@@ -53,14 +53,14 @@ const HomeLocale: any = {
   nl: {
     title1: "inspired innovation",
     description1:
-      "Een adem van creativiteit, een poetische toets: dat is Creativa Poeta, waar ideeen vorm krijgen en blijven hangen.",
+      "Een adem van creativiteit, een poëtische toets: dat is Creativa Poeta, waar ideeën vorm krijgen en blijven hangen.",
     title2: "geef vorm aan uw eigen AI-assistent",
     description2:
       "We helpen u AI-assistenten bedenken, configureren en verbinden die uw werk, toon en publiek begrijpen.",
     title3: "word zichtbaar waar klanten zoeken",
     description3:
       "Oplossingen op maat die uw publiek raken, uw aanwezigheid verduidelijken en u onderscheiden van de concurrentie.",
-    title4: "maak uw ideeen werkelijkheid",
+    title4: "maak uw ideeën werkelijkheid",
     description4:
       "Van woorden tot beelden, van websites tot intelligente tools: wij bouwen de brug tussen uw visie en uw publiek.",
     action1: "START EEN PROJECT",
