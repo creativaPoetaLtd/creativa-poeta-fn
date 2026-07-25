@@ -5,6 +5,11 @@ const hostToMarket = {
   "nl.creativapoeta.com": "nl",
 };
 
+const hostRedirects = {
+  "creativapoeta.be": "be.creativapoeta.com",
+  "www.creativapoeta.be": "be.creativapoeta.com",
+};
+
 const globalHosts = new Set(["creativapoeta.com", "www.creativapoeta.com"]);
 
 const countryToHost = {
@@ -98,6 +103,14 @@ function redirectByCountry(request, context, url) {
 
 export default async (request, context) => {
   const url = new URL(request.url);
+  const targetHost = hostRedirects[url.hostname.toLowerCase()];
+
+  if (targetHost) {
+    const targetUrl = new URL(request.url);
+    targetUrl.hostname = targetHost;
+    return Response.redirect(targetUrl.toString(), 301);
+  }
+
   const geoRedirect = redirectByCountry(request, context, url);
   if (geoRedirect) return geoRedirect;
 
