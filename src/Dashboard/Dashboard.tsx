@@ -39,6 +39,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
 import ContactQueries from "./ContactQueries";
+import Emails from "./Emails";
 import Jobs from "./Jobs";
 import Projects from "./Projects";
 import Users from "./Users";
@@ -79,6 +80,13 @@ const navigationItems = [
     icon: <EmailIcon />,
     path: "/secure-admin-dashboard-2024/contact-queries",
     color: "#FF9800",
+    section: "Demandes",
+  },
+  {
+    text: "Emails",
+    icon: <EmailIcon />,
+    path: "/secure-admin-dashboard-2024/emails",
+    color: "#14b8a6",
     section: "Demandes",
   },
   {
@@ -478,6 +486,7 @@ export default function Dashboard() {
             <Route path="assistance-requests" element={<Projects kind="assistance" />} />
             <Route path="blogs" element={<Blogs />} />
             <Route path="contact-queries" element={<ContactQueries />} />
+            <Route path="emails" element={<Emails />} />
             <Route path="users" element={<Users />} />
             <Route path="jobs" element={<Jobs />} />
           </Routes>
