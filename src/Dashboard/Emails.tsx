@@ -33,6 +33,7 @@ import {
   EmailStatus,
   getEmail,
   getEmails,
+  replyToEmail,
   syncEmails,
   updateEmailStatus,
 } from "../APIs/Emails";
@@ -106,6 +107,10 @@ const Emails = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error" | "warning">("success");
+  const [replyOpen, setReplyOpen] = useState(false);
+  const [replySubject, setReplySubject] = useState("");
+  const [replyMessage, setReplyMessage] = useState("");
+  const [replyLoading, setReplyLoading] = useState(false);
 
   const showMessage = (message: string, severity: "success" | "error" | "warning" = "success") => {
     setSnackbarMessage(message);
@@ -203,6 +208,34 @@ const Emails = () => {
       showMessage("Email status updated.");
     } catch (statusError) {
       showMessage(statusError instanceof Error ? statusError.message : "Failed to update email.", "error");
+    }
+  };
+
+  const openReplyDialog = (email: EmailMessage) => {
+    setSelectedEmail(email);
+    setReplySubject(/^re:/i.test(email.subject) ? email.subject : `Re: ${email.subject || "Votre message"}`);
+    setReplyMessage("");
+    setReplyOpen(true);
+  };
+
+  const handleReplySubmit = async () => {
+    if (!selectedEmail || !replyMessage.trim() || !replySubject.trim()) {
+      showMessage("Subject and reply message are required.", "warning");
+      return;
+    }
+
+    try {
+      setReplyLoading(true);
+      const response = await replyToEmail(selectedEmail._id, replyMessage, replySubject);
+      setEmails((current) => current.map((item) => (item._id === selectedEmail._id ? response.email : item)));
+      setSelectedEmail(response.email);
+      setReplyOpen(false);
+      setReplyMessage("");
+      showMessage("Reply sent from the dashboard.");
+    } catch (replyError) {
+      showMessage(replyError instanceof Error ? replyError.message : "Failed to send reply.", "error");
+    } finally {
+      setReplyLoading(false);
     }
   };
 
@@ -328,7 +361,8 @@ const Emails = () => {
           return (
             <>
               <MenuAction icon={<MarkEmailRead />} label="Mark read" onClick={() => void handleStatusChange(email._id, "read")} color="#0ea5e9" />
-              <MenuAction icon={<Reply />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
+              <MenuAction icon={<Reply />} label="Reply" onClick={() => openReplyDialog(email)} color="#16a34a" />
+              <MenuAction icon={<MarkEmailRead />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
               <MenuAction icon={<Archive />} label="Archive" onClick={() => void handleStatusChange(email._id, "archived")} color="#64748b" />
               <MenuAction icon={<Delete />} label="Delete copy" onClick={() => void handleDelete(email)} color="#ef4444" />
             </>
@@ -385,6 +419,19 @@ const Emails = () => {
                   {selectedEmail.text || selectedEmail.preview || "No readable text content."}
                 </Typography>
               </Paper>
+
+              {selectedEmail.replyMessage && (
+                <Paper sx={{ p: 2.5, borderLeft: "5px solid #16a34a", bgcolor: "#f0fdf4" }}>
+                  <Typography variant="subtitle2" color="text.secondary">Last reply</Typography>
+                  <Typography fontWeight={800}>{selectedEmail.replySubject || "Reply"}</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {formatDate(selectedEmail.repliedAt)} by {selectedEmail.repliedBy || "Admin"}
+                  </Typography>
+                  <Typography sx={{ mt: 2, whiteSpace: "pre-wrap", lineHeight: 1.7 }}>
+                    {selectedEmail.replyMessage}
+                  </Typography>
+                </Paper>
+              )}
             </Box>
           )}
         </DialogContent>
@@ -394,10 +441,49 @@ const Emails = () => {
           {selectedEmail && (
             <>
               <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "read")}>Mark read</ActionButton>
-              <ActionButton variant="success" onClick={() => void handleStatusChange(selectedEmail._id, "replied")}>Mark replied</ActionButton>
+              <ActionButton variant="success" startIcon={<Reply />} onClick={() => openReplyDialog(selectedEmail)}>Reply</ActionButton>
+              <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "replied")}>Mark replied</ActionButton>
               <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "archived")}>Archive</ActionButton>
             </>
           )}
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={replyOpen} onClose={() => !replyLoading && setReplyOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>
+          Reply to {selectedEmail ? getSender(selectedEmail) : "email"}
+        </DialogTitle>
+        <DialogContent sx={{ pt: 3 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+            <TextField
+              label="Subject"
+              value={replySubject}
+              onChange={(event) => setReplySubject(event.target.value)}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Reply message"
+              value={replyMessage}
+              onChange={(event) => setReplyMessage(event.target.value)}
+              minRows={8}
+              multiline
+              fullWidth
+              required
+              placeholder="Write a clear, professional answer..."
+            />
+            <Alert severity="info">
+              The email will use the branded Creativa Poeta template and the configured SMTP sender.
+            </Alert>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 2, gap: 1 }}>
+          <ActionButton variant="secondary" disabled={replyLoading} onClick={() => setReplyOpen(false)}>
+            Cancel
+          </ActionButton>
+          <ActionButton variant="primary" disabled={replyLoading} startIcon={<Reply />} onClick={() => void handleReplySubmit()}>
+            {replyLoading ? "Sending..." : "Send reply"}
+          </ActionButton>
         </DialogActions>
       </Dialog>
 

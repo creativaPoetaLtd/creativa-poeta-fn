@@ -22,6 +22,10 @@ export interface EmailMessage {
   syncedAt?: string;
   createdAt?: string;
   updatedAt?: string;
+  replyMessage?: string;
+  replySubject?: string;
+  repliedAt?: string;
+  repliedBy?: string;
 }
 
 export interface EmailsResponse {
@@ -107,5 +111,20 @@ export const deleteEmail = async (id: string) => {
       url: `/api/emails/${id}`,
     },
     "Failed to delete email."
+  );
+};
+
+export const replyToEmail = async (
+  id: string,
+  replyMessage: string,
+  subject?: string
+) => {
+  return authRequest<{ email: EmailMessage }>(
+    {
+      method: "POST",
+      url: `/api/emails/${id}/reply`,
+      data: { replyMessage, subject },
+    },
+    "Failed to send email reply."
   );
 };
