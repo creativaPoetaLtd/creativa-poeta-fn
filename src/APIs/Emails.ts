@@ -29,6 +29,12 @@ export interface EmailMessage {
   repliedBy?: string;
 }
 
+export interface EmailAttachmentMeta {
+  filename: string;
+  mimeType?: string;
+  size?: number;
+}
+
 export interface OutboundEmail {
   _id: string;
   folder: "sent" | "draft";
@@ -39,6 +45,7 @@ export interface OutboundEmail {
   subject: string;
   body: string;
   signature?: string;
+  attachments?: EmailAttachmentMeta[];
   error?: string;
   sentAt?: string;
   createdAt?: string;
@@ -208,12 +215,30 @@ export const updateEmailDraft = async (id: string, payload: ComposeEmailPayload)
   );
 };
 
-export const sendComposedEmail = async (payload: ComposeEmailPayload) => {
+const appendComposeField = (formData: FormData, key: string, value?: string[] | string) => {
+  const normalized = Array.isArray(value) ? value.join(",") : value || "";
+  if (normalized) formData.append(key, normalized);
+};
+
+export const sendComposedEmail = async (payload: ComposeEmailPayload, attachments: File[] = []) => {
+  const data = attachments.length ? new FormData() : payload;
+
+  if (data instanceof FormData) {
+    appendComposeField(data, "to", payload.to);
+    appendComposeField(data, "cc", payload.cc);
+    appendComposeField(data, "bcc", payload.bcc);
+    appendComposeField(data, "subject", payload.subject);
+    appendComposeField(data, "body", payload.body);
+    appendComposeField(data, "signature", payload.signature);
+    appendComposeField(data, "draftId", payload.draftId);
+    attachments.forEach((file) => data.append("attachments", file));
+  }
+
   return authRequest<{ email: OutboundEmail }>(
     {
       method: "POST",
       url: "/api/emails/outbound/send",
-      data: payload,
+      data,
     },
     "Failed to send email."
   );

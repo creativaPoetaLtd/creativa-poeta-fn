@@ -2,8 +2,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Box,
+  Button,
   Card,
   CardContent,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -23,6 +25,8 @@ import {
   Typography,
 } from "@mui/material";
 import Archive from "@mui/icons-material/Archive";
+import AttachFile from "@mui/icons-material/AttachFile";
+import Close from "@mui/icons-material/Close";
 import Create from "@mui/icons-material/Create";
 import Delete from "@mui/icons-material/Delete";
 import Drafts from "@mui/icons-material/Drafts";
@@ -69,6 +73,8 @@ const mailboxOptions = [
 ];
 
 const emptyCompose = { to: "", cc: "", bcc: "", subject: "", body: "", signature: "" };
+const maxAttachmentCount = 8;
+const maxAttachmentTotalBytes = 8 * 1024 * 1024;
 
 type ComposeForm = typeof emptyCompose;
 
@@ -85,6 +91,12 @@ const formatDate = (dateString?: string) => {
   });
 };
 
+
+const formatFileSize = (bytes = 0) => {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+};
 const getStatusVariant = (status: string) => {
   switch (status) {
     case "new":
@@ -162,6 +174,7 @@ const Emails = () => {
   const [composeOpen, setComposeOpen] = useState(false);
   const [composeForm, setComposeForm] = useState<ComposeForm>(emptyCompose);
   const [editingDraftId, setEditingDraftId] = useState<string | null>(null);
+  const [composeAttachments, setComposeAttachments] = useState<File[]>([]);
   const [composeLoading, setComposeLoading] = useState(false);
   const syncingRef = useRef(false);
 
@@ -358,9 +371,34 @@ const Emails = () => {
   const openComposeDialog = (draft?: OutboundEmail) => {
     setEditingDraftId(draft?._id || null);
     setComposeForm(draft ? fromOutboundEmail(draft) : emptyCompose);
+    setComposeAttachments([]);
     setComposeOpen(true);
   };
 
+
+  const handleAttachmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(event.target.files || []);
+    event.target.value = "";
+    if (!selectedFiles.length) return;
+
+    const nextFiles = [...composeAttachments, ...selectedFiles];
+    if (nextFiles.length > maxAttachmentCount) {
+      showMessage(`Maximum ${maxAttachmentCount} attachments are allowed.`, "warning");
+      return;
+    }
+
+    const totalSize = nextFiles.reduce((total, file) => total + file.size, 0);
+    if (totalSize > maxAttachmentTotalBytes) {
+      showMessage("Attachments are too large. Maximum total size is 8 MB.", "warning");
+      return;
+    }
+
+    setComposeAttachments(nextFiles);
+  };
+
+  const removeAttachment = (indexToRemove: number) => {
+    setComposeAttachments((current) => current.filter((_, index) => index !== indexToRemove));
+  };
   const handleReplySubmit = async () => {
     if (!selectedEmail || !replyMessage.trim() || !replySubject.trim()) {
       showMessage("Subject and reply message are required.", "warning");
@@ -384,6 +422,11 @@ const Emails = () => {
   };
 
   const handleSaveDraft = async () => {
+    if (composeAttachments.length) {
+      showMessage("Attachments are sent immediately and cannot be saved in drafts yet.", "warning");
+      return;
+    }
+
     try {
       setComposeLoading(true);
       const payload = toComposePayload(composeForm);
@@ -405,9 +448,10 @@ const Emails = () => {
   const handleSendCompose = async () => {
     try {
       setComposeLoading(true);
-      await sendComposedEmail(toComposePayload(composeForm, editingDraftId || undefined));
+      await sendComposedEmail(toComposePayload(composeForm, editingDraftId || undefined), composeAttachments);
       setComposeOpen(false);
       setEditingDraftId(null);
+      setComposeAttachments([]);
       if (folder !== "sent") setFolder("sent");
       setCurrentPage(1);
       await loadEmails();
@@ -651,6 +695,16 @@ const Emails = () => {
                 {!!selectedOutbound.cc?.length && <Typography sx={{ mt: 1 }}>CC: {selectedOutbound.cc.join(", ")}</Typography>}
                 {!!selectedOutbound.bcc?.length && <Typography sx={{ mt: 1 }}>BCC: {selectedOutbound.bcc.join(", ")}</Typography>}
                 <Box sx={{ mt: 2 }}><StatusChip status={selectedOutbound.status} variant={getStatusVariant(selectedOutbound.status) as any} /></Box>
+                {!!selectedOutbound.attachments?.length && (
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="subtitle2" color="text.secondary">Attachments</Typography>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 1 }}>
+                      {selectedOutbound.attachments.map((attachment, index) => (
+                        <Chip key={`${attachment.filename}-${index}`} icon={<AttachFile />} label={`${attachment.filename} (${formatFileSize(attachment.size || 0)})`} />
+                      ))}
+                    </Box>
+                  </Box>
+                )}
               </Paper>
               <Paper sx={{ p: 2.5 }}><Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedOutbound.body || "No message"}</Typography></Paper>
               {selectedOutbound.error && <Alert severity="error">{selectedOutbound.error}</Alert>}
@@ -694,6 +748,32 @@ const Emails = () => {
             <TextField label="Message" value={composeForm.body} onChange={(event) => setComposeForm((current) => ({ ...current, body: event.target.value }))} minRows={10} multiline fullWidth required placeholder="Write your message..." />
             <TextField label="Signature" value={composeForm.signature} onChange={(event) => setComposeForm((current) => ({ ...current, signature: event.target.value }))} minRows={2} multiline fullWidth placeholder="Ex. Deogris, Creativa Poeta" />
             <Alert severity="info">Signature is optional. If filled, it appears under Best regards.</Alert>
+            <Box sx={{ border: "1px dashed #cbd5e1", borderRadius: 2, p: 2, bgcolor: "#f8fafc" }}>
+              <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, flexWrap: "wrap" }}>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>Attachments</Typography>
+                  <Typography variant="caption" color="text.secondary">Any file type, up to 8 files / 8 MB total.</Typography>
+                </Box>
+                <Button variant="outlined" component="label" startIcon={<AttachFile />} disabled={composeLoading} sx={{ borderRadius: 999, fontWeight: 800 }}>
+                  Add files
+                  <input hidden multiple type="file" onChange={handleAttachmentChange} />
+                </Button>
+              </Box>
+              {composeAttachments.length > 0 && (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 1.5 }}>
+                  {composeAttachments.map((file, index) => (
+                    <Chip
+                      key={`${file.name}-${file.size}-${index}`}
+                      icon={<AttachFile />}
+                      label={`${file.name} (${formatFileSize(file.size)})`}
+                      onDelete={() => removeAttachment(index)}
+                      deleteIcon={<Close />}
+                      sx={{ maxWidth: "100%", "& .MuiChip-label": { overflow: "hidden", textOverflow: "ellipsis" } }}
+                    />
+                  ))}
+                </Box>
+              )}
+            </Box>
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: 2, gap: 1, flexWrap: "wrap" }}>
