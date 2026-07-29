@@ -38,6 +38,7 @@ import {
   deleteOutboundEmail,
   EmailFolder,
   EmailMessage,
+  EmailSyncResult,
   EmailStatus,
   getEmail,
   getEmails,
@@ -141,6 +142,7 @@ const Emails = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [syncReport, setSyncReport] = useState<EmailSyncResult | null>(null);
   const [statusFilter, setStatusFilter] = useState("all");
   const [mailboxFilter, setMailboxFilter] = useState("all");
   const [search, setSearch] = useState("");
@@ -262,6 +264,7 @@ const Emails = () => {
     try {
       setSyncing(true);
       const result = await syncEmails(75);
+      setSyncReport(result);
       const missing = result.results.filter((item) => !item.configured).length;
       const failed = result.results.filter((item) => item.error && item.configured).length;
       await loadEmails();
@@ -271,6 +274,7 @@ const Emails = () => {
         showMessage(`Sync done: ${result.imported} imported, ${result.updated} updated.`);
       }
     } catch (syncError) {
+      setSyncReport(null);
       showMessage(syncError instanceof Error ? syncError.message : "Email sync failed.", "error");
     } finally {
       setSyncing(false);
@@ -466,6 +470,22 @@ const Emails = () => {
         )}
       </Grid>
 
+      {syncReport && (
+        <Alert severity={syncReport.results.some((item) => item.error) ? "warning" : "success"} sx={{ mb: 3 }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 800, mb: 1 }}>
+            Last sync diagnostic
+          </Typography>
+          {syncReport.results.map((item) => (
+            <Box key={item.mailbox} sx={{ mb: 0.75 }}>
+              <strong>{item.mailbox}</strong>
+              {item.address ? ` (${item.address})` : ""}: {item.configured ? "configured" : "not configured"}, imported {item.imported}, updated {item.updated}, skipped {item.skipped}
+              {item.error ? ` - ${item.error}` : ""}
+            </Box>
+          ))}
+        </Alert>
+      )}
+
+
       <Card sx={{ mb: 3, borderRadius: 3 }}>
         <CardContent>
           <Grid container spacing={2} alignItems="center">
@@ -651,3 +671,4 @@ const Emails = () => {
 };
 
 export default Emails;
+
