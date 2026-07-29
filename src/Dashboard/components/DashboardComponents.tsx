@@ -231,6 +231,7 @@ const ActionMenu: React.FC<{
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -383,39 +384,49 @@ export const DataTable: React.FC<{
                 </TableCell>
               </TableRow>
             ) : (
-              rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  hover
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: alpha("#EEBA2B", 0.04),
-                    },
-                  }}
-                >
-                  {Object.entries(row)
-                    .filter(([key]) => !hiddenFields.includes(key))
-                    .map(([, cell], cellIndex) => (
+              rows.map((row, index) => {
+                const rowId = row.id == null ? "" : String(row.id);
+                const isClickable = Boolean(rowId && onView);
+
+                return (
+                  <TableRow
+                    key={index}
+                    hover={isClickable}
+                    onClick={isClickable ? () => onView?.(rowId) : undefined}
+                    sx={{
+                      cursor: isClickable ? "pointer" : "default",
+                      "&:hover": {
+                        backgroundColor: isClickable ? alpha("#EEBA2B", 0.04) : "inherit",
+                      },
+                    }}
+                  >
+                    {Object.entries(row)
+                      .filter(([key]) => !hiddenFields.includes(key))
+                      .map(([, cell], cellIndex) => (
+                        <TableCell
+                          key={cellIndex}
+                          sx={{ borderBottom: "1px solid #e2e8f0" }}
+                        >
+                          {cell as React.ReactNode}
+                        </TableCell>
+                      ))}
+                    {(onEdit || onDelete || onView || customActions) && (
                       <TableCell
-                        key={cellIndex}
+                        onClick={(event) => event.stopPropagation()}
                         sx={{ borderBottom: "1px solid #e2e8f0" }}
                       >
-                        {cell as React.ReactNode}
+                        <ActionMenu
+                          row={row}
+                          onView={onView}
+                          onEdit={onEdit}
+                          onDelete={onDelete}
+                          customActions={customActions}
+                        />
                       </TableCell>
-                    ))}
-                  {(onEdit || onDelete || onView || customActions) && (
-                    <TableCell sx={{ borderBottom: "1px solid #e2e8f0" }}>
-                      <ActionMenu
-                        row={row}
-                        onView={onView}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
-                        customActions={customActions}
-                      />
-                    </TableCell>
-                  )}
-                </TableRow>
-              ))
+                    )}
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
