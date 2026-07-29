@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Box,
@@ -160,6 +160,7 @@ const Emails = () => {
   const [composeForm, setComposeForm] = useState<ComposeForm>(emptyCompose);
   const [editingDraftId, setEditingDraftId] = useState<string | null>(null);
   const [composeLoading, setComposeLoading] = useState(false);
+  const syncingRef = useRef(false);
 
   const showMessage = (message: string, severity: "success" | "error" | "warning" = "success") => {
     setSnackbarMessage(message);
@@ -260,26 +261,58 @@ const Emails = () => {
     setSearch("");
   };
 
-  const handleSync = async () => {
-    try {
-      setSyncing(true);
-      const result = await syncEmails(75);
-      setSyncReport(result);
-      const missing = result.results.filter((item) => !item.configured).length;
-      const failed = result.results.filter((item) => item.error && item.configured).length;
-      await loadEmails();
-      if (failed > 0 || missing > 0) {
-        showMessage(`Sync done with warnings: ${result.imported} imported, ${result.updated} updated. Check backend env vars.`, "warning");
-      } else {
-        showMessage(`Sync done: ${result.imported} imported, ${result.updated} updated.`);
+  const runMailboxSync = useCallback(
+    async (silent = false) => {
+      if (syncingRef.current) return;
+
+      try {
+        syncingRef.current = true;
+        if (!silent) setSyncing(true);
+
+        const result = await syncEmails(75);
+        setSyncReport(result);
+        const missing = result.results.filter((item) => !item.configured).length;
+        const failed = result.results.filter((item) => item.error && item.configured).length;
+        await loadEmails();
+
+        if (silent) {
+          if (result.imported > 0) {
+            showMessage(`${result.imported} new email(s) imported.`);
+          }
+          return;
+        }
+
+        if (failed > 0 || missing > 0) {
+          showMessage(`Sync done with warnings: ${result.imported} imported, ${result.updated} updated. Check backend env vars.`, "warning");
+        } else {
+          showMessage(`Sync done: ${result.imported} imported, ${result.updated} updated.`);
+        }
+      } catch (syncError) {
+        if (!silent) {
+          setSyncReport(null);
+          showMessage(syncError instanceof Error ? syncError.message : "Email sync failed.", "error");
+        }
+      } finally {
+        syncingRef.current = false;
+        if (!silent) setSyncing(false);
       }
-    } catch (syncError) {
-      setSyncReport(null);
-      showMessage(syncError instanceof Error ? syncError.message : "Email sync failed.", "error");
-    } finally {
-      setSyncing(false);
-    }
+    },
+    [loadEmails]
+  );
+
+  const handleSync = async () => {
+    await runMailboxSync(false);
   };
+
+  useEffect(() => {
+    if (folder !== "inbox") return undefined;
+
+    const interval = window.setInterval(() => {
+      void runMailboxSync(true);
+    }, 30000);
+
+    return () => window.clearInterval(interval);
+  }, [folder, runMailboxSync]);
 
   const handleViewInbox = async (id: string) => {
     try {
