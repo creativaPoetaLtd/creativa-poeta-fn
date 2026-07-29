@@ -68,7 +68,7 @@ const mailboxOptions = [
   { value: "global", label: "contact@creativapoeta.com" },
 ];
 
-const emptyCompose = { to: "", cc: "", bcc: "", subject: "", body: "" };
+const emptyCompose = { to: "", cc: "", bcc: "", subject: "", body: "", signature: "" };
 
 type ComposeForm = typeof emptyCompose;
 
@@ -121,6 +121,7 @@ const toComposePayload = (form: ComposeForm, draftId?: string): ComposeEmailPayl
   bcc: splitEmailList(form.bcc),
   subject: form.subject.trim(),
   body: form.body.trim(),
+  signature: form.signature.trim(),
   draftId,
 });
 
@@ -130,6 +131,7 @@ const fromOutboundEmail = (email: OutboundEmail): ComposeForm => ({
   bcc: (email.bcc || []).join(", "),
   subject: email.subject || "",
   body: email.body || "",
+  signature: email.signature || "",
 });
 
 const Emails = () => {
@@ -155,6 +157,7 @@ const Emails = () => {
   const [replyOpen, setReplyOpen] = useState(false);
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
+  const [replySignature, setReplySignature] = useState("");
   const [replyLoading, setReplyLoading] = useState(false);
   const [composeOpen, setComposeOpen] = useState(false);
   const [composeForm, setComposeForm] = useState<ComposeForm>(emptyCompose);
@@ -348,6 +351,7 @@ const Emails = () => {
     setSelectedEmail(email);
     setReplySubject(/^re:/i.test(email.subject) ? email.subject : `Re: ${email.subject || "Votre message"}`);
     setReplyMessage("");
+    setReplySignature("");
     setReplyOpen(true);
   };
 
@@ -365,11 +369,12 @@ const Emails = () => {
 
     try {
       setReplyLoading(true);
-      const response = await replyToEmail(selectedEmail._id, replyMessage, replySubject);
+      const response = await replyToEmail(selectedEmail._id, replyMessage, replySubject, replySignature);
       setEmails((current) => current.map((item) => (item._id === selectedEmail._id ? response.email : item)));
       setSelectedEmail(response.email);
       setReplyOpen(false);
       setReplyMessage("");
+      setReplySignature("");
       showMessage("Reply sent from the dashboard.");
     } catch (replyError) {
       showMessage(replyError instanceof Error ? replyError.message : "Failed to send reply.", "error");
@@ -666,7 +671,8 @@ const Emails = () => {
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
             <TextField label="Subject" value={replySubject} onChange={(event) => setReplySubject(event.target.value)} fullWidth required />
             <TextField label="Reply message" value={replyMessage} onChange={(event) => setReplyMessage(event.target.value)} minRows={8} multiline fullWidth required placeholder="Write a clear, professional answer..." />
-            <Alert severity="info">The email will use the branded Creativa Poeta template and the configured SMTP sender.</Alert>
+            <TextField label="Signature" value={replySignature} onChange={(event) => setReplySignature(event.target.value)} minRows={2} multiline fullWidth placeholder="Ex. Deogris, Creativa Poeta" />
+            <Alert severity="info">Signature is optional. If filled, it appears under Best regards.</Alert>
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: 2, gap: 1 }}>
@@ -686,7 +692,8 @@ const Emails = () => {
             </Grid>
             <TextField label="Subject" value={composeForm.subject} onChange={(event) => setComposeForm((current) => ({ ...current, subject: event.target.value }))} fullWidth required />
             <TextField label="Message" value={composeForm.body} onChange={(event) => setComposeForm((current) => ({ ...current, body: event.target.value }))} minRows={10} multiline fullWidth required placeholder="Write your message..." />
-            <Alert severity="info">Sent emails use the professional Creativa Poeta template and are stored in Sent.</Alert>
+            <TextField label="Signature" value={composeForm.signature} onChange={(event) => setComposeForm((current) => ({ ...current, signature: event.target.value }))} minRows={2} multiline fullWidth placeholder="Ex. Deogris, Creativa Poeta" />
+            <Alert severity="info">Signature is optional. If filled, it appears under Best regards.</Alert>
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: 2, gap: 1, flexWrap: "wrap" }}>
@@ -704,4 +711,3 @@ const Emails = () => {
 };
 
 export default Emails;
-

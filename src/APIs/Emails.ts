@@ -38,6 +38,7 @@ export interface OutboundEmail {
   bcc?: string[];
   subject: string;
   body: string;
+  signature?: string;
   error?: string;
   sentAt?: string;
   createdAt?: string;
@@ -90,6 +91,7 @@ export interface ComposeEmailPayload {
   bcc?: string[] | string;
   subject: string;
   body: string;
+  signature?: string;
   draftId?: string;
 }
 
@@ -171,13 +173,14 @@ export const deleteEmail = async (id: string) => {
 export const replyToEmail = async (
   id: string,
   replyMessage: string,
-  subject?: string
+  subject?: string,
+  signature?: string
 ) => {
   return authRequest<{ email: EmailMessage }>(
     {
       method: "POST",
       url: `/api/emails/${id}/reply`,
-      data: { replyMessage, subject },
+      data: { replyMessage, subject, signature },
     },
     "Failed to send email reply."
   );
