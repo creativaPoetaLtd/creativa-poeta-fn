@@ -17,24 +17,38 @@ import {
   Paper,
   Select,
   Snackbar,
+  Tab,
+  Tabs,
   TextField,
   Typography,
 } from "@mui/material";
 import Archive from "@mui/icons-material/Archive";
+import Create from "@mui/icons-material/Create";
 import Delete from "@mui/icons-material/Delete";
+import Drafts from "@mui/icons-material/Drafts";
 import EmailIcon from "@mui/icons-material/Email";
 import Inbox from "@mui/icons-material/Inbox";
 import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
 import Refresh from "@mui/icons-material/Refresh";
 import Reply from "@mui/icons-material/Reply";
+import Send from "@mui/icons-material/Send";
 import {
+  ComposeEmailPayload,
   deleteEmail,
+  deleteOutboundEmail,
+  EmailFolder,
   EmailMessage,
   EmailStatus,
   getEmail,
   getEmails,
+  getOutboundEmails,
+  OutboundEmail,
   replyToEmail,
+  saveEmailDraft,
+  sendComposedEmail,
+  sendEmailDraft,
   syncEmails,
+  updateEmailDraft,
   updateEmailStatus,
 } from "../APIs/Emails";
 import {
@@ -53,6 +67,10 @@ const mailboxOptions = [
   { value: "global", label: "contact@creativapoeta.com" },
 ];
 
+const emptyCompose = { to: "", cc: "", bcc: "", subject: "", body: "" };
+
+type ComposeForm = typeof emptyCompose;
+
 const formatDate = (dateString?: string) => {
   if (!dateString) return "Unknown date";
   const date = new Date(dateString);
@@ -69,11 +87,15 @@ const formatDate = (dateString?: string) => {
 const getStatusVariant = (status: string) => {
   switch (status) {
     case "new":
+    case "draft":
       return "warning";
     case "read":
       return "info";
     case "replied":
+    case "sent":
       return "success";
+    case "failed":
+      return "error";
     case "archived":
       return "default";
     default:
@@ -86,9 +108,35 @@ const getSender = (email: EmailMessage) => {
   return email.fromEmail || email.fromName || "Unknown sender";
 };
 
+const splitEmailList = (value: string) =>
+  value
+    .split(/[,;\n]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const toComposePayload = (form: ComposeForm, draftId?: string): ComposeEmailPayload => ({
+  to: splitEmailList(form.to),
+  cc: splitEmailList(form.cc),
+  bcc: splitEmailList(form.bcc),
+  subject: form.subject.trim(),
+  body: form.body.trim(),
+  draftId,
+});
+
+const fromOutboundEmail = (email: OutboundEmail): ComposeForm => ({
+  to: (email.to || []).join(", "),
+  cc: (email.cc || []).join(", "),
+  bcc: (email.bcc || []).join(", "),
+  subject: email.subject || "",
+  body: email.body || "",
+});
+
 const Emails = () => {
+  const [folder, setFolder] = useState<EmailFolder>("inbox");
   const [emails, setEmails] = useState<EmailMessage[]>([]);
+  const [outboundEmails, setOutboundEmails] = useState<OutboundEmail[]>([]);
   const [selectedEmail, setSelectedEmail] = useState<EmailMessage | null>(null);
+  const [selectedOutbound, setSelectedOutbound] = useState<OutboundEmail | null>(null);
   const [viewOpen, setViewOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
@@ -97,12 +145,7 @@ const Emails = () => {
   const [mailboxFilter, setMailboxFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagination, setPagination] = useState({
-    currentPage: 1,
-    totalPages: 1,
-    totalEmails: 0,
-    limit: 25,
-  });
+  const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1, totalEmails: 0, limit: 25 });
   const [metrics, setMetrics] = useState<Record<string, number>>({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -111,6 +154,10 @@ const Emails = () => {
   const [replySubject, setReplySubject] = useState("");
   const [replyMessage, setReplyMessage] = useState("");
   const [replyLoading, setReplyLoading] = useState(false);
+  const [composeOpen, setComposeOpen] = useState(false);
+  const [composeForm, setComposeForm] = useState<ComposeForm>(emptyCompose);
+  const [editingDraftId, setEditingDraftId] = useState<string | null>(null);
+  const [composeLoading, setComposeLoading] = useState(false);
 
   const showMessage = (message: string, severity: "success" | "error" | "warning" = "success") => {
     setSnackbarMessage(message);
@@ -121,17 +168,28 @@ const Emails = () => {
   const loadEmails = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await getEmails(currentPage, 25, statusFilter, mailboxFilter, search);
-      setEmails(response.emails || []);
-      setMetrics(response.metrics || {});
-      if (response.pagination) setPagination(response.pagination);
+
+      if (folder === "inbox") {
+        const response = await getEmails(currentPage, 25, statusFilter, mailboxFilter, search);
+        setEmails(response.emails || []);
+        setOutboundEmails([]);
+        setMetrics(response.metrics || {});
+        if (response.pagination) setPagination(response.pagination);
+      } else {
+        const response = await getOutboundEmails(folder === "sent" ? "sent" : "draft", currentPage, 25, search);
+        setOutboundEmails(response.emails || []);
+        setEmails([]);
+        setMetrics(response.metrics || {});
+        if (response.pagination) setPagination(response.pagination);
+      }
+
       setError(null);
     } catch (fetchError) {
       setError(fetchError instanceof Error ? fetchError.message : "Failed to fetch emails.");
     } finally {
       setLoading(false);
     }
-  }, [currentPage, mailboxFilter, search, statusFilter]);
+  }, [currentPage, folder, mailboxFilter, search, statusFilter]);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -141,7 +199,7 @@ const Emails = () => {
     return () => window.clearTimeout(timeout);
   }, [loadEmails, search]);
 
-  const rows = useMemo(
+  const inboxRows = useMemo(
     () =>
       emails.map((email) => ({
         id: email._id,
@@ -167,6 +225,39 @@ const Emails = () => {
     [emails]
   );
 
+  const outboundRows = useMemo(
+    () =>
+      outboundEmails.map((email) => ({
+        id: email._id,
+        To: (
+          <Box>
+            <Typography fontWeight={800}>{email.to?.join(", ") || "No recipient"}</Typography>
+            {!!email.cc?.length && (
+              <Typography variant="caption" color="text.secondary">CC: {email.cc.join(", ")}</Typography>
+            )}
+          </Box>
+        ),
+        Subject: (
+          <Box sx={{ maxWidth: 520 }}>
+            <Typography fontWeight={800}>{email.subject || "No subject"}</Typography>
+            <Typography variant="body2" color="text.secondary" noWrap>{email.body || "No message"}</Typography>
+            {email.error && <Typography variant="caption" color="error">{email.error}</Typography>}
+          </Box>
+        ),
+        Status: <StatusChip status={email.status} variant={getStatusVariant(email.status) as any} />,
+        Date: formatDate(email.sentAt || email.updatedAt || email.createdAt),
+      })),
+    [outboundEmails]
+  );
+
+  const handleFolderChange = (_: unknown, nextFolder: EmailFolder) => {
+    setFolder(nextFolder);
+    setCurrentPage(1);
+    setStatusFilter("all");
+    setMailboxFilter("all");
+    setSearch("");
+  };
+
   const handleSync = async () => {
     try {
       setSyncing(true);
@@ -175,10 +266,7 @@ const Emails = () => {
       const failed = result.results.filter((item) => item.error && item.configured).length;
       await loadEmails();
       if (failed > 0 || missing > 0) {
-        showMessage(
-          `Sync done with warnings: ${result.imported} imported, ${result.updated} updated. Check backend env vars.`,
-          "warning"
-        );
+        showMessage(`Sync done with warnings: ${result.imported} imported, ${result.updated} updated. Check backend env vars.`, "warning");
       } else {
         showMessage(`Sync done: ${result.imported} imported, ${result.updated} updated.`);
       }
@@ -189,15 +277,23 @@ const Emails = () => {
     }
   };
 
-  const handleView = async (id: string) => {
+  const handleViewInbox = async (id: string) => {
     try {
       const response = await getEmail(id);
       setSelectedEmail(response.email);
+      setSelectedOutbound(null);
       setViewOpen(true);
       setEmails((current) => current.map((item) => (item._id === id ? response.email : item)));
     } catch (viewError) {
       showMessage(viewError instanceof Error ? viewError.message : "Failed to open email.", "error");
     }
+  };
+
+  const handleViewOutbound = (id: string) => {
+    const email = outboundEmails.find((item) => item._id === id) || null;
+    setSelectedOutbound(email);
+    setSelectedEmail(null);
+    setViewOpen(true);
   };
 
   const handleStatusChange = async (id: string, status: EmailStatus) => {
@@ -216,6 +312,12 @@ const Emails = () => {
     setReplySubject(/^re:/i.test(email.subject) ? email.subject : `Re: ${email.subject || "Votre message"}`);
     setReplyMessage("");
     setReplyOpen(true);
+  };
+
+  const openComposeDialog = (draft?: OutboundEmail) => {
+    setEditingDraftId(draft?._id || null);
+    setComposeForm(draft ? fromOutboundEmail(draft) : emptyCompose);
+    setComposeOpen(true);
   };
 
   const handleReplySubmit = async () => {
@@ -239,9 +341,55 @@ const Emails = () => {
     }
   };
 
-  const handleDelete = async (email: EmailMessage) => {
-    if (!window.confirm(`Delete the dashboard copy of "${email.subject}"?`)) return;
+  const handleSaveDraft = async () => {
+    try {
+      setComposeLoading(true);
+      const payload = toComposePayload(composeForm);
+      if (editingDraftId) await updateEmailDraft(editingDraftId, payload);
+      else await saveEmailDraft(payload);
+      setComposeOpen(false);
+      setEditingDraftId(null);
+      if (folder !== "drafts") setFolder("drafts");
+      setCurrentPage(1);
+      await loadEmails();
+      showMessage("Draft saved.");
+    } catch (draftError) {
+      showMessage(draftError instanceof Error ? draftError.message : "Failed to save draft.", "error");
+    } finally {
+      setComposeLoading(false);
+    }
+  };
 
+  const handleSendCompose = async () => {
+    try {
+      setComposeLoading(true);
+      await sendComposedEmail(toComposePayload(composeForm, editingDraftId || undefined));
+      setComposeOpen(false);
+      setEditingDraftId(null);
+      if (folder !== "sent") setFolder("sent");
+      setCurrentPage(1);
+      await loadEmails();
+      showMessage("Email sent.");
+    } catch (sendError) {
+      showMessage(sendError instanceof Error ? sendError.message : "Failed to send email.", "error");
+    } finally {
+      setComposeLoading(false);
+    }
+  };
+
+  const handleSendDraft = async (email: OutboundEmail) => {
+    try {
+      await sendEmailDraft(email._id);
+      await loadEmails();
+      showMessage("Draft sent.");
+    } catch (sendError) {
+      showMessage(sendError instanceof Error ? sendError.message : "Failed to send draft.", "error");
+      await loadEmails();
+    }
+  };
+
+  const handleDeleteInbox = async (email: EmailMessage) => {
+    if (!window.confirm(`Delete the dashboard copy of "${email.subject}"?`)) return;
     try {
       await deleteEmail(email._id);
       setEmails((current) => current.filter((item) => item._id !== email._id));
@@ -251,26 +399,47 @@ const Emails = () => {
     }
   };
 
-  if (loading && emails.length === 0) {
-    return <PageHeader title="Emails" subtitle="Loading synced mailbox messages..." />;
-  }
+  const handleDeleteOutbound = async (email: OutboundEmail) => {
+    if (!window.confirm(`Delete "${email.subject || "this email"}"?`)) return;
+    try {
+      await deleteOutboundEmail(email._id);
+      setOutboundEmails((current) => current.filter((item) => item._id !== email._id));
+      showMessage("Email deleted.");
+    } catch (deleteError) {
+      showMessage(deleteError instanceof Error ? deleteError.message : "Failed to delete email.", "error");
+    }
+  };
+
+  const totalInbox = folder === "inbox" ? pagination.totalEmails : 0;
+  const totalOutbound = folder !== "inbox" ? pagination.totalEmails : 0;
 
   return (
     <Box>
       <PageHeader
         title="Emails"
-        subtitle="Messages received by contact@creativapoeta.be and contact@creativapoeta.com."
+        subtitle="Inbox, sent emails and drafts for Creativa Poeta mailboxes."
         action={
           <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
+            <ActionButton variant="primary" startIcon={<Create />} onClick={() => openComposeDialog()} disabled={composeLoading}>
+              Compose
+            </ActionButton>
             <ActionButton variant="secondary" startIcon={<Refresh />} onClick={() => void loadEmails()} disabled={loading}>
               Refresh
             </ActionButton>
-            <ActionButton variant="primary" startIcon={<Inbox />} onClick={() => void handleSync()} disabled={syncing}>
-              {syncing ? "Syncing..." : "Sync mailboxes"}
-            </ActionButton>
+            {folder === "inbox" && (
+              <ActionButton variant="primary" startIcon={<Inbox />} onClick={() => void handleSync()} disabled={syncing}>
+                {syncing ? "Syncing..." : "Sync mailboxes"}
+              </ActionButton>
+            )}
           </Box>
         }
       />
+
+      <Tabs value={folder} onChange={handleFolderChange} sx={{ mb: 3 }}>
+        <Tab value="inbox" icon={<Inbox />} iconPosition="start" label="Inbox" />
+        <Tab value="sent" icon={<Send />} iconPosition="start" label="Sent" />
+        <Tab value="drafts" icon={<Drafts />} iconPosition="start" label="Drafts" />
+      </Tabs>
 
       {error && (
         <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
@@ -280,25 +449,29 @@ const Emails = () => {
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title="Total Emails" value={pagination.totalEmails} icon={<EmailIcon />} color="#071a33" />
+          <DashboardCard title={folder === "inbox" ? "Total Emails" : "Total"} value={folder === "inbox" ? totalInbox : totalOutbound} icon={<EmailIcon />} color="#071a33" />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title="New" value={metrics.new || 0} icon={<Inbox />} color="#f59e0b" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title="Read" value={metrics.read || 0} icon={<MarkEmailRead />} color="#0ea5e9" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title="Archived" value={metrics.archived || 0} icon={<Archive />} color="#64748b" />
-        </Grid>
+        {folder === "inbox" ? (
+          <>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="New" value={metrics.new || 0} icon={<Inbox />} color="#f59e0b" /></Grid>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="Read" value={metrics.read || 0} icon={<MarkEmailRead />} color="#0ea5e9" /></Grid>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="Archived" value={metrics.archived || 0} icon={<Archive />} color="#64748b" /></Grid>
+          </>
+        ) : (
+          <>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="Sent" value={folder === "sent" ? totalOutbound : metrics.sent || 0} icon={<Send />} color="#16a34a" /></Grid>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="Drafts" value={folder === "drafts" ? totalOutbound : metrics.draft || 0} icon={<Drafts />} color="#f59e0b" /></Grid>
+            <Grid item xs={12} sm={6} md={3}><DashboardCard title="Failed" value={outboundEmails.filter((item) => item.status === "failed").length} icon={<EmailIcon />} color="#ef4444" /></Grid>
+          </>
+        )}
       </Grid>
 
       <Card sx={{ mb: 3, borderRadius: 3 }}>
         <CardContent>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={folder === "inbox" ? 6 : 12}>
               <TextField
-                label="Search sender, subject or message..."
+                label={folder === "inbox" ? "Search sender, subject or message..." : "Search recipient, subject or message..."}
                 value={search}
                 onChange={(event) => {
                   setSearch(event.target.value);
@@ -307,90 +480,80 @@ const Emails = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} md={3}>
-              <FormControl fullWidth>
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={statusFilter}
-                  label="Status"
-                  onChange={(event) => {
-                    setStatusFilter(event.target.value);
-                    setCurrentPage(1);
-                  }}
-                >
-                  {statusOptions.map((status) => (
-                    <MenuItem key={status} value={status}>
-                      {status === "all" ? "All statuses" : status}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <FormControl fullWidth>
-                <InputLabel>Mailbox</InputLabel>
-                <Select
-                  value={mailboxFilter}
-                  label="Mailbox"
-                  onChange={(event) => {
-                    setMailboxFilter(event.target.value);
-                    setCurrentPage(1);
-                  }}
-                >
-                  {mailboxOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
+            {folder === "inbox" && (
+              <>
+                <Grid item xs={12} md={3}>
+                  <FormControl fullWidth>
+                    <InputLabel>Status</InputLabel>
+                    <Select value={statusFilter} label="Status" onChange={(event) => { setStatusFilter(event.target.value); setCurrentPage(1); }}>
+                      {statusOptions.map((status) => <MenuItem key={status} value={status}>{status === "all" ? "All statuses" : status}</MenuItem>)}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={3}>
+                  <FormControl fullWidth>
+                    <InputLabel>Mailbox</InputLabel>
+                    <Select value={mailboxFilter} label="Mailbox" onChange={(event) => { setMailboxFilter(event.target.value); setCurrentPage(1); }}>
+                      {mailboxOptions.map((option) => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </>
+            )}
           </Grid>
         </CardContent>
       </Card>
 
-      <DataTable
-        headers={["From", "Subject", "Status", "Received"]}
-        hiddenFields={["id"]}
-        rows={rows}
-        onView={(id) => void handleView(id)}
-        customActions={(row) => {
-          const email = emails.find((item) => item._id === row.id);
-          if (!email) return null;
-
-          return (
-            <>
-              <MenuAction icon={<MarkEmailRead />} label="Mark read" onClick={() => void handleStatusChange(email._id, "read")} color="#0ea5e9" />
-              <MenuAction icon={<Reply />} label="Reply" onClick={() => openReplyDialog(email)} color="#16a34a" />
-              <MenuAction icon={<MarkEmailRead />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
-              <MenuAction icon={<Archive />} label="Archive" onClick={() => void handleStatusChange(email._id, "archived")} color="#64748b" />
-              <MenuAction icon={<Delete />} label="Delete copy" onClick={() => void handleDelete(email)} color="#ef4444" />
-            </>
-          );
-        }}
-        emptyMessage="No synced emails found"
-      />
+      {folder === "inbox" ? (
+        <DataTable
+          headers={["From", "Subject", "Status", "Received"]}
+          hiddenFields={["id"]}
+          rows={inboxRows}
+          onView={(id) => void handleViewInbox(id)}
+          customActions={(row) => {
+            const email = emails.find((item) => item._id === row.id);
+            if (!email) return null;
+            return (
+              <>
+                <MenuAction icon={<MarkEmailRead />} label="Mark read" onClick={() => void handleStatusChange(email._id, "read")} color="#0ea5e9" />
+                <MenuAction icon={<Reply />} label="Reply" onClick={() => openReplyDialog(email)} color="#16a34a" />
+                <MenuAction icon={<MarkEmailRead />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
+                <MenuAction icon={<Archive />} label="Archive" onClick={() => void handleStatusChange(email._id, "archived")} color="#64748b" />
+                <MenuAction icon={<Delete />} label="Delete copy" onClick={() => void handleDeleteInbox(email)} color="#ef4444" />
+              </>
+            );
+          }}
+          emptyMessage="No synced emails found"
+        />
+      ) : (
+        <DataTable
+          headers={["To", "Subject", "Status", "Date"]}
+          hiddenFields={["id"]}
+          rows={outboundRows}
+          onView={handleViewOutbound}
+          customActions={(row) => {
+            const email = outboundEmails.find((item) => item._id === row.id);
+            if (!email) return null;
+            return (
+              <>
+                {folder === "drafts" && <MenuAction icon={<Create />} label="Edit draft" onClick={() => openComposeDialog(email)} color="#f59e0b" />}
+                {folder === "drafts" && <MenuAction icon={<Send />} label="Send draft" onClick={() => void handleSendDraft(email)} color="#16a34a" />}
+                <MenuAction icon={<Delete />} label="Delete" onClick={() => void handleDeleteOutbound(email)} color="#ef4444" />
+              </>
+            );
+          }}
+          emptyMessage={folder === "sent" ? "No sent emails yet" : "No drafts yet"}
+        />
+      )}
 
       {pagination.totalPages > 1 && (
         <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-          <Pagination
-            count={pagination.totalPages}
-            page={currentPage}
-            onChange={(_, page) => setCurrentPage(page)}
-            sx={{
-              "& .MuiPaginationItem-root.Mui-selected": {
-                backgroundColor: "#EEBA2B",
-                color: "#071a33",
-              },
-            }}
-          />
+          <Pagination count={pagination.totalPages} page={currentPage} onChange={(_, page) => setCurrentPage(page)} sx={{ "& .MuiPaginationItem-root.Mui-selected": { backgroundColor: "#EEBA2B", color: "#071a33" } }} />
         </Box>
       )}
 
       <Dialog open={viewOpen} onClose={() => setViewOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>
-          {selectedEmail?.subject || "Email"}
-        </DialogTitle>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>{selectedEmail?.subject || selectedOutbound?.subject || "Email"}</DialogTitle>
         <DialogContent sx={{ pt: 3 }}>
           {selectedEmail && (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -407,95 +570,81 @@ const Emails = () => {
                   <Paper sx={{ p: 2.5, height: "100%" }}>
                     <Typography variant="subtitle2" color="text.secondary">Received</Typography>
                     <Typography>{formatDate(selectedEmail.receivedAt)}</Typography>
-                    <Box sx={{ mt: 2 }}>
-                      <StatusChip status={selectedEmail.status} variant={getStatusVariant(selectedEmail.status) as any} />
-                    </Box>
+                    <Box sx={{ mt: 2 }}><StatusChip status={selectedEmail.status} variant={getStatusVariant(selectedEmail.status) as any} /></Box>
                   </Paper>
                 </Grid>
               </Grid>
-
-              <Paper sx={{ p: 2.5 }}>
-                <Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>
-                  {selectedEmail.text || selectedEmail.preview || "No readable text content."}
-                </Typography>
-              </Paper>
-
+              <Paper sx={{ p: 2.5 }}><Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedEmail.text || selectedEmail.preview || "No readable text content."}</Typography></Paper>
               {selectedEmail.replyMessage && (
                 <Paper sx={{ p: 2.5, borderLeft: "5px solid #16a34a", bgcolor: "#f0fdf4" }}>
                   <Typography variant="subtitle2" color="text.secondary">Last reply</Typography>
                   <Typography fontWeight={800}>{selectedEmail.replySubject || "Reply"}</Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    {formatDate(selectedEmail.repliedAt)} by {selectedEmail.repliedBy || "Admin"}
-                  </Typography>
-                  <Typography sx={{ mt: 2, whiteSpace: "pre-wrap", lineHeight: 1.7 }}>
-                    {selectedEmail.replyMessage}
-                  </Typography>
+                  <Typography variant="caption" color="text.secondary">{formatDate(selectedEmail.repliedAt)} by {selectedEmail.repliedBy || "Admin"}</Typography>
+                  <Typography sx={{ mt: 2, whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedEmail.replyMessage}</Typography>
                 </Paper>
               )}
+            </Box>
+          )}
+          {selectedOutbound && (
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <Paper sx={{ p: 2.5 }}>
+                <Typography variant="subtitle2" color="text.secondary">To</Typography>
+                <Typography fontWeight={800}>{selectedOutbound.to?.join(", ") || "No recipient"}</Typography>
+                {!!selectedOutbound.cc?.length && <Typography sx={{ mt: 1 }}>CC: {selectedOutbound.cc.join(", ")}</Typography>}
+                {!!selectedOutbound.bcc?.length && <Typography sx={{ mt: 1 }}>BCC: {selectedOutbound.bcc.join(", ")}</Typography>}
+                <Box sx={{ mt: 2 }}><StatusChip status={selectedOutbound.status} variant={getStatusVariant(selectedOutbound.status) as any} /></Box>
+              </Paper>
+              <Paper sx={{ p: 2.5 }}><Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedOutbound.body || "No message"}</Typography></Paper>
+              {selectedOutbound.error && <Alert severity="error">{selectedOutbound.error}</Alert>}
             </Box>
           )}
         </DialogContent>
         <Divider />
         <DialogActions sx={{ p: 2, flexWrap: "wrap", gap: 1 }}>
           <ActionButton variant="secondary" onClick={() => setViewOpen(false)}>Close</ActionButton>
-          {selectedEmail && (
-            <>
-              <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "read")}>Mark read</ActionButton>
-              <ActionButton variant="success" startIcon={<Reply />} onClick={() => openReplyDialog(selectedEmail)}>Reply</ActionButton>
-              <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "replied")}>Mark replied</ActionButton>
-              <ActionButton variant="secondary" onClick={() => void handleStatusChange(selectedEmail._id, "archived")}>Archive</ActionButton>
-            </>
-          )}
+          {selectedEmail && <ActionButton variant="success" startIcon={<Reply />} onClick={() => openReplyDialog(selectedEmail)}>Reply</ActionButton>}
+          {selectedOutbound && folder === "drafts" && <ActionButton variant="primary" startIcon={<Create />} onClick={() => openComposeDialog(selectedOutbound)}>Edit draft</ActionButton>}
         </DialogActions>
       </Dialog>
 
       <Dialog open={replyOpen} onClose={() => !replyLoading && setReplyOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>
-          Reply to {selectedEmail ? getSender(selectedEmail) : "email"}
-        </DialogTitle>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Reply to {selectedEmail ? getSender(selectedEmail) : "email"}</DialogTitle>
         <DialogContent sx={{ pt: 3 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
-            <TextField
-              label="Subject"
-              value={replySubject}
-              onChange={(event) => setReplySubject(event.target.value)}
-              fullWidth
-              required
-            />
-            <TextField
-              label="Reply message"
-              value={replyMessage}
-              onChange={(event) => setReplyMessage(event.target.value)}
-              minRows={8}
-              multiline
-              fullWidth
-              required
-              placeholder="Write a clear, professional answer..."
-            />
-            <Alert severity="info">
-              The email will use the branded Creativa Poeta template and the configured SMTP sender.
-            </Alert>
+            <TextField label="Subject" value={replySubject} onChange={(event) => setReplySubject(event.target.value)} fullWidth required />
+            <TextField label="Reply message" value={replyMessage} onChange={(event) => setReplyMessage(event.target.value)} minRows={8} multiline fullWidth required placeholder="Write a clear, professional answer..." />
+            <Alert severity="info">The email will use the branded Creativa Poeta template and the configured SMTP sender.</Alert>
           </Box>
         </DialogContent>
         <DialogActions sx={{ p: 2, gap: 1 }}>
-          <ActionButton variant="secondary" disabled={replyLoading} onClick={() => setReplyOpen(false)}>
-            Cancel
-          </ActionButton>
-          <ActionButton variant="primary" disabled={replyLoading} startIcon={<Reply />} onClick={() => void handleReplySubmit()}>
-            {replyLoading ? "Sending..." : "Send reply"}
-          </ActionButton>
+          <ActionButton variant="secondary" disabled={replyLoading} onClick={() => setReplyOpen(false)}>Cancel</ActionButton>
+          <ActionButton variant="primary" disabled={replyLoading} startIcon={<Reply />} onClick={() => void handleReplySubmit()}>{replyLoading ? "Sending..." : "Send reply"}</ActionButton>
         </DialogActions>
       </Dialog>
 
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={5000}
-        onClose={() => setSnackbarOpen(false)}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>
-          {snackbarMessage}
-        </Alert>
+      <Dialog open={composeOpen} onClose={() => !composeLoading && setComposeOpen(false)} maxWidth="md" fullWidth>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>{editingDraftId ? "Edit draft" : "Compose email"}</DialogTitle>
+        <DialogContent sx={{ pt: 3 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+            <TextField label="To" value={composeForm.to} onChange={(event) => setComposeForm((current) => ({ ...current, to: event.target.value }))} fullWidth required placeholder="client@example.com" />
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}><TextField label="CC" value={composeForm.cc} onChange={(event) => setComposeForm((current) => ({ ...current, cc: event.target.value }))} fullWidth placeholder="optional@example.com" /></Grid>
+              <Grid item xs={12} md={6}><TextField label="BCC" value={composeForm.bcc} onChange={(event) => setComposeForm((current) => ({ ...current, bcc: event.target.value }))} fullWidth placeholder="hidden@example.com" /></Grid>
+            </Grid>
+            <TextField label="Subject" value={composeForm.subject} onChange={(event) => setComposeForm((current) => ({ ...current, subject: event.target.value }))} fullWidth required />
+            <TextField label="Message" value={composeForm.body} onChange={(event) => setComposeForm((current) => ({ ...current, body: event.target.value }))} minRows={10} multiline fullWidth required placeholder="Write your message..." />
+            <Alert severity="info">Sent emails use the professional Creativa Poeta template and are stored in Sent.</Alert>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 2, gap: 1, flexWrap: "wrap" }}>
+          <ActionButton variant="secondary" disabled={composeLoading} onClick={() => setComposeOpen(false)}>Cancel</ActionButton>
+          <ActionButton variant="secondary" disabled={composeLoading} startIcon={<Drafts />} onClick={() => void handleSaveDraft()}>{composeLoading ? "Saving..." : "Save draft"}</ActionButton>
+          <ActionButton variant="primary" disabled={composeLoading} startIcon={<Send />} onClick={() => void handleSendCompose()}>{composeLoading ? "Sending..." : "Send email"}</ActionButton>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar open={snackbarOpen} autoHideDuration={5000} onClose={() => setSnackbarOpen(false)} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>{snackbarMessage}</Alert>
       </Snackbar>
     </Box>
   );

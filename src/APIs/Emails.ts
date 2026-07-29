@@ -1,6 +1,7 @@
 import { authRequest } from "./client";
 
 export type EmailStatus = "new" | "read" | "replied" | "archived";
+export type EmailFolder = "inbox" | "sent" | "drafts";
 
 export interface EmailMessage {
   _id: string;
@@ -28,8 +29,36 @@ export interface EmailMessage {
   repliedBy?: string;
 }
 
+export interface OutboundEmail {
+  _id: string;
+  folder: "sent" | "draft";
+  status: "draft" | "sent" | "failed";
+  to: string[];
+  cc?: string[];
+  bcc?: string[];
+  subject: string;
+  body: string;
+  error?: string;
+  sentAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: string;
+  updatedBy?: string;
+}
+
 export interface EmailsResponse {
   emails: EmailMessage[];
+  metrics?: Record<string, number>;
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    totalEmails: number;
+    limit: number;
+  };
+}
+
+export interface OutboundEmailsResponse {
+  emails: OutboundEmail[];
   metrics?: Record<string, number>;
   pagination?: {
     currentPage: number;
@@ -55,6 +84,15 @@ export interface EmailSyncResult {
   }>;
 }
 
+export interface ComposeEmailPayload {
+  to: string[] | string;
+  cc?: string[] | string;
+  bcc?: string[] | string;
+  subject: string;
+  body: string;
+  draftId?: string;
+}
+
 export const getEmails = async (
   page = 1,
   limit = 25,
@@ -69,6 +107,22 @@ export const getEmails = async (
       params: { page, limit, status, mailbox, search },
     },
     "Failed to fetch emails."
+  );
+};
+
+export const getOutboundEmails = async (
+  folder: "sent" | "draft" = "sent",
+  page = 1,
+  limit = 25,
+  search = ""
+) => {
+  return authRequest<OutboundEmailsResponse>(
+    {
+      method: "GET",
+      url: "/api/emails/outbound",
+      params: { folder, page, limit, search },
+    },
+    "Failed to fetch outbound emails."
   );
 };
 
@@ -126,5 +180,58 @@ export const replyToEmail = async (
       data: { replyMessage, subject },
     },
     "Failed to send email reply."
+  );
+};
+
+export const saveEmailDraft = async (payload: ComposeEmailPayload) => {
+  return authRequest<{ email: OutboundEmail }>(
+    {
+      method: "POST",
+      url: "/api/emails/outbound/draft",
+      data: payload,
+    },
+    "Failed to save email draft."
+  );
+};
+
+export const updateEmailDraft = async (id: string, payload: ComposeEmailPayload) => {
+  return authRequest<{ email: OutboundEmail }>(
+    {
+      method: "PUT",
+      url: `/api/emails/outbound/${id}/draft`,
+      data: payload,
+    },
+    "Failed to update email draft."
+  );
+};
+
+export const sendComposedEmail = async (payload: ComposeEmailPayload) => {
+  return authRequest<{ email: OutboundEmail }>(
+    {
+      method: "POST",
+      url: "/api/emails/outbound/send",
+      data: payload,
+    },
+    "Failed to send email."
+  );
+};
+
+export const sendEmailDraft = async (id: string) => {
+  return authRequest<{ email: OutboundEmail }>(
+    {
+      method: "POST",
+      url: `/api/emails/outbound/${id}/send`,
+    },
+    "Failed to send email draft."
+  );
+};
+
+export const deleteOutboundEmail = async (id: string) => {
+  return authRequest(
+    {
+      method: "DELETE",
+      url: `/api/emails/outbound/${id}`,
+    },
+    "Failed to delete outbound email."
   );
 };
