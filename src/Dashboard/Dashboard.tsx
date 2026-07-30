@@ -1,7 +1,8 @@
-import {
+﻿import {
   alpha,
   AppBar,
   Avatar,
+  Badge,
   Box,
   Breadcrumbs,
   Button,
@@ -34,8 +35,9 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
+import { getEmailSummary } from "../APIs/Emails";
 import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -137,6 +139,7 @@ export default function Dashboard() {
   const location = useLocation();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [emailAttentionCount, setEmailAttentionCount] = useState(0);
   const menuOpen = Boolean(anchorEl);
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const displayName = user?.name || "Admin";
@@ -144,6 +147,27 @@ export default function Dashboard() {
   const visibleNavigationItems = navigationItems.filter((item) =>
     item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
   );
+
+  useEffect(() => {
+    if (!user) return undefined;
+
+    let mounted = true;
+    const loadEmailBadge = async () => {
+      try {
+        const response = await getEmailSummary();
+        if (mounted) setEmailAttentionCount(Number(response.metrics?.attention || response.metrics?.new || 0));
+      } catch {
+        if (mounted) setEmailAttentionCount(0);
+      }
+    };
+
+    void loadEmailBadge();
+    const interval = window.setInterval(loadEmailBadge, 60000);
+    return () => {
+      mounted = false;
+      window.clearInterval(interval);
+    };
+  }, [user]);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -312,7 +336,13 @@ export default function Dashboard() {
                         transition: "color 0.22s ease",
                       }}
                     >
-                      {item.icon}
+                      {item.text === "Emails" ? (
+                        <Badge badgeContent={emailAttentionCount} color="error" overlap="circular" invisible={emailAttentionCount <= 0}>
+                          {item.icon}
+                        </Badge>
+                      ) : (
+                        item.icon
+                      )}
                     </ListItemIcon>
                     <ListItemText
                       primary={item.text}
@@ -524,6 +554,7 @@ export default function Dashboard() {
     </Box>
   );
 }
+
 
 
 

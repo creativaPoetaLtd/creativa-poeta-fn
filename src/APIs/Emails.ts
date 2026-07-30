@@ -3,6 +3,14 @@ import { authRequest } from "./client";
 export type EmailStatus = "new" | "read" | "replied" | "archived";
 export type EmailFolder = "inbox" | "sent" | "drafts";
 
+export interface EmailActivity {
+  type: "assigned" | "released" | "read" | "replied" | "status";
+  actorName?: string;
+  actorEmail?: string;
+  message?: string;
+  createdAt?: string;
+}
+
 export interface EmailMessage {
   _id: string;
   mailbox: string;
@@ -27,6 +35,10 @@ export interface EmailMessage {
   replySubject?: string;
   repliedAt?: string;
   repliedBy?: string;
+  assignedToEmail?: string;
+  assignedToName?: string;
+  assignedAt?: string;
+  activity?: EmailActivity[];
 }
 
 export interface EmailAttachmentMeta {
@@ -138,6 +150,16 @@ export const getOutboundEmails = async (
   );
 };
 
+export const getEmailSummary = async () => {
+  return authRequest<{ metrics: Record<string, number> }>(
+    {
+      method: "GET",
+      url: "/api/emails/summary",
+    },
+    "Failed to fetch email summary."
+  );
+};
+
 export const getEmail = async (id: string) => {
   return authRequest<{ email: EmailMessage }>(
     {
@@ -156,6 +178,26 @@ export const syncEmails = async (limit = 50) => {
       data: { limit },
     },
     "Failed to sync emails."
+  );
+};
+
+export const claimEmail = async (id: string) => {
+  return authRequest<{ email: EmailMessage }>(
+    {
+      method: "POST",
+      url: `/api/emails/${id}/claim`, 
+    },
+    "Failed to assign email."
+  );
+};
+
+export const releaseEmail = async (id: string) => {
+  return authRequest<{ email: EmailMessage }>(
+    {
+      method: "POST",
+      url: `/api/emails/${id}/release`, 
+    },
+    "Failed to release email."
   );
 };
 
@@ -267,5 +309,6 @@ export const deleteOutboundEmail = async (id: string) => {
     "Failed to delete outbound email."
   );
 };
+
 
 

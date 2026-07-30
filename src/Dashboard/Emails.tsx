@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Box,
@@ -38,7 +38,9 @@ import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
 import Refresh from "@mui/icons-material/Refresh";
 import Reply from "@mui/icons-material/Reply";
 import Send from "@mui/icons-material/Send";
+import PersonPin from "@mui/icons-material/PersonPin";
 import {
+  claimEmail,
   ComposeEmailPayload,
   deleteEmail,
   deleteOutboundEmail,
@@ -49,6 +51,7 @@ import {
   getEmails,
   getOutboundEmails,
   OutboundEmail,
+  releaseEmail,
   replyToEmail,
   saveEmailDraft,
   sendComposedEmail,
@@ -131,6 +134,10 @@ const getSender = (email: EmailMessage) => {
   if (email.fromName && email.fromEmail) return `${email.fromName} <${email.fromEmail}>`;
   return email.fromEmail || email.fromName || "Unknown sender";
 };
+
+const getOwnerLabel = (email: EmailMessage) => email.assignedToName || email.assignedToEmail || "Open";
+const isAssignedToAnother = (email: EmailMessage, currentEmail?: string) =>
+  Boolean(email.assignedToEmail && normalizeMailbox(email.assignedToEmail) !== normalizeMailbox(currentEmail));
 
 const splitEmailList = (value: string) =>
   value
@@ -310,10 +317,19 @@ const Emails = () => {
             </Typography>
           </Box>
         ),
+        Owner: (
+          <Chip
+            size="small"
+            icon={<PersonPin />}
+            label={getOwnerLabel(email)}
+            color={email.assignedToEmail ? (isAssignedToAnother(email, user?.email) ? "warning" : "success") : "default"}
+            variant={email.assignedToEmail ? "filled" : "outlined"}
+          />
+        ),
         Status: <StatusChip status={email.status} variant={getStatusVariant(email.status) as any} />,
         Received: formatDate(email.receivedAt),
       })),
-    [emails]
+    [emails, user?.email]
   );
 
   const outboundRows = useMemo(
@@ -419,6 +435,28 @@ const Emails = () => {
       showMessage("Email status updated.");
     } catch (statusError) {
       showMessage(statusError instanceof Error ? statusError.message : "Failed to update email.", "error");
+    }
+  };
+
+  const handleClaimEmail = async (email: EmailMessage) => {
+    try {
+      const response = await claimEmail(email._id);
+      setEmails((current) => current.map((item) => (item._id === email._id ? response.email : item)));
+      setSelectedEmail((current) => (current?._id === email._id ? response.email : current));
+      showMessage("Email assigned to you.");
+    } catch (claimError) {
+      showMessage(claimError instanceof Error ? claimError.message : "Failed to assign email.", "error");
+    }
+  };
+
+  const handleReleaseEmail = async (email: EmailMessage) => {
+    try {
+      const response = await releaseEmail(email._id);
+      setEmails((current) => current.map((item) => (item._id === email._id ? response.email : item)));
+      setSelectedEmail((current) => (current?._id === email._id ? response.email : current));
+      showMessage("Email released.");
+    } catch (releaseError) {
+      showMessage(releaseError instanceof Error ? releaseError.message : "Failed to release email.", "error");
     }
   };
 
@@ -694,7 +732,7 @@ const Emails = () => {
 
       {folder === "inbox" ? (
         <DataTable
-          headers={["From", "Subject", "Status", "Received"]}
+          headers={["From", "Subject", "Owner", "Status", "Received"]}
           hiddenFields={["id"]}
           rows={inboxRows}
           onView={(id) => void handleViewInbox(id)}
@@ -703,6 +741,8 @@ const Emails = () => {
             if (!email) return null;
             return (
               <>
+                {!email.assignedToEmail && <MenuAction icon={<PersonPin />} label="Take ownership" onClick={() => void handleClaimEmail(email)} color="#f59e0b" />}
+                {email.assignedToEmail && !isAssignedToAnother(email, user?.email) && <MenuAction icon={<PersonPin />} label="Release" onClick={() => void handleReleaseEmail(email)} color="#64748b" />}
                 <MenuAction icon={<MarkEmailRead />} label="Mark read" onClick={() => void handleStatusChange(email._id, "read")} color="#0ea5e9" />
                 <MenuAction icon={<Reply />} label="Reply" onClick={() => openReplyDialog(email)} color="#16a34a" />
                 <MenuAction icon={<MarkEmailRead />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
@@ -762,6 +802,22 @@ const Emails = () => {
                   </Paper>
                 </Grid>
               </Grid>
+              {isAssignedToAnother(selectedEmail, user?.email) && (
+                <Alert severity="warning">
+                  This email is already handled by {selectedEmail.assignedToName || selectedEmail.assignedToEmail}. Check the shared history before replying.
+                </Alert>
+              )}
+              <Paper sx={{ p: 2.5, display: "flex", alignItems: { xs: "flex-start", sm: "center" }, justifyContent: "space-between", gap: 2, flexDirection: { xs: "column", sm: "row" } }}>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">Owner</Typography>
+                  <Typography fontWeight={900}>{getOwnerLabel(selectedEmail)}</Typography>
+                  {selectedEmail.assignedAt && <Typography variant="caption" color="text.secondary">Since {formatDate(selectedEmail.assignedAt)}</Typography>}
+                </Box>
+                <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                  {!selectedEmail.assignedToEmail && <ActionButton variant="primary" startIcon={<PersonPin />} onClick={() => void handleClaimEmail(selectedEmail)}>Take ownership</ActionButton>}
+                  {selectedEmail.assignedToEmail && !isAssignedToAnother(selectedEmail, user?.email) && <ActionButton variant="secondary" startIcon={<PersonPin />} onClick={() => void handleReleaseEmail(selectedEmail)}>Release</ActionButton>}
+                </Box>
+              </Paper>
               <Paper sx={{ p: 2.5 }}><Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedEmail.text || selectedEmail.preview || "No readable text content."}</Typography></Paper>
               {selectedEmail.replyMessage && (
                 <Paper sx={{ p: 2.5, borderLeft: "5px solid #16a34a", bgcolor: "#f0fdf4" }}>
@@ -771,7 +827,22 @@ const Emails = () => {
                   <Typography sx={{ mt: 2, whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{selectedEmail.replyMessage}</Typography>
                 </Paper>
               )}
-            </Box>
+              {!!selectedEmail.activity?.length && (
+                <Paper sx={{ p: 2.5 }}>
+                  <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>Shared history</Typography>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                    {selectedEmail.activity.slice().reverse().slice(0, 12).map((event, index) => (
+                      <Box key={`${event.createdAt || event.type}-${index}`} sx={{ display: "flex", justifyContent: "space-between", gap: 2, borderBottom: index === Math.min((selectedEmail.activity?.length || 1), 12) - 1 ? "none" : "1px solid #e2e8f0", pb: 1 }}>
+                        <Box>
+                          <Typography fontWeight={800}>{event.message || event.type}</Typography>
+                          <Typography variant="caption" color="text.secondary">{event.actorName || event.actorEmail || "Admin"}</Typography>
+                        </Box>
+                        <Typography variant="caption" color="text.secondary" sx={{ whiteSpace: "nowrap" }}>{formatDate(event.createdAt)}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Paper>
+              )}            </Box>
           )}
           {selectedOutbound && (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -880,6 +951,14 @@ const Emails = () => {
 };
 
 export default Emails;
+
+
+
+
+
+
+
+
 
 
 
