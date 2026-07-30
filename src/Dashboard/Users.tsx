@@ -19,6 +19,7 @@ import {
   Delete,
   Edit,
   Email,
+  Link as LinkIcon,
   PersonAdd,
   PersonOff,
   People,
@@ -27,6 +28,8 @@ import {
 import {
   AdminRole,
   AdminUser,
+  MailboxAccess,
+  createAdminPasswordResetLink,
   createAdminUser,
   deleteAdminUser,
   getAdminUsers,
@@ -44,52 +47,61 @@ import {
 
 type EditableAdminRole = Exclude<AdminRole, "super_admin">;
 
+type AdminForm = {
+  name: string;
+  email: string;
+  role: EditableAdminRole;
+  sharedMailboxes: string;
+};
+
+const sharedMailboxDefaults = ["contact@creativapoeta.com", "contact@creativapoeta.be"];
+
 const roleDefinitions: Record<AdminRole, { label: string; short: string; powers: string }> = {
   super_admin: {
-    label: "Superadmin",
-    short: "Proprietaire racine",
-    powers: "Controle total. Seul ce role peut creer, modifier, desactiver ou supprimer un admin niveau 0.",
+    label: "Super Admin",
+    short: "Root owner",
+    powers: "Full control. Only this role can create, modify, disable or delete level 0 admins.",
   },
   admin_0: {
     label: "Niveau 0 - Direction",
-    short: "Pouvoirs presque complets",
-    powers: "Acces complet au dashboard, sauf creation ou gestion des autres niveaux 0 et du superadmin.",
+    short: "Almost full powers",
+    powers: "Full dashboard access, except creating or managing other level 0 admins and the superadmin.",
   },
   admin_1: {
     label: "Niveau 1 - Operations",
-    short: "Demandes et suivi client",
-    powers: "Projects, demandes de visibilite, assistance, contacts, emails et suivi operationnel.",
+    short: "Client requests",
+    powers: "Projects, visibility requests, assistance, contact inbox, shared emails and operational follow-up.",
   },
   admin_2: {
-    label: "Niveau 2 - Contenu & SEO",
-    short: "Blog et visibilite",
-    powers: "Articles, SEO, contenus, calendrier editorial et elements lies a la visibilite.",
+    label: "Niveau 2 - Content & SEO",
+    short: "Blog and visibility",
+    powers: "Articles, SEO, content, editorial calendar and visibility-related work.",
   },
   admin_3: {
     label: "Niveau 3 - Support & email",
-    short: "Support client",
-    powers: "Boite mail CP, reponses aux contacts, demandes d'assistance et messages clients.",
+    short: "Client support",
+    powers: "CP Mail, contact replies, assistance requests and customer messages assigned to them.",
   },
   admin_4: {
-    label: "Niveau 4 - Lecture & reporting",
+    label: "Niveau 4 - Read & reporting",
     short: "Consultation",
-    powers: "Lecture du dashboard, suivi des resultats et reporting sans suppression critique.",
+    powers: "Dashboard reading, results monitoring and reporting without critical deletion rights.",
   },
   admin_5: {
-    label: "Niveau 5 - Acces limite",
-    short: "Assistant limite",
-    powers: "Acces tres cible a des elements assignes. Utile pour un prestataire ou assistant temporaire.",
+    label: "Niveau 5 - Limited access",
+    short: "Limited assistant",
+    powers: "Very targeted access to assigned items. Useful for a temporary assistant or contractor.",
   },
 };
 
 const defaultRole: EditableAdminRole = "admin_1";
-
-const emptyForm: { name: string; email: string; password: string; role: EditableAdminRole } = {
+const emptyForm: AdminForm = {
   name: "",
   email: "",
-  password: "",
   role: defaultRole,
+  sharedMailboxes: sharedMailboxDefaults.join("\n"),
 };
+
 const getUserId = (user: AdminUser) => user._id || user.id || "";
 const rootAdminEmails = ["admin@creativapoeta.com", "admin@cp.com"];
 
@@ -104,6 +116,19 @@ const normalizeRole = (role?: string, email?: string): AdminRole => {
   return (role || "admin_5") as AdminRole;
 };
 
+const parseSharedMailboxes = (value: string): MailboxAccess[] =>
+  value
+    .split(/[\n,;]/)
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean)
+    .map((address) => ({ address, permission: "manage", type: "shared" }));
+
+const formatSharedMailboxes = (mailboxAccess?: MailboxAccess[]) =>
+  (mailboxAccess || [])
+    .filter((mailbox) => mailbox.type === "shared")
+    .map((mailbox) => mailbox.address)
+    .join("\n");
+
 export default function Users() {
   const { user: currentUser } = useAuth();
   const currentRole = normalizeRole(currentUser?.role, currentUser?.email);
@@ -117,7 +142,7 @@ export default function Users() {
   const [error, setError] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<AdminForm>(emptyForm);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
@@ -128,8 +153,8 @@ export default function Users() {
     return [];
   }, [currentRole, isSuperAdmin]);
 
-  const canManageRole = (targetRoleValue: string) => {
-    const targetRole = normalizeRole(targetRoleValue);
+  const canManageRole = (targetRoleValue: string, targetEmail?: string) => {
+    const targetRole = normalizeRole(targetRoleValue, targetEmail);
     if (isSuperAdmin) return targetRole !== "super_admin";
     if (currentRole === "admin_0") return !["super_admin", "admin_0"].includes(targetRole);
     return false;
@@ -165,15 +190,15 @@ export default function Users() {
   const filteredUsers = useMemo(() => {
     const query = search.trim().toLowerCase();
     return users.filter((adminUser) => {
-      const role = normalizeRole(adminUser.role);
-      const status = adminUser.isActive ? "active" : "inactive";
+      const role = normalizeRole(adminUser.role, adminUser.email);
+      const accountStatus = adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled");
       const matchesSearch =
         !query ||
         [adminUser.name, adminUser.email, roleDefinitions[role]?.label || role]
           .join(" ")
           .toLowerCase()
           .includes(query);
-      const matchesStatus = !filterStatus || filterStatus === status;
+      const matchesStatus = !filterStatus || filterStatus === accountStatus;
       return matchesSearch && matchesStatus;
     });
   }, [filterStatus, search, users]);
@@ -181,9 +206,9 @@ export default function Users() {
   const metrics = useMemo(
     () => ({
       total: users.length,
-      active: users.filter((adminUser) => adminUser.isActive).length,
-      inactive: users.filter((adminUser) => !adminUser.isActive).length,
-      levelZero: users.filter((adminUser) => normalizeRole(adminUser.role) === "admin_0").length,
+      active: users.filter((adminUser) => (adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled")) === "active").length,
+      pending: users.filter((adminUser) => adminUser.accountStatus === "pending").length,
+      levelZero: users.filter((adminUser) => normalizeRole(adminUser.role, adminUser.email) === "admin_0").length,
     }),
     [users]
   );
@@ -195,8 +220,8 @@ export default function Users() {
   };
 
   const openEditDialog = (adminUser: AdminUser) => {
-    const role = normalizeRole(adminUser.role);
-    if (!canManageRole(role)) {
+    const role = normalizeRole(adminUser.role, adminUser.email);
+    if (!canManageRole(role, adminUser.email)) {
       showMessage("You cannot edit this admin level.", "error");
       return;
     }
@@ -205,8 +230,8 @@ export default function Users() {
     setForm({
       name: adminUser.name,
       email: adminUser.email,
-      password: "",
       role: role === "super_admin" ? defaultRole : (role as EditableAdminRole),
+      sharedMailboxes: formatSharedMailboxes(adminUser.mailboxAccess),
     });
     setDialogOpen(true);
   };
@@ -218,24 +243,20 @@ export default function Users() {
         return;
       }
 
-      if (!editingUser && !form.password.trim()) {
-        showMessage("Password is required for a new admin.", "error");
-        return;
-      }
-
       if (!roleOptions.includes(form.role)) {
         showMessage("You cannot assign this admin level.", "error");
         return;
       }
 
+      const mailboxAccess = parseSharedMailboxes(form.sharedMailboxes);
+
       if (editingUser) {
         const id = getUserId(editingUser);
-        const payload = {
+        const response = await updateAdminUser(id, {
           name: form.name,
           role: form.role,
-          ...(form.password.trim() ? { password: form.password } : {}),
-        };
-        const response = await updateAdminUser(id, payload);
+          mailboxAccess,
+        });
         setUsers((current) =>
           current.map((adminUser) =>
             getUserId(adminUser) === id ? { ...adminUser, ...response.user } : adminUser
@@ -246,11 +267,11 @@ export default function Users() {
         const response = await createAdminUser({
           name: form.name,
           email: form.email,
-          password: form.password,
           role: form.role,
+          mailboxAccess,
         });
         setUsers((current) => [response.user, ...current]);
-        showMessage("Admin user created.");
+        showMessage("Admin created. They can now click Create account and choose their own password.");
       }
 
       setDialogOpen(false);
@@ -260,7 +281,7 @@ export default function Users() {
   };
 
   const toggleActive = async (adminUser: AdminUser) => {
-    if (!canManageRole(adminUser.role)) {
+    if (!canManageRole(adminUser.role, adminUser.email)) {
       showMessage("You cannot change this admin level.", "error");
       return;
     }
@@ -278,7 +299,7 @@ export default function Users() {
   };
 
   const handleDeleteUser = async (adminUser: AdminUser) => {
-    if (!canManageRole(adminUser.role)) {
+    if (!canManageRole(adminUser.role, adminUser.email)) {
       showMessage("You cannot delete this admin level.", "error");
       return;
     }
@@ -292,6 +313,22 @@ export default function Users() {
       showMessage("Admin user deleted.");
     } catch (err) {
       showMessage(err instanceof Error ? err.message : "Failed to delete admin.", "error");
+    }
+  };
+
+  const handleResetPassword = async (adminUser: AdminUser) => {
+    if (!canManageRole(adminUser.role, adminUser.email)) {
+      showMessage("You cannot reset this admin password.", "error");
+      return;
+    }
+
+    try {
+      const id = getUserId(adminUser);
+      const response = await createAdminPasswordResetLink(id);
+      await navigator.clipboard?.writeText(response.resetLink);
+      showMessage("Password reset link created and copied. Send it to the admin securely.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to create reset link.", "error");
     }
   };
 
@@ -319,7 +356,7 @@ export default function Users() {
     <Box sx={{ p: 3 }}>
       <PageHeader
         title="Admin Users"
-        subtitle="Create, disable and manage dashboard access levels."
+        subtitle="Create admins, assign levels and control mailbox access. New admins choose their own password."
         action={
           <ActionButton variant="primary" startIcon={<PersonAdd />} onClick={openCreateDialog}>
             Add Admin
@@ -334,7 +371,7 @@ export default function Users() {
       )}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Create the mailbox first in Infomaniak, for example prenom.nom@creativapoeta.com. Dashboard access is created here. CP Mail per-user mailbox sync still needs one secure mailbox credential per user unless we later connect an Infomaniak API.
+        Create the mailbox first in Infomaniak, then add the CP email here. The admin clicks Create account on the login page and sets their own password. Shared mailbox access can be assigned below.
       </Alert>
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -345,7 +382,7 @@ export default function Users() {
           <DashboardCard title="Active" value={metrics.active} icon={<VerifiedUser />} color="#4CAF50" />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DashboardCard title="Inactive" value={metrics.inactive} icon={<PersonOff />} color="#FF5722" />
+          <DashboardCard title="Pending" value={metrics.pending} icon={<PersonOff />} color="#FF9800" />
         </Grid>
         <Grid item xs={12} md={3}>
           <DashboardCard title="Level 0" value={metrics.levelZero} icon={<Badge />} color="#EEBA2B" />
@@ -390,17 +427,20 @@ export default function Users() {
             >
               <MenuItem value="">All</MenuItem>
               <MenuItem value="active">Active</MenuItem>
-              <MenuItem value="inactive">Inactive</MenuItem>
+              <MenuItem value="pending">Pending</MenuItem>
+              <MenuItem value="disabled">Disabled</MenuItem>
             </TextField>
           </Box>
         </CardContent>
       </Card>
 
       <DataTable
-        headers={["Name", "Email", "Role", "Status"]}
+        headers={["Name", "Email", "Role", "Account", "Mailboxes"]}
         hiddenFields={["id"]}
         rows={filteredUsers.map((adminUser) => {
-          const role = normalizeRole(adminUser.role);
+          const role = normalizeRole(adminUser.role, adminUser.email);
+          const accountStatus = adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled");
+          const sharedCount = (adminUser.mailboxAccess || []).filter((mailbox) => mailbox.type === "shared").length;
           return {
             id: getUserId(adminUser),
             name: (
@@ -418,22 +458,24 @@ export default function Users() {
               </Box>
             ),
             role: <StatusChip status={roleDefinitions[role]?.label || role} variant={role === "super_admin" ? "warning" : "info"} />,
-            status: (
+            account: (
               <StatusChip
-                status={adminUser.isActive ? "active" : "inactive"}
-                variant={adminUser.isActive ? "success" : "error"}
+                status={accountStatus}
+                variant={accountStatus === "active" ? "success" : accountStatus === "pending" ? "warning" : "error"}
               />
             ),
+            mailboxes: `${sharedCount} shared`,
           };
         })}
         customActions={(row) => {
           const adminUser = users.find((item) => getUserId(item) === row.id);
           if (!adminUser) return null;
-          const manageable = canManageRole(adminUser.role);
+          const manageable = canManageRole(adminUser.role, adminUser.email);
 
           return (
             <>
               <MenuAction icon={<Edit />} label="Edit" onClick={() => openEditDialog(adminUser)} color={manageable ? "#EEBA2B" : "#94a3b8"} />
+              <MenuAction icon={<LinkIcon />} label="Reset link" onClick={() => void handleResetPassword(adminUser)} color={manageable ? "#0ea5e9" : "#94a3b8"} />
               <MenuAction
                 icon={<PersonOff />}
                 label={adminUser.isActive ? "Disable" : "Enable"}
@@ -474,14 +516,6 @@ export default function Users() {
             sx={{ mb: 2 }}
           />
           <TextField
-            label={editingUser ? "New password (optional)" : "Temporary password"}
-            type="password"
-            fullWidth
-            value={form.password}
-            onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-            sx={{ mb: 2 }}
-          />
-          <TextField
             select
             label="Admin level"
             fullWidth
@@ -489,6 +523,7 @@ export default function Users() {
             onChange={(event) =>
               setForm((current) => ({ ...current, role: event.target.value as EditableAdminRole }))
             }
+            sx={{ mb: 2 }}
           >
             {roleOptions.map((role) => (
               <MenuItem key={role} value={role}>
@@ -496,13 +531,23 @@ export default function Users() {
               </MenuItem>
             ))}
           </TextField>
+          <TextField
+            label="Shared mailboxes"
+            fullWidth
+            multiline
+            minRows={3}
+            value={form.sharedMailboxes}
+            placeholder="contact@creativapoeta.com\ncontact@creativapoeta.be"
+            helperText="One shared mailbox per line. The personal mailbox is always private and added automatically."
+            onChange={(event) => setForm((current) => ({ ...current, sharedMailboxes: event.target.value }))}
+          />
         </DialogContent>
         <DialogActions sx={{ p: 2 }}>
           <ActionButton variant="secondary" onClick={() => setDialogOpen(false)}>
             Cancel
           </ActionButton>
           <ActionButton variant="primary" onClick={() => void handleSubmit()}>
-            {editingUser ? "Save changes" : "Create admin"}
+            {editingUser ? "Save changes" : "Create pending admin"}
           </ActionButton>
         </DialogActions>
       </Dialog>

@@ -1,4 +1,4 @@
-import { authRequest } from "./client";
+﻿import { authRequest } from "./client";
 
 export type AdminRole =
   | "super_admin"
@@ -9,6 +9,16 @@ export type AdminRole =
   | "admin_4"
   | "admin_5";
 
+export type AccountStatus = "pending" | "active" | "disabled";
+export type MailboxPermission = "read" | "send" | "manage";
+export type MailboxType = "personal" | "shared";
+
+export interface MailboxAccess {
+  address: string;
+  permission: MailboxPermission;
+  type: MailboxType;
+}
+
 export interface AdminUser {
   _id?: string;
   id?: string;
@@ -18,21 +28,23 @@ export interface AdminUser {
   roleLabel?: string;
   permissions?: string[];
   isActive: boolean;
+  accountStatus?: AccountStatus;
+  mailboxAccess?: MailboxAccess[];
   createdAt?: string;
 }
 
 export interface CreateAdminPayload {
   name: string;
   email: string;
-  password: string;
   role: Exclude<AdminRole, "super_admin">;
+  mailboxAccess?: MailboxAccess[];
 }
 
 export interface UpdateAdminPayload {
   name?: string;
   role?: Exclude<AdminRole, "super_admin">;
   isActive?: boolean;
-  password?: string;
+  mailboxAccess?: MailboxAccess[];
 }
 
 export const getAdminUsers = async () => {
@@ -64,6 +76,16 @@ export const updateAdminUser = async (id: string, data: UpdateAdminPayload) => {
       data,
     },
     "Failed to update admin user."
+  );
+};
+
+export const createAdminPasswordResetLink = async (id: string) => {
+  return authRequest<{ message: string; resetLink: string }>(
+    {
+      method: "POST",
+      url: `/api/auth/admins/${id}/reset-password`,
+    },
+    "Failed to create password reset link."
   );
 };
 

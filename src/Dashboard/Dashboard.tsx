@@ -30,6 +30,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import PeopleIcon from "@mui/icons-material/People";
+import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
@@ -42,6 +43,7 @@ import ContactQueries from "./ContactQueries";
 import Emails from "./Emails";
 import Jobs from "./Jobs";
 import Projects from "./Projects";
+import Settings from "./Settings";
 import Users from "./Users";
 
 const drawerWidth = 292;
@@ -104,6 +106,13 @@ const navigationItems = [
     section: "Systeme",
   },
   {
+    text: "Settings",
+    icon: <SettingsIcon />,
+    path: "/secure-admin-dashboard-2024/settings",
+    color: "#607D8B",
+    section: "Systeme",
+  },
+  {
     text: "Jobs",
     icon: <BusinessIcon />,
     path: "/secure-admin-dashboard-2024/jobs",
@@ -130,6 +139,8 @@ export default function Dashboard() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
+  const displayName = currentRole === "super_admin" ? "Super Admin" : user?.name || "Admin";
+  const avatarLetter = displayName.trim().charAt(0).toUpperCase() || "A";
   const visibleNavigationItems = navigationItems.filter((item) =>
     item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
   );
@@ -389,7 +400,7 @@ export default function Dashboard() {
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Chip
-                label="Admin"
+                label={displayName}
                 size="small"
                 sx={{
                   bgcolor: alpha("#071a33", 0.08),
@@ -437,9 +448,9 @@ export default function Dashboard() {
                     fontSize: "0.9rem",
                   }}
                 >
-                  P
+                  {avatarLetter}
                 </Avatar>
-                Profile
+                {displayName}
               </Button>
 
               <Menu
@@ -472,6 +483,10 @@ export default function Dashboard() {
                   <DashboardIcon sx={{ mr: 2, color: "#EEBA2B" }} />
                   Overview
                 </MenuItem>
+                <MenuItem onClick={() => navigate("/secure-admin-dashboard-2024/settings")}>
+                  <SettingsIcon sx={{ mr: 2, color: "#EEBA2B" }} />
+                  Settings
+                </MenuItem>
                 <Divider sx={{ my: 1 }} />
                 <MenuItem onClick={handleLogout} sx={{ color: "error.main" }}>
                   <LogoutIcon sx={{ mr: 2 }} />
@@ -501,6 +516,7 @@ export default function Dashboard() {
             <Route path="contact-queries" element={<ContactQueries />} />
             <Route path="emails" element={<Emails />} />
             <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="jobs" element={<Jobs />} />
           </Routes>
         </Box>
@@ -508,3 +524,9 @@ export default function Dashboard() {
     </Box>
   );
 }
+
+
+
+
+
+

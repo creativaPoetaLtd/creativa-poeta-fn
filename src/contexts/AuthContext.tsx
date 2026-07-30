@@ -1,4 +1,4 @@
-import React, {
+﻿import React, {
   createContext,
   useContext,
   useState,
@@ -12,6 +12,8 @@ interface User {
   name: string;
   email: string;
   role: string;
+  roleLabel?: string;
+  accountStatus?: string;
 }
 
 interface AuthContextType {
@@ -160,3 +162,4 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
+
