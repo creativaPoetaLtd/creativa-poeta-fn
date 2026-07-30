@@ -1,5 +1,13 @@
 import { authRequest, publicRequest } from "./client";
 
+export interface TicketActivity {
+  type: "assigned" | "released" | "opened" | "replied" | "status" | string;
+  message: string;
+  actorEmail?: string;
+  actorName?: string;
+  at: string;
+}
+
 export interface ContactPayload {
   fullName?: string;
   name?: string;
@@ -20,6 +28,10 @@ export interface ContactQuery {
   repliedBy?: string;
   createdAt?: string;
   updatedAt?: string;
+  assignedToEmail?: string;
+  assignedToName?: string;
+  assignedAt?: string;
+  activity?: TicketActivity[];
 }
 
 export interface ContactQueriesResponse {
@@ -40,6 +52,16 @@ export const contactUs = async (data: ContactPayload) => {
       data,
     },
     "Failed to submit contact form."
+  );
+};
+
+export const getContactSummary = async () => {
+  return authRequest<{ metrics: Record<string, number> }>(
+    {
+      method: "GET",
+      url: "/api/contact/summary",
+    },
+    "Failed to fetch contact summary."
   );
 };
 
@@ -94,6 +116,26 @@ export const updateContactQueryStatus = async (
       data: { status },
     },
     "Failed to update query status."
+  );
+};
+
+export const claimContactQuery = async (queryId: string) => {
+  return authRequest<{ query: ContactQuery }>(
+    {
+      method: "POST",
+      url: `/api/contact/${queryId}/claim`,
+    },
+    "Failed to assign contact query."
+  );
+};
+
+export const releaseContactQuery = async (queryId: string) => {
+  return authRequest<{ query: ContactQuery }>(
+    {
+      method: "POST",
+      url: `/api/contact/${queryId}/release`,
+    },
+    "Failed to release contact query."
   );
 };
 

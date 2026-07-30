@@ -38,6 +38,8 @@ import WorkIcon from "@mui/icons-material/Work";
 import { useEffect, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
+import { getContactSummary } from "../APIs/Contact";
+import { getProjectSummary } from "../APIs/projectForm";
 import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -140,6 +142,7 @@ export default function Dashboard() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [emailAttentionCount, setEmailAttentionCount] = useState(0);
+  const [requestAttentionCounts, setRequestAttentionCounts] = useState<Record<string, number>>({});
   const menuOpen = Boolean(anchorEl);
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const displayName = user?.name || "Admin";
@@ -152,17 +155,33 @@ export default function Dashboard() {
     if (!user) return undefined;
 
     let mounted = true;
-    const loadEmailBadge = async () => {
-      try {
-        const response = await getEmailSummary();
-        if (mounted) setEmailAttentionCount(Number(response.metrics?.attention || response.metrics?.new || 0));
-      } catch {
-        if (mounted) setEmailAttentionCount(0);
+    const loadNavigationBadges = async () => {
+      const [emailResult, projectResult, contactResult] = await Promise.allSettled([
+        getEmailSummary(),
+        getProjectSummary(),
+        getContactSummary(),
+      ]);
+
+      if (!mounted) return;
+
+      if (emailResult.status === "fulfilled") {
+        setEmailAttentionCount(Number(emailResult.value.metrics?.attention || emailResult.value.metrics?.new || 0));
+      } else {
+        setEmailAttentionCount(0);
       }
+
+      const projectMetrics = projectResult.status === "fulfilled" ? projectResult.value.metrics || {} : {};
+      const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
+      setRequestAttentionCounts({
+        Projects: Number(projectMetrics.projects || 0),
+        "Visibility Tests": Number(projectMetrics.visibility || 0),
+        "Assistance Requests": Number(projectMetrics.assistance || 0),
+        "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
+      });
     };
 
-    void loadEmailBadge();
-    const interval = window.setInterval(loadEmailBadge, 60000);
+    void loadNavigationBadges();
+    const interval = window.setInterval(loadNavigationBadges, 60000);
     return () => {
       mounted = false;
       window.clearInterval(interval);
@@ -192,6 +211,11 @@ export default function Dashboard() {
   };
 
   const isActivePath = (path: string) => location.pathname === path;
+
+  const getNavigationBadgeCount = (text: string) => {
+    if (text === "Emails") return emailAttentionCount;
+    return requestAttentionCounts[text] || 0;
+  };
 
   const groupedNavigation = visibleNavigationItems.reduce<Record<string, typeof navigationItems>>(
     (groups, item) => {
@@ -306,6 +330,7 @@ export default function Dashboard() {
               </Typography>
               {items.map((item) => {
                 const active = isActivePath(item.path);
+                const badgeCount = getNavigationBadgeCount(item.text);
                 return (
                   <ListItem
                     key={item.text}
@@ -336,8 +361,8 @@ export default function Dashboard() {
                         transition: "color 0.22s ease",
                       }}
                     >
-                      {item.text === "Emails" ? (
-                        <Badge badgeContent={emailAttentionCount} color="error" overlap="circular" invisible={emailAttentionCount <= 0}>
+                      {badgeCount > 0 ? (
+                        <Badge badgeContent={badgeCount} color="error" overlap="circular">
                           {item.icon}
                         </Badge>
                       ) : (

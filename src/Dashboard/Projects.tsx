@@ -36,10 +36,12 @@ import {
 } from "@mui/icons-material";
 import { useAuth } from "../contexts/AuthContext";
 import {
+  claimProject,
   deleteProject,
   getProjectById,
   getProjects,
   ProjectRequest,
+  releaseProject,
   replyToProject,
   updateProjectStatus,
 } from "../APIs/projectForm";
@@ -163,8 +165,13 @@ const getProjectDateValue = (project: ProjectRequest) => {
   return Number.isNaN(date.getTime()) ? 0 : date.getTime();
 };
 
+const normalizeEmail = (email?: string) => (email || "").trim().toLowerCase();
+const getOwnerLabel = (project: ProjectRequest) => project.assignedToName || project.assignedToEmail || "Open";
+const isAssignedToAnother = (project: ProjectRequest, currentEmail?: string) =>
+  Boolean(project.assignedToEmail && normalizeEmail(project.assignedToEmail) !== normalizeEmail(currentEmail));
+
 export default function Projects({ kind = "projects" }: ProjectsProps) {
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated, token, user } = useAuth();
   const pageCopy = requestKindCopy[kind];
   const [projects, setProjects] = useState<ProjectRequest[]>([]);
   const [search, setSearch] = useState("");
@@ -186,6 +193,11 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
     setSnackbarOpen(true);
+  };
+
+  const replaceProject = (updated: ProjectRequest) => {
+    setProjects((current) => current.map((project) => (project._id === updated._id ? updated : project)));
+    setSelectedProject((current) => (current?._id === updated._id ? updated : current));
   };
 
   const fetchProjects = async () => {
@@ -294,6 +306,26 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
     }
   };
 
+  const handleClaim = async (project: ProjectRequest) => {
+    try {
+      const response = await claimProject(project._id);
+      replaceProject(response.request);
+      showMessage("Ticket assigned to you.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to assign ticket.", "error");
+    }
+  };
+
+  const handleRelease = async (project: ProjectRequest) => {
+    try {
+      const response = await releaseProject(project._id);
+      replaceProject(response.request);
+      showMessage("Ticket released.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to release ticket.", "error");
+    }
+  };
+
   const handleDelete = async (projectId: string) => {
     if (!window.confirm("Delete this project request?")) return;
 
@@ -384,6 +416,16 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
             </Typography>
           )}
         </Box>
+      ),
+      Owner: (
+        <Chip
+          icon={<Person fontSize="small" />}
+          label={getOwnerLabel(project)}
+          size="small"
+          color={isAssignedToAnother(project, user?.email) ? "warning" : project.assignedToEmail ? "success" : "default"}
+          variant={project.assignedToEmail ? "filled" : "outlined"}
+          sx={{ fontWeight: 800 }}
+        />
       ),
       Status: <StatusChip status={status} variant={getStatusVariant(status) as any} />,
       Date: formatDate(project.createdAt),
@@ -494,7 +536,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
       </Card>
 
       <DataTable
-        headers={["Client", "Company", "Service", "Needs", "Status", "Date"]}
+        headers={["Client", "Company", "Service", "Needs", "Owner", "Status", "Date"]}
         hiddenFields={["id"]}
         rows={tableRows}
         onView={(id) => {
@@ -507,6 +549,12 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
 
           return (
             <>
+              {!project.assignedToEmail && (
+                <MenuAction icon={<Person />} label="Take ownership" onClick={() => void handleClaim(project)} color="#16a34a" />
+              )}
+              {project.assignedToEmail && !isAssignedToAnother(project, user?.email) && (
+                <MenuAction icon={<Person />} label="Release" onClick={() => void handleRelease(project)} color="#64748b" />
+              )}
               <MenuAction icon={<Reply />} label="Reply" onClick={() => handleReply(project)} color="#EEBA2B" />
               <MenuAction icon={<Delete />} label="Delete" onClick={() => void handleDelete(project._id)} color="#ef4444" />
             </>
@@ -522,6 +570,11 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
         <DialogContent sx={{ pt: 3 }}>
           {selectedProject && (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              {isAssignedToAnother(selectedProject, user?.email) && (
+                <Alert severity="warning">
+                  This ticket is already handled by {getOwnerLabel(selectedProject)}. Check the shared history before replying.
+                </Alert>
+              )}
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <Paper sx={{ p: 2.5, height: "100%" }}>
@@ -561,6 +614,30 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
                 </Grid>
               </Grid>
 
+              <Paper sx={{ p: 2.5, bgcolor: "#f8fafc" }}>
+                <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+                  Current owner
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1.5 }}>
+                  <Chip
+                    icon={<Person fontSize="small" />}
+                    label={getOwnerLabel(selectedProject)}
+                    color={selectedProject.assignedToEmail ? "success" : "default"}
+                    variant={selectedProject.assignedToEmail ? "filled" : "outlined"}
+                  />
+                  {!selectedProject.assignedToEmail && (
+                    <ActionButton size="small" variant="primary" onClick={() => void handleClaim(selectedProject)}>
+                      Take ownership
+                    </ActionButton>
+                  )}
+                  {selectedProject.assignedToEmail && !isAssignedToAnother(selectedProject, user?.email) && (
+                    <ActionButton size="small" variant="secondary" onClick={() => void handleRelease(selectedProject)}>
+                      Release
+                    </ActionButton>
+                  )}
+                </Box>
+              </Paper>
+
               {!!selectedProject.selectedServices?.length && (
                 <Paper sx={{ p: 2.5 }}>
                   <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
@@ -589,6 +666,26 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
                     <Typography sx={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>{value}</Typography>
                   </Paper>
                 ))}
+
+              {!!selectedProject.activity?.length && (
+                <Paper sx={{ p: 2.5 }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
+                    Shared history
+                  </Typography>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
+                    {[...selectedProject.activity].reverse().slice(0, 12).map((item, index) => (
+                      <Box key={String(item.at) + index} sx={{ borderLeft: "3px solid #EEBA2B", pl: 1.5 }}>
+                        <Typography variant="body2" fontWeight={800}>
+                          {item.message}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {item.actorName || item.actorEmail || "Admin"} - {formatDate(item.at)}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Paper>
+              )}
 
               <Paper sx={{ p: 2.5, bgcolor: "#f8fafc" }}>
                 <Typography variant="subtitle2" sx={{ mb: 1.5 }}>

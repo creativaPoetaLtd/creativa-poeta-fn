@@ -4,6 +4,7 @@ import {
   Box,
   Card,
   CardContent,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -27,14 +28,18 @@ import {
   Email,
   MarkEmailRead,
   Pending,
+  Person,
   Refresh,
   Reply,
 } from "@mui/icons-material";
+import { useAuth } from "../contexts/AuthContext";
 import {
+  claimContactQuery,
   ContactQuery,
   deleteContactQuery,
   getContactQueries,
   getContactQuery,
+  releaseContactQuery,
   replyToContactQuery,
   updateContactQueryStatus,
 } from "../APIs/Contact";
@@ -79,8 +84,13 @@ const formatDate = (dateString?: string) => {
 };
 
 const getQueryName = (query: ContactQuery) => query.fullName || query.name || "Unknown contact";
+const normalizeEmail = (email?: string) => (email || "").trim().toLowerCase();
+const getOwnerLabel = (query: ContactQuery) => query.assignedToName || query.assignedToEmail || "Open";
+const isAssignedToAnother = (query: ContactQuery, currentEmail?: string) =>
+  Boolean(query.assignedToEmail && normalizeEmail(query.assignedToEmail) !== normalizeEmail(currentEmail));
 
 const ContactQueries = () => {
+  const { user } = useAuth();
   const [queries, setQueries] = useState<ContactQuery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -107,6 +117,11 @@ const ContactQueries = () => {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
     setSnackbarOpen(true);
+  };
+
+  const replaceQuery = (updated: ContactQuery) => {
+    setQueries((current) => current.map((query) => (query._id === updated._id ? updated : query)));
+    setSelectedQuery((current) => (current?._id === updated._id ? updated : current));
   };
 
   const fetchQueries = async () => {
@@ -212,6 +227,26 @@ const ContactQueries = () => {
     }
   };
 
+  const handleClaim = async (query: ContactQuery) => {
+    try {
+      const response = await claimContactQuery(query._id);
+      replaceQuery(response.query);
+      showMessage("Ticket assigned to you.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to assign ticket.", "error");
+    }
+  };
+
+  const handleRelease = async (query: ContactQuery) => {
+    try {
+      const response = await releaseContactQuery(query._id);
+      replaceQuery(response.query);
+      showMessage("Ticket released.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to release ticket.", "error");
+    }
+  };
+
   const handleDelete = async (query: ContactQuery) => {
     if (!window.confirm("Delete this contact message?")) return;
 
@@ -244,6 +279,16 @@ const ContactQueries = () => {
         <Typography variant="body2" sx={{ maxWidth: 420 }}>
           {query.message?.length > 120 ? `${query.message.slice(0, 120)}...` : query.message}
         </Typography>
+      ),
+      Owner: (
+        <Chip
+          icon={<Person fontSize="small" />}
+          label={getOwnerLabel(query)}
+          size="small"
+          color={isAssignedToAnother(query, user?.email) ? "warning" : query.assignedToEmail ? "success" : "default"}
+          variant={query.assignedToEmail ? "filled" : "outlined"}
+          sx={{ fontWeight: 800 }}
+        />
       ),
       Status: <StatusChip status={status} variant={getStatusVariant(status) as any} />,
       Submitted: formatDate(query.createdAt),
@@ -340,7 +385,7 @@ const ContactQueries = () => {
       </Card>
 
       <DataTable
-        headers={["Contact", "Message", "Status", "Submitted"]}
+        headers={["Contact", "Message", "Owner", "Status", "Submitted"]}
         hiddenFields={["id"]}
         rows={rows}
         onView={(id) => void handleViewQuery(id)}
@@ -351,6 +396,12 @@ const ContactQueries = () => {
 
           return (
             <>
+              {!query.assignedToEmail && (
+                <MenuAction icon={<Person />} label="Take ownership" onClick={() => void handleClaim(query)} color="#16a34a" />
+              )}
+              {query.assignedToEmail && !isAssignedToAnother(query, user?.email) && (
+                <MenuAction icon={<Person />} label="Release" onClick={() => void handleRelease(query)} color="#64748b" />
+              )}
               <MenuAction
                 icon={<Reply />}
                 label={isReplied ? "Replied" : "Reply"}
@@ -388,6 +439,11 @@ const ContactQueries = () => {
         <DialogContent sx={{ pt: 3 }}>
           {selectedQuery && (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              {isAssignedToAnother(selectedQuery, user?.email) && (
+                <Alert severity="warning">
+                  This ticket is already handled by {getOwnerLabel(selectedQuery)}. Check the shared history before replying.
+                </Alert>
+              )}
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <Paper sx={{ p: 2.5, height: "100%" }}>
@@ -426,6 +482,30 @@ const ContactQueries = () => {
                 </Grid>
               </Grid>
 
+              <Paper sx={{ p: 2.5, bgcolor: "#f8fafc" }}>
+                <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+                  Current owner
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1.5 }}>
+                  <Chip
+                    icon={<Person fontSize="small" />}
+                    label={getOwnerLabel(selectedQuery)}
+                    color={selectedQuery.assignedToEmail ? "success" : "default"}
+                    variant={selectedQuery.assignedToEmail ? "filled" : "outlined"}
+                  />
+                  {!selectedQuery.assignedToEmail && (
+                    <ActionButton size="small" variant="primary" onClick={() => void handleClaim(selectedQuery)}>
+                      Take ownership
+                    </ActionButton>
+                  )}
+                  {selectedQuery.assignedToEmail && !isAssignedToAnother(selectedQuery, user?.email) && (
+                    <ActionButton size="small" variant="secondary" onClick={() => void handleRelease(selectedQuery)}>
+                      Release
+                    </ActionButton>
+                  )}
+                </Box>
+              </Paper>
+
               <Paper sx={{ p: 2.5 }}>
                 <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
                   Message
@@ -434,6 +514,26 @@ const ContactQueries = () => {
                   {selectedQuery.message}
                 </Typography>
               </Paper>
+
+              {!!selectedQuery.activity?.length && (
+                <Paper sx={{ p: 2.5 }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: "#071a33" }}>
+                    Shared history
+                  </Typography>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
+                    {[...selectedQuery.activity].reverse().slice(0, 12).map((item, index) => (
+                      <Box key={String(item.at) + index} sx={{ borderLeft: "3px solid #EEBA2B", pl: 1.5 }}>
+                        <Typography variant="body2" fontWeight={800}>
+                          {item.message}
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {item.actorName || item.actorEmail || "Admin"} - {formatDate(item.at)}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Paper>
+              )}
 
               {selectedQuery.replyMessage && (
                 <Paper sx={{ p: 2.5, bgcolor: "#f0fdf4", border: "1px solid #bbf7d0" }}>

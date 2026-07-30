@@ -1,5 +1,13 @@
 import { authRequest, publicRequest } from "./client";
 
+export interface TicketActivity {
+  type: "assigned" | "released" | "opened" | "replied" | "status" | string;
+  message: string;
+  actorEmail?: string;
+  actorName?: string;
+  at: string;
+}
+
 export interface ProjectInquiryPayload {
   name: string;
   email: string;
@@ -32,6 +40,10 @@ export interface ProjectRequest {
   repliedAt?: string;
   repliedBy?: string;
   replyMessage?: string;
+  assignedToEmail?: string;
+  assignedToName?: string;
+  assignedAt?: string;
+  activity?: TicketActivity[];
 }
 
 export interface ProjectListResponse {
@@ -55,6 +67,16 @@ export const projectForm = async (data: ProjectInquiryPayload) => {
       data,
     },
     "Failed to submit project request."
+  );
+};
+
+export const getProjectSummary = async () => {
+  return authRequest<{ metrics: Record<string, number> }>(
+    {
+      method: "GET",
+      url: "/api/project/summary",
+    },
+    "Failed to fetch project summary."
   );
 };
 
@@ -96,6 +118,26 @@ export const replyToProject = async (
       data: { replyMessage, subject },
     },
     "Failed to send reply."
+  );
+};
+
+export const claimProject = async (projectId: string) => {
+  return authRequest<{ request: ProjectRequest }>(
+    {
+      method: "POST",
+      url: `/api/project/${projectId}/claim`,
+    },
+    "Failed to assign project request."
+  );
+};
+
+export const releaseProject = async (projectId: string) => {
+  return authRequest<{ request: ProjectRequest }>(
+    {
+      method: "POST",
+      url: `/api/project/${projectId}/release`,
+    },
+    "Failed to release project request."
   );
 };
 
