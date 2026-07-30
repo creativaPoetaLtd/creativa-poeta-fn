@@ -45,6 +45,7 @@ export interface OutboundEmail {
   subject: string;
   body: string;
   signature?: string;
+  fromEmail?: string;
   attachments?: EmailAttachmentMeta[];
   error?: string;
   sentAt?: string;
@@ -56,6 +57,7 @@ export interface OutboundEmail {
 
 export interface EmailsResponse {
   emails: EmailMessage[];
+  mailboxes?: string[];
   metrics?: Record<string, number>;
   pagination?: {
     currentPage: number;
@@ -100,6 +102,7 @@ export interface ComposeEmailPayload {
   body: string;
   signature?: string;
   draftId?: string;
+  fromEmail?: string;
 }
 
 export const getEmails = async (
@@ -230,6 +233,7 @@ export const sendComposedEmail = async (payload: ComposeEmailPayload, attachment
     appendComposeField(data, "subject", payload.subject);
     appendComposeField(data, "body", payload.body);
     appendComposeField(data, "signature", payload.signature);
+    appendComposeField(data, "fromEmail", payload.fromEmail);
     appendComposeField(data, "draftId", payload.draftId);
     attachments.forEach((file) => data.append("attachments", file));
   }
@@ -263,3 +267,5 @@ export const deleteOutboundEmail = async (id: string) => {
     "Failed to delete outbound email."
   );
 };
+
+

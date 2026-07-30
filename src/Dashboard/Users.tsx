@@ -58,14 +58,14 @@ const sharedMailboxDefaults = ["contact@creativapoeta.com", "contact@creativapoe
 
 const roleDefinitions: Record<AdminRole, { label: string; short: string; powers: string }> = {
   super_admin: {
-    label: "Super Admin",
-    short: "Root owner",
-    powers: "Full control. Only this role can create, modify, disable or delete level 0 admins.",
+    label: "Niveau 0 - Direction",
+    short: "Compte principal",
+    powers: "Acces complet au dashboard.",
   },
   admin_0: {
     label: "Niveau 0 - Direction",
-    short: "Almost full powers",
-    powers: "Full dashboard access, except creating or managing other level 0 admins and the superadmin.",
+    short: "Pouvoirs avances",
+    powers: "Acces complet au dashboard, avec gestion des niveaux 1 a 5.",
   },
   admin_1: {
     label: "Niveau 1 - Operations",
@@ -337,7 +337,7 @@ export default function Users() {
       <Box sx={{ p: 3 }}>
         <PageHeader title="Admin Users" subtitle="Manage access and permissions." />
         <Alert severity="warning">
-          This section is reserved for the superadmin and level 0 admins. Your current role is{" "}
+          This section is reserved for level 0 admins. Your current role is{" "}
           <strong>{roleDefinitions[currentRole]?.label || currentRole}</strong>.
         </Alert>
       </Box>
@@ -356,7 +356,7 @@ export default function Users() {
     <Box sx={{ p: 3 }}>
       <PageHeader
         title="Admin Users"
-        subtitle="Create admins, assign levels and control mailbox access. New admins choose their own password."
+        subtitle="Create admins, assign levels and control mailbox access."
         action={
           <ActionButton variant="primary" startIcon={<PersonAdd />} onClick={openCreateDialog}>
             Add Admin
@@ -371,7 +371,7 @@ export default function Users() {
       )}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Create the mailbox first in Infomaniak, then add the CP email here. The admin clicks Create account on the login page and sets their own password. Shared mailbox access can be assigned below.
+        Add a CP admin email, assign a level, then choose which shared mailboxes this person can access.
       </Alert>
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -390,8 +390,8 @@ export default function Users() {
       </Grid>
 
       <Grid container spacing={2} sx={{ mb: 3 }}>
-        {Object.entries(roleDefinitions).map(([role, definition]) => (
-          <Grid item xs={12} md={role === "super_admin" ? 12 : 4} key={role}>
+        {Object.entries(roleDefinitions).filter(([role]) => role !== "super_admin").map(([role, definition]) => (
+          <Grid item xs={12} md={4} key={role}>
             <Card sx={{ height: "100%", border: role === currentRole ? "2px solid #EEBA2B" : "1px solid #e2e8f0" }}>
               <CardContent>
                 <Typography sx={{ fontWeight: 900, color: "#071a33" }}>{definition.label}</Typography>
@@ -457,7 +457,7 @@ export default function Users() {
                 <Typography variant="body2">{adminUser.email}</Typography>
               </Box>
             ),
-            role: <StatusChip status={roleDefinitions[role]?.label || role} variant={role === "super_admin" ? "warning" : "info"} />,
+            role: <StatusChip status={roleDefinitions[role]?.label || role} variant="info" />,
             account: (
               <StatusChip
                 status={accountStatus}
@@ -565,3 +565,5 @@ export default function Users() {
     </Box>
   );
 }
+
+

@@ -7,6 +7,12 @@
 } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface MailboxAccess {
+  address: string;
+  permission: "read" | "send" | "manage";
+  type: "personal" | "shared";
+}
+
 interface User {
   id: string;
   name: string;
@@ -14,6 +20,7 @@ interface User {
   role: string;
   roleLabel?: string;
   accountStatus?: string;
+  mailboxAccess?: MailboxAccess[];
 }
 
 interface AuthContextType {
@@ -162,4 +169,5 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
+
 

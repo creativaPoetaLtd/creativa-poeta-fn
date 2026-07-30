@@ -13,7 +13,9 @@ import {
   Divider,
   FormControl,
   Grid,
+  Checkbox,
   InputLabel,
+  ListItemText,
   MenuItem,
   Pagination,
   Paper,
@@ -42,7 +44,6 @@ import {
   deleteOutboundEmail,
   EmailFolder,
   EmailMessage,
-  EmailSyncResult,
   EmailStatus,
   getEmail,
   getEmails,
@@ -56,6 +57,7 @@ import {
   updateEmailDraft,
   updateEmailStatus,
 } from "../APIs/Emails";
+import { useAuth } from "../contexts/AuthContext";
 import {
   ActionButton,
   DashboardCard,
@@ -65,14 +67,23 @@ import {
   StatusChip,
 } from "./components/DashboardComponents";
 
-const statusOptions: Array<"all" | EmailStatus> = ["all", "new", "read", "replied", "archived"];
-const mailboxOptions = [
-  { value: "all", label: "All mailboxes" },
-  { value: "be", label: "contact@creativapoeta.be" },
-  { value: "global", label: "contact@creativapoeta.com" },
-];
+const allStatusValues: EmailStatus[] = ["new", "read", "replied", "archived"];
+const statusLabels: Record<EmailStatus, string> = {
+  new: "New",
+  read: "Read",
+  replied: "Replied",
+  archived: "Archived",
+};
+const sharedMailboxDefaults = ["contact@creativapoeta.com", "contact@creativapoeta.be"];
 
-const emptyCompose = { to: "", cc: "", bcc: "", subject: "", body: "", signature: "" };
+const normalizeMailbox = (value?: string) => String(value || "").trim().toLowerCase();
+const toFilterParam = (selected: string[], allValues: string[]) => {
+  const clean = selected.map(normalizeMailbox).filter(Boolean);
+  if (!clean.length || clean.length === allValues.length) return "all";
+  return clean.join(",");
+};
+
+const emptyCompose = { fromEmail: "", to: "", cc: "", bcc: "", subject: "", body: "", signature: "" };
 const maxAttachmentCount = 8;
 const maxAttachmentTotalBytes = 8 * 1024 * 1024;
 
@@ -128,6 +139,7 @@ const splitEmailList = (value: string) =>
     .filter(Boolean);
 
 const toComposePayload = (form: ComposeForm, draftId?: string): ComposeEmailPayload => ({
+  fromEmail: normalizeMailbox(form.fromEmail),
   to: splitEmailList(form.to),
   cc: splitEmailList(form.cc),
   bcc: splitEmailList(form.bcc),
@@ -138,6 +150,7 @@ const toComposePayload = (form: ComposeForm, draftId?: string): ComposeEmailPayl
 });
 
 const fromOutboundEmail = (email: OutboundEmail): ComposeForm => ({
+  fromEmail: email.fromEmail || "",
   to: (email.to || []).join(", "),
   cc: (email.cc || []).join(", "),
   bcc: (email.bcc || []).join(", "),
@@ -147,6 +160,7 @@ const fromOutboundEmail = (email: OutboundEmail): ComposeForm => ({
 });
 
 const Emails = () => {
+  const { user } = useAuth();
   const [folder, setFolder] = useState<EmailFolder>("inbox");
   const [emails, setEmails] = useState<EmailMessage[]>([]);
   const [outboundEmails, setOutboundEmails] = useState<OutboundEmail[]>([]);
@@ -156,9 +170,10 @@ const Emails = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [syncReport, setSyncReport] = useState<EmailSyncResult | null>(null);
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [mailboxFilter, setMailboxFilter] = useState("all");
+  const [statusFilters, setStatusFilters] = useState<EmailStatus[]>(allStatusValues);
+  const [mailboxFilters, setMailboxFilters] = useState<string[]>([]);
+  const [serverMailboxes, setServerMailboxes] = useState<string[]>([]);
+  const [filtersHydrated, setFiltersHydrated] = useState(false);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1, totalEmails: 0, limit: 25 });
@@ -178,6 +193,56 @@ const Emails = () => {
   const [composeLoading, setComposeLoading] = useState(false);
   const syncingRef = useRef(false);
 
+  const mailboxOptions = useMemo(() => {
+    const values = new Set<string>();
+    const add = (value?: string) => {
+      const normalized = normalizeMailbox(value);
+      if (normalized) values.add(normalized);
+    };
+
+    const role = String(user?.role || "").toLowerCase();
+    const canSeeSharedByDefault = role === "super_admin" || role === "admin_0";
+
+    add(user?.email);
+    if (canSeeSharedByDefault) sharedMailboxDefaults.forEach(add);
+    (user?.mailboxAccess || []).forEach((mailbox) => add(mailbox.address));
+    serverMailboxes.forEach(add);
+
+    return Array.from(values).map((address) => ({ value: address, label: address }));
+  }, [serverMailboxes, user?.email, user?.mailboxAccess, user?.role]);
+
+  const allMailboxValues = useMemo(() => mailboxOptions.map((option) => option.value), [mailboxOptions]);
+  const filterStorageKey = useMemo(() => `cp-email-filters:${normalizeMailbox(user?.email) || "anonymous"}`, [user?.email]);
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(filterStorageKey);
+      if (saved) {
+        const parsed = JSON.parse(saved) as { statuses?: EmailStatus[]; mailboxes?: string[] };
+        const nextStatuses = (parsed.statuses || []).filter((status): status is EmailStatus => allStatusValues.includes(status as EmailStatus));
+        if (nextStatuses.length) setStatusFilters(nextStatuses);
+        if (Array.isArray(parsed.mailboxes)) setMailboxFilters(parsed.mailboxes.map(normalizeMailbox).filter(Boolean));
+      }
+    } catch {
+      // Keep defaults if a saved preference is malformed.
+    } finally {
+      setFiltersHydrated(true);
+    }
+  }, [filterStorageKey]);
+
+  useEffect(() => {
+    if (!filtersHydrated) return;
+    window.localStorage.setItem(
+      filterStorageKey,
+      JSON.stringify({ statuses: statusFilters, mailboxes: mailboxFilters })
+    );
+  }, [filterStorageKey, filtersHydrated, mailboxFilters, statusFilters]);
+
+  useEffect(() => {
+    if (!allMailboxValues.length) return;
+    setMailboxFilters((current) => current.filter((mailbox) => allMailboxValues.includes(mailbox)));
+  }, [allMailboxValues]);
+
   const showMessage = (message: string, severity: "success" | "error" | "warning" = "success") => {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
@@ -189,8 +254,15 @@ const Emails = () => {
       setLoading(true);
 
       if (folder === "inbox") {
-        const response = await getEmails(currentPage, 25, statusFilter, mailboxFilter, search);
+        const response = await getEmails(currentPage, 25, toFilterParam(statusFilters, allStatusValues), toFilterParam(mailboxFilters, allMailboxValues), search);
         setEmails(response.emails || []);
+        const nextServerMailboxes = (response.mailboxes || []).map(normalizeMailbox).filter(Boolean);
+        setServerMailboxes((current) => {
+          if (current.length === nextServerMailboxes.length && current.every((mailbox, index) => mailbox === nextServerMailboxes[index])) {
+            return current;
+          }
+          return nextServerMailboxes;
+        });
         setOutboundEmails([]);
         setMetrics(response.metrics || {});
         if (response.pagination) setPagination(response.pagination);
@@ -208,7 +280,7 @@ const Emails = () => {
     } finally {
       setLoading(false);
     }
-  }, [currentPage, folder, mailboxFilter, search, statusFilter]);
+  }, [allMailboxValues, currentPage, folder, mailboxFilters, search, statusFilters]);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -224,7 +296,7 @@ const Emails = () => {
         id: email._id,
         From: (
           <Box>
-            <Typography fontWeight={800}>{email.fromName || email.fromEmail || "Unknown sender"}</Typography>
+            <Typography fontWeight={email.status === "new" ? 900 : 650}>{email.fromName || email.fromEmail || "Unknown sender"}</Typography>
             <Typography variant="caption" color="text.secondary">
               {email.mailboxAddress}
             </Typography>
@@ -272,8 +344,6 @@ const Emails = () => {
   const handleFolderChange = (_: unknown, nextFolder: EmailFolder) => {
     setFolder(nextFolder);
     setCurrentPage(1);
-    setStatusFilter("all");
-    setMailboxFilter("all");
     setSearch("");
   };
 
@@ -286,9 +356,6 @@ const Emails = () => {
         if (!silent) setSyncing(true);
 
         const result = await syncEmails(75);
-        setSyncReport(result);
-        const missing = result.results.filter((item) => !item.configured).length;
-        const failed = result.results.filter((item) => item.error && item.configured).length;
         await loadEmails();
 
         if (silent) {
@@ -298,14 +365,9 @@ const Emails = () => {
           return;
         }
 
-        if (failed > 0 || missing > 0) {
-          showMessage(`Sync done with warnings: ${result.imported} imported, ${result.updated} updated. Check backend env vars.`, "warning");
-        } else {
-          showMessage(`Sync done: ${result.imported} imported, ${result.updated} updated.`);
-        }
+        showMessage(`Mailbox sync completed: ${result.imported} imported, ${result.updated} updated.`);
       } catch (syncError) {
         if (!silent) {
-          setSyncReport(null);
           showMessage(syncError instanceof Error ? syncError.message : "Email sync failed.", "error");
         }
       } finally {
@@ -370,7 +432,8 @@ const Emails = () => {
 
   const openComposeDialog = (draft?: OutboundEmail) => {
     setEditingDraftId(draft?._id || null);
-    setComposeForm(draft ? fromOutboundEmail(draft) : emptyCompose);
+    const defaultFromEmail = allMailboxValues[0] || "";
+    setComposeForm(draft ? { ...fromOutboundEmail(draft), fromEmail: draft.fromEmail || defaultFromEmail } : { ...emptyCompose, fromEmail: defaultFromEmail });
     setComposeAttachments([]);
     setComposeOpen(true);
   };
@@ -552,21 +615,6 @@ const Emails = () => {
         )}
       </Grid>
 
-      {syncReport && (
-        <Alert severity={syncReport.results.some((item) => item.error) ? "warning" : "success"} sx={{ mb: 3 }}>
-          <Typography variant="subtitle2" sx={{ fontWeight: 800, mb: 1 }}>
-            Last sync diagnostic
-          </Typography>
-          {syncReport.results.map((item) => (
-            <Box key={item.mailbox} sx={{ mb: 0.75 }}>
-              <strong>{item.mailbox}</strong>
-              {item.address ? ` (${item.address})` : ""}: {item.configured ? "configured" : "not configured"}, imported {item.imported}, updated {item.updated}, skipped {item.skipped}
-              {item.error ? ` - ${item.error}` : ""}
-            </Box>
-          ))}
-        </Alert>
-      )}
-
 
       <Card sx={{ mb: 3, borderRadius: 3 }}>
         <CardContent>
@@ -587,16 +635,54 @@ const Emails = () => {
                 <Grid item xs={12} md={3}>
                   <FormControl fullWidth>
                     <InputLabel>Status</InputLabel>
-                    <Select value={statusFilter} label="Status" onChange={(event) => { setStatusFilter(event.target.value); setCurrentPage(1); }}>
-                      {statusOptions.map((status) => <MenuItem key={status} value={status}>{status === "all" ? "All statuses" : status}</MenuItem>)}
+                    <Select
+                      multiple
+                      value={statusFilters}
+                      label="Status"
+                      renderValue={(selected) =>
+                        selected.length === allStatusValues.length
+                          ? "All statuses"
+                          : selected.map((status) => statusLabels[status as EmailStatus]).join(", ")
+                      }
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        setStatusFilters(typeof value === "string" ? (value.split(",") as EmailStatus[]) : (value as EmailStatus[]));
+                        setCurrentPage(1);
+                      }}
+                    >
+                      {allStatusValues.map((status) => (
+                        <MenuItem key={status} value={status}>
+                          <Checkbox checked={statusFilters.includes(status)} />
+                          <ListItemText primary={statusLabels[status]} />
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={3}>
                   <FormControl fullWidth>
                     <InputLabel>Mailbox</InputLabel>
-                    <Select value={mailboxFilter} label="Mailbox" onChange={(event) => { setMailboxFilter(event.target.value); setCurrentPage(1); }}>
-                      {mailboxOptions.map((option) => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+                    <Select
+                      multiple
+                      value={mailboxFilters}
+                      label="Mailbox"
+                      renderValue={(selected) =>
+                        selected.length === 0 || selected.length === allMailboxValues.length
+                          ? "All mailboxes"
+                          : selected.join(", ")
+                      }
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        setMailboxFilters(typeof value === "string" ? value.split(",").map(normalizeMailbox) : (value as string[]).map(normalizeMailbox));
+                        setCurrentPage(1);
+                      }}
+                    >
+                      {mailboxOptions.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          <Checkbox checked={mailboxFilters.includes(option.value)} />
+                          <ListItemText primary={option.label} />
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Grid>
@@ -739,6 +825,9 @@ const Emails = () => {
         <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>{editingDraftId ? "Edit draft" : "Compose email"}</DialogTitle>
         <DialogContent sx={{ pt: 3 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+            <TextField select label="From" value={composeForm.fromEmail} onChange={(event) => setComposeForm((current) => ({ ...current, fromEmail: event.target.value }))} fullWidth required>
+              {mailboxOptions.map((option) => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+            </TextField>
             <TextField label="To" value={composeForm.to} onChange={(event) => setComposeForm((current) => ({ ...current, to: event.target.value }))} fullWidth required placeholder="client@example.com" />
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}><TextField label="CC" value={composeForm.cc} onChange={(event) => setComposeForm((current) => ({ ...current, cc: event.target.value }))} fullWidth placeholder="optional@example.com" /></Grid>
@@ -791,3 +880,10 @@ const Emails = () => {
 };
 
 export default Emails;
+
+
+
+
+
+
+

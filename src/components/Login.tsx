@@ -39,17 +39,17 @@ const modeCopy: Record<LoginMode, { title: string; action: string; helper: strin
   activate: {
     title: "Create account",
     action: "Activate account",
-    helper: "Enter your CP email. If an admin created you, you can choose your password.",
+    helper: "Enter your CP email to finalize your access.",
   },
   forgot: {
     title: "Forgot password",
     action: "Request reset",
-    helper: "The request is recorded. A super admin or level 0 admin can generate your reset link.",
+    helper: "Enter your CP email to request a password reset.",
   },
   reset: {
     title: "Reset password",
     action: "Save new password",
-    helper: "Choose a new password for this admin account.",
+    helper: "Choose a new password.",
   },
 };
 
@@ -127,7 +127,7 @@ const Login: React.FC = () => {
         if (!activationChecked) {
           await checkAdminActivation(data.email);
           setActivationChecked(true);
-          setMessage("Account found. Choose your password now.");
+          setMessage("Account found. Choose your password.");
           return;
         }
         const response = await activateAdminAccount(data.email, data.password, data.confirmPassword);
@@ -274,3 +274,4 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+

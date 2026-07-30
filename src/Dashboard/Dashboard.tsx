@@ -139,7 +139,7 @@ export default function Dashboard() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
-  const displayName = currentRole === "super_admin" ? "Super Admin" : user?.name || "Admin";
+  const displayName = user?.name || "Admin";
   const avatarLetter = displayName.trim().charAt(0).toUpperCase() || "A";
   const visibleNavigationItems = navigationItems.filter((item) =>
     item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
@@ -524,6 +524,8 @@ export default function Dashboard() {
     </Box>
   );
 }
+
+
 
 
 
