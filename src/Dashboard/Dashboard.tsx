@@ -112,7 +112,10 @@ const navigationItems = [
   },
 ];
 
-const normalizeDashboardRole = (role?: string) => {
+const rootAdminEmails = ["admin@creativapoeta.com", "admin@cp.com"];
+
+const normalizeDashboardRole = (role?: string, email?: string) => {
+  if (email && rootAdminEmails.includes(email.trim().toLowerCase())) return "super_admin";
   if (role === "admin") return "admin_0";
   if (role === "editor") return "admin_2";
   if (role === "viewer") return "admin_4";
@@ -126,7 +129,7 @@ export default function Dashboard() {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
-  const currentRole = normalizeDashboardRole(user?.role);
+  const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const visibleNavigationItems = navigationItems.filter((item) =>
     item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
   );

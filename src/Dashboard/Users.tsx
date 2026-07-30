@@ -91,8 +91,13 @@ const emptyForm: { name: string; email: string; password: string; role: Editable
   role: defaultRole,
 };
 const getUserId = (user: AdminUser) => user._id || user.id || "";
+const rootAdminEmails = ["admin@creativapoeta.com", "admin@cp.com"];
 
-const normalizeRole = (role?: string): AdminRole => {
+const isRootAdminEmail = (email?: string) =>
+  Boolean(email && rootAdminEmails.includes(email.trim().toLowerCase()));
+
+const normalizeRole = (role?: string, email?: string): AdminRole => {
+  if (isRootAdminEmail(email)) return "super_admin";
   if (role === "admin") return "admin_0";
   if (role === "editor") return "admin_2";
   if (role === "viewer") return "admin_4";
@@ -101,7 +106,7 @@ const normalizeRole = (role?: string): AdminRole => {
 
 export default function Users() {
   const { user: currentUser } = useAuth();
-  const currentRole = normalizeRole(currentUser?.role);
+  const currentRole = normalizeRole(currentUser?.role, currentUser?.email);
   const isSuperAdmin = currentRole === "super_admin";
   const canManageUsers = isSuperAdmin || currentRole === "admin_0";
 
