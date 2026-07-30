@@ -112,14 +112,24 @@ const navigationItems = [
   },
 ];
 
+const normalizeDashboardRole = (role?: string) => {
+  if (role === "admin") return "admin_0";
+  if (role === "editor") return "admin_2";
+  if (role === "viewer") return "admin_4";
+  return role || "admin_5";
+};
+
 export default function Dashboard() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
-
+  const currentRole = normalizeDashboardRole(user?.role);
+  const visibleNavigationItems = navigationItems.filter((item) =>
+    item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
+  );
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -139,13 +149,13 @@ export default function Dashboard() {
   };
 
   const getCurrentPageTitle = () => {
-    const currentItem = navigationItems.find((item) => location.pathname === item.path);
+    const currentItem = visibleNavigationItems.find((item) => location.pathname === item.path);
     return currentItem ? currentItem.text : "Overview";
   };
 
   const isActivePath = (path: string) => location.pathname === path;
 
-  const groupedNavigation = navigationItems.reduce<Record<string, typeof navigationItems>>(
+  const groupedNavigation = visibleNavigationItems.reduce<Record<string, typeof navigationItems>>(
     (groups, item) => {
       groups[item.section] = groups[item.section] || [];
       groups[item.section].push(item);
