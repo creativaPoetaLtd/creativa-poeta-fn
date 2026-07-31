@@ -26,6 +26,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import BusinessIcon from "@mui/icons-material/Business";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import EmailIcon from "@mui/icons-material/Email";
+import ForumIcon from "@mui/icons-material/Forum";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -38,6 +39,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import { useEffect, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
+import { getInternalMessageSummary } from "../APIs/internalMessages";
 import { getAdminNotificationSummary } from "../APIs/adminNotifications";
 import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
@@ -46,6 +48,7 @@ import Analytics from "./Analytics";
 import Blogs from "./Blogs";
 import ContactQueries from "./ContactQueries";
 import Emails from "./Emails";
+import InternalMessages from "./InternalMessages";
 import Jobs from "./Jobs";
 import Projects from "./Projects";
 import Settings from "./Settings";
@@ -101,6 +104,14 @@ const navigationItems = [
     color: "#14b8a6",
     section: "Demandes",
     permission: "email:read",
+  },
+  {
+    text: "Internal Messages",
+    icon: <ForumIcon />,
+    path: "/secure-admin-dashboard-2024/internal-messages",
+    color: "#8b5cf6",
+    section: "Demandes",
+    permission: "internal:messages",
   },
   {
     text: "Blogs",
@@ -176,11 +187,12 @@ export default function Dashboard() {
 
     let mounted = true;
     const loadNavigationBadges = async () => {
-      const [emailResult, projectResult, contactResult, adminNotificationResult] = await Promise.allSettled([
+      const [emailResult, projectResult, contactResult, adminNotificationResult, internalMessageResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
         getContactSummary(),
         ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
+        hasPermission("internal:messages") ? getInternalMessageSummary() : Promise.resolve({ metrics: { unread: 0, total: 0 } }),
       ]);
 
       if (!mounted) return;
@@ -194,12 +206,14 @@ export default function Dashboard() {
       const projectMetrics = projectResult.status === "fulfilled" ? projectResult.value.metrics || {} : {};
       const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
       const adminNotificationMetrics = adminNotificationResult.status === "fulfilled" ? adminNotificationResult.value.metrics || { new: 0, open: 0 } : { new: 0, open: 0 };
+      const internalMessageMetrics = internalMessageResult.status === "fulfilled" ? internalMessageResult.value.metrics || { unread: 0 } : { unread: 0 };
       setRequestAttentionCounts({
         Projects: Number(projectMetrics.projects || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
         "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
         Users: Number(adminNotificationMetrics.new || adminNotificationMetrics.open || 0),
+        "Internal Messages": Number(internalMessageMetrics.unread || 0),
       });
     };
 
@@ -606,6 +620,7 @@ export default function Dashboard() {
             <Route path="blogs" element={renderWithPermission("blogs:manage", <Blogs />)} />
             <Route path="contact-queries" element={renderWithPermission("contacts:read", <ContactQueries />)} />
             <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />
+            <Route path="internal-messages" element={renderWithPermission("internal:messages", <InternalMessages />)} />
             <Route path="users" element={renderWithPermission("users:manage", <Users />)} />
             <Route path="settings" element={renderWithPermission("dashboard:read", <Settings />)} />
             <Route path="jobs" element={renderWithPermission("jobs:manage", <Jobs />)} />

@@ -27,6 +27,7 @@ export type AdminPermission =
   | "seo:manage"
   | "jobs:manage"
   | "users:manage"
+  | "internal:messages"
   | "reports:read";
 
 export interface MailboxAccess {
