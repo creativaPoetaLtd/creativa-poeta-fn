@@ -82,27 +82,27 @@ const roleDefinitions: Record<AdminRole, { label: string; short: string; powers:
   admin_1: {
     label: "Niveau 1 - Operations",
     short: "Client requests",
-    powers: "Projects, visibility requests, assistance, contact inbox, shared emails and operational follow-up.",
+    powers: "Projects, visibility requests, assistance, contact inbox, shared emails, internal messages and operational follow-up.",
   },
   admin_2: {
     label: "Niveau 2 - Content & SEO",
     short: "Blog and visibility",
-    powers: "Articles, SEO, content, editorial calendar and visibility-related work.",
+    powers: "Articles, SEO, content, editorial calendar, internal messages and visibility-related work.",
   },
   admin_3: {
     label: "Niveau 3 - Support & email",
     short: "Client support",
-    powers: "CP Mail, contact replies, assistance requests and customer messages assigned to them.",
+    powers: "CP Mail, contact replies, assistance requests, internal messages and customer messages assigned to them.",
   },
   admin_4: {
     label: "Niveau 4 - Read & reporting",
     short: "Consultation",
-    powers: "Dashboard reading, results monitoring and reporting without critical deletion rights.",
+    powers: "Dashboard reading, internal messages, results monitoring and reporting without critical deletion rights.",
   },
   admin_5: {
     label: "Niveau 5 - Limited access",
     short: "Limited assistant",
-    powers: "Very targeted access to assigned items. Useful for a temporary assistant or contractor.",
+    powers: "Very targeted access to assigned items and internal messages. Useful for a temporary assistant or contractor.",
   },
 };
 
@@ -120,6 +120,7 @@ const permissionOptions: Array<{ key: AdminPermission; label: string; group: str
   { key: "seo:manage", label: "SEO tools", group: "Content" },
   { key: "jobs:manage", label: "Jobs", group: "System" },
   { key: "users:manage", label: "Admin users", group: "System" },
+  { key: "internal:messages", label: "Internal messages", group: "Messages" },
   { key: "reports:read", label: "Reports", group: "System" },
 ];
 
