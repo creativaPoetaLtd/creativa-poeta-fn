@@ -37,6 +37,7 @@ export interface EmailMessage {
   repliedBy?: string;
   assignedToEmail?: string;
   assignedToName?: string;
+  assignedToRole?: string;
   assignedAt?: string;
   activity?: EmailActivity[];
 }

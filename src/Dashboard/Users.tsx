@@ -54,6 +54,7 @@ import {
   PageHeader,
   StatusChip,
 } from "./components/DashboardComponents";
+import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 type EditableAdminRole = Exclude<AdminRole, "super_admin">;
 
@@ -169,6 +170,16 @@ const formatSharedMailboxes = (mailboxAccess?: MailboxAccess[]) =>
     .filter((mailbox) => mailbox.type === "shared")
     .map((mailbox) => mailbox.address)
     .join("\n");
+
+const roleChipSx = (role: AdminRole) => {
+  const colors = getAdminRoleColor(role);
+  return {
+    bgcolor: colors.backgroundColor,
+    color: colors.color,
+    borderColor: colors.borderColor,
+    fontWeight: 900,
+  };
+};
 
 const togglePermission = (
   values: AdminPermission[],
@@ -603,7 +614,13 @@ export default function Users() {
                 <Typography variant="body2">{adminUser.email}</Typography>
               </Box>
             ),
-            role: <StatusChip status={roleDefinitions[role]?.label || role} variant="info" />,
+            role: (
+              <Chip
+                size="small"
+                label={roleDefinitions[role]?.label || role}
+                sx={roleChipSx(role)}
+              />
+            ),
             account: (
               <StatusChip
                 status={accountStatus}

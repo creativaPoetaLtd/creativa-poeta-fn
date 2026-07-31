@@ -53,6 +53,7 @@ import Jobs from "./Jobs";
 import Projects from "./Projects";
 import Settings from "./Settings";
 import Users from "./Users";
+import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
 
@@ -169,6 +170,7 @@ export default function Dashboard() {
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const displayName = user?.name || "Admin";
   const avatarLetter = displayName.trim().charAt(0).toUpperCase() || "A";
+  const roleColors = getAdminRoleColor(currentRole);
   const userPermissions = new Set(user?.permissions || []);
   const hasPermission = (permission?: string) => {
     if (!permission) return true;
@@ -459,7 +461,7 @@ export default function Dashboard() {
         </Box>
       </Drawer>
 
-      <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+      <Box sx={{ flexGrow: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
         <AppBar
           position="fixed"
           elevation={0}
@@ -508,8 +510,10 @@ export default function Dashboard() {
                 label={displayName}
                 size="small"
                 sx={{
-                  bgcolor: alpha("#071a33", 0.08),
-                  color: "#071a33",
+                  bgcolor: roleColors.backgroundColor,
+                  color: roleColors.color,
+                  borderColor: roleColors.borderColor,
+                  border: `1px solid ${roleColors.borderColor}`,
                   fontWeight: 900,
                   display: { xs: "none", md: "inline-flex" },
                 }}
@@ -547,8 +551,8 @@ export default function Dashboard() {
                     width: 32,
                     height: 32,
                     mr: 1,
-                    backgroundColor: "#EEBA2B",
-                    color: "#071a33",
+                    backgroundColor: roleColors.backgroundColor,
+                    color: roleColors.color,
                     fontWeight: "bold",
                     fontSize: "0.9rem",
                   }}
@@ -610,6 +614,9 @@ export default function Dashboard() {
             background:
               "radial-gradient(circle at top right, rgba(238,186,43,0.12), transparent 32rem), #f6f8fb",
             minHeight: "calc(100vh - 84px)",
+            minWidth: 0,
+            maxWidth: `calc(100vw - ${drawerWidth}px)`,
+            overflowX: "hidden",
           }}
         >
           <Routes>

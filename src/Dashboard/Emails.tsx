@@ -61,6 +61,7 @@ import {
   updateEmailStatus,
 } from "../APIs/Emails";
 import { useAuth } from "../contexts/AuthContext";
+import { getAdminRoleColor } from "./utils/adminRoleColors";
 import {
   ActionButton,
   DashboardCard,
@@ -136,6 +137,17 @@ const getSender = (email: EmailMessage) => {
 };
 
 const getOwnerLabel = (email: EmailMessage) => email.assignedToName || email.assignedToEmail || "Open";
+const getOwnerChipStyles = (email: EmailMessage) => {
+  if (!email.assignedToEmail) return {};
+  const colors = getAdminRoleColor(email.assignedToRole);
+  return {
+    bgcolor: colors.backgroundColor,
+    color: colors.color,
+    borderColor: colors.borderColor,
+    fontWeight: 800,
+    "& .MuiChip-icon": { color: colors.color },
+  };
+};
 const isAssignedToAnother = (email: EmailMessage, currentEmail?: string) =>
   Boolean(email.assignedToEmail && normalizeMailbox(email.assignedToEmail) !== normalizeMailbox(currentEmail));
 
@@ -302,7 +314,7 @@ const Emails = () => {
         id: email._id,
         From: (
           <Box>
-            <Typography fontWeight={email.status === "new" ? 900 : 650}>{email.fromName || email.fromEmail || "Unknown sender"}</Typography>
+            <Typography fontWeight={email.status === "new" ? 900 : 400}>{email.fromName || email.fromEmail || "Unknown sender"}</Typography>
             <Typography variant="caption" color="text.secondary">
               {email.mailboxAddress}
             </Typography>
@@ -310,7 +322,7 @@ const Emails = () => {
         ),
         Subject: (
           <Box sx={{ maxWidth: 520 }}>
-            <Typography fontWeight={email.status === "new" ? 900 : 650}>{email.subject}</Typography>
+            <Typography fontWeight={email.status === "new" ? 900 : 400}>{email.subject}</Typography>
             <Typography variant="body2" color="text.secondary" noWrap>
               {email.preview || "No preview available"}
             </Typography>
@@ -321,8 +333,9 @@ const Emails = () => {
             size="small"
             icon={<PersonPin />}
             label={getOwnerLabel(email)}
-            color={email.assignedToEmail ? (isAssignedToAnother(email, user?.email) ? "warning" : "success") : "default"}
+            color={email.assignedToEmail ? undefined : "default"}
             variant={email.assignedToEmail ? "filled" : "outlined"}
+            sx={getOwnerChipStyles(email)}
           />
         ),
         Status: <StatusChip status={email.status} variant={getStatusVariant(email.status) as any} />,
