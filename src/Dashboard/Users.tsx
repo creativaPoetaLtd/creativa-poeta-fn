@@ -3,11 +3,14 @@ import {
   Alert,
   Box,
   Card,
+  Checkbox,
   CardContent,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
   Grid,
   MenuItem,
   Snackbar,
@@ -26,6 +29,7 @@ import {
   VerifiedUser,
 } from "@mui/icons-material";
 import {
+  AdminPermission,
   AdminRole,
   AdminUser,
   MailboxAccess,
@@ -36,6 +40,12 @@ import {
   updateAdminUser,
 } from "../APIs/adminUsers";
 import { useAuth } from "../contexts/AuthContext";
+import {
+  AdminNotification,
+  archiveAdminNotification,
+  getAdminNotifications,
+  resolvePasswordResetNotification,
+} from "../APIs/adminNotifications";
 import {
   ActionButton,
   DashboardCard,
@@ -52,6 +62,8 @@ type AdminForm = {
   email: string;
   role: EditableAdminRole;
   sharedMailboxes: string;
+  permissionsAllow: AdminPermission[];
+  permissionsDeny: AdminPermission[];
 };
 
 const sharedMailboxDefaults = ["contact@creativapoeta.com", "contact@creativapoeta.be"];
@@ -94,12 +106,36 @@ const roleDefinitions: Record<AdminRole, { label: string; short: string; powers:
   },
 };
 
+const permissionOptions: Array<{ key: AdminPermission; label: string; group: string }> = [
+  { key: "dashboard:read", label: "Dashboard", group: "General" },
+  { key: "requests:projects", label: "Projects", group: "Requests" },
+  { key: "requests:visibility", label: "Visibility tests", group: "Requests" },
+  { key: "requests:assistance", label: "Assistance requests", group: "Requests" },
+  { key: "contacts:read", label: "Contact inbox read", group: "Messages" },
+  { key: "contacts:reply", label: "Contact inbox reply", group: "Messages" },
+  { key: "email:read", label: "CP Mail read", group: "Emails" },
+  { key: "email:send", label: "CP Mail send", group: "Emails" },
+  { key: "email:manage", label: "CP Mail manage", group: "Emails" },
+  { key: "blogs:manage", label: "Blogs", group: "Content" },
+  { key: "seo:manage", label: "SEO tools", group: "Content" },
+  { key: "jobs:manage", label: "Jobs", group: "System" },
+  { key: "users:manage", label: "Admin users", group: "System" },
+  { key: "reports:read", label: "Reports", group: "System" },
+];
+
+const groupedPermissions = permissionOptions.reduce<Record<string, typeof permissionOptions>>((groups, permission) => {
+  groups[permission.group] = groups[permission.group] || [];
+  groups[permission.group].push(permission);
+  return groups;
+}, {});
 const defaultRole: EditableAdminRole = "admin_1";
 const emptyForm: AdminForm = {
   name: "",
   email: "",
   role: defaultRole,
   sharedMailboxes: sharedMailboxDefaults.join("\n"),
+  permissionsAllow: [],
+  permissionsDeny: [],
 };
 
 const getUserId = (user: AdminUser) => user._id || user.id || "";
@@ -129,6 +165,15 @@ const formatSharedMailboxes = (mailboxAccess?: MailboxAccess[]) =>
     .map((mailbox) => mailbox.address)
     .join("\n");
 
+const togglePermission = (
+  values: AdminPermission[],
+  permission: AdminPermission,
+  checked: boolean
+): AdminPermission[] =>
+  checked
+    ? Array.from(new Set([...values, permission]))
+    : values.filter((item) => item !== permission);
+
 export default function Users() {
   const { user: currentUser } = useAuth();
   const currentRole = normalizeRole(currentUser?.role, currentUser?.email);
@@ -146,6 +191,8 @@ export default function Users() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
+  const [notifications, setNotifications] = useState<AdminNotification[]>([]);
+  const [loadingNotifications, setLoadingNotifications] = useState(false);
 
   const roleOptions = useMemo<EditableAdminRole[]>(() => {
     if (isSuperAdmin) return ["admin_0", "admin_1", "admin_2", "admin_3", "admin_4", "admin_5"];
@@ -179,9 +226,22 @@ export default function Users() {
     }
   };
 
+  const fetchNotifications = async () => {
+    try {
+      setLoadingNotifications(true);
+      const data = await getAdminNotifications();
+      setNotifications(data.notifications || []);
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to fetch admin notifications.", "error");
+    } finally {
+      setLoadingNotifications(false);
+    }
+  };
+
   useEffect(() => {
     if (canManageUsers) {
       void fetchUsers();
+      void fetchNotifications();
     } else {
       setLoading(false);
     }
@@ -232,6 +292,8 @@ export default function Users() {
       email: adminUser.email,
       role: role === "super_admin" ? defaultRole : (role as EditableAdminRole),
       sharedMailboxes: formatSharedMailboxes(adminUser.mailboxAccess),
+      permissionsAllow: adminUser.permissionsAllow || [],
+      permissionsDeny: adminUser.permissionsDeny || [],
     });
     setDialogOpen(true);
   };
@@ -256,6 +318,8 @@ export default function Users() {
           name: form.name,
           role: form.role,
           mailboxAccess,
+          permissionsAllow: form.permissionsAllow,
+          permissionsDeny: form.permissionsDeny,
         });
         setUsers((current) =>
           current.map((adminUser) =>
@@ -269,6 +333,8 @@ export default function Users() {
           email: form.email,
           role: form.role,
           mailboxAccess,
+          permissionsAllow: form.permissionsAllow,
+          permissionsDeny: form.permissionsDeny,
         });
         setUsers((current) => [response.user, ...current]);
         showMessage("Admin created. They can now click Create account and choose their own password.");
@@ -332,12 +398,35 @@ export default function Users() {
     }
   };
 
+  const handleResolvePasswordResetNotification = async (notification: AdminNotification) => {
+    try {
+      const id = notification._id || notification.id || "";
+      const response = await resolvePasswordResetNotification(id);
+      await navigator.clipboard?.writeText(response.resetLink);
+      setNotifications((current) => current.filter((item) => (item._id || item.id) !== id));
+      showMessage("Password reset link created and copied.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to generate reset link.", "error");
+    }
+  };
+
+  const handleArchiveNotification = async (notification: AdminNotification) => {
+    try {
+      const id = notification._id || notification.id || "";
+      await archiveAdminNotification(id);
+      setNotifications((current) => current.filter((item) => (item._id || item.id) !== id));
+      showMessage("Request archived.");
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to archive request.", "error");
+    }
+  };
+
   if (!canManageUsers) {
     return (
       <Box sx={{ p: 3 }}>
         <PageHeader title="Admin Users" subtitle="Manage access and permissions." />
         <Alert severity="warning">
-          This section is reserved for level 0 admins. Your current role is{" "}
+          This section is reserved for authorized accounts. Your current role is{" "}
           <strong>{roleDefinitions[currentRole]?.label || currentRole}</strong>.
         </Alert>
       </Box>
@@ -374,7 +463,56 @@ export default function Users() {
         Add a CP admin email, assign a level, then choose which shared mailboxes this person can access.
       </Alert>
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Card sx={{ mb: 3, border: notifications.length ? "1px solid #f59e0b" : "1px solid #e2e8f0" }}>
+        <CardContent>
+          <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2, flexWrap: "wrap", alignItems: "center", mb: notifications.length ? 2 : 0 }}>
+            <Box>
+              <Typography sx={{ fontWeight: 900, color: "#071a33" }}>Password reset requests</Typography>
+              <Typography sx={{ color: "#64748b", fontSize: 13 }}>
+                Treat pending password reset requests and generate secure links only when needed.
+              </Typography>
+            </Box>
+            <ActionButton variant="secondary" onClick={() => void fetchNotifications()}>
+              Refresh requests
+            </ActionButton>
+          </Box>
+
+          {loadingNotifications ? (
+            <Typography sx={{ color: "#64748b" }}>Loading requests...</Typography>
+          ) : notifications.length === 0 ? (
+            <Typography sx={{ color: "#64748b" }}>No pending reset request.</Typography>
+          ) : (
+            <Grid container spacing={2}>
+              {notifications.map((notification) => (
+                <Grid item xs={12} md={6} key={notification._id || notification.id}>
+                  <Card variant="outlined" sx={{ background: notification.status === "new" ? "#fff7ed" : "#fff" }}>
+                    <CardContent>
+                      <Typography sx={{ fontWeight: 900, color: "#071a33" }}>
+                        {notification.targetName || "Admin account"}
+                      </Typography>
+                      <Typography sx={{ color: "#475569", fontSize: 13, mb: 1 }}>
+                        {notification.targetEmail}
+                      </Typography>
+                      <Typography sx={{ color: "#64748b", fontSize: 12 }}>
+                        Requested {notification.createdAt ? new Date(notification.createdAt).toLocaleString() : "recently"}
+                      </Typography>
+                      <Box sx={{ display: "flex", gap: 1, mt: 2, flexWrap: "wrap" }}>
+                        <ActionButton variant="primary" onClick={() => void handleResolvePasswordResetNotification(notification)}>
+                          Generate reset link
+                        </ActionButton>
+                        <ActionButton variant="secondary" onClick={() => void handleArchiveNotification(notification)}>
+                          Archive
+                        </ActionButton>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </CardContent>
+      </Card>
+<Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} md={3}>
           <DashboardCard title="Total Admins" value={metrics.total} icon={<People />} color="#2196F3" />
         </Grid>
@@ -435,7 +573,7 @@ export default function Users() {
       </Card>
 
       <DataTable
-        headers={["Name", "Email", "Role", "Account", "Mailboxes"]}
+        headers={["Name", "Email", "Role", "Account", "Mailboxes", "Access"]}
         hiddenFields={["id"]}
         rows={filteredUsers.map((adminUser) => {
           const role = normalizeRole(adminUser.role, adminUser.email);
@@ -465,6 +603,19 @@ export default function Users() {
               />
             ),
             mailboxes: `${sharedCount} shared`,
+            access: (
+              <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
+                {(adminUser.permissionsAllow || []).length > 0 && (
+                  <Chip size="small" label={`+${(adminUser.permissionsAllow || []).length}`} color="success" />
+                )}
+                {(adminUser.permissionsDeny || []).length > 0 && (
+                  <Chip size="small" label={`-${(adminUser.permissionsDeny || []).length}`} color="warning" />
+                )}
+                {(adminUser.permissionsAllow || []).length === 0 && (adminUser.permissionsDeny || []).length === 0 && (
+                  <Typography sx={{ fontSize: 13, color: "#64748b" }}>Level defaults</Typography>
+                )}
+              </Box>
+            ),
           };
         })}
         customActions={(row) => {
@@ -494,7 +645,7 @@ export default function Users() {
         emptyMessage="No admin users found"
       />
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth>
         <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>
           {editingUser ? "Edit Admin" : "Create Admin"}
         </DialogTitle>
@@ -540,7 +691,87 @@ export default function Users() {
             placeholder="contact@creativapoeta.com\ncontact@creativapoeta.be"
             helperText="One shared mailbox per line. The personal mailbox is always private and added automatically."
             onChange={(event) => setForm((current) => ({ ...current, sharedMailboxes: event.target.value }))}
+            sx={{ mb: 2 }}
           />
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Card variant="outlined" sx={{ height: "100%" }}>
+                <CardContent>
+                  <Typography sx={{ fontWeight: 900, color: "#071a33", mb: 1 }}>
+                    Add specific access
+                  </Typography>
+                  {Object.entries(groupedPermissions).map(([group, permissions]) => (
+                    <Box key={`allow-${group}`} sx={{ mb: 1.5 }}>
+                      <Typography sx={{ fontSize: 12, fontWeight: 900, color: "#64748b", textTransform: "uppercase" }}>
+                        {group}
+                      </Typography>
+                      {permissions.map((permission) => (
+                        <FormControlLabel
+                          key={`allow-${permission.key}`}
+                          control={
+                            <Checkbox
+                              size="small"
+                              checked={form.permissionsAllow.includes(permission.key)}
+                              onChange={(event) =>
+                                setForm((current) => ({
+                                  ...current,
+                                  permissionsAllow: togglePermission(current.permissionsAllow, permission.key, event.target.checked),
+                                  permissionsDeny: event.target.checked
+                                    ? current.permissionsDeny.filter((item) => item !== permission.key)
+                                    : current.permissionsDeny,
+                                }))
+                              }
+                            />
+                          }
+                          label={permission.label}
+                          sx={{ display: "block", m: 0 }}
+                        />
+                      ))}
+                    </Box>
+                  ))}
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Card variant="outlined" sx={{ height: "100%" }}>
+                <CardContent>
+                  <Typography sx={{ fontWeight: 900, color: "#071a33", mb: 1 }}>
+                    Remove specific access
+                  </Typography>
+                  {Object.entries(groupedPermissions).map(([group, permissions]) => (
+                    <Box key={`deny-${group}`} sx={{ mb: 1.5 }}>
+                      <Typography sx={{ fontSize: 12, fontWeight: 900, color: "#64748b", textTransform: "uppercase" }}>
+                        {group}
+                      </Typography>
+                      {permissions.map((permission) => (
+                        <FormControlLabel
+                          key={`deny-${permission.key}`}
+                          control={
+                            <Checkbox
+                              size="small"
+                              checked={form.permissionsDeny.includes(permission.key)}
+                              onChange={(event) =>
+                                setForm((current) => ({
+                                  ...current,
+                                  permissionsDeny: togglePermission(current.permissionsDeny, permission.key, event.target.checked),
+                                  permissionsAllow: event.target.checked
+                                    ? current.permissionsAllow.filter((item) => item !== permission.key)
+                                    : current.permissionsAllow,
+                                }))
+                              }
+                            />
+                          }
+                          label={permission.label}
+                          sx={{ display: "block", m: 0 }}
+                        />
+                      ))}
+                    </Box>
+                  ))}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions sx={{ p: 2 }}>
           <ActionButton variant="secondary" onClick={() => setDialogOpen(false)}>
@@ -565,5 +796,3 @@ export default function Users() {
     </Box>
   );
 }
-
-

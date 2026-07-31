@@ -1,4 +1,4 @@
-﻿import React, {
+import React, {
   createContext,
   useContext,
   useState,
@@ -21,6 +21,10 @@ interface User {
   roleLabel?: string;
   accountStatus?: string;
   mailboxAccess?: MailboxAccess[];
+  permissions?: string[];
+  permissionsAllow?: string[];
+  permissionsDeny?: string[];
+  internalGroups?: string[];
 }
 
 interface AuthContextType {
@@ -169,5 +173,3 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-
-

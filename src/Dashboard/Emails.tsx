@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Box,
@@ -376,12 +376,12 @@ const Emails = () => {
 
         if (silent) {
           if (result.imported > 0) {
-            showMessage(`${result.imported} new email(s) imported.`);
+            showMessage(`${result.imported} new email(s) received.`);
           }
           return;
         }
 
-        showMessage(`Mailbox sync completed: ${result.imported} imported, ${result.updated} updated.`);
+        showMessage(result.imported > 0 ? `${result.imported} new email(s) received.` : "Mailbox sync completed.");
       } catch (syncError) {
         if (!silent) {
           showMessage(syncError instanceof Error ? syncError.message : "Email sync failed.", "error");
@@ -951,18 +951,3 @@ const Emails = () => {
 };
 
 export default Emails;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

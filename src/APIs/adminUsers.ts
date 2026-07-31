@@ -1,4 +1,4 @@
-﻿import { authRequest } from "./client";
+import { authRequest } from "./client";
 
 export type AdminRole =
   | "super_admin"
@@ -13,6 +13,22 @@ export type AccountStatus = "pending" | "active" | "disabled";
 export type MailboxPermission = "read" | "send" | "manage";
 export type MailboxType = "personal" | "shared";
 
+export type AdminPermission =
+  | "dashboard:read"
+  | "requests:projects"
+  | "requests:visibility"
+  | "requests:assistance"
+  | "contacts:read"
+  | "contacts:reply"
+  | "email:read"
+  | "email:send"
+  | "email:manage"
+  | "blogs:manage"
+  | "seo:manage"
+  | "jobs:manage"
+  | "users:manage"
+  | "reports:read";
+
 export interface MailboxAccess {
   address: string;
   permission: MailboxPermission;
@@ -26,7 +42,10 @@ export interface AdminUser {
   email: string;
   role: AdminRole;
   roleLabel?: string;
-  permissions?: string[];
+  permissions?: AdminPermission[];
+  permissionsAllow?: AdminPermission[];
+  permissionsDeny?: AdminPermission[];
+  internalGroups?: string[];
   isActive: boolean;
   accountStatus?: AccountStatus;
   mailboxAccess?: MailboxAccess[];
@@ -38,6 +57,8 @@ export interface CreateAdminPayload {
   email: string;
   role: Exclude<AdminRole, "super_admin">;
   mailboxAccess?: MailboxAccess[];
+  permissionsAllow?: AdminPermission[];
+  permissionsDeny?: AdminPermission[];
 }
 
 export interface UpdateAdminPayload {
@@ -45,6 +66,8 @@ export interface UpdateAdminPayload {
   role?: Exclude<AdminRole, "super_admin">;
   isActive?: boolean;
   mailboxAccess?: MailboxAccess[];
+  permissionsAllow?: AdminPermission[];
+  permissionsDeny?: AdminPermission[];
 }
 
 export const getAdminUsers = async () => {

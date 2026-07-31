@@ -1,4 +1,4 @@
-﻿import {
+import {
   alpha,
   AppBar,
   Avatar,
@@ -38,6 +38,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import { useEffect, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
+import { getAdminNotificationSummary } from "../APIs/adminNotifications";
 import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
 import { useAuth } from "../contexts/AuthContext";
@@ -59,6 +60,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024",
     color: "#EEBA2B",
     section: "Pilotage",
+    permission: "dashboard:read",
   },
   {
     text: "Projects",
@@ -66,6 +68,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/projects",
     color: "#4CAF50",
     section: "Demandes",
+    permission: "requests:projects",
   },
   {
     text: "Visibility Tests",
@@ -73,6 +76,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/visibility-tests",
     color: "#0ea5e9",
     section: "Demandes",
+    permission: "requests:visibility",
   },
   {
     text: "Assistance Requests",
@@ -80,6 +84,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/assistance-requests",
     color: "#EEBA2B",
     section: "Demandes",
+    permission: "requests:assistance",
   },
   {
     text: "Contact Inbox",
@@ -87,6 +92,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/contact-queries",
     color: "#FF9800",
     section: "Demandes",
+    permission: "contacts:read",
   },
   {
     text: "Emails",
@@ -94,6 +100,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/emails",
     color: "#14b8a6",
     section: "Demandes",
+    permission: "email:read",
   },
   {
     text: "Blogs",
@@ -101,6 +108,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/blogs",
     color: "#2196F3",
     section: "Contenu",
+    permission: "blogs:manage",
   },
   {
     text: "Users",
@@ -108,6 +116,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/users",
     color: "#9C27B0",
     section: "Systeme",
+    permission: "users:manage",
   },
   {
     text: "Settings",
@@ -115,6 +124,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/settings",
     color: "#607D8B",
     section: "Systeme",
+    permission: "dashboard:read",
   },
   {
     text: "Jobs",
@@ -122,6 +132,7 @@ const navigationItems = [
     path: "/secure-admin-dashboard-2024/jobs",
     color: "#F44336",
     section: "Systeme",
+    permission: "jobs:manage",
   },
 ];
 
@@ -147,19 +158,29 @@ export default function Dashboard() {
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const displayName = user?.name || "Admin";
   const avatarLetter = displayName.trim().charAt(0).toUpperCase() || "A";
-  const visibleNavigationItems = navigationItems.filter((item) =>
-    item.text !== "Users" || ["super_admin", "admin_0"].includes(currentRole)
-  );
+  const userPermissions = new Set(user?.permissions || []);
+  const hasPermission = (permission?: string) => {
+    if (!permission) return true;
+    if (["super_admin", "admin_0"].includes(currentRole)) return true;
+    return userPermissions.has(permission);
+  };
+  const visibleNavigationItems = navigationItems.filter((item) => {
+    if (item.text === "Users" && !["super_admin", "admin_0"].includes(currentRole)) {
+      return false;
+    }
+    return hasPermission(item.permission);
+  });
 
   useEffect(() => {
     if (!user) return undefined;
 
     let mounted = true;
     const loadNavigationBadges = async () => {
-      const [emailResult, projectResult, contactResult] = await Promise.allSettled([
+      const [emailResult, projectResult, contactResult, adminNotificationResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
         getContactSummary(),
+        ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
       ]);
 
       if (!mounted) return;
@@ -172,11 +193,13 @@ export default function Dashboard() {
 
       const projectMetrics = projectResult.status === "fulfilled" ? projectResult.value.metrics || {} : {};
       const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
+      const adminNotificationMetrics = adminNotificationResult.status === "fulfilled" ? adminNotificationResult.value.metrics || { new: 0, open: 0 } : { new: 0, open: 0 };
       setRequestAttentionCounts({
         Projects: Number(projectMetrics.projects || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
         "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
+        Users: Number(adminNotificationMetrics.new || adminNotificationMetrics.open || 0),
       });
     };
 
@@ -186,7 +209,7 @@ export default function Dashboard() {
       mounted = false;
       window.clearInterval(interval);
     };
-  }, [user]);
+  }, [user, currentRole]);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -205,6 +228,19 @@ export default function Dashboard() {
     handleMenuClose();
   };
 
+  const renderWithPermission = (permission: string, element: JSX.Element) =>
+    hasPermission(permission) ? (
+      element
+    ) : (
+      <Box sx={{ p: 3 }}>
+        <Typography sx={{ fontWeight: 900, color: "#071a33", mb: 1 }}>
+          Access reserved
+        </Typography>
+        <Typography sx={{ color: "#64748b" }}>
+          Your account does not have access to this section.
+        </Typography>
+      </Box>
+    );
   const getCurrentPageTitle = () => {
     const currentItem = visibleNavigationItems.find((item) => location.pathname === item.path);
     return currentItem ? currentItem.text : "Overview";
@@ -563,28 +599,19 @@ export default function Dashboard() {
           }}
         >
           <Routes>
-            <Route path="/" element={<Analytics />} />
-            <Route path="projects" element={<Projects kind="projects" />} />
-            <Route path="visibility-tests" element={<Projects kind="visibility" />} />
-            <Route path="assistance-requests" element={<Projects kind="assistance" />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="contact-queries" element={<ContactQueries />} />
-            <Route path="emails" element={<Emails />} />
-            <Route path="users" element={<Users />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="jobs" element={<Jobs />} />
+            <Route path="/" element={renderWithPermission("dashboard:read", <Analytics />)} />
+            <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
+            <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
+            <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
+            <Route path="blogs" element={renderWithPermission("blogs:manage", <Blogs />)} />
+            <Route path="contact-queries" element={renderWithPermission("contacts:read", <ContactQueries />)} />
+            <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />
+            <Route path="users" element={renderWithPermission("users:manage", <Users />)} />
+            <Route path="settings" element={renderWithPermission("dashboard:read", <Settings />)} />
+            <Route path="jobs" element={renderWithPermission("jobs:manage", <Jobs />)} />
           </Routes>
         </Box>
       </Box>
     </Box>
   );
 }
-
-
-
-
-
-
-
-
-
