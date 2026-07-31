@@ -153,12 +153,16 @@ const normalizeRole = (role?: string, email?: string): AdminRole => {
   return (role || "admin_5") as AdminRole;
 };
 
-const parseSharedMailboxes = (value: string): MailboxAccess[] =>
-  value
+const parseSharedMailboxes = (value: string, personalEmail: string, reservedPersonalEmails: string[]): MailboxAccess[] => {
+  const personal = personalEmail.trim().toLowerCase();
+  const reserved = new Set(reservedPersonalEmails.map((email) => email.trim().toLowerCase()).filter(Boolean));
+
+  return value
     .split(/[\n,;]/)
     .map((item) => item.trim().toLowerCase())
-    .filter(Boolean)
+    .filter((address) => address && address !== personal && !reserved.has(address))
     .map((address) => ({ address, permission: "manage", type: "shared" }));
+};
 
 const formatSharedMailboxes = (mailboxAccess?: MailboxAccess[]) =>
   (mailboxAccess || [])
@@ -311,7 +315,10 @@ export default function Users() {
         return;
       }
 
-      const mailboxAccess = parseSharedMailboxes(form.sharedMailboxes);
+      const reservedPersonalEmails = users
+        .filter((adminUser) => !editingUser || getUserId(adminUser) !== getUserId(editingUser))
+        .map((adminUser) => adminUser.email);
+      const mailboxAccess = parseSharedMailboxes(form.sharedMailboxes, form.email, reservedPersonalEmails);
 
       if (editingUser) {
         const id = getUserId(editingUser);
@@ -338,7 +345,7 @@ export default function Users() {
           permissionsDeny: form.permissionsDeny,
         });
         setUsers((current) => [response.user, ...current]);
-        showMessage("Admin created. They can now click Create account and choose their own password.");
+        showMessage("Admin created. The account can now be activated. For CP Mail, add secure reception and sending credentials for this mailbox, then redeploy.");
       }
 
       setDialogOpen(false);
@@ -461,7 +468,7 @@ export default function Users() {
       )}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Add a CP admin email, assign a level, then choose which shared mailboxes this person can access.
+        Add a CP admin email, assign a level, then choose shared mailboxes only. Personal staff mailboxes stay private and are added automatically.
       </Alert>
 
       <Card sx={{ mb: 3, border: notifications.length ? "1px solid #f59e0b" : "1px solid #e2e8f0" }}>
@@ -690,7 +697,7 @@ export default function Users() {
             minRows={3}
             value={form.sharedMailboxes}
             placeholder="contact@creativapoeta.com\ncontact@creativapoeta.be"
-            helperText="One shared mailbox per line. The personal mailbox is always private and added automatically."
+            helperText="One common mailbox per line. Do not add staff addresses here; personal mailboxes remain private."
             onChange={(event) => setForm((current) => ({ ...current, sharedMailboxes: event.target.value }))}
             sx={{ mb: 2 }}
           />

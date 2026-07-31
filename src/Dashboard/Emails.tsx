@@ -212,11 +212,10 @@ const Emails = () => {
 
     add(user?.email);
     if (canSeeSharedByDefault) sharedMailboxDefaults.forEach(add);
-    (user?.mailboxAccess || []).forEach((mailbox) => add(mailbox.address));
     serverMailboxes.forEach(add);
 
     return Array.from(values).map((address) => ({ value: address, label: address }));
-  }, [serverMailboxes, user?.email, user?.mailboxAccess, user?.role]);
+  }, [serverMailboxes, user?.email, user?.role]);
 
   const allMailboxValues = useMemo(() => mailboxOptions.map((option) => option.value), [mailboxOptions]);
   const filterStorageKey = useMemo(() => `cp-email-filters:${normalizeMailbox(user?.email) || "anonymous"}`, [user?.email]);
