@@ -291,6 +291,30 @@ export const sendComposedEmail = async (payload: ComposeEmailPayload, attachment
   );
 };
 
+
+export const forwardEmail = async (id: string, payload: ComposeEmailPayload, attachments: File[] = []) => {
+  const data = attachments.length ? new FormData() : payload;
+
+  if (data instanceof FormData) {
+    appendComposeField(data, "to", payload.to);
+    appendComposeField(data, "cc", payload.cc);
+    appendComposeField(data, "bcc", payload.bcc);
+    appendComposeField(data, "subject", payload.subject);
+    appendComposeField(data, "body", payload.body);
+    appendComposeField(data, "signature", payload.signature);
+    appendComposeField(data, "fromEmail", payload.fromEmail);
+    attachments.forEach((file) => data.append("attachments", file));
+  }
+
+  return authRequest<{ email: OutboundEmail }>(
+    {
+      method: "POST",
+      url: `/api/emails/${id}/forward`,
+      data,
+    },
+    "Failed to forward email."
+  );
+};
 export const sendEmailDraft = async (id: string) => {
   return authRequest<{ email: OutboundEmail }>(
     {
@@ -310,6 +334,3 @@ export const deleteOutboundEmail = async (id: string) => {
     "Failed to delete outbound email."
   );
 };
-
-
-

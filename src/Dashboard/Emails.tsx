@@ -33,6 +33,7 @@ import Create from "@mui/icons-material/Create";
 import Delete from "@mui/icons-material/Delete";
 import Drafts from "@mui/icons-material/Drafts";
 import EmailIcon from "@mui/icons-material/Email";
+import Forward from "@mui/icons-material/Forward";
 import Inbox from "@mui/icons-material/Inbox";
 import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
 import Refresh from "@mui/icons-material/Refresh";
@@ -47,6 +48,7 @@ import {
   EmailFolder,
   EmailMessage,
   EmailStatus,
+  forwardEmail,
   getEmail,
   getEmails,
   getOutboundEmails,
@@ -206,6 +208,7 @@ const Emails = () => {
   const [replySignature, setReplySignature] = useState("");
   const [replyLoading, setReplyLoading] = useState(false);
   const [composeOpen, setComposeOpen] = useState(false);
+  const [forwardSourceId, setForwardSourceId] = useState<string | null>(null);
   const [composeForm, setComposeForm] = useState<ComposeForm>(emptyCompose);
   const [editingDraftId, setEditingDraftId] = useState<string | null>(null);
   const [composeAttachments, setComposeAttachments] = useState<File[]>([]);
@@ -474,19 +477,36 @@ const Emails = () => {
 
   const openReplyDialog = (email: EmailMessage) => {
     setSelectedEmail(email);
-    setReplySubject(/^re:/i.test(email.subject) ? email.subject : `Re: ${email.subject || "Votre message"}`);
+    setReplySubject(/^re:/i.test(email.subject) ? email.subject : `Re: ${email.subject || "Your message"}`);
     setReplyMessage("");
     setReplySignature("");
     setReplyOpen(true);
   };
 
   const openComposeDialog = (draft?: OutboundEmail) => {
+    setForwardSourceId(null);
     setEditingDraftId(draft?._id || null);
     const defaultFromEmail = allMailboxValues[0] || "";
     setComposeForm(draft ? { ...fromOutboundEmail(draft), fromEmail: draft.fromEmail || defaultFromEmail } : { ...emptyCompose, fromEmail: defaultFromEmail });
     setComposeAttachments([]);
     setComposeOpen(true);
   };
+
+  const openForwardDialog = (email: EmailMessage) => {
+    const mailboxAddress = normalizeMailbox(email.mailboxAddress);
+    const defaultFromEmail = allMailboxValues.includes(mailboxAddress) ? mailboxAddress : allMailboxValues[0] || "";
+    setSelectedEmail(email);
+    setForwardSourceId(email._id);
+    setEditingDraftId(null);
+    setComposeForm({
+      ...emptyCompose,
+      fromEmail: defaultFromEmail,
+      subject: /^(fw|fwd):/i.test(email.subject || "") ? email.subject : `Fwd: ${email.subject || "Forwarded message"}`,
+    });
+    setComposeAttachments([]);
+    setComposeOpen(true);
+  };
+
 
 
   const handleAttachmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -535,6 +555,11 @@ const Emails = () => {
   };
 
   const handleSaveDraft = async () => {
+    if (forwardSourceId) {
+      showMessage("Forward drafts are not available yet. Send the forwarded email directly.", "warning");
+      return;
+    }
+
     if (composeAttachments.length) {
       showMessage("Attachments are sent immediately and cannot be saved in drafts yet.", "warning");
       return;
@@ -561,9 +586,11 @@ const Emails = () => {
   const handleSendCompose = async () => {
     try {
       setComposeLoading(true);
-      await sendComposedEmail(toComposePayload(composeForm, editingDraftId || undefined), composeAttachments);
+      if (forwardSourceId) await forwardEmail(forwardSourceId, toComposePayload(composeForm), composeAttachments);
+      else await sendComposedEmail(toComposePayload(composeForm, editingDraftId || undefined), composeAttachments);
       setComposeOpen(false);
       setEditingDraftId(null);
+      setForwardSourceId(null);
       setComposeAttachments([]);
       if (folder !== "sent") setFolder("sent");
       setCurrentPage(1);
@@ -757,6 +784,7 @@ const Emails = () => {
                 {email.assignedToEmail && !isAssignedToAnother(email, user?.email) && <MenuAction icon={<PersonPin />} label="Release" onClick={() => void handleReleaseEmail(email)} color="#64748b" />}
                 <MenuAction icon={<MarkEmailRead />} label="Mark read" onClick={() => void handleStatusChange(email._id, "read")} color="#0ea5e9" />
                 <MenuAction icon={<Reply />} label="Reply" onClick={() => openReplyDialog(email)} color="#16a34a" />
+                <MenuAction icon={<Forward />} label="Forward" onClick={() => openForwardDialog(email)} color="#2563eb" />
                 <MenuAction icon={<MarkEmailRead />} label="Mark replied" onClick={() => void handleStatusChange(email._id, "replied")} color="#16a34a" />
                 <MenuAction icon={<Archive />} label="Archive" onClick={() => void handleStatusChange(email._id, "archived")} color="#64748b" />
                 <MenuAction icon={<Delete />} label="Delete copy" onClick={() => void handleDeleteInbox(email)} color="#ef4444" />
@@ -884,6 +912,7 @@ const Emails = () => {
         <DialogActions sx={{ p: 2, flexWrap: "wrap", gap: 1 }}>
           <ActionButton variant="secondary" onClick={() => setViewOpen(false)}>Close</ActionButton>
           {selectedEmail && <ActionButton variant="success" startIcon={<Reply />} onClick={() => openReplyDialog(selectedEmail)}>Reply</ActionButton>}
+          {selectedEmail && <ActionButton variant="secondary" startIcon={<Forward />} onClick={() => openForwardDialog(selectedEmail)}>Forward</ActionButton>}
           {selectedOutbound && folder === "drafts" && <ActionButton variant="primary" startIcon={<Create />} onClick={() => openComposeDialog(selectedOutbound)}>Edit draft</ActionButton>}
         </DialogActions>
       </Dialog>
@@ -905,7 +934,7 @@ const Emails = () => {
       </Dialog>
 
       <Dialog open={composeOpen} onClose={() => !composeLoading && setComposeOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>{editingDraftId ? "Edit draft" : "Compose email"}</DialogTitle>
+        <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>{forwardSourceId ? "Forward email" : editingDraftId ? "Edit draft" : "Compose email"}</DialogTitle>
         <DialogContent sx={{ pt: 3 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
             <TextField select label="From" value={composeForm.fromEmail} onChange={(event) => setComposeForm((current) => ({ ...current, fromEmail: event.target.value }))} fullWidth required>
@@ -950,8 +979,8 @@ const Emails = () => {
         </DialogContent>
         <DialogActions sx={{ p: 2, gap: 1, flexWrap: "wrap" }}>
           <ActionButton variant="secondary" disabled={composeLoading} onClick={() => setComposeOpen(false)}>Cancel</ActionButton>
-          <ActionButton variant="secondary" disabled={composeLoading} startIcon={<Drafts />} onClick={() => void handleSaveDraft()}>{composeLoading ? "Saving..." : "Save draft"}</ActionButton>
-          <ActionButton variant="primary" disabled={composeLoading} startIcon={<Send />} onClick={() => void handleSendCompose()}>{composeLoading ? "Sending..." : "Send email"}</ActionButton>
+          {!forwardSourceId && <ActionButton variant="secondary" disabled={composeLoading} startIcon={<Drafts />} onClick={() => void handleSaveDraft()}>{composeLoading ? "Saving..." : "Save draft"}</ActionButton>}
+          <ActionButton variant="primary" disabled={composeLoading} startIcon={<Send />} onClick={() => void handleSendCompose()}>{composeLoading ? "Sending..." : forwardSourceId ? "Forward email" : "Send email"}</ActionButton>
         </DialogActions>
       </Dialog>
 
