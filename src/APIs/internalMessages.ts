@@ -10,16 +10,34 @@ export interface InternalMessage {
   createdAt: string;
 }
 
+export interface InternalGroupMeta {
+  key: string;
+  label: string;
+  levels: number[];
+  ownerLevel: number;
+  color: string;
+  background: string;
+}
+
+export interface InternalUserOption {
+  name: string;
+  email: string;
+  role: string;
+  roleLabel?: string;
+}
+
 export interface InternalConversation {
   _id?: string;
   id?: string;
   title: string;
   type: "group" | "direct" | "custom";
   groupKey?: string;
+  groupMeta?: InternalGroupMeta;
   participantEmails: string[];
   createdByEmail: string;
   messages: InternalMessage[];
   lastMessage?: InternalMessage | null;
+  hasMessages?: boolean;
   unreadCount: number;
   lastMessageAt?: string;
   createdAt?: string;
@@ -27,7 +45,7 @@ export interface InternalConversation {
 }
 
 export const getInternalConversations = async () =>
-  authRequest<{ conversations: InternalConversation[] }>(
+  authRequest<{ conversations: InternalConversation[]; groups: InternalGroupMeta[]; users: InternalUserOption[] }>(
     {
       method: "GET",
       url: "/api/internal-messages",
@@ -45,7 +63,7 @@ export const getInternalMessageSummary = async () =>
   );
 
 export const createInternalConversation = async (data: {
-  title: string;
+  title?: string;
   participantEmails: string[];
   body?: string;
 }) =>
