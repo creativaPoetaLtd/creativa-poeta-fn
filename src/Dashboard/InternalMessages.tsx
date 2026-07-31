@@ -57,6 +57,13 @@ const fallbackGroupMeta = (groupKey?: string): InternalGroupMeta => ({
   background: "#f8fafc",
 });
 
+const displaySenderName = (name?: string, email?: string) => {
+  const value = (name || "").trim();
+  if (/admin\s*level\s*\d/i.test(value) || /admin\s*niveau\s*\d/i.test(value)) {
+    return email || "CP Admin";
+  }
+  return value || email || "CP Admin";
+};
 const InternalMessages = () => {
   const { user } = useAuth();
   const [conversations, setConversations] = useState<InternalConversation[]>([]);
@@ -207,7 +214,7 @@ const InternalMessages = () => {
         </Stack>
         {conversation.lastMessage && (
           <Typography variant="body2" color="text.secondary" noWrap sx={{ mt: 1 }}>
-            {conversation.lastMessage.senderName}: {conversation.lastMessage.body}
+            {displaySenderName(conversation.lastMessage.senderName, conversation.lastMessage.senderEmail)}: {conversation.lastMessage.body}
           </Typography>
         )}
       </Box>
@@ -245,9 +252,9 @@ const InternalMessages = () => {
         </Alert>
       )}
 
-      <Grid container spacing={2} sx={{ minWidth: 0 }}>
-        <Grid item xs={12} md={4} sx={{ minWidth: 0 }}>
-          <Paper sx={{ overflow: "hidden", borderRadius: 3 }}>
+      <Grid container spacing={2} sx={{ minWidth: 0, width: "100%", maxWidth: "100%", overflow: "hidden" }}>
+        <Grid item xs={12} md={4} zeroMinWidth sx={{ minWidth: 0, maxWidth: "100%" }}>
+          <Paper sx={{ overflow: "hidden", borderRadius: 3, width: "100%", maxWidth: "100%" }}>
             <Box sx={{ p: 2, borderBottom: "1px solid #e5e7eb" }}>
               <Typography fontWeight={800}>Open Threads</Typography>
               <Typography variant="caption" color="text.secondary">
@@ -273,7 +280,7 @@ const InternalMessages = () => {
                 <Stack divider={<Divider />} sx={{ maxHeight: 260, overflow: "auto" }}>
                   {emptyGroupConversations.length === 0 && (
                     <Box sx={{ p: 2 }}>
-                      <Typography variant="body2" color="text.secondary">No empty groups available.</Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}>No empty groups available.</Typography>
                     </Box>
                   )}
                   {emptyGroupConversations.map(renderConversationRow)}
@@ -283,11 +290,11 @@ const InternalMessages = () => {
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={8} sx={{ minWidth: 0 }}>
-          <Paper sx={{ borderRadius: 3, height: { xs: "calc(100vh - 230px)", md: "calc(100vh - 230px)" }, minHeight: { xs: 520, md: 560 }, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
+        <Grid item xs={12} md={8} zeroMinWidth sx={{ minWidth: 0, maxWidth: "100%" }}>
+          <Paper sx={{ borderRadius: 3, height: { xs: "calc(100vh - 230px)", md: "calc(100vh - 230px)" }, minHeight: { xs: 520, md: 560 }, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0, width: "100%", maxWidth: "100%" }}>
             {selectedConversation ? (
               <>
-                <Box sx={{ p: 2.5, borderBottom: "1px solid #e5e7eb" }}>
+                <Box sx={{ p: 2.5, borderBottom: "1px solid #e5e7eb", minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
                   <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
                     <Typography variant="h6" fontWeight={900} sx={{ overflowWrap: "anywhere" }}>{displayConversationTitle(selectedConversation)}</Typography>
                     {selectedConversation.type === "group" && (
@@ -298,22 +305,24 @@ const InternalMessages = () => {
                       />
                     )}
                   </Stack>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}>
                     {selectedConversation.type === "group"
                       ? "Group conversation"
                       : selectedConversation.participantEmails.join(", ")}
                   </Typography>
                 </Box>
 
-                <Stack spacing={1.5} sx={{ p: 2.5, flex: 1, minHeight: 0, overflow: "auto", bgcolor: "#f8fafc", minWidth: 0 }}>
+                <Stack spacing={1.5} sx={{ p: 2.5, flex: 1, minHeight: 0, overflowY: "auto", overflowX: "hidden", bgcolor: "#f8fafc", minWidth: 0, maxWidth: "100%" }}>
                   {(selectedConversation.messages || []).map((item, index) => {
                     const mine = item.senderEmail?.toLowerCase() === currentEmail;
                     return (
-                      <Box key={item._id || `${item.createdAt}-${index}`} sx={{ display: "flex", justifyContent: mine ? "flex-end" : "flex-start" }}>
+                      <Box key={item._id || `${item.createdAt}-${index}`} sx={{ display: "flex", justifyContent: mine ? "flex-end" : "flex-start", width: "100%", minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
                         <Box
                           sx={{
+                            width: "fit-content",
                             maxWidth: { xs: "100%", md: "78%" },
                             minWidth: 0,
+                            maxInlineSize: "100%",
                             overflowWrap: "anywhere",
                             wordBreak: "break-word",
                             p: 1.5,
@@ -324,9 +333,9 @@ const InternalMessages = () => {
                           }}
                         >
                           <Typography variant="caption" sx={{ opacity: 0.8, display: "block", mb: 0.5 }}>
-                            {item.senderName} - {formatDate(item.createdAt)}
+                            {displaySenderName(item.senderName, item.senderEmail)} - {formatDate(item.createdAt)}
                           </Typography>
-                          <Typography whiteSpace="pre-wrap" sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}>{item.body}</Typography>
+                          <Typography component="div" whiteSpace="pre-wrap" sx={{ maxWidth: "100%", overflowWrap: "anywhere", wordBreak: "break-word" }}>{item.body}</Typography>
                         </Box>
                       </Box>
                     );
@@ -336,8 +345,8 @@ const InternalMessages = () => {
                   )}
                 </Stack>
 
-                <Box sx={{ p: 2, borderTop: "1px solid #e5e7eb" }}>
-                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1} alignItems={{ xs: "stretch", sm: "flex-end" }}>
+                <Box sx={{ p: 2, borderTop: "1px solid #e5e7eb", minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1} alignItems={{ xs: "stretch", sm: "flex-end" }} sx={{ minWidth: 0, maxWidth: "100%" }}>
                     <TextField
                       fullWidth
                       multiline
