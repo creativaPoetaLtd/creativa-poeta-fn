@@ -13,7 +13,6 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Grid,
   IconButton,
   Paper,
   Stack,
@@ -213,7 +212,7 @@ const InternalMessages = () => {
           </Typography>
         </Stack>
         {conversation.lastMessage && (
-          <Typography variant="body2" color="text.secondary" noWrap sx={{ mt: 1 }}>
+          <Typography variant="body2" color="text.secondary" noWrap sx={{ mt: 1, minWidth: 0 }}>
             {displaySenderName(conversation.lastMessage.senderName, conversation.lastMessage.senderEmail)}: {conversation.lastMessage.body}
           </Typography>
         )}
@@ -226,7 +225,7 @@ const InternalMessages = () => {
     conversation.type === "group" ? conversation.groupKey || conversation.groupMeta?.key || "CPG" : conversation.title;
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: "100%", overflow: "hidden" }}>
       <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" spacing={2} sx={{ mb: 3 }}>
         <Box>
           <Typography variant="h4" fontWeight={800} color="#0b1f3a">
@@ -252,8 +251,8 @@ const InternalMessages = () => {
         </Alert>
       )}
 
-      <Grid container spacing={2} sx={{ minWidth: 0, width: "100%", maxWidth: "100%", overflow: "hidden" }}>
-        <Grid item xs={12} md={4} zeroMinWidth sx={{ minWidth: 0, maxWidth: "100%" }}>
+      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", lg: "minmax(320px, 0.82fr) minmax(0, 1.18fr)" }, gap: 2, minWidth: 0, width: "100%", maxWidth: "100%", overflow: "hidden" }}>
+        <Box sx={{ minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
           <Paper sx={{ overflow: "hidden", borderRadius: 3, width: "100%", maxWidth: "100%" }}>
             <Box sx={{ p: 2, borderBottom: "1px solid #e5e7eb" }}>
               <Typography fontWeight={800}>Open Threads</Typography>
@@ -288,9 +287,9 @@ const InternalMessages = () => {
               </AccordionDetails>
             </Accordion>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={8} zeroMinWidth sx={{ minWidth: 0, maxWidth: "100%" }}>
+        <Box sx={{ minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
           <Paper sx={{ borderRadius: 3, height: { xs: "calc(100vh - 230px)", md: "calc(100vh - 230px)" }, minHeight: { xs: 520, md: 560 }, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0, width: "100%", maxWidth: "100%" }}>
             {selectedConversation ? (
               <>
@@ -319,10 +318,10 @@ const InternalMessages = () => {
                       <Box key={item._id || `${item.createdAt}-${index}`} sx={{ display: "flex", justifyContent: mine ? "flex-end" : "flex-start", width: "100%", minWidth: 0, maxWidth: "100%", overflow: "hidden" }}>
                         <Box
                           sx={{
-                            width: "fit-content",
-                            maxWidth: { xs: "100%", md: "78%" },
+                            width: { xs: "100%", md: "78%" },
                             minWidth: 0,
-                            maxInlineSize: "100%",
+                            maxWidth: "100%",
+                            boxSizing: "border-box",
                             overflowWrap: "anywhere",
                             wordBreak: "break-word",
                             p: 1.5,
@@ -373,8 +372,8 @@ const InternalMessages = () => {
               </Box>
             )}
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       <Dialog open={createOpen} onClose={() => setCreateOpen(false)} fullWidth maxWidth="sm">
         <DialogTitle sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>

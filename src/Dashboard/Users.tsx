@@ -75,32 +75,32 @@ const roleDefinitions: Record<AdminRole, { label: string; short: string; powers:
     powers: "Full dashboard access.",
   },
   admin_0: {
-    label: "Direction",
+    label: "L0 - Direction",
     short: "Advanced access",
     powers: "Full dashboard access with operational profile management.",
   },
   admin_1: {
-    label: "Operations",
+    label: "L1 - Operations",
     short: "Client requests",
     powers: "Projects, visibility requests, assistance, contact inbox, shared emails, internal messages and operational follow-up.",
   },
   admin_2: {
-    label: "Content & SEO",
+    label: "L2 - Content & SEO",
     short: "Blog and visibility",
     powers: "Articles, SEO, content, editorial calendar, internal messages and visibility-related work.",
   },
   admin_3: {
-    label: "Support & email",
+    label: "L3 - Support & email",
     short: "Client support",
     powers: "CP Mail, contact replies, assistance requests, internal messages and customer messages assigned to them.",
   },
   admin_4: {
-    label: "Read & reporting",
+    label: "L4 - Read & reporting",
     short: "Consultation",
     powers: "Dashboard reading, internal messages, results monitoring and reporting without critical deletion rights.",
   },
   admin_5: {
-    label: "Limited access",
+    label: "L5 - Limited access",
     short: "Limited assistant",
     powers: "Very targeted access to assigned items and internal messages. Useful for a temporary assistant or contractor.",
   },
