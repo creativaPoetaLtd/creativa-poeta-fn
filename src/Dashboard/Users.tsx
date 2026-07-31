@@ -70,37 +70,37 @@ const sharedMailboxDefaults = ["contact@creativapoeta.com", "contact@creativapoe
 
 const roleDefinitions: Record<AdminRole, { label: string; short: string; powers: string }> = {
   super_admin: {
-    label: "Niveau 0 - Direction",
-    short: "Compte principal",
-    powers: "Acces complet au dashboard.",
+    label: "Direction",
+    short: "Primary account",
+    powers: "Full dashboard access.",
   },
   admin_0: {
-    label: "Niveau 0 - Direction",
-    short: "Pouvoirs avances",
-    powers: "Acces complet au dashboard, avec gestion des niveaux 1 a 5.",
+    label: "Direction",
+    short: "Advanced access",
+    powers: "Full dashboard access with operational profile management.",
   },
   admin_1: {
-    label: "Niveau 1 - Operations",
+    label: "Operations",
     short: "Client requests",
     powers: "Projects, visibility requests, assistance, contact inbox, shared emails, internal messages and operational follow-up.",
   },
   admin_2: {
-    label: "Niveau 2 - Content & SEO",
+    label: "Content & SEO",
     short: "Blog and visibility",
     powers: "Articles, SEO, content, editorial calendar, internal messages and visibility-related work.",
   },
   admin_3: {
-    label: "Niveau 3 - Support & email",
+    label: "Support & email",
     short: "Client support",
     powers: "CP Mail, contact replies, assistance requests, internal messages and customer messages assigned to them.",
   },
   admin_4: {
-    label: "Niveau 4 - Read & reporting",
+    label: "Read & reporting",
     short: "Consultation",
     powers: "Dashboard reading, internal messages, results monitoring and reporting without critical deletion rights.",
   },
   admin_5: {
-    label: "Niveau 5 - Limited access",
+    label: "Limited access",
     short: "Limited assistant",
     powers: "Very targeted access to assigned items and internal messages. Useful for a temporary assistant or contractor.",
   },
@@ -287,7 +287,7 @@ export default function Users() {
   const openEditDialog = (adminUser: AdminUser) => {
     const role = normalizeRole(adminUser.role, adminUser.email);
     if (!canManageRole(role, adminUser.email)) {
-      showMessage("You cannot edit this admin level.", "error");
+      showMessage("You cannot edit this access profile.", "error");
       return;
     }
 
@@ -311,7 +311,7 @@ export default function Users() {
       }
 
       if (!roleOptions.includes(form.role)) {
-        showMessage("You cannot assign this admin level.", "error");
+        showMessage("You cannot assign this access profile.", "error");
         return;
       }
 
@@ -356,7 +356,7 @@ export default function Users() {
 
   const toggleActive = async (adminUser: AdminUser) => {
     if (!canManageRole(adminUser.role, adminUser.email)) {
-      showMessage("You cannot change this admin level.", "error");
+      showMessage("You cannot change this access profile.", "error");
       return;
     }
 
@@ -374,7 +374,7 @@ export default function Users() {
 
   const handleDeleteUser = async (adminUser: AdminUser) => {
     if (!canManageRole(adminUser.role, adminUser.email)) {
-      showMessage("You cannot delete this admin level.", "error");
+      showMessage("You cannot delete this access profile.", "error");
       return;
     }
 
@@ -453,7 +453,7 @@ export default function Users() {
     <Box sx={{ p: 3 }}>
       <PageHeader
         title="Admin Users"
-        subtitle="Create admins, assign levels and control mailbox access."
+        subtitle="Create admins, assign access profiles and control mailbox access."
         action={
           <ActionButton variant="primary" startIcon={<PersonAdd />} onClick={openCreateDialog}>
             Add Admin
@@ -468,7 +468,7 @@ export default function Users() {
       )}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Add a CP admin email, assign a level, then choose shared mailboxes only. Personal staff mailboxes stay private and are added automatically.
+        Add a CP admin email, assign an access profile, then choose shared mailboxes only. Personal staff mailboxes stay private and are added automatically.
       </Alert>
 
       <Card sx={{ mb: 3, border: notifications.length ? "1px solid #f59e0b" : "1px solid #e2e8f0" }}>
@@ -531,7 +531,7 @@ export default function Users() {
           <DashboardCard title="Pending" value={metrics.pending} icon={<PersonOff />} color="#FF9800" />
         </Grid>
         <Grid item xs={12} md={3}>
-          <DashboardCard title="Level 0" value={metrics.levelZero} icon={<Badge />} color="#EEBA2B" />
+          <DashboardCard title="Direction" value={metrics.levelZero} icon={<Badge />} color="#EEBA2B" />
         </Grid>
       </Grid>
 
@@ -620,7 +620,7 @@ export default function Users() {
                   <Chip size="small" label={`-${(adminUser.permissionsDeny || []).length}`} color="warning" />
                 )}
                 {(adminUser.permissionsAllow || []).length === 0 && (adminUser.permissionsDeny || []).length === 0 && (
-                  <Typography sx={{ fontSize: 13, color: "#64748b" }}>Level defaults</Typography>
+                  <Typography sx={{ fontSize: 13, color: "#64748b" }}>Profile defaults</Typography>
                 )}
               </Box>
             ),
@@ -676,7 +676,7 @@ export default function Users() {
           />
           <TextField
             select
-            label="Admin level"
+            label="Access profile"
             fullWidth
             value={form.role}
             onChange={(event) =>

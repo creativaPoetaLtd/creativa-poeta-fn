@@ -190,7 +190,7 @@ const InternalMessages = () => {
         }}
       >
         <Stack direction="row" justifyContent="space-between" spacing={1} alignItems="center">
-          <Typography fontWeight={800}>{conversation.title}</Typography>
+          <Typography fontWeight={800} noWrap>{displayConversationTitle(conversation)}</Typography>
           {conversation.unreadCount > 0 && <Chip size="small" color="warning" label={conversation.unreadCount} />}
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 0.75 }}>
@@ -202,7 +202,7 @@ const InternalMessages = () => {
             />
           )}
           <Typography variant="caption" color="text.secondary">
-            {conversation.type === "group" ? meta.label : "Conversation"} - {formatDate(conversation.lastMessageAt || conversation.updatedAt)}
+            {conversation.type === "group" ? "Group" : "Conversation"} - {formatDate(conversation.lastMessageAt || conversation.updatedAt)}
           </Typography>
         </Stack>
         {conversation.lastMessage && (
@@ -215,6 +215,8 @@ const InternalMessages = () => {
   };
 
   const selectedMeta = selectedConversation?.groupMeta || fallbackGroupMeta(selectedConversation?.groupKey);
+  const displayConversationTitle = (conversation: InternalConversation) =>
+    conversation.type === "group" ? conversation.groupKey || conversation.groupMeta?.key || "CPG" : conversation.title;
 
   return (
     <Box sx={{ p: { xs: 2, md: 4 } }}>
@@ -243,8 +245,8 @@ const InternalMessages = () => {
         </Alert>
       )}
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+      <Grid container spacing={2} sx={{ minWidth: 0 }}>
+        <Grid item xs={12} md={4} sx={{ minWidth: 0 }}>
           <Paper sx={{ overflow: "hidden", borderRadius: 3 }}>
             <Box sx={{ p: 2, borderBottom: "1px solid #e5e7eb" }}>
               <Typography fontWeight={800}>Open Threads</Typography>
@@ -281,13 +283,13 @@ const InternalMessages = () => {
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ borderRadius: 3, minHeight: 620, display: "flex", flexDirection: "column" }}>
+        <Grid item xs={12} md={8} sx={{ minWidth: 0 }}>
+          <Paper sx={{ borderRadius: 3, height: { xs: "calc(100vh - 230px)", md: "calc(100vh - 230px)" }, minHeight: { xs: 520, md: 560 }, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
             {selectedConversation ? (
               <>
                 <Box sx={{ p: 2.5, borderBottom: "1px solid #e5e7eb" }}>
                   <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap">
-                    <Typography variant="h6" fontWeight={900}>{selectedConversation.title}</Typography>
+                    <Typography variant="h6" fontWeight={900} sx={{ overflowWrap: "anywhere" }}>{displayConversationTitle(selectedConversation)}</Typography>
                     {selectedConversation.type === "group" && (
                       <Chip
                         size="small"
@@ -298,19 +300,22 @@ const InternalMessages = () => {
                   </Stack>
                   <Typography variant="body2" color="text.secondary">
                     {selectedConversation.type === "group"
-                      ? selectedMeta.label
+                      ? "Group conversation"
                       : selectedConversation.participantEmails.join(", ")}
                   </Typography>
                 </Box>
 
-                <Stack spacing={1.5} sx={{ p: 2.5, flex: 1, overflow: "auto", bgcolor: "#f8fafc" }}>
+                <Stack spacing={1.5} sx={{ p: 2.5, flex: 1, minHeight: 0, overflow: "auto", bgcolor: "#f8fafc", minWidth: 0 }}>
                   {(selectedConversation.messages || []).map((item, index) => {
                     const mine = item.senderEmail?.toLowerCase() === currentEmail;
                     return (
                       <Box key={item._id || `${item.createdAt}-${index}`} sx={{ display: "flex", justifyContent: mine ? "flex-end" : "flex-start" }}>
                         <Box
                           sx={{
-                            maxWidth: "78%",
+                            maxWidth: { xs: "100%", md: "78%" },
+                            minWidth: 0,
+                            overflowWrap: "anywhere",
+                            wordBreak: "break-word",
                             p: 1.5,
                             borderRadius: 2,
                             bgcolor: mine ? "#0b1f3a" : "#fff",
@@ -321,7 +326,7 @@ const InternalMessages = () => {
                           <Typography variant="caption" sx={{ opacity: 0.8, display: "block", mb: 0.5 }}>
                             {item.senderName} - {formatDate(item.createdAt)}
                           </Typography>
-                          <Typography whiteSpace="pre-wrap">{item.body}</Typography>
+                          <Typography whiteSpace="pre-wrap" sx={{ overflowWrap: "anywhere", wordBreak: "break-word" }}>{item.body}</Typography>
                         </Box>
                       </Box>
                     );
@@ -332,7 +337,7 @@ const InternalMessages = () => {
                 </Stack>
 
                 <Box sx={{ p: 2, borderTop: "1px solid #e5e7eb" }}>
-                  <Stack direction="row" spacing={1} alignItems="flex-end">
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1} alignItems={{ xs: "stretch", sm: "flex-end" }}>
                     <TextField
                       fullWidth
                       multiline
@@ -347,7 +352,7 @@ const InternalMessages = () => {
                         }
                       }}
                     />
-                    <IconButton color="primary" onClick={handleSend} disabled={!message.trim()}>
+                    <IconButton color="primary" onClick={handleSend} disabled={!message.trim()} sx={{ alignSelf: { xs: "flex-end", sm: "center" }, flexShrink: 0 }}>
                       <SendIcon />
                     </IconButton>
                   </Stack>
