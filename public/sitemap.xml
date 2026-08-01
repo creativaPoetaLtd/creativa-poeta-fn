@@ -1,164 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <url>
-    <loc>https://creativapoeta.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/contact" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/contact" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/contact" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/contact" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/contact" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/contact" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/start-project</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/start-project" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/start-project" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/start-project" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/start-project</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/start-project" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/start-project" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/start-project" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/services/web-app</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/web-app" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/web-app" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/web-app" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/services/web-app</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/web-app" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/web-app" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/web-app" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/services/graphic-design</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/graphic-design" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/graphic-design" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/graphic-design" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/services/graphic-design</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/graphic-design" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/graphic-design" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/graphic-design" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/services/digital-marketing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/digital-marketing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/digital-marketing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/digital-marketing" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/services/digital-marketing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/digital-marketing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/digital-marketing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/digital-marketing" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/services/content-writing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/content-writing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/content-writing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/content-writing" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/services/content-writing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/services/content-writing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/services/content-writing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/services/content-writing" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/terms-and-conditions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/terms-and-conditions" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/terms-and-conditions" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/terms-and-conditions" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://creativapoeta.com/fr/terms-and-conditions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://creativapoeta.com/terms-and-conditions" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://creativapoeta.com/fr/terms-and-conditions" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://creativapoeta.com/terms-and-conditions" />
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://creativapoeta.com/sitemaps/global.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://creativapoeta.com/sitemaps/be.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://creativapoeta.com/sitemaps/fr.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://creativapoeta.com/sitemaps/rw.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://creativapoeta.com/sitemaps/nl.xml</loc>
+  </sitemap>
+</sitemapindex>

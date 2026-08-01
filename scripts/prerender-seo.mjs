@@ -296,10 +296,9 @@ const publishedBlogs = await fetchPublishedBlogs();
 const marketHosts = {
   global: {
     baseUrl: "https://creativapoeta.com",
-    locales: ["en", "fr"],
+    locales: ["en"],
     hreflang: {
       en: "en",
-      fr: "fr",
     },
     countryCode: "Global",
     areaName: "International",
@@ -1911,7 +1910,19 @@ for (const route of routeDefinitions) {
   fs.writeFileSync(filePath, output, "utf8");
 }
 
-const sitemapPagePaths = [...new Set(Object.values(pageTemplates).map((template) => template.path))];
+const redirectedPagePaths = new Set([
+  "/services/audit-visibilite",
+  "/services/site-officiel",
+  "/services/contenus-utiles",
+]);
+
+const sitemapPagePaths = [
+  ...new Set(
+    Object.values(pageTemplates)
+      .map((template) => template.path)
+      .filter((pagePath) => !redirectedPagePaths.has(pagePath))
+  ),
+];
 
 function localePathForSitemap(locale, defaultLocale, pagePath) {
   return localizedMarketPath(locale, defaultLocale, pagePath);
@@ -2035,4 +2046,3 @@ Llms-Full: ${siteUrl}/llms-full.txt
 writeSitemapFiles();
 
 console.log(`Pre-rendered ${routeDefinitions.length} SEO pages (${publishedBlogs.length} published blog article(s)).`);
-

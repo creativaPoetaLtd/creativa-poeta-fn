@@ -33,6 +33,96 @@ status = 301
 force = true
 
 [[redirects]]
+from = "/services/audit-visibilite"
+to = "/tester-visibilite"
+status = 301
+force = true
+
+[[redirects]]
+from = "/en/services/audit-visibilite"
+to = "/en/tester-visibilite"
+status = 301
+force = true
+
+[[redirects]]
+from = "/fr/services/audit-visibilite"
+to = "/fr/tester-visibilite"
+status = 301
+force = true
+
+[[redirects]]
+from = "/nl/services/audit-visibilite"
+to = "/nl/tester-visibilite"
+status = 301
+force = true
+
+[[redirects]]
+from = "/rw/services/audit-visibilite"
+to = "/rw/tester-visibilite"
+status = 301
+force = true
+
+[[redirects]]
+from = "/services/site-officiel"
+to = "/services/web-app"
+status = 301
+force = true
+
+[[redirects]]
+from = "/en/services/site-officiel"
+to = "/en/services/web-app"
+status = 301
+force = true
+
+[[redirects]]
+from = "/fr/services/site-officiel"
+to = "/fr/services/web-app"
+status = 301
+force = true
+
+[[redirects]]
+from = "/nl/services/site-officiel"
+to = "/nl/services/web-app"
+status = 301
+force = true
+
+[[redirects]]
+from = "/rw/services/site-officiel"
+to = "/rw/services/web-app"
+status = 301
+force = true
+
+[[redirects]]
+from = "/services/contenus-utiles"
+to = "/services/content-writing"
+status = 301
+force = true
+
+[[redirects]]
+from = "/en/services/contenus-utiles"
+to = "/en/services/content-writing"
+status = 301
+force = true
+
+[[redirects]]
+from = "/fr/services/contenus-utiles"
+to = "/fr/services/content-writing"
+status = 301
+force = true
+
+[[redirects]]
+from = "/nl/services/contenus-utiles"
+to = "/nl/services/content-writing"
+status = 301
+force = true
+
+[[redirects]]
+from = "/rw/services/contenus-utiles"
+to = "/rw/services/content-writing"
+status = 301
+force = true
+
+[[redirects]]
 from = "/refonte"
 to = "/"
 status = 301

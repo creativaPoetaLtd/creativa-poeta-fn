@@ -8,9 +8,16 @@ const hostToMarket = {
 const hostRedirects = {
   "creativapoeta.be": "be.creativapoeta.com",
   "www.creativapoeta.be": "be.creativapoeta.com",
+  "www.creativapoeta.com": "creativapoeta.com",
 };
 
-const globalHosts = new Set(["creativapoeta.com", "www.creativapoeta.com"]);
+const globalHosts = new Set(["creativapoeta.com"]);
+
+const globalLocaleRedirectHosts = {
+  fr: "fr.creativapoeta.com",
+  nl: "nl.creativapoeta.com",
+  rw: "rw.creativapoeta.com",
+};
 
 const countryToHost = {
   BE: "be.creativapoeta.com",
@@ -111,6 +118,24 @@ export default async (request, context) => {
     return Response.redirect(targetUrl.toString(), 301);
   }
 
+  if (globalHosts.has(url.hostname.toLowerCase()) && !isIgnoredPath(url.pathname)) {
+    const segments = url.pathname.split("/").filter(Boolean);
+    const locale = segments[0];
+
+    if (locale === "en") {
+      const targetUrl = new URL(request.url);
+      targetUrl.pathname = `/${segments.slice(1).join("/")}`.replace(/\/$/, "") || "/";
+      return Response.redirect(targetUrl.toString(), 301);
+    }
+
+    const localeTargetHost = globalLocaleRedirectHosts[locale];
+    if (localeTargetHost) {
+      const targetUrl = new URL(request.url);
+      targetUrl.hostname = localeTargetHost;
+      targetUrl.pathname = `/${segments.slice(1).join("/")}`.replace(/\/$/, "") || "/";
+      return Response.redirect(targetUrl.toString(), 301);
+    }
+  }
   const geoRedirect = redirectByCountry(request, context, url);
   if (geoRedirect) return geoRedirect;
 
