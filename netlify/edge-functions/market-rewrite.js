@@ -19,6 +19,12 @@ const globalLocaleRedirectHosts = {
   rw: "rw.creativapoeta.com",
 };
 
+const legacyPathRedirects = {
+  "/services/audit-visibilite": "/tester-visibilite",
+  "/services/site-officiel": "/services/web-app",
+  "/services/contenus-utiles": "/services/content-writing",
+};
+
 const countryToHost = {
   BE: "be.creativapoeta.com",
   FR: "fr.creativapoeta.com",
@@ -79,6 +85,21 @@ function normalizePathForMarket(pathname, market) {
   return rest ? `/${first}/${rest}` : `/${first}`;
 }
 
+function redirectLegacyPath(url) {
+  if (isIgnoredPath(url.pathname)) return;
+
+  const segments = url.pathname.split("/").filter(Boolean);
+  const locale = ["en", "fr", "nl", "rw"].includes(segments[0]) ? segments[0] : null;
+  const pathWithoutLocale = `/${segments.slice(locale ? 1 : 0).join("/")}`.replace(/\/$/, "") || "/";
+  const targetPath = legacyPathRedirects[pathWithoutLocale];
+
+  if (!targetPath) return;
+
+  const targetUrl = new URL(url.toString());
+  targetUrl.pathname = locale ? `/${locale}${targetPath}` : targetPath;
+  return Response.redirect(targetUrl.toString(), 301);
+}
+
 function redirectByCountry(request, context, url) {
   const hostname = url.hostname.toLowerCase();
   if (!globalHosts.has(hostname)) return;
@@ -117,6 +138,9 @@ export default async (request, context) => {
     targetUrl.hostname = targetHost;
     return Response.redirect(targetUrl.toString(), 301);
   }
+
+  const legacyRedirect = redirectLegacyPath(url);
+  if (legacyRedirect) return legacyRedirect;
 
   if (globalHosts.has(url.hostname.toLowerCase()) && !isIgnoredPath(url.pathname)) {
     const segments = url.pathname.split("/").filter(Boolean);
