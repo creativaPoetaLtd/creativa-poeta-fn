@@ -274,8 +274,8 @@ const Emails = () => {
     try {
       setLoading(true);
 
-      if (folder === "inbox") {
-        const response = await getEmails(currentPage, 25, toFilterParam(statusFilters, allStatusValues), toFilterParam(mailboxFilters, allMailboxValues), search);
+      if (folder === "inbox" || folder === "dmarc") {
+        const response = await getEmails(currentPage, 25, toFilterParam(statusFilters, allStatusValues), toFilterParam(mailboxFilters, allMailboxValues), search, folder === "dmarc" ? "dmarc" : "inbox");
         setEmails(response.emails || []);
         const nextServerMailboxes = (response.mailboxes || []).map(normalizeMailbox).filter(Boolean);
         setServerMailboxes((current) => {
@@ -414,7 +414,7 @@ const Emails = () => {
   };
 
   useEffect(() => {
-    if (folder !== "inbox") return undefined;
+    if (folder !== "inbox" && folder !== "dmarc") return undefined;
 
     const interval = window.setInterval(() => {
       void runMailboxSync(true);
@@ -636,8 +636,9 @@ const Emails = () => {
     }
   };
 
-  const totalInbox = folder === "inbox" ? pagination.totalEmails : 0;
-  const totalOutbound = folder !== "inbox" ? pagination.totalEmails : 0;
+  const isInboundFolder = folder === "inbox" || folder === "dmarc";
+  const totalInbox = isInboundFolder ? pagination.totalEmails : 0;
+  const totalOutbound = !isInboundFolder ? pagination.totalEmails : 0;
 
   return (
     <Box>
@@ -652,7 +653,7 @@ const Emails = () => {
             <ActionButton variant="secondary" startIcon={<Refresh />} onClick={() => void loadEmails()} disabled={loading}>
               Refresh
             </ActionButton>
-            {folder === "inbox" && (
+            {isInboundFolder && (
               <ActionButton variant="primary" startIcon={<Inbox />} onClick={() => void handleSync()} disabled={syncing}>
                 {syncing ? "Syncing..." : "Sync mailboxes"}
               </ActionButton>
@@ -663,6 +664,7 @@ const Emails = () => {
 
       <Tabs value={folder} onChange={handleFolderChange} sx={{ mb: 3 }}>
         <Tab value="inbox" icon={<Inbox />} iconPosition="start" label="Inbox" />
+        <Tab value="dmarc" icon={<MarkEmailRead />} iconPosition="start" label="DMARC" />
         <Tab value="sent" icon={<Send />} iconPosition="start" label="Sent" />
         <Tab value="drafts" icon={<Drafts />} iconPosition="start" label="Drafts" />
       </Tabs>
@@ -675,9 +677,9 @@ const Emails = () => {
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title={folder === "inbox" ? "Total Emails" : "Total"} value={folder === "inbox" ? totalInbox : totalOutbound} icon={<EmailIcon />} color="#071a33" />
+          <DashboardCard title={folder === "dmarc" ? "DMARC Reports" : folder === "inbox" ? "Total Emails" : "Total"} value={isInboundFolder ? totalInbox : totalOutbound} icon={<EmailIcon />} color="#071a33" />
         </Grid>
-        {folder === "inbox" ? (
+        {isInboundFolder ? (
           <>
             <Grid item xs={12} sm={6} md={3}><DashboardCard title="New" value={metrics.new || 0} icon={<Inbox />} color="#f59e0b" /></Grid>
             <Grid item xs={12} sm={6} md={3}><DashboardCard title="Read" value={metrics.read || 0} icon={<MarkEmailRead />} color="#0ea5e9" /></Grid>
@@ -696,9 +698,9 @@ const Emails = () => {
       <Card sx={{ mb: 3, borderRadius: 3 }}>
         <CardContent>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} md={folder === "inbox" ? 6 : 12}>
+            <Grid item xs={12} md={isInboundFolder ? 6 : 12}>
               <TextField
-                label={folder === "inbox" ? "Search sender, subject or message..." : "Search recipient, subject or message..."}
+                label={isInboundFolder ? "Search sender, subject or message..." : "Search recipient, subject or message..."}
                 value={search}
                 onChange={(event) => {
                   setSearch(event.target.value);
@@ -707,7 +709,7 @@ const Emails = () => {
                 fullWidth
               />
             </Grid>
-            {folder === "inbox" && (
+            {isInboundFolder && (
               <>
                 <Grid item xs={12} md={3}>
                   <FormControl fullWidth>
@@ -769,7 +771,7 @@ const Emails = () => {
         </CardContent>
       </Card>
 
-      {folder === "inbox" ? (
+      {isInboundFolder ? (
         <DataTable
           headers={["From", "Subject", "Owner", "Status", "Received"]}
           hiddenFields={["id"]}
@@ -791,7 +793,7 @@ const Emails = () => {
               </>
             );
           }}
-          emptyMessage="No synced emails found"
+          emptyMessage={folder === "dmarc" ? "No DMARC reports found" : "No synced emails found"}
         />
       ) : (
         <DataTable
@@ -992,3 +994,5 @@ const Emails = () => {
 };
 
 export default Emails;
+
+

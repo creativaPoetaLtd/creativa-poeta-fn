@@ -1,7 +1,7 @@
 import { authRequest } from "./client";
 
 export type EmailStatus = "new" | "read" | "replied" | "archived";
-export type EmailFolder = "inbox" | "sent" | "drafts";
+export type EmailFolder = "inbox" | "dmarc" | "sent" | "drafts";
 
 export interface EmailActivity {
   type: "assigned" | "released" | "read" | "replied" | "status";
@@ -123,13 +123,14 @@ export const getEmails = async (
   limit = 25,
   status = "all",
   mailbox = "all",
-  search = ""
+  search = "",
+  folder: "inbox" | "dmarc" = "inbox"
 ) => {
   return authRequest<EmailsResponse>(
     {
       method: "GET",
       url: "/api/emails",
-      params: { page, limit, status, mailbox, search },
+      params: { page, limit, status, mailbox, search, folder },
     },
     "Failed to fetch emails."
   );
@@ -334,3 +335,5 @@ export const deleteOutboundEmail = async (id: string) => {
     "Failed to delete outbound email."
   );
 };
+
+
