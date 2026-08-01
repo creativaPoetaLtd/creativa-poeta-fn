@@ -85,18 +85,44 @@ function normalizePathForMarket(pathname, market) {
   return rest ? `/${first}/${rest}` : `/${first}`;
 }
 
+function canonicalPath(pathname) {
+  const cleanPath = pathname.replace(/\/+$/, "");
+  return cleanPath || "/";
+}
+
 function redirectLegacyPath(url) {
   if (isIgnoredPath(url.pathname)) return;
 
   const segments = url.pathname.split("/").filter(Boolean);
   const locale = ["en", "fr", "nl", "rw"].includes(segments[0]) ? segments[0] : null;
-  const pathWithoutLocale = `/${segments.slice(locale ? 1 : 0).join("/")}`.replace(/\/$/, "") || "/";
+  const pathWithoutLocale = canonicalPath(`/${segments.slice(locale ? 1 : 0).join("/")}`);
   const targetPath = legacyPathRedirects[pathWithoutLocale];
 
   if (!targetPath) return;
 
   const targetUrl = new URL(url.toString());
   targetUrl.pathname = locale ? `/${locale}${targetPath}` : targetPath;
+  return Response.redirect(targetUrl.toString(), 301);
+}
+
+function redirectMarketLocalePath(url, market) {
+  if (isIgnoredPath(url.pathname)) return;
+
+  const targetPath = canonicalPath(normalizePathForMarket(url.pathname, market));
+  const currentPath = canonicalPath(url.pathname);
+  if (targetPath === currentPath) return;
+
+  const targetUrl = new URL(url.toString());
+  targetUrl.pathname = targetPath;
+  return Response.redirect(targetUrl.toString(), 301);
+}
+
+function redirectTrailingSlash(url) {
+  if (isIgnoredPath(url.pathname)) return;
+  if (url.pathname === "/" || !url.pathname.endsWith("/")) return;
+
+  const targetUrl = new URL(url.toString());
+  targetUrl.pathname = canonicalPath(url.pathname);
   return Response.redirect(targetUrl.toString(), 301);
 }
 
@@ -148,7 +174,7 @@ export default async (request, context) => {
 
     if (locale === "en") {
       const targetUrl = new URL(request.url);
-      targetUrl.pathname = `/${segments.slice(1).join("/")}`.replace(/\/$/, "") || "/";
+      targetUrl.pathname = canonicalPath(`/${segments.slice(1).join("/")}`);
       return Response.redirect(targetUrl.toString(), 301);
     }
 
@@ -156,20 +182,29 @@ export default async (request, context) => {
     if (localeTargetHost) {
       const targetUrl = new URL(request.url);
       targetUrl.hostname = localeTargetHost;
-      targetUrl.pathname = `/${segments.slice(1).join("/")}`.replace(/\/$/, "") || "/";
+      targetUrl.pathname = canonicalPath(`/${segments.slice(1).join("/")}`);
       return Response.redirect(targetUrl.toString(), 301);
     }
   }
-  const geoRedirect = redirectByCountry(request, context, url);
-  if (geoRedirect) return geoRedirect;
 
   const market = hostToMarket[url.hostname.toLowerCase()];
+
+  if (market) {
+    const localePathRedirect = redirectMarketLocalePath(url, market);
+    if (localePathRedirect) return localePathRedirect;
+  }
+
+  const slashRedirect = redirectTrailingSlash(url);
+  if (slashRedirect) return slashRedirect;
+
+  const geoRedirect = redirectByCountry(request, context, url);
+  if (geoRedirect) return geoRedirect;
 
   if (!market) return;
   if (isIgnoredPath(url.pathname)) return;
 
-  const cleanPath = url.pathname.replace(/\/$/, "");
-  const marketPath = cleanPath === "" ? "" : cleanPath;
+  const cleanPath = canonicalPath(url.pathname);
+  const marketPath = cleanPath === "/" ? "" : cleanPath;
   return new URL(
     `/__markets/${market}${marketPath}/index.html${url.search}`,
     request.url
