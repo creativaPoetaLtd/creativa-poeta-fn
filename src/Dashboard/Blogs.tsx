@@ -794,7 +794,7 @@ const Blogs = () => {
               label="Sujet principal"
               value={generationForm.topic}
               onChange={(event) => setGenerationField("topic", event.target.value)}
-              placeholder="Ex. visibilite locale pour restaurants"
+              placeholder="Ex. visibilité locale pour restaurants"
               required
               fullWidth
             />

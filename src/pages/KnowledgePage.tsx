@@ -41,11 +41,11 @@ const copyByLocale: Record<
       "Des definitions courtes pour savoir comment Google, les maps, les assistants vocaux et les moteurs IA comprennent une entreprise.",
     searchLabel: "Questions que cette page aide a clarifier",
     sectionsTitle: "Definitions utiles",
-    ctaTitle: "Vous voulez appliquer ces principes a votre entreprise ?",
+    ctaTitle: "Vous voulez appliquer ces principes à votre entreprise ?",
     ctaText:
       "Commencez par un diagnostic de visibilité ou expliquez votre projet. On identifie ensuite le bon chemin: site, contenu, maps, IA ou outil digital.",
     ctaPrimary: "Tester ma visibilité",
-    ctaSecondary: "Demarrer un projet",
+    ctaSecondary: "Démarrer un projet",
     items: [
       {
         term: "Qu'est-ce que le SEO ?",
@@ -58,15 +58,15 @@ const copyByLocale: Record<
       {
         term: "Qu'est-ce que l'AEO ?",
         answer:
-          "L'AEO consiste a formuler des reponses directes aux questions des utilisateurs pour les moteurs de reponse, assistants vocaux et extraits enrichis.",
-        points: ["Questions naturelles", "Reponses courtes et fiables", "FAQ et contenus structurés"],
+          "L'AEO consiste a formuler des réponses directes aux questions des utilisateurs pour les moteurs de réponse, assistants vocaux et extraits enrichis.",
+        points: ["Questions naturelles", "Réponses courtes et fiables", "FAQ et contenus structurés"],
         service: "/services/content-writing",
         serviceLabel: "Structurer le contenu",
       },
       {
         term: "Qu'est-ce que le GEO ?",
         answer:
-          "Le GEO optimise une marque pour etre comprise, citee ou recommandee par les moteurs generatifs comme ChatGPT, Gemini ou Perplexity.",
+          "Le GEO optimise une marque pour être comprise, citée ou recommandée par les moteurs génératifs comme ChatGPT, Gemini ou Perplexity.",
         points: ["Entite claire", "Mentions cohérentes", "Sources lisibles par les IA"],
         service: "/services/ia-automatisation",
         serviceLabel: "Preparer la visibilité IA",
@@ -80,7 +80,7 @@ const copyByLocale: Record<
         serviceLabel: "Creer un site clair",
       },
       {
-        term: "A quoi sert schema.org ?",
+        term: "À quoi sert schema.org ?",
         answer:
           "Schema.org donne aux moteurs une structure explicite: organisation, service, article, FAQ, fil d'Ariane ou offre.",
         points: ["JSON-LD", "Service schema", "FAQPage et BlogPosting"],

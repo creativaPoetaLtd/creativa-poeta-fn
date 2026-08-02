@@ -25,8 +25,8 @@ function Footer() {
       : locale === "en"
       ? "Request digital assistance"
       : locale === "kiny"
-      ? "Saba assistance numÃ©rique"
-      : "Demander une assistance numÃ©rique";
+      ? "Saba assistance numérique"
+      : "Demander une assistance numérique";
   const answersLabel =
     locale === "nl"
       ? "Nuttige antwoorden"
@@ -34,7 +34,7 @@ function Footer() {
       ? "Useful answers"
       : locale === "kiny"
       ? "Useful answers"
-      : "RÃ©ponses utiles";
+      : "Réponses utiles";
 
   const knowledgeLabel =
     locale === "nl"
@@ -43,7 +43,7 @@ function Footer() {
       ? "Knowledge base"
       : locale === "kiny"
       ? "Knowledge base"
-      : "Glossaire visibilitÃ©";
+      : "Glossaire visibilité";
 
   const blogLabel =
     locale === "nl"
@@ -103,7 +103,7 @@ function Footer() {
           <h1 className='logo text-4xl text-[#EEBA2B] flex laptop:mx-0 tablet:mx-0 laptop:justify-start tablet:justify-start text-left laptop:items-start tablet:items-start float-left justify-start items-start'>
           <Link
             to={homePath}
-            aria-label="Retour a l'accueil Creativa Poeta"
+            aria-label="Retour ? l'accueil Creativa Poeta"
             className="block laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] w-[50%]"
           >
             <img src={logopoeta1} alt="Creativa Poeta" className="h-auto w-full"/>
@@ -230,16 +230,16 @@ function Footer() {
         onChange={handleEmailChange}
         className='w-full h-10 px-3 bg-black rounded-md'
       />
-      <button type='submit' className='w-fit laptop:px-10 desktop:px-10 tablet:px-8 px-2 h-10 bg-[#EEBA2B] text-white font-semibold rounded-md'> {!isLoading? "s'abonner": 'attendez...'} </button>
+      <button type='submit' className='w-fit laptop:px-10 desktop:px-10 tablet:px-8 px-2 h-10 bg-[#EEBA2B] text-white font-semibold rounded-md'> {!isLoading ? "s'abonner": 'attendez...'} </button>
     </form> */}
         </div>
       {/* </div> */}
       {/* <div className='flex w-full bg-white h-[1px] mt-5'></div>
       <div className="grid laptop:grid-cols-5 desktop:grid-cols-5 tablet:grid-cols-3 grid-cols-2  mt-5 justify-center items-center basis-full text-slate-400">
-          <a href='' className='text-xs font-bold'>Clause de non-responsabilitÃ©</a>
-          <a href='' className='text-xs font-bold'>Politique de confidentialitÃ©</a>
-          <a href='' className='text-xs font-bold'>Mentions lÃ©gales </a>
-          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions gÃ©nÃ©rales  </Link>
+          <a href='' className='text-xs font-bold'>Clause de non-responsabilité</a>
+          <a href='' className='text-xs font-bold'>Politique de confidentialité</a>
+          <a href='' className='text-xs font-bold'>Mentions légales </a>
+          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions générales  </Link>
           <a href='' className='text-xs font-bold'>Cookes policy</a>
         </div>
         <div className="flex laptop:flex-row desktop:flex-row tablet:flex-row flex-col  space-x-10 mt-16 justify-center items-center basis-full text-slate-400">

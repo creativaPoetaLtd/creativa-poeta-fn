@@ -18,12 +18,12 @@ export const serviceSummariesFr: ServiceSummary[] = [
   {
     code: "ai-visibility",
     priority: 1,
-    title: "Etre trouve dans Google, les maps et les IA",
-    shortTitle: "Etre trouve",
+    title: "Être trouvé dans Google, les maps et les IA",
+    shortTitle: "Être trouvé",
     slug: "/services/visibilite-ia-recherche-locale",
     summary:
       "Nous aidons votre entreprise à être plus facile a trouver dans Google, les maps, les recherches vocales et les moteurs IA.",
-    primaryCta: "Ameliorer ma visibilité",
+    primaryCta: "Améliorer ma visibilité",
   },
   {
     code: "ai-ready-websites",

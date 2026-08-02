@@ -23,7 +23,7 @@ const proofPoints = [
   {
     icon: Search,
     title: "Google",
-    body: "Vos services, vos horaires et vos contacts doivent etre faciles a trouver.",
+    body: "Vos services, vos horaires et vos contacts doivent être faciles à trouver.",
   },
   {
     icon: MapPin,
@@ -60,7 +60,7 @@ const visibleWithoutJargon = [
   },
   {
     label: "Vos preuves",
-    text: "avis, realisations, questions frequentes, garanties",
+    text: "avis, réalisations, questions fréquentes, garanties",
   },
   {
     label: "Vos chemins de contact",
@@ -76,7 +76,7 @@ const structuredData = {
   description:
     "Creativa Poeta aide les entreprises à être plus faciles a trouver, comprendre et contacter dans Google, les maps, les recherches vocales et les moteurs IA.",
   serviceType: [
-    "Visibilite digitale",
+    "Visibilité digitale",
     "Creation de site web",
     "Refonte de site web",
     "Presence locale",
@@ -281,7 +281,7 @@ const RefontePreviewPage = () => {
       <section className="refonte-section refonte-section-light">
         <div className="refonte-shell refonte-split">
           <div>
-            <p className="refonte-eyebrow">Visibilite moderne</p>
+            <p className="refonte-eyebrow">Visibilité moderne</p>
             <h2>{visibilityService.problem.title}</h2>
             <p>{visibilityService.problem.body}</p>
           </div>

@@ -360,7 +360,7 @@ export default function Dashboard() {
             Aujourd'hui
           </Typography>
           <Typography sx={{ color: "rgba(255,255,255,0.78)", fontSize: 13, mt: 0.75, lineHeight: 1.55 }}>
-            Suivez les demandes recues, les messages clients et les reponses a envoyer.
+            Suivez les demandes reçues, les messages clients et les réponses à envoyer.
           </Typography>
         </Box>
 

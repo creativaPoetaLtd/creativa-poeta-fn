@@ -25,10 +25,10 @@ const NavLocale: any = {
     contacts: "Contact",
     home: "Accueil",
     career: "Carriere",
-    getStarted: "Demarrer un projet",
+    getStarted: "Démarrer un projet",
     subservice1: "Message, image et contenu",
     subservice2: "Site officiel clair",
-    subservice3: "Visibilite sur Google, maps et outils IA",
+    subservice3: "Visibilité sur Google, maps et outils IA",
     subservice4: "Pages utiles pour recherches precises",
   },
   kiny: {

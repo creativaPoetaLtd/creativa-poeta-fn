@@ -14,12 +14,12 @@ type LocaleKey = BlogLanguage;
 
 const copyByLocale = {
   fr: {
-    title: "Conseils pour une presence qui travaille vraiment.",
+    title: "Conseils pour une présence qui travaille vraiment.",
     intro:
-      "Visibilite, creation, outils digitaux, IA et assistance numerique: des reponses pratiques pour passer a l'action.",
-    seoTitle: "Conseils visibilite, design et outils digitaux | Creativa Poeta",
+      "Visibilité, création, outils digitaux, IA et assistance numérique: des réponses pratiques pour passer à l'action.",
+    seoTitle: "Conseils visibilité, design et outils digitaux | Creativa Poeta",
     seoDescription:
-      "Guides pratiques de Creativa Poeta sur la visibilite locale, le design, les sites, applications, contenus, IA et outils numeriques.",
+      "Guides pratiques de Creativa Poeta sur la visibilité locale, le design, les sites, applications, contenus, IA et outils numériques.",
     search: "Rechercher un sujet",
     all: "Tous",
     read: "Lire l'article",
@@ -27,7 +27,7 @@ const copyByLocale = {
     loading: "Chargement des articles...",
     previous: "Precedent",
     next: "Suivant",
-    unknown: "Equipe Creativa Poeta",
+    unknown: "Équipe Creativa Poeta",
   },
   en: {
     title: "Advice for a digital presence that delivers.",
@@ -75,7 +75,7 @@ const copyByLocale = {
     loading: "Articles zirimo kuza...",
     previous: "Inyuma",
     next: "Imbere",
-    unknown: "Equipe Creativa Poeta",
+    unknown: "Équipe Creativa Poeta",
   },
 } satisfies Record<LocaleKey, Record<string, string>>;
 
@@ -177,7 +177,7 @@ const BlogsPage = () => {
       <MarketSEOHead
         title={copy.seoTitle}
         description={copy.seoDescription}
-        keywords="visibilite locale, design graphique, outils digitaux, intelligence artificielle, assistance numerique"
+        keywords="visibilité locale, design graphique, outils digitaux, intelligence artificielle, assistance numérique"
         path="/blogs"
         structuredData={structuredData}
       />

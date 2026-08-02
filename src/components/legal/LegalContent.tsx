@@ -14,9 +14,9 @@ const pageLinks: Array<{ kind: LegalPageKind; path: string }> = [
 
 const linkLabels = {
   fr: {
-    legal: "Mentions legales",
-    terms: "Conditions generales",
-    privacy: "Confidentialite et cookies",
+    legal: "Mentions légales",
+    terms: "Conditions générales",
+    privacy: "Confidentialité et cookies",
   },
   en: {
     legal: "Legal notice",
@@ -54,7 +54,7 @@ const LegalContent = ({ kind }: LegalContentProps) => {
           <h1>{copy.title}</h1>
           <p className="cp-legal-intro">{copy.intro}</p>
           <p className="cp-legal-updated">{copy.updated}</p>
-          <nav className="cp-legal-tabs" aria-label="Pages legales">
+          <nav className="cp-legal-tabs" aria-label="Pages légales">
             {pageLinks.map((item) => (
               <a
                 key={item.kind}

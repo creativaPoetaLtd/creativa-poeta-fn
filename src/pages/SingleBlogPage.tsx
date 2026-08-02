@@ -32,10 +32,10 @@ const copyByLocale = {
     by: "Par",
     disclosure:
       "Cet article peut contenir des liens affilies. Creativa Poeta peut recevoir une commission sans cout supplementaire pour vous.",
-    useful: "Besoin d'une aide adaptee a votre situation ?",
-    visibility: "Tester ma visibilite",
-    project: "Demarrer un projet",
-    updated: "Mis a jour",
+    useful: "Besoin d’une aide adaptée à votre situation ?",
+    visibility: "Tester ma visibilité",
+    project: "Démarrer un projet",
+    updated: "Mis à jour",
     related: "A lire aussi",
   },
   en: {

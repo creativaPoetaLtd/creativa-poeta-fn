@@ -126,15 +126,15 @@ export type AuditToolContent = {
 
 export const homeContentFr: HomeContent = {
   metadata: {
-    title: "Creativa Poeta | Visibilite digitale pour Google, maps et moteurs IA",
+    title: "Creativa Poeta | Visibilité digitale pour Google, maps et moteurs IA",
     description:
-      "Creativa Poeta aide les entreprises à être trouvees, comprises et recommandees dans Google, les maps, les recherches vocales et les moteurs IA.",
+      "Creativa Poeta aide les entreprises à être trouvées, comprises et recommandées dans Google, les maps, les recherches vocales et les moteurs IA.",
   },
   hero: {
     eyebrow: "Sites, Google Maps et visibilité dans les moteurs IA",
     title: "Soyez visible là où vos clients cherchent maintenant.",
     body:
-      "Creativa Poeta aide votre entreprise à être trouvee, comprise et recommandee dans Google, les maps, les recherches vocales et les moteurs IA. Nous construisons des sites clairs, des présences locales cohérentes et des contenus utiles pour que vos clients sachent qui vous êtes, ce que vous proposez et pourquoi vous contacter.",
+      "Creativa Poeta aide votre entreprise à être trouvée, comprise et recommandée dans Google, les maps, les recherches vocales et les moteurs IA. Nous construisons des sites clairs, des présences locales cohérentes et des contenus utiles pour que vos clients sachent qui vous êtes, ce que vous proposez et pourquoi vous contacter.",
     primaryCta: {
       label: "Tester ma visibilité",
       href: "/audit-visibilite-ia",
@@ -144,16 +144,16 @@ export const homeContentFr: HomeContent = {
       href: "/services",
     },
     trustLine:
-      "Pour les entreprises qui veulent etre plus faciles a trouver, comprendre et contacter.",
+      "Pour les entreprises qui veulent être plus faciles à trouver, comprendre et contacter.",
   },
   problem: {
     title: "Vos clients ne cherchent plus comme avant.",
     body:
-      "Aujourd'hui, un client peut vous chercher sur Google, demander une recommandation a un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question a une IA. Si vos informations sont dispersees, contradictoires ou difficiles à comprendre, vous pouvez etre invisible au moment precis ou le client a besoin de vous.",
+      "Aujourd'hui, un client peut vous chercher sur Google, demander une recommandation à un assistant vocal, regarder Google Maps, comparer des avis, visiter Instagram ou poser une question à une IA. Si vos informations sont dispersées, contradictoires ou difficiles à comprendre, vous pouvez être invisible au moment précis où le client a besoin de vous.",
     examples: [
-      "Quelle agence peut refaire mon site pour etre visible dans Google et les moteurs IA ?",
+      "Quelle agence peut refaire mon site pour être visible dans Google et les moteurs IA ?",
       "Quel service proche de moi est ouvert maintenant ?",
-      "Quelle entreprise parle francais et neerlandais ?",
+      "Quelle entreprise parle français et néerlandais ?",
       "Qui peut m'aider à être visible dans Google Maps, Apple Maps et ChatGPT ?",
     ],
   },
@@ -165,7 +165,7 @@ export const homeContentFr: HomeContent = {
       {
         title: "Une source officielle claire",
         body:
-          "Un site ou une page officielle qui presente vos services, vos contacts, vos langues, vos zones et vos reponses importantes.",
+          "Un site ou une page officielle qui présente vos services, vos contacts, vos langues, vos zones et vos réponses importantes.",
       },
       {
         title: "Une présence locale cohérente",
@@ -173,22 +173,22 @@ export const homeContentFr: HomeContent = {
           "Des informations fiables sur Google, Apple Maps, Bing Maps et les plateformes que vos clients utilisent.",
       },
       {
-        title: "Des reponses utiles",
+        title: "Des réponses utiles",
         body:
           "Des contenus simples qui répondent aux vraies questions de vos clients avant qu'ils vous contactent.",
       },
       {
-        title: "Une base prete a grandir",
+        title: "Une base prête à grandir",
         body:
-          "Une structure qui peut s'adapter a plusieurs langues, regions, services et offres sans refaire tout le travail.",
+          "Une structure qui peut s'adapter à plusieurs langues, regions, services et offres sans refaire tout le travail.",
       },
     ],
   },
   audiencePaths: [
     {
-      title: "Vous avez deja un site",
+      title: "Vous avez déjà un site",
       body:
-        "Nous analysons ce qui bloque votre visibilité, puis nous refondons votre site pour qu'il soit plus clair, plus rapide et mieux relie a vos profils locaux.",
+        "Nous analysons ce qui bloque votre visibilité, puis nous refondons votre site pour qu'il soit plus clair, plus rapide et mieux relie à vos profils locaux.",
       cta: {
         label: "Refondre mon site",
         href: "/services/sites-web-prets-pour-ia",
@@ -197,16 +197,16 @@ export const homeContentFr: HomeContent = {
     {
       title: "Vous n'avez pas encore de site",
       body:
-        "Nous pouvons commencer par une page officielle simple qui presente vos services, relie vos profils et permet aux clients de vous contacter.",
+        "Nous pouvons commencer par une page officielle simple qui présente vos services, relie vos profils et permet aux clients de vous contacter.",
       cta: {
-        label: "Creer ma page officielle",
+        label: "Créer ma page officielle",
         href: "/services/sites-web-prets-pour-ia",
       },
     },
     {
       title: "Vous voulez toucher plusieurs langues ou regions",
       body:
-        "Nous preparons une structure qui peut s'adapter a plusieurs langues, regions ou publics sans refaire tout le travail.",
+        "Nous preparons une structure qui peut s'adapter à plusieurs langues, regions ou publics sans refaire tout le travail.",
       cta: {
         label: "Adapter ma présence",
         href: "/services/visibilite-ia-recherche-locale",
@@ -214,15 +214,15 @@ export const homeContentFr: HomeContent = {
     },
   ],
   audit: {
-    title: "Commencez par savoir ou vous en etes.",
+    title: "Commencez par savoir où vous en êtes.",
     body:
-      "Notre audit de visibilité IA donne une premiere lecture de votre présence actuelle. Il montre si vos informations sont claires, cohérentes et faciles à comprendre par les clients, les maps et les moteurs modernes.",
+      "Notre audit de visibilité IA donne une première lecture de votre présence actuelle. Il montre si vos informations sont claires, cohérentes et faciles à comprendre par les clients, les maps et les moteurs modernes.",
     checks: [
       "votre site ou votre profil principal",
       "vos informations essentielles",
       "vos profils locaux",
-      "vos reponses aux questions clients",
-      "votre coherence entre les plateformes",
+      "vos réponses aux questions clients",
+      "votre cohérence entre les plateformes",
     ],
     cta: {
       label: "Lancer mon audit gratuit",
@@ -230,9 +230,9 @@ export const homeContentFr: HomeContent = {
     },
   },
   localAdaptation: {
-    title: "Une présence adaptee au contexte de vos clients.",
+    title: "Une présence adaptée au contexte de vos clients.",
     body:
-      "Les clients ne cherchent pas toujours avec les memes mots, les memes langues ou les memes habitudes. Selon le contexte, il peut etre utile d'adapter vos pages, vos profils, vos informations et vos contenus.",
+      "Les clients ne cherchent pas toujours avec les mêmes mots, les mêmes langues ou les mêmes habitudes. Selon le contexte, il peut être utile d'adapter vos pages, vos profils, vos informations et vos contenus.",
     examples: [
       "langue du client",
       "zone desservie",
@@ -244,9 +244,9 @@ export const homeContentFr: HomeContent = {
   },
   faqs: [
     {
-      question: "Est-ce que j'ai besoin d'un site si j'ai deja Google Maps ou Instagram ?",
+      question: "Est-ce que j'ai besoin d'un site si j'ai déjà Google Maps ou Instagram ?",
       answer:
-        "Oui, si vous voulez une base officielle que vous contrôlez. Google Maps et Instagram sont utiles, mais un site clair rassemble vos informations importantes et les rend plus faciles a verifier.",
+        "Oui, si vous voulez une base officielle que vous contrôlez. Google Maps et Instagram sont utiles, mais un site clair rassemble vos informations importantes et les rend plus faciles à vérifier.",
     },
     {
       question: "Est-ce que vous pouvez commencer petit ?",
@@ -254,15 +254,15 @@ export const homeContentFr: HomeContent = {
         "Oui. Nous pouvons commencer par une page officielle, un audit ou une optimisation de vos profils locaux, puis construire un site complet plus tard.",
     },
     {
-      question: "Est-ce que vous garantissez une premiere position sur Google ?",
+      question: "Est-ce que vous garantissez une première position sur Google ?",
       answer:
-        "Non. Nous ne promettons pas de miracle. Nous mettons en place les fondations qui augmentent vos chances d'etre trouve, compris et contacte.",
+        "Non. Nous ne promettons pas de miracle. Nous mettons en place les fondations qui augmentent vos chances d'être trouvé, compris et contacté.",
     },
   ],
   finalCta: {
-    title: "Votre entreprise est-elle prete pour la nouvelle recherche ?",
+    title: "Votre entreprise est-elle prête pour la nouvelle recherche ?",
     body:
-      "Testez votre présence actuelle et decouvrez les premieres améliorations possibles.",
+      "Testez votre présence actuelle et découvrez les premières améliorations possibles.",
     primaryCta: {
       label: "Tester ma visibilité",
       href: "/audit-visibilite-ia",
@@ -276,9 +276,9 @@ export const homeContentFr: HomeContent = {
 
 export const auditToolContentFr: AuditToolContent = {
   metadata: {
-    title: "Audit de Visibilite IA | Creativa Poeta",
+    title: "Audit de Visibilité IA | Creativa Poeta",
     description:
-      "Testez si votre entreprise est facile a trouver et à comprendre par Google, les maps, les assistants vocaux et les moteurs IA.",
+      "Testez si votre entreprise est facile à trouver et à comprendre par Google, les maps, les assistants vocaux et les moteurs IA.",
   },
   slug: "/audit-visibilite-ia",
   hero: {
@@ -291,21 +291,21 @@ export const auditToolContentFr: AuditToolContent = {
       href: "#audit-form",
     },
     microcopy:
-      "L'audit donne une premiere lecture rapide. Pour un diagnostic complet, notre equipe peut analyser votre présence en detail.",
+      "L'audit donne une première lecture rapide. Pour un diagnostic complet, notre équipe peut analyser votre présence en détail.",
   },
   form: {
     fields: [
       "Adresse du site ou profil principal",
-      "Pays ou vous voulez etre visible",
+      "Pays où vous voulez être visible",
       "Langue principale de vos clients",
       "Type d'entreprise",
-      "Email pour recevoir le resultat",
+      "Email pour recevoir le résultat",
     ],
     businessTypes: [
       "commerce local",
       "restaurant ou horeca",
       "service professionnel",
-      "sante ou bien-etre",
+      "santé ou bien-être",
       "agence ou consultant",
       "e-commerce",
       "autre",
@@ -346,9 +346,9 @@ export const auditToolContentFr: AuditToolContent = {
     },
   ],
   finalCta: {
-    title: "Commencez par savoir ou vous en etes.",
+    title: "Commencez par savoir où vous en êtes.",
     body:
-      "En quelques informations, vous obtenez une premiere lecture de votre visibilité actuelle et des points a améliorer en priorite.",
+      "En quelques informations, vous obtenez une première lecture de votre visibilité actuelle et des points a améliorer en priorité.",
     primaryCta: {
       label: "Lancer mon audit",
       href: "#audit-form",
@@ -360,16 +360,16 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
   "ai-visibility": {
     code: "ai-visibility",
     metadata: {
-      title: "Visibilite IA & Recherche Locale | Creativa Poeta",
+      title: "Visibilité IA & Recherche Locale | Creativa Poeta",
       description:
-        "Rendez votre entreprise visible dans Google, ChatGPT, Siri, Apple Maps, Bing et les moteurs IA grace a une strategie locale, technique et structuree.",
+        "Rendez votre entreprise visible dans Google, ChatGPT, Siri, Apple Maps, Bing et les moteurs IA grâce à une strategie locale, technique et structuree.",
     },
     slug: "/services/visibilite-ia-recherche-locale",
     hero: {
-      eyebrow: "Visibilite sur Google, les maps et les moteurs IA",
+      eyebrow: "Visibilité sur Google, les maps et les moteurs IA",
       title: "Soyez visible là où vos clients cherchent maintenant.",
       body:
-        "Vos clients ne cherchent plus seulement sur Google. Ils demandent a ChatGPT, Perplexity, Siri, Apple Maps, Bing, Google Maps et aux nouveaux moteurs IA de leur recommander une entreprise proche, fiable et adaptee a leur besoin. Creativa Poeta configure votre présence digitale pour que votre entreprise soit plus facile a trouver, comprendre et recommander.",
+        "Vos clients ne cherchent plus seulement sur Google. Ils demandent à ChatGPT, Perplexity, Siri, Apple Maps, Bing, Google Maps et aux nouveaux moteurs IA de leur recommander une entreprise proche, fiable et adaptée à leur besoin. Creativa Poeta configure votre présence digitale pour que votre entreprise soit plus facile à trouver, comprendre et recommander.",
       primaryCta: {
         label: "Demander un audit de visibilité IA",
         href: "/audit-visibilite-ia",
@@ -380,43 +380,43 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       },
     },
     problem: {
-      title: "Etre visible sur Google ne suffit plus.",
+      title: "être visible sur Google ne suffit plus.",
       body:
-        "Les clients posent des questions plus précises, souvent par voix ou via une IA. Si vos informations sont incomplètes, mal structurees, incohérentes ou invisibles sur les bonnes plateformes, les moteurs modernes risquent de ne pas vous proposer.",
+        "Les clients posent des questions plus précises, souvent par voix ou via une IA. Si vos informations sont incomplètes, mal structurées, incohérentes ou invisibles sur les bonnes plateformes, les moteurs modernes risquent de ne pas vous proposer.",
       examples: [
         "Quel service proche de moi est ouvert maintenant ?",
-        "Quelle agence peut m'aider a apparaitre dans Apple Maps et Google Maps ?",
+        "Quelle agence peut m'aider à apparaître dans Apple Maps et Google Maps ?",
         "Quel prestataire peut rendre mon site plus visible dans Google et ChatGPT ?",
       ],
     },
     approach: {
       title: "Nous structurons votre présence pour les humains, les moteurs et les IA.",
       body:
-        "Creativa Poeta met en place une base de visibilité locale et IA: site lisible, informations claires, profils locaux, contenus sous forme de reponses, coherence des données et signaux de confiance.",
+        "Creativa Poeta met en place une base de visibilité locale et IA: site lisible, informations claires, profils locaux, contenus sous forme de réponses, cohérence des données et signaux de confiance.",
     },
     deliverables: [
       "audit de visibilité IA et locale",
       "rapport des blocages prioritaires",
       "plan de correction",
       "optimisation des profils Google, Apple et Bing",
-      "questions et reponses pretes a integrer",
-      "checklist de coherence des informations",
+      "questions et réponses prêtes à intégrer",
+      "checklist de cohérence des informations",
     ],
     benefits: [
       {
-        title: "Etre plus facile à comprendre",
+        title: "être plus facile à comprendre",
         body:
           "Les moteurs modernes doivent comprendre rapidement votre activité, vos services, votre zone, vos horaires et vos contacts.",
       },
       {
-        title: "Etre plus cohérent partout",
+        title: "Être plus cohérent partout",
         body:
           "Quand vos informations sont identiques sur votre site, Google, Apple, Bing et vos profils, les moteurs ont plus de signaux de confiance.",
       },
       {
-        title: "Generer des demandes plus qualifiees",
+        title: "Generer des demandes plus qualifiées",
         body:
-          "Un client qui vous trouve via une recherche précise comprend deja mieux ce que vous faites et pourquoi vous etes pertinent.",
+          "Un client qui vous trouve via une recherche précise comprend déjà mieux ce que vous faites et pourquoi vous êtes pertinent.",
       },
     ],
     process: [
@@ -445,12 +445,12 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         question: "Qu'est-ce que la visibilité IA ?",
         answer:
-          "C'est la capacité d'une entreprise à être trouvee, comprise et recommandee par les moteurs de recherche, les maps et les assistants IA.",
+          "C'est la capacité d'une entreprise à être trouvée, comprise et recommandée par les moteurs de recherche, les maps et les assistants IA.",
       },
       {
         question: "Est-ce que vous garantissez que ChatGPT va recommander mon entreprise ?",
         answer:
-          "Non. Personne ne peut le garantir. Nous mettons en place les fondations qui augmentent vos chances d'etre trouve, compris et cite.",
+          "Non. Personne ne peut le garantir. Nous mettons en place les fondations qui augmentent vos chances d'être trouvé, compris et cite.",
       },
       {
         question: "Est-ce que Google Business Profile suffit ?",
@@ -459,7 +459,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       },
     ],
     finalCta: {
-      title: "Votre entreprise est-elle prete pour la recherche IA ?",
+      title: "Votre entreprise est-elle prête pour la recherche IA ?",
       body:
         "Commencez par un audit. Nous identifions ce qui bloque votre visibilité dans Google, les maps, les recherches vocales et les moteurs IA.",
       primaryCta: {
@@ -480,7 +480,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       eyebrow: "Site vitrine moderne, clair et lisible par les moteurs",
       title: "Votre site doit devenir la source officielle de votre entreprise.",
       body:
-        "Un site web ne sert plus seulement a presenter une entreprise. Il sert aussi de base fiable pour expliquer qui vous êtes, ce que vous proposez, où vous travaillez et comment vous contacter.",
+        "Un site web ne sert plus seulement à présenter une entreprise. Il sert aussi de base fiable pour expliquer qui vous êtes, ce que vous proposez, où vous travaillez et comment vous contacter.",
       primaryCta: {
         label: "Demander une refonte",
         href: "/contact",
@@ -493,12 +493,12 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
     problem: {
       title: "Beaucoup d'entreprises sont visibles, mais pas vraiment comprises.",
       body:
-        "Certaines entreprises n'ont pas de site et comptent sur Google Maps, Facebook, Instagram ou WhatsApp. D'autres ont deja un site, mais il est ancien, lent, incomplet ou difficile à comprendre. Dans les deux cas, les informations importantes sont dispersees.",
+        "Certaines entreprises n’ont pas de site et comptent sur Google Maps, Facebook, Instagram ou WhatsApp. D’autres ont déjà un site, mais il est ancien, lent, incomplet ou difficile à comprendre. Dans les deux cas, les informations importantes sont dispersées.",
     },
     approach: {
-      title: "Le site n'est pas mort. Son role a change.",
+      title: "Le site n'est pas mort. Son rôle a changé.",
       body:
-        "Vos réseaux montrent votre activité. Vos profils locaux aident les clients à vous trouver. Votre site doit servir de reference officielle: il rassemble vos services, vos informations, vos questions frequentes, vos langues, vos zones et vos preuves de confiance.",
+        "Vos réseaux montrent votre activité. Vos profils locaux aident les clients à vous trouver. Votre site doit servir de référence officielle: il rassemble vos services, vos informations, vos questions fréquentes, vos langues, vos zones et vos preuves de confiance.",
     },
     deliverables: [
       "site vitrine ou mini-site",
@@ -515,9 +515,9 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
           "Les clients comprennent plus vite ce que vous faites et pourquoi ils devraient vous contacter.",
       },
       {
-        title: "Plus de coherence",
+        title: "Plus de cohérence",
         body:
-          "Votre site, vos maps et vos réseaux sociaux affichent les memes informations importantes.",
+          "Votre site, vos maps et vos réseaux sociaux affichent les mêmes informations importantes.",
       },
       {
         title: "Plus d'evolutivite",
@@ -529,7 +529,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         title: "Clarifier",
         body:
-          "Nous identifions vos services, vos publics, vos langues et les informations qui doivent etre fiables partout.",
+          "Nous identifions vos services, vos publics, vos langues et les informations qui doivent être fiables partout.",
       },
       {
         title: "Structurer",
@@ -544,25 +544,25 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         title: "Relier",
         body:
-          "Nous connectons le site a vos profils Google, Apple, Bing et réseaux sociaux.",
+          "Nous connectons le site à vos profils Google, Apple, Bing et réseaux sociaux.",
       },
     ],
     faqs: [
       {
-        question: "Ai-je encore besoin d'un site si j'ai deja Google Maps et Instagram ?",
+        question: "Ai-je encore besoin d'un site si j'ai déjà Google Maps et Instagram ?",
         answer:
           "Oui, si vous voulez une source officielle stable. Google Maps et Instagram sont importants, mais ils ne remplacent pas un espace que vous contrôlez.",
       },
       {
         question: "Est-ce qu'un petit site suffit ?",
         answer:
-          "Oui, pour commencer. Une page officielle claire peut deja presenter vos services, contacts, horaires, zones et liens importants.",
+          "Oui, pour commencer. Une page officielle claire peut déjà présenter vos services, contacts, horaires, zones et liens importants.",
       },
     ],
     finalCta: {
       title: "Votre présence digitale a besoin d'une base fiable.",
       body:
-        "Que vous ayez deja un site ou non, nous pouvons construire une base claire pour vos clients, vos recherches locales et les moteurs IA.",
+        "Que vous ayez déjà un site ou non, nous pouvons construire une base claire pour vos clients, vos recherches locales et les moteurs IA.",
       primaryCta: {
         label: "Parler de mon projet",
         href: "/contact",
@@ -579,9 +579,9 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
     slug: "/services/marque-contenu-systemes-creatifs",
     hero: {
       eyebrow: "Message, image et contenus",
-      title: "Une entreprise visible doit d'abord etre claire.",
+      title: "Une entreprise visible doit d’abord être claire.",
       body:
-        "Avant de convaincre Google, les maps, les réseaux ou les moteurs IA, votre entreprise doit être facile à comprendre pour une personne reelle.",
+        "Avant de convaincre Google, les maps, les réseaux ou les moteurs IA, votre entreprise doit être facile à comprendre pour une personne réelle.",
       primaryCta: {
         label: "Clarifier ma marque",
         href: "/contact",
@@ -594,12 +594,12 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
     problem: {
       title: "Beaucoup d'entreprises ont de la valeur, mais l'expliquent mal.",
       body:
-        "Le probleme n'est pas toujours le service. Souvent, le probleme est la façon de le presenter: mots trop vagues, visuels incohérents, offres mal organisees ou messages différents selon les plateformes.",
+        "Le problème n'est pas toujours le service. Souvent, le problème est la façon de le présenter: mots trop vagues, visuels incohérents, offres mal organisées ou messages différents selon les plateformes.",
     },
     approach: {
       title: "Nous transformons votre expertise en message clair.",
       body:
-        "Nous partons de ce que vous faites vraiment, de vos clients, de vos services et de votre difference. Ensuite, nous construisons un systeme simple: mots, visuels, pages, contenus et reponses.",
+        "Nous partons de ce que vous faites vraiment, de vos clients, de vos services et de votre différence. Ensuite, nous construisons un système simple: mots, visuels, pages, contenus et réponses.",
     },
     deliverables: [
       "message principal de marque",
@@ -612,9 +612,9 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
     ],
     benefits: [
       {
-        title: "Etre compris plus vite",
+        title: "être compris plus vite",
         body:
-          "Un message clair evite au client de chercher trop longtemps ce que vous faites.",
+          "Un message clair évite au client de chercher trop longtemps ce que vous faites.",
       },
       {
         title: "Inspirer plus confiance",
@@ -624,7 +624,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         title: "Alimenter votre visibilité",
         body:
-          "Des contenus clairs peuvent etre reutilisés sur votre site, vos profils locaux, vos réseaux sociaux et vos campagnes.",
+          "Des contenus clairs peuvent être reutilisés sur votre site, vos profils locaux, vos réseaux sociaux et vos campagnes.",
       },
     ],
     process: [
@@ -634,10 +634,10 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       },
       {
         title: "Clarifier",
-        body: "Nous organisons vos offres, votre message et vos priorites.",
+        body: "Nous organisons vos offres, votre message et vos priorités.",
       },
       {
-        title: "Creer",
+        title: "Créer",
         body: "Nous produisons les textes, visuels et contenus nécessaires.",
       },
       {
@@ -653,9 +653,9 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
           "Oui. Une marque claire aide les clients à comprendre et retenir votre entreprise. Elle facilite aussi la cohérence entre votre site, vos profils locaux et vos contenus.",
       },
       {
-        question: "Est-ce que vous creez aussi les textes ?",
+        question: "Est-ce que vous créez aussi les textes ?",
         answer:
-          "Oui. Nous pouvons ecrire les textes du site, les descriptions de services, les questions frequentes et les contenus de base.",
+          "Oui. Nous pouvons écrire les textes du site, les descriptions de services, les questions fréquentes et les contenus de base.",
       },
     ],
     finalCta: {
@@ -682,7 +682,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
     slug: "/services/croissance-programmatique",
     hero: {
       eyebrow: "Contenu utile a grande echelle",
-      title: "Répondez à plus de recherches sans refaire le meme travail.",
+      title: "Répondez à plus de recherches sans refaire le même travail.",
       body:
         "Vos clients ne cherchent pas tous la même chose. Creativa Poeta construit des systèmes de pages utiles pour couvrir ces recherches de façon claire, contrôlée et durable.",
       primaryCta: {
@@ -700,7 +700,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
         "Une entreprise peut proposer plusieurs services, travailler dans plusieurs zones, parler plusieurs langues ou servir plusieurs types de clients. Beaucoup de sites essaient pourtant de tout expliquer sur quelques pages seulement.",
     },
     approach: {
-      title: "Nous creons un systeme, pas une pile de pages au hasard.",
+      title: "Nous creons un système, pas une pile de pages au hasard.",
       body:
         "Le but n'est pas de publier beaucoup pour publier beaucoup. Le but est de répondre clairement a beaucoup de recherches reelles avec des pages utiles et contrôlées.",
     },
@@ -727,7 +727,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         title: "Preparer l'expansion",
         body:
-          "La meme base peut s'adapter a de nouvelles langues, regions, services ou secteurs.",
+          "La même base peut s'adapter a de nouvelles langues, regions, services ou secteurs.",
       },
     ],
     process: [
@@ -743,7 +743,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         title: "Produire",
         body:
-          "Nous creons les premieres pages et validons leur qualité avant d'aller plus loin.",
+          "Nous creons les premières pages et validons leur qualité avant d'aller plus loin.",
       },
       {
         title: "Mesurer",
@@ -755,7 +755,7 @@ export const servicePageContentFr: Record<ServiceCode, ServicePageContent> = {
       {
         question: "Qu'est-ce que la croissance programmatique ?",
         answer:
-          "C'est une méthode qui permet de créer plusieurs pages utiles à partir d'une structure commune, pour répondre à des recherches précises sans tout refaire a la main.",
+          "C'est une méthode qui permet de créer plusieurs pages utiles à partir d'une structure commune, pour répondre à des recherches précises sans tout refaire à la main.",
       },
       {
         question: "Est-ce risque pour Google ?",

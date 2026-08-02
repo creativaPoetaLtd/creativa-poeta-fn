@@ -1,49 +1,49 @@
 const FaqLocale: any = {
   fr: {
     h1: "F.A.Q.",
-    h2: "Questions frequentes",
-    title1: "Est-ce que j'ai encore besoin d'un site si j'ai deja Google Maps ou Instagram ?",
+    h2: "Questions fréquentes",
+    title1: "Est-ce que j'ai encore besoin d'un site si j'ai déjà Google Maps ou Instagram ?",
     description1:
       "Oui, si vous voulez une base officielle que vous controlez. Google Maps, Instagram, Facebook et WhatsApp sont utiles, mais votre site rassemble vos informations importantes au meme endroit.",
     title2: "Je n'ai pas encore de site. Est-ce grave ?",
     description2:
-      "Non. On peut commencer petit avec une page officielle simple: vos services, vos contacts, vos horaires, vos langues, vos liens et vos reponses principales.",
+      "Non. On peut commencer petit avec une page officielle simple: vos services, vos contacts, vos horaires, vos langues, vos liens et vos réponses principales.",
     title3: "Vous parlez d'IA. Qu'est-ce que cela veut dire pour mon entreprise ?",
     description3:
       "IA veut dire intelligence artificielle. Ce sont des outils comme ChatGPT, Perplexity ou certains assistants vocaux. Ils ont besoin d'informations claires pour comprendre une entreprise.",
-    title4: "Est-ce que vous promettez la premiere place sur Google ?",
+    title4: "Est-ce que vous promettez la première place sur Google ?",
     description4:
-      "Non. Personne ne peut garantir une premiere place serieusement. Nous mettons en place les bonnes bases pour augmenter vos chances d'etre trouve, compris et contacte.",
-    title5: "Pouvez-vous ameliorer un site deja existant ?",
+      "Non. Personne ne peut garantir une première place sérieusement. Nous mettons en place les bonnes bases pour augmenter vos chances d'être trouvé, compris et contacté.",
+    title5: "Pouvez-vous améliorer un site déjà existant ?",
     description5:
       "Oui. Nous pouvons garder ce qui fonctionne, corriger ce qui bloque et remettre le contenu au clair sans forcement tout jeter.",
     title6: "Pouvez-vous aussi aider mes profils Google, Facebook ou Instagram ?",
     description6:
-      "Oui. Le but est que votre site, vos maps et vos reseaux racontent la meme chose. Cela aide les clients a vous faire confiance.",
-    title7: "Travaillez-vous avec des petits commerces et independants ?",
+      "Oui. Le but est que votre site, vos maps et vos réseaux racontent la meme chose. Cela aide les clients a vous faire confiance.",
+    title7: "Travaillez-vous avec des petits commerces et indépendants ?",
     description7:
-      "Oui. Nous travaillons avec les commerces, restaurants, services locaux, independants, associations, createurs et entreprises qui veulent etre plus faciles a trouver.",
+      "Oui. Nous travaillons avec les commerces, restaurants, services locaux, indépendants, associations, créateurs et entreprises qui veulent être plus faciles à trouver.",
     title8: "Est-ce que je dois comprendre la technique pour travailler avec vous ?",
     description8:
-      "Non. Nous expliquons simplement ce que nous faisons, pourquoi nous le faisons et ce que cela change pour votre activite.",
+      "Non. Nous expliquons simplement ce que nous faisons, pourquoi nous le faisons et ce que cela change pour votre activité.",
     title9: "Combien de temps prend un projet ?",
     description9:
       "Cela depend du besoin. Une page officielle peut aller vite. Une refonte complete ou une presence en plusieurs langues demande plus de preparation.",
-    title10: "Combien cela coute ?",
+    title10: "Combien cela coûte ?",
     description10:
-      "Le prix depend du niveau d'accompagnement. Nous pouvons commencer par un audit ou une base simple avant de construire plus grand.",
+      "Le prix depend du niveau d'accompagnément. Nous pouvons commencer par un audit ou une base simple avant de construire plus grand.",
     title11: "Pouvez-vous travailler en plusieurs langues ?",
     description11:
       "Oui. Nous pouvons preparer le contenu pour plusieurs langues, en gardant une base commune et des adaptations locales quand c'est utile.",
-    title12: "Est-ce que les reseaux sociaux restent importants ?",
+    title12: "Est-ce que les réseaux sociaux restent importants ?",
     description12:
-      "Oui. Les reseaux montrent votre activite. Le site sert plutot de base officielle et stable. Les deux peuvent se completer.",
+      "Oui. Les réseaux montrent votre activité. Le site sert plutot de base officielle et stable. Les deux peuvent se completer.",
     title13: "Comment commence-t-on ?",
     description13:
-      "Vous nous contactez, nous regardons votre presence actuelle, puis nous proposons les premieres priorites: site, page officielle, maps, contenu ou profils.",
-    title14: "Mes donnees et mes acces sont-ils proteges ?",
+      "Vous nous contactez, nous regardons votre presence actuelle, puis nous proposons les premières priorites: site, page officielle, maps, contenu ou profils.",
+    title14: "Mes données et mes accès sont-ils protégés ?",
     description14:
-      "Oui. Nous limitons les acces au strict necessaire et nous vous aidons a garder le controle de vos comptes, mots de passe et plateformes.",
+      "Oui. Nous limitons les accès au strict necessaire et nous vous aidons a garder le controle de vos comptes, mots de passe et plateformes.",
   },
   en: {
     h1: "F.A.Q.",
@@ -89,7 +89,7 @@ const FaqLocale: any = {
       "You contact us, we review your current presence, then we suggest the first priorities: website, official page, maps, content or profiles.",
     title14: "Are my data and accesses protected?",
     description14:
-      "Yes. We limit access to what is needed and help you keep control of your accounts, passwords and platforms.",
+      "Yes. We limit accèss to what is needed and help you keep control of your accounts, passwords and platforms.",
   },
   kiny: {
     h1: "F.A.Q.",
@@ -97,7 +97,7 @@ const FaqLocale: any = {
     title1: "Ese nkeneye website niba mfite Google Maps cyangwa Instagram?",
     description1:
       "Yego, niba ushaka ahantu hizewe ugenzura. Google Maps, Instagram, Facebook na WhatsApp ni ingenzi, ariko website ihuriza amakuru yawe y'ingenzi hamwe.",
-    title2: "Nta website mfite. Ese ni ikibazo?",
+    title2: "Nta website mfite. Ese ni ikibazoù",
     description2:
       "Oya. Dushobora gutangira n'urupapuro rwemewe ruto: serivisi zawe, aho bagushakira, amasaha, indimi ukoresha n'ibisubizo by'ingenzi.",
     title3: "Iyo muvuga IA muba mushaka kuvuga iki?",
@@ -127,7 +127,7 @@ const FaqLocale: any = {
     title11: "Mushobora gukora mu ndimi nyinshi?",
     description11:
       "Yego. Dushobora gutegura amagambo mu ndimi nyinshi, tugakoresha ishingiro rimwe ariko tugahindura aho bikenewe.",
-    title12: "Imbuga nkoranyambaga ziracyafite akamaro?",
+    title12: "Imbuga nkoranyambaga ziracyafite akamaroù",
     description12:
       "Yego. Zerekana ibikorwa byawe. Website iba ahantu hizewe kandi hahoraho. Byombi biruzuzanya.",
     title13: "Dutangira dute?",
@@ -135,7 +135,7 @@ const FaqLocale: any = {
       "Uratwandikira, tukareba uko ugaragara ubu, hanyuma tukakwereka ibyihutirwa: website, page, amakarita, amagambo cyangwa profili.",
     title14: "Amakuru yanjye ararinzwe?",
     description14:
-      "Yego. Dufata gusa acces zikenewe kandi tugufasha kugumana ububasha kuri konti, ijambo ry'ibanga n'ibikoresho ukoresha.",
+      "Yego. Dufata gusa accès zikenewe kandi tugufasha kugumana ububasha kuri konti, ijambo ry'ibanga n'ibikoresho ukoresha.",
   },
   nl: {
     h1: "F.A.Q.",
@@ -163,7 +163,7 @@ const FaqLocale: any = {
       "Ja. We werken met winkels, restaurants, lokale diensten, zelfstandigen, verenigingen, makers en bedrijven die beter gevonden willen worden.",
     title8: "Moet ik technische dingen begrijpen?",
     description8:
-      "Nee. We leggen eenvoudig uit wat we doen, waarom we het doen en wat het verandert voor je activiteit.",
+      "Nee. We leggen eenvoudig uit wat we doen, waarom we het doen en wat het verandert voor je activitéit.",
     title9: "Hoe lang duurt een project?",
     description9:
       "Dat hangt af van de behoefte. Een eenvoudige officiele pagina kan snel. Een volledige vernieuwing of meerdere talen vraagt meer voorbereiding.",
@@ -175,7 +175,7 @@ const FaqLocale: any = {
       "Ja. We kunnen inhoud voorbereiden in meerdere talen, met een gemeenschappelijke basis en lokale aanpassingen waar nodig.",
     title12: "Blijven sociale netwerken belangrijk?",
     description12:
-      "Ja. Sociale netwerken tonen je activiteit. De website dient als stabiele officiele basis. Beide vullen elkaar aan.",
+      "Ja. Sociale netwerken tonen je activitéit. De website dient als stabiele officiele basis. Beide vullen elkaar aan.",
     title13: "Hoe starten we?",
     description13:
       "Je contacteert ons, wij bekijken je huidige aanwezigheid en stellen dan de eerste prioriteiten voor: website, pagina, kaarten, content of profielen.",

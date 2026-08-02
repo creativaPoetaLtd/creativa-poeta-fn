@@ -10,8 +10,8 @@ const AboutLocale: any = {
     title1: "CE QUE NOUS FAISONS",
     title2: "NOUS FAISONS",
     description:
-      "Creativa Poeta aide les entreprises a construire une presence digitale claire. Nous ne faisons pas seulement de beaux sites ou de beaux contenus. Nous aidons vos informations a devenir faciles a trouver, faciles a comprendre et faciles a verifier. Si vous avez deja un site, nous pouvons l'ameliorer. Si vous utilisez seulement Google Maps, Facebook, Instagram ou WhatsApp, nous pouvons commencer par une page officielle simple et tout relier petit a petit.",
-    action: "CONTACTEZ NOTRE EQUIPE",
+      "Creativa Poeta aide les entreprises à construire une présence digitale claire. Nous ne faisons pas seulement de beaux sites ou de beaux contenus. Nous aidons vos informations à devenir faciles à trouver, faciles à comprendre et faciles à vérifier. Si vous avez déjà un site, nous pouvons l’améliorer. Si vous utilisez seulement Google Maps, Facebook, Instagram ou WhatsApp, nous pouvons commencer par une page officielle simple et tout relier petit a petit.",
+    action: "CONTACTEZ NOTRE ÉQUIPE",
   },
   kiny: {
     title1: "IBYO DUKORA",

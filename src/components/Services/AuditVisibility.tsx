@@ -40,60 +40,60 @@ const copies: Record<string, AuditCopy> = {
     title: "Votre entreprise est-elle visible dans Google, les maps et les moteurs IA ?",
     intro:
       "Nous analysons votre site, votre page Google Maps, vos profils locaux et vos informations publiques pour voir si un client ou un outil comme ChatGPT peut vous trouver, vous comprendre et vous recommander.",
-    cta: "Tester ma visibilite",
+    cta: "Tester ma visibilit?",
     secondaryCta: "Parler a Creativa Poeta",
     promiseTitle: "Le but n'est pas de faire un rapport complique.",
     promise:
-      "Le but est de vous montrer clairement ce qui bloque aujourd'hui : informations manquantes, textes confus, profils qui ne disent pas la meme chose, manque de reponses utiles ou presence difficile a lire pour les outils modernes.",
+      "Le but est de vous montrer clairement ce qui bloque aujourd'hui : informations manquantes, textes confus, profils qui ne disent pas la meme chose, manque de réponses utiles ou presence difficile a lire pour les outils modernes.",
     checksTitle: "Ce que nous regardons",
     checks: [
       {
         title: "Google",
-        text: "Est-ce que votre entreprise est facile a trouver et a comprendre dans les resultats de recherche ?",
+        text: "Est-ce que votre entreprise est facile à trouver et à comprendre dans les résultats de recherche ?",
       },
       {
         title: "Maps",
-        text: "Est-ce que vos horaires, contacts, services et zones sont coherents sur les cartes ?",
+        text: "Est-ce que vos horaires, contacts, services et zones sont cohérents sur les cartes ?",
       },
       {
         title: "Recherche vocale",
-        text: "Est-ce qu'une personne qui cherche en parlant peut obtenir une reponse claire sur votre entreprise ?",
+        text: "Est-ce qu'une personne qui cherche en parlant peut obtenir une réponse claire sur votre entreprise ?",
       },
       {
         title: "Outils IA",
-        text: "Est-ce que vos informations sont assez claires pour etre reprises par des outils comme ChatGPT ?",
+        text: "Est-ce que vos informations sont assez claires pour être reprises par des outils comme ChatGPT ?",
       },
     ],
     deliverTitle: "Ce que vous recevez",
     deliver: [
-      "Une note simple de votre visibilite actuelle.",
+      "Une note simple de votre visibilit? actuelle.",
       "Les blocages les plus importants a corriger.",
       "Les informations a harmoniser sur votre site, vos maps et vos profils.",
       "Une liste d'actions prioritaires, classees du plus urgent au moins urgent.",
     ],
     notTitle: "Ce que ce service n'est pas",
     notItems: [
-      "Ce n'est pas une promesse de premiere place sur Google.",
+      "Ce n'est pas une promesse de première place sur Google.",
       "Ce n'est pas un jargon technique incomprehensible.",
       "Ce n'est pas une refonte complete du site.",
       "C'est un point de depart clair avant de depenser plus.",
     ],
-    faqTitle: "Questions frequentes",
+    faqTitle: "Questions fréquentes",
     faqs: [
       {
         question: "Est-ce utile si je n'ai pas encore de site ?",
         answer:
-          "Oui. Nous pouvons analyser votre page Google Maps, vos reseaux sociaux, vos informations publiques et vous dire quelle base officielle construire en premier.",
+          "Oui. Nous pouvons analyser votre page Google Maps, vos réseaux sociaux, vos informations publiques et vous dire quelle base officielle construire en premier.",
       },
       {
-        question: "Est-ce utile si j'ai deja un site ?",
+        question: "Est-ce utile si j'ai déjà un site ?",
         answer:
-          "Oui. Nous regardons si votre site explique vraiment vos services, vos contacts, vos zones, vos langues et les reponses importantes pour vos clients.",
+          "Oui. Nous regardons si votre site explique vraiment vos services, vos contacts, vos zones, vos langues et les réponses importantes pour vos clients.",
       },
       {
         question: "Est-ce que vous garantissez que Google ou une IA va me recommander ?",
         answer:
-          "Non. Personne ne peut garantir cela serieusement. Nous mettons en place les conditions pour que votre entreprise soit plus facile a trouver, comprendre et citer.",
+          "Non. Personne ne peut garantir cela serieusement. Nous mettons en place les conditions pour que votre entreprise soit plus facile à trouver, comprendre et citer.",
       },
     ],
   },

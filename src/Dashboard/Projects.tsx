@@ -80,7 +80,7 @@ const requestKindCopy: Record<
   },
   visibility: {
     title: "Visibility Tests",
-    subtitle: "Inbox for visibility tests submitted from Tester ma visibilite.",
+    subtitle: "Inbox for visibility tests submitted from Tester ma visibilité.",
     loading: "Loading visibility tests...",
     empty: "No visibility tests found",
     totalLabel: "Visibility Tests",
@@ -101,9 +101,9 @@ const isVisibilityRequest = (project: ProjectRequest) => {
   const serviceType = getServiceType(project);
   const selected = (project.selectedServices || []).join(" ").toLowerCase();
   return (
-    serviceType.includes("diagnostic visibilite") ||
+    serviceType.includes("diagnostic visibilité") ||
     serviceType.includes("visibility test") ||
-    selected.includes("test visibilite")
+    selected.includes("test visibilité")
   );
 };
 
@@ -111,7 +111,7 @@ const isAssistanceRequest = (project: ProjectRequest) => {
   const serviceType = getServiceType(project);
   const selected = (project.selectedServices || []).join(" ").toLowerCase();
   return (
-    serviceType.includes("assistance numerique") ||
+    serviceType.includes("assistance numérique") ||
     serviceType.includes("digital assistance") ||
     serviceType.includes("depannage") ||
     selected.includes("depannage") ||

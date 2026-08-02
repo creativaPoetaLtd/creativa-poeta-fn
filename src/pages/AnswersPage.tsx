@@ -32,41 +32,41 @@ const answersByLocale: Record<
   fr: {
     title: "Questions sur la visibilité moderne, Google et IA | Creativa Poeta",
     description:
-      "Reponses claires aux questions que les clients posent a Google, aux assistants vocaux et aux IA sur la visibilité, les sites, maps, contenus et outils digitaux.",
-    eyebrow: "Reponses utiles",
-    hero: "Les vraies questions que vos clients peuvent poser a Google, Siri ou une IA.",
+      "Réponses claires aux questions que les clients posent à Google, aux assistants vocaux et aux IA sur la visibilité, les sites, maps, contenus et outils digitaux.",
+    eyebrow: "Réponses utiles",
+    hero: "Les vraies questions que vos clients peuvent poser à Google, Siri ou une IA.",
     intro:
-      "Cette page rassemble les formulations naturelles qu'une personne peut taper ou demander a voix haute. Chaque reponse renvoie vers le service le plus logique.",
+      "Cette page rassemble les formulations naturelles qu'une personne peut taper ou demander a voix haute. Chaque réponse renvoie vers le service le plus logique.",
     label: "Questions prioritaires",
     ctaTitle: "Vous voulez savoir ce qui bloque votre visibilité ?",
     ctaText:
-      "Commencez par un test simple. Ensuite on decide si la priorite est Google Maps, le site, les contenus, les données structurees ou l'IA.",
+      "Commencez par un test simple. Ensuite on decide si la priorite est Google Maps, le site, les contenus, les données structurées ou l'IA.",
     ctaPrimary: "Tester ma visibilité",
-    ctaSecondary: "Demarrer un projet",
+    ctaSecondary: "Démarrer un projet",
     answers: [
       {
-        question: "Comment faire pour que mon entreprise soit trouvee sur Google et Google Maps ?",
+        question: "Comment faire pour que mon entreprise soit trouvée sur Google et Google Maps ?",
         answer:
           "Il faut aligner votre site, votre fiche Google, vos services, vos zones, vos avis, vos horaires, vos photos et vos liens. Google comprend mieux une entreprise quand les informations sont cohérentes partout.",
         action: "Travailler ma visibilité locale",
         href: "/services/visibilite-locale",
       },
       {
-        question: "Comment etre recommande par ChatGPT, Gemini, Perplexity ou les moteurs IA ?",
+        question: "Comment être recommandé par ChatGPT, Gemini, Perplexity ou les moteurs IA ?",
         answer:
-          "Une IA recommande plus facilement une entreprise quand elle trouve des pages claires, des services bien nommes, des reponses utiles, des preuves publiques, des données structurees et des sources cohérentes.",
+          "Une IA recommande plus facilement une entreprise quand elle trouve des pages claires, des services bien nommés, des réponses utiles, des preuves publiques, des données structurées et des sources cohérentes.",
         action: "Preparer ma visibilité IA",
         href: "/services/ia-automatisation",
       },
       {
-        question: "Est-ce qu'un site web suffit pour etre visible ?",
+        question: "Est-ce qu'un site web suffit pour être visible ?",
         answer:
           "Non. Le site est la base officielle, mais il doit être relie aux maps, profils sociaux, contenus, FAQ, schema.org et chemins de contact. La visibilité moderne fonctionne comme un ecosysteme.",
         action: "Construire une base digitale claire",
         href: "/services/web-app",
       },
       {
-        question: "Pourquoi mon entreprise n'apparait pas bien dans les recherches locales ?",
+        question: "Pourquoi mon entreprise n'apparaît pas bien dans les recherches locales ?",
         answer:
           "Souvent, les categories sont faibles, les textes ne disent pas clairement les services, les zones ne sont pas précisees, les avis sont peu exploites ou les informations publiques ne racontent pas la meme chose.",
         action: "Faire un diagnostic",
@@ -75,14 +75,14 @@ const answersByLocale: Record<
       {
         question: "Quels contenus faut-il créer pour attirer les bons clients ?",
         answer:
-          "Il faut des pages services, des reponses aux questions frequentes, des articles utiles, des exemples concrets, des pages locales et des contenus qui expliquent clairement pour qui vous travaillez.",
-        action: "Creer des contenus utiles",
+          "Il faut des pages services, des réponses aux questions fréquentes, des articles utiles, des exemples concrets, des pages locales et des contenus qui expliquent clairement pour qui vous travaillez.",
+        action: "Créer des contenus utiles",
         href: "/services/content-writing",
       },
       {
         question: "Comment rendre mon site lisible par les assistants vocaux et les IA ?",
         answer:
-          "Le site doit avoir une structure simple, des titres explicites, des reponses courtes, du schema.org, un sitemap propre, des liens internes et des pages accèssibles sans friction technique.",
+          "Le site doit avoir une structure simple, des titres explicites, des réponses courtes, du schema.org, un sitemap propre, des liens internes et des pages accèssibles sans friction technique.",
         action: "Structurer mon site",
         href: "/knowledge",
       },

@@ -6,9 +6,9 @@ const MainFooterLocale: any = {
     copyright: "© 2026 Creativa Poeta. All rights reserved.",
   },
   fr: {
-    legalMentions: "Mentions legales",
-    terms: "Conditions generales",
-    cookies: "Confidentialite et cookies",
+    legalMentions: "Mentions légales",
+    terms: "Conditions générales",
+    cookies: "Confidentialité et cookies",
     copyright: "© 2026 Creativa Poeta. Tous droits reserves.",
   },
   kiny: {

@@ -16,18 +16,18 @@ const getLegalKind = (pathname: string): LegalPageKind => {
 
 const seoByKind: Record<LegalPageKind, { title: string; description: string; path: string }> = {
   legal: {
-    title: "Mentions legales | Creativa Poeta",
-    description: "Informations legales, editeur, hebergement et contact de Creativa Poeta.",
+    title: "Mentions légales | Creativa Poeta",
+    description: "Informations légales, éditeur, hébergement et contact de Creativa Poeta.",
     path: "/mentions-legales",
   },
   terms: {
-    title: "Conditions generales | Creativa Poeta",
-    description: "Conditions generales d'utilisation du site et des demandes de service Creativa Poeta.",
+    title: "Conditions générales | Creativa Poeta",
+    description: "Conditions générales d’utilisation du site et des demandes de service Creativa Poeta.",
     path: "/terms-and-conditions",
   },
   privacy: {
-    title: "Confidentialite et cookies | Creativa Poeta",
-    description: "Politique de confidentialite, donnees personnelles et gestion des cookies de Creativa Poeta.",
+    title: "Confidentialité et cookies | Creativa Poeta",
+    description: "Politique de confidentialité, données personnelles et gestion des cookies de Creativa Poeta.",
     path: "/confidentialite-cookies",
   },
 };
@@ -46,7 +46,7 @@ const TermsPage = () => {
       <MarketSEOHead
         title={seo.title}
         description={seo.description}
-        keywords="Creativa Poeta, mentions legales, conditions generales, confidentialite, cookies, RGPD"
+        keywords="Creativa Poeta, mentions légales, conditions générales, confidentialité, cookies, RGPD"
         path={seo.path}
       />
       <NavBar />

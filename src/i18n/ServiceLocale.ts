@@ -34,7 +34,7 @@ const ServiceLocale: any = {
     service22: "comme source officielle",
     description2:
       "Nous créons ou améliorons votre site pour qu'il devienne la source officielle comprise par vos clients, Google et les outils IA.",
-    service31: "Visibilite",
+    service31: "Visibilité",
     service32: "locale",
     description3:
       "Nous alignons maps, profils locaux et informations publiques pour que vos clients et les outils IA voient les memes informations fiables.",
@@ -45,7 +45,7 @@ const ServiceLocale: any = {
     service51: "Assistants IA",
     service52: "sur mesure",
     description5:
-      "Nous vous aidons à créer ou configurer vos propres assistants IA, GPT personnalises et outils intelligents adaptes a votre metier.",
+      "Nous vous aidons à créer ou configurer vos propres assistants IA, GPT personnalisés et outils intelligents adaptés à votre métier.",
   },
   kiny: {
     title1: "IBYO",
