@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -33,6 +33,7 @@ import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
 import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
 import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
+import PartnershipPage from "./pages/PartnershipPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 
 const appElement = (
@@ -68,6 +69,11 @@ const appElement = (
             <Route path="/fr/contact" element={<ContactPage />} />
             <Route path="/nl/contact" element={<ContactPage />} />
             <Route path="/rw/contact" element={<ContactPage />} />
+            <Route path="/partnership" element={<PartnershipPage />} />
+            <Route path="/en/partnership" element={<PartnershipPage />} />
+            <Route path="/fr/partnership" element={<PartnershipPage />} />
+            <Route path="/nl/partnership" element={<PartnershipPage />} />
+            <Route path="/rw/partnership" element={<PartnershipPage />} />
             {/* <Route path="/career" element={<JobsPages />} /> */}
             <Route path="/start-project" element={<ProjectFormPage />} />
             <Route path="/en/start-project" element={<ProjectFormPage />} />
@@ -235,6 +241,7 @@ const appElement = (
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container!);
 root.render(appElement);
+
 
 
 

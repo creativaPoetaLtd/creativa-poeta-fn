@@ -1,4 +1,4 @@
-// import { useTranslation } from 'react-i18next';
+﻿// import { useTranslation } from 'react-i18next';
 import logopoeta1 from '../../assets/flags/logopoeta1.png';
 import Cont from '../unUsedComponents/Cont';
 // import { SetStateAction, useState } from 'react';
@@ -25,8 +25,8 @@ function Footer() {
       : locale === "en"
       ? "Request digital assistance"
       : locale === "kiny"
-      ? "Saba assistance numérique"
-      : "Demander une assistance numérique";
+      ? "Saba assistance numÃ©rique"
+      : "Demander une assistance numÃ©rique";
   const answersLabel =
     locale === "nl"
       ? "Nuttige antwoorden"
@@ -34,7 +34,7 @@ function Footer() {
       ? "Useful answers"
       : locale === "kiny"
       ? "Useful answers"
-      : "Réponses utiles";
+      : "RÃ©ponses utiles";
 
   const knowledgeLabel =
     locale === "nl"
@@ -43,7 +43,7 @@ function Footer() {
       ? "Knowledge base"
       : locale === "kiny"
       ? "Knowledge base"
-      : "Glossaire visibilité";
+      : "Glossaire visibilitÃ©";
 
   const blogLabel =
     locale === "nl"
@@ -53,6 +53,14 @@ function Footer() {
       : locale === "kiny"
       ? "Inama & resources"
       : "Journal & conseils";
+  const partnershipLabel =
+    locale === "nl"
+      ? "Partnerschap"
+      : locale === "en"
+      ? "Partnership"
+      : locale === "kiny"
+      ? "Partnership"
+      : "Partenariat";
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -138,6 +146,9 @@ function Footer() {
     </Link>
     <Link to={linkPath("/demander-assistance-numerique")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{assistanceLabel}</p>
+    </Link>
+    <Link to={linkPath("/partnership")}>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{partnershipLabel}</p>
     </Link>
     <Link to={linkPath("/answers")}> 
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{answersLabel}</p>
@@ -225,10 +236,10 @@ function Footer() {
       {/* </div> */}
       {/* <div className='flex w-full bg-white h-[1px] mt-5'></div>
       <div className="grid laptop:grid-cols-5 desktop:grid-cols-5 tablet:grid-cols-3 grid-cols-2  mt-5 justify-center items-center basis-full text-slate-400">
-          <a href='' className='text-xs font-bold'>Clause de non-responsabilité</a>
-          <a href='' className='text-xs font-bold'>Politique de confidentialité</a>
-          <a href='' className='text-xs font-bold'>Mentions légales </a>
-          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions générales  </Link>
+          <a href='' className='text-xs font-bold'>Clause de non-responsabilitÃ©</a>
+          <a href='' className='text-xs font-bold'>Politique de confidentialitÃ©</a>
+          <a href='' className='text-xs font-bold'>Mentions lÃ©gales </a>
+          <Link to='/terms-and-conditions' className='text-xs font-bold'>Conditions gÃ©nÃ©rales  </Link>
           <a href='' className='text-xs font-bold'>Cookes policy</a>
         </div>
         <div className="flex laptop:flex-row desktop:flex-row tablet:flex-row flex-col  space-x-10 mt-16 justify-center items-center basis-full text-slate-400">
@@ -249,5 +260,8 @@ function Footer() {
 }
 
 export default Footer;
+
+
+
 
 

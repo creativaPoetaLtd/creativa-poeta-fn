@@ -1,11 +1,11 @@
-export const seoConfig = {
+﻿export const seoConfig = {
   home: {
     title:
       "Creativa Poeta | Be found on Google, maps, voice search and AI tools",
     description:
       "Creativa Poeta helps businesses become easier to find, understand and contact by aligning websites, maps, social profiles and useful content.",
     keywords:
-      "Creativa Poeta, website, local visibility, Google Maps, voice search, ChatGPT visibility, business website, digital présence",
+      "Creativa Poeta, website, local visibility, Google Maps, voice search, ChatGPT visibility, business website, digital prÃ©sence",
     url: "https://creativapoeta.com/",
     structuredData: {
       "@context": "https://schema.org",
@@ -42,7 +42,7 @@ export const seoConfig = {
         },
         {
           "@type": "Service",
-          name: "Useful pages for précise searches",
+          name: "Useful pages for prÃ©cise searches",
           description:
             "Useful service and question pages for specific client needs, locations or searches.",
         },
@@ -52,18 +52,18 @@ export const seoConfig = {
 
   services: {
     auditVisibility: {
-      title: "Audit de visibilité IA, Google et maps | Creativa Poeta",
+      title: "Audit de visibilitÃ© IA, Google et maps | Creativa Poeta",
       description:
         "Analysez votre site, vos maps, vos profils locaux et vos informations publiques pour savoir si vos clients et les outils IA peuvent vous trouver, vous comprendre et vous recommander.",
       keywords:
-        "audit visibilité, Google Maps, visibilité locale, recherche vocale, ChatGPT, présence digitale, Creativa Poeta",
+        "audit visibilitÃ©, Google Maps, visibilitÃ© locale, recherche vocale, ChatGPT, prÃ©sence digitale, Creativa Poeta",
       url: "https://creativapoeta.com/services/audit-visibilite",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Audit de visibilité moderne",
+        name: "Audit de visibilitÃ© moderne",
         description:
-          "Analyse de la présence publique d'une entreprise sur son site, ses maps, ses profils locaux et ses informations importantes.",
+          "Analyse de la prÃ©sence publique d'une entreprise sur son site, ses maps, ses profils locaux et ses informations importantes.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
@@ -75,7 +75,7 @@ export const seoConfig = {
     officialWebsite: {
       title: "Site officiel pret pour les IA | Creativa Poeta",
       description:
-        "Créez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, Google, les maps et les outils IA.",
+        "CrÃ©ez ou refondez un site clair qui devient la source officielle de votre entreprise pour vos clients, Google, les maps et les outils IA.",
       keywords:
         "site officiel entreprise, site vitrine clair, source officielle, site web local, site pour IA, Creativa Poeta",
       url: "https://creativapoeta.com/services/site-officiel",
@@ -96,16 +96,16 @@ export const seoConfig = {
     localVisibility: {
       title: "Visibilite locale pour Google, maps et IA | Creativa Poeta",
       description:
-        "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos réseaux pour aider les clients et les outils IA a vous trouver.",
+        "Alignez vos informations sur Google Maps, Apple Maps, Bing, vos profils locaux et vos rÃ©seaux pour aider les clients et les outils IA a vous trouver.",
       keywords:
-        "visibilité locale, Google Maps, Apple Maps, Bing Places, recherche vocale, profils locaux, avis clients, Creativa Poeta",
+        "visibilitÃ© locale, Google Maps, Apple Maps, Bing Places, recherche vocale, profils locaux, avis clients, Creativa Poeta",
       url: "https://creativapoeta.com/services/visibilite-locale",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
         name: "Visibilite locale, maps et recherche vocale",
         description:
-          "Alignement des informations publiques d'une entreprise sur les maps, profils locaux, réseaux et recherches vocales.",
+          "Alignement des informations publiques d'une entreprise sur les maps, profils locaux, rÃ©seaux et recherches vocales.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
@@ -117,14 +117,14 @@ export const seoConfig = {
     usefulContent: {
       title: "Pages utiles pour Google, clients et IA | Creativa Poeta",
       description:
-        "Créez des pages claires qui répondent aux vraies questions de vos clients et aident Google, les maps et les outils IA à comprendre votre entreprise.",
+        "CrÃ©ez des pages claires qui rÃ©pondent aux vraies questions de vos clients et aident Google, les maps et les outils IA Ã  comprendre votre entreprise.",
       keywords:
-        "contenus utiles, questions clients, pages services, FAQ entreprise, visibilité IA, Google, ChatGPT, Creativa Poeta",
+        "contenus utiles, questions clients, pages services, FAQ entreprise, visibilitÃ© IA, Google, ChatGPT, Creativa Poeta",
       url: "https://creativapoeta.com/services/contenus-utiles",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Pages utiles pour questions précises",
+        name: "Pages utiles pour questions prÃ©cises",
         description:
           "Creation de pages claires pour les services, questions frequentes, zones, langues et besoins precis des clients.",
         provider: {
@@ -138,7 +138,7 @@ export const seoConfig = {
     aiAutomation: {
       title: "Assistants IA, GPT personnalises et agents | Creativa Poeta",
       description:
-        "Créez des assistants IA, GPT personnalises, chatbots et agents simples adaptes a votre metier, vos contenus et vos clients.",
+        "CrÃ©ez des assistants IA, GPT personnalises, chatbots et agents simples adaptes a votre metier, vos contenus et vos clients.",
       keywords:
         "assistant IA, GPT personnalise, chatbot entreprise, agent IA, automatisation simple, Creativa Poeta",
       url: "https://creativapoeta.com/services/ia-automatisation",
@@ -157,18 +157,18 @@ export const seoConfig = {
     },
 
     digitalAssistance: {
-      title: "Assistance numérique et depannage tech | Creativa Poeta",
+      title: "Assistance numÃ©rique et depannage tech | Creativa Poeta",
       description:
-        "Depannage informatique, configuration d'appareils, aide aux démarches en ligne, sécurité et accompagnement numérique pas à pas.",
+        "Depannage informatique, configuration d'appareils, aide aux dÃ©marches en ligne, sÃ©curitÃ© et accompagnement numÃ©rique pas Ã  pas.",
       keywords:
-        "assistance numérique, depannage informatique, configuration appareil, aide technologie, accompagnement digital, Creativa Poeta",
+        "assistance numÃ©rique, depannage informatique, configuration appareil, aide technologie, accompagnement digital, Creativa Poeta",
       url: "https://creativapoeta.com/services/assistance-numerique",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Assistance numérique et depannage tech",
+        name: "Assistance numÃ©rique et depannage tech",
         description:
-          "Assistance pour installer, configurer, depanner et utiliser les outils numériques, appareils et services en ligne.",
+          "Assistance pour installer, configurer, depanner et utiliser les outils numÃ©riques, appareils et services en ligne.",
         provider: {
           "@type": "Organization",
           name: "Creativa Poeta",
@@ -220,16 +220,16 @@ export const seoConfig = {
     },
 
     contentWriting: {
-      title: "Useful pages for précise searches | Creativa Poeta",
+      title: "Useful pages for prÃ©cise searches | Creativa Poeta",
       description:
-        "Create useful pages that answer précise client questions without empty or repetitive content.",
+        "Create useful pages that answer prÃ©cise client questions without empty or repetitive content.",
       keywords:
-        "service pages, business FAQ, useful content, précise searches, content strategy",
+        "service pages, business FAQ, useful content, prÃ©cise searches, content strategy",
       url: "https://creativapoeta.com/services/content-writing",
       structuredData: {
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Useful pages for précise searches",
+        name: "Useful pages for prÃ©cise searches",
         description:
           "Useful service and question pages for specific client needs, locations or searches.",
         provider: {
@@ -241,12 +241,34 @@ export const seoConfig = {
     },
   },
 
+  partnership: {
+    title: "Partnership for agencies and digital teams | Creativa Poeta",
+    description:
+      "Partner with Creativa Poeta to extend delivery capacity in web development, design, AI, content and digital visibility without growing your team.",
+    keywords:
+      "Creativa Poeta partnership, white label web development, agency partner, AI delivery partner, design partner, digital delivery team",
+    url: "https://creativapoeta.com/partnership",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Digital delivery partnership",
+      description:
+        "Partnership support for agencies, software teams and companies that need flexible delivery capacity in web development, design, AI and digital visibility.",
+      provider: {
+        "@type": "Organization",
+        name: "Creativa Poeta",
+        url: "https://creativapoeta.com",
+      },
+      serviceType: "Digital delivery partnership",
+    },
+  },
+
   contact: {
     title: "Contact Creativa Poeta",
     description:
       "Contact Creativa Poeta to improve your website, local visibility, maps, social profiles and business content.",
     keywords:
-      "contact Creativa Poeta, website help, local visibility help, business digital présence",
+      "contact Creativa Poeta, website help, local visibility help, business digital prÃ©sence",
     url: "https://creativapoeta.com/contact",
     structuredData: {
       "@context": "https://schema.org",
@@ -276,3 +298,4 @@ export const seoConfig = {
 };
 
 export default seoConfig;
+

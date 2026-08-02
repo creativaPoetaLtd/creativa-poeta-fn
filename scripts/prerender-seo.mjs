@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 
 const rootDir = process.cwd();
@@ -1176,6 +1176,49 @@ const pageTemplates = {
       ],
     ],
   },
+  partnership: {
+    path: "/partnership",
+    title: (lang) =>
+      lang === "fr"
+        ? "Partenariat agence et livraison digitale | Creativa Poeta"
+        : lang === "nl"
+          ? "Partnerschap voor bureaus en digitale teams | Creativa Poeta"
+          : lang === "rw"
+            ? "Partnership y'abakora digital | Creativa Poeta"
+            : "Partnership for agencies and digital teams | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Creativa Poeta aide les agences, editeurs et equipes digitales a livrer plus de sites, apps, design, IA et visibilite sans agrandir leur equipe."
+        : lang === "nl"
+          ? "Creativa Poeta helpt bureaus, softwareteams en digitale bedrijven meer websites, apps, design, AI en zichtbaarheid te leveren zonder hun team uit te breiden."
+          : lang === "rw"
+            ? "Creativa Poeta ifasha agencies na digital teams gukora websites, apps, design, AI na visibility nk'umufatanyabikorwa wizewe."
+            : "Creativa Poeta helps agencies, software companies and digital teams deliver more websites, apps, design, AI and visibility without growing their team.",
+    keywords:
+      "partnership, agency partner, white label web development, digital delivery partner, AI partner, design partner, Creativa Poeta",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Livrer plus sans recruter tout de suite",
+              "Nous devenons une capacite flexible pour les agences et entreprises qui veulent avancer vite sans sacrifier la qualite.",
+            ],
+            [
+              "Un partenaire discret et fiable",
+              "White label, equipe dediee ou livraison projet: nous nous adaptons a votre maniere de travailler.",
+            ],
+          ]
+        : [
+            [
+              "Deliver more without hiring immediately",
+              "We become flexible capacity for agencies and companies that need to move fast without sacrificing quality.",
+            ],
+            [
+              "A quiet and reliable partner",
+              "White label, dedicated team or project delivery: we adapt to the way you work.",
+            ],
+          ],
+  },
   blogs: {
     path: "/blogs",
     title: (lang) =>
@@ -2046,3 +2089,4 @@ Llms-Full: ${siteUrl}/llms-full.txt
 writeSitemapFiles();
 
 console.log(`Pre-rendered ${routeDefinitions.length} SEO pages (${publishedBlogs.length} published blog article(s)).`);
+

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaChevronDown,
@@ -36,6 +36,8 @@ const menuCopy: Record<
     contact: string;
     assistanceRequest: string;
     assistanceRequestText: string;
+    partnership: string;
+    partnershipText: string;
     servicesList: MenuService[];
   }
 > = {
@@ -43,12 +45,14 @@ const menuCopy: Record<
     menu: "Menu",
     close: "Fermer le menu",
     audit: "Diagnostic visibilité",
-    auditText: "Voir comment votre entreprise apparait sur Google et les outils IA",
+    auditText: "Voir comment votre entreprise apparaît sur Google et les outils IA",
     services: "Services",
     start: "Démarrer un projet",
     contact: "Contact",
     assistanceRequest: "Demander une assistance",
     assistanceRequestText: "Dépannage, configuration et aide numérique pas à pas",
+    partnership: "Partenariat",
+    partnershipText: "Agences, éditeurs et équipes digitales : livrons plus ensemble",
     servicesList: [
       ["Présence locale", "Google, Maps et visibilité IA", "/services/visibilite-locale"],
       ["Outils digitaux", "Sites, apps, logiciels et systèmes", "/services/site-officiel"],
@@ -68,8 +72,10 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Request assistance",
     assistanceRequestText: "Troubleshooting, setup and step-by-step digital help",
+    partnership: "Partnership",
+    partnershipText: "Agencies, software teams and digital companies: deliver more with us",
     servicesList: [
-      ["Local présence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
+      ["Local presence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software and systems", "/services/site-officiel"],
       ["AI assistants", "GPTs, chatbots and connected agents", "/services/ia-automatisation"],
       ["Visual identity", "Logo, design and brand materials", "/services/graphic-design"],
@@ -87,6 +93,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Digitale hulp aanvragen",
     assistanceRequestText: "Problemen oplossen, installatie en begeleiding",
+    partnership: "Partnerschap",
+    partnershipText: "Bureaus, softwareteams en digitale bedrijven: lever meer samen met ons",
     servicesList: [
       ["Lokale aanwezigheid", "Google, Maps en AI-zichtbaarheid", "/services/visibilite-locale"],
       ["Digitale tools", "Websites, apps, software en systemen", "/services/site-officiel"],
@@ -106,8 +114,10 @@ const menuCopy: Record<
     contact: "Twandikire",
     assistanceRequest: "Saba assistance",
     assistanceRequestText: "Depannage, setup no kugufasha gukoresha digital",
+    partnership: "Partnership",
+    partnershipText: "Agencies na digital teams: dutange imishinga myinshi turi hamwe",
     servicesList: [
-      ["Local présence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
+      ["Local presence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software na systems", "/services/site-officiel"],
       ["AI assistants", "GPTs, chatbots na agents", "/services/ia-automatisation"],
       ["Visual identity", "Logo, design na brand materials", "/services/graphic-design"],
@@ -175,6 +185,12 @@ function NavBar() {
       text: copy.assistanceRequestText,
       href: localizePath("/demander-assistance-numerique"),
       featured: true,
+    },
+    {
+      label: copy.partnership,
+      text: copy.partnershipText,
+      href: localizePath("/partnership"),
+      featured: false,
     },
     {
       label: (blogCopy[lang] ?? blogCopy.en).label,
@@ -461,5 +477,10 @@ function NavBar() {
 }
 
 export default NavBar;
+
+
+
+
+
 
 

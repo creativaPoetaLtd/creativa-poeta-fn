@@ -1,4 +1,4 @@
-# Creativa Poeta - AI and Search Visibility Context
+﻿# Creativa Poeta - AI and Search Visibility Context
 
 ## Identity
 
@@ -291,3 +291,11 @@ https://creativapoeta.com/sitemap.xml
 Robots file:
 
 https://creativapoeta.com/robots.txt
+
+## Partnership
+
+Creativa Poeta partners with agencies, software companies, marketing teams and consultancies that need white-label or extra delivery capacity in websites, apps, design, AI automation, content and modern visibility.
+
+Page:
+
+https://creativapoeta.com/partnership
