@@ -93,11 +93,19 @@ const copy = {
   },
 } as const;
 
-const defaultChoice: CookieChoice = {
+const necessaryOnlyChoice: CookieChoice = {
   necessary: true,
   preferences: false,
   analytics: false,
   marketing: false,
+  savedAt: "",
+};
+
+const defaultChoice: CookieChoice = {
+  necessary: true,
+  preferences: true,
+  analytics: true,
+  marketing: true,
   savedAt: "",
 };
 
@@ -183,7 +191,7 @@ const CookieConsent = () => {
               {labels.back}
             </button>
           ) : (
-            <button type="button" className="cp-cookie-button cp-cookie-button-ghost" onClick={() => save(defaultChoice)}>
+            <button type="button" className="cp-cookie-button cp-cookie-button-ghost" onClick={() => save(necessaryOnlyChoice)}>
               {labels.decline}
             </button>
           )}

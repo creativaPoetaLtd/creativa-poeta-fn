@@ -37,6 +37,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
 import HandshakeIcon from "@mui/icons-material/Handshake";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
@@ -45,6 +46,7 @@ import { getAdminNotificationSummary } from "../APIs/adminNotifications";
 import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
+import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
 import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -56,6 +58,7 @@ import Projects from "./Projects";
 import PartnershipRequests from "./PartnershipRequests";
 import Settings from "./Settings";
 import Users from "./Users";
+import WebsiteAnalytics from "./WebsiteAnalytics";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
@@ -68,6 +71,14 @@ const navigationItems = [
     color: "#EEBA2B",
     section: "Pilotage",
     permission: "dashboard:read",
+  },
+  {
+    text: "Website Analytics",
+    icon: <QueryStatsIcon />,
+    path: "/secure-admin-dashboard-2024/website-analytics",
+    color: "#38bdf8",
+    section: "Pilotage",
+    permission: "analytics:read",
   },
   {
     text: "Projects",
@@ -200,13 +211,14 @@ export default function Dashboard() {
 
     let mounted = true;
     const loadNavigationBadges = async () => {
-      const [emailResult, projectResult, partnershipResult, contactResult, adminNotificationResult, internalMessageResult] = await Promise.allSettled([
+      const [emailResult, projectResult, partnershipResult, contactResult, adminNotificationResult, internalMessageResult, analyticsIncidentResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
         hasPermission("requests:partnerships") ? getPartnershipRequestSummary() : Promise.resolve({ metrics: { attention: 0, pending: 0 } }),
         getContactSummary(),
         ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
         hasPermission("internal:messages") ? getInternalMessageSummary() : Promise.resolve({ metrics: { unread: 0, total: 0 } }),
+        hasPermission("analytics:read") ? getAnalyticsIncidentSummary() : Promise.resolve({ metrics: { open: 0, critical: 0, warning: 0 } }),
       ]);
 
       if (!mounted) return;
@@ -222,7 +234,9 @@ export default function Dashboard() {
       const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
       const adminNotificationMetrics = adminNotificationResult.status === "fulfilled" ? adminNotificationResult.value.metrics || { new: 0, open: 0 } : { new: 0, open: 0 };
       const internalMessageMetrics = internalMessageResult.status === "fulfilled" ? internalMessageResult.value.metrics || { unread: 0 } : { unread: 0 };
+      const analyticsIncidentMetrics = analyticsIncidentResult.status === "fulfilled" ? analyticsIncidentResult.value.metrics || { open: 0 } : { open: 0 };
       setRequestAttentionCounts({
+        "Website Analytics": Number(analyticsIncidentMetrics.open || 0),
         Projects: Number(projectMetrics.projects || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
@@ -635,6 +649,7 @@ export default function Dashboard() {
         >
           <Routes>
             <Route path="/" element={renderWithPermission("dashboard:read", <Analytics />)} />
+            <Route path="website-analytics" element={renderWithPermission("analytics:read", <WebsiteAnalytics />)} />
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />

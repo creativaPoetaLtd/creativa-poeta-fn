@@ -36,6 +36,7 @@ import AnswersPage from "./pages/AnswersPage.tsx";
 import PartnershipPage from "./pages/PartnershipPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -230,6 +231,8 @@ const appElement = (
               }
             />
 
+            <Route path="*" element={<NotFoundPage />} />
+
             {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           </Routes>
         </AuthProvider>
@@ -241,7 +244,8 @@ const appElement = (
 );
 
 const container = document.getElementById("root");
-const root = ReactDOM.createRoot(container!);
+if (!container) throw new Error("Root application container was not found.");
+const root = ReactDOM.createRoot(container);
 root.render(appElement);
 
 
