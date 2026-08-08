@@ -16,7 +16,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { contactUs } from "../APIs/Contact";
+import { submitPartnershipRequest } from "../APIs/PartnershipRequests";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { seoConfig } from "../components/SEO/seoConfig";
 import PageLayout from "../components/layout/PageLayout";
@@ -374,18 +374,14 @@ const PartnershipPage = () => {
 
     setSending(true);
     try {
-      await contactUs({
-        fullName: `${form.name}${form.company ? ` - ${form.company}` : ""}`,
+      await submitPartnershipRequest({
+        name: form.name,
+        company: form.company,
         email: form.email,
-        message: [
-          "[PARTNERSHIP REQUEST]",
-          `Type: ${form.type}`,
-          `Company: ${form.company || "-"}`,
-          `Phone: ${form.phone || "-"}`,
-          `Language: ${locale}`,
-          "",
-          form.message,
-        ].join("\n"),
+        phone: form.phone,
+        partnershipType: form.type,
+        locale,
+        message: form.message,
       });
       toast.success(copy.success);
       setForm({
@@ -404,91 +400,91 @@ const PartnershipPage = () => {
   };
 
   return (
-    <PageLayout className="bg-[#071323] text-white">
+    <PageLayout className="text-white">
       <MarketSEOHead {...seoConfig.partnership} path="/partnership" />
 
-      <main className="min-h-screen w-full overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(238,186,43,0.16),transparent_34%),linear-gradient(180deg,#071323_0%,#05080d_100%)] pt-28">
-        <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 pb-10 pt-10 md:px-8 lg:min-h-[78vh] lg:flex-row lg:items-center lg:pb-16">
+      <main className="min-h-screen w-full overflow-hidden bg-[linear-gradient(180deg,rgba(5,12,22,0.38)_0%,rgba(5,12,22,0.68)_55%,rgba(5,12,22,0.78)_100%)] pt-24 sm:pt-28">
+        <section className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 pb-6 pt-3 sm:gap-8 sm:pt-8 md:px-8 lg:min-h-[72vh] lg:flex-row lg:items-center lg:pb-12">
           <div className="flex-1">
-            <div className="mb-4 inline-flex items-center gap-3 text-sm font-black uppercase tracking-[0.18em] text-[#ffee00]">
-              <span className="h-4 w-10 skew-x-[-15deg] bg-[#EEBA2B]" />
+            <div className="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-[#ffee00] sm:mb-4 sm:gap-3 sm:text-sm">
+              <span className="h-3 w-7 skew-x-[-15deg] bg-[#EEBA2B] sm:h-4 sm:w-10" />
               {copy.heroKicker}
             </div>
-            <h1 className="max-w-4xl text-4xl font-black leading-[0.95] tracking-normal text-white md:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-[2.35rem] font-black leading-[0.96] tracking-normal text-white sm:text-5xl md:text-6xl lg:text-7xl">
               {pageTitle}
             </h1>
-            <p className="mt-5 max-w-2xl text-lg font-bold leading-relaxed text-slate-200 md:text-2xl">
+            <p className="mt-3 max-w-2xl text-base font-bold leading-snug text-slate-200 sm:mt-5 sm:text-lg md:text-2xl">
               {copy.heroLead}
             </p>
-            <p className="mt-4 max-w-2xl text-base font-semibold text-[#EEBA2B] md:text-xl">
+            <p className="mt-2 max-w-2xl text-sm font-semibold text-[#EEBA2B] sm:mt-4 sm:text-base md:text-xl">
               {copy.heroLine}
             </p>
             <a
               href="#partnership-form"
-              className="mt-8 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-full bg-[#ffee00] px-7 text-sm font-black uppercase text-black transition hover:bg-white"
+              className="mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-[#ffee00] px-6 text-xs font-black uppercase text-black transition hover:bg-white sm:mt-8 sm:min-h-[48px] sm:gap-3 sm:px-7 sm:text-sm"
             >
               {copy.heroCta}
               <FaArrowRight />
             </a>
           </div>
 
-          <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="grid flex-1 grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
             {copy.strengths.map((item, index) => {
               const Icon = strengthIcons[index] ?? FaCheckCircle;
               return (
                 <div
                   key={item}
-                  className="rounded-[8px] border border-white/15 bg-white/[0.06] p-4 backdrop-blur-md"
+                  className="rounded-lg border border-white/15 bg-black/25 p-3 backdrop-blur-sm sm:p-4"
                 >
-                  <Icon className="mb-4 text-2xl text-[#ffee00]" />
-                  <p className="text-sm font-black leading-tight text-white md:text-base">{item}</p>
+                  <Icon className="mb-2 text-lg text-[#ffee00] sm:mb-4 sm:text-2xl" />
+                  <p className="text-xs font-black leading-tight text-white sm:text-sm md:text-base">{item}</p>
                 </div>
               );
             })}
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-          <div className="rounded-[10px] border border-white/15 bg-white/[0.05] p-5 backdrop-blur-md md:p-8">
-            <h2 className="text-3xl font-black leading-tight md:text-5xl">{copy.whyTitle}</h2>
-            <p className="mt-4 max-w-4xl text-base font-semibold leading-relaxed text-slate-200 md:text-xl">
+        <section className="mx-auto w-full max-w-7xl px-4 py-4 sm:py-8 md:px-8">
+          <div className="border-y border-white/15 bg-black/20 px-1 py-4 backdrop-blur-sm sm:rounded-xl sm:border sm:p-6 md:p-8">
+            <h2 className="text-2xl font-black leading-tight sm:text-3xl md:text-5xl">{copy.whyTitle}</h2>
+            <p className="mt-2 max-w-4xl text-sm font-semibold leading-relaxed text-slate-200 sm:mt-4 sm:text-base md:text-xl">
               {copy.whyLead}
             </p>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-          <h2 className="mb-5 text-3xl font-black md:text-5xl">{copy.workTitle}</h2>
-          <div className="grid gap-4 md:grid-cols-3">
+        <section className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8 md:px-8">
+          <h2 className="mb-3 text-2xl font-black sm:mb-5 sm:text-3xl md:text-5xl">{copy.workTitle}</h2>
+          <div className="grid gap-2.5 sm:gap-4 md:grid-cols-3">
             {copy.workCards.map((card) => (
-              <article key={card.title} className="rounded-[8px] border border-[#EEBA2B]/35 bg-black/20 p-5">
-                <h3 className="text-2xl font-black text-[#ffee00]">{card.title}</h3>
-                <p className="mt-3 text-lg font-black text-white">{card.lead}</p>
-                <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300 md:text-base">{card.text}</p>
+              <article key={card.title} className="rounded-lg border border-[#EEBA2B]/30 bg-black/25 p-4 backdrop-blur-sm sm:p-5">
+                <h3 className="text-xl font-black text-[#ffee00] sm:text-2xl">{card.title}</h3>
+                <p className="mt-1.5 text-base font-black text-white sm:mt-3 sm:text-lg">{card.lead}</p>
+                <p className="mt-1.5 text-sm font-semibold leading-relaxed text-slate-300 sm:mt-3 md:text-base">{card.text}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-          <h2 className="mb-5 text-3xl font-black md:text-5xl">{copy.processTitle}</h2>
-          <div className="grid gap-3 md:grid-cols-5">
+        <section className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8 md:px-8">
+          <h2 className="mb-3 text-2xl font-black sm:mb-5 sm:text-3xl md:text-5xl">{copy.processTitle}</h2>
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-5">
             {copy.process.map((step, index) => (
-              <div key={step} className="relative rounded-[8px] border border-white/15 bg-white/[0.06] p-4">
-                <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#EEBA2B] text-sm font-black text-black">
+              <div key={step} className="relative flex items-center gap-2 rounded-lg border border-white/15 bg-black/20 p-2.5 backdrop-blur-sm sm:block sm:p-4">
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#EEBA2B] text-xs font-black text-black sm:mb-3 sm:h-9 sm:w-9 sm:text-sm">
                   {index + 1}
                 </span>
-                <p className="text-base font-black text-white">{step}</p>
+                <p className="text-xs font-black leading-tight text-white sm:text-base">{step}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-8 md:grid-cols-2 md:px-8">
-          <div className="rounded-[8px] border border-white/15 bg-white/[0.06] p-5">
-            <h2 className="text-3xl font-black text-white">{copy.pilotTitle}</h2>
-            <p className="mt-3 text-base font-semibold text-slate-200">{copy.pilotLead}</p>
-            <div className="mt-5 grid gap-3">
+        <section className="mx-auto grid w-full max-w-7xl gap-2.5 px-4 py-5 sm:gap-4 sm:py-8 md:grid-cols-2 md:px-8">
+          <div className="rounded-lg border border-white/15 bg-black/20 p-4 backdrop-blur-sm sm:p-5">
+            <h2 className="text-2xl font-black text-white sm:text-3xl">{copy.pilotTitle}</h2>
+            <p className="mt-2 text-sm font-semibold text-slate-200 sm:mt-3 sm:text-base">{copy.pilotLead}</p>
+            <div className="mt-3 grid gap-2 sm:mt-5 sm:gap-3">
               {copy.pilotPoints.map((point) => (
                 <p key={point} className="flex items-center gap-3 text-sm font-black text-white">
                   <FaCheckCircle className="shrink-0 text-[#ffee00]" />
@@ -497,9 +493,9 @@ const PartnershipPage = () => {
               ))}
             </div>
           </div>
-          <div className="rounded-[8px] border border-[#EEBA2B]/35 bg-[#EEBA2B]/10 p-5">
-            <h2 className="text-3xl font-black text-[#ffee00]">{copy.satisfactionTitle}</h2>
-            <div className="mt-5 text-2xl font-black leading-tight text-white md:text-4xl">
+          <div className="rounded-lg border border-[#EEBA2B]/35 bg-[#EEBA2B]/10 p-4 backdrop-blur-sm sm:p-5">
+            <h2 className="text-2xl font-black text-[#ffee00] sm:text-3xl">{copy.satisfactionTitle}</h2>
+            <div className="mt-3 text-xl font-black leading-tight text-white sm:mt-5 sm:text-2xl md:text-4xl">
               {copy.satisfactionLines.map((line) => (
                 <p key={line}>{line}</p>
               ))}
@@ -507,38 +503,38 @@ const PartnershipPage = () => {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
-          <h2 className="mb-5 text-3xl font-black md:text-5xl">{copy.industriesTitle}</h2>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <section className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8 md:px-8">
+          <h2 className="mb-3 text-2xl font-black sm:mb-5 sm:text-3xl md:text-5xl">{copy.industriesTitle}</h2>
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
             {copy.industries.map((industry, index) => {
               const Icon = industryIcons[index] ?? FaIndustry;
               return (
-                <div key={industry} className="rounded-[8px] border border-white/15 bg-white/[0.05] p-4">
-                  <Icon className="mb-3 text-xl text-[#EEBA2B]" />
-                  <p className="text-sm font-black text-white md:text-base">{industry}</p>
+                <div key={industry} className="flex items-center gap-2 rounded-lg border border-white/15 bg-black/20 p-2.5 backdrop-blur-sm sm:block sm:p-4">
+                  <Icon className="shrink-0 text-base text-[#EEBA2B] sm:mb-3 sm:text-xl" />
+                  <p className="text-xs font-black leading-tight text-white sm:text-sm md:text-base">{industry}</p>
                 </div>
               );
             })}
           </div>
         </section>
 
-        <section id="partnership-form" className="mx-auto w-full max-w-7xl px-4 py-10 md:px-8 md:py-16">
-          <div className="grid gap-6 rounded-[10px] border border-white/15 bg-white/[0.06] p-5 backdrop-blur-md md:grid-cols-[0.85fr_1.15fr] md:p-8">
+        <section id="partnership-form" className="mx-auto w-full max-w-7xl scroll-mt-24 px-4 py-6 sm:py-10 md:px-8 md:py-14">
+          <div className="grid gap-5 rounded-xl border border-white/15 bg-black/35 p-4 backdrop-blur-md sm:p-5 md:grid-cols-[0.85fr_1.15fr] md:gap-6 md:p-8">
             <div>
-              <h2 className="text-3xl font-black leading-tight md:text-5xl">{copy.finalTitle}</h2>
-              <p className="mt-4 text-lg font-bold leading-relaxed text-slate-200">{copy.finalLead}</p>
+              <h2 className="text-2xl font-black leading-tight sm:text-3xl md:text-5xl">{copy.finalTitle}</h2>
+              <p className="mt-2 text-sm font-bold leading-relaxed text-slate-200 sm:mt-4 sm:text-lg">{copy.finalLead}</p>
               <a
                 href="#partnership-form"
-                className="mt-6 inline-flex min-h-[46px] items-center gap-3 rounded-full border border-[#ffee00] px-6 text-sm font-black uppercase text-[#ffee00]"
+                className="mt-4 inline-flex min-h-[42px] items-center gap-2 rounded-full border border-[#ffee00] px-5 text-xs font-black uppercase text-[#ffee00] sm:mt-6 sm:min-h-[46px] sm:gap-3 sm:px-6 sm:text-sm"
               >
                 {copy.finalCta}
                 <FaPaperPlane />
               </a>
             </div>
 
-            <form onSubmit={handleSubmit} className="grid gap-3">
+            <form onSubmit={handleSubmit} className="grid gap-2.5 sm:gap-3">
               <div>
-                <h3 className="text-2xl font-black text-[#ffee00]">{copy.formTitle}</h3>
+                <h3 className="text-xl font-black text-[#ffee00] sm:text-2xl">{copy.formTitle}</h3>
                 <p className="mt-2 text-sm font-semibold text-slate-300">{copy.formLead}</p>
               </div>
               <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
@@ -547,7 +543,7 @@ const PartnershipPage = () => {
                   required
                   value={form.name}
                   onChange={(event) => updateField("name", event.target.value)}
-                  className="min-h-[48px] rounded-[8px] border border-white/20 bg-[#071323] px-4 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                  className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                 />
               </label>
               <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
@@ -555,10 +551,10 @@ const PartnershipPage = () => {
                 <input
                   value={form.company}
                   onChange={(event) => updateField("company", event.target.value)}
-                  className="min-h-[48px] rounded-[8px] border border-white/20 bg-[#071323] px-4 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                  className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                 />
               </label>
-              <div className="grid gap-3 md:grid-cols-2">
+              <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
                 <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
                   {copy.email} *
                   <input
@@ -566,7 +562,7 @@ const PartnershipPage = () => {
                     type="email"
                     value={form.email}
                     onChange={(event) => updateField("email", event.target.value)}
-                    className="min-h-[48px] rounded-[8px] border border-white/20 bg-[#071323] px-4 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                    className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                   />
                 </label>
                 <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
@@ -574,7 +570,7 @@ const PartnershipPage = () => {
                   <input
                     value={form.phone}
                     onChange={(event) => updateField("phone", event.target.value)}
-                    className="min-h-[48px] rounded-[8px] border border-white/20 bg-[#071323] px-4 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                    className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                   />
                 </label>
               </div>
@@ -583,7 +579,7 @@ const PartnershipPage = () => {
                 <select
                   value={form.type}
                   onChange={(event) => updateField("type", event.target.value)}
-                  className="min-h-[48px] rounded-[8px] border border-white/20 bg-[#071323] px-4 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                  className="min-h-[44px] rounded-lg border border-white/20 bg-[#071323]/85 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                 >
                   {copy.typeOptions.map((option) => (
                     <option key={option}>{option}</option>
@@ -596,14 +592,14 @@ const PartnershipPage = () => {
                   required
                   value={form.message}
                   onChange={(event) => updateField("message", event.target.value)}
-                  rows={5}
-                  className="rounded-[8px] border border-white/20 bg-[#071323] px-4 py-3 text-base normal-case text-white outline-none focus:border-[#ffee00]"
+                  rows={4}
+                  className="rounded-lg border border-white/20 bg-black/35 px-3 py-2.5 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:px-4 sm:py-3 sm:text-base"
                 />
               </label>
               <button
                 type="submit"
                 disabled={sending}
-                className="min-h-[50px] rounded-full bg-[#ffee00] px-6 text-sm font-black uppercase text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                className="min-h-[46px] rounded-full bg-[#ffee00] px-6 text-xs font-black uppercase text-black transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60 sm:min-h-[50px] sm:text-sm"
               >
                 {sending ? "..." : copy.submit}
               </button>

@@ -36,13 +36,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
-import { useEffect, useState } from "react";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
 import { getInternalMessageSummary } from "../APIs/internalMessages";
 import { getAdminNotificationSummary } from "../APIs/adminNotifications";
 import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
+import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
 import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -51,6 +53,7 @@ import Emails from "./Emails";
 import InternalMessages from "./InternalMessages";
 import Jobs from "./Jobs";
 import Projects from "./Projects";
+import PartnershipRequests from "./PartnershipRequests";
 import Settings from "./Settings";
 import Users from "./Users";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
@@ -89,6 +92,14 @@ const navigationItems = [
     color: "#EEBA2B",
     section: "Demandes",
     permission: "requests:assistance",
+  },
+  {
+    text: "Partnership Requests",
+    icon: <HandshakeIcon />,
+    path: "/secure-admin-dashboard-2024/partnership-requests",
+    color: "#7c3aed",
+    section: "Demandes",
+    permission: "requests:partnerships",
   },
   {
     text: "Contact Inbox",
@@ -171,12 +182,12 @@ export default function Dashboard() {
   const displayName = user?.name || "Admin";
   const avatarLetter = displayName.trim().charAt(0).toUpperCase() || "A";
   const roleColors = getAdminRoleColor(currentRole);
-  const userPermissions = new Set(user?.permissions || []);
-  const hasPermission = (permission?: string) => {
+  const userPermissions = useMemo(() => new Set(user?.permissions || []), [user?.permissions]);
+  const hasPermission = useCallback((permission?: string) => {
     if (!permission) return true;
     if (["super_admin", "admin_0"].includes(currentRole)) return true;
     return userPermissions.has(permission);
-  };
+  }, [currentRole, userPermissions]);
   const visibleNavigationItems = navigationItems.filter((item) => {
     if (item.text === "Users" && !["super_admin", "admin_0"].includes(currentRole)) {
       return false;
@@ -189,9 +200,10 @@ export default function Dashboard() {
 
     let mounted = true;
     const loadNavigationBadges = async () => {
-      const [emailResult, projectResult, contactResult, adminNotificationResult, internalMessageResult] = await Promise.allSettled([
+      const [emailResult, projectResult, partnershipResult, contactResult, adminNotificationResult, internalMessageResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
+        hasPermission("requests:partnerships") ? getPartnershipRequestSummary() : Promise.resolve({ metrics: { attention: 0, pending: 0 } }),
         getContactSummary(),
         ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
         hasPermission("internal:messages") ? getInternalMessageSummary() : Promise.resolve({ metrics: { unread: 0, total: 0 } }),
@@ -206,6 +218,7 @@ export default function Dashboard() {
       }
 
       const projectMetrics = projectResult.status === "fulfilled" ? projectResult.value.metrics || {} : {};
+      const partnershipMetrics = partnershipResult.status === "fulfilled" ? partnershipResult.value.metrics || {} : {};
       const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
       const adminNotificationMetrics = adminNotificationResult.status === "fulfilled" ? adminNotificationResult.value.metrics || { new: 0, open: 0 } : { new: 0, open: 0 };
       const internalMessageMetrics = internalMessageResult.status === "fulfilled" ? internalMessageResult.value.metrics || { unread: 0 } : { unread: 0 };
@@ -213,6 +226,7 @@ export default function Dashboard() {
         Projects: Number(projectMetrics.projects || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
+        "Partnership Requests": Number(partnershipMetrics.attention || partnershipMetrics.pending || 0),
         "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
         Users: Number(adminNotificationMetrics.new || adminNotificationMetrics.open || 0),
         "Internal Messages": Number(internalMessageMetrics.unread || 0),
@@ -225,7 +239,7 @@ export default function Dashboard() {
       mounted = false;
       window.clearInterval(interval);
     };
-  }, [user, currentRole]);
+  }, [user, currentRole, hasPermission]);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -624,6 +638,7 @@ export default function Dashboard() {
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
+            <Route path="partnership-requests" element={renderWithPermission("requests:partnerships", <PartnershipRequests />)} />
             <Route path="blogs" element={renderWithPermission("blogs:manage", <Blogs />)} />
             <Route path="contact-queries" element={renderWithPermission("contacts:read", <ContactQueries />)} />
             <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />

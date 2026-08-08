@@ -83,7 +83,7 @@ const roleDefinitions: Record<AdminRole, { label: string; short: string; powers:
   admin_1: {
     label: "L1 - Operations",
     short: "Client requests",
-    powers: "Projects, visibility requests, assistance, contact inbox, shared emails, internal messages and operational follow-up.",
+    powers: "Projects, partnership proposals, visibility requests, assistance, contact inbox, shared emails, internal messages and operational follow-up.",
   },
   admin_2: {
     label: "L2 - Content & SEO",
@@ -112,6 +112,7 @@ const permissionOptions: Array<{ key: AdminPermission; label: string; group: str
   { key: "requests:projects", label: "Projects", group: "Requests" },
   { key: "requests:visibility", label: "Visibility tests", group: "Requests" },
   { key: "requests:assistance", label: "Assistance requests", group: "Requests" },
+  { key: "requests:partnerships", label: "Partnership requests", group: "Requests" },
   { key: "contacts:read", label: "Contact inbox read", group: "Messages" },
   { key: "contacts:reply", label: "Contact inbox reply", group: "Messages" },
   { key: "email:read", label: "CP Mail read", group: "Emails" },

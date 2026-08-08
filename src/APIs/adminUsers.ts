@@ -18,6 +18,7 @@ export type AdminPermission =
   | "requests:projects"
   | "requests:visibility"
   | "requests:assistance"
+  | "requests:partnerships"
   | "contacts:read"
   | "contacts:reply"
   | "email:read"
