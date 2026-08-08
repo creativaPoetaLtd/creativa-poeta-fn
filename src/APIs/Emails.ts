@@ -131,11 +131,14 @@ export const getEmails = async (
   search = "",
   folder: "inbox" | "spam" = "inbox"
 ) => {
+  // The legacy production API only understands "dmarc". The current API
+  // accepts it as an alias for "spam", keeping the UI safe during deploys.
+  const apiFolder = folder === "spam" ? "dmarc" : folder;
   return authRequest<EmailsResponse>(
     {
       method: "GET",
       url: "/api/emails",
-      params: { page, limit, status, mailbox, search, folder },
+      params: { page, limit, status, mailbox, search, folder: apiFolder },
     },
     "Failed to fetch emails."
   );

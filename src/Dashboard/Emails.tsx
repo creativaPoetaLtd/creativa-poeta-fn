@@ -454,12 +454,21 @@ const Emails = () => {
   };
 
   const handleStatusChange = async (id: string, status: EmailStatus) => {
+    const previousEmail = emails.find((item) => item._id === id);
+    const previousSelectedEmail = selectedEmail?._id === id ? selectedEmail : null;
+    setEmails((current) => current.map((item) => (item._id === id ? { ...item, status } : item)));
+    setSelectedEmail((current) => (current?._id === id ? { ...current, status } : current));
+
     try {
       const response = await updateEmailStatus(id, status);
       setEmails((current) => current.map((item) => (item._id === id ? response.email : item)));
       setSelectedEmail((current) => (current?._id === id ? response.email : current));
       showMessage("Email status updated.");
     } catch (statusError) {
+      if (previousEmail) {
+        setEmails((current) => current.map((item) => (item._id === id ? previousEmail : item)));
+      }
+      if (previousSelectedEmail) setSelectedEmail(previousSelectedEmail);
       showMessage(statusError instanceof Error ? statusError.message : "Failed to update email.", "error");
     }
   };
