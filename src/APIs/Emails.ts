@@ -1,7 +1,7 @@
 import { authRequest } from "./client";
 
 export type EmailStatus = "new" | "read" | "replied" | "archived";
-export type EmailFolder = "inbox" | "dmarc" | "sent" | "drafts";
+export type EmailFolder = "inbox" | "spam" | "sent" | "drafts";
 
 export interface EmailActivity {
   type: "assigned" | "released" | "read" | "replied" | "status";
@@ -16,6 +16,8 @@ export interface EmailMessage {
   mailbox: string;
   mailboxAddress: string;
   uid?: number;
+  sourceFolder?: string;
+  sourceSpecialUse?: string;
   messageId?: string;
   fromName?: string;
   fromEmail?: string;
@@ -25,6 +27,7 @@ export interface EmailMessage {
   preview: string;
   text: string;
   html?: string;
+  folder?: "inbox" | "spam";
   status: EmailStatus;
   isSeenOnServer?: boolean;
   receivedAt?: string;
@@ -103,6 +106,8 @@ export interface EmailSyncResult {
     imported: number;
     updated: number;
     skipped: number;
+    folders?: string[];
+    folderErrors?: Array<{ folder: string; error: string }>;
     error?: string;
   }>;
 }
@@ -124,7 +129,7 @@ export const getEmails = async (
   status = "all",
   mailbox = "all",
   search = "",
-  folder: "inbox" | "dmarc" = "inbox"
+  folder: "inbox" | "spam" = "inbox"
 ) => {
   return authRequest<EmailsResponse>(
     {

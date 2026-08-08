@@ -214,6 +214,7 @@ const Emails = () => {
   const [composeAttachments, setComposeAttachments] = useState<File[]>([]);
   const [composeLoading, setComposeLoading] = useState(false);
   const syncingRef = useRef(false);
+  const loadRequestRef = useRef(0);
 
   const mailboxOptions = useMemo(() => {
     const values = new Set<string>();
@@ -270,12 +271,18 @@ const Emails = () => {
     setSnackbarOpen(true);
   };
 
-  const loadEmails = useCallback(async () => {
+  const loadEmails = useCallback(async (
+    targetFolder: EmailFolder = folder,
+    targetPage = currentPage,
+    targetSearch = search
+  ) => {
+    const requestId = ++loadRequestRef.current;
     try {
       setLoading(true);
 
-      if (folder === "inbox" || folder === "dmarc") {
-        const response = await getEmails(currentPage, 25, toFilterParam(statusFilters, allStatusValues), toFilterParam(mailboxFilters, allMailboxValues), search, folder === "dmarc" ? "dmarc" : "inbox");
+      if (targetFolder === "inbox" || targetFolder === "spam") {
+        const response = await getEmails(targetPage, 25, toFilterParam(statusFilters, allStatusValues), toFilterParam(mailboxFilters, allMailboxValues), targetSearch, targetFolder);
+        if (requestId !== loadRequestRef.current) return;
         setEmails(response.emails || []);
         const nextServerMailboxes = (response.mailboxes || []).map(normalizeMailbox).filter(Boolean);
         setServerMailboxes((current) => {
@@ -288,7 +295,8 @@ const Emails = () => {
         setMetrics(response.metrics || {});
         if (response.pagination) setPagination(response.pagination);
       } else {
-        const response = await getOutboundEmails(folder === "sent" ? "sent" : "draft", currentPage, 25, search);
+        const response = await getOutboundEmails(targetFolder === "sent" ? "sent" : "draft", targetPage, 25, targetSearch);
+        if (requestId !== loadRequestRef.current) return;
         setOutboundEmails(response.emails || []);
         setEmails([]);
         setMetrics(response.metrics || {});
@@ -297,9 +305,11 @@ const Emails = () => {
 
       setError(null);
     } catch (fetchError) {
-      setError(fetchError instanceof Error ? fetchError.message : "Failed to fetch emails.");
+      if (requestId === loadRequestRef.current) {
+        setError(fetchError instanceof Error ? fetchError.message : "Failed to fetch emails.");
+      }
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) setLoading(false);
     }
   }, [allMailboxValues, currentPage, folder, mailboxFilters, search, statusFilters]);
 
@@ -373,6 +383,7 @@ const Emails = () => {
   );
 
   const handleFolderChange = (_: unknown, nextFolder: EmailFolder) => {
+    loadRequestRef.current += 1;
     setFolder(nextFolder);
     setCurrentPage(1);
     setSearch("");
@@ -414,7 +425,7 @@ const Emails = () => {
   };
 
   useEffect(() => {
-    if (folder !== "inbox" && folder !== "dmarc") return undefined;
+    if (folder !== "inbox" && folder !== "spam") return undefined;
 
     const interval = window.setInterval(() => {
       void runMailboxSync(true);
@@ -572,9 +583,10 @@ const Emails = () => {
       else await saveEmailDraft(payload);
       setComposeOpen(false);
       setEditingDraftId(null);
-      if (folder !== "drafts") setFolder("drafts");
+      setFolder("drafts");
       setCurrentPage(1);
-      await loadEmails();
+      setSearch("");
+      await loadEmails("drafts", 1, "");
       showMessage("Draft saved.");
     } catch (draftError) {
       showMessage(draftError instanceof Error ? draftError.message : "Failed to save draft.", "error");
@@ -592,9 +604,10 @@ const Emails = () => {
       setEditingDraftId(null);
       setForwardSourceId(null);
       setComposeAttachments([]);
-      if (folder !== "sent") setFolder("sent");
+      setFolder("sent");
       setCurrentPage(1);
-      await loadEmails();
+      setSearch("");
+      await loadEmails("sent", 1, "");
       showMessage("Email sent.");
     } catch (sendError) {
       showMessage(sendError instanceof Error ? sendError.message : "Failed to send email.", "error");
@@ -606,7 +619,10 @@ const Emails = () => {
   const handleSendDraft = async (email: OutboundEmail) => {
     try {
       await sendEmailDraft(email._id);
-      await loadEmails();
+      setFolder("sent");
+      setCurrentPage(1);
+      setSearch("");
+      await loadEmails("sent", 1, "");
       showMessage("Draft sent.");
     } catch (sendError) {
       showMessage(sendError instanceof Error ? sendError.message : "Failed to send draft.", "error");
@@ -636,7 +652,7 @@ const Emails = () => {
     }
   };
 
-  const isInboundFolder = folder === "inbox" || folder === "dmarc";
+  const isInboundFolder = folder === "inbox" || folder === "spam";
   const totalInbox = isInboundFolder ? pagination.totalEmails : 0;
   const totalOutbound = !isInboundFolder ? pagination.totalEmails : 0;
 
@@ -664,7 +680,7 @@ const Emails = () => {
 
       <Tabs value={folder} onChange={handleFolderChange} sx={{ mb: 3 }}>
         <Tab value="inbox" icon={<Inbox />} iconPosition="start" label="Inbox" />
-        <Tab value="dmarc" icon={<MarkEmailRead />} iconPosition="start" label="DMARC" />
+        <Tab value="spam" icon={<MarkEmailRead />} iconPosition="start" label="Spam" />
         <Tab value="sent" icon={<Send />} iconPosition="start" label="Sent" />
         <Tab value="drafts" icon={<Drafts />} iconPosition="start" label="Drafts" />
       </Tabs>
@@ -677,7 +693,7 @@ const Emails = () => {
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <DashboardCard title={folder === "dmarc" ? "DMARC Reports" : folder === "inbox" ? "Total Emails" : "Total"} value={isInboundFolder ? totalInbox : totalOutbound} icon={<EmailIcon />} color="#071a33" />
+          <DashboardCard title={folder === "spam" ? "Spam" : folder === "inbox" ? "Total Emails" : "Total"} value={isInboundFolder ? totalInbox : totalOutbound} icon={<EmailIcon />} color="#071a33" />
         </Grid>
         {isInboundFolder ? (
           <>
@@ -793,7 +809,7 @@ const Emails = () => {
               </>
             );
           }}
-          emptyMessage={folder === "dmarc" ? "No DMARC reports found" : "No synced emails found"}
+          emptyMessage={folder === "spam" ? "No spam messages found" : "No synced emails found"}
         />
       ) : (
         <DataTable
