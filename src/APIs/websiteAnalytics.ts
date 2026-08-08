@@ -137,6 +137,7 @@ export interface SearchConsoleReport {
   countries?: SearchConsoleMetric[];
   devices?: SearchConsoleMetric[];
   properties?: Array<Partial<SearchConsoleMetric> & { siteUrl: string }>;
+  propertyErrors?: Array<{ siteUrl: string; message: string }>;
 }
 
 export type AnalyticsIncidentSeverity = "info" | "warning" | "critical";

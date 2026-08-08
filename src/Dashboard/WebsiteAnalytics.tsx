@@ -37,6 +37,7 @@ import {
   ManageSearch,
   Mouse,
   NotificationsActive,
+  OpenInNew,
   People,
   Public,
   Refresh,
@@ -839,6 +840,7 @@ export default function WebsiteAnalytics() {
               <Tab label="Content & conversions" />
               <Tab label="Google SEO" />
               <Tab label="Performance & health" />
+              <Tab label="Uptime monitoring" />
             </Tabs>
           </Paper>
 
@@ -1226,6 +1228,16 @@ export default function WebsiteAnalytics() {
                           <Chip key={property.siteUrl} label={`${property.siteUrl} · ${formatNumber(property.clicks || 0)} clicks`} sx={{ fontWeight: 800 }} />
                         ))}
                       </Stack>
+                      {report.seo.propertyErrors?.length ? (
+                        <Alert severity="warning" sx={{ mt: 2 }}>
+                          <Typography fontWeight={900}>Some Search Console properties need attention.</Typography>
+                          {report.seo.propertyErrors.map((property) => (
+                            <Typography key={property.siteUrl} variant="body2" sx={{ mt: 0.5 }}>
+                              {property.siteUrl}: {property.message}
+                            </Typography>
+                          ))}
+                        </Alert>
+                      ) : null}
                     </SectionCard>
                   </Grid>
                 </>
@@ -1485,6 +1497,123 @@ export default function WebsiteAnalytics() {
                       ) : null}
                     </Stack>
                   ) : <EmptyState label="No automated traffic detected in this period." />}
+                </SectionCard>
+              </Grid>
+            </Grid>
+          )}
+
+          {activeTab === 5 && (
+            <Grid container spacing={{ xs: 1.5, md: 2.5 }}>
+              <Grid item xs={12}>
+                <SectionCard
+                  title="External uptime monitoring"
+                  subtitle="Independent availability checks performed by UptimeRobot every five minutes"
+                  action={<NotificationsActive sx={{ color: colors.green, fontSize: 34 }} />}
+                >
+                  <Alert severity="info" sx={{ mb: 2 }}>
+                    UptimeRobot keeps the official uptime history and sends outage alerts. CP Analytics separately
+                    tracks application errors, server activity and internal incidents. These two monitoring sources
+                    complement each other but are not automatically synchronized.
+                  </Alert>
+                  <Button
+                    component="a"
+                    href="https://dashboard.uptimerobot.com/monitors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="contained"
+                    endIcon={<OpenInNew />}
+                    sx={{
+                      bgcolor: colors.navy,
+                      textTransform: "none",
+                      fontWeight: 900,
+                      "&:hover": { bgcolor: "#12365f" },
+                    }}
+                  >
+                    Open UptimeRobot monitors
+                  </Button>
+                </SectionCard>
+              </Grid>
+
+              <Grid item xs={12} lg={6}>
+                <SectionCard
+                  title="Public website coverage"
+                  subtitle="Availability of CP's public markets and language entry points"
+                  action={<Public sx={{ color: colors.blue }} />}
+                >
+                  <Stack direction="row" flexWrap="wrap" gap={1}>
+                    {[
+                      "Main website",
+                      "Belgium",
+                      "France",
+                      "Rwanda",
+                      "Netherlands",
+                      "www redirect",
+                    ].map((monitor) => (
+                      <Chip key={monitor} label={monitor} size="small" sx={{ fontWeight: 800 }} />
+                    ))}
+                  </Stack>
+                  <Typography variant="body2" sx={{ mt: 2, color: colors.muted }}>
+                    If only one market is down, check its DNS or Netlify domain configuration. If all markets are
+                    down, check the main frontend deployment.
+                  </Typography>
+                </SectionCard>
+              </Grid>
+
+              <Grid item xs={12} lg={6}>
+                <SectionCard
+                  title="Backend diagnosis"
+                  subtitle="Two checks distinguish an API outage from a database outage"
+                  action={<Route sx={{ color: colors.violet }} />}
+                >
+                  <Stack spacing={1.5}>
+                    <Box sx={{ p: 1.5, border: "1px solid #e2e8f0", borderRadius: 2 }}>
+                      <Typography sx={{ color: colors.navy, fontWeight: 900 }}>CP — Backend API</Typography>
+                      <Typography variant="body2" sx={{ color: colors.muted, wordBreak: "break-all" }}>
+                        /api/health/live — confirms that the deployed backend can answer.
+                      </Typography>
+                    </Box>
+                    <Box sx={{ p: 1.5, border: "1px solid #e2e8f0", borderRadius: 2 }}>
+                      <Typography sx={{ color: colors.navy, fontWeight: 900 }}>CP — Backend & database</Typography>
+                      <Typography variant="body2" sx={{ color: colors.muted, wordBreak: "break-all" }}>
+                        /api/health/ready — confirms that both the backend and MongoDB are available.
+                      </Typography>
+                    </Box>
+                    <Alert severity="success">
+                      Both green means the public API and its database are operational.
+                    </Alert>
+                  </Stack>
+                </SectionCard>
+              </Grid>
+
+              <Grid item xs={12}>
+                <SectionCard title="How to investigate an alert" subtitle="Use both dashboards to locate the source quickly">
+                  <Grid container spacing={1.5}>
+                    {[
+                      {
+                        number: "1",
+                        title: "Open UptimeRobot",
+                        text: "Identify the exact website, API or database monitor that changed to Down.",
+                      },
+                      {
+                        number: "2",
+                        title: "Check CP incidents",
+                        text: "Return to Performance & health to review API errors, latency, forms, security and anomaly alerts.",
+                      },
+                      {
+                        number: "3",
+                        title: "Check hosting",
+                        text: "Use Netlify for the public website and Vercel for backend deployment logs and production status.",
+                      },
+                    ].map((step) => (
+                      <Grid item xs={12} md={4} key={step.number}>
+                        <Box sx={{ height: "100%", p: 2, border: "1px solid #e2e8f0", borderRadius: 2 }}>
+                          <Chip label={step.number} size="small" sx={{ mb: 1.25, bgcolor: colors.gold, color: colors.navy, fontWeight: 900 }} />
+                          <Typography sx={{ color: colors.navy, fontWeight: 900 }}>{step.title}</Typography>
+                          <Typography variant="body2" sx={{ mt: 0.75, color: colors.muted }}>{step.text}</Typography>
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </SectionCard>
               </Grid>
             </Grid>
