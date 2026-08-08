@@ -35,6 +35,7 @@ import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
 import PartnershipPage from "./pages/PartnershipPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
+import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -42,6 +43,7 @@ const appElement = (
       <Router>
         <AuthProvider>
           <ScrollToTop />
+          <WebsiteAnalyticsTracker />
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/en" element={<App />} />

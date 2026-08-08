@@ -1,4 +1,5 @@
 import { API_BASE_URL, publicRequest } from "./client";
+import { trackConversion } from "../analytics/analytics";
 
 export type TechnicalAuditCheck = {
   id: string;
@@ -51,7 +52,7 @@ const VISIBILITY_AUDIT_BASE_URL =
   (import.meta.env.DEV ? "http://127.0.0.1:5000" : API_BASE_URL);
 
 export const runTechnicalVisibilityAudit = async (url: string) => {
-  return publicRequest<{ audit: TechnicalVisibilityAudit }>(
+  const response = await publicRequest<{ audit: TechnicalVisibilityAudit }>(
     {
       method: "POST",
       url: `${VISIBILITY_AUDIT_BASE_URL}/api/visibility-audit/technical`,
@@ -60,6 +61,8 @@ export const runTechnicalVisibilityAudit = async (url: string) => {
     },
     "Impossible d'analyser ce site pour le moment."
   );
+  trackConversion("visibility_audit_completed", "visibility_audit");
+  return response;
 };
 export type VisibilityInterpretation = {
   source: "openai" | "rules";
@@ -103,7 +106,7 @@ export type VisibilityInterpretationInput = {
 export const runVisibilityAuditInterpretation = async (
   data: VisibilityInterpretationInput
 ) => {
-  return publicRequest<{ interprétation: VisibilityInterpretation }>(
+  const response = await publicRequest<{ interprétation: VisibilityInterpretation }>(
     {
       method: "POST",
       url: `${VISIBILITY_AUDIT_BASE_URL}/api/visibility-audit/interpret`,
@@ -112,4 +115,6 @@ export const runVisibilityAuditInterpretation = async (
     },
     "Impossible de générer l'interprétation personnalisée."
   );
+  trackConversion("visibility_interpretation_completed", "visibility_audit_interpretation");
+  return response;
 };

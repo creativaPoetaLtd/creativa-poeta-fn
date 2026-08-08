@@ -124,6 +124,7 @@ const permissionOptions: Array<{ key: AdminPermission; label: string; group: str
   { key: "users:manage", label: "Admin users", group: "System" },
   { key: "internal:messages", label: "Internal messages", group: "Messages" },
   { key: "reports:read", label: "Reports", group: "System" },
+  { key: "analytics:read", label: "Website analytics", group: "System" },
 ];
 
 const groupedPermissions = permissionOptions.reduce<Record<string, typeof permissionOptions>>((groups, permission) => {

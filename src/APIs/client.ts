@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { trackApiError } from "../analytics/analytics";
 
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ||
@@ -39,6 +40,7 @@ export const publicRequest = async <T = any>(
     });
     return response.data;
   } catch (error) {
+    trackApiError(String(config.url || "unknown"), axios.isAxiosError(error) ? error.response?.status : undefined);
     throw new Error(getErrorMessage(error, fallbackMessage));
   }
 };
@@ -64,6 +66,7 @@ export const authRequest = async <T = any>(
     });
     return response.data;
   } catch (error) {
+    trackApiError(String(config.url || "unknown"), axios.isAxiosError(error) ? error.response?.status : undefined);
     if (axios.isAxiosError(error) && [401, 403].includes(error.response?.status ?? 0)) {
       clearAuthSession();
       if (!window.location.pathname.includes("login")) {

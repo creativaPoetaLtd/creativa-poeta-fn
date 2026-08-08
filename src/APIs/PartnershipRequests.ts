@@ -1,5 +1,6 @@
 import { authRequest, publicRequest } from "./client";
 import type { TicketActivity } from "./Contact";
+import { trackConversion } from "../analytics/analytics";
 
 export type PartnershipRequestStatus = "pending" | "in_progress" | "replied" | "closed";
 
@@ -37,11 +38,14 @@ export interface PartnershipRequestsResponse {
   };
 }
 
-export const submitPartnershipRequest = (data: PartnershipRequestPayload) =>
-  publicRequest<{ requestId: string; status: PartnershipRequestStatus }>(
+export const submitPartnershipRequest = async (data: PartnershipRequestPayload) => {
+  const response = await publicRequest<{ requestId: string; status: PartnershipRequestStatus }>(
     { method: "POST", url: "/api/partnership-requests", data },
     "Failed to submit partnership request."
   );
+  trackConversion("partnership_request_submitted", "partnership_request");
+  return response;
+};
 
 export const getPartnershipRequestSummary = () =>
   authRequest<{ metrics: Record<string, number> }>(

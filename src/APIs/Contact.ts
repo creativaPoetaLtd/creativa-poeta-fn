@@ -1,4 +1,5 @@
 import { authRequest, publicRequest } from "./client";
+import { trackConversion } from "../analytics/analytics";
 
 export interface TicketActivity {
   type: "assigned" | "released" | "opened" | "replied" | "status" | string;
@@ -45,7 +46,7 @@ export interface ContactQueriesResponse {
 }
 
 export const contactUs = async (data: ContactPayload) => {
-  return publicRequest<{ message?: string }>(
+  const response = await publicRequest<{ message?: string }>(
     {
       method: "POST",
       url: "/api/contact/send",
@@ -53,6 +54,8 @@ export const contactUs = async (data: ContactPayload) => {
     },
     "Failed to submit contact form."
   );
+  trackConversion("contact_form_submitted", "contact_request");
+  return response;
 };
 
 export const getContactSummary = async () => {

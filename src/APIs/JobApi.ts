@@ -1,7 +1,8 @@
 import { publicRequest } from "./client";
+import { trackConversion } from "../analytics/analytics";
 
 export const ApplyJob = async (data: any) => {
-  return publicRequest(
+  const response = await publicRequest(
     {
       method: "POST",
       url: "/api/job/apply",
@@ -9,4 +10,6 @@ export const ApplyJob = async (data: any) => {
     },
     "Failed to submit job application."
   );
+  trackConversion("job_application_submitted", "job_application");
+  return response;
 };

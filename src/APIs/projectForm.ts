@@ -1,4 +1,5 @@
 import { authRequest, publicRequest } from "./client";
+import { trackConversion } from "../analytics/analytics";
 
 export interface TicketActivity {
   type: "assigned" | "released" | "opened" | "replied" | "status" | string;
@@ -60,7 +61,7 @@ export interface ProjectListResponse {
 }
 
 export const projectForm = async (data: ProjectInquiryPayload) => {
-  return publicRequest<{ message?: string }>(
+  const response = await publicRequest<{ message?: string }>(
     {
       method: "POST",
       url: "/api/project/send-inquiry",
@@ -68,6 +69,13 @@ export const projectForm = async (data: ProjectInquiryPayload) => {
     },
     "Failed to submit project request."
   );
+  const serviceType = data.serviceType.toLowerCase();
+  if (serviceType.includes("assistance") || serviceType.includes("depannage")) {
+    trackConversion("assistance_request_submitted", "assistance_request");
+  } else {
+    trackConversion("project_request_submitted", "project_request");
+  }
+  return response;
 };
 
 export const getProjectSummary = async () => {
