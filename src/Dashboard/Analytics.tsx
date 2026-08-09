@@ -1,222 +1,428 @@
-import { useEffect, useMemo, useState } from "react";
-import { Alert, Box, Grid, Paper, Skeleton, Typography } from "@mui/material";
-import { Bar, Doughnut } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  DashboardCard,
-  PageHeader,
-  ProgressCard,
-} from "./components/DashboardComponents";
+  Alert,
+  alpha,
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Paper,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import {
-  Assessment as AssessmentIcon,
+  ArrowForward as ArrowForwardIcon,
+  Article as ArticleIcon,
+  Assignment as AssignmentIcon,
+  ContactMail as ContactMailIcon,
   Email as EmailIcon,
-  Inbox as InboxIcon,
-  PendingActions as PendingActionsIcon,
+  Forum as ForumIcon,
+  Handshake as HandshakeIcon,
+  NotificationsActive as NotificationsActiveIcon,
+  QueryStats as QueryStatsIcon,
+  Refresh as RefreshIcon,
+  Search as SearchIcon,
+  SupportAgent as SupportAgentIcon,
+  WarningAmber as WarningAmberIcon,
   Work as WorkIcon,
 } from "@mui/icons-material";
-import { ContactQuery, getContactQueries } from "../APIs/Contact";
-import { getProjects, ProjectRequest } from "../APIs/projectForm";
+import { Link } from "react-router-dom";
+import { getContactSummary } from "../APIs/Contact";
+import { getEmailSummary } from "../APIs/Emails";
+import { getInternalMessageSummary } from "../APIs/internalMessages";
+import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
+import { getProjectSummary } from "../APIs/projectForm";
+import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
+import { useAuth } from "../contexts/AuthContext";
+import { PageHeader } from "./components/DashboardComponents";
 
-Chart.register(...registerables);
+type MetricMap = Record<string, number>;
 
-const theme = {
-  primary: "#EEBA2B",
-  slate: "#071a33",
-  success: "#10b981",
-  info: "#2563eb",
-  warning: "#f59e0b",
-  error: "#ef4444",
+type SummaryState = {
+  projects: MetricMap | null;
+  partnerships: MetricMap | null;
+  contacts: MetricMap | null;
+  emails: MetricMap | null;
+  internalMessages: MetricMap | null;
+  analytics: MetricMap | null;
+};
+
+type SummaryKey = keyof SummaryState;
+
+type QueueItem = {
+  key: string;
+  title: string;
+  description: string;
+  path: string;
+  permission: string;
+  value: number | null;
+  assigned?: number;
+  color: string;
+  icon: JSX.Element;
+};
+
+const colors = {
+  navy: "#071a33",
+  gold: "#EEBA2B",
+  blue: "#2563eb",
+  cyan: "#0ea5e9",
+  green: "#16a34a",
+  orange: "#f59e0b",
+  red: "#ef4444",
+  violet: "#7c3aed",
+  teal: "#0f766e",
   muted: "#64748b",
 };
 
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: "bottom" as const,
-      labels: {
-        padding: 18,
-        usePointStyle: true,
-      },
-    },
-  },
-  scales: {
-    x: {
-      grid: { display: false },
-    },
-    y: {
-      beginAtZero: true,
-      ticks: { precision: 0 },
-      grid: { color: "#f1f5f9" },
-    },
-  },
+const emptySummaries: SummaryState = {
+  projects: {},
+  partnerships: {},
+  contacts: {},
+  emails: {},
+  internalMessages: {},
+  analytics: {},
 };
 
-const normalizeProjectStatus = (status?: string, isReplied?: boolean) => {
-  if (isReplied && !status) return "In-Progress";
-  const normalized = (status || "Pending").toLowerCase();
-  if (normalized === "completed") return "Completed";
-  if (normalized === "cancelled" || normalized === "canceled") return "Cancelled";
-  if (normalized === "in-progress" || normalized === "in progress") return "In-Progress";
-  return "Pending";
-};
+const rootAdminEmails = ["admin@creativapoeta.com", "admin@cp.com"];
 
-const normalizeContactStatus = (query: ContactQuery) => {
-  if (query.isReplied && !query.status) return "replied";
-  return (query.status || "pending").toLowerCase();
-};
+const metric = (summary: MetricMap | null, key: string) =>
+  summary === null ? null : Number(summary[key] || 0);
 
-const monthKey = (dateString?: string) => {
-  const date = new Date(dateString || "");
-  if (Number.isNaN(date.getTime())) return "Unknown";
-  return date.toLocaleDateString("fr-BE", { month: "short", year: "2-digit" });
-};
+const OverviewMetric = ({
+  label,
+  value,
+  detail,
+  color,
+  icon,
+  path,
+}: {
+  label: string;
+  value: number;
+  detail: string;
+  color: string;
+  icon: JSX.Element;
+  path?: string;
+}) => (
+  <Paper
+    {...(path ? { component: Link, to: path } : {})}
+    elevation={0}
+    sx={{
+      display: "block",
+      height: "100%",
+      p: 2.25,
+      border: "1px solid #e2e8f0",
+      borderRadius: 3,
+      color: "inherit",
+      textDecoration: "none",
+      transition: "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
+      ...(path && {
+        cursor: "pointer",
+        "&:hover": {
+          transform: "translateY(-2px)",
+          boxShadow: `0 12px 30px ${alpha(color, 0.14)}`,
+          borderColor: alpha(color, 0.4),
+        },
+      }),
+    }}
+  >
+    <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={2}>
+      <Box>
+        <Typography variant="overline" sx={{ color: colors.muted, fontWeight: 900, letterSpacing: "0.07em" }}>
+          {label}
+        </Typography>
+        <Typography sx={{ color: colors.navy, fontSize: "2rem", lineHeight: 1.1, fontWeight: 900 }}>
+          {value}
+        </Typography>
+        <Typography variant="body2" sx={{ color: colors.muted, mt: 0.75 }}>
+          {detail}
+        </Typography>
+      </Box>
+      <Box sx={{ width: 46, height: 46, borderRadius: 2, display: "grid", placeItems: "center", bgcolor: alpha(color, 0.1), color }}>
+        {icon}
+      </Box>
+    </Stack>
+  </Paper>
+);
 
-const countByMonth = (items: Array<{ createdAt?: string }>) => {
-  const buckets = new Map<string, number>();
+const QueueCard = ({ item }: { item: QueueItem }) => {
+  const unavailable = item.value === null;
+  const needsAttention = Number(item.value || 0) > 0;
 
-  items.forEach((item) => {
-    const key = monthKey(item.createdAt);
-    buckets.set(key, (buckets.get(key) || 0) + 1);
-  });
+  return (
+    <Paper
+      component={Link}
+      to={item.path}
+      elevation={0}
+      aria-label={`Open ${item.title}`}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        p: 2.25,
+        border: "1px solid #e2e8f0",
+        borderRadius: 3,
+        color: "inherit",
+        textDecoration: "none",
+        transition: "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
+        "&:hover": {
+          transform: "translateY(-3px)",
+          boxShadow: `0 14px 34px ${alpha(item.color, 0.15)}`,
+          borderColor: alpha(item.color, 0.45),
+        },
+      }}
+    >
+      <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1.5}>
+        <Box sx={{ width: 44, height: 44, borderRadius: 2, display: "grid", placeItems: "center", bgcolor: alpha(item.color, 0.1), color: item.color }}>
+          {item.icon}
+        </Box>
+        <Chip
+          size="small"
+          label={unavailable ? "Unavailable" : needsAttention ? "Needs attention" : "Clear"}
+          sx={{
+            fontWeight: 900,
+            bgcolor: unavailable ? "#f1f5f9" : needsAttention ? alpha(colors.orange, 0.12) : alpha(colors.green, 0.1),
+            color: unavailable ? colors.muted : needsAttention ? "#b45309" : colors.green,
+          }}
+        />
+      </Stack>
 
-  return Array.from(buckets.entries()).slice(-6);
+      <Typography sx={{ color: colors.navy, fontWeight: 900, mt: 2 }}>{item.title}</Typography>
+      <Typography sx={{ color: unavailable ? colors.muted : item.color, fontSize: "2rem", lineHeight: 1.15, fontWeight: 900, mt: 0.5 }}>
+        {unavailable ? "--" : item.value}
+      </Typography>
+      <Typography variant="body2" sx={{ color: colors.muted, mt: 0.75, flexGrow: 1 }}>
+        {item.description}
+      </Typography>
+
+      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: 2, pt: 1.5, borderTop: "1px solid #eef2f7" }}>
+        <Typography variant="caption" sx={{ color: colors.muted, fontWeight: 800 }}>
+          {item.assigned ? `${item.assigned} assigned to you` : "Open queue"}
+        </Typography>
+        <ArrowForwardIcon sx={{ color: item.color, fontSize: 20 }} />
+      </Stack>
+    </Paper>
+  );
 };
 
 export default function Analytics() {
-  const [projects, setProjects] = useState<ProjectRequest[]>([]);
-  const [contacts, setContacts] = useState<ContactQuery[]>([]);
+  const { user } = useAuth();
+  const [summaries, setSummaries] = useState<SummaryState>(emptySummaries);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
-  const fetchDashboardData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  const normalizedRole = rootAdminEmails.includes((user?.email || "").trim().toLowerCase())
+    ? "super_admin"
+    : user?.role === "admin"
+      ? "admin_0"
+      : user?.role || "admin_5";
+  const permissions = useMemo(() => new Set(user?.permissions || []), [user?.permissions]);
+  const hasPermission = useCallback(
+    (permission: string) => ["super_admin", "admin_0"].includes(normalizedRole) || permissions.has(permission),
+    [normalizedRole, permissions]
+  );
 
-      const [projectData, contactData] = await Promise.all([
-        getProjects(1, 100, "all"),
-        getContactQueries(1, 100, "all"),
-      ]);
+  const loadOverview = useCallback(async (isRefresh = false) => {
+    if (isRefresh) setRefreshing(true);
+    else setLoading(true);
 
-      setProjects(projectData.requests || projectData.projects || []);
-      setContacts(contactData.queries || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load dashboard data.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const tasks: Array<{
+      key: SummaryKey;
+      label: string;
+      allowed: boolean;
+      load: () => Promise<MetricMap>;
+    }> = [
+      {
+        key: "projects",
+        label: "project requests",
+        allowed: ["requests:projects", "requests:visibility", "requests:assistance"].some(hasPermission),
+        load: async () => (await getProjectSummary()).metrics,
+      },
+      {
+        key: "partnerships",
+        label: "partnership requests",
+        allowed: hasPermission("requests:partnerships"),
+        load: async () => (await getPartnershipRequestSummary()).metrics,
+      },
+      {
+        key: "contacts",
+        label: "contact inbox",
+        allowed: hasPermission("contacts:read"),
+        load: async () => (await getContactSummary()).metrics,
+      },
+      {
+        key: "emails",
+        label: "emails",
+        allowed: hasPermission("email:read"),
+        load: async () => (await getEmailSummary()).metrics,
+      },
+      {
+        key: "internalMessages",
+        label: "internal messages",
+        allowed: hasPermission("internal:messages"),
+        load: async () => (await getInternalMessageSummary()).metrics,
+      },
+      {
+        key: "analytics",
+        label: "website incidents",
+        allowed: hasPermission("analytics:read"),
+        load: async () => (await getAnalyticsIncidentSummary()).metrics as unknown as MetricMap,
+      },
+    ];
+
+    const allowedTasks = tasks.filter((task) => task.allowed);
+    const results = await Promise.allSettled(allowedTasks.map((task) => task.load()));
+    const next: SummaryState = { ...emptySummaries };
+    const nextErrors: string[] = [];
+
+    allowedTasks.forEach((task, index) => {
+      const result = results[index];
+      if (result.status === "fulfilled") next[task.key] = result.value;
+      else {
+        next[task.key] = null;
+        nextErrors.push(task.label);
+      }
+    });
+
+    setSummaries(next);
+    setErrors(nextErrors);
+    setLoading(false);
+    setRefreshing(false);
+  }, [hasPermission]);
 
   useEffect(() => {
-    void fetchDashboardData();
-  }, []);
+    void loadOverview();
+  }, [loadOverview]);
 
-  const metrics = useMemo(() => {
-    const projectStatuses = projects.map((project) =>
-      normalizeProjectStatus(project.status, project.isReplied)
-    );
-    const contactStatuses = contacts.map(normalizeContactStatus);
-    const totalIncoming = projects.length + contacts.length;
-    const replied =
-      projects.filter((project) => project.isReplied).length +
-      contacts.filter((query) => normalizeContactStatus(query) === "replied").length;
-    const pending =
-      projectStatuses.filter((status) => status === "Pending").length +
-      contactStatuses.filter((status) => status === "pending").length;
-    const active = projectStatuses.filter((status) => status === "In-Progress").length;
-    const responseRate = totalIncoming > 0 ? Math.round((replied / totalIncoming) * 100) : 0;
+  const queueItems: QueueItem[] = [
+    {
+      key: "projects",
+      title: "Project Requests",
+      description: "Project enquiries waiting for review or follow-up.",
+      path: "/secure-admin-dashboard-2024/projects",
+      permission: "requests:projects",
+      value: metric(summaries.projects, "projects"),
+      color: colors.gold,
+      icon: <WorkIcon />,
+    },
+    {
+      key: "visibility",
+      title: "Visibility Tests",
+      description: "Visibility audits and tests requiring attention.",
+      path: "/secure-admin-dashboard-2024/visibility-tests",
+      permission: "requests:visibility",
+      value: metric(summaries.projects, "visibility"),
+      color: colors.cyan,
+      icon: <SearchIcon />,
+    },
+    {
+      key: "assistance",
+      title: "Assistance Requests",
+      description: "Digital assistance requests awaiting action.",
+      path: "/secure-admin-dashboard-2024/assistance-requests",
+      permission: "requests:assistance",
+      value: metric(summaries.projects, "assistance"),
+      color: colors.blue,
+      icon: <SupportAgentIcon />,
+    },
+    {
+      key: "partnerships",
+      title: "Partnership Requests",
+      description: "New or assigned partnership conversations.",
+      path: "/secure-admin-dashboard-2024/partnership-requests",
+      permission: "requests:partnerships",
+      value: metric(summaries.partnerships, "attention"),
+      assigned: metric(summaries.partnerships, "assignedToMe") || 0,
+      color: colors.violet,
+      icon: <HandshakeIcon />,
+    },
+    {
+      key: "contacts",
+      title: "Contact Inbox",
+      description: "Contact-form messages waiting for a response.",
+      path: "/secure-admin-dashboard-2024/contact-queries",
+      permission: "contacts:read",
+      value: metric(summaries.contacts, "attention"),
+      assigned: metric(summaries.contacts, "assignedToMe") || 0,
+      color: colors.orange,
+      icon: <ContactMailIcon />,
+    },
+    {
+      key: "emails",
+      title: "Emails",
+      description: "New inbox messages and messages assigned to you.",
+      path: "/secure-admin-dashboard-2024/emails",
+      permission: "email:read",
+      value: metric(summaries.emails, "attention"),
+      assigned: metric(summaries.emails, "assignedToMe") || 0,
+      color: colors.teal,
+      icon: <EmailIcon />,
+    },
+    {
+      key: "internal",
+      title: "Internal Messages",
+      description: "Unread conversations inside the CP team.",
+      path: "/secure-admin-dashboard-2024/internal-messages",
+      permission: "internal:messages",
+      value: metric(summaries.internalMessages, "unread"),
+      color: colors.violet,
+      icon: <ForumIcon />,
+    },
+  ].filter((item) => hasPermission(item.permission));
 
-    return {
-      totalIncoming,
-      projectTotal: projects.length,
-      contactTotal: contacts.length,
-      pending,
-      active,
-      replied,
-      responseRate,
-      completed: projectStatuses.filter((status) => status === "Completed").length,
-      cancelled: projectStatuses.filter((status) => status === "Cancelled").length,
-      closedContacts: contactStatuses.filter((status) => status === "closed").length,
-    };
-  }, [contacts, projects]);
+  const attentionTotal = queueItems.reduce((total, item) => total + Number(item.value || 0), 0);
+  const assignedToMe = [
+    metric(summaries.projects, "assignedToMe"),
+    metric(summaries.partnerships, "assignedToMe"),
+    metric(summaries.contacts, "assignedToMe"),
+    metric(summaries.emails, "assignedToMe"),
+  ].reduce<number>((total, value) => total + Number(value || 0), 0);
+  const communicationWaiting = [
+    metric(summaries.contacts, "pending"),
+    metric(summaries.emails, "new"),
+    metric(summaries.internalMessages, "unread"),
+  ].reduce<number>((total, value) => total + Number(value || 0), 0);
+  const openIncidents = Number(metric(summaries.analytics, "open") || 0);
 
-  const monthlyEntries = useMemo(() => {
-    const projectMonths = new Map(countByMonth(projects));
-    const contactMonths = new Map(countByMonth(contacts));
-    const keys = Array.from(new Set([...projectMonths.keys(), ...contactMonths.keys()]));
-
-    return keys.map((key) => ({
-      key,
-      projects: projectMonths.get(key) || 0,
-      contacts: contactMonths.get(key) || 0,
-    }));
-  }, [contacts, projects]);
-
-  const incomingChartData = {
-    labels: monthlyEntries.map((entry) => entry.key),
-    datasets: [
-      {
-        label: "Project requests",
-        data: monthlyEntries.map((entry) => entry.projects),
-        backgroundColor: theme.primary,
-        borderRadius: 6,
-      },
-      {
-        label: "Contact messages",
-        data: monthlyEntries.map((entry) => entry.contacts),
-        backgroundColor: theme.info,
-        borderRadius: 6,
-      },
-    ],
-  };
-
-  const projectStatusData = {
-    labels: ["Pending", "In Progress", "Completed", "Cancelled"],
-    datasets: [
-      {
-        data: [
-          projects.filter((project) => normalizeProjectStatus(project.status, project.isReplied) === "Pending").length,
-          metrics.active,
-          metrics.completed,
-          metrics.cancelled,
-        ],
-        backgroundColor: [theme.warning, theme.info, theme.success, theme.error],
-        borderWidth: 0,
-        hoverOffset: 8,
-      },
-    ],
-  };
-
-  const contactStatusData = {
-    labels: ["Pending", "Replied", "Closed"],
-    datasets: [
-      {
-        data: [
-          contacts.filter((query) => normalizeContactStatus(query) === "pending").length,
-          contacts.filter((query) => normalizeContactStatus(query) === "replied").length,
-          metrics.closedContacts,
-        ],
-        backgroundColor: [theme.warning, theme.success, theme.muted],
-        borderWidth: 0,
-        hoverOffset: 8,
-      },
-    ],
-  };
+  const quickLinks = [
+    {
+      title: "Website Analytics",
+      description: "Audience, acquisition, SEO, conversions and health.",
+      path: "/secure-admin-dashboard-2024/website-analytics",
+      permission: "analytics:read",
+      color: colors.cyan,
+      icon: <QueryStatsIcon />,
+    },
+    {
+      title: "Uptime Monitoring",
+      description: "Open uptime guidance and the direct UptimeRobot link.",
+      path: "/secure-admin-dashboard-2024/uptime-monitoring",
+      permission: "analytics:read",
+      color: colors.green,
+      icon: <NotificationsActiveIcon />,
+    },
+    {
+      title: "Blogs",
+      description: "Create, update and manage CP blog content.",
+      path: "/secure-admin-dashboard-2024/blogs",
+      permission: "blogs:manage",
+      color: colors.blue,
+      icon: <ArticleIcon />,
+    },
+  ].filter((item) => hasPermission(item.permission));
 
   if (loading) {
     return (
       <Box>
-        <PageHeader title="Admin Overview" subtitle="Loading live inbox metrics..." />
-        <Grid container spacing={3} sx={{ mb: 4 }}>
-          {[1, 2, 3, 4].map((item) => (
+        <PageHeader title="Admin Overview" subtitle="Loading all CP work queues..." />
+        <Grid container spacing={2}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <Grid item xs={12} sm={6} lg={3} key={item}>
-              <Skeleton variant="rounded" height={140} />
+              <Skeleton variant="rounded" height={190} />
             </Grid>
           ))}
         </Grid>
-        <Skeleton variant="rounded" height={420} />
       </Box>
     );
   }
@@ -225,150 +431,127 @@ export default function Analytics() {
     <Box>
       <PageHeader
         title="Admin Overview"
-        subtitle="Live view of website requests, contact messages and response activity."
+        subtitle="One operational view of requests, communications, assignments and website incidents."
+        action={(
+          <Button
+            variant="contained"
+            startIcon={<RefreshIcon />}
+            disabled={refreshing}
+            onClick={() => void loadOverview(true)}
+            sx={{ bgcolor: colors.navy, textTransform: "none", fontWeight: 900, "&:hover": { bgcolor: "#12365f" } }}
+          >
+            {refreshing ? "Refreshing..." : "Refresh"}
+          </Button>
+        )}
       />
 
-      {error && (
-        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
-          {error}
+      {errors.length > 0 && (
+        <Alert severity="warning" sx={{ mb: 2.5 }}>
+          Some overview summaries could not be loaded: {errors.join(", ")}. Their individual pages remain accessible.
         </Alert>
       )}
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} lg={3}>
-          <DashboardCard
-            title="Incoming Requests"
-            value={metrics.totalIncoming}
-            subtitle={`${metrics.projectTotal} projects, ${metrics.contactTotal} contacts`}
-            icon={<InboxIcon />}
-            color={theme.slate}
+      <Grid container spacing={2} sx={{ mb: 3.5 }}>
+        <Grid item xs={12} sm={6} xl={3}>
+          <OverviewMetric
+            label="Needs attention"
+            value={attentionTotal}
+            detail={`Across ${queueItems.length} accessible work queues`}
+            color={colors.orange}
+            icon={<WarningAmberIcon />}
           />
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <DashboardCard
-            title="Project Requests"
-            value={metrics.projectTotal}
-            subtitle={`${metrics.active} in progress`}
-            icon={<WorkIcon />}
-            color={theme.primary}
+        <Grid item xs={12} sm={6} xl={3}>
+          <OverviewMetric
+            label="Assigned to me"
+            value={assignedToMe}
+            detail="Open work explicitly assigned to your account"
+            color={colors.blue}
+            icon={<AssignmentIcon />}
           />
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <DashboardCard
-            title="Contact Messages"
-            value={metrics.contactTotal}
-            subtitle={`${contacts.filter((query) => normalizeContactStatus(query) === "pending").length} pending`}
+        <Grid item xs={12} sm={6} xl={3}>
+          <OverviewMetric
+            label="Communications waiting"
+            value={communicationWaiting}
+            detail="Pending contacts, new emails and unread team messages"
+            color={colors.teal}
             icon={<EmailIcon />}
-            color={theme.info}
           />
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <DashboardCard
-            title="Pending Follow-Up"
-            value={metrics.pending}
-            subtitle={`${metrics.replied} already replied`}
-            icon={<PendingActionsIcon />}
-            color={theme.warning}
-          />
-        </Grid>
+        {hasPermission("analytics:read") && (
+          <Grid item xs={12} sm={6} xl={3}>
+            <OverviewMetric
+              label="Website incidents"
+              value={openIncidents}
+              detail="Open performance, health or security incidents"
+              color={openIncidents > 0 ? colors.red : colors.green}
+              icon={<QueryStatsIcon />}
+              path="/secure-admin-dashboard-2024/website-analytics"
+            />
+          </Grid>
+        )}
       </Grid>
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={6} lg={4}>
-          <ProgressCard
-            title="Response Rate"
-            current={metrics.responseRate}
-            total={100}
-            subtitle="Incoming requests already replied"
-            color={theme.success}
-          />
-        </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <ProgressCard
-            title="Project Completion"
-            current={metrics.completed}
-            total={Math.max(metrics.projectTotal, 1)}
-            subtitle="Completed project requests"
-            color={theme.primary}
-          />
-        </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <ProgressCard
-            title="Contact Closure"
-            current={metrics.closedContacts}
-            total={Math.max(metrics.contactTotal, 1)}
-            subtitle="Contact messages closed"
-            color={theme.muted}
-          />
-        </Grid>
+      <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} spacing={1} sx={{ mb: 2 }}>
+        <Box>
+          <Typography variant="h5" sx={{ color: colors.navy, fontWeight: 900 }}>
+            Work queues
+          </Typography>
+          <Typography variant="body2" sx={{ color: colors.muted, mt: 0.35 }}>
+            Select any card to open the corresponding dashboard tab.
+          </Typography>
+        </Box>
+        <Chip label={`${queueItems.length} accessible queues`} sx={{ bgcolor: alpha(colors.navy, 0.07), color: colors.navy, fontWeight: 900 }} />
+      </Stack>
+
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {queueItems.map((item) => (
+          <Grid item xs={12} sm={6} lg={4} xl={3} key={item.key}>
+            <QueueCard item={item} />
+          </Grid>
+        ))}
       </Grid>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} lg={7}>
-          <Paper
-            sx={{
-              p: 3,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              border: "1px solid #e2e8f0",
-              height: 400,
-            }}
-          >
-            <Box sx={{ mb: 2 }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-                <AssessmentIcon sx={{ color: theme.primary }} />
-                <Typography fontWeight={700} color="#1e293b">
-                  Incoming Activity
-                </Typography>
-              </Box>
-              <Typography color="#64748b" fontSize="0.875rem">
-                Project requests and contact messages by month.
-              </Typography>
-            </Box>
-            <Box sx={{ height: 300 }}>
-              <Bar data={incomingChartData} options={chartOptions} />
-            </Box>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={6} lg={2.5}>
-          <Paper
-            sx={{
-              p: 3,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              border: "1px solid #e2e8f0",
-              height: 400,
-            }}
-          >
-            <Typography fontWeight={700} color="#1e293b" sx={{ mb: 1 }}>
-              Project Status
-            </Typography>
-            <Box sx={{ height: 310, display: "flex", alignItems: "center" }}>
-              <Doughnut data={projectStatusData} options={{ ...chartOptions, scales: undefined }} />
-            </Box>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={6} lg={2.5}>
-          <Paper
-            sx={{
-              p: 3,
-              borderRadius: 3,
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              border: "1px solid #e2e8f0",
-              height: 400,
-            }}
-          >
-            <Typography fontWeight={700} color="#1e293b" sx={{ mb: 1 }}>
-              Contact Status
-            </Typography>
-            <Box sx={{ height: 310, display: "flex", alignItems: "center" }}>
-              <Doughnut data={contactStatusData} options={{ ...chartOptions, scales: undefined }} />
-            </Box>
-          </Paper>
-        </Grid>
-      </Grid>
+      {quickLinks.length > 0 && (
+        <Box>
+          <Typography variant="h5" sx={{ color: colors.navy, fontWeight: 900, mb: 2 }}>
+            Content and operations
+          </Typography>
+          <Grid container spacing={2}>
+            {quickLinks.map((item) => (
+              <Grid item xs={12} md={4} key={item.title}>
+                <Paper
+                  component={Link}
+                  to={item.path}
+                  elevation={0}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.75,
+                    height: "100%",
+                    p: 2,
+                    border: "1px solid #e2e8f0",
+                    borderRadius: 2.5,
+                    color: "inherit",
+                    textDecoration: "none",
+                    "&:hover": { borderColor: alpha(item.color, 0.5), bgcolor: alpha(item.color, 0.035) },
+                  }}
+                >
+                  <Box sx={{ width: 42, height: 42, flex: "0 0 auto", borderRadius: 2, display: "grid", placeItems: "center", bgcolor: alpha(item.color, 0.1), color: item.color }}>
+                    {item.icon}
+                  </Box>
+                  <Box sx={{ minWidth: 0, flexGrow: 1 }}>
+                    <Typography sx={{ color: colors.navy, fontWeight: 900 }}>{item.title}</Typography>
+                    <Typography variant="body2" sx={{ color: colors.muted }}>{item.description}</Typography>
+                  </Box>
+                  <ArrowForwardIcon sx={{ color: item.color }} />
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
     </Box>
   );
 }

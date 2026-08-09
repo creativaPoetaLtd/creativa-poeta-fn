@@ -328,6 +328,9 @@ export default function Dashboard() {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
             background:
               "linear-gradient(180deg, #06152a 0%, #071a33 48%, #020814 100%)",
             color: "white",
@@ -383,26 +386,23 @@ export default function Dashboard() {
           />
         </Box>
 
-        <Box
+        <List
           sx={{
-            mx: 2,
-            mt: 2,
-            p: 2,
-            borderRadius: 3,
-            border: "1px solid rgba(255,255,255,0.1)",
-            background:
-              "linear-gradient(135deg, rgba(238,186,43,0.16), rgba(255,255,255,0.045))",
+            flexGrow: 1,
+            minHeight: 0,
+            overflowY: "auto",
+            overflowX: "hidden",
+            pt: 2,
+            px: 2,
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(255,255,255,0.22) transparent",
+            "&::-webkit-scrollbar": { width: 6 },
+            "&::-webkit-scrollbar-thumb": {
+              bgcolor: "rgba(255,255,255,0.22)",
+              borderRadius: 999,
+            },
           }}
         >
-          <Typography sx={{ color: "#FFE533", fontWeight: 900, fontSize: 13, textTransform: "uppercase" }}>
-            Aujourd'hui
-          </Typography>
-          <Typography sx={{ color: "rgba(255,255,255,0.78)", fontSize: 13, mt: 0.75, lineHeight: 1.55 }}>
-            Suivez les demandes reçues, les messages clients et les réponses à envoyer.
-          </Typography>
-        </Box>
-
-        <List sx={{ pt: 2, px: 2 }}>
           {Object.entries(groupedNavigation).map(([section, items]) => (
             <Box key={section} sx={{ mb: 2 }}>
               <Typography
