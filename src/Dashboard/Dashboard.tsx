@@ -38,6 +38,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
@@ -59,6 +60,7 @@ import PartnershipRequests from "./PartnershipRequests";
 import Settings from "./Settings";
 import Users from "./Users";
 import WebsiteAnalytics from "./WebsiteAnalytics";
+import UptimeMonitoring from "./UptimeMonitoring";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
@@ -77,6 +79,14 @@ const navigationItems = [
     icon: <QueryStatsIcon />,
     path: "/secure-admin-dashboard-2024/website-analytics",
     color: "#38bdf8",
+    section: "Pilotage",
+    permission: "analytics:read",
+  },
+  {
+    text: "Uptime Monitoring",
+    icon: <NotificationsActiveIcon />,
+    path: "/secure-admin-dashboard-2024/uptime-monitoring",
+    color: "#22c55e",
     section: "Pilotage",
     permission: "analytics:read",
   },
@@ -650,6 +660,7 @@ export default function Dashboard() {
           <Routes>
             <Route path="/" element={renderWithPermission("dashboard:read", <Analytics />)} />
             <Route path="website-analytics" element={renderWithPermission("analytics:read", <WebsiteAnalytics />)} />
+            <Route path="uptime-monitoring" element={renderWithPermission("analytics:read", <UptimeMonitoring />)} />
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
