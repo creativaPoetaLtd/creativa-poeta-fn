@@ -157,7 +157,8 @@ function redirectByCountry(request, context, url) {
 
 export default async (request, context) => {
   const url = new URL(request.url);
-  const targetHost = hostRedirects[url.hostname.toLowerCase()];
+  const hostname = url.hostname.toLowerCase();
+  const targetHost = hostRedirects[hostname];
 
   if (targetHost) {
     const targetUrl = new URL(request.url);
@@ -168,7 +169,7 @@ export default async (request, context) => {
   const legacyRedirect = redirectLegacyPath(url);
   if (legacyRedirect) return legacyRedirect;
 
-  if (globalHosts.has(url.hostname.toLowerCase()) && !isIgnoredPath(url.pathname)) {
+  if (globalHosts.has(hostname) && !isIgnoredPath(url.pathname)) {
     const segments = url.pathname.split("/").filter(Boolean);
     const locale = segments[0];
 
@@ -187,7 +188,7 @@ export default async (request, context) => {
     }
   }
 
-  const market = hostToMarket[url.hostname.toLowerCase()];
+  const market = hostToMarket[hostname];
 
   if (market) {
     const localePathRedirect = redirectMarketLocalePath(url, market);
@@ -200,10 +201,16 @@ export default async (request, context) => {
   const geoRedirect = redirectByCountry(request, context, url);
   if (geoRedirect) return geoRedirect;
 
-  if (!market) return;
+  const isGlobalHost = globalHosts.has(hostname);
+  if (!market && !isGlobalHost) return;
   if (isIgnoredPath(url.pathname)) return;
 
   const cleanPath = canonicalPath(url.pathname);
+  if (isGlobalHost) {
+    const globalPath = cleanPath === "/" ? "" : cleanPath;
+    return new URL(`${globalPath}/index.html${url.search}`, request.url);
+  }
+
   const marketPath = cleanPath === "/" ? "" : cleanPath;
   return new URL(
     `/__markets/${market}${marketPath}/index.html${url.search}`,
