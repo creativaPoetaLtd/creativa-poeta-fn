@@ -1,0 +1,97 @@
+.cp-referral-program .cp-referral-field {
+  align-items: initial;
+  cursor: text;
+  display: block;
+  min-width: 0;
+  user-select: auto;
+}
+
+.cp-referral-program .cp-referral-control {
+  background-color: rgba(4, 11, 20, 0.58) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  display: block;
+  transform: none !important;
+}
+
+.cp-referral-program .cp-referral-control:hover {
+  background-color: rgba(4, 11, 20, 0.68) !important;
+  border-color: rgba(238, 186, 43, 0.62) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.cp-referral-program .cp-referral-control:focus,
+.cp-referral-program .cp-referral-control:focus-visible {
+  background-color: rgba(4, 11, 20, 0.72) !important;
+  border-color: #eeba2b !important;
+  box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.17) !important;
+  color: #fff !important;
+  transform: none !important;
+}
+
+.cp-referral-program select.cp-referral-control:valid:not(:placeholder-shown) {
+  background-color: rgba(4, 11, 20, 0.58) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  transform: none !important;
+}
+
+.cp-referral-program select.cp-referral-control:focus,
+.cp-referral-program select.cp-referral-control:focus-visible {
+  background-color: rgba(4, 11, 20, 0.72) !important;
+  border-color: #eeba2b !important;
+  box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.17) !important;
+}
+
+.cp-referral-program select.cp-referral-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EEBA2B' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-position: right 0.9rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1rem !important;
+  padding-right: 2.75rem;
+}
+
+.cp-referral-program select.cp-referral-control option,
+.cp-referral-program select.cp-referral-control option:not(:checked) {
+  background: #07111f !important;
+  color: #fff !important;
+}
+
+.cp-referral-program textarea.cp-referral-control {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.cp-referral-program .cp-referral-check {
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cp-referral-program .cp-referral-check input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin-right: 0;
+}
+
+.cp-referral-program .cp-referral-control:-webkit-autofill,
+.cp-referral-program .cp-referral-control:-webkit-autofill:hover,
+.cp-referral-program .cp-referral-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+  transition: background-color 9999s ease-out 0s;
+}
+
+@media (max-width: 639px) {
+  .cp-referral-program form {
+    min-width: 0;
+  }
+
+  .cp-referral-program .cp-referral-field,
+  .cp-referral-program .cp-referral-control {
+    width: 100%;
+  }
+}
