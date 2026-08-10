@@ -201,7 +201,11 @@ export default async (request, context) => {
   const geoRedirect = redirectByCountry(request, context, url);
   if (geoRedirect) return geoRedirect;
 
-  const isGlobalHost = globalHosts.has(hostname);
+  // Netlify deploy previews use their own hostname. Treat them like the
+  // global site for internal file rewrites so Netlify's pretty-URL redirect
+  // cannot fight our trailing-slash canonicalization.
+  const isNetlifyPreviewHost = hostname.endsWith(".netlify.app");
+  const isGlobalHost = globalHosts.has(hostname) || isNetlifyPreviewHost;
   if (!market && !isGlobalHost) return;
   if (isIgnoredPath(url.pathname)) return;
 

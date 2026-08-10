@@ -44,6 +44,25 @@ assert.equal(
 const ignoredSitemap = await run("https://creativapoeta.com/sitemap.xml");
 assert.equal(ignoredSitemap, undefined);
 
+const previewPartnership = await run(
+  "https://deploy-preview-35--creativapoeta.netlify.app/partnership"
+);
+assert(previewPartnership instanceof URL);
+assert.equal(
+  previewPartnership.href,
+  "https://deploy-preview-35--creativapoeta.netlify.app/partnership/index.html"
+);
+
+const previewTrailingSlash = await run(
+  "https://deploy-preview-35--creativapoeta.netlify.app/partnership/"
+);
+assert(previewTrailingSlash instanceof Response);
+assert.equal(previewTrailingSlash.status, 301);
+assert.equal(
+  previewTrailingSlash.headers.get("location"),
+  "https://deploy-preview-35--creativapoeta.netlify.app/partnership"
+);
+
 const humanGeoRedirect = await run("https://creativapoeta.com/answers", "Mozilla/5.0");
 assert(humanGeoRedirect instanceof Response);
 assert.equal(humanGeoRedirect.status, 302);
