@@ -241,6 +241,36 @@
     },
   },
 
+  referralProgram: {
+    title: "Referral Partner Program | Earn up to €200 | Creativa Poeta",
+    description:
+      "Introduce businesses that need websites, software, AI, SEO, marketing or design. Creativa Poeta delivers the project and rewards successful referrals.",
+    keywords:
+      "Creativa Poeta referral program, referral partner, business partner, earn referral reward, digital services referral",
+    url: "https://creativapoeta.com/referral-partners",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Creativa Poeta Referral Partner Program",
+      description:
+        "A referral program that rewards genuine introductions to businesses needing digital services.",
+      provider: {
+        "@type": "Organization",
+        name: "Creativa Poeta",
+        url: "https://creativapoeta.com",
+      },
+      serviceType: "Business referral program",
+    },
+  },
+
+  referralTerms: {
+    title: "Referral Partner Program Terms | Creativa Poeta",
+    description:
+      "Rules for valid referrals, attribution, eligible revenue and reward payments in the Creativa Poeta Referral Partner Program.",
+    keywords: "CPRPP terms, referral reward terms, Creativa Poeta referral partner",
+    url: "https://creativapoeta.com/referral-program-terms",
+  },
+
   partnership: {
     title: "Partnership for agencies and digital teams | Creativa Poeta",
     description:

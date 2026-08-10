@@ -1176,48 +1176,55 @@ const pageTemplates = {
       ],
     ],
   },
-  partnership: {
-    path: "/partnership",
+  referralProgram: {
+    path: "/referral-partners",
     title: (lang) =>
       lang === "fr"
-        ? "Partenariat agence et livraison digitale | Creativa Poeta"
+        ? "Referral Partner Program : gagnez jusqu'a 200 EUR | Creativa Poeta"
         : lang === "nl"
-          ? "Partnerschap voor bureaus en digitale teams | Creativa Poeta"
+          ? "Referral Partner Program: verdien tot 200 EUR | Creativa Poeta"
           : lang === "rw"
-            ? "Partnership y'abakora digital | Creativa Poeta"
-            : "Partnership for agencies and digital teams | Creativa Poeta",
+            ? "Creativa Poeta Referral Partner Program"
+            : "Referral Partner Program: earn up to EUR 200 | Creativa Poeta",
     description: (lang) =>
       lang === "fr"
-        ? "Creativa Poeta aide les agences, editeurs et equipes digitales a livrer plus de sites, apps, design, IA et visibilite sans agrandir leur equipe."
+        ? "Presentez a Creativa Poeta une entreprise qui a besoin de services numeriques et gagnez une recompense lorsque le client paie."
         : lang === "nl"
-          ? "Creativa Poeta helpt bureaus, softwareteams en digitale bedrijven meer websites, apps, design, AI en zichtbaarheid te leveren zonder hun team uit te breiden."
+          ? "Breng Creativa Poeta in contact met een bedrijf dat digitale diensten nodig heeft en ontvang een beloning wanneer de klant betaalt."
           : lang === "rw"
-            ? "Creativa Poeta ifasha agencies na digital teams gukora websites, apps, design, AI na visibility nk'umufatanyabikorwa wizewe."
-            : "Creativa Poeta helps agencies, software companies and digital teams deliver more websites, apps, design, AI and visibility without growing their team.",
+            ? "Tumenyeshe business ikeneye digital services, CP ikore delivery, nawe ubone reward client amaze kwishyura."
+            : "Introduce a business that needs digital services. Creativa Poeta handles sales and delivery, and rewards successful referrals.",
     keywords:
-      "partnership, agency partner, white label web development, digital delivery partner, AI partner, design partner, Creativa Poeta",
+      "Creativa Poeta referral program, referral partner, business partner, digital services referral reward",
     sections: (lang) =>
       lang === "fr"
         ? [
             [
-              "Livrer plus sans recruter tout de suite",
-              "Nous devenons une capacite flexible pour les agences et entreprises qui veulent avancer vite sans sacrifier la qualite.",
+              "Votre reseau a de la valeur",
+              "Faites une introduction authentique. CP qualifie, vend et realise le projet. Vous recevez 10 % du revenu admissible, jusqu'a 200 EUR.",
             ],
             [
-              "Un partenaire discret et fiable",
-              "White label, equipe dediee ou livraison projet: nous nous adaptons a votre maniere de travailler.",
+              "Referral Partner ou Business Partner",
+              "Le programme standard est ouvert aux introductions ponctuelles; les professionnels peuvent demander des conditions personnalisees.",
             ],
           ]
         : [
             [
-              "Deliver more without hiring immediately",
-              "We become flexible capacity for agencies and companies that need to move fast without sacrificing quality.",
+              "Your network has value",
+              "Make a genuine introduction. CP qualifies, sells and delivers the project. You receive 10% of eligible revenue, up to EUR 200.",
             ],
             [
-              "A quiet and reliable partner",
-              "White label, dedicated team or project delivery: we adapt to the way you work.",
+              "Referral Partner or Business Partner",
+              "The standard program supports occasional introductions, while professionals can request custom terms.",
             ],
           ],
+  },
+  referralTerms: {
+    path: "/referral-program-terms",
+    title: (lang) => lang === "fr" ? "Conditions du Referral Partner Program | Creativa Poeta" : lang === "nl" ? "Voorwaarden Referral Partner Program | Creativa Poeta" : "Referral Partner Program Terms | Creativa Poeta",
+    description: (lang) => lang === "fr" ? "Regles concernant les referrals valides, l'attribution, le revenu admissible et le paiement des recompenses CPRPP." : lang === "nl" ? "Regels voor geldige referrals, toewijzing, in aanmerking komende omzet en beloningen." : "Rules for valid referrals, attribution, eligible revenue and reward payments in the CPRPP.",
+    keywords: "CPRPP terms, referral program terms, Creativa Poeta",
+    sections: (lang) => [[lang === "fr" ? "Des regles transparentes" : "Transparent rules", lang === "fr" ? "Les conditions expliquent clairement ce qui constitue un referral valide et quand une recompense devient payable." : "The terms clearly explain what qualifies as a valid referral and when a reward becomes payable."]],
   },
   blogs: {
     path: "/blogs",

@@ -46,7 +46,7 @@ import { getInternalMessageSummary } from "../APIs/internalMessages";
 import { getAdminNotificationSummary } from "../APIs/adminNotifications";
 import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
-import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
+import { getReferralProgramSummary } from "../APIs/ReferralProgram";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
 import { useAuth } from "../contexts/useAuth";
 import Analytics from "./Analytics";
@@ -56,7 +56,7 @@ import Emails from "./Emails";
 import InternalMessages from "./InternalMessages";
 import Jobs from "./Jobs";
 import Projects from "./Projects";
-import PartnershipRequests from "./PartnershipRequests";
+import ReferralProgram from "./ReferralProgram";
 import Settings from "./Settings";
 import Users from "./Users";
 import WebsiteAnalytics from "./WebsiteAnalytics";
@@ -115,12 +115,12 @@ const navigationItems = [
     permission: "requests:assistance",
   },
   {
-    text: "Partnership Requests",
+    text: "Referral & Partners",
     icon: <HandshakeIcon />,
-    path: "/secure-admin-dashboard-2024/partnership-requests",
+    path: "/secure-admin-dashboard-2024/referral-program",
     color: "#7c3aed",
     section: "Demandes",
-    permission: "requests:partnerships",
+    permission: "referrals:read",
   },
   {
     text: "Contact Inbox",
@@ -224,7 +224,7 @@ export default function Dashboard() {
       const [emailResult, projectResult, partnershipResult, contactResult, adminNotificationResult, internalMessageResult, analyticsIncidentResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
-        hasPermission("requests:partnerships") ? getPartnershipRequestSummary() : Promise.resolve({ metrics: { attention: 0, pending: 0 } }),
+        hasPermission("referrals:read") ? getReferralProgramSummary() : Promise.resolve({ metrics: { attention: 0 } }),
         getContactSummary(),
         ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
         hasPermission("internal:messages") ? getInternalMessageSummary() : Promise.resolve({ metrics: { unread: 0, total: 0 } }),
@@ -250,7 +250,7 @@ export default function Dashboard() {
         Projects: Number(projectMetrics.projects || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
-        "Partnership Requests": Number(partnershipMetrics.attention || partnershipMetrics.pending || 0),
+        "Referral & Partners": Number(partnershipMetrics.attention || 0),
         "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
         Users: Number(adminNotificationMetrics.new || adminNotificationMetrics.open || 0),
         "Internal Messages": Number(internalMessageMetrics.unread || 0),
@@ -664,7 +664,8 @@ export default function Dashboard() {
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
-            <Route path="partnership-requests" element={renderWithPermission("requests:partnerships", <PartnershipRequests />)} />
+            <Route path="referral-program" element={renderWithPermission("referrals:read", <ReferralProgram />)} />
+            <Route path="partnership-requests" element={renderWithPermission("referrals:read", <ReferralProgram />)} />
             <Route path="blogs" element={renderWithPermission("blogs:manage", <Blogs />)} />
             <Route path="contact-queries" element={renderWithPermission("contacts:read", <ContactQueries />)} />
             <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />

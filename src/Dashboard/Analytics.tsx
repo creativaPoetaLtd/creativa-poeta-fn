@@ -29,7 +29,7 @@ import { Link } from "react-router-dom";
 import { getContactSummary } from "../APIs/Contact";
 import { getEmailSummary } from "../APIs/Emails";
 import { getInternalMessageSummary } from "../APIs/internalMessages";
-import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
+import { getReferralProgramSummary } from "../APIs/ReferralProgram";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
 import { useAuth } from "../contexts/useAuth";
@@ -239,9 +239,9 @@ export default function Analytics() {
       },
       {
         key: "partnerships",
-        label: "partnership requests",
-        allowed: hasPermission("requests:partnerships"),
-        load: async () => (await getPartnershipRequestSummary()).metrics,
+        label: "referral program",
+        allowed: hasPermission("referrals:read"),
+        load: async () => (await getReferralProgramSummary()).metrics,
       },
       {
         key: "contacts",
@@ -326,12 +326,11 @@ export default function Analytics() {
     },
     {
       key: "partnerships",
-      title: "Partnership Requests",
-      description: "New or assigned partnership conversations.",
-      path: "/secure-admin-dashboard-2024/partnership-requests",
-      permission: "requests:partnerships",
+      title: "Referral & Partners",
+      description: "Partner applications, referral leads and rewards requiring attention.",
+      path: "/secure-admin-dashboard-2024/referral-program",
+      permission: "referrals:read",
       value: metric(summaries.partnerships, "attention"),
-      assigned: metric(summaries.partnerships, "assignedToMe") || 0,
       color: colors.violet,
       icon: <HandshakeIcon />,
     },
@@ -372,7 +371,6 @@ export default function Analytics() {
   const attentionTotal = queueItems.reduce((total, item) => total + Number(item.value || 0), 0);
   const assignedToMe = [
     metric(summaries.projects, "assignedToMe"),
-    metric(summaries.partnerships, "assignedToMe"),
     metric(summaries.contacts, "assignedToMe"),
     metric(summaries.emails, "assignedToMe"),
   ].reduce<number>((total, value) => total + Number(value || 0), 0);

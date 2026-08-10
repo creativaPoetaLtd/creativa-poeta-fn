@@ -33,7 +33,8 @@ import VisibilityAuditToolPage from "./pages/VisibilityAuditToolPage.tsx";
 import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.tsx";
 import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
-import PartnershipPage from "./pages/PartnershipPage.tsx";
+import ReferralProgramPage from "./pages/ReferralProgramPage.tsx";
+import ReferralProgramTermsPage from "./pages/ReferralProgramTermsPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
@@ -72,11 +73,22 @@ const appElement = (
             <Route path="/fr/contact" element={<ContactPage />} />
             <Route path="/nl/contact" element={<ContactPage />} />
             <Route path="/rw/contact" element={<ContactPage />} />
-            <Route path="/partnership" element={<PartnershipPage />} />
-            <Route path="/en/partnership" element={<PartnershipPage />} />
-            <Route path="/fr/partnership" element={<PartnershipPage />} />
-            <Route path="/nl/partnership" element={<PartnershipPage />} />
-            <Route path="/rw/partnership" element={<PartnershipPage />} />
+            <Route path="/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/en/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/fr/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/nl/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/rw/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/referral-program-terms" element={<ReferralProgramTermsPage />} />
+            <Route path="/en/referral-program-terms" element={<ReferralProgramTermsPage />} />
+            <Route path="/fr/referral-program-terms" element={<ReferralProgramTermsPage />} />
+            <Route path="/nl/referral-program-terms" element={<ReferralProgramTermsPage />} />
+            <Route path="/rw/referral-program-terms" element={<ReferralProgramTermsPage />} />
+            {/* Legacy URLs remain valid while search engines and old links migrate. */}
+            <Route path="/partnership" element={<ReferralProgramPage />} />
+            <Route path="/en/partnership" element={<ReferralProgramPage />} />
+            <Route path="/fr/partnership" element={<ReferralProgramPage />} />
+            <Route path="/nl/partnership" element={<ReferralProgramPage />} />
+            <Route path="/rw/partnership" element={<ReferralProgramPage />} />
             {/* <Route path="/career" element={<JobsPages />} /> */}
             <Route path="/start-project" element={<ProjectFormPage />} />
             <Route path="/en/start-project" element={<ProjectFormPage />} />

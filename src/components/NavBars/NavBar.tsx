@@ -51,8 +51,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Demander une assistance",
     assistanceRequestText: "Dépannage, configuration et aide numérique pas à pas",
-    partnership: "Partenariat",
-    partnershipText: "Agences, éditeurs et équipes digitales : livrons plus ensemble",
+    partnership: "Referral & partenaires",
+    partnershipText: "Présentez un client, gagnez une récompense, ou proposez une collaboration",
     servicesList: [
       ["Présence locale", "Google, Maps et visibilité IA", "/services/visibilite-locale"],
       ["Outils digitaux", "Sites, apps, logiciels et systèmes", "/services/site-officiel"],
@@ -72,8 +72,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Request assistance",
     assistanceRequestText: "Troubleshooting, setup and step-by-step digital help",
-    partnership: "Partnership",
-    partnershipText: "Agencies, software teams and digital companies: deliver more with us",
+    partnership: "Referral & partners",
+    partnershipText: "Refer a client, earn a reward, or propose a broader collaboration",
     servicesList: [
       ["Local presence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software and systems", "/services/site-officiel"],
@@ -93,8 +93,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Digitale hulp aanvragen",
     assistanceRequestText: "Problemen oplossen, installatie en begeleiding",
-    partnership: "Partnerschap",
-    partnershipText: "Bureaus, softwareteams en digitale bedrijven: lever meer samen met ons",
+    partnership: "Referral & partners",
+    partnershipText: "Breng een klant aan, ontvang een beloning of stel een samenwerking voor",
     servicesList: [
       ["Lokale aanwezigheid", "Google, Maps en AI-zichtbaarheid", "/services/visibilite-locale"],
       ["Digitale tools", "Websites, apps, software en systemen", "/services/site-officiel"],
@@ -114,8 +114,8 @@ const menuCopy: Record<
     contact: "Twandikire",
     assistanceRequest: "Saba assistance",
     assistanceRequestText: "Depannage, setup no kugufasha gukoresha digital",
-    partnership: "Partnership",
-    partnershipText: "Agencies na digital teams: dutange imishinga myinshi turi hamwe",
+    partnership: "Referral & partners",
+    partnershipText: "Tumenyeshe client, ubone reward, cyangwa usabe collaboration yagutse",
     servicesList: [
       ["Local presence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software na systems", "/services/site-officiel"],
@@ -189,7 +189,7 @@ function NavBar() {
     {
       label: copy.partnership,
       text: copy.partnershipText,
-      href: localizePath("/partnership"),
+      href: localizePath("/referral-partners"),
       featured: false,
     },
     {

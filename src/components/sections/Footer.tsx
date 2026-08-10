@@ -53,14 +53,13 @@ function Footer() {
       : locale === "kiny"
       ? "Inama & resources"
       : "Journal & conseils";
-  const partnershipLabel =
-    locale === "nl"
-      ? "Partnerschap"
-      : locale === "en"
-      ? "Partnership"
-      : locale === "kiny"
-      ? "Partnership"
-      : "Partenariat";
+  const referralFooter = locale === "nl"
+    ? { title: "Referral & partnerships", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Referral Program", join: "Referral Partner worden", submit: "Referral indienen", business: "Business Partners", strategic: "Strategische samenwerking", terms: "Programmavoorwaarden" }
+    : locale === "en"
+    ? { title: "Referral & partnerships", intro: "Your network can connect businesses with the digital services they need.", overview: "Referral Program", join: "Become a Referral Partner", submit: "Submit a referral", business: "Business Partners", strategic: "Strategic partnerships", terms: "Program terms" }
+    : locale === "kiny"
+    ? { title: "Referral & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Referral Program", join: "Ba Referral Partner", submit: "Ohereza referral", business: "Business Partners", strategic: "Strategic partnerships", terms: "Program terms" }
+    : { title: "Referral & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Referral Program", join: "Devenir Referral Partner", submit: "Soumettre un referral", business: "Business Partners", strategic: "Partenariats stratégiques", terms: "Conditions du programme" };
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -146,9 +145,6 @@ function Footer() {
     </Link>
     <Link to={linkPath("/demander-assistance-numerique")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{assistanceLabel}</p>
-    </Link>
-    <Link to={linkPath("/partnership")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{partnershipLabel}</p>
     </Link>
     <Link to={linkPath("/answers")}> 
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{answersLabel}</p>
@@ -255,6 +251,25 @@ function Footer() {
           </a>
           </div> */}
           </div>
+          <section className="mt-10 w-full border-t border-white/15 pt-7">
+            <div className="grid gap-5 rounded-2xl border border-[#EEBA2B]/25 bg-black/20 p-5 backdrop-blur-sm md:grid-cols-[1fr_2fr] md:p-7">
+              <div>
+                <p className="text-xl font-black text-[#EEBA2B]">{referralFooter.title}</p>
+                <p className="mt-2 max-w-md text-sm font-semibold leading-relaxed text-slate-400">{referralFooter.intro}</p>
+                <Link to={`${linkPath("/referral-partners")}#join-cprpp`} className="mt-4 inline-flex min-h-[42px] items-center rounded-full bg-[#EEBA2B] px-5 text-sm font-black text-slate-950 transition hover:bg-white">
+                  {referralFooter.join}
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-sm font-bold sm:grid-cols-3">
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={linkPath("/referral-partners")}>{referralFooter.overview}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#join-cprpp`}>{referralFooter.join}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#submit-referral`}>{referralFooter.submit}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#business-partners`}>{referralFooter.business}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#strategic-partnerships`}>{referralFooter.strategic}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={linkPath("/referral-program-terms")}>{referralFooter.terms}</Link>
+              </div>
+            </div>
+          </section>
     </footer>
   );
 }

@@ -1011,7 +1011,7 @@ export default function WebsiteAnalytics() {
                 <SectionCard title="Conversions" subtitle="Completed business actions on the website">
                   {report.conversions.items.length ? (
                     <TableContainer><Table size="small"><TableHead><TableRow><TableCell>Action</TableCell><TableCell align="right">Total</TableCell><TableCell align="right">Visitors</TableCell><TableCell align="right">Visits</TableCell></TableRow></TableHead><TableBody>{report.conversions.items.map((item) => <TableRow key={item.name}><TableCell sx={{ fontWeight: 700 }}>{humanize(item.name)}</TableCell><TableCell align="right">{formatNumber(item.count)}</TableCell><TableCell align="right">{formatNumber(item.visitors)}</TableCell><TableCell align="right">{formatNumber(item.sessions)}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
-                  ) : <EmptyState label="Submitted contacts, projects, partnerships, audits and applications will appear here." />}
+                  ) : <EmptyState label="Submitted contacts, projects, partner applications, referrals, audits and applications will appear here." />}
                 </SectionCard>
               </Grid>
               <Grid item xs={12} lg={5}>
