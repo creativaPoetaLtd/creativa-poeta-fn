@@ -48,9 +48,13 @@ const Signup: React.FC = () => {
 
       setMessage(response.data.message || "Signup successful!");
       navigate("/secure-admin-login-2024");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(
-        err.response?.data?.error || "Something went wrong. Please try again."
+        axios.isAxiosError<{ error?: string }>(err)
+          ? err.response?.data?.error || "Something went wrong. Please try again."
+          : err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again."
       );
     } finally {
       setLoading(false);

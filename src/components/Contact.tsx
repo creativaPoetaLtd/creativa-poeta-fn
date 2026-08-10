@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { contactUs } from "../APIs/Contact";
 import { localizePath } from "../data/marketRuntime";
 
-const lang: any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof contactLocale;
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -59,9 +59,11 @@ const Contact = () => {
       } else {
         throw new Error(response.message || "Something went wrong!");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(
-        error.message || "An error occurred. Please try again later."
+        error instanceof Error
+          ? error.message
+          : "An error occurred. Please try again later."
       );
     } finally {
       setIsLoading(false);

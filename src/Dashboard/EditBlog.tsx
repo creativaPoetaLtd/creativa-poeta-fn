@@ -7,7 +7,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import Close from "@mui/icons-material/Close";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 

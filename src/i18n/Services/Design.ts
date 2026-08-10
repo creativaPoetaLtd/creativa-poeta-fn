@@ -1,4 +1,4 @@
-const DesignLocale: any = {
+const DesignLocale = {
     fr: {
         title: "Design Graphique",
         substitle:"Transformer les idées en chefs-d'œuvre visuels",

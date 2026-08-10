@@ -1,4 +1,4 @@
-const WebAppLocale: any = {
+const WebAppLocale = {
  en: {
     faq:"Frequently Asked Questions",
 question1:"What types of websites do you develop?",

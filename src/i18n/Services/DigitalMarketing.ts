@@ -1,4 +1,4 @@
-const DigitalMarketingLocale: any = {
+const DigitalMarketingLocale = {
     en: {
         title: "Digital Marketing",
         subtitle:"Boost Your Online Presence with Strategic Solutions",

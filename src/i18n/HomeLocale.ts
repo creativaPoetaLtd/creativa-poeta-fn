@@ -1,4 +1,4 @@
-const HomeLocale: any = {
+const HomeLocale = {
   en: {
     title1: "inspired innovation",
     description1:

@@ -1,7 +1,7 @@
 import getLangFromLocalStorage from "../../utils/Lang";
 import FaqLocale from "../i18n/FaqLocale";
 
-const lang: any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof FaqLocale;
 const faqData = [
   {
     id: 1,

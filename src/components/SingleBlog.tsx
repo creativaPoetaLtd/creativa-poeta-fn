@@ -18,10 +18,10 @@ const BlogPost = () => {
   const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 
   useEffect(() => {
-    const fetchBlog = async () => {
+    const fetchBlog = async (blogId: string) => {
       try {
         setLoading(true);
-        const data = await fetchSingleBlog(id!);
+        const data = await fetchSingleBlog(blogId);
         setBlog(data.blog);
         setComments(data.blog.comments || []);
       } catch (err) {
@@ -36,7 +36,7 @@ const BlogPost = () => {
     };
 
     if (id) {
-      fetchBlog();
+      void fetchBlog(id);
     }
   }, [id]);
 
@@ -45,6 +45,11 @@ const BlogPost = () => {
 
     if (!commentName.trim() || !commentEmail.trim() || !commentText.trim()) {
       toast.error("Please fill in all fields");
+      return;
+    }
+
+    if (!id) {
+      toast.error("This blog post is unavailable");
       return;
     }
 
@@ -73,14 +78,14 @@ const BlogPost = () => {
     setIsSubmittingComment(true);
 
     try {
-      await addCommentToBlog(id!, {
+      await addCommentToBlog(id, {
         name: commentName.trim(),
         email: commentEmail.trim(),
         text: commentText.trim(),
       });
 
       // Refresh the blog to get updated comments
-      const blogData = await fetchSingleBlog(id!);
+      const blogData = await fetchSingleBlog(id);
       setComments(blogData.blog.comments || []);
 
       // Clear form

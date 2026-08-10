@@ -1,4 +1,4 @@
-const ContentLocale: any = {
+const ContentLocale = {
     en: {
         title: "Content Writing",
         subtititle:"Words That Capture, Engage, and Inspire",

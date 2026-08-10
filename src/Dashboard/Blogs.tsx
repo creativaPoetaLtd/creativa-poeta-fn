@@ -1,12 +1,10 @@
-import {
-  Add,
-  AutoAwesome,
-  Delete,
-  Edit,
-  OpenInNew,
-  PublishedWithChanges,
-  Refresh,
-} from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import AutoAwesome from "@mui/icons-material/AutoAwesome";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
+import OpenInNew from "@mui/icons-material/OpenInNew";
+import PublishedWithChanges from "@mui/icons-material/PublishedWithChanges";
+import Refresh from "@mui/icons-material/Refresh";
 import {
   Alert,
   Box,

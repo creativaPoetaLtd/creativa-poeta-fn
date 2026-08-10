@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 // Helper function to handle authenticated API requests
-export const authenticatedApiRequest = async <T = any>(
+export const authenticatedApiRequest = async <T = unknown>(
   config: AxiosRequestConfig
 ): Promise<T> => {
   try {
@@ -56,7 +56,7 @@ export const authenticatedApiRequest = async <T = any>(
 };
 
 // Helper function for non-authenticated requests
-export const publicApiRequest = async <T = any>(
+export const publicApiRequest = async <T = unknown>(
   config: AxiosRequestConfig
 ): Promise<T> => {
   try {

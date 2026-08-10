@@ -731,17 +731,20 @@ const VisibilityAuditToolPage = () => {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market) as LocaleKey;
   const baseCopy = copies[locale] ?? copies.fr;
-  const copy = {
-    ...baseCopy,
-    placeholders: {
-      ...baseCopy.placeholders,
-      name: getExampleName(locale),
-      email: getExampleEmail(locale),
-      phone: getExamplePhone(market),
-      city: getExampleCity(market, locale),
-      languages: getExampleLanguages(market, locale),
-    },
-  };
+  const copy = useMemo(
+    () => ({
+      ...baseCopy,
+      placeholders: {
+        ...baseCopy.placeholders,
+        name: getExampleName(locale),
+        email: getExampleEmail(locale),
+        phone: getExamplePhone(market),
+        city: getExampleCity(market, locale),
+        languages: getExampleLanguages(market, locale),
+      },
+    }),
+    [baseCopy, locale, market]
+  );
   const [form, setForm] = useState<AuditForm>(initialForm);
   const [result, setResult] = useState<AuditResult | null>(null);
   const [technicalAudit, setTechnicalAudit] =

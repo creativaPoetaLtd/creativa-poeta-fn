@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -26,7 +26,10 @@ import {
   Alert,
   CircularProgress,
 } from "@mui/material";
-import { Visibility, Reply, Delete, Refresh } from "@mui/icons-material";
+import Delete from "@mui/icons-material/Delete";
+import Refresh from "@mui/icons-material/Refresh";
+import Reply from "@mui/icons-material/Reply";
+import Visibility from "@mui/icons-material/Visibility";
 import { toast } from "react-toastify";
 import {
   getProjects,
@@ -90,11 +93,7 @@ const ProjectManagement: React.FC = () => {
     limit: 10,
   });
 
-  useEffect(() => {
-    fetchProjects();
-  }, [currentPage, statusFilter]);
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       const response: ProjectsResponse = await getProjects(
@@ -111,7 +110,11 @@ const ProjectManagement: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, statusFilter]);
+
+  useEffect(() => {
+    void fetchProjects();
+  }, [fetchProjects]);
 
   const handleViewProject = (project: ProjectRequest) => {
     setSelectedProject(project);
@@ -445,7 +448,9 @@ const ProjectManagement: React.FC = () => {
                     </Typography>
                     <Typography variant="caption">
                       Replied by {selectedProject.repliedBy} on{" "}
-                      {formatDate(selectedProject.repliedAt!)}
+                      {selectedProject.repliedAt
+                        ? formatDate(selectedProject.repliedAt)
+                        : "Unknown date"}
                     </Typography>
                   </Alert>
                 </Grid>

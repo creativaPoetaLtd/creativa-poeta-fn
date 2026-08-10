@@ -1,4 +1,4 @@
-const contactLocale: any = {
+const contactLocale = {
     fr: {
         validation: "Veuillez remplir tous les champs.",
         email: "Veuillez saisir une adresse e-mail valide.",

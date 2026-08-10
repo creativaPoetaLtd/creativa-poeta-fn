@@ -7,8 +7,10 @@ const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/blogs";
 
 // Get selected language from localStorage
 const rawLang = localStorage.getItem("selectedLang");
-const selectedLang =
-  rawLang && ["en", "fr", "kiny", "nl"].includes(rawLang) ? rawLang : "en";
+const selectedLang: keyof typeof BlogLocale =
+  rawLang && ["en", "fr", "kiny", "nl"].includes(rawLang)
+    ? (rawLang as keyof typeof BlogLocale)
+    : "en";
 const locale = BlogLocale[selectedLang]; // safely get the locale
 
 const BlogGrid = () => {
@@ -21,8 +23,8 @@ const BlogGrid = () => {
     author: { name: string };
     createdAt: string;
     image?: string;
-    likes: any[];
-    comments: any[];
+    likes: unknown[];
+    comments: unknown[];
   }
 
   const [blogs, setBlogs] = useState<Blog[]>([]);

@@ -13,7 +13,7 @@ import {
   getCurrentMarket,
 } from '../../data/marketRuntime';
 
-const lang:any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof FooterLocale;
 function Footer() {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);

@@ -21,17 +21,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  CheckCircle,
-  Delete,
-  Handshake,
-  HourglassTop,
-  MarkEmailRead,
-  Pending,
-  Person,
-  Refresh,
-  Reply,
-} from "@mui/icons-material";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Delete from "@mui/icons-material/Delete";
+import Handshake from "@mui/icons-material/Handshake";
+import HourglassTop from "@mui/icons-material/HourglassTop";
+import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
+import Pending from "@mui/icons-material/Pending";
+import Person from "@mui/icons-material/Person";
+import Refresh from "@mui/icons-material/Refresh";
+import Reply from "@mui/icons-material/Reply";
 import {
   PartnershipRequest,
   PartnershipRequestStatus,
@@ -43,7 +41,7 @@ import {
   replyToPartnershipRequest,
   updatePartnershipRequestStatus,
 } from "../APIs/PartnershipRequests";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import {
   ActionButton,
   DashboardCard,

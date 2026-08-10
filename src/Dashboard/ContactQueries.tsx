@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -22,17 +22,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  CheckCircle,
-  Delete,
-  Email,
-  MarkEmailRead,
-  Pending,
-  Person,
-  Refresh,
-  Reply,
-} from "@mui/icons-material";
-import { useAuth } from "../contexts/AuthContext";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Delete from "@mui/icons-material/Delete";
+import Email from "@mui/icons-material/Email";
+import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
+import Pending from "@mui/icons-material/Pending";
+import Person from "@mui/icons-material/Person";
+import Refresh from "@mui/icons-material/Refresh";
+import Reply from "@mui/icons-material/Reply";
+import { useAuth } from "../contexts/useAuth";
 import {
   claimContactQuery,
   ContactQuery,
@@ -50,6 +48,7 @@ import {
   MenuAction,
   PageHeader,
   StatusChip,
+  StatusVariant,
 } from "./components/DashboardComponents";
 
 const statusOptions = ["pending", "replied", "closed"];
@@ -59,7 +58,7 @@ const normalizeContactStatus = (query: ContactQuery) => {
   return (query.status || "pending").toLowerCase();
 };
 
-const getStatusVariant = (status: string) => {
+const getStatusVariant = (status: string): StatusVariant => {
   switch (status) {
     case "replied":
       return "success";
@@ -124,7 +123,7 @@ const ContactQueries = () => {
     setSelectedQuery((current) => (current?._id === updated._id ? updated : current));
   };
 
-  const fetchQueries = async () => {
+  const fetchQueries = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -141,11 +140,11 @@ const ContactQueries = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, statusFilter]);
 
   useEffect(() => {
     void fetchQueries();
-  }, [currentPage, statusFilter]);
+  }, [fetchQueries]);
 
   const filteredQueries = useMemo(() => {
     const queryText = search.trim().toLowerCase();
@@ -290,7 +289,7 @@ const ContactQueries = () => {
           sx={{ fontWeight: 800 }}
         />
       ),
-      Status: <StatusChip status={status} variant={getStatusVariant(status) as any} />,
+      Status: <StatusChip status={status} variant={getStatusVariant(status)} />,
       Submitted: formatDate(query.createdAt),
     };
   });
@@ -464,7 +463,7 @@ const ContactQueries = () => {
                     </Typography>
                     <StatusChip
                       status={normalizeContactStatus(selectedQuery)}
-                      variant={getStatusVariant(normalizeContactStatus(selectedQuery)) as any}
+                      variant={getStatusVariant(normalizeContactStatus(selectedQuery))}
                     />
                     <Box sx={{ mt: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
                       {statusOptions.map((status) => (

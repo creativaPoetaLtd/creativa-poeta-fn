@@ -53,24 +53,8 @@ const JobPage = () => {
     fetchJobs();
   }, []);
 
-  const highlightEmail = (text: string) => {
-    const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/;
-    return text.split(emailRegex).map((part, index) => {
-      if (emailRegex.test(part)) {
-        return (
-          <span key={index} className="font-bold text-blue-600">
-            {part}
-          </span>
-        );
-      }
-      return part;
-    });
-  };
-
   const handleJobSelect = (job: Job) => {
     setSelectedJob(job);
-    // @ts-ignore
-    const highlightedHowToApply = highlightEmail(job.howToApply);
     setIsSidebarOpen(false);
   };
 

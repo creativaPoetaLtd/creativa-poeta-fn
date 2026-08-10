@@ -1,4 +1,4 @@
-const FooterLocale: any = {
+const FooterLocale = {
   fr: {
     desc:
       "La créativité est notre passion et notre métier. Notre mission est de donner vie à vos idées, de renforcer votre présence en ligne et de susciter l'engagement de votre public.",

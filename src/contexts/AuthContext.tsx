@@ -1,43 +1,10 @@
 import React, {
-  createContext,
-  useContext,
   useState,
   useEffect,
   ReactNode,
 } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface MailboxAccess {
-  address: string;
-  permission: "read" | "send" | "manage";
-  type: "personal" | "shared";
-}
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  roleLabel?: string;
-  accountStatus?: string;
-  mailboxAccess?: MailboxAccess[];
-  permissions?: string[];
-  permissionsAllow?: string[];
-  permissionsDeny?: string[];
-  internalGroups?: string[];
-}
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (token: string, userData: User) => void;
-  logout: () => void;
-  checkAuth: () => boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext, AuthContextType, User } from "./authContextValue";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -163,13 +130,4 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
-};
-
-// Custom hook to use auth context
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };

@@ -7,7 +7,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import Close from "@mui/icons-material/Close";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { CreateBlog } from "../APIs/Blogs";
@@ -27,9 +27,7 @@ export default function AddBlogModal({ open, handleClose }: AddBlogModalProps) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  interface ImageChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
-
-  const handleImageChange = (e: ImageChangeEvent) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
       setCoverImage(file);

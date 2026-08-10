@@ -5,9 +5,9 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 // About.tsx
 const Faq = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  const handleExpand = (index: any) => {
+  const handleExpand = (index: number) => {
     setExpandedIndex(index === expandedIndex ? null : index);
   };
   return (

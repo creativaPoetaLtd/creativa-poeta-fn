@@ -15,7 +15,7 @@ import{
 } from "react-icons/fa";
 import { localizePath } from "../../data/marketRuntime";
 
-export const handleNavigate = () => {
+const handleNavigate = () => {
   window.location.href = "/start-project?service=visibility";
 };
 
@@ -57,7 +57,7 @@ const testimonials = [
   },
 ];
 
-export function TestimonialSlider() {
+function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -159,7 +159,7 @@ const relatedServices = [
   },
 ];
 
-export function RelatedServices() {
+function RelatedServices() {
   return (
     <section className="related-services-section hidden w-full md:w-[95%] py-16 px-8  text-center z-10">
       <h2 className="text-2xl text-[#EEBA2B]  font-bold mb-8">
@@ -213,10 +213,10 @@ const faqs = [
 
 
 
-export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(null);
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleFAQ = (index: any) => {
+  const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
@@ -384,7 +384,7 @@ const DigitalMarketings = () => {
         {DigitalLocale[lang]?.header6 || DigitalLocale.en.header6}
         </h3>
         <p className="md:w-[70%] text-center">
-            {DigitalLocale[lang]?.Paragraph7 || DigitalLocale.en.paragraph7}       </p>
+            {DigitalLocale[lang].paragraph7 || DigitalLocale.en.paragraph7}       </p>
       </div>
       <div className="shadow-lg rounded-md bg-white p-6 flex flex-col items-center text-center">
       <img
@@ -423,7 +423,7 @@ const DigitalMarketings = () => {
     <div className="w-52 md:w-64 shrink-0">
       <div className="relative bg-gradient-to-tr from-yellow-400 to-yellow-500 rounded-full w-48 h-48 md:w-64 md:h-64 border-4 border-white flex items-center justify-center shadow-lg">
         <div className="text-black text-center">
-          <h2 className="font-bold text-xl md:text-3xl leading-tight">{DigitalLocale[lang]?.key || DigitalLocale.en.key}</h2>
+          <h2 className="font-bold text-xl md:text-3xl leading-tight">{DigitalLocale[lang].key || DigitalLocale.en.key}</h2>
           <h2 className="font-bold text-xl md:text-3xl leading-tight">{DigitalLocale[lang]?.competencies || DigitalLocale.en.competencies}</h2>
         </div>
       </div>

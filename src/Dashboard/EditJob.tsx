@@ -15,7 +15,8 @@ import {
   Chip,
   Stack,
 } from "@mui/material";
-import { Close, Add } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import Close from "@mui/icons-material/Close";
 
 interface Job {
   _id: string;

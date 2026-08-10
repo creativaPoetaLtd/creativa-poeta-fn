@@ -1,4 +1,4 @@
-const BlogLocale: any = {
+const BlogLocale = {
   en: {
     pageTitle: "Latest Blogs",
     readMore: "Read More",

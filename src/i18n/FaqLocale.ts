@@ -1,4 +1,4 @@
-const FaqLocale: any = {
+const FaqLocale = {
   fr: {
     h1: "F.A.Q.",
     h2: "Questions fréquentes",

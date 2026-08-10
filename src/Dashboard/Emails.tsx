@@ -62,7 +62,7 @@ import {
   updateEmailDraft,
   updateEmailStatus,
 } from "../APIs/Emails";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 import {
   ActionButton,
@@ -71,6 +71,7 @@ import {
   MenuAction,
   PageHeader,
   StatusChip,
+  StatusVariant,
 } from "./components/DashboardComponents";
 
 const allStatusValues: EmailStatus[] = ["new", "read", "replied", "archived"];
@@ -114,7 +115,7 @@ const formatFileSize = (bytes = 0) => {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 };
-const getStatusVariant = (status: string) => {
+const getStatusVariant = (status: string): StatusVariant => {
   switch (status) {
     case "new":
     case "draft":
@@ -351,10 +352,10 @@ const Emails = () => {
             sx={getOwnerChipStyles(email)}
           />
         ),
-        Status: <StatusChip status={email.status} variant={getStatusVariant(email.status) as any} />,
+        Status: <StatusChip status={email.status} variant={getStatusVariant(email.status)} />,
         Received: formatDate(email.receivedAt),
       })),
-    [emails, user?.email]
+    [emails]
   );
 
   const outboundRows = useMemo(
@@ -376,7 +377,7 @@ const Emails = () => {
             {email.error && <Typography variant="caption" color="error">{email.error}</Typography>}
           </Box>
         ),
-        Status: <StatusChip status={email.status} variant={getStatusVariant(email.status) as any} />,
+        Status: <StatusChip status={email.status} variant={getStatusVariant(email.status)} />,
         Date: formatDate(email.sentAt || email.updatedAt || email.createdAt),
       })),
     [outboundEmails]
@@ -865,7 +866,7 @@ const Emails = () => {
                   <Paper sx={{ p: 2.5, height: "100%" }}>
                     <Typography variant="subtitle2" color="text.secondary">Received</Typography>
                     <Typography>{formatDate(selectedEmail.receivedAt)}</Typography>
-                    <Box sx={{ mt: 2 }}><StatusChip status={selectedEmail.status} variant={getStatusVariant(selectedEmail.status) as any} /></Box>
+                    <Box sx={{ mt: 2 }}><StatusChip status={selectedEmail.status} variant={getStatusVariant(selectedEmail.status)} /></Box>
                   </Paper>
                 </Grid>
               </Grid>
@@ -918,7 +919,7 @@ const Emails = () => {
                 <Typography fontWeight={800}>{selectedOutbound.to?.join(", ") || "No recipient"}</Typography>
                 {!!selectedOutbound.cc?.length && <Typography sx={{ mt: 1 }}>CC: {selectedOutbound.cc.join(", ")}</Typography>}
                 {!!selectedOutbound.bcc?.length && <Typography sx={{ mt: 1 }}>BCC: {selectedOutbound.bcc.join(", ")}</Typography>}
-                <Box sx={{ mt: 2 }}><StatusChip status={selectedOutbound.status} variant={getStatusVariant(selectedOutbound.status) as any} /></Box>
+                <Box sx={{ mt: 2 }}><StatusChip status={selectedOutbound.status} variant={getStatusVariant(selectedOutbound.status)} /></Box>
                 {!!selectedOutbound.attachments?.length && (
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="subtitle2" color="text.secondary">Attachments</Typography>

@@ -13,7 +13,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
+import type { User } from "../contexts/authContextValue";
 import { API_BASE_URL } from "../APIs/client";
 import {
   activateAdminAccount,
@@ -99,7 +100,7 @@ const Login: React.FC = () => {
     reset({ email: nextMode === "reset" ? resetEmail : "", password: "", confirmPassword: "" });
   };
 
-  const finishLogin = (token: string, user: any) => {
+  const finishLogin = (token: string, user: User) => {
     login(token, user);
     const redirectPath =
       sessionStorage.getItem("redirectAfterLogin") ||
@@ -115,10 +116,13 @@ const Login: React.FC = () => {
       setLoading(true);
 
       if (mode === "login") {
-        const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
-          email: data.email,
-          password: data.password,
-        });
+        const response = await axios.post<{ token: string; user: User }>(
+          `${API_BASE_URL}/api/auth/login`,
+          {
+            email: data.email,
+            password: data.password,
+          }
+        );
         finishLogin(response.data.token, response.data.user);
         return;
       }
@@ -150,8 +154,12 @@ const Login: React.FC = () => {
         );
         finishLogin(response.token, response.user);
       }
-    } catch (err: any) {
-      setError(err.response?.data?.error || err.message || "Request failed. Try again.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError<{ error?: string }>(err)) {
+        setError(err.response?.data?.error || err.message || "Request failed. Try again.");
+      } else {
+        setError(err instanceof Error ? err.message : "Request failed. Try again.");
+      }
     } finally {
       setLoading(false);
     }

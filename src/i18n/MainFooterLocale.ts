@@ -1,4 +1,4 @@
-const MainFooterLocale: any = {
+const MainFooterLocale = {
   en: {
     legalMentions: "Legal mentions",
     terms: "Terms and conditions",

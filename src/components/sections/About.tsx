@@ -3,7 +3,7 @@ import AboutLocale from "../../i18n/AboutLocale";
 import { useState, useEffect } from "react";
 import image8 from "../../assets/flags/image8.jpg";
 import image2 from "../../assets/flags/image2.jpg";
-const lang: any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof AboutLocale;
 
 const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +17,7 @@ const About = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
     }, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backgrounds.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);

@@ -2,7 +2,20 @@ import axios from "axios";
 
 const BASE_URL = "https://creativa-poeta-bn-phi.vercel.app/api/jobs";
 
-export const CreateJob = async (jobData: any) => {
+export interface CreateJobPayload {
+  title: string;
+  company: string;
+  location: string;
+  type: string;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+  benefits: string[];
+  isRemote: boolean;
+  howToApply: string;
+}
+
+export const CreateJob = async (jobData: CreateJobPayload) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(BASE_URL, jobData, {

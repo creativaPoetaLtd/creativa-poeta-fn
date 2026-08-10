@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -21,20 +21,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  Assignment,
-  Business,
-  Delete,
-  Email,
-  MarkEmailRead,
-  Person,
-  Phone,
-  Refresh,
-  Reply,
-  Schedule,
-  Work,
-} from "@mui/icons-material";
-import { useAuth } from "../contexts/AuthContext";
+import Assignment from "@mui/icons-material/Assignment";
+import Business from "@mui/icons-material/Business";
+import Delete from "@mui/icons-material/Delete";
+import Email from "@mui/icons-material/Email";
+import MarkEmailRead from "@mui/icons-material/MarkEmailRead";
+import Person from "@mui/icons-material/Person";
+import Phone from "@mui/icons-material/Phone";
+import Refresh from "@mui/icons-material/Refresh";
+import Reply from "@mui/icons-material/Reply";
+import Schedule from "@mui/icons-material/Schedule";
+import Work from "@mui/icons-material/Work";
+import { useAuth } from "../contexts/useAuth";
 import {
   claimProject,
   deleteProject,
@@ -52,6 +50,7 @@ import {
   MenuAction,
   PageHeader,
   StatusChip,
+  StatusVariant,
 } from "./components/DashboardComponents";
 
 const statusOptions = ["Pending", "In-Progress", "Completed", "Cancelled"];
@@ -134,7 +133,7 @@ const normalizeStatus = (status?: string, isReplied?: boolean) => {
   return "Pending";
 };
 
-const getStatusVariant = (status: string) => {
+const getStatusVariant = (status: string): StatusVariant => {
   switch (normalizeStatus(status).toLowerCase()) {
     case "completed":
       return "success";
@@ -200,7 +199,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
     setSelectedProject((current) => (current?._id === updated._id ? updated : current));
   };
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -217,13 +216,13 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (isAuthenticated && token) {
       void fetchProjects();
     }
-  }, [isAuthenticated, token]);
+  }, [fetchProjects, isAuthenticated, token]);
 
   const serviceTypes = useMemo(
     () =>
@@ -427,7 +426,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
           sx={{ fontWeight: 800 }}
         />
       ),
-      Status: <StatusChip status={status} variant={getStatusVariant(status) as any} />,
+      Status: <StatusChip status={status} variant={getStatusVariant(status)} />,
       Date: formatDate(project.createdAt),
     };
   });
@@ -607,7 +606,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
                     <Box sx={{ mt: 2 }}>
                       <StatusChip
                         status={normalizeStatus(selectedProject.status, selectedProject.isReplied)}
-                        variant={getStatusVariant(selectedProject.status || "") as any}
+                        variant={getStatusVariant(selectedProject.status || "")}
                       />
                     </Box>
                   </Paper>

@@ -5,7 +5,7 @@ import des from '../assets/des.png'
 import getLangFromLocalStorage from '../../utils/Lang'
 import ServiceLocale from '../i18n/ServiceLocale'
 
-const lang:any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof ServiceLocale;
 const blogData = [
     {
         id: 1,
