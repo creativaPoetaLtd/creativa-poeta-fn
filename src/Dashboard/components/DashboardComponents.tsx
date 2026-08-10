@@ -22,14 +22,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import {
-  Edit,
-  Delete,
-  Visibility,
-  TrendingUp,
-  TrendingDown,
-  MoreVert,
-} from "@mui/icons-material";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
+import MoreVert from "@mui/icons-material/MoreVert";
+import TrendingDown from "@mui/icons-material/TrendingDown";
+import TrendingUp from "@mui/icons-material/TrendingUp";
+import Visibility from "@mui/icons-material/Visibility";
 
 // Standardized Dashboard Card Component
 export const DashboardCard: React.FC<{
@@ -219,13 +217,20 @@ export const MenuAction: React.FC<{
   );
 };
 
+export type StatusVariant = "success" | "warning" | "error" | "info" | "default";
+
+type DashboardRow = {
+  id: string;
+  [key: string]: unknown;
+};
+
 // Action Menu Component for 3-dot menu
 const ActionMenu: React.FC<{
-  row: any;
+  row: DashboardRow;
   onView?: (id: string) => void;
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
-  customActions?: (row: any) => React.ReactNode;
+  customActions?: (row: DashboardRow) => React.ReactNode;
 }> = ({ row, onView, onEdit, onDelete, customActions }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -310,11 +315,11 @@ const ActionMenu: React.FC<{
 // Standardized Data Table Component
 export const DataTable: React.FC<{
   headers: string[];
-  rows: any[];
+  rows: DashboardRow[];
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
   onView?: (id: string) => void;
-  customActions?: (row: any) => React.ReactNode;
+  customActions?: (row: DashboardRow) => React.ReactNode;
   emptyMessage?: string;
   hiddenFields?: string[];
 }> = ({
@@ -438,7 +443,7 @@ export const DataTable: React.FC<{
 // Standardized Status Chip Component
 export const StatusChip: React.FC<{
   status: string;
-  variant?: "success" | "warning" | "error" | "info" | "default";
+  variant?: StatusVariant;
 }> = ({ status, variant = "default" }) => {
   const getColor = () => {
     switch (variant) {

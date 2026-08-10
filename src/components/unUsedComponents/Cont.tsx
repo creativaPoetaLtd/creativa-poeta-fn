@@ -7,7 +7,7 @@ import FooterLocale from "../../i18n/FooterLocale";
 import { contactUs } from "../../APIs/Contact";
 import { getCurrentMarket } from "../../data/marketRuntime";
 
-const lang:any = getLangFromLocalStorage();
+const lang = getLangFromLocalStorage() as keyof typeof FooterLocale;
 const Cont = () => {
   const market = getCurrentMarket();
   const contactEmail = market.email ?? "contact@creativapoeta.com";

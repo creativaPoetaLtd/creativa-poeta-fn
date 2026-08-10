@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { Box, TextField } from "@mui/material";
-import {
-  LocationOn,
-  Business,
-  Work,
-  Schedule,
-  Edit,
-  Delete,
-} from "@mui/icons-material";
+import Business from "@mui/icons-material/Business";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
+import LocationOn from "@mui/icons-material/LocationOn";
+import Schedule from "@mui/icons-material/Schedule";
+import Work from "@mui/icons-material/Work";
 import {
   DashboardCard,
   PageHeader,
@@ -42,7 +40,6 @@ export default function Jobs() {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
-  // @ts-ignore
   const [error, setError] = useState<string | null>(null);
 
   const API_URL = "https://creativa-poeta-bn-phi.vercel.app/api/jobs";
@@ -125,6 +122,14 @@ export default function Jobs() {
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-yellow-500"></div>
         </div>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ flexGrow: 1, p: 3 }}>
+        <PageHeader title="Job Management" subtitle={`Unable to load jobs: ${error}`} />
       </Box>
     );
   }

@@ -62,8 +62,8 @@ const Home = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get("token");
-  const [successMessage, setsuccessMessage] = useState("" as any);
-  const [errorMessage, setErrorMessage] = useState("" as any);
+  const [successMessage, setsuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (token) {
@@ -109,7 +109,7 @@ const Home = () => {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [backgrounds.length]);
 
   useEffect(() => {
     const titleTimeout = setTimeout(() => {

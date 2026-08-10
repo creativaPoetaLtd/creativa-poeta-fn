@@ -1,4 +1,4 @@
-const NavLocale: any = {
+const NavLocale = {
   en: {
     navigation: "Navigation",
     about: "What we do",

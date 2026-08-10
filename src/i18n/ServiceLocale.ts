@@ -1,4 +1,4 @@
-const ServiceLocale: any = {
+const ServiceLocale = {
   en: {
     title1: "OUR",
     title2: "SERVICES",

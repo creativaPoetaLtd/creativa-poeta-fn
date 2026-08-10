@@ -1,6 +1,6 @@
 // src/i18n/ContentWritingLocale.ts
 
-const ContentWritingLocale: any = {
+const ContentWritingLocale = {
   en: {
     hero: {
       title: "Professional Content Writing",

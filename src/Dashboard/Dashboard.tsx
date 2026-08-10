@@ -48,7 +48,7 @@ import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
 import ContactQueries from "./ContactQueries";

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Accordion,
@@ -33,7 +33,7 @@ import {
   markInternalConversationRead,
   sendInternalMessage,
 } from "../APIs/internalMessages";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 
 const getId = (conversation: InternalConversation) => conversation.id || conversation._id || "";
 
@@ -98,7 +98,7 @@ const InternalMessages = () => {
     [currentEmail, users]
   );
 
-  const loadConversations = async () => {
+  const loadConversations = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
@@ -107,20 +107,20 @@ const InternalMessages = () => {
       setConversations(nextConversations);
       setGroups(response.groups || []);
       setUsers(response.users || []);
-      if (!selectedId && nextConversations.length) {
+      if (nextConversations.length) {
         const firstActive = nextConversations.find((conversation) => conversation.type !== "group" || conversation.hasMessages || conversation.unreadCount > 0);
-        setSelectedId(getId(firstActive || nextConversations[0]));
+        setSelectedId((current) => current || getId(firstActive || nextConversations[0]));
       }
-    } catch (err: any) {
-      setError(err?.message || "Unable to load internal messages.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to load internal messages.");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    loadConversations();
-  }, []);
+    void loadConversations();
+  }, [loadConversations]);
 
   useEffect(() => {
     const markRead = async () => {
@@ -147,8 +147,8 @@ const InternalMessages = () => {
       setConversations((items) =>
         items.map((item) => (getId(item) === selectedId ? response.conversation : item))
       );
-    } catch (err: any) {
-      setError(err?.message || "Unable to send the message.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unable to send the message.");
       setMessage(body);
     }
   };
@@ -173,8 +173,8 @@ const InternalMessages = () => {
       setNewTitle("");
       setNewRecipients([]);
       setNewBody("");
-    } catch (err: any) {
-      setError(err?.message || "Unable to create the conversation.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unable to create the conversation.");
     }
   };
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Card, CardContent, Grid, Snackbar, TextField, Typography } from "@mui/material";
-import { LockReset, Security } from "@mui/icons-material";
+import LockReset from "@mui/icons-material/LockReset";
+import Security from "@mui/icons-material/Security";
 import { changeAdminPassword } from "../APIs/auth";
 import { ActionButton, DashboardCard, PageHeader } from "./components/DashboardComponents";
 

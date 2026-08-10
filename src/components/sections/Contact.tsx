@@ -22,9 +22,9 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // ✅ get selected language (same logic as in your other pages)
-  const lang =
+  const lang: keyof typeof contactLocale =
     typeof window !== "undefined"
-      ? window.localStorage.getItem("selectedLang") || "en"
+      ? (window.localStorage.getItem("selectedLang") as keyof typeof contactLocale) || "en"
       : "en";
 
   const t = contactLocale[lang] ?? contactLocale["en"];

@@ -88,12 +88,12 @@ export const getProjectSummary = async () => {
   );
 };
 
-export const getProjects = async (
+export const getProjects = async <T = ProjectListResponse>(
   page = 1,
   limit = 25,
   status = "all"
-): Promise<any> => {
-  return authRequest(
+): Promise<T> => {
+  return authRequest<T>(
     {
       method: "GET",
       url: "/api/project",

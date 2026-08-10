@@ -16,7 +16,9 @@ import {
   Stack,
   CircularProgress,
 } from "@mui/material";
-import { Close, Add, Save } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import Close from "@mui/icons-material/Close";
+import Save from "@mui/icons-material/Save";
 import { toast } from 'react-toastify';
 import { CreateJob } from '../APIs/Jobs';
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -17,17 +17,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  Badge,
-  Delete,
-  Edit,
-  Email,
-  Link as LinkIcon,
-  PersonAdd,
-  PersonOff,
-  People,
-  VerifiedUser,
-} from "@mui/icons-material";
+import Badge from "@mui/icons-material/Badge";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
+import Email from "@mui/icons-material/Email";
+import LinkIcon from "@mui/icons-material/Link";
+import People from "@mui/icons-material/People";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import PersonOff from "@mui/icons-material/PersonOff";
+import VerifiedUser from "@mui/icons-material/VerifiedUser";
 import {
   AdminPermission,
   AdminRole,
@@ -39,7 +37,7 @@ import {
   getAdminUsers,
   updateAdminUser,
 } from "../APIs/adminUsers";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import {
   AdminNotification,
   archiveAdminNotification,
@@ -225,13 +223,13 @@ export default function Users() {
     return false;
   };
 
-  const showMessage = (message: string, severity: "success" | "error" = "success") => {
+  const showMessage = useCallback((message: string, severity: "success" | "error" = "success") => {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
     setSnackbarOpen(true);
-  };
+  }, []);
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -242,9 +240,9 @@ export default function Users() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchNotifications = async () => {
+  const fetchNotifications = useCallback(async () => {
     try {
       setLoadingNotifications(true);
       const data = await getAdminNotifications();
@@ -254,7 +252,7 @@ export default function Users() {
     } finally {
       setLoadingNotifications(false);
     }
-  };
+  }, [showMessage]);
 
   useEffect(() => {
     if (canManageUsers) {
@@ -263,7 +261,7 @@ export default function Users() {
     } else {
       setLoading(false);
     }
-  }, [canManageUsers]);
+  }, [canManageUsers, fetchNotifications, fetchUsers]);
 
   const filteredUsers = useMemo(() => {
     const query = search.trim().toLowerCase();

@@ -26,7 +26,7 @@ const getErrorMessage = (error: unknown, fallback: string) => {
   return fallback;
 };
 
-export const publicRequest = async <T = any>(
+export const publicRequest = async <T = unknown>(
   config: AxiosRequestConfig,
   fallbackMessage = "Request failed. Please try again."
 ): Promise<T> => {
@@ -45,7 +45,7 @@ export const publicRequest = async <T = any>(
   }
 };
 
-export const authRequest = async <T = any>(
+export const authRequest = async <T = unknown>(
   config: AxiosRequestConfig,
   fallbackMessage = "Request failed. Please try again."
 ): Promise<T> => {

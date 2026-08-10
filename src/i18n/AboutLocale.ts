@@ -1,4 +1,4 @@
-const AboutLocale: any = {
+const AboutLocale = {
   en: {
     title1: "WHAT WE DO",
     title2: "WE DO",

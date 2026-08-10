@@ -1,6 +1,6 @@
 
 
-const DigitalLocale: any = {
+const DigitalLocale = {
     en: {
        header1:"Digital marketing & social media",
        paragraph1:"Engage, inspire, and grow your digital presence",
@@ -19,7 +19,7 @@ const DigitalLocale: any = {
        paragraph8:"Setting up and managing user-friendly digital platforms for seamless content management and online sales.",
        header8:"Digital advertising",
        paragraph9:"Designing and executing targeted campaigns to maximize conversions across Google Ads, Facebook Ads, and other platforms.",
-       Key:"KEY",
+       key:"KEY",
        competencies:"COMPETENCIES",
        key1:"Expertise in major social media platforms and their algorithms.",
        key2:"Proficiency in SEO tools and techniques for optimized content.",

@@ -1,4 +1,4 @@
-const ProjectsFormLocale: any = {
+const ProjectsFormLocale = {
   en: {
     header1: "Get Started",
     button1: "Next",

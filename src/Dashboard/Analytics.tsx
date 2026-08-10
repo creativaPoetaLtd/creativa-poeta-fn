@@ -11,22 +11,20 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  ArrowForward as ArrowForwardIcon,
-  Article as ArticleIcon,
-  Assignment as AssignmentIcon,
-  ContactMail as ContactMailIcon,
-  Email as EmailIcon,
-  Forum as ForumIcon,
-  Handshake as HandshakeIcon,
-  NotificationsActive as NotificationsActiveIcon,
-  QueryStats as QueryStatsIcon,
-  Refresh as RefreshIcon,
-  Search as SearchIcon,
-  SupportAgent as SupportAgentIcon,
-  WarningAmber as WarningAmberIcon,
-  Work as WorkIcon,
-} from "@mui/icons-material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArticleIcon from "@mui/icons-material/Article";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import EmailIcon from "@mui/icons-material/Email";
+import ForumIcon from "@mui/icons-material/Forum";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import SearchIcon from "@mui/icons-material/Search";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import WorkIcon from "@mui/icons-material/Work";
 import { Link } from "react-router-dom";
 import { getContactSummary } from "../APIs/Contact";
 import { getEmailSummary } from "../APIs/Emails";
@@ -34,7 +32,7 @@ import { getInternalMessageSummary } from "../APIs/internalMessages";
 import { getPartnershipRequestSummary } from "../APIs/PartnershipRequests";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import { PageHeader } from "./components/DashboardComponents";
 
 type MetricMap = Record<string, number>;

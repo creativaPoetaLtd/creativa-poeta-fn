@@ -1,4 +1,4 @@
-const ContentLocale: any = {
+const ContentLocale = {
  
 en:{
  question1:"How long does it take to write a blog post?",

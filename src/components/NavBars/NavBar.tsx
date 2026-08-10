@@ -17,7 +17,7 @@ import {
 import logoBurger from "../../assets/flags/logoBurger.png";
 import NavLocale from "../../i18n/NavLocale";
 import getLangFromLocalStorage from "../../../utils/Lang";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/useAuth";
 import BurgerButton from "./BurgerButton";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { localizePath } from "../../data/marketRuntime";

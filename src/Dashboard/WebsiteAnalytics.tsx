@@ -25,30 +25,28 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import {
-  AdsClick,
-  Assessment,
-  BugReport,
-  CheckCircle,
-  Devices,
-  Language,
-  Login,
-  Mail,
-  ManageSearch,
-  Mouse,
-  NotificationsActive,
-  OpenInNew,
-  People,
-  Public,
-  Refresh,
-  Route,
-  Security,
-  Speed,
-  TrendingDown,
-  TrendingUp,
-  Visibility,
-  WarningAmber,
-} from "@mui/icons-material";
+import AdsClick from "@mui/icons-material/AdsClick";
+import Assessment from "@mui/icons-material/Assessment";
+import BugReport from "@mui/icons-material/BugReport";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Devices from "@mui/icons-material/Devices";
+import Language from "@mui/icons-material/Language";
+import Login from "@mui/icons-material/Login";
+import Mail from "@mui/icons-material/Mail";
+import ManageSearch from "@mui/icons-material/ManageSearch";
+import Mouse from "@mui/icons-material/Mouse";
+import NotificationsActive from "@mui/icons-material/NotificationsActive";
+import OpenInNew from "@mui/icons-material/OpenInNew";
+import People from "@mui/icons-material/People";
+import Public from "@mui/icons-material/Public";
+import Refresh from "@mui/icons-material/Refresh";
+import Route from "@mui/icons-material/Route";
+import Security from "@mui/icons-material/Security";
+import Speed from "@mui/icons-material/Speed";
+import TrendingDown from "@mui/icons-material/TrendingDown";
+import TrendingUp from "@mui/icons-material/TrendingUp";
+import Visibility from "@mui/icons-material/Visibility";
+import WarningAmber from "@mui/icons-material/WarningAmber";
 import { Chart, registerables } from "chart.js";
 import { Doughnut, Line } from "react-chartjs-2";
 import {

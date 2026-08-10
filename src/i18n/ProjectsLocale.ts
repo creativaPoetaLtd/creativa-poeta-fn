@@ -1,5 +1,5 @@
 // src/i18n/ProjectsLocale.ts
-const ProjectsLocale: any = {
+const ProjectsLocale = {
   en: {
     headingPart1: "OUR",
     headingPart2: "LATEST PROJECTS",

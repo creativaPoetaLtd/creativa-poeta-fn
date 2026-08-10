@@ -1,5 +1,5 @@
 
-const DesignLocale: any = {
+const DesignLocale = {
     en:{
         quote1: "This team’s design work has transformed our brand! The logo and colors truly represent who we are.",
         quote2: "Fantastic designs that resonate with our audience. Highly recommended!",
@@ -358,6 +358,24 @@ const DesignLocale: any = {
         skilldesc4: "Ibindi byiza bya design.",
         skill5: "Ibindi byiza bya design:",
         skilldesc5: "Ibindi byiza bya design.",
+        portifolioTitle: "Ibikorwa byacu",
+        relatedServTitle: "Izindi serivisi zijyanye",
+        ctaCaption: "Wakunze ibyo wabonye? Twandikire!",
+        ctaTitle: "Witeguye guteza imbere ikirango cyawe ukoresheje igishushanyo gifite imbaraga?",
+        ctaDescription: "Twandikire uyu munsi tuganire ku mushinga wawe kandi turebe uko twashyira icyerekezo cyawe mu bikorwa.",
+        ctaAction: "Teza imbere ikirango cyawe n'ibishushanyo byacu",
+        faqTitle: "Ibibazo bikunze kubazwa",
+        expTitle: "Ubumenyi bwacu mu gushushanya",
+        exp1: "Gushushanya ibirango",
+        expdesc1: "Ibirango byihariye kandi byibukwa bigaragaza umwirondoro wawe.",
+        exp2: "Gushushanya amakarita y'ubucuruzi",
+        expdesc2: "Amakarita y'ubucuruzi meza kandi asiga isura nziza.",
+        exp3: "Gushushanya ibyapa",
+        expdesc3: "Ibyapa bikurura amaso bigenewe kwamamaza n'ibirori.",
+        projTitle: "Imishinga yacu",
+        explore: "Reba izindi serivisi",
+        dm: "Kwamamaza kuri murandasi",
+        cw: "Kwandika ibikubiyemo",
         webAppTitle: "Kubaka no Gukora Imbuga za Interneti na Porogaramu",
   webAppSubtitle: "Ibisubizo bishya by’ikoranabuhanga, bijyanye n’ibyo ukeneye.",
   servicesOfferedWebApp: "Serivisi zitangwa",
