@@ -30,7 +30,7 @@ export default function ReferralProgramPage() {
     ? { title: "Hari umuntu wakumenyesheje Creativa Poeta", lead: "Tubwire icyo wowe cyangwa business yawe ikeneye. Request izandikwa ku muntu waguhaye iyi link.", consent: "Ndasaba Creativa Poeta kumvugisha kuri iyi need.", send: "Ohereza request", success: "Request yawe yoherejwe. Creativa Poeta izakuvugisha." }
     : { title: "Une personne vous a recommandé Creativa Poeta", lead: "Expliquez-nous directement votre besoin ou celui de votre entreprise. Votre demande sera attribuée à la personne qui vous a transmis ce lien.", consent: "Je demande à Creativa Poeta de me contacter au sujet de ce besoin.", send: "Envoyer ma demande", success: "Votre demande a été envoyée. Creativa Poeta vous contactera." };
   const termsPath = buildLocalLocalePath(market, locale, "/referral-program-terms");
-  const [projectValue, setProjectValue] = useState(1500);
+  const [projectValue, setProjectValue] = useState(2000);
   const estimatedReward = useMemo(() => Math.max(0, projectValue) * 0.1, [projectValue]);
   const [applicationSending, setApplicationSending] = useState(false);
   const [directSending, setDirectSending] = useState(false);
