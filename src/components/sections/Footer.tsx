@@ -54,12 +54,12 @@ function Footer() {
       ? "Inama & resources"
       : "Journal & conseils";
   const referralFooter = locale === "nl"
-    ? { title: "Referral & partnerships", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Referral Program", join: "Referral Partner worden", submit: "Referral indienen", business: "Business Partners", strategic: "Strategische samenwerking", terms: "Programmavoorwaarden" }
+    ? { title: "Klanten voorstellen & samenwerken", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Hoe het werkt", join: "Deelnemen", submit: "Een klant voorstellen", business: "Commerciële partners", strategic: "Samenwerking op maat", terms: "Programmavoorwaarden" }
     : locale === "en"
-    ? { title: "Referral & partnerships", intro: "Your network can connect businesses with the digital services they need.", overview: "Referral Program", join: "Become a Referral Partner", submit: "Submit a referral", business: "Business Partners", strategic: "Strategic partnerships", terms: "Program terms" }
+    ? { title: "Client introductions & partnerships", intro: "Your network can connect businesses with the digital services they need.", overview: "How it works", join: "Join the program", submit: "Introduce a client", business: "Commercial partners", strategic: "Tailored collaboration", terms: "Program terms" }
     : locale === "kiny"
-    ? { title: "Referral & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Referral Program", join: "Ba Referral Partner", submit: "Ohereza referral", business: "Business Partners", strategic: "Strategic partnerships", terms: "Program terms" }
-    : { title: "Referral & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Referral Program", join: "Devenir Referral Partner", submit: "Soumettre un referral", business: "Business Partners", strategic: "Partenariats stratégiques", terms: "Conditions du programme" };
+    ? { title: "Kumenyekanisha abakiliya & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Uko ikora", join: "Injira muri porogaramu", submit: "Menyekanisha umukiliya", business: "Abafatanyabikorwa b’ubucuruzi", strategic: "Ubufatanye bwihariye", terms: "Amategeko ya porogaramu" }
+    : { title: "Apporteurs de clients & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Comment ça marche", join: "Rejoindre le programme", submit: "Présenter un client", business: "Partenaires commerciaux", strategic: "Collaboration sur mesure", terms: "Conditions du programme" };
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);

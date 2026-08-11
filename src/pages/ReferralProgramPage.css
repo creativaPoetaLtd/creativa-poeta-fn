@@ -77,6 +77,21 @@
   margin-right: 0;
 }
 
+.cp-referral-program .cp-referral-button {
+  min-height: 3rem;
+  padding-block: 0.75rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.cp-referral-program .cp-referral-modal {
+  overscroll-behavior: contain;
+}
+
+.cp-referral-program .cp-referral-modal form {
+  width: 100%;
+}
+
 .cp-referral-program .cp-referral-control:-webkit-autofill,
 .cp-referral-program .cp-referral-control:-webkit-autofill:hover,
 .cp-referral-program .cp-referral-control:-webkit-autofill:focus {
@@ -93,5 +108,12 @@
   .cp-referral-program .cp-referral-field,
   .cp-referral-program .cp-referral-control {
     width: 100%;
+  }
+
+  .cp-referral-program .cp-referral-button {
+    min-height: 2.75rem;
+    padding-block: 0.6rem;
+    max-width: 100%;
+    padding-inline: 0.9rem;
   }
 }

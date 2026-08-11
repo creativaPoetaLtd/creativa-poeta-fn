@@ -1,5 +1,6 @@
 import {
   buildMarketUrl,
+  getPublishedMarketLocales,
   getMarketByHost,
   isLocaleAllowed,
   localeHreflang,
@@ -64,7 +65,7 @@ export function getMarketAlternateLinks(
   market = getCurrentMarket(),
   path = "/"
 ): AlternateLink[] {
-  const marketLinks = market.locales.map((locale) => ({
+  const marketLinks = getPublishedMarketLocales(market).map((locale) => ({
     hrefLang:
       market.countryCode
         ? `${localeHreflang[locale]}-${market.countryCode}`

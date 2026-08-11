@@ -38,7 +38,6 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
@@ -79,14 +78,6 @@ const navigationItems = [
     icon: <QueryStatsIcon />,
     path: "/secure-admin-dashboard-2024/website-analytics",
     color: "#38bdf8",
-    section: "Pilotage",
-    permission: "analytics:read",
-  },
-  {
-    text: "Uptime Monitoring",
-    icon: <NotificationsActiveIcon />,
-    path: "/secure-admin-dashboard-2024/uptime-monitoring",
-    color: "#22c55e",
     section: "Pilotage",
     permission: "analytics:read",
   },

@@ -1,5 +1,9 @@
 export type LocaleCode = "en" | "fr" | "nl" | "kiny";
 
+// Kinyarwanda remains fully supported in source code and translations, but is
+// intentionally kept out of the public website until its editorial review is complete.
+export const publishedLocales: LocaleCode[] = ["en", "fr", "nl"];
+
 export type MarketCode = "global" | "be" | "fr" | "rw" | "nl";
 
 export type MarketConfig = {
@@ -70,7 +74,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
   rw: {
     code: "rw",
     label: "Rwanda",
-    defaultLocale: "kiny",
+    defaultLocale: "fr",
     locales: ["kiny", "fr", "en"],
     domains: ["rw.creativapoeta.com"],
     currency: "RWF",
@@ -111,7 +115,11 @@ export function isLocaleAllowed(
   market: MarketConfig,
   locale: string
 ): locale is LocaleCode {
-  return market.locales.includes(locale as LocaleCode);
+  return market.locales.includes(locale as LocaleCode) && publishedLocales.includes(locale as LocaleCode);
+}
+
+export function getPublishedMarketLocales(market: MarketConfig): LocaleCode[] {
+  return market.locales.filter((locale) => publishedLocales.includes(locale));
 }
 
 export function getDefaultHost(market: MarketConfig): string {

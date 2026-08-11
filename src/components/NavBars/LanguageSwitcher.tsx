@@ -5,7 +5,7 @@ import {
   getCurrentLocale,
   getCurrentMarket,
 } from "../../data/marketRuntime";
-import { LocaleCode, localeLabels } from "../../data/markets";
+import { getPublishedMarketLocales, LocaleCode, localeLabels } from "../../data/markets";
 
 const languageFlags: Record<LocaleCode, string> = {
   en: "/uk.svg",
@@ -42,9 +42,10 @@ const LanguageSwitcher = ({
   const rootRef = useRef<HTMLDivElement | null>(null);
   const market = getCurrentMarket();
   const currentLocale = getCurrentLocale(market);
+  const publishedMarketLocales = getPublishedMarketLocales(market);
   const availableLocales = showCurrent
-    ? market.locales
-    : market.locales.filter((locale) => locale !== currentLocale);
+    ? publishedMarketLocales
+    : publishedMarketLocales.filter((locale) => locale !== currentLocale);
 
   useEffect(() => {
     if (!open) return;
@@ -61,7 +62,7 @@ const LanguageSwitcher = ({
     onOpenChange?.(open);
   }, [onOpenChange, open]);
 
-  if (market.locales.length < 2 || availableLocales.length === 0) return null;
+  if (publishedMarketLocales.length < 2 || availableLocales.length === 0) return null;
 
   if (variant === "text") {
     return (
@@ -89,7 +90,7 @@ const LanguageSwitcher = ({
     );
   }
 
-  const otherLocales = market.locales.filter((locale) => locale !== currentLocale);
+  const otherLocales = publishedMarketLocales.filter((locale) => locale !== currentLocale);
 
   return (
     <div ref={rootRef} className={`relative z-[120] flex flex-col items-end ${className}`} aria-label="Changer de langue">
