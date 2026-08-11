@@ -327,9 +327,8 @@ const marketHosts = {
   },
   rw: {
     baseUrl: "https://rw.creativapoeta.com",
-    locales: ["rw", "fr", "en"],
+    locales: ["fr", "en"],
     hreflang: {
-      rw: "rw-RW",
       fr: "fr-RW",
       en: "en-RW",
     },
