@@ -263,6 +263,22 @@
     },
   },
 
+  career: {
+    title: "Careers, opportunities and spontaneous applications | Creativa Poeta",
+    description:
+      "Explore current opportunities at Creativa Poeta, join the client introduction program or send a spontaneous application for future digital projects.",
+    keywords:
+      "Creativa Poeta careers, digital jobs, spontaneous application, remote digital opportunities, client introducer",
+    url: "https://creativapoeta.com/career",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Creativa Poeta Careers",
+      description: "Current career opportunities, independent client introduction program and spontaneous applications.",
+      about: { "@type": "Organization", name: "Creativa Poeta", url: "https://creativapoeta.com" },
+    },
+  },
+
   referralTerms: {
     title: "Client Introduction Program Terms | Creativa Poeta",
     description:

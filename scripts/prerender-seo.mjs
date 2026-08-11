@@ -1179,12 +1179,12 @@ const pageTemplates = {
     path: "/referral-partners",
     title: (lang) =>
       lang === "fr"
-        ? "Referral Partner Program : gagnez jusqu'a 200 EUR | Creativa Poeta"
+        ? "Programme d'apporteurs de clients | Creativa Poeta"
         : lang === "nl"
-          ? "Referral Partner Program: verdien tot 200 EUR | Creativa Poeta"
+          ? "Programma voor klantenaanbrengers | Creativa Poeta"
           : lang === "rw"
             ? "Creativa Poeta Referral Partner Program"
-            : "Referral Partner Program: earn up to EUR 200 | Creativa Poeta",
+            : "Client Introduction Program | Creativa Poeta",
     description: (lang) =>
       lang === "fr"
         ? "Presentez a Creativa Poeta une entreprise qui a besoin de services numeriques et gagnez une recompense lorsque le client paie."
@@ -1200,7 +1200,7 @@ const pageTemplates = {
         ? [
             [
               "Votre reseau a de la valeur",
-              "Faites une introduction authentique. CP qualifie, vend et realise le projet. Vous recevez 10 % du revenu admissible, jusqu'a 200 EUR.",
+              "Faites une introduction authentique. Creativa Poeta qualifie, vend et realise le projet. Vous recevez normalement 10 % du revenu admissible encaisse.",
             ],
             [
               "Referral Partner ou Business Partner",
@@ -1210,13 +1210,28 @@ const pageTemplates = {
         : [
             [
               "Your network has value",
-              "Make a genuine introduction. CP qualifies, sells and delivers the project. You receive 10% of eligible revenue, up to EUR 200.",
+              "Make a genuine introduction. Creativa Poeta qualifies, sells and delivers the project. You normally receive 10% of eligible revenue collected.",
             ],
             [
               "Referral Partner or Business Partner",
               "The standard program supports occasional introductions, while professionals can request custom terms.",
             ],
           ],
+  },
+  career: {
+    path: "/career",
+    title: (lang) =>
+      lang === "fr" ? "Carrieres, opportunites et candidatures | Creativa Poeta"
+        : lang === "nl" ? "Carriere, kansen en sollicitaties | Creativa Poeta"
+          : lang === "rw" ? "Career & opportunities | Creativa Poeta"
+            : "Careers, opportunities and applications | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr" ? "Decouvrez les opportunites chez Creativa Poeta, le programme d'apporteurs de clients et la candidature spontanee."
+        : lang === "nl" ? "Bekijk kansen bij Creativa Poeta, het programma voor klantenaanbrengers en spontane sollicitaties."
+          : lang === "rw" ? "Reba opportunities za Creativa Poeta, client introducer program na spontaneous applications."
+            : "Explore opportunities at Creativa Poeta, the client introduction program and spontaneous applications.",
+    keywords: "Creativa Poeta careers, digital jobs, spontaneous application, client introducer program",
+    sections: (lang) => [[lang === "fr" ? "Construisons quelque chose d'utile" : "Build something useful with us", lang === "fr" ? "Consultez les postes ouverts ou envoyez votre profil pour de futures missions." : "Explore open roles or share your profile for future assignments."]],
   },
   referralTerms: {
     path: "/referral-program-terms",

@@ -38,6 +38,7 @@ const menuCopy: Record<
     assistanceRequestText: string;
     partnership: string;
     partnershipText: string;
+    careerText: string;
     servicesList: MenuService[];
   }
 > = {
@@ -53,6 +54,7 @@ const menuCopy: Record<
     assistanceRequestText: "Dépannage, configuration et aide numérique pas à pas",
     partnership: "Referral & partenaires",
     partnershipText: "Présentez un client, gagnez une récompense, ou proposez une collaboration",
+    careerText: "Opportunités, programme d’apporteurs et candidatures spontanées",
     servicesList: [
       ["Présence locale", "Google, Maps et visibilité IA", "/services/visibilite-locale"],
       ["Outils digitaux", "Sites, apps, logiciels et systèmes", "/services/site-officiel"],
@@ -74,6 +76,7 @@ const menuCopy: Record<
     assistanceRequestText: "Troubleshooting, setup and step-by-step digital help",
     partnership: "Referral & partners",
     partnershipText: "Refer a client, earn a reward, or propose a broader collaboration",
+    careerText: "Open opportunities, client introducer program and spontaneous applications",
     servicesList: [
       ["Local presence", "Google, Maps and AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software and systems", "/services/site-officiel"],
@@ -95,6 +98,7 @@ const menuCopy: Record<
     assistanceRequestText: "Problemen oplossen, installatie en begeleiding",
     partnership: "Referral & partners",
     partnershipText: "Breng een klant aan, ontvang een beloning of stel een samenwerking voor",
+    careerText: "Openstaande kansen, klantenaanbrengers en spontane sollicitaties",
     servicesList: [
       ["Lokale aanwezigheid", "Google, Maps en AI-zichtbaarheid", "/services/visibilite-locale"],
       ["Digitale tools", "Websites, apps, software en systemen", "/services/site-officiel"],
@@ -116,6 +120,7 @@ const menuCopy: Record<
     assistanceRequestText: "Depannage, setup no kugufasha gukoresha digital",
     partnership: "Referral & partners",
     partnershipText: "Tumenyeshe client, ubone reward, cyangwa usabe collaboration yagutse",
+    careerText: "Opportunities, client introducer program na spontaneous applications",
     servicesList: [
       ["Local presence", "Google, Maps na AI visibility", "/services/visibilite-locale"],
       ["Digital tools", "Websites, apps, software na systems", "/services/site-officiel"],
@@ -190,6 +195,12 @@ function NavBar() {
       label: copy.partnership,
       text: copy.partnershipText,
       href: localizePath("/referral-partners"),
+      featured: false,
+    },
+    {
+      label: navCopy.career ?? "Career",
+      text: copy.careerText,
+      href: localizePath("/career"),
       featured: false,
     },
     {

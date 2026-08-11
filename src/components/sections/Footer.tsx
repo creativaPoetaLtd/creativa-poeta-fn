@@ -53,6 +53,14 @@ function Footer() {
       : locale === "kiny"
       ? "Inama & resources"
       : "Journal & conseils";
+  const careerLabel =
+    locale === "nl"
+      ? "Carrière & kansen"
+      : locale === "en"
+      ? "Careers & opportunities"
+      : locale === "kiny"
+      ? "Career & opportunities"
+      : "Carrières & opportunités";
   const referralFooter = locale === "nl"
     ? { title: "Klanten voorstellen & samenwerken", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Hoe het werkt", join: "Deelnemen", submit: "Een klant voorstellen", business: "Commerciële partners", strategic: "Samenwerking op maat", terms: "Programmavoorwaarden" }
     : locale === "en"
@@ -102,7 +110,7 @@ function Footer() {
           <h1 className='logo text-4xl text-[#EEBA2B] flex laptop:mx-0 tablet:mx-0 laptop:justify-start tablet:justify-start text-left laptop:items-start tablet:items-start float-left justify-start items-start'>
           <Link
             to={homePath}
-            aria-label="Retour ? l'accueil Creativa Poeta"
+            aria-label="Retour à l’accueil Creativa Poeta"
             className="block laptop:w-[30%] tablet:w-[40%] desktop:w-[30%] w-[50%]"
           >
             <img src={logopoeta1} alt="Creativa Poeta" className="h-auto w-full"/>
@@ -154,6 +162,9 @@ function Footer() {
     </Link>
     <Link to={linkPath("/blogs")}>
       <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{blogLabel}</p>
+    </Link>
+    <Link to={linkPath("/career")}>
+      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{careerLabel}</p>
     </Link>
   </div>
 
