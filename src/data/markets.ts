@@ -22,7 +22,7 @@ export type MarketConfig = {
 
 export const localeLabels: Record<LocaleCode, string> = {
   en: "English",
-  fr: "Fran?ais",
+  fr: "Français",
   nl: "Nederlands",
   kiny: "Kinyarwanda",
 };
@@ -56,7 +56,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     primaryCity: "Bruxelles",
     email: "contact@creativapoeta.be",
     publicPositioning:
-      "Une pr?sence claire pour les clients qui cherchent en fran?ais ou en n?erlandais.",
+      "Une présence claire pour les clients qui cherchent en français ou en néerlandais.",
   },
   fr: {
     code: "fr",
@@ -69,7 +69,7 @@ export const markets: Record<MarketCode, MarketConfig> = {
     primaryCity: "Paris",
     email: "contact@creativapoeta.fr",
     publicPositioning:
-      "Une pr?sence claire pour ?tre mieux compris dans les recherches locales et modernes.",
+      "Une présence claire pour être mieux compris dans les recherches locales et modernes.",
   },
   rw: {
     code: "rw",

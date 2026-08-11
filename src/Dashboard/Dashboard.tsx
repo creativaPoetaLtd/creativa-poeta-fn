@@ -53,7 +53,7 @@ import Blogs from "./Blogs";
 import ContactQueries from "./ContactQueries";
 import Emails from "./Emails";
 import InternalMessages from "./InternalMessages";
-import Jobs from "./Jobs";
+import CareersDashboard from "./CareersDashboard";
 import Projects from "./Projects";
 import ReferralProgram from "./ReferralProgram";
 import Settings from "./Settings";
@@ -162,7 +162,7 @@ const navigationItems = [
     permission: "dashboard:read",
   },
   {
-    text: "Jobs",
+    text: "Careers",
     icon: <BusinessIcon />,
     path: "/secure-admin-dashboard-2024/jobs",
     color: "#F44336",
@@ -663,7 +663,7 @@ export default function Dashboard() {
             <Route path="internal-messages" element={renderWithPermission("internal:messages", <InternalMessages />)} />
             <Route path="users" element={renderWithPermission("users:manage", <Users />)} />
             <Route path="settings" element={renderWithPermission("dashboard:read", <Settings />)} />
-            <Route path="jobs" element={renderWithPermission("jobs:manage", <Jobs />)} />
+            <Route path="jobs" element={renderWithPermission("jobs:manage", <CareersDashboard />)} />
           </Routes>
         </Box>
       </Box>

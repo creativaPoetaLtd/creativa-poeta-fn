@@ -42,14 +42,15 @@ export interface ReferralLead {
   partnerName: string;
   partnerEmail?: string;
   partnerPhone?: string;
-  companyName: string;
+  clientType?: "person" | "company";
+  companyName?: string;
   contactName: string;
   contactEmail?: string;
   contactPhone?: string;
   website?: string;
   serviceNeeded: string;
   budgetRange?: string;
-  needDescription: string;
+  needDescription?: string;
   relationship: string;
   consentStatus: "agreed" | "not_yet" | "prospect_submitted";
   introductionMethod: string;
@@ -67,7 +68,7 @@ export interface ReferralLead {
 
 export interface ReferralReward {
   _id: string;
-  lead: { _id: string; companyName: string; status: ReferralLeadStatus } | string;
+  lead: { _id: string; companyName?: string; contactName?: string; status: ReferralLeadStatus } | string;
   partner: { _id: string; name: string; email: string } | string;
   partnerId: string;
   currency: string;
@@ -101,17 +102,18 @@ export interface ReferralApplicationPayload {
 export interface ReferralLeadPayload {
   partnerId: string;
   accessSecret: string;
-  companyName: string;
+  clientType: "person" | "company";
+  companyName?: string;
   contactName: string;
   contactEmail?: string;
   contactPhone?: string;
   website?: string;
   serviceNeeded: string;
   budgetRange?: string;
-  needDescription: string;
+  needDescription?: string;
   relationship: string;
   consentStatus: "agreed" | "not_yet";
-  introductionMethod: string;
+  introductionMethod?: string;
   introductionDetails?: string;
   locale: string;
   websiteConfirmation?: string;
@@ -119,14 +121,15 @@ export interface ReferralLeadPayload {
 
 export interface ProspectReferralPayload {
   referralCode: string;
-  companyName: string;
+  clientType: "person" | "company";
+  companyName?: string;
   contactName: string;
-  contactEmail: string;
+  contactEmail?: string;
   contactPhone?: string;
   website?: string;
   serviceNeeded: string;
   budgetRange?: string;
-  needDescription: string;
+  needDescription?: string;
   contactConsent: boolean;
   locale: string;
   websiteConfirmation?: string;
@@ -140,17 +143,18 @@ export interface DirectReferralPayload {
   referrerCountry: string;
   referrerProfileType: string;
   referrerWebsite?: string;
-  companyName: string;
+  clientType: "person" | "company";
+  companyName?: string;
   contactName: string;
   contactEmail?: string;
   contactPhone?: string;
   website?: string;
   serviceNeeded: string;
   budgetRange?: string;
-  needDescription: string;
+  needDescription?: string;
   relationship: string;
   consentStatus: "agreed" | "not_yet";
-  introductionMethod: string;
+  introductionMethod?: string;
   introductionDetails?: string;
   termsAccepted: boolean;
   locale: string;
@@ -219,6 +223,7 @@ export interface ManualReferralEntryPayload {
   approveNow: boolean;
   regenerateAccess: boolean;
   includeClient: boolean;
+  clientType?: "person" | "company";
   companyName?: string;
   contactName?: string;
   contactEmail?: string;

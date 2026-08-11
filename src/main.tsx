@@ -10,8 +10,7 @@ import TermsPage from "./pages/TermsPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import ScrollToTop from "./ScrollToTop.tsx";
 import ProjectFormPage from "./pages/ProjectFormPage.tsx";
-import JobsPages from "./pages/JobsPages.tsx";
-import LeaveInfoPage from "./pages/LeaveInfoPage.tsx";
+import CareerPage from "./pages/CareerPage.tsx";
 import ThankYouPage from "./pages/ThankYouPage.tsx";
 import WebPage from "./pages/Services/WebAppPage.tsx";
 import ContentPage from "./pages/Services/ContentPage.tsx";
@@ -89,7 +88,12 @@ const appElement = (
             <Route path="/fr/partnership" element={<ReferralProgramPage />} />
             <Route path="/nl/partnership" element={<ReferralProgramPage />} />
             <Route path="/rw/partnership" element={<ReferralProgramPage />} />
-            {/* <Route path="/career" element={<JobsPages />} /> */}
+            <Route path="/career" element={<CareerPage />} />
+            <Route path="/en/career" element={<CareerPage />} />
+            <Route path="/fr/career" element={<CareerPage />} />
+            <Route path="/nl/career" element={<CareerPage />} />
+            <Route path="/rw/career" element={<CareerPage />} />
+            <Route path="/jobs" element={<Navigate to="/career" replace />} />
             <Route path="/start-project" element={<ProjectFormPage />} />
             <Route path="/en/start-project" element={<ProjectFormPage />} />
             <Route path="/fr/start-project" element={<ProjectFormPage />} />
@@ -105,7 +109,7 @@ const appElement = (
             <Route path="/fr/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
             <Route path="/nl/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
             <Route path="/rw/demander-assistance-numerique" element={<DigitalAssistanceRequestPage />} />
-            <Route path="/form-to-leave-info" element={<LeaveInfoPage />} />
+            <Route path="/form-to-leave-info" element={<Navigate to="/career#career-application" replace />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/thank-you-for-applying" element={<GetBackToYou />} />
             <Route path="/blogs" element={<BlogsPage />} />
@@ -136,7 +140,7 @@ const appElement = (
               path="/secure-admin-careers-panel-2024"
               element={
                 <ProtectedRoute>
-                  <JobsPages />
+                  <Navigate to="/secure-admin-dashboard-2024/jobs" replace />
                 </ProtectedRoute>
               }
             />
