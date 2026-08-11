@@ -17,7 +17,9 @@ export interface ReferralPartner {
   _id: string;
   partnerId?: string;
   name: string;
-  email: string;
+  email?: string;
+  phone?: string;
+  preferredContact: "email" | "whatsapp" | "phone" | "sms" | "other";
   country: string;
   locale: string;
   profileType: string;
@@ -38,7 +40,8 @@ export interface ReferralLead {
   _id: string;
   partnerId: string;
   partnerName: string;
-  partnerEmail: string;
+  partnerEmail?: string;
+  partnerPhone?: string;
   companyName: string;
   contactName: string;
   contactEmail?: string;
@@ -81,7 +84,9 @@ export interface ReferralReward {
 
 export interface ReferralApplicationPayload {
   name: string;
-  email: string;
+  email?: string;
+  phone?: string;
+  preferredContact: "email" | "whatsapp" | "phone" | "sms" | "other";
   country: string;
   locale: string;
   profileType: string;
@@ -127,6 +132,31 @@ export interface ProspectReferralPayload {
   websiteConfirmation?: string;
 }
 
+export interface DirectReferralPayload {
+  referrerName: string;
+  referrerEmail?: string;
+  referrerPhone?: string;
+  preferredContact: "email" | "whatsapp" | "phone" | "sms" | "other";
+  referrerCountry: string;
+  referrerProfileType: string;
+  referrerWebsite?: string;
+  companyName: string;
+  contactName: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  website?: string;
+  serviceNeeded: string;
+  budgetRange?: string;
+  needDescription: string;
+  relationship: string;
+  consentStatus: "agreed" | "not_yet";
+  introductionMethod: string;
+  introductionDetails?: string;
+  termsAccepted: boolean;
+  locale: string;
+  websiteConfirmation?: string;
+}
+
 export const submitReferralApplication = async (data: ReferralApplicationPayload) => {
   const response = await publicRequest<{ applicationId: string; status: ReferralPartnerStatus }>(
     { method: "POST", url: "/api/referral-program/partners", data },
@@ -145,6 +175,20 @@ export const submitReferralLead = async (data: ReferralLeadPayload) => {
   return response;
 };
 
+export const submitDirectReferral = async (data: DirectReferralPayload) => {
+  const response = await publicRequest<{
+    leadId: string;
+    status: ReferralLeadStatus;
+    partnerId: string;
+    applicationStatus: ReferralPartnerStatus;
+  }>(
+    { method: "POST", url: "/api/referral-program/direct-referrals", data },
+    "Failed to submit the client introduction."
+  );
+  trackConversion("direct_referral_submitted", "referral_lead");
+  return response;
+};
+
 export const submitProspectReferral = async (data: ProspectReferralPayload) => {
   const response = await publicRequest<{ leadId: string; status: ReferralLeadStatus }>(
     { method: "POST", url: "/api/referral-program/prospect-referrals", data },
@@ -159,12 +203,52 @@ export const getReferralProgramSummary = () => authRequest<{ metrics: Record<str
   "Failed to fetch referral program summary."
 );
 
+export interface ManualReferralEntryPayload {
+  existingPartnerId?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  preferredContact?: "email" | "whatsapp" | "phone" | "sms" | "other";
+  country?: string;
+  locale: string;
+  profileType?: string;
+  program?: "referral" | "business";
+  website?: string;
+  termsAccepted?: boolean;
+  marketingConsent?: boolean;
+  approveNow: boolean;
+  regenerateAccess: boolean;
+  includeClient: boolean;
+  companyName?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  clientWebsite?: string;
+  serviceNeeded?: string;
+  budgetRange?: string;
+  needDescription?: string;
+  relationship?: string;
+  consentStatus?: "agreed" | "not_yet";
+  introductionMethod?: string;
+  introductionDetails?: string;
+}
+
+export const createManualReferralEntry = (data: ManualReferralEntryPayload) => authRequest<{
+  partner: ReferralPartner;
+  lead?: ReferralLead;
+  accessUrl?: string;
+  shareUrl?: string;
+}>(
+  { method: "POST", url: "/api/referral-program/manual-entries", data },
+  "Failed to create the manual referral entry."
+);
+
 export const getReferralPartners = (page = 1, status = "all", search = "") => authRequest<{
   partners: ReferralPartner[];
   pagination: { currentPage: number; totalPages: number; total: number; limit: number };
 }>({ method: "GET", url: "/api/referral-program/partners", params: { page, status, search } }, "Failed to fetch referral partners.");
 
-export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean }>(
+export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean; accessUrl?: string; shareUrl?: string }>(
   { method: "PATCH", url: `/api/referral-program/partners/${id}`, data },
   "Failed to update referral partner."
 );

@@ -29,12 +29,18 @@ export const SEO_CONSTANTS = {
     "Technology Consulting",
   ],
 
-  // Supported languages
+  // Publicly available languages. Kinyarwanda translations remain in source
+  // while they undergo editorial review, but must not be advertised yet.
   SUPPORTED_LANGUAGES: [
     { code: "en", name: "English", locale: "en_US" },
     { code: "fr", name: "French", locale: "fr_FR" },
-    { code: "kiny", name: "Kinyarwanda", locale: "rw_RW" },
     { code: "nl", name: "Dutch", locale: "nl_NL" },
+  ],
+  DEVELOPED_LANGUAGES: [
+    { code: "en", name: "English", locale: "en_US" },
+    { code: "fr", name: "French", locale: "fr_FR" },
+    { code: "nl", name: "Dutch", locale: "nl_NL" },
+    { code: "kiny", name: "Kinyarwanda", locale: "rw_RW" },
   ],
 };
 
