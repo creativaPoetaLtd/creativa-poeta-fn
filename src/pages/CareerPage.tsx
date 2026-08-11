@@ -22,7 +22,7 @@ export default function CareerPage() {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const copy = careerLocale[locale] ?? careerLocale.fr;
-  const referralPath = `${buildLocalLocalePath(market, locale, "/referral-partners")}#join-cprpp`;
+  const referralPath = buildLocalLocalePath(market, locale, "/referral-partners");
   const [jobs, setJobs] = useState<CareerJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState<CareerJob | null>(null);
@@ -115,19 +115,18 @@ export default function CareerPage() {
               <a href={referralPath} className={`${buttonClass} mt-5 bg-[#ffee00] text-black hover:bg-white`}>{copy.referralCta}<FaArrowRight /></a>
             </article>
 
-            {loading ? <div className="min-h-64 animate-pulse rounded-2xl border border-white/10 bg-white/[.04]" /> : jobs.length === 0 ? (
-              <article className="rounded-2xl border border-white/15 bg-black/20 p-5 backdrop-blur-md sm:p-7">
-                <span className="inline-flex rounded-full border border-white/15 bg-white/5 p-3 text-[#EEBA2B]"><FaClock /></span>
-                <h3 className="mt-4 text-2xl font-black">{copy.noJobsTitle}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300 sm:text-base">{copy.noJobsLead}</p>
-                <button type="button" onClick={() => chooseJob(null)} className={`${buttonClass} mt-5 border border-white/30 text-white hover:border-[#EEBA2B] hover:text-[#ffee00]`}>{copy.secondaryCta}<FaArrowRight /></button>
-              </article>
-            ) : <div className="grid gap-3">{jobs.map((job) => <article key={job._id} className="rounded-2xl border border-white/15 bg-black/20 p-5 backdrop-blur-md transition hover:border-[#EEBA2B]/60">
+            {loading ? <div className="min-h-64 animate-pulse rounded-2xl border border-white/10 bg-white/[.04]" /> : jobs.map((job) => <article key={job._id} className="rounded-2xl border border-white/15 bg-black/20 p-5 backdrop-blur-md transition hover:border-[#EEBA2B]/60">
               <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-[10px] font-black uppercase tracking-[.16em] text-[#EEBA2B]">{job.department || job.company}</p><h3 className="mt-1 text-xl font-black">{job.title}</h3></div><span className="rounded-full border border-white/15 px-3 py-1 text-[10px] font-black uppercase text-slate-300">{copy.types[job.type] || job.type}</span></div>
               <div className="mt-3 flex flex-wrap gap-3 text-xs font-bold text-slate-400"><span className="inline-flex items-center gap-1"><FaMapMarkerAlt />{job.isRemote ? copy.remote : job.location}</span>{job.applicationDeadline && <span className="inline-flex items-center gap-1"><FaClock />{copy.deadline}: {new Intl.DateTimeFormat(dateLocale, { dateStyle: "medium" }).format(new Date(job.applicationDeadline))}</span>}</div>
               <p className="mt-3 line-clamp-3 text-sm font-semibold leading-relaxed text-slate-300">{job.summary || job.description}</p>
               <div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={() => setExpandedJobId(expandedJobId === job._id ? null : job._id)} className={`${buttonClass} border border-white/25 text-white hover:border-[#EEBA2B]`}>{copy.details}</button><button type="button" onClick={() => chooseJob(job)} className={`${buttonClass} bg-[#ffee00] text-black hover:bg-white`}>{copy.apply}<FaArrowRight /></button></div>
               {expandedJobId === job._id && <div className="mt-5 grid gap-4 border-t border-white/10 pt-5 text-sm text-slate-300"><p className="whitespace-pre-wrap font-semibold leading-relaxed">{job.description}</p><JobList title={copy.responsibilities} items={job.responsibilities} /><JobList title={copy.requirements} items={job.requirements} /><JobList title={copy.benefits} items={job.benefits} /></div>}
-            </article>)}</div>}
+            </article>)}
+            {!loading && <article className="rounded-2xl border border-white/15 bg-black/20 p-5 backdrop-blur-md sm:p-7">
+              <span className="inline-flex rounded-full border border-white/15 bg-white/5 p-3 text-[#EEBA2B]"><FaClock /></span>
+              <h3 className="mt-4 text-2xl font-black">{copy.noJobsTitle}</h3><p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300 sm:text-base">{copy.noJobsLead}</p>
+              <button type="button" onClick={() => chooseJob(null)} className={`${buttonClass} mt-5 border border-white/30 text-white hover:border-[#EEBA2B] hover:text-[#ffee00]`}>{copy.secondaryCta}<FaArrowRight /></button>
+            </article>}
           </div>
         </div>
       </section>
