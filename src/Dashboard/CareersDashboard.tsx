@@ -8,7 +8,7 @@ import People from "@mui/icons-material/People";
 import Visibility from "@mui/icons-material/Visibility";
 import {
   CareerApplication, CareerApplicationStatus, CareerJob, CareerJobPayload, CareerJobType,
-  closeCareerJob, createCareerJob, getAdminCareerJobs, getCareerApplications,
+  closeCareerJob, createCareerJob, downloadCareerApplicationCv, getAdminCareerJobs, getCareerApplications,
   updateCareerApplicationStatus, updateCareerJob,
 } from "../APIs/CareerApi";
 import { ActionButton, DashboardCard, DataTable, MenuAction, PageHeader, StatusChip } from "./components/DashboardComponents";
@@ -70,6 +70,14 @@ export default function CareersDashboard() {
     } catch (error) { setNotice({ message: error instanceof Error ? error.message : "Unable to update the application.", severity: "error" }); }
   };
 
+  const downloadCv = async (application: CareerApplication) => {
+    try {
+      await downloadCareerApplicationCv(application._id, application.cvOriginalName || `${application.fullName}-cv`);
+    } catch (error) {
+      setNotice({ message: error instanceof Error ? error.message : "Unable to download the CV.", severity: "error" });
+    }
+  };
+
   const jobRows = jobs.map((job) => ({
     id: job._id,
     Opportunity: <Box><Typography fontWeight={900}>{job.title}</Typography><Typography variant="caption" color="text.secondary">{job.department || job.company}</Typography></Box>,
@@ -83,6 +91,7 @@ export default function CareersDashboard() {
     Candidate: <Box><Typography fontWeight={900}>{application.fullName}</Typography><Typography variant="caption" color="text.secondary">{application.email || application.phone}</Typography></Box>,
     Application: application.kind === "spontaneous" ? "Spontaneous" : application.jobTitle || "Published role",
     Role: application.desiredRole || "—",
+    Source: application.discoverySourceOther || (application.discoverySource ? words(application.discoverySource) : "—"),
     Status: <StatusChip status={application.status} variant={statusVariant(application.status)} />,
     Received: formatDate(application.createdAt),
   }));
@@ -98,11 +107,11 @@ export default function CareersDashboard() {
       <Tabs value={tab} onChange={(_, value) => setTab(value)} sx={{ borderBottom: "1px solid #e2e8f0", px: 1 }}><Tab label="Opportunities" /><Tab label="Applications" /></Tabs>
       <Box sx={{ p: { xs: 1.5, md: 2.5 } }}>
         {tab === 0 && <DataTable headers={["Opportunity", "Location", "Type", "Status", "Deadline"]} hiddenFields={["id"]} rows={jobRows} emptyMessage={loading ? "Loading opportunities..." : "No opportunities created yet"} customActions={(row) => { const job = jobs.find((item) => item._id === row.id); if (!job) return null; return <><MenuAction icon={<Edit />} label="Edit" color="#d39b00" onClick={() => setEditor(job)} />{job.status !== "closed" && <MenuAction icon={<Close />} label="Close" color="#ef4444" onClick={() => void closeJob(job)} />}</>; }} />}
-        {tab === 1 && <><Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}><FormControl size="small" sx={{ minWidth: 190 }}><InputLabel>Status</InputLabel><Select label="Status" value={applicationFilter} onChange={(event) => setApplicationFilter(event.target.value)}><MenuItem value="all">All applications</MenuItem>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box><DataTable headers={["Candidate", "Application", "Role", "Status", "Received"]} hiddenFields={["id"]} rows={applicationRows} emptyMessage={loading ? "Loading applications..." : "No applications received yet"} customActions={(row) => <MenuAction icon={<Visibility />} label="Review" color="#0ea5e9" onClick={() => setSelectedApplication(applications.find((item) => item._id === row.id) || null)} />} /></>}
+        {tab === 1 && <><Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}><FormControl size="small" sx={{ minWidth: 190 }}><InputLabel>Status</InputLabel><Select label="Status" value={applicationFilter} onChange={(event) => setApplicationFilter(event.target.value)}><MenuItem value="all">All applications</MenuItem>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box><DataTable headers={["Candidate", "Application", "Role", "Source", "Status", "Received"]} hiddenFields={["id"]} rows={applicationRows} emptyMessage={loading ? "Loading applications..." : "No applications received yet"} customActions={(row) => <MenuAction icon={<Visibility />} label="Review" color="#0ea5e9" onClick={() => setSelectedApplication(applications.find((item) => item._id === row.id) || null)} />} /></>}
       </Box>
     </Paper>
     <JobEditor open={Boolean(editor)} job={editor === "new" ? undefined : editor || undefined} onClose={() => setEditor(null)} onSaved={(job) => { setJobs((current) => editor === "new" ? [job, ...current] : current.map((item) => item._id === job._id ? job : item)); setEditor(null); setNotice({ message: editor === "new" ? "Opportunity created." : "Opportunity updated.", severity: "success" }); }} />
-    <ApplicationDialog application={selectedApplication} onClose={() => setSelectedApplication(null)} onStatus={changeApplicationStatus} />
+    <ApplicationDialog application={selectedApplication} onClose={() => setSelectedApplication(null)} onStatus={changeApplicationStatus} onCv={downloadCv} />
     <Snackbar open={Boolean(notice)} autoHideDuration={5000} onClose={() => setNotice(null)} anchorOrigin={{ vertical: "top", horizontal: "right" }}><Alert severity={notice?.severity || "success"} onClose={() => setNotice(null)}>{notice?.message}</Alert></Snackbar>
   </Box>;
 }
@@ -138,8 +147,8 @@ function JobEditor({ open, job, onClose, onSaved }: { open: boolean; job?: Caree
   </Grid></DialogContent><DialogActions sx={{ p: 2, gap: 1 }}><ActionButton variant="secondary" onClick={onClose} disabled={saving}>Cancel</ActionButton><ActionButton variant="primary" onClick={() => void save()} disabled={saving}>{saving ? "Saving..." : job ? "Save changes" : "Create opportunity"}</ActionButton></DialogActions></Dialog>;
 }
 
-function ApplicationDialog({ application, onClose, onStatus }: { application: CareerApplication | null; onClose: () => void; onStatus: (status: CareerApplicationStatus) => void }) {
-  return <Dialog open={Boolean(application)} onClose={onClose} maxWidth="md" fullWidth><DialogTitle sx={{ bgcolor: "#071a33", color: "white", fontWeight: 900 }}>Application review</DialogTitle><DialogContent dividers>{application && <Box sx={{ display: "grid", gap: 2 }}><Box><Typography variant="h5" fontWeight={900}>{application.fullName}</Typography><Typography color="text.secondary">{application.kind === "spontaneous" ? "Spontaneous application" : application.jobTitle}</Typography></Box><Grid container spacing={2}><Grid item xs={12} sm={6}><Info label="Email" value={application.email} /></Grid><Grid item xs={12} sm={6}><Info label="Phone / WhatsApp" value={application.phone} /></Grid><Grid item xs={12} sm={6}><Info label="Country / city" value={application.country} /></Grid><Grid item xs={12} sm={6}><Info label="Desired role" value={application.desiredRole} /></Grid><Grid item xs={12} sm={6}><Info label="Experience" value={application.experience} /></Grid><Grid item xs={12} sm={6}><Info label="Availability" value={application.availability} /></Grid></Grid><Info label="Skills" value={application.skills} /><Info label="Message" value={application.message} /><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{application.linkedin && <Chip component="a" href={application.linkedin} target="_blank" clickable label="Open LinkedIn" />}{application.portfolio && <Chip component="a" href={application.portfolio} target="_blank" clickable label="Open CV / portfolio" />}</Box><FormControl fullWidth><InputLabel>Application status</InputLabel><Select label="Application status" value={application.status} onChange={(event) => void onStatus(event.target.value as CareerApplicationStatus)}>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box>}</DialogContent><DialogActions><ActionButton variant="secondary" onClick={onClose}>Close</ActionButton></DialogActions></Dialog>;
+function ApplicationDialog({ application, onClose, onStatus, onCv }: { application: CareerApplication | null; onClose: () => void; onStatus: (status: CareerApplicationStatus) => void; onCv: (application: CareerApplication) => void }) {
+  return <Dialog open={Boolean(application)} onClose={onClose} maxWidth="md" fullWidth><DialogTitle sx={{ bgcolor: "#071a33", color: "white", fontWeight: 900 }}>Application review</DialogTitle><DialogContent dividers>{application && <Box sx={{ display: "grid", gap: 2 }}><Box><Typography variant="h5" fontWeight={900}>{application.fullName}</Typography><Typography color="text.secondary">{application.kind === "spontaneous" ? "Spontaneous application" : application.jobTitle}</Typography></Box><Grid container spacing={2}><Grid item xs={12} sm={6}><Info label="Email" value={application.email} /></Grid><Grid item xs={12} sm={6}><Info label="Phone / WhatsApp" value={application.phone} /></Grid><Grid item xs={12} sm={6}><Info label="Country / city" value={application.country} /></Grid><Grid item xs={12} sm={6}><Info label="Desired position" value={application.desiredRole} /></Grid><Grid item xs={12} sm={6}><Info label="How they found Creativa Poeta" value={application.discoverySourceOther || (application.discoverySource ? words(application.discoverySource) : undefined)} /></Grid><Grid item xs={12} sm={6}><Info label="Availability" value={application.availability} /></Grid></Grid><Info label="Skills" value={application.skills} /><Info label="Additional information" value={application.message} /><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{application.hasCv && <Chip color="primary" onClick={() => void onCv(application)} clickable label={`Download CV${application.cvOriginalName ? ` — ${application.cvOriginalName}` : ""}`} />}{application.linkedin && <Chip component="a" href={application.linkedin} target="_blank" clickable label="Open LinkedIn" />}{application.portfolio && <Chip component="a" href={application.portfolio} target="_blank" clickable label="Open legacy CV / portfolio link" />}</Box><FormControl fullWidth><InputLabel>Application status</InputLabel><Select label="Application status" value={application.status} onChange={(event) => void onStatus(event.target.value as CareerApplicationStatus)}>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box>}</DialogContent><DialogActions><ActionButton variant="secondary" onClick={onClose}>Close</ActionButton></DialogActions></Dialog>;
 }
 
 function Info({ label, value }: { label: string; value?: string }) { return <Box><Typography variant="caption" color="text.secondary" fontWeight={800}>{label}</Typography><Typography sx={{ whiteSpace: "pre-wrap" }}>{value || "—"}</Typography></Box>; }
