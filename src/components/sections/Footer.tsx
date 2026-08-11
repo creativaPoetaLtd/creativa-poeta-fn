@@ -4,7 +4,6 @@ import Cont from '../unUsedComponents/Cont';
 // import { SetStateAction, useState } from 'react';
 // import { toast } from 'react-toastify';
 // import { Link } from 'react-router-dom';
-import getLangFromLocalStorage from '../../../utils/Lang';
 import FooterLocale from '../../i18n/FooterLocale';
 import { Link } from 'react-router-dom';
 import {
@@ -13,10 +12,10 @@ import {
   getCurrentMarket,
 } from '../../data/marketRuntime';
 
-const lang = getLangFromLocalStorage() as keyof typeof FooterLocale;
 function Footer() {
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
+  const footerCopy = FooterLocale[locale] ?? FooterLocale.fr;
   const homePath = buildLocalLocalePath(market, locale, "/");
   const linkPath = (path: string) => buildLocalLocalePath(market, locale, path);
   const assistanceLabel =
@@ -61,6 +60,44 @@ function Footer() {
       : locale === "kiny"
       ? "Career & opportunities"
       : "Carrières & opportunités";
+  const resourcesTitle =
+    locale === "nl"
+      ? "Ontdek Creativa Poeta"
+      : locale === "en"
+      ? "Explore Creativa Poeta"
+      : locale === "kiny"
+      ? "Menya Creativa Poeta"
+      : "Explorer Creativa Poeta";
+  const skillLinks = [
+    { label: footerCopy.competence1, path: "/services/site-officiel" },
+    { label: footerCopy.competence2, path: "/services/site-officiel" },
+    { label: footerCopy.competence3, path: "/services/site-officiel" },
+    { label: footerCopy.competence14, path: "/services/site-officiel" },
+    { label: footerCopy.competence15, path: "/services/site-officiel" },
+    { label: footerCopy.competence16, path: "/services/site-officiel" },
+    { label: footerCopy.competence23, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence4, path: "/services/content-writing" },
+    { label: footerCopy.competence6, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence7, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence8, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence9, path: "/services/graphic-design" },
+    { label: footerCopy.competence10, path: "/services/content-writing" },
+    { label: footerCopy.competence11, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence12, path: "/services/visibilite-locale" },
+    { label: footerCopy.competence13, path: "/services/ia-automatisation" },
+    { label: footerCopy.competence17, path: "/services/ia-automatisation" },
+    { label: footerCopy.competence18, path: "/services/graphic-design" },
+    { label: footerCopy.competence19, path: "/services/graphic-design" },
+    { label: footerCopy.competence20, path: "/services/graphic-design" },
+  ];
+  const resourceLinks = [
+    { label: careerLabel, path: "/career" },
+    { label: blogLabel, path: "/blogs" },
+    { label: knowledgeLabel, path: "/knowledge" },
+    { label: answersLabel, path: "/answers" },
+    { label: footerCopy.competence5, path: "/answers", hash: "#q-1" },
+    { label: assistanceLabel, path: "/demander-assistance-numerique" },
+  ];
   const referralFooter = locale === "nl"
     ? { title: "Klanten voorstellen & samenwerken", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Hoe het werkt", join: "Deelnemen", submit: "Een klant voorstellen", business: "Commerciële partners", strategic: "Samenwerking op maat", terms: "Programmavoorwaarden" }
     : locale === "en"
@@ -116,110 +153,36 @@ function Footer() {
             <img src={logopoeta1} alt="Creativa Poeta" className="h-auto w-full"/>
           </Link>
           </h1>
-          <p className='flex justify-start text-start  items-start pr-7 float-left mt-3 text-slate-400'>
-             {FooterLocale[lang].desc}          
-             </p>
-         <div className='flex desktop:flex-row laptop:flex-row tablet:flex-row flex-col w-full justify-start items-start laptop:mt-3 desktop:mt-3 tablet:mt-3 mt-3 h-fit'>
+          <p className='mt-3 flex items-start justify-start pr-7 text-start text-slate-400'>
+            {footerCopy.desc}
+          </p>
+          <div className="mt-6 grid w-full items-start gap-7 pr-1 md:grid-cols-[minmax(0,1.35fr)_minmax(12rem,.65fr)] md:pr-6">
+            <section aria-labelledby="footer-skills-title">
+              <h2 id="footer-skills-title" className="text-xl font-bold text-[#EEBA2B]">{footerCopy.key}</h2>
+              <div className="mt-3 grid gap-x-6 gap-y-1 sm:grid-cols-2">
+                {skillLinks.map((item) => (
+                  <Link key={`${item.path}-${item.label}`} to={`${linkPath(item.path)}${"hash" in item ? item.hash : ""}`} className="py-0.5 text-sm leading-relaxed text-slate-400 transition hover:text-white">
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+            <section aria-labelledby="footer-resources-title" className="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+              <h2 id="footer-resources-title" className="text-xl font-bold text-[#EEBA2B]">{resourcesTitle}</h2>
+              <div className="mt-3 flex flex-col gap-1">
+                {resourceLinks.map((item) => (
+                  <Link key={`${item.path}-${item.label}`} to={linkPath(item.path)} className="py-0.5 text-sm leading-relaxed text-slate-400 transition hover:text-white">
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          </div>
 
-  {/* LEFT COLUMN */}
-  <div className='flex flex-col laptop:pr-12 desktop:pr-12 tablet:pr-6 pr-1 justify-start items-start laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
-    <p className='flex justify-start items-start mt-3 text-[#EEBA2B] text-xl font-bold'>
-      {FooterLocale[lang].key}
-    </p>
-
-    <Link to={linkPath("/services/graphic-design")}>
-      <p className='flex justify-start items-start text-start mt-3 text-slate-400'>{FooterLocale[lang].competence1}</p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence2}</p>
-    </Link>
-    <Link to={linkPath("/services/site-officiel")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence3}</p>
-    </Link>
-    <Link to={linkPath("/services/graphic-design")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence23}</p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence4}</p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence5}</p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence6}</p>
-    </Link>
-     <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence20}</p>
-    </Link>
-    <Link to={linkPath("/demander-assistance-numerique")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{assistanceLabel}</p>
-    </Link>
-    <Link to={linkPath("/answers")}> 
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{answersLabel}</p>
-    </Link>
-    <Link to={linkPath("/knowledge")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{knowledgeLabel}</p>
-    </Link>
-    <Link to={linkPath("/blogs")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{blogLabel}</p>
-    </Link>
-    <Link to={linkPath("/career")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{careerLabel}</p>
-    </Link>
-  </div>
-
-  {/* RIGHT COLUMN */}
-  <div className='flex flex-col justify-start items-start pr-5 laptop:w-1/2 desktop:w-1/2 w-full h-fit'>
-
-    {/* moved from left to balance */}
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start laptop:mt-12 desktop:mt-12 tablet:mt-12 mt-1 text-slate-400'>
-        {FooterLocale[lang].competence7}
-      </p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
-        {FooterLocale[lang].competence8}
-      </p>
-    </Link>
-    <Link to={linkPath("/services/graphic-design")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
-        {FooterLocale[lang].competence9}
-      </p>
-    </Link>
-    <Link to={linkPath("/services/visibilite-locale")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>
-        {FooterLocale[lang].competence10}
-      </p>
-    </Link>
-    
-
-    {/* original right column links */}
-    <Link to={linkPath("/services/visibilite-locale")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence11}</p>
-    </Link>
-    <Link to={linkPath("/services/visibilite-locale")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence12}</p>
-    </Link>
-    <Link to={linkPath("/services/ia-automatisation")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence13}</p>
-    </Link>
-    <Link to={linkPath("/services/graphic-design")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence18}</p>
-    </Link>
-    <Link to={linkPath("/services/content-writing")}>
-      <p className='flex justify-start items-start text-start mt-1 text-slate-400'>{FooterLocale[lang].competence19}</p>
-    </Link>
-   
-  </div>
-</div>
-
-            <div className='flex flex-col w-full justify-start items-start mt-5  h-fit'>
-            <p className='flex justify-start items-start float-left text-slate-400 pr-7'>{FooterLocale[lang].competence21}</p>
-             <p className='flex justify-start items-start float-left mt-5 text-white font-bold'>
-             {FooterLocale[lang].competence22}
-             </p>
-             </div>
+          <div className='mt-6 flex h-fit w-full flex-col items-start justify-start border-t border-white/10 pt-5'>
+            <p className='flex items-start justify-start pr-7 text-slate-400'>{footerCopy.competence21}</p>
+            <p className='mt-5 flex items-start justify-start font-bold text-white'>{footerCopy.competence22}</p>
+          </div>
         </div>
         <div className="flex flex-col laptop:w-[37%] desktop:w-[37%] b w-full h-fit ">
           <Cont />
