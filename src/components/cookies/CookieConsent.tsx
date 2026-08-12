@@ -120,6 +120,7 @@ const writeChoice = (choice: Omit<CookieChoice, "savedAt">) => {
 };
 
 const CookieConsent = () => {
+  const isPrivateArea = window.location.pathname.startsWith("/secure-admin-");
   const market = getCurrentMarket();
   const locale = getCurrentLocale(market);
   const labels = copy[locale] ?? copy.en;
@@ -141,7 +142,7 @@ const CookieConsent = () => {
     [labels]
   );
 
-  if (!visible) return null;
+  if (isPrivateArea || !visible) return null;
 
   const save = (choice: Omit<CookieChoice, "savedAt">) => {
     writeChoice(choice);

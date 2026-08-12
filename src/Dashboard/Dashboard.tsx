@@ -10,6 +10,7 @@ import {
   CssBaseline,
   Divider,
   Drawer,
+  IconButton,
   Link as MuiLink,
   List,
   ListItem,
@@ -19,6 +20,7 @@ import {
   MenuItem,
   Toolbar,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
@@ -38,6 +40,8 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../assets/flags/logopoeta1.png";
 import { getEmailSummary } from "../APIs/Emails";
@@ -47,6 +51,7 @@ import { getContactSummary } from "../APIs/Contact";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getReferralProgramSummary } from "../APIs/ReferralProgram";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
+import { getWhatsAppSummary } from "../APIs/WhatsApp";
 import { useAuth } from "../contexts/useAuth";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -59,6 +64,7 @@ import ReferralProgram from "./ReferralProgram";
 import Settings from "./Settings";
 import Users from "./Users";
 import WebsiteAnalytics from "./WebsiteAnalytics";
+import WhatsAppInbox from "./WhatsAppInbox";
 import UptimeMonitoring from "./UptimeMonitoring";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
@@ -120,6 +126,14 @@ const navigationItems = [
     color: "#FF9800",
     section: "Demandes",
     permission: "contacts:read",
+  },
+  {
+    text: "WhatsApp",
+    icon: <WhatsAppIcon />,
+    path: "/secure-admin-dashboard-2024/whatsapp",
+    color: "#25D366",
+    section: "Demandes",
+    permission: "whatsapp:read",
   },
   {
     text: "Emails",
@@ -186,6 +200,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const isCompactDashboard = useMediaQuery(theme.breakpoints.down("md"));
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [emailAttentionCount, setEmailAttentionCount] = useState(0);
   const [requestAttentionCounts, setRequestAttentionCounts] = useState<Record<string, number>>({});
@@ -212,11 +228,12 @@ export default function Dashboard() {
 
     let mounted = true;
     const loadNavigationBadges = async () => {
-      const [emailResult, projectResult, partnershipResult, contactResult, adminNotificationResult, internalMessageResult, analyticsIncidentResult] = await Promise.allSettled([
+      const [emailResult, projectResult, partnershipResult, contactResult, whatsAppResult, adminNotificationResult, internalMessageResult, analyticsIncidentResult] = await Promise.allSettled([
         getEmailSummary(),
         getProjectSummary(),
         hasPermission("referrals:read") ? getReferralProgramSummary() : Promise.resolve({ metrics: { attention: 0 } }),
         getContactSummary(),
+        hasPermission("whatsapp:read") ? getWhatsAppSummary() : Promise.resolve({ metrics: { attention: 0 } }),
         ["super_admin", "admin_0"].includes(currentRole) ? getAdminNotificationSummary() : Promise.resolve({ metrics: { new: 0, open: 0 } }),
         hasPermission("internal:messages") ? getInternalMessageSummary() : Promise.resolve({ metrics: { unread: 0, total: 0 } }),
         hasPermission("analytics:read") ? getAnalyticsIncidentSummary() : Promise.resolve({ metrics: { open: 0, critical: 0, warning: 0 } }),
@@ -233,6 +250,9 @@ export default function Dashboard() {
       const projectMetrics = projectResult.status === "fulfilled" ? projectResult.value.metrics || {} : {};
       const partnershipMetrics = partnershipResult.status === "fulfilled" ? partnershipResult.value.metrics || {} : {};
       const contactMetrics = contactResult.status === "fulfilled" ? contactResult.value.metrics || {} : {};
+      const whatsAppMetrics: Record<string, number> = whatsAppResult.status === "fulfilled"
+        ? whatsAppResult.value.metrics || {}
+        : {};
       const adminNotificationMetrics = adminNotificationResult.status === "fulfilled" ? adminNotificationResult.value.metrics || { new: 0, open: 0 } : { new: 0, open: 0 };
       const internalMessageMetrics = internalMessageResult.status === "fulfilled" ? internalMessageResult.value.metrics || { unread: 0 } : { unread: 0 };
       const analyticsIncidentMetrics = analyticsIncidentResult.status === "fulfilled" ? analyticsIncidentResult.value.metrics || { open: 0 } : { open: 0 };
@@ -243,6 +263,7 @@ export default function Dashboard() {
         "Assistance Requests": Number(projectMetrics.assistance || 0),
         "Referral & Partners": Number(partnershipMetrics.attention || 0),
         "Contact Inbox": Number(contactMetrics.attention || contactMetrics.pending || 0),
+        WhatsApp: Number(whatsAppMetrics.attention || whatsAppMetrics.unread || 0),
         Users: Number(adminNotificationMetrics.new || adminNotificationMetrics.open || 0),
         "Internal Messages": Number(internalMessageMetrics.unread || 0),
       });
@@ -312,12 +333,15 @@ export default function Dashboard() {
       <CssBaseline />
 
       <Drawer
-        variant="permanent"
+        variant={isCompactDashboard ? "temporary" : "permanent"}
+        open={isCompactDashboard ? mobileDrawerOpen : true}
+        onClose={() => setMobileDrawerOpen(false)}
+        ModalProps={{ keepMounted: true }}
         sx={{
-          width: drawerWidth,
-          flexShrink: 0,
+          width: { xs: 0, md: drawerWidth },
+          flexShrink: { xs: 0, md: 0 },
           [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
+            width: { xs: "min(86vw, 292px)", md: drawerWidth },
             boxSizing: "border-box",
             display: "flex",
             flexDirection: "column",
@@ -434,6 +458,9 @@ export default function Dashboard() {
                       textDecoration: "none",
                       color: "inherit",
                     }}
+                    onClick={() => {
+                      if (isCompactDashboard) setMobileDrawerOpen(false);
+                    }}
                   >
                     <ListItemIcon
                       sx={{
@@ -495,24 +522,41 @@ export default function Dashboard() {
           position="fixed"
           elevation={0}
           sx={{
-            width: `calc(100% - ${drawerWidth}px)`,
-            ml: `${drawerWidth}px`,
+            width: { xs: "100%", md: `calc(100% - ${drawerWidth}px)` },
+            ml: { xs: 0, md: `${drawerWidth}px` },
             backgroundColor: "rgba(255,255,255,0.92)",
             color: "#1e293b",
             borderBottom: "1px solid #e2e8f0",
             backdropFilter: "blur(10px)",
-            zIndex: theme.zIndex.drawer - 1,
+            zIndex: theme.zIndex.drawer + 1,
           }}
         >
-          <Toolbar sx={{ minHeight: 84, px: 4 }}>
+          <Toolbar sx={{ minHeight: { xs: 68, md: 84 }, px: { xs: 1.25, sm: 2.5, md: 4 }, gap: 1 }}>
+            <IconButton
+              color="inherit"
+              onClick={() => setMobileDrawerOpen(true)}
+              aria-label="Open dashboard navigation"
+              sx={{ display: { xs: "inline-flex", md: "none" }, color: "#071a33" }}
+            >
+              <MenuIcon />
+            </IconButton>
             <Box sx={{ flexGrow: 1 }}>
               <Typography
                 variant="h4"
-                sx={{ fontWeight: 900, color: "#1e293b", mb: 0.5, letterSpacing: 0 }}
+                sx={{
+                  fontWeight: 900,
+                  color: "#1e293b",
+                  mb: { xs: 0, md: 0.5 },
+                  letterSpacing: 0,
+                  fontSize: { xs: "1.25rem", sm: "1.6rem", md: "2.125rem" },
+                }}
               >
                 {getCurrentPageTitle()}
               </Typography>
-              <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ color: "#64748b" }}>
+              <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                sx={{ color: "#64748b", display: { xs: "none", sm: "flex" } }}
+              >
                 <MuiLink
                   component={Link}
                   to="/secure-admin-dashboard-2024"
@@ -534,7 +578,7 @@ export default function Dashboard() {
               </Breadcrumbs>
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 0.5, md: 2 } }}>
               <Chip
                 label={displayName}
                 size="small"
@@ -573,6 +617,7 @@ export default function Dashboard() {
                   py: 1,
                   transition: "all 0.3s ease",
                   border: "1px solid rgba(7, 26, 51, 0.2)",
+                  minWidth: { xs: 50, sm: "auto" },
                 }}
               >
                 <Avatar
@@ -588,7 +633,9 @@ export default function Dashboard() {
                 >
                   {avatarLetter}
                 </Avatar>
-                {displayName}
+                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                  {displayName}
+                </Box>
               </Button>
 
               <Menu
@@ -638,13 +685,13 @@ export default function Dashboard() {
         <Box
           sx={{
             flexGrow: 1,
-            mt: "84px",
-            p: 4,
+            mt: { xs: "68px", md: "84px" },
+            p: { xs: 0, sm: 2, md: 4 },
             background:
               "radial-gradient(circle at top right, rgba(238,186,43,0.12), transparent 32rem), #f6f8fb",
-            minHeight: "calc(100vh - 84px)",
+            minHeight: { xs: "calc(100vh - 68px)", md: "calc(100vh - 84px)" },
             minWidth: 0,
-            maxWidth: `calc(100vw - ${drawerWidth}px)`,
+            maxWidth: { xs: "100vw", md: `calc(100vw - ${drawerWidth}px)` },
             overflowX: "hidden",
           }}
         >
@@ -659,6 +706,7 @@ export default function Dashboard() {
             <Route path="partnership-requests" element={renderWithPermission("referrals:read", <ReferralProgram />)} />
             <Route path="blogs" element={renderWithPermission("blogs:manage", <Blogs />)} />
             <Route path="contact-queries" element={renderWithPermission("contacts:read", <ContactQueries />)} />
+            <Route path="whatsapp" element={renderWithPermission("whatsapp:read", <WhatsAppInbox />)} />
             <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />
             <Route path="internal-messages" element={renderWithPermission("internal:messages", <InternalMessages />)} />
             <Route path="users" element={renderWithPermission("users:manage", <Users />)} />
