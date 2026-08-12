@@ -25,6 +25,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import WorkIcon from "@mui/icons-material/Work";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Link } from "react-router-dom";
 import { getContactSummary } from "../APIs/Contact";
 import { getEmailSummary } from "../APIs/Emails";
@@ -32,6 +33,7 @@ import { getInternalMessageSummary } from "../APIs/internalMessages";
 import { getReferralProgramSummary } from "../APIs/ReferralProgram";
 import { getProjectSummary } from "../APIs/projectForm";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
+import { getWhatsAppSummary } from "../APIs/WhatsApp";
 import { useAuth } from "../contexts/useAuth";
 import { PageHeader } from "./components/DashboardComponents";
 
@@ -41,6 +43,7 @@ type SummaryState = {
   projects: MetricMap | null;
   partnerships: MetricMap | null;
   contacts: MetricMap | null;
+  whatsApp: MetricMap | null;
   emails: MetricMap | null;
   internalMessages: MetricMap | null;
   analytics: MetricMap | null;
@@ -77,6 +80,7 @@ const emptySummaries: SummaryState = {
   projects: {},
   partnerships: {},
   contacts: {},
+  whatsApp: {},
   emails: {},
   internalMessages: {},
   analytics: {},
@@ -250,6 +254,12 @@ export default function Analytics() {
         load: async () => (await getContactSummary()).metrics,
       },
       {
+        key: "whatsApp",
+        label: "WhatsApp inbox",
+        allowed: hasPermission("whatsapp:read"),
+        load: async () => (await getWhatsAppSummary()).metrics,
+      },
+      {
         key: "emails",
         label: "emails",
         allowed: hasPermission("email:read"),
@@ -346,6 +356,16 @@ export default function Analytics() {
       icon: <ContactMailIcon />,
     },
     {
+      key: "whatsapp",
+      title: "WhatsApp",
+      description: "Unread and unassigned client conversations requiring follow-up.",
+      path: "/secure-admin-dashboard-2024/whatsapp",
+      permission: "whatsapp:read",
+      value: metric(summaries.whatsApp, "attention"),
+      color: colors.green,
+      icon: <WhatsAppIcon />,
+    },
+    {
       key: "emails",
       title: "Emails",
       description: "New inbox messages and messages assigned to you.",
@@ -372,10 +392,12 @@ export default function Analytics() {
   const assignedToMe = [
     metric(summaries.projects, "assignedToMe"),
     metric(summaries.contacts, "assignedToMe"),
+    metric(summaries.whatsApp, "assignedToMe"),
     metric(summaries.emails, "assignedToMe"),
   ].reduce<number>((total, value) => total + Number(value || 0), 0);
   const communicationWaiting = [
     metric(summaries.contacts, "pending"),
+    metric(summaries.whatsApp, "unread"),
     metric(summaries.emails, "new"),
     metric(summaries.internalMessages, "unread"),
   ].reduce<number>((total, value) => total + Number(value || 0), 0);
