@@ -23,6 +23,7 @@
     "framer-motion": "^10.16.4",
     "html-react-parser": "^5.2.2",
     "i18next": "^23.2.7",
+    "libphonenumber-js": "^1.13.10",
     "lucide-react": "^0.475.0",
     "postcss": "^8.5.26",
     "quill": "2.0.2",

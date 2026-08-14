@@ -11,10 +11,12 @@ import {
   FaWifi,
 } from "react-icons/fa";
 import PageLayout from "../components/layout/PageLayout";
+import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { projectForm } from "../APIs/projectForm";
 import { getCurrentLocale, getCurrentMarket, localizePath } from "../data/marketRuntime";
 import { getExampleCity, getExampleEmail, getExampleName, getExamplePhone } from "../utils/localExamples";
+import { validateLocalizedForm } from "../utils/localizedFormValidation";
 
 type LocaleKey = "fr" | "en" | "nl" | "kiny";
 
@@ -292,6 +294,11 @@ export default function DigitalAssistanceRequestPage() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const validationError = validateLocalizedForm(event.currentTarget, locale);
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -359,6 +366,7 @@ export default function DigitalAssistanceRequestPage() {
             </aside>
 
             <form
+              noValidate
               onSubmit={handleSubmit}
               className="rounded-[1.7rem] border border-white/20 bg-white/[.06] p-4 shadow-2xl backdrop-blur-md phone:p-6"
             >
@@ -390,7 +398,10 @@ export default function DigitalAssistanceRequestPage() {
               <div className="grid gap-3 tablet:grid-cols-2">
                 <Field label={copy.labels.name} value={form.name} placeholder={copy.placeholders.name} onChange={(value) => setField("name", value)} required />
                 <Field label={copy.labels.email} value={form.email} type="email" placeholder={copy.placeholders.email} onChange={(value) => setField("email", value)} required />
-                <Field label={copy.labels.phone} value={form.phone} placeholder={copy.placeholders.phone} onChange={(value) => setField("phone", value)} />
+                <label className="block min-w-0">
+                  <RequiredLabel required={false}>{copy.labels.phone}</RequiredLabel>
+                  <InternationalPhoneInput value={form.phone} onChange={(value) => setField("phone", value)} locale={locale} defaultCountry={market.countryCode} placeholder={copy.placeholders.phone} />
+                </label>
                 <Field label={copy.labels.city} value={form.city} placeholder={copy.placeholders.city} onChange={(value) => setField("city", value)} />
                 <Field label={copy.labels.device} value={form.device} placeholder={copy.placeholders.device} onChange={(value) => setField("device", value)} />
                 <label>
@@ -491,6 +502,11 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
   };
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const validationError = validateLocalizedForm(event.currentTarget, locale);
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
     setIsSubmitting(true);
     try {
       await projectForm({
@@ -507,7 +523,7 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
 
   return (
     <main className="min-h-[100dvh] bg-[#071a33] p-3 text-white laptop:hidden">
-      <form onSubmit={submit} className="flex min-h-[calc(100dvh-1.5rem)] flex-col rounded-[1.4rem] border border-white/20 bg-black/20 p-4">
+      <form noValidate onSubmit={submit} className="flex min-h-[calc(100dvh-1.5rem)] flex-col rounded-[1.4rem] border border-white/20 bg-black/20 p-4">
         <div className="flex items-center justify-between gap-2">
           <Link to={localizePath("/")} className="text-[10px] font-black uppercase text-white/65">&lt; {copy.backHome}</Link>
           <button type="button" onClick={closeForm} aria-label={copy.backHome} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-xl font-black text-white">X</button>
@@ -533,7 +549,10 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
             <div className="grid grid-cols-1 gap-2">
               <Field label={copy.labels.name} value={form.name} placeholder={copy.placeholders.name} onChange={(value) => setField("name", value)} required />
               <Field label={copy.labels.email} value={form.email} type="email" placeholder={copy.placeholders.email} onChange={(value) => setField("email", value)} required />
-              <Field label={copy.labels.phone} value={form.phone} placeholder={copy.placeholders.phone} onChange={(value) => setField("phone", value)} />
+              <label className="block min-w-0">
+                <RequiredLabel required={false}>{copy.labels.phone}</RequiredLabel>
+                <InternationalPhoneInput value={form.phone} onChange={(value) => setField("phone", value)} locale={locale} defaultCountry={getCurrentMarket().countryCode} placeholder={copy.placeholders.phone} />
+              </label>
               <Field label={copy.labels.city} value={form.city} placeholder={copy.placeholders.city} onChange={(value) => setField("city", value)} />
               <Field label={copy.labels.device} value={form.device} placeholder={copy.placeholders.device} onChange={(value) => setField("device", value)} />
               <label><RequiredLabel required={false}>{copy.labels.urgency}</RequiredLabel><select value={form.urgency} onChange={(event) => setField("urgency", event.target.value)} className="h-11 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-xs font-bold text-white outline-none">{copy.urgency.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>

@@ -197,13 +197,29 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       await onChanged();
     } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update partner.", severity: "error" }); }
   };
-  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{partner.email || partner.phone || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <StatusChip status={partner.status} variant={statusVariant(partner.status)} />, Applied: formatDate(partner.createdAt) }));
+  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <StatusChip status={partner.status} variant={statusVariant(partner.status)} />, Applied: formatDate(partner.createdAt) }));
   return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
     <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedLinks(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
       <DialogContent sx={{ pt: 3 }}>{selected && <Box sx={{ display: "grid", gap: 2 }}>
-        <Paper variant="outlined" sx={{ p: 2 }}><Typography variant="h6" fontWeight={900}>{selected.name}</Typography><Typography>{selected.email || selected.phone || "No contact provided"} · {selected.country}</Typography><Typography variant="body2" color="text.secondary">Preferred contact: {words(selected.preferredContact || "email")} · {selected.profileType} · {selected.program} · {formatDate(selected.createdAt)}</Typography></Paper>
-        <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Network / opportunity source</Typography><Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription || "Not provided"}</Typography>{selected.website && <Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website}</Typography>}</Paper>
+        <Paper variant="outlined" sx={{ p: 2 }}>
+          <Typography variant="h6" fontWeight={900}>{selected.name}</Typography>
+          <Box sx={{ display: "grid", gap: 0.5, mt: 1 }}>
+            <Typography><b>Email:</b> {selected.email || "Not provided"}</Typography>
+            <Typography><b>Phone / WhatsApp:</b> {selected.phone || "Not provided"}</Typography>
+            <Typography><b>Preferred contact:</b> {words(selected.preferredContact || (selected.email ? "email" : "whatsapp"))}</Typography>
+            <Typography><b>Country:</b> {selected.country}</Typography>
+            <Typography><b>Profile:</b> {selected.profileType}</Typography>
+            <Typography><b>Program:</b> {words(selected.program)}</Typography>
+            <Typography><b>Language:</b> {selected.locale?.toUpperCase() || "Not provided"}</Typography>
+            <Typography><b>Program terms accepted:</b> {selected.termsAcceptedAt ? `Yes · ${formatDate(selected.termsAcceptedAt)}` : "No"}</Typography>
+            <Typography><b>Marketing consent:</b> {selected.marketingConsent ? "Yes" : "No"}</Typography>
+            <Typography><b>Status:</b> {words(selected.status)}</Typography>
+            <Typography><b>Partner ID:</b> {selected.partnerId || "Not issued"}</Typography>
+            <Typography><b>Submitted:</b> {formatDate(selected.createdAt)}</Typography>
+          </Box>
+        </Paper>
+        <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Website / professional profile</Typography><Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website || "Not provided"}</Typography>{selected.networkDescription && <Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription}</Typography>}</Paper>
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{partnerStatuses.map((item) => <ActionButton key={item} size="small" variant={selected.status === item ? "primary" : "secondary"} onClick={() => void changeStatus(selected, item)}>{words(item)}</ActionButton>)}</Box>
         {generatedLinks && <Alert severity="success"><Typography fontWeight={900}>Links ready to share</Typography><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>{generatedLinks.accessUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.accessUrl && void navigator.clipboard.writeText(generatedLinks.accessUrl)}>Copy private access</ActionButton>}{generatedLinks.shareUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.shareUrl && void navigator.clipboard.writeText(generatedLinks.shareUrl)}>Copy client invitation</ActionButton>}</Box></Alert>}
         {["approved", "active"].includes(selected.status) && <Alert severity="warning" action={<ActionButton size="small" variant="secondary" onClick={() => void changeStatus(selected, selected.status, true)}>Generate new link</ActionButton>}>Generating a new private access invalidates the previous one. Copy the returned link and send it through the partner&apos;s preferred channel.</Alert>}
