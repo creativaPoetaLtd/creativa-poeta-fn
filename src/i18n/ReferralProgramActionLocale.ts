@@ -26,6 +26,16 @@ export type ReferralProgramActionCopy = {
   contactOptions: Array<{ value: "email" | "whatsapp" | "phone" | "sms" | "other"; label: string }>;
   strategicButton: string;
   close: string;
+  dialogOk: string;
+  successTitle: string;
+  errorTitle: string;
+  validationTitle: string;
+  alreadyRegisteredTitle: string;
+  alreadyRegisteredMessage: string;
+  requestAccess: string;
+  requestingAccess: string;
+  recoveryReceivedTitle: string;
+  recoveryReceivedMessage: string;
 };
 
 const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralProgramActionCopy> = {
@@ -57,6 +67,16 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Appel téléphonique" }, { value: "sms", label: "SMS" }, { value: "other", label: "Autre" }],
     strategicButton: "Proposer une collaboration",
     close: "Fermer",
+    dialogOk: "J’ai compris",
+    successTitle: "Demande bien enregistrée",
+    errorTitle: "La demande n’a pas pu être envoyée",
+    validationTitle: "Informations à compléter",
+    alreadyRegisteredTitle: "Vous êtes déjà inscrit",
+    alreadyRegisteredMessage: "Une inscription utilisant cette adresse e-mail ou ce numéro existe déjà. Il n’est pas nécessaire de vous inscrire une seconde fois. Si vous avez perdu votre lien privé pour présenter des clients, demandez-nous de vous le renvoyer.",
+    requestAccess: "Redemander mon lien privé",
+    requestingAccess: "Envoi de la demande…",
+    recoveryReceivedTitle: "Demande de lien reçue",
+    recoveryReceivedMessage: "Creativa Poeta a reçu votre demande. Notre équipe vérifiera votre inscription et vous transmettra un nouveau lien privé par votre moyen de contact enregistré.",
   },
   en: {
     directTitle: "Already have a client to introduce?",
@@ -86,6 +106,16 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Phone call" }, { value: "sms", label: "SMS" }, { value: "other", label: "Other" }],
     strategicButton: "Propose a collaboration",
     close: "Close",
+    dialogOk: "I understand",
+    successTitle: "Request successfully recorded",
+    errorTitle: "The request could not be sent",
+    validationTitle: "Information required",
+    alreadyRegisteredTitle: "You are already registered",
+    alreadyRegisteredMessage: "A registration using this email address or phone number already exists. You do not need to register again. If you have lost your private client-introduction link, ask us to send you a new one.",
+    requestAccess: "Request my private link",
+    requestingAccess: "Sending request…",
+    recoveryReceivedTitle: "Link request received",
+    recoveryReceivedMessage: "Creativa Poeta has received your request. Our team will verify your registration and send a new private link through your registered contact method.",
   },
   nl: {
     directTitle: "Hebt u al een klant om voor te stellen?",
@@ -115,6 +145,16 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefoongesprek" }, { value: "sms", label: "SMS" }, { value: "other", label: "Andere" }],
     strategicButton: "Een samenwerking voorstellen",
     close: "Sluiten",
+    dialogOk: "Ik begrijp het",
+    successTitle: "Aanvraag goed geregistreerd",
+    errorTitle: "De aanvraag kon niet worden verzonden",
+    validationTitle: "Informatie ontbreekt",
+    alreadyRegisteredTitle: "U bent al geregistreerd",
+    alreadyRegisteredMessage: "Er bestaat al een inschrijving met dit e-mailadres of telefoonnummer. U hoeft zich niet opnieuw in te schrijven. Bent u uw privélink kwijt om klanten voor te stellen, vraag ons dan om een nieuwe link.",
+    requestAccess: "Mijn privélink opnieuw aanvragen",
+    requestingAccess: "Aanvraag verzenden…",
+    recoveryReceivedTitle: "Linkaanvraag ontvangen",
+    recoveryReceivedMessage: "Creativa Poeta heeft uw aanvraag ontvangen. Ons team controleert uw inschrijving en stuurt een nieuwe privélink via uw geregistreerde contactmethode.",
   },
   kiny: {
     directTitle: "Hari umukiliya usanzwe ushaka kutumenyesha?",
@@ -144,6 +184,16 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefone" }, { value: "sms", label: "SMS" }, { value: "other", label: "Ubundi buryo" }],
     strategicButton: "Saba ko tuganira ku bufatanye",
     close: "Funga",
+    dialogOk: "Ndabyumvise",
+    successTitle: "Ubusabe bwakiriwe neza",
+    errorTitle: "Ubusabe ntibwashoboye koherezwa",
+    validationTitle: "Hari amakuru abura",
+    alreadyRegisteredTitle: "Usanzwe wanditswe",
+    alreadyRegisteredMessage: "Hari registration isanzwe ikoresha iyi email cyangwa numero ya telefone. Ntukeneye kongera kwiyandikisha. Niba waratakaje private link ukoresha utumenyesha abakiliya, saba ko tuyikoherereza indi.",
+    requestAccess: "Saba private link yanjye",
+    requestingAccess: "Ubusabe burimo koherezwa…",
+    recoveryReceivedTitle: "Ubusabe bwa link bwakiriwe",
+    recoveryReceivedMessage: "Creativa Poeta yakiriye ubusabe bwawe. Team izagenzura registration yawe maze ikoherereze private link nshya ikoresheje contact wandikishije.",
   },
 };
 

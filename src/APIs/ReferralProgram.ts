@@ -31,6 +31,10 @@ export interface ReferralPartner {
   termsAcceptedAt: string;
   marketingConsent: boolean;
   rejectionReason?: string;
+  accessRecoveryStatus?: "pending" | "resolved";
+  accessRecoveryRequestedAt?: string;
+  accessRecoveryResolvedAt?: string;
+  accessRecoveryRequestCount?: number;
   activity: ReferralActivity[];
   createdAt: string;
   updatedAt: string;
@@ -162,13 +166,28 @@ export interface DirectReferralPayload {
 }
 
 export const submitReferralApplication = async (data: ReferralApplicationPayload) => {
-  const response = await publicRequest<{ applicationId: string; status: ReferralPartnerStatus }>(
+  const response = await publicRequest<{
+    applicationId?: string;
+    outcome: "submitted" | "already_registered";
+    status: ReferralPartnerStatus;
+    recoveryAvailable?: boolean;
+  }>(
     { method: "POST", url: "/api/referral-program/partners", data },
     "Failed to submit referral partner application."
   );
   trackConversion("referral_partner_application_submitted", "referral_partner_application");
   return response;
 };
+
+export const requestReferralAccessRecovery = async (data: {
+  email?: string;
+  phone?: string;
+  locale: string;
+  websiteConfirmation?: string;
+}) => publicRequest<{ outcome: "received" }>(
+  { method: "POST", url: "/api/referral-program/partners/recover-access", data },
+  "Failed to request referral access."
+);
 
 export const submitReferralLead = async (data: ReferralLeadPayload) => {
   const response = await publicRequest<{ leadId: string; status: ReferralLeadStatus }>(

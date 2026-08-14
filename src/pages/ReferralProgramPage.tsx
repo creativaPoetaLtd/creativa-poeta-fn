@@ -1,8 +1,7 @@
 import { FormEvent, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { FaArrowRight, FaBriefcase, FaCalculator, FaCheck, FaHandshake, FaPaperPlane, FaShieldAlt, FaTimes, FaUsers } from "react-icons/fa";
-import { toast } from "react-toastify";
 import { submitPartnershipRequest } from "../APIs/PartnershipRequests";
-import { submitDirectReferral, submitProspectReferral, submitReferralApplication, submitReferralLead } from "../APIs/ReferralProgram";
+import { requestReferralAccessRecovery, submitDirectReferral, submitProspectReferral, submitReferralApplication, submitReferralLead } from "../APIs/ReferralProgram";
 import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
 import PageLayout from "../components/layout/PageLayout";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
@@ -19,6 +18,12 @@ const buttonClass = "cp-referral-button inline-flex min-h-11 items-center justif
 type ModalKind = "direct" | "partner" | "prospect" | "strategic" | null;
 type ClientType = "person" | "company";
 type ContactPreference = "email" | "whatsapp" | "phone" | "sms" | "other";
+type FeedbackState = {
+  tone: "success" | "error" | "info";
+  title: string;
+  message: string;
+  primaryAction?: "recover-access";
+} | null;
 
 const resolvePreferredContact = (preferred: ContactPreference, email: string, phone: string): ContactPreference => {
   if (preferred === "email" && !email.trim() && phone.trim()) return "whatsapp";
@@ -46,6 +51,8 @@ export default function ReferralProgramPage() {
   const [leadSending, setLeadSending] = useState(false);
   const [prospectSending, setProspectSending] = useState(false);
   const [strategicSending, setStrategicSending] = useState(false);
+  const [recoverySending, setRecoverySending] = useState(false);
+  const [feedback, setFeedback] = useState<FeedbackState>(null);
   const [partnerAccess, setPartnerAccess] = useState({ partnerId: "", accessSecret: "" });
   const referralCode = useMemo(() => new URLSearchParams(window.location.search).get("ref") || "", []);
   const [activeModal, setActiveModal] = useState<ModalKind>(referralCode ? "prospect" : null);
@@ -67,6 +74,27 @@ export default function ReferralProgramPage() {
   const [strategic, setStrategic] = useState({ name: "", company: "", email: "", phone: "", partnershipType: "Strategic partnership", message: "" });
   const [prospect, setProspect] = useState({ clientType: "company" as ClientType, companyName: "", contactName: "", contactEmail: "", contactPhone: "", website: "", serviceNeeded: copy.services[0], budgetRange: "", needDescription: "", contactConsent: false, websiteConfirmation: "" });
 
+  const showValidation = (message: string) => setFeedback({ tone: "error", title: actionCopy.validationTitle, message });
+  const showError = (message: string) => setFeedback({ tone: "error", title: actionCopy.errorTitle, message });
+  const showSuccess = (message: string) => setFeedback({ tone: "success", title: actionCopy.successTitle, message });
+
+  const handleAccessRecovery = async () => {
+    try {
+      setRecoverySending(true);
+      await requestReferralAccessRecovery({
+        email: application.email,
+        phone: application.phone,
+        locale,
+        websiteConfirmation: application.websiteConfirmation,
+      });
+      setFeedback({ tone: "success", title: actionCopy.recoveryReceivedTitle, message: actionCopy.recoveryReceivedMessage });
+    } catch {
+      showError(copy.form.error);
+    } finally {
+      setRecoverySending(false);
+    }
+  };
+
   useLayoutEffect(() => {
     const rawHash = window.location.hash.replace(/^#/, "");
     const params = new URLSearchParams(rawHash);
@@ -83,42 +111,51 @@ export default function ReferralProgramPage() {
   }, []);
 
   useEffect(() => {
-    if (!activeModal) return;
+    if (!activeModal && !feedback) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveModal(null);
+      if (event.key === "Escape" && !feedback) setActiveModal(null);
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [activeModal]);
+  }, [activeModal, feedback]);
 
   const handleApplication = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const validationError = validateLocalizedForm(event.currentTarget, locale);
     if (validationError) {
-      toast.error(validationError);
+      showValidation(validationError);
       return;
     }
     if (!application.email.trim() && !application.phone.trim()) {
-      toast.error(getContactRequiredMessage(locale));
+      showValidation(getContactRequiredMessage(locale));
       return;
     }
     try {
       setApplicationSending(true);
-      await submitReferralApplication({
+      const response = await submitReferralApplication({
         ...application,
         preferredContact: resolvePreferredContact(application.preferredContact, application.email, application.phone),
         website: normalizeWebsiteUrl(application.website),
         locale,
       });
-      toast.success(copy.form.success);
+      if (response.outcome === "already_registered") {
+        setFeedback({
+          tone: "info",
+          title: actionCopy.alreadyRegisteredTitle,
+          message: actionCopy.alreadyRegisteredMessage,
+          primaryAction: "recover-access",
+        });
+        return;
+      }
+      showSuccess(copy.form.success);
       setApplication((current) => ({ ...current, name: "", email: "", phone: "", country: "", website: "", termsAccepted: false, marketingConsent: false }));
     } catch {
-      toast.error(copy.form.error);
+      showError(copy.form.error);
     } finally {
       setApplicationSending(false);
     }
@@ -128,15 +165,15 @@ export default function ReferralProgramPage() {
     event.preventDefault();
     const validationError = validateLocalizedForm(event.currentTarget, locale);
     if (validationError) {
-      toast.error(validationError);
+      showValidation(validationError);
       return;
     }
     if (!direct.referrerEmail.trim() && !direct.referrerPhone.trim()) {
-      toast.error(actionCopy.contactRequired);
+      showValidation(actionCopy.contactRequired);
       return;
     }
     if (!direct.contactEmail.trim() && !direct.contactPhone.trim()) {
-      toast.error(actionCopy.clientContactRequired);
+      showValidation(actionCopy.clientContactRequired);
       return;
     }
     try {
@@ -148,7 +185,7 @@ export default function ReferralProgramPage() {
         website: normalizeWebsiteUrl(direct.website),
         locale,
       });
-      toast.success(actionCopy.directSuccess);
+      showSuccess(actionCopy.directSuccess);
       setDirect((current) => ({
         ...current,
         referrerName: "", referrerEmail: "", referrerPhone: "", referrerCountry: "", referrerWebsite: "",
@@ -157,7 +194,7 @@ export default function ReferralProgramPage() {
       }));
       setActiveModal(null);
     } catch {
-      toast.error(actionCopy.directError);
+      showError(actionCopy.directError);
     } finally {
       setDirectSending(false);
     }
@@ -167,21 +204,21 @@ export default function ReferralProgramPage() {
     event.preventDefault();
     const validationError = validateLocalizedForm(event.currentTarget, locale);
     if (validationError) {
-      toast.error(validationError);
+      showValidation(validationError);
       return;
     }
     if (!lead.contactEmail.trim() && !lead.contactPhone.trim()) {
-      toast.error(actionCopy.clientContactRequired);
+      showValidation(actionCopy.clientContactRequired);
       return;
     }
     try {
       setLeadSending(true);
       await submitReferralLead({ ...lead, website: normalizeWebsiteUrl(lead.website), ...partnerAccess, locale });
-      toast.success(copy.leadForm.success);
+      showSuccess(copy.leadForm.success);
       setLead((current) => ({ ...current, companyName: "", contactName: "", contactEmail: "", contactPhone: "", website: "", budgetRange: "", needDescription: "" }));
       setActiveModal(null);
     } catch {
-      toast.error(copy.leadForm.error);
+      showError(copy.leadForm.error);
     } finally {
       setLeadSending(false);
     }
@@ -191,17 +228,17 @@ export default function ReferralProgramPage() {
     event.preventDefault();
     const validationError = validateLocalizedForm(event.currentTarget, locale);
     if (validationError) {
-      toast.error(validationError);
+      showValidation(validationError);
       return;
     }
     try {
       setStrategicSending(true);
       await submitPartnershipRequest({ ...strategic, locale });
-      toast.success(copy.strategicSuccess);
+      showSuccess(copy.strategicSuccess);
       setStrategic({ name: "", company: "", email: "", phone: "", partnershipType: "Strategic partnership", message: "" });
       setActiveModal(null);
     } catch {
-      toast.error(copy.form.error);
+      showError(copy.form.error);
     } finally {
       setStrategicSending(false);
     }
@@ -211,21 +248,21 @@ export default function ReferralProgramPage() {
     event.preventDefault();
     const validationError = validateLocalizedForm(event.currentTarget, locale);
     if (validationError) {
-      toast.error(validationError);
+      showValidation(validationError);
       return;
     }
     if (!prospect.contactEmail.trim() && !prospect.contactPhone.trim()) {
-      toast.error(actionCopy.clientContactRequired);
+      showValidation(actionCopy.clientContactRequired);
       return;
     }
     try {
       setProspectSending(true);
       await submitProspectReferral({ ...prospect, website: normalizeWebsiteUrl(prospect.website), referralCode, locale });
-      toast.success(prospectCopy.success);
+      showSuccess(prospectCopy.success);
       setProspect((current) => ({ ...current, companyName: "", contactName: "", contactEmail: "", contactPhone: "", website: "", budgetRange: "", needDescription: "", contactConsent: false }));
       setActiveModal(null);
     } catch {
-      toast.error(copy.leadForm.error);
+      showError(copy.leadForm.error);
     } finally {
       setProspectSending(false);
     }
@@ -376,6 +413,15 @@ export default function ReferralProgramPage() {
         </form>
       </Modal>}
 
+      {feedback && <FeedbackModal
+        feedback={feedback}
+        okLabel={actionCopy.dialogOk}
+        recoveryLabel={recoverySending ? actionCopy.requestingAccess : actionCopy.requestAccess}
+        recoverySending={recoverySending}
+        onRecover={() => void handleAccessRecovery()}
+        onClose={() => setFeedback(null)}
+      />}
+
       <section className="border-t border-white/10 bg-black/20 py-9 sm:py-12"><div className="mx-auto max-w-6xl px-4 md:px-8"><h2 className="text-3xl font-black sm:text-4xl">{copy.faqTitle}</h2><div className="mt-5 grid items-start gap-2 lg:grid-cols-2">{copy.faq.map((item) => <details key={item.question} className="rounded-xl border border-white/15 bg-black/25 p-4"><summary className="cursor-pointer list-none pr-6 text-sm font-black sm:text-base">{item.question}</summary><p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300">{item.answer}</p></details>)}</div><a href={termsPath} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#EEBA2B] underline">{copy.termsLink}<FaArrowRight /></a></div></section>
     </main>
   </PageLayout>;
@@ -404,3 +450,26 @@ const Modal = ({ title, closeLabel, onClose, children }: { title: string; closeL
     </div>
   </div>
 );
+
+const FeedbackModal = ({ feedback, okLabel, recoveryLabel, recoverySending, onRecover, onClose }: {
+  feedback: NonNullable<FeedbackState>;
+  okLabel: string;
+  recoveryLabel: string;
+  recoverySending: boolean;
+  onRecover: () => void;
+  onClose: () => void;
+}) => {
+  const Icon = feedback.tone === "success" ? FaCheck : feedback.tone === "error" ? FaTimes : FaShieldAlt;
+  const accent = feedback.tone === "success" ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-300" : feedback.tone === "error" ? "border-red-400/40 bg-red-400/10 text-red-300" : "border-[#EEBA2B]/50 bg-[#EEBA2B]/10 text-[#ffee00]";
+  return <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-slate-950/90 p-4 backdrop-blur-sm" role="alertdialog" aria-modal="true" aria-labelledby="cp-feedback-title">
+    <div className="w-full max-w-lg rounded-2xl border border-white/15 bg-[#071426] p-5 shadow-2xl sm:p-7">
+      <div className={`flex h-12 w-12 items-center justify-center rounded-full border ${accent}`}><Icon aria-hidden="true" /></div>
+      <h2 id="cp-feedback-title" className="mt-4 text-2xl font-black leading-tight text-white sm:text-3xl">{feedback.title}</h2>
+      <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300 sm:text-base">{feedback.message}</p>
+      <div className={`mt-6 grid gap-2 ${feedback.primaryAction ? "grid-cols-2" : "grid-cols-1"}`}>
+        {feedback.primaryAction === "recover-access" && <button type="button" disabled={recoverySending} onClick={onRecover} className={`${buttonClass} bg-[#ffee00] text-black disabled:opacity-60`}>{recoveryLabel}</button>}
+        <button type="button" disabled={recoverySending} onClick={onClose} className={`${buttonClass} border border-white/25 bg-white/5 text-white disabled:opacity-60`}>{okLabel}</button>
+      </div>
+    </div>
+  </div>;
+};

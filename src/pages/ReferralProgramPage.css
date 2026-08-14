@@ -7,7 +7,7 @@
 }
 
 .cp-referral-program .cp-referral-control {
-  background-color: rgba(4, 11, 20, 0.58) !important;
+  background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
   box-shadow: none !important;
   color: #fff !important;
@@ -16,7 +16,7 @@
 }
 
 .cp-referral-program .cp-referral-control:hover {
-  background-color: rgba(4, 11, 20, 0.68) !important;
+  background-color: transparent !important;
   border-color: rgba(238, 186, 43, 0.62) !important;
   box-shadow: none !important;
   transform: none !important;
@@ -24,7 +24,7 @@
 
 .cp-referral-program .cp-referral-control:focus,
 .cp-referral-program .cp-referral-control:focus-visible {
-  background-color: rgba(4, 11, 20, 0.72) !important;
+  background-color: transparent !important;
   border-color: #eeba2b !important;
   box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.17) !important;
   color: #fff !important;
@@ -32,7 +32,7 @@
 }
 
 .cp-referral-program select.cp-referral-control:valid:not(:placeholder-shown) {
-  background-color: rgba(4, 11, 20, 0.58) !important;
+  background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
   box-shadow: none !important;
   color: #fff !important;
@@ -41,7 +41,7 @@
 
 .cp-referral-program select.cp-referral-control:focus,
 .cp-referral-program select.cp-referral-control:focus-visible {
-  background-color: rgba(4, 11, 20, 0.72) !important;
+  background-color: transparent !important;
   border-color: #eeba2b !important;
   box-shadow: 0 0 0 3px rgba(238, 186, 43, 0.17) !important;
 }

@@ -204,7 +204,7 @@ const Contact = () => {
                         name="name"
                         value={name}
                         onChange={handleNameChange}
-                        className="block w-full px-5  py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
+                        className="block w-full px-5 py-3 mt-2 text-white bg-transparent border border-yellow-200 rounded-md"
                       />
                     </div>
 
@@ -217,7 +217,7 @@ const Contact = () => {
                         placeholder="johndoe@example.com"
                         value={email}
                         onChange={handleEmailChange}
-                        className="block w-full px-5 py-3 mt-2 text-white bg-black border border-yellow-200 rounded-md "
+                        className="block w-full px-5 py-3 mt-2 text-white bg-transparent border border-yellow-200 rounded-md"
                       />
                     </div>
 
@@ -226,7 +226,7 @@ const Contact = () => {
                         {contactLocale[lang]?.message}
                       </label>
                       <textarea
-                        className="block w-full h-32 px-5 py-3 mt-2 text-white placeholder-gray-400 bg-black border border-yellow-200 rounded-md md:h-48 "
+                        className="block w-full h-32 px-5 py-3 mt-2 text-white placeholder-gray-400 bg-transparent border border-yellow-200 rounded-md md:h-48"
                         placeholder="Message"
                         value={message}
                         onChange={handleMessageChange}

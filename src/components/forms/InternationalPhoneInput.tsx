@@ -146,20 +146,23 @@ const InternationalPhoneInput = ({
 
   return (
     <div className={`flex min-w-0 gap-2 ${className}`.trim()}>
-      <select
-        value={country}
-        onChange={(event) => handleCountryChange(event.target.value as CountryCode)}
-        aria-label={copy[locale].country}
-        title={copy[locale].country}
-        disabled={disabled}
-        className="h-12 w-[8.75rem] shrink-0 rounded-xl border border-white/20 bg-[#071a33]/90 px-2 text-xs font-black text-white outline-none transition focus:border-[#fff200] disabled:opacity-60 tablet:rounded-2xl"
-      >
-        {countries.map((item) => (
-          <option key={item.code} value={item.code}>
-            {flagFor(item.code)} +{item.callingCode} {item.name}
-          </option>
-        ))}
-      </select>
+      <div className="relative w-[6.25rem] shrink-0">
+        <select
+          value={country}
+          onChange={(event) => handleCountryChange(event.target.value as CountryCode)}
+          aria-label={copy[locale].country}
+          title={copy[locale].country}
+          disabled={disabled}
+          className="h-12 w-full appearance-none rounded-xl border border-white/20 bg-transparent py-0 pl-2.5 pr-6 text-xs font-black text-white outline-none transition focus:border-[#fff200] disabled:opacity-60 tablet:rounded-2xl"
+        >
+          {countries.map((item) => (
+            <option key={item.code} value={item.code} title={item.name} className="bg-[#07111f] text-white">
+              {flagFor(item.code)} +{item.callingCode}
+            </option>
+          ))}
+        </select>
+        <span aria-hidden="true" className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs font-black text-[#fff200]">⌄</span>
+      </div>
       <input
         id={id}
         name={name}
@@ -171,7 +174,7 @@ const InternationalPhoneInput = ({
         placeholder={placeholder || copy[locale].phone}
         required={required}
         disabled={disabled}
-        className="h-12 min-w-0 flex-1 rounded-xl border border-white/20 bg-white/10 px-3 text-sm font-semibold text-white outline-none transition placeholder:text-white/45 focus:border-[#fff200] disabled:opacity-60 tablet:rounded-2xl"
+        className="h-12 min-w-0 flex-1 rounded-xl border border-white/20 bg-transparent px-3 text-sm font-semibold text-white outline-none transition placeholder:text-white/45 focus:border-[#fff200] disabled:opacity-60 tablet:rounded-2xl"
       />
     </div>
   );
