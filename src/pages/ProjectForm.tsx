@@ -1026,7 +1026,7 @@ const ProjectForm = () => {
               onChange={updateField}
               rows={2}
               placeholder={copy.otherPlaceholder}
-              className="w-full rounded-xl border border-white/20 bg-white/10 p-2 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl tablet:p-3"
+              className="w-full rounded-xl border border-white/20 bg-transparent p-2 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl tablet:p-3"
             />
           </div>
         </div>
@@ -1051,7 +1051,7 @@ const ProjectForm = () => {
                 name="websiteStatus"
                 value={formData.websiteStatus}
                 onChange={updateField}
-                className="w-full rounded-xl border border-white/20 bg-[#071a33] p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               >
                 <option value="">--</option>
                 {copy.websiteOptions.map((option) => (
@@ -1069,7 +1069,7 @@ const ProjectForm = () => {
                 name="urgency"
                 value={formData.urgency}
                 onChange={updateField}
-                className="w-full rounded-xl border border-white/20 bg-[#071a33] p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               >
                 <option value="">--</option>
                 {copy.urgencyOptions.map((option) => (
@@ -1089,7 +1089,7 @@ const ProjectForm = () => {
                 value={formData.targetZone}
                 onChange={updateField}
                 placeholder={getExampleCity(market, locale)}
-                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
             <div>
@@ -1102,7 +1102,7 @@ const ProjectForm = () => {
                 value={formData.languages}
                 onChange={updateField}
                 placeholder={getExampleLanguages(market, locale)}
-                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
               />
             </div>
           </div>
@@ -1171,7 +1171,7 @@ const ProjectForm = () => {
                   value={formData[name as keyof typeof formData] as string}
                   placeholder={contactPlaceholders[name]}
                   onChange={updateField}
-                  className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                  className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
                 />
               )}
             </div>
@@ -1187,7 +1187,7 @@ const ProjectForm = () => {
             onChange={updateField}
             rows={4}
             placeholder={copy.messagePlaceholder}
-            className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+            className="w-full rounded-xl border border-white/20 bg-transparent p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
           />
         </div>
       </div>

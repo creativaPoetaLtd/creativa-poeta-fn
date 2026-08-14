@@ -409,7 +409,7 @@ export default function DigitalAssistanceRequestPage() {
                   <select
                     value={form.urgency}
                     onChange={(event) => setField("urgency", event.target.value)}
-                    className="h-14 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-4 text-sm laptop:h-12 font-bold text-white outline-none transition focus:border-[#fff200]"
+                    className="h-14 w-full rounded-2xl border border-white/20 bg-transparent px-4 text-sm laptop:h-12 font-bold text-white outline-none transition focus:border-[#fff200]"
                   >
                     {copy.urgency.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -428,7 +428,7 @@ export default function DigitalAssistanceRequestPage() {
                   placeholder={copy.placeholders.message}
                   rows={5}
                   required
-                  className="w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-4 py-3 text-sm font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
+                  className="w-full rounded-2xl border border-white/20 bg-transparent px-4 py-3 text-sm font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
                 />
               </label>
 
@@ -466,7 +466,7 @@ const Field = ({ label, value, placeholder, type = "text", required = false, onC
       required={required}
       placeholder={placeholder}
       onChange={(event) => onChange(event.target.value)}
-      className="h-11 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-xs font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200] tablet:h-14 tablet:px-4 tablet:text-sm laptop:h-12"
+      className="h-11 w-full rounded-2xl border border-white/20 bg-transparent px-3 text-xs font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200] tablet:h-14 tablet:px-4 tablet:text-sm laptop:h-12"
     />
   </label>
 );
@@ -555,9 +555,9 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
               </label>
               <Field label={copy.labels.city} value={form.city} placeholder={copy.placeholders.city} onChange={(value) => setField("city", value)} />
               <Field label={copy.labels.device} value={form.device} placeholder={copy.placeholders.device} onChange={(value) => setField("device", value)} />
-              <label><RequiredLabel required={false}>{copy.labels.urgency}</RequiredLabel><select value={form.urgency} onChange={(event) => setField("urgency", event.target.value)} className="h-11 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 text-xs font-bold text-white outline-none">{copy.urgency.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+              <label><RequiredLabel required={false}>{copy.labels.urgency}</RequiredLabel><select value={form.urgency} onChange={(event) => setField("urgency", event.target.value)} className="h-11 w-full rounded-2xl border border-white/20 bg-transparent px-3 text-xs font-bold text-white outline-none">{copy.urgency.map((option) => <option className="bg-[#07111f] text-white" key={option.value} value={option.value}>{option.label}</option>)}</select></label>
             </div>
-            <label className="mt-2 block"><RequiredLabel>{copy.labels.message}</RequiredLabel><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={2} required className="min-h-[5rem] w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
+            <label className="mt-2 block"><RequiredLabel>{copy.labels.message}</RequiredLabel><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={2} required className="min-h-[5rem] w-full rounded-2xl border border-white/20 bg-transparent px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
           </section>}
         </div>
 

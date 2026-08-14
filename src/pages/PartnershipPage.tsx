@@ -547,7 +547,7 @@ const PartnershipPage = () => {
                   required
                   value={form.name}
                   onChange={(event) => updateField("name", event.target.value)}
-                  className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
+                  className="min-h-[44px] rounded-lg border border-white/20 bg-transparent px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                 />
               </label>
               <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
@@ -555,7 +555,7 @@ const PartnershipPage = () => {
                 <input
                   value={form.company}
                   onChange={(event) => updateField("company", event.target.value)}
-                  className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
+                  className="min-h-[44px] rounded-lg border border-white/20 bg-transparent px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                 />
               </label>
               <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
@@ -566,7 +566,7 @@ const PartnershipPage = () => {
                     type="email"
                     value={form.email}
                     onChange={(event) => updateField("email", event.target.value)}
-                    className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
+                    className="min-h-[44px] rounded-lg border border-white/20 bg-transparent px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
                   />
                 </label>
                 <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
@@ -593,7 +593,7 @@ const PartnershipPage = () => {
                   value={form.message}
                   onChange={(event) => updateField("message", event.target.value)}
                   rows={4}
-                  className="rounded-lg border border-white/20 bg-black/35 px-3 py-2.5 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:px-4 sm:py-3 sm:text-base"
+                  className="rounded-lg border border-white/20 bg-transparent px-3 py-2.5 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:px-4 sm:py-3 sm:text-base"
                 />
               </label>
               <button

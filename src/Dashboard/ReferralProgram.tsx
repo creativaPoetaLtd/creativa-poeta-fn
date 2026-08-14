@@ -13,6 +13,7 @@ import ContentCopy from "@mui/icons-material/ContentCopy";
 import Refresh from "@mui/icons-material/Refresh";
 import Search from "@mui/icons-material/Search";
 import Visibility from "@mui/icons-material/Visibility";
+import VpnKey from "@mui/icons-material/VpnKey";
 import {
   ManualReferralEntryPayload, ReferralLead, ReferralLeadStatus, ReferralPartner, ReferralPartnerStatus, ReferralReward,
   claimReferralLead, createManualReferralEntry, getReferralLeads, getReferralPartners, getReferralProgramSummary,
@@ -58,6 +59,7 @@ export default function ReferralProgram() {
       <Grid item xs={6} lg={3}><DashboardCard title="Active partners" value={metrics.activePartners || 0} icon={<Groups />} color="#16a34a" /></Grid>
       <Grid item xs={6} lg={3}><DashboardCard title="Leads to review" value={metrics.leadsToReview || 0} icon={<Search />} color="#0ea5e9" /></Grid>
       <Grid item xs={6} lg={3}><DashboardCard title="Rewards to approve" value={metrics.rewardsToApprove || 0} icon={<AccountBalanceWallet />} color="#7c3aed" /></Grid>
+      <Grid item xs={12} lg={3}><DashboardCard title="Access links requested" value={metrics.accessRecoveryPending || 0} icon={<VpnKey />} color="#dc2626" /></Grid>
     </Grid>
     <Paper sx={{ borderRadius: 3, overflow: "hidden" }}>
       <Tabs value={tab} onChange={(_, value) => setTab(value)} variant="scrollable" scrollButtons="auto" sx={{ borderBottom: "1px solid #e2e8f0", px: 1 }}>
@@ -79,6 +81,7 @@ export default function ReferralProgram() {
 function ProgramOverview({ metrics, setTab }: { metrics: Record<string, number>; setTab: (tab: number) => void }) {
   const items = [
     { title: "Review partner applications", value: metrics.pendingPartners || 0, text: "Approve only credible applicants. Approval generates a secure private referral link.", tab: 1 },
+    { title: "Return requested private links", value: metrics.accessRecoveryPending || 0, text: "Review partners who lost their private access, generate a new link and send it through their registered contact method.", tab: 1 },
     { title: "Qualify introductions", value: metrics.leadsToReview || 0, text: "Verify the connection, consent, duplicates and whether the opportunity is new to Creativa Poeta.", tab: 2 },
     { title: "Control rewards", value: metrics.rewardsToApprove || 0, text: "Standard rewards use eligible revenue collected and a stored 10% rate without a fixed cap.", tab: 3 },
     { title: "Won opportunities", value: metrics.wonLeads || 0, text: "Track the referrals that have become paying Creativa Poeta clients.", tab: 2 },
@@ -197,7 +200,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       await onChanged();
     } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update partner.", severity: "error" }); }
   };
-  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <StatusChip status={partner.status} variant={statusVariant(partner.status)} />, Applied: formatDate(partner.createdAt) }));
+  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}><StatusChip status={partner.status} variant={statusVariant(partner.status)} />{partner.accessRecoveryStatus === "pending" && <Chip size="small" color="error" icon={<VpnKey />} label="Link requested" />}</Box>, Applied: formatDate(partner.createdAt) }));
   return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
     <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedLinks(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
@@ -220,6 +223,10 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
           </Box>
         </Paper>
         <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Website / professional profile</Typography><Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website || "Not provided"}</Typography>{selected.networkDescription && <Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription}</Typography>}</Paper>
+        {selected.accessRecoveryStatus === "pending" && <Alert severity="error" icon={<VpnKey />}>
+          <Typography fontWeight={900}>The partner requested a new private link</Typography>
+          <Typography variant="body2">Requested {formatDate(selected.accessRecoveryRequestedAt)} · {selected.accessRecoveryRequestCount || 1} request(s). Verify the contact, generate a new link below and send it through the registered channel.</Typography>
+        </Alert>}
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{partnerStatuses.map((item) => <ActionButton key={item} size="small" variant={selected.status === item ? "primary" : "secondary"} onClick={() => void changeStatus(selected, item)}>{words(item)}</ActionButton>)}</Box>
         {generatedLinks && <Alert severity="success"><Typography fontWeight={900}>Links ready to share</Typography><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>{generatedLinks.accessUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.accessUrl && void navigator.clipboard.writeText(generatedLinks.accessUrl)}>Copy private access</ActionButton>}{generatedLinks.shareUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.shareUrl && void navigator.clipboard.writeText(generatedLinks.shareUrl)}>Copy client invitation</ActionButton>}</Box></Alert>}
         {["approved", "active"].includes(selected.status) && <Alert severity="warning" action={<ActionButton size="small" variant="secondary" onClick={() => void changeStatus(selected, selected.status, true)}>Generate new link</ActionButton>}>Generating a new private access invalidates the previous one. Copy the returned link and send it through the partner&apos;s preferred channel.</Alert>}

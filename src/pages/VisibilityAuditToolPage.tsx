@@ -1045,7 +1045,7 @@ const VisibilityAuditToolPage = () => {
                       onChange={(event) => setField("message", event.target.value)}
                       placeholder={copy.placeholders.message}
                       rows={3}
-                      className="min-h-[6.2rem] w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-4 py-3 text-sm font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
+                      className="min-h-[6.2rem] w-full rounded-2xl border border-white/20 bg-transparent px-4 py-3 text-sm font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
                     />
                   </label>
                 </div>
@@ -1143,7 +1143,7 @@ const Field = ({
       required={required}
       placeholder={placeholder}
       onChange={(event) => onChange(event.target.value)}
-      className="h-14 w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-4 text-sm laptop:h-12 font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
+      className="h-14 w-full rounded-2xl border border-white/20 bg-transparent px-4 text-sm laptop:h-12 font-bold text-white outline-none transition placeholder:text-white/40 focus:border-[#fff200]"
     />
   </label>
 );
@@ -1373,7 +1373,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
                 <span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.phone}</span>
                 <InternationalPhoneInput value={form.phone} onChange={(value) => setField("phone", value)} locale={locale} defaultCountry={getCurrentMarket().countryCode} placeholder={copy.placeholders.phone} />
               </label>
-              <label><span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.message}</span><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={3} className="min-h-[6rem] w-full rounded-2xl border border-white/20 bg-[#071a33]/80 px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
+              <label><span className="mb-2 block text-xs font-black uppercase text-white/75">{copy.labels.message}</span><textarea value={form.message} onChange={(event) => setField("message", event.target.value)} placeholder={copy.placeholders.message} rows={3} className="min-h-[6rem] w-full rounded-2xl border border-white/20 bg-transparent px-3 py-2 text-xs font-bold text-white outline-none placeholder:text-white/40" /></label>
             </div>
             {result && (
               <div className="mt-3 rounded-2xl border border-[#EEBA2B]/50 bg-black/25 p-3">

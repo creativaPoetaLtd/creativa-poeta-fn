@@ -203,7 +203,7 @@ const BlogsPage = () => {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={copy.search}
                 aria-label={copy.search}
-                className="h-12 w-full rounded-full border border-white/20 bg-white/[.07] pl-5 pr-12 text-sm font-bold text-white outline-none placeholder:text-white/40 focus:border-[#fff200]"
+                className="h-12 w-full rounded-full border border-white/20 bg-transparent pl-5 pr-12 text-sm font-bold text-white outline-none placeholder:text-white/40 focus:border-[#fff200]"
               />
               <button
                 type="submit"
