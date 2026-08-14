@@ -16,6 +16,7 @@ import {
   FaTools,
 } from "react-icons/fa";
 import image8 from "../assets/flags/image8.jpg";
+import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
 import "../styles/custom-inputs.css";
 import {
   buildLocalLocalePath,
@@ -1153,14 +1154,26 @@ const ProjectForm = () => {
                 {label}
               {["name", "email", "phone", "company"].includes(name) ? <span className="ml-1 text-[#fff200]" aria-hidden="true">*</span> : null}
               </label>
-              <input
-                type={type}
-                name={name}
-                value={formData[name as keyof typeof formData] as string}
-                placeholder={contactPlaceholders[name]}
-                onChange={updateField}
-                className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
-              />
+              {name === "phone" ? (
+                <InternationalPhoneInput
+                  name="phone"
+                  value={formData.phone}
+                  onChange={(value) => setFormData((current) => ({ ...current, phone: value }))}
+                  locale={locale}
+                  defaultCountry={market.countryCode}
+                  placeholder={contactPlaceholders.phone}
+                  required
+                />
+              ) : (
+                <input
+                  type={type}
+                  name={name}
+                  value={formData[name as keyof typeof formData] as string}
+                  placeholder={contactPlaceholders[name]}
+                  onChange={updateField}
+                  className="w-full rounded-xl border border-white/20 bg-white/10 p-3 text-sm font-semibold text-white placeholder:text-white/45 focus:border-[#EEBA2B] focus:outline-none tablet:rounded-2xl"
+                />
+              )}
             </div>
           ))}
         </div>

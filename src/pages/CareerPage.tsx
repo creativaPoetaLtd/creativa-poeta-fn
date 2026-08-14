@@ -2,12 +2,14 @@ import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 import { FaArrowRight, FaBriefcase, FaCheck, FaClock, FaFileUpload, FaGlobeEurope, FaHandshake, FaLaptop, FaMapMarkerAlt, FaPaperPlane, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { CareerJob, getPublishedCareerJobs, submitCareerApplication } from "../APIs/CareerApi";
+import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
 import PageLayout from "../components/layout/PageLayout";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { seoConfig } from "../components/SEO/seoConfig";
 import { buildLocalLocalePath, getCurrentLocale, getCurrentMarket } from "../data/marketRuntime";
 import careerLocale from "../i18n/CareerLocale";
 import type { CareerDiscoverySource } from "../i18n/CareerLocale";
+import { getContactRequiredMessage, validateLocalizedForm } from "../utils/localizedFormValidation";
 
 const controlClass = "min-h-12 w-full rounded-xl border border-white/20 bg-black/20 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-500 focus:border-[#EEBA2B] focus:bg-black/30 focus:ring-2 focus:ring-[#EEBA2B]/20";
 const labelClass = "mb-2 block text-[11px] font-black uppercase tracking-[.06em] text-slate-300 sm:text-xs";
@@ -55,10 +57,15 @@ export default function CareerPage() {
     window.requestAnimationFrame(() => document.getElementById("career-application")?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
-  const submit = async (event: FormEvent) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const validationError = validateLocalizedForm(event.currentTarget, locale);
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
     if (!application.email.trim() && !application.phone.trim()) {
-      toast.error(copy.contactError);
+      toast.error(getContactRequiredMessage(locale));
       return;
     }
     try {
@@ -68,8 +75,8 @@ export default function CareerPage() {
       setApplication(initialApplication);
       setCvFile(null);
       setSelectedJob(null);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : copy.error);
+    } catch {
+      toast.error(copy.error);
     } finally { setSending(false); }
   };
 
@@ -134,11 +141,11 @@ export default function CareerPage() {
       <section id="career-application" className="scroll-mt-24 border-y border-white/10 bg-black/10 py-10 backdrop-blur-[1px] sm:py-14">
         <div className="mx-auto grid max-w-6xl items-start gap-7 px-4 md:px-8 lg:grid-cols-[minmax(15rem,.7fr)_minmax(0,1.3fr)]">
           <div className="lg:sticky lg:top-28"><p className="text-xs font-black uppercase tracking-[.2em] text-[#EEBA2B]">{copy.formEyebrow}</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">{selectedJob ? copy.jobFormTitle : copy.spontaneousTitle}</h2><p className="mt-3 text-sm font-semibold leading-relaxed text-slate-400 sm:text-base">{copy.formLead}</p>{selectedJob && <div className="mt-5 rounded-xl border border-[#EEBA2B]/35 bg-[#EEBA2B]/10 p-4"><p className="text-xs font-black uppercase text-[#ffee00]">{selectedType}</p><p className="mt-1 font-black">{selectedTitle}</p><button type="button" onClick={() => { setSelectedJob(null); setApplication((current) => ({ ...current, desiredRole: "" })); }} className="mt-3 inline-flex items-center gap-2 text-xs font-black text-slate-300 hover:text-white"><FaTimes />{copy.spontaneousTitle}</button></div>}</div>
-          <form onSubmit={submit} encType="multipart/form-data" className="grid gap-4 rounded-2xl border border-white/15 bg-black/20 p-4 backdrop-blur-md sm:grid-cols-2 sm:p-6">
+          <form noValidate onSubmit={submit} encType="multipart/form-data" className="grid gap-4 rounded-2xl border border-white/15 bg-black/20 p-4 backdrop-blur-md sm:grid-cols-2 sm:p-6">
             <FormField label={copy.labels.fullName} required><input required className={controlClass} value={application.fullName} onChange={(event) => setApplication({ ...application, fullName: event.target.value })} /></FormField>
             <FormField label={copy.labels.country}><input className={controlClass} value={application.country} onChange={(event) => setApplication({ ...application, country: event.target.value })} /></FormField>
             <FormField label={copy.labels.email}><input type="email" className={controlClass} value={application.email} onChange={(event) => setApplication({ ...application, email: event.target.value })} /></FormField>
-            <FormField label={copy.labels.phone}><input type="tel" className={controlClass} value={application.phone} onChange={(event) => setApplication({ ...application, phone: event.target.value })} /></FormField>
+            <FormField label={copy.labels.phone}><InternationalPhoneInput value={application.phone} onChange={(value) => setApplication({ ...application, phone: value })} locale={locale} defaultCountry={market.countryCode} /></FormField>
             <FormField label={copy.labels.desiredRole}><input className={controlClass} value={application.desiredRole} onChange={(event) => setApplication({ ...application, desiredRole: event.target.value })} /></FormField>
             <FormField label={copy.labels.availability}><input className={controlClass} value={application.availability} onChange={(event) => setApplication({ ...application, availability: event.target.value })} /></FormField>
             <FormField label={copy.labels.skills} wide><textarea rows={3} className={controlClass} value={application.skills} onChange={(event) => setApplication({ ...application, skills: event.target.value })} /></FormField>

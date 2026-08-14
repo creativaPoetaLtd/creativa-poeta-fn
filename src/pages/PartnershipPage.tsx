@@ -17,10 +17,12 @@ import {
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { submitPartnershipRequest } from "../APIs/PartnershipRequests";
+import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
 import MarketSEOHead from "../components/SEO/MarketSEOHead";
 import { seoConfig } from "../components/SEO/seoConfig";
 import PageLayout from "../components/layout/PageLayout";
-import { getCurrentLocale } from "../data/marketRuntime";
+import { getCurrentLocale, getCurrentMarket } from "../data/marketRuntime";
+import { validateLocalizedForm } from "../utils/localizedFormValidation";
 
 type LocaleCopy = {
   heroKicker: string;
@@ -347,7 +349,8 @@ const strengthIcons = [FaCheckCircle, FaRegClock, FaBrain, FaRocket, FaHandshake
 const industryIcons = [FaLaptopCode, FaCode, FaBullhorn, FaBuilding, FaBrain, FaRocket, FaUsers, FaIndustry];
 
 const PartnershipPage = () => {
-  const locale = getCurrentLocale();
+  const market = getCurrentMarket();
+  const locale = getCurrentLocale(market);
   const copy = copyByLocale[locale] ?? copyByLocale.fr;
   const [form, setForm] = useState({
     name: "",
@@ -367,8 +370,9 @@ const PartnershipPage = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      toast.error(copy.required);
+    const validationError = validateLocalizedForm(event.currentTarget, locale);
+    if (validationError) {
+      toast.error(validationError);
       return;
     }
 
@@ -532,7 +536,7 @@ const PartnershipPage = () => {
               </a>
             </div>
 
-            <form onSubmit={handleSubmit} className="grid gap-2.5 sm:gap-3">
+            <form noValidate onSubmit={handleSubmit} className="grid gap-2.5 sm:gap-3">
               <div>
                 <h3 className="text-xl font-black text-[#ffee00] sm:text-2xl">{copy.formTitle}</h3>
                 <p className="mt-2 text-sm font-semibold text-slate-300">{copy.formLead}</p>
@@ -567,11 +571,7 @@ const PartnershipPage = () => {
                 </label>
                 <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
                   {copy.phone}
-                  <input
-                    value={form.phone}
-                    onChange={(event) => updateField("phone", event.target.value)}
-                    className="min-h-[44px] rounded-lg border border-white/20 bg-black/35 px-3 text-sm normal-case text-white outline-none focus:border-[#ffee00] sm:min-h-[48px] sm:px-4 sm:text-base"
-                  />
+                  <InternationalPhoneInput value={form.phone} onChange={(value) => updateField("phone", value)} locale={locale} defaultCountry={market.countryCode} />
                 </label>
               </div>
               <label className="grid gap-1 text-xs font-black uppercase text-slate-300">
