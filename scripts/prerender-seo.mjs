@@ -1218,6 +1218,45 @@ const pageTemplates = {
             ],
           ],
   },
+  referralGuide: {
+    path: "/referral-partners/guide",
+    title: (lang) =>
+      lang === "fr"
+        ? "Guide de l'apporteur de clients | Creativa Poeta"
+        : lang === "nl"
+          ? "Praktische gids voor klantenaanbrengers | Creativa Poeta"
+          : lang === "rw"
+            ? "Igitabo cy'umuhuza w'abakiliya | Creativa Poeta"
+            : "Client Introducer Guide | Creativa Poeta",
+    description: (lang) =>
+      lang === "fr"
+        ? "Apprenez a reperer un besoin numerique reel, engager une conversation utile et presenter une personne ou une entreprise a Creativa Poeta."
+        : lang === "nl"
+          ? "Leer een echte digitale behoefte herkennen, een nuttig gesprek starten en een persoon of bedrijf aan Creativa Poeta voorstellen."
+          : lang === "rw"
+            ? "Menya uko wabona digital need nyayo, ukaganira neza kandi ugahuza umuntu cyangwa business na Creativa Poeta."
+            : "Learn how to spot a genuine digital need, start a useful conversation and introduce a person or business to Creativa Poeta.",
+    keywords:
+      "client introducer guide, referral guide, business introduction, find digital opportunities, Creativa Poeta",
+    sections: (lang) => [
+      [
+        lang === "fr" ? "Reperer un vrai besoin" : lang === "nl" ? "Herken een echte behoefte" : "Spot a real need",
+        lang === "fr"
+          ? "Observez, ecoutez et posez quelques questions avant de proposer une mise en relation."
+          : lang === "nl"
+            ? "Observeer, luister en stel enkele vragen voordat u een introductie voorstelt."
+            : "Observe, listen and ask a few questions before suggesting an introduction.",
+      ],
+      [
+        lang === "fr" ? "Faire une introduction valable" : lang === "nl" ? "Maak een geldige introductie" : "Make a valid introduction",
+        lang === "fr"
+          ? "Obtenez l'accord de la personne et transmettez un contexte exact plutot qu'une simple coordonnee publique."
+          : lang === "nl"
+            ? "Vraag toestemming en geef correcte context in plaats van alleen openbare contactgegevens."
+            : "Get the person's agreement and provide accurate context rather than public contact details alone.",
+      ],
+    ],
+  },
   career: {
     path: "/career",
     title: (lang) =>

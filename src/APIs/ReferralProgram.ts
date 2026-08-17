@@ -13,6 +13,18 @@ export interface ReferralActivity {
   at: string;
 }
 
+export interface ReferralNotificationDelivery {
+  kind: "approval" | "rejection";
+  requestedChannel: "email" | "whatsapp" | "phone" | "sms" | "other";
+  deliveredChannel?: "email" | "whatsapp";
+  status: "sent" | "delivered" | "read" | "failed" | "manual_required";
+  fallbackUsed: boolean;
+  providerMessageId?: string;
+  error?: string;
+  attemptedAt: string;
+  updatedAt: string;
+}
+
 export interface ReferralPartner {
   _id: string;
   partnerId?: string;
@@ -35,6 +47,7 @@ export interface ReferralPartner {
   accessRecoveryRequestedAt?: string;
   accessRecoveryResolvedAt?: string;
   accessRecoveryRequestCount?: number;
+  lastNotification?: ReferralNotificationDelivery;
   activity: ReferralActivity[];
   createdAt: string;
   updatedAt: string;
@@ -260,6 +273,7 @@ export interface ManualReferralEntryPayload {
 export const createManualReferralEntry = (data: ManualReferralEntryPayload) => authRequest<{
   partner: ReferralPartner;
   lead?: ReferralLead;
+  notification?: ReferralNotificationDelivery;
   accessUrl?: string;
   shareUrl?: string;
 }>(
@@ -272,7 +286,7 @@ export const getReferralPartners = (page = 1, status = "all", search = "") => au
   pagination: { currentPage: number; totalPages: number; total: number; limit: number };
 }>({ method: "GET", url: "/api/referral-program/partners", params: { page, status, search } }, "Failed to fetch referral partners.");
 
-export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean; accessUrl?: string; shareUrl?: string }>(
+export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean; notification?: ReferralNotificationDelivery; accessUrl?: string; shareUrl?: string }>(
   { method: "PATCH", url: `/api/referral-program/partners/${id}`, data },
   "Failed to update referral partner."
 );

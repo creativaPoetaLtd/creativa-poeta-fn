@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { FaArrowRight, FaBriefcase, FaCalculator, FaCheck, FaHandshake, FaPaperPlane, FaShieldAlt, FaTimes, FaUsers } from "react-icons/fa";
+import { FaArrowRight, FaBriefcase, FaCalculator, FaCheck, FaHandshake, FaPaperPlane, FaShieldAlt, FaTimes, FaUsers, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { submitPartnershipRequest } from "../APIs/PartnershipRequests";
 import { requestReferralAccessRecovery, submitDirectReferral, submitProspectReferral, submitReferralApplication, submitReferralLead } from "../APIs/ReferralProgram";
 import InternationalPhoneInput from "../components/forms/InternationalPhoneInput";
@@ -9,6 +10,7 @@ import { seoConfig } from "../components/SEO/seoConfig";
 import { buildLocalLocalePath, getCurrentLocale, getCurrentMarket } from "../data/marketRuntime";
 import referralProgramLocale from "../i18n/ReferralProgramLocale";
 import referralProgramActionLocale from "../i18n/ReferralProgramActionLocale";
+import referralPartnerGuideLocale from "../i18n/ReferralPartnerGuideLocale";
 import { getContactRequiredMessage, normalizeWebsiteUrl, validateLocalizedForm } from "../utils/localizedFormValidation";
 import "./ReferralProgramPage.css";
 
@@ -22,8 +24,11 @@ type FeedbackState = {
   tone: "success" | "error" | "info";
   title: string;
   message: string;
-  primaryAction?: "recover-access";
+  primaryAction?: "recover-access" | "continue-whatsapp";
+  actionHref?: string;
 } | null;
+
+const buildWhatsAppUrl = (message: string) => `https://wa.me/32473297112?text=${encodeURIComponent(message)}`;
 
 const resolvePreferredContact = (preferred: ContactPreference, email: string, phone: string): ContactPreference => {
   if (preferred === "email" && !email.trim() && phone.trim()) return "whatsapp";
@@ -36,6 +41,7 @@ export default function ReferralProgramPage() {
   const locale = getCurrentLocale(market);
   const copy = referralProgramLocale[locale] ?? referralProgramLocale.fr;
   const actionCopy = referralProgramActionLocale[locale] ?? referralProgramActionLocale.fr;
+  const guideCopy = referralPartnerGuideLocale[locale] ?? referralPartnerGuideLocale.fr;
   const prospectCopy = locale === "nl"
     ? { title: "U bent doorverwezen naar Creativa Poeta", lead: "Vertel ons wat u of uw bedrijf nodig heeft. Uw gegevens worden aan de partner toegewezen die u deze link stuurde.", consent: "Ik vraag Creativa Poeta om contact met mij op te nemen over deze behoefte.", send: "Mijn aanvraag verzenden", success: "Uw aanvraag is verzonden. Creativa Poeta neemt contact met u op." }
     : locale === "en"
@@ -44,6 +50,7 @@ export default function ReferralProgramPage() {
     ? { title: "Hari umuntu wakumenyesheje Creativa Poeta", lead: "Tubwire icyo wowe cyangwa business yawe ikeneye. Request izandikwa ku muntu waguhaye iyi link.", consent: "Ndasaba Creativa Poeta kumvugisha kuri iyi need.", send: "Ohereza request", success: "Request yawe yoherejwe. Creativa Poeta izakuvugisha." }
     : { title: "Une personne vous a recommandé Creativa Poeta", lead: "Expliquez-nous directement votre besoin ou celui de votre entreprise. Votre demande sera attribuée à la personne qui vous a transmis ce lien.", consent: "Je demande à Creativa Poeta de me contacter au sujet de ce besoin.", send: "Envoyer ma demande", success: "Votre demande a été envoyée. Creativa Poeta vous contactera." };
   const termsPath = buildLocalLocalePath(market, locale, "/referral-program-terms");
+  const guidePath = buildLocalLocalePath(market, locale, "/referral-partners/guide");
   const [projectValue, setProjectValue] = useState(2000);
   const estimatedReward = useMemo(() => Math.max(0, projectValue) * 0.1, [projectValue]);
   const [applicationSending, setApplicationSending] = useState(false);
@@ -137,9 +144,11 @@ export default function ReferralProgramPage() {
     }
     try {
       setApplicationSending(true);
+      const preferredContact = resolvePreferredContact(application.preferredContact, application.email, application.phone);
+      const applicantName = application.name.trim();
       const response = await submitReferralApplication({
         ...application,
-        preferredContact: resolvePreferredContact(application.preferredContact, application.email, application.phone),
+        preferredContact,
         website: normalizeWebsiteUrl(application.website),
         locale,
       });
@@ -152,7 +161,17 @@ export default function ReferralProgramPage() {
         });
         return;
       }
-      showSuccess(copy.form.success);
+      if (preferredContact === "whatsapp") {
+        setFeedback({
+          tone: "success",
+          title: actionCopy.successTitle,
+          message: `${copy.form.success} ${actionCopy.continueWhatsAppHelp}`,
+          primaryAction: "continue-whatsapp",
+          actionHref: buildWhatsAppUrl(actionCopy.whatsappApplicationMessage.replace("{{name}}", applicantName)),
+        });
+      } else {
+        showSuccess(copy.form.success);
+      }
       setApplication((current) => ({ ...current, name: "", email: "", phone: "", country: "", website: "", termsAccepted: false, marketingConsent: false }));
     } catch {
       showError(copy.form.error);
@@ -178,14 +197,26 @@ export default function ReferralProgramPage() {
     }
     try {
       setDirectSending(true);
+      const preferredContact = resolvePreferredContact(direct.preferredContact, direct.referrerEmail, direct.referrerPhone);
+      const referrerName = direct.referrerName.trim();
       await submitDirectReferral({
         ...direct,
-        preferredContact: resolvePreferredContact(direct.preferredContact, direct.referrerEmail, direct.referrerPhone),
+        preferredContact,
         referrerWebsite: normalizeWebsiteUrl(direct.referrerWebsite),
         website: normalizeWebsiteUrl(direct.website),
         locale,
       });
-      showSuccess(actionCopy.directSuccess);
+      if (preferredContact === "whatsapp") {
+        setFeedback({
+          tone: "success",
+          title: actionCopy.successTitle,
+          message: `${actionCopy.directSuccess} ${actionCopy.continueWhatsAppHelp}`,
+          primaryAction: "continue-whatsapp",
+          actionHref: buildWhatsAppUrl(actionCopy.whatsappIntroductionMessage.replace("{{name}}", referrerName)),
+        });
+      } else {
+        showSuccess(actionCopy.directSuccess);
+      }
       setDirect((current) => ({
         ...current,
         referrerName: "", referrerEmail: "", referrerPhone: "", referrerCountry: "", referrerWebsite: "",
@@ -294,6 +325,13 @@ export default function ReferralProgramPage() {
       </div></section>
 
       <section className="mx-auto max-w-6xl px-4 py-9 md:px-8 sm:py-12"><h2 className="text-2xl font-black sm:text-4xl">{copy.servicesTitle}</h2><div className="mt-5 flex flex-wrap gap-2">{copy.services.map((service) => <span key={service} className="rounded-full border border-[#EEBA2B]/35 bg-black/25 px-3.5 py-2 text-xs font-black sm:text-sm">{service}</span>)}</div></section>
+
+      <section className="mx-auto max-w-6xl px-4 pb-9 md:px-8 sm:pb-12">
+        <div className="grid items-center gap-4 rounded-2xl border border-[#EEBA2B]/35 bg-[linear-gradient(135deg,rgba(238,186,43,.13),rgba(0,0,0,.24))] p-5 backdrop-blur md:grid-cols-[1fr_auto] sm:p-6">
+          <div><p className="text-[11px] font-black uppercase tracking-[.18em] text-[#ffee00]">{guideCopy.guidePromoEyebrow}</p><h2 className="mt-2 text-2xl font-black sm:text-3xl">{guideCopy.guidePromoTitle}</h2><p className="mt-2 max-w-3xl text-sm font-semibold leading-relaxed text-slate-300 sm:text-base">{guideCopy.guidePromoText}</p></div>
+          <Link to={guidePath} className={`${buttonClass} w-fit bg-[#ffee00] text-black hover:bg-white`}>{guideCopy.guidePromoCta}<FaArrowRight /></Link>
+        </div>
+      </section>
 
       <section id="business-partners" className="mx-auto grid max-w-6xl scroll-mt-28 items-start gap-4 px-4 pb-9 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] sm:pb-12">
         <article className="rounded-2xl border border-[#EEBA2B]/30 bg-black/25 p-5 backdrop-blur sm:p-6"><FaCalculator className="text-2xl text-[#EEBA2B]" /><h2 className="mt-3 text-2xl font-black sm:text-3xl">{copy.calculatorTitle}</h2><p className="mt-2 text-sm font-semibold leading-relaxed text-slate-300">{copy.calculatorLead}</p><div className="mt-5 grid items-end gap-3 sm:grid-cols-[minmax(0,1fr)_auto]"><label className="cp-referral-field block"><span className={labelClass}>{copy.estimatedValue}</span><div className="flex items-center rounded-xl border border-white/20 bg-black/30 px-3"><span className="font-black text-[#EEBA2B]">€</span><input type="number" min="0" step="50" value={projectValue} onChange={(event) => setProjectValue(Number(event.target.value))} className="min-h-12 w-full bg-transparent px-2 font-black outline-none" /></div></label><div className="w-fit min-w-[12rem] rounded-xl bg-[#EEBA2B] px-4 py-3 text-black"><p className="text-[10px] font-black uppercase tracking-wide">{copy.estimatedReward}</p><p className="mt-0.5 text-3xl font-black">€{estimatedReward.toFixed(2)}</p></div></div><p className="mt-3 text-xs font-semibold leading-relaxed text-slate-400">{copy.estimateNote}</p></article>
@@ -417,6 +455,7 @@ export default function ReferralProgramPage() {
         feedback={feedback}
         okLabel={actionCopy.dialogOk}
         recoveryLabel={recoverySending ? actionCopy.requestingAccess : actionCopy.requestAccess}
+        whatsappLabel={actionCopy.continueWhatsApp}
         recoverySending={recoverySending}
         onRecover={() => void handleAccessRecovery()}
         onClose={() => setFeedback(null)}
@@ -451,10 +490,11 @@ const Modal = ({ title, closeLabel, onClose, children }: { title: string; closeL
   </div>
 );
 
-const FeedbackModal = ({ feedback, okLabel, recoveryLabel, recoverySending, onRecover, onClose }: {
+const FeedbackModal = ({ feedback, okLabel, recoveryLabel, whatsappLabel, recoverySending, onRecover, onClose }: {
   feedback: NonNullable<FeedbackState>;
   okLabel: string;
   recoveryLabel: string;
+  whatsappLabel: string;
   recoverySending: boolean;
   onRecover: () => void;
   onClose: () => void;
@@ -468,6 +508,7 @@ const FeedbackModal = ({ feedback, okLabel, recoveryLabel, recoverySending, onRe
       <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-300 sm:text-base">{feedback.message}</p>
       <div className={`mt-6 grid gap-2 ${feedback.primaryAction ? "grid-cols-2" : "grid-cols-1"}`}>
         {feedback.primaryAction === "recover-access" && <button type="button" disabled={recoverySending} onClick={onRecover} className={`${buttonClass} bg-[#ffee00] text-black disabled:opacity-60`}>{recoveryLabel}</button>}
+        {feedback.primaryAction === "continue-whatsapp" && feedback.actionHref && <a href={feedback.actionHref} target="_blank" rel="noreferrer" className={`${buttonClass} bg-[#25D366] text-black`}><FaWhatsapp aria-hidden="true" />{whatsappLabel}</a>}
         <button type="button" disabled={recoverySending} onClick={onClose} className={`${buttonClass} border border-white/25 bg-white/5 text-white disabled:opacity-60`}>{okLabel}</button>
       </div>
     </div>

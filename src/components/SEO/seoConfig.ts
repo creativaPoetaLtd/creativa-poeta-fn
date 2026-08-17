@@ -263,6 +263,28 @@
     },
   },
 
+  referralGuide: {
+    title: "Client Introducer Guide | Find Good Opportunities | Creativa Poeta",
+    description:
+      "Learn how to spot genuine digital needs, start a useful conversation and introduce a person or business to Creativa Poeta responsibly.",
+    keywords:
+      "client introducer guide, referral guide, find digital clients, business introduction, Creativa Poeta partner guide",
+    url: "https://creativapoeta.com/referral-partners/guide",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      name: "How to identify and introduce a potential client to Creativa Poeta",
+      description:
+        "A practical guide to spotting a real digital need, obtaining consent and making a useful client introduction.",
+      step: [
+        { "@type": "HowToStep", name: "Observe", text: "Identify a concrete business need or digital difficulty." },
+        { "@type": "HowToStep", name: "Listen", text: "Ask questions to understand the desired outcome without making promises." },
+        { "@type": "HowToStep", name: "Ask for agreement", text: "Confirm that the person agrees to an introduction." },
+        { "@type": "HowToStep", name: "Introduce", text: "Connect the person with Creativa Poeta and provide accurate context." },
+      ],
+    },
+  },
+
   career: {
     title: "Careers, opportunities and spontaneous applications | Creativa Poeta",
     description:
