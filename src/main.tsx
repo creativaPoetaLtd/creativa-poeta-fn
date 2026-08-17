@@ -33,6 +33,7 @@ import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.t
 import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
 import ReferralProgramPage from "./pages/ReferralProgramPage.tsx";
+import ReferralPartnerGuidePage from "./pages/ReferralPartnerGuidePage.tsx";
 import ReferralProgramTermsPage from "./pages/ReferralProgramTermsPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
@@ -77,6 +78,11 @@ const appElement = (
             <Route path="/fr/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/nl/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/rw/referral-partners" element={<ReferralProgramPage />} />
+            <Route path="/referral-partners/guide" element={<ReferralPartnerGuidePage />} />
+            <Route path="/en/referral-partners/guide" element={<ReferralPartnerGuidePage />} />
+            <Route path="/fr/referral-partners/guide" element={<ReferralPartnerGuidePage />} />
+            <Route path="/nl/referral-partners/guide" element={<ReferralPartnerGuidePage />} />
+            <Route path="/rw/referral-partners/guide" element={<ReferralPartnerGuidePage />} />
             <Route path="/referral-program-terms" element={<ReferralProgramTermsPage />} />
             <Route path="/en/referral-program-terms" element={<ReferralProgramTermsPage />} />
             <Route path="/fr/referral-program-terms" element={<ReferralProgramTermsPage />} />

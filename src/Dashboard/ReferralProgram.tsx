@@ -15,7 +15,7 @@ import Search from "@mui/icons-material/Search";
 import Visibility from "@mui/icons-material/Visibility";
 import VpnKey from "@mui/icons-material/VpnKey";
 import {
-  ManualReferralEntryPayload, ReferralLead, ReferralLeadStatus, ReferralPartner, ReferralPartnerStatus, ReferralReward,
+  ManualReferralEntryPayload, ReferralLead, ReferralLeadStatus, ReferralNotificationDelivery, ReferralPartner, ReferralPartnerStatus, ReferralReward,
   claimReferralLead, createManualReferralEntry, getReferralLeads, getReferralPartners, getReferralProgramSummary,
   getReferralRewards, markReferralRewardPaid, updateReferralLead, updateReferralPartner,
   updateReferralRewardStatus, upsertReferralReward,
@@ -106,7 +106,12 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
 }) {
   const [form, setForm] = useState<ManualReferralEntryPayload>({ ...initialManualEntry });
   const [sending, setSending] = useState(false);
-  const [result, setResult] = useState<{ partnerId?: string; accessUrl?: string; shareUrl?: string } | null>(null);
+  const [result, setResult] = useState<{
+    partnerId?: string;
+    accessUrl?: string;
+    shareUrl?: string;
+    notification?: ReferralNotificationDelivery;
+  } | null>(null);
   const existing = Boolean(form.existingPartnerId?.trim());
 
   const close = () => {
@@ -123,7 +128,12 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
     try {
       setSending(true);
       const response = await createManualReferralEntry(form);
-      setResult({ partnerId: response.partner.partnerId, accessUrl: response.accessUrl, shareUrl: response.shareUrl });
+      setResult({
+        partnerId: response.partner.partnerId,
+        accessUrl: response.accessUrl,
+        shareUrl: response.shareUrl,
+        notification: response.notification,
+      });
       onNotice({ message: response.lead ? "Partner and client introduction recorded." : "Partner application recorded.", severity: "success" });
       await onChanged();
     } catch (error) {
@@ -139,6 +149,12 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
       <Alert severity="info" sx={{ mb: 2 }}>Use this form when someone contacts Creativa Poeta through WhatsApp, Facebook, phone, SMS or another external channel. Use an existing partner ID when the person is already registered.</Alert>
       {result ? <Box sx={{ display: "grid", gap: 2 }}>
         <Alert severity="success">Saved under partner ID <b>{result.partnerId}</b>.</Alert>
+        {result.notification && <Alert severity={result.notification.status === "sent" ? "success" : result.notification.status === "failed" ? "error" : "warning"}>
+          <b>Partner notification:</b>{" "}
+          {result.notification.status === "sent"
+            ? `sent via ${words(result.notification.deliveredChannel || result.notification.requestedChannel)}${result.notification.fallbackUsed ? " after an email fallback" : ""}.`
+            : `${words(result.notification.status)} for ${words(result.notification.requestedChannel)}.${result.notification.error ? ` ${result.notification.error}` : ""}`}
+        </Alert>}
         {result.accessUrl && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Private partner access</Typography><Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>Only the partner should receive this link.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13 }}>{result.accessUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => result.accessUrl && void copy(result.accessUrl, "Private access link")}>Copy private link</ActionButton></Paper>}
         {result.shareUrl && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Client invitation link</Typography><Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>The partner may share this link with a client who agreed to be contacted.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13 }}>{result.shareUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => result.shareUrl && void copy(result.shareUrl, "Client invitation link")}>Copy client link</ActionButton></Paper>}
         {!result.accessUrl && !result.shareUrl && <Alert severity="warning">The record is pending. Approve it from Partner applications to generate the shareable links.</Alert>}
@@ -196,12 +212,22 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
         setGeneratedLinks({ accessUrl: response.accessUrl, shareUrl: response.shareUrl });
         setSelected(response.partner);
       }
-      onNotice({ message: response.emailSent ? `Partner ${nextStatus}; notification sent.` : `Partner ${nextStatus}.`, severity: "success" });
+      const delivery = response.notification;
+      const deliveryFailed = Boolean(delivery && ["failed", "manual_required"].includes(delivery.status));
+      const deliveryMessage = delivery?.deliveredChannel
+        ? `${words(delivery.kind)} notification sent via ${words(delivery.deliveredChannel)}${delivery.fallbackUsed ? " after fallback" : ""}.`
+        : delivery
+          ? `${words(delivery.kind)} notification ${words(delivery.status)}. ${delivery.error || ""}`.trim()
+          : "No automatic notification was required.";
+      onNotice({
+        message: `Partner ${nextStatus}. ${deliveryMessage}`,
+        severity: deliveryFailed ? "error" : "success",
+      });
       await onChanged();
     } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update partner.", severity: "error" }); }
   };
-  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}><StatusChip status={partner.status} variant={statusVariant(partner.status)} />{partner.accessRecoveryStatus === "pending" && <Chip size="small" color="error" icon={<VpnKey />} label="Link requested" />}</Box>, Applied: formatDate(partner.createdAt) }));
-  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
+  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}><StatusChip status={partner.status} variant={statusVariant(partner.status)} />{partner.accessRecoveryStatus === "pending" && <Chip size="small" color="error" icon={<VpnKey />} label="Link requested" />}</Box>, Notification: partner.lastNotification ? <Chip size="small" color={["failed", "manual_required"].includes(partner.lastNotification.status) ? "error" : partner.lastNotification.status === "read" ? "success" : "info"} label={`${words(partner.lastNotification.status)} · ${words(partner.lastNotification.deliveredChannel || partner.lastNotification.requestedChannel)}`} /> : "-", Applied: formatDate(partner.createdAt) }));
+  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
     <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedLinks(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
       <DialogContent sx={{ pt: 3 }}>{selected && <Box sx={{ display: "grid", gap: 2 }}>
@@ -222,6 +248,16 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
             <Typography><b>Submitted:</b> {formatDate(selected.createdAt)}</Typography>
           </Box>
         </Paper>
+        {selected.lastNotification && <Alert severity={["failed", "manual_required"].includes(selected.lastNotification.status) ? "error" : selected.lastNotification.status === "read" ? "success" : "info"}>
+          <Typography fontWeight={900}>Last {words(selected.lastNotification.kind)} notification</Typography>
+          <Typography variant="body2">
+            Preferred: {words(selected.lastNotification.requestedChannel)} · Result: {words(selected.lastNotification.status)}
+            {selected.lastNotification.deliveredChannel ? ` · Sent via ${words(selected.lastNotification.deliveredChannel)}` : ""}
+            {selected.lastNotification.fallbackUsed ? " · Fallback used" : ""}
+            {` · ${formatDate(selected.lastNotification.updatedAt)}`}
+          </Typography>
+          {selected.lastNotification.error && <Typography variant="body2" sx={{ mt: 0.75 }}>{selected.lastNotification.error}</Typography>}
+        </Alert>}
         <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Website / professional profile</Typography><Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website || "Not provided"}</Typography>{selected.networkDescription && <Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription}</Typography>}</Paper>
         {selected.accessRecoveryStatus === "pending" && <Alert severity="error" icon={<VpnKey />}>
           <Typography fontWeight={900}>The partner requested a new private link</Typography>
@@ -229,7 +265,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
         </Alert>}
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{partnerStatuses.map((item) => <ActionButton key={item} size="small" variant={selected.status === item ? "primary" : "secondary"} onClick={() => void changeStatus(selected, item)}>{words(item)}</ActionButton>)}</Box>
         {generatedLinks && <Alert severity="success"><Typography fontWeight={900}>Links ready to share</Typography><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>{generatedLinks.accessUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.accessUrl && void navigator.clipboard.writeText(generatedLinks.accessUrl)}>Copy private access</ActionButton>}{generatedLinks.shareUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.shareUrl && void navigator.clipboard.writeText(generatedLinks.shareUrl)}>Copy client invitation</ActionButton>}</Box></Alert>}
-        {["approved", "active"].includes(selected.status) && <Alert severity="warning" action={<ActionButton size="small" variant="secondary" onClick={() => void changeStatus(selected, selected.status, true)}>Generate new link</ActionButton>}>Generating a new private access invalidates the previous one. Copy the returned link and send it through the partner&apos;s preferred channel.</Alert>}
+        {["approved", "active"].includes(selected.status) && <Alert severity="warning" action={<ActionButton size="small" variant="secondary" onClick={() => void changeStatus(selected, selected.status, true)}>Regenerate and resend</ActionButton>}>Generating a new private access invalidates the previous one. The new access will be sent through the preferred channel, with email fallback when available.</Alert>}
       </Box>}</DialogContent>
       <DialogActions><ActionButton variant="secondary" onClick={() => { setSelected(null); setGeneratedLinks(null); }}>Close</ActionButton></DialogActions>
     </Dialog>

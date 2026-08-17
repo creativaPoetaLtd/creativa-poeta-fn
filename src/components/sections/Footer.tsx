@@ -99,12 +99,12 @@ function Footer() {
     { label: assistanceLabel, path: "/demander-assistance-numerique" },
   ];
   const referralFooter = locale === "nl"
-    ? { title: "Klanten voorstellen & samenwerken", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Hoe het werkt", join: "Deelnemen", submit: "Een klant voorstellen", business: "Commerciële partners", strategic: "Samenwerking op maat", terms: "Programmavoorwaarden" }
+    ? { title: "Klanten voorstellen & samenwerken", intro: "Uw netwerk kan bedrijven verbinden met de digitale diensten die ze nodig hebben.", overview: "Hoe het werkt", guide: "Praktische gids", join: "Deelnemen", submit: "Een klant voorstellen", business: "Commerciële partners", strategic: "Samenwerking op maat", terms: "Programmavoorwaarden" }
     : locale === "en"
-    ? { title: "Client introductions & partnerships", intro: "Your network can connect businesses with the digital services they need.", overview: "How it works", join: "Join the program", submit: "Introduce a client", business: "Commercial partners", strategic: "Tailored collaboration", terms: "Program terms" }
+    ? { title: "Client introductions & partnerships", intro: "Your network can connect businesses with the digital services they need.", overview: "How it works", guide: "Practical guide", join: "Join the program", submit: "Introduce a client", business: "Commercial partners", strategic: "Tailored collaboration", terms: "Program terms" }
     : locale === "kiny"
-    ? { title: "Kumenyekanisha abakiliya & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Uko ikora", join: "Injira muri porogaramu", submit: "Menyekanisha umukiliya", business: "Abafatanyabikorwa b’ubucuruzi", strategic: "Ubufatanye bwihariye", terms: "Amategeko ya porogaramu" }
-    : { title: "Apporteurs de clients & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Comment ça marche", join: "Rejoindre le programme", submit: "Présenter un client", business: "Partenaires commerciaux", strategic: "Collaboration sur mesure", terms: "Conditions du programme" };
+    ? { title: "Kumenyekanisha abakiliya & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Uko ikora", guide: "Guide ifatika", join: "Injira muri porogaramu", submit: "Menyekanisha umukiliya", business: "Abafatanyabikorwa b’ubucuruzi", strategic: "Ubufatanye bwihariye", terms: "Amategeko ya porogaramu" }
+    : { title: "Apporteurs de clients & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Comment ça marche", guide: "Guide pratique", join: "Rejoindre le programme", submit: "Présenter un client", business: "Partenaires commerciaux", strategic: "Collaboration sur mesure", terms: "Conditions du programme" };
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -236,6 +236,7 @@ function Footer() {
               </div>
               <div className="grid grid-cols-2 gap-2 text-sm font-bold sm:grid-cols-3">
                 <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={linkPath("/referral-partners")}>{referralFooter.overview}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={linkPath("/referral-partners/guide")}>{referralFooter.guide}</Link>
                 <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#join-cprpp`}>{referralFooter.join}</Link>
                 <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#submit-referral`}>{referralFooter.submit}</Link>
                 <Link className="rounded-lg border border-white/10 p-3 text-slate-300 hover:border-[#EEBA2B] hover:text-white" to={`${linkPath("/referral-partners")}#business-partners`}>{referralFooter.business}</Link>

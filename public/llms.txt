@@ -24,6 +24,7 @@ Primary website: https://creativapoeta.com/
 - Visibility test: https://creativapoeta.com/tester-visibilite
 - Digital assistance request: https://creativapoeta.com/demande-assistance-numerique
 - Referral and Business Partner Program: https://creativapoeta.com/referral-partners
+- Client Introducer Guide: https://creativapoeta.com/referral-partners/guide
 - Referral Program Terms: https://creativapoeta.com/referral-program-terms
 - Local visibility service: https://creativapoeta.com/services/visibilite-locale
 - Websites, apps and tools service: https://creativapoeta.com/services/web-app

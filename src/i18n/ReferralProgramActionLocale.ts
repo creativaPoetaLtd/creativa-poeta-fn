@@ -36,10 +36,18 @@ export type ReferralProgramActionCopy = {
   requestingAccess: string;
   recoveryReceivedTitle: string;
   recoveryReceivedMessage: string;
+  continueWhatsApp: string;
+  continueWhatsAppHelp: string;
+  whatsappApplicationMessage: string;
+  whatsappIntroductionMessage: string;
 };
 
 const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralProgramActionCopy> = {
   fr: {
+    continueWhatsApp: "Continuer sur WhatsApp",
+    continueWhatsAppHelp: "Pour permettre à notre équipe de vous répondre directement sur WhatsApp, ouvrez la conversation et envoyez le message préparé.",
+    whatsappApplicationMessage: "Bonjour Creativa Poeta, je viens d'envoyer ma demande d'inscription au programme d'apporteurs de clients. Mon nom est {{name}}.",
+    whatsappIntroductionMessage: "Bonjour Creativa Poeta, je viens de vous présenter un client. Mon nom est {{name}}.",
     directTitle: "Vous avez déjà un client à nous présenter ?",
     directLead: "Vous pouvez faire votre première présentation sans attendre votre inscription. Nous enregistrerons vos informations avec celles du client et créerons automatiquement votre dossier dans le programme.",
     directButton: "Présenter ce client",
@@ -79,6 +87,10 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     recoveryReceivedMessage: "Creativa Poeta a reçu votre demande. Notre équipe vérifiera votre inscription et vous transmettra un nouveau lien privé par votre moyen de contact enregistré.",
   },
   en: {
+    continueWhatsApp: "Continue on WhatsApp",
+    continueWhatsAppHelp: "To let our team reply to you directly on WhatsApp, open the conversation and send the prepared message.",
+    whatsappApplicationMessage: "Hello Creativa Poeta, I have just submitted my application to the client introducer program. My name is {{name}}.",
+    whatsappIntroductionMessage: "Hello Creativa Poeta, I have just introduced a client. My name is {{name}}.",
     directTitle: "Already have a client to introduce?",
     directLead: "You can make your first introduction before registering. We will save your details with the client information and automatically create your program record.",
     directButton: "Introduce this client",
@@ -118,6 +130,10 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     recoveryReceivedMessage: "Creativa Poeta has received your request. Our team will verify your registration and send a new private link through your registered contact method.",
   },
   nl: {
+    continueWhatsApp: "Verdergaan op WhatsApp",
+    continueWhatsAppHelp: "Open het gesprek en verstuur het voorbereide bericht, zodat ons team u rechtstreeks via WhatsApp kan antwoorden.",
+    whatsappApplicationMessage: "Hallo Creativa Poeta, ik heb zojuist mijn aanvraag voor het klantenaanbrengerprogramma ingediend. Mijn naam is {{name}}.",
+    whatsappIntroductionMessage: "Hallo Creativa Poeta, ik heb zojuist een klant voorgesteld. Mijn naam is {{name}}.",
     directTitle: "Hebt u al een klant om voor te stellen?",
     directLead: "U kunt uw eerste introductie doen zonder voorafgaande registratie. We bewaren uw gegevens samen met die van de klant en maken automatisch uw programmadossier aan.",
     directButton: "Deze klant voorstellen",
@@ -157,6 +173,10 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     recoveryReceivedMessage: "Creativa Poeta heeft uw aanvraag ontvangen. Ons team controleert uw inschrijving en stuurt een nieuwe privélink via uw geregistreerde contactmethode.",
   },
   kiny: {
+    continueWhatsApp: "Komereza kuri WhatsApp",
+    continueWhatsAppHelp: "Fungura ikiganiro hanyuma wohereze ubutumwa bwateguwe kugira ngo team yacu ishobore kugusubiza kuri WhatsApp.",
+    whatsappApplicationMessage: "Muraho Creativa Poeta, maze kohereza ubusabe bwo kwinjira muri porogaramu y'abatumenyesha abakiliya. Nitwa {{name}}.",
+    whatsappIntroductionMessage: "Muraho Creativa Poeta, maze kubamenyesha umukiliya. Nitwa {{name}}.",
     directTitle: "Hari umukiliya usanzwe ushaka kutumenyesha?",
     directLead: "Ushobora kutwoherereza umukiliya wa mbere utarabanje kwiyandikisha. Tuzabika amakuru yawe n’ay’umukiliya kandi tugukorere dossier ya porogaramu ako kanya.",
     directButton: "Menyekanisha uyu mukiliya",
