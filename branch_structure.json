@@ -1,0 +1,33 @@
+{
+  "default_branch": "develop",
+  "branches": [
+    "agent/referral-guide-focus",
+    "agent/referral-program-launch-2026-08-11",
+    "agent/refine-career-applications-2026-08-11",
+    "agent/refine-career-opportunity-order-2026-08-11",
+    "agent/whatsapp-team-inbox-2026-08-12",
+    "develop",
+    "feature/delete-dashboard-requests",
+    "origin"
+  ],
+  "parent": {
+    "agent/referral-guide-focus": "develop",
+    "agent/referral-program-launch-2026-08-11": "develop",
+    "agent/refine-career-applications-2026-08-11": "develop",
+    "agent/refine-career-opportunity-order-2026-08-11": "develop",
+    "agent/whatsapp-team-inbox-2026-08-12": "develop",
+    "develop": null,
+    "feature/delete-dashboard-requests": "develop",
+    "origin": "develop"
+  },
+  "order": [
+    "develop",
+    "agent/referral-guide-focus",
+    "agent/referral-program-launch-2026-08-11",
+    "agent/refine-career-applications-2026-08-11",
+    "agent/refine-career-opportunity-order-2026-08-11",
+    "agent/whatsapp-team-inbox-2026-08-12",
+    "feature/delete-dashboard-requests",
+    "origin"
+  ]
+}
