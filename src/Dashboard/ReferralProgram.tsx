@@ -26,8 +26,29 @@ import { ActionButton, DashboardCard, DataTable, MenuAction, PageHeader, StatusC
 
 const partnerStatuses: ReferralPartnerStatus[] = ["pending", "approved", "active", "rejected", "suspended", "closed"];
 const leadStatuses: ReferralLeadStatus[] = ["submitted", "waiting_for_introduction", "under_review", "accepted", "duplicate", "rejected", "contacted", "qualified", "proposal_sent", "won", "lost"];
-const formatDate = (value?: string) => value ? new Intl.DateTimeFormat("fr-BE", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)) : "-";
-const words = (value: string) => value.replace(/_/g, " ");
+const formatDate = (value?: string | Date | null) => {
+  if (!value) return "-";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+  return new Intl.DateTimeFormat("fr-BE", { dateStyle: "medium", timeStyle: "short" }).format(date);
+};
+const words = (value: unknown, fallback = "-") => typeof value === "string" && value.trim()
+  ? value.replace(/_/g, " ")
+  : fallback;
+const notificationLabel = (notification?: Partial<ReferralNotificationDelivery> | null) => {
+  if (!notification || (!notification.status && !notification.requestedChannel && !notification.deliveredChannel)) return null;
+  return `${words(notification.status, "unknown status")} · ${words(notification.deliveredChannel || notification.requestedChannel, "unknown channel")}`;
+};
+const notificationColor = (notification?: Partial<ReferralNotificationDelivery> | null) => {
+  if (!notification?.status) return "default" as const;
+  if (["failed", "manual_required"].includes(notification.status)) return "error" as const;
+  if (notification.status === "read") return "success" as const;
+  return "info" as const;
+};
+const notificationSeverity = (notification?: Partial<ReferralNotificationDelivery> | null) => {
+  const color = notificationColor(notification);
+  return color === "default" ? "info" as const : color;
+};
 const statusVariant = (status: string) => {
   if (["active", "approved", "accepted", "qualified", "won", "paid"].includes(status)) return "success" as const;
   if (["rejected", "duplicate", "lost", "cancelled", "suspended"].includes(status)) return "error" as const;
@@ -226,7 +247,19 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       await onChanged();
     } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update partner.", severity: "error" }); }
   };
-  const rows = partners.map((partner) => ({ id: partner._id, Partner: <Box><Typography fontWeight={900}>{partner.name}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country}</Typography></Box>, Program: <Chip size="small" label={partner.program} color={partner.program === "business" ? "secondary" : "default"} />, "Partner ID": partner.partnerId || "Not issued", Status: <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}><StatusChip status={partner.status} variant={statusVariant(partner.status)} />{partner.accessRecoveryStatus === "pending" && <Chip size="small" color="error" icon={<VpnKey />} label="Link requested" />}</Box>, Notification: partner.lastNotification ? <Chip size="small" color={["failed", "manual_required"].includes(partner.lastNotification.status) ? "error" : partner.lastNotification.status === "read" ? "success" : "info"} label={`${words(partner.lastNotification.status)} · ${words(partner.lastNotification.deliveredChannel || partner.lastNotification.requestedChannel)}`} /> : "-", Applied: formatDate(partner.createdAt) }));
+  const rows = partners.map((partner) => {
+    const statusLabel = words(partner.status, "pending");
+    const lastNotificationLabel = notificationLabel(partner.lastNotification);
+    return {
+      id: partner._id,
+      Partner: <Box><Typography fontWeight={900}>{partner.name || "Unnamed applicant"}</Typography><Typography variant="caption" color="text.secondary">{[partner.email, partner.phone].filter(Boolean).join(" · ") || "No contact"} · {partner.country || "Country not provided"}</Typography></Box>,
+      Program: <Chip size="small" label={words(partner.program, "referral")} color={partner.program === "business" ? "secondary" : "default"} />,
+      "Partner ID": partner.partnerId || "Not issued",
+      Status: <Box sx={{ display: "flex", gap: 0.75, flexWrap: "wrap" }}><StatusChip status={statusLabel} variant={statusVariant(statusLabel)} />{partner.accessRecoveryStatus === "pending" && <Chip size="small" color="error" icon={<VpnKey />} label="Link requested" />}</Box>,
+      Notification: lastNotificationLabel ? <Chip size="small" color={notificationColor(partner.lastNotification)} label={lastNotificationLabel} /> : "-",
+      Applied: formatDate(partner.createdAt),
+    };
+  });
   return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
     <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedLinks(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
@@ -248,15 +281,15 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
             <Typography><b>Submitted:</b> {formatDate(selected.createdAt)}</Typography>
           </Box>
         </Paper>
-        {selected.lastNotification && <Alert severity={["failed", "manual_required"].includes(selected.lastNotification.status) ? "error" : selected.lastNotification.status === "read" ? "success" : "info"}>
-          <Typography fontWeight={900}>Last {words(selected.lastNotification.kind)} notification</Typography>
+        {notificationLabel(selected.lastNotification) && <Alert severity={notificationSeverity(selected.lastNotification)}>
+          <Typography fontWeight={900}>Last {words(selected.lastNotification?.kind, "partner")} notification</Typography>
           <Typography variant="body2">
-            Preferred: {words(selected.lastNotification.requestedChannel)} · Result: {words(selected.lastNotification.status)}
-            {selected.lastNotification.deliveredChannel ? ` · Sent via ${words(selected.lastNotification.deliveredChannel)}` : ""}
-            {selected.lastNotification.fallbackUsed ? " · Fallback used" : ""}
-            {` · ${formatDate(selected.lastNotification.updatedAt)}`}
+            Preferred: {words(selected.lastNotification?.requestedChannel, "not recorded")} · Result: {words(selected.lastNotification?.status, "not recorded")}
+            {selected.lastNotification?.deliveredChannel ? ` · Sent via ${words(selected.lastNotification.deliveredChannel)}` : ""}
+            {selected.lastNotification?.fallbackUsed ? " · Fallback used" : ""}
+            {` · ${formatDate(selected.lastNotification?.updatedAt)}`}
           </Typography>
-          {selected.lastNotification.error && <Typography variant="body2" sx={{ mt: 0.75 }}>{selected.lastNotification.error}</Typography>}
+          {selected.lastNotification?.error && <Typography variant="body2" sx={{ mt: 0.75 }}>{selected.lastNotification.error}</Typography>}
         </Alert>}
         <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Website / professional profile</Typography><Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website || "Not provided"}</Typography>{selected.networkDescription && <Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription}</Typography>}</Paper>
         {selected.accessRecoveryStatus === "pending" && <Alert severity="error" icon={<VpnKey />}>
