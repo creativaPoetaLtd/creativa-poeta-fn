@@ -33,7 +33,7 @@ import DigitalAssistanceRequestPage from "./pages/DigitalAssistanceRequestPage.t
 import KnowledgePage from "./pages/KnowledgePage.tsx";
 import AnswersPage from "./pages/AnswersPage.tsx";
 import ReferralProgramPage from "./pages/ReferralProgramPage.tsx";
-import ReferralPartnerGuidePage from "./pages/ReferralPartnerGuidePage.tsx";
+import ReferralPartnerGuidePage from "./pages/ReferralPartnerGuideFocusedPage.tsx";
 import ReferralProgramTermsPage from "./pages/ReferralProgramTermsPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
