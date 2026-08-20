@@ -4,6 +4,7 @@ import { authRequest, publicRequest } from "./client";
 export type ReferralPartnerStatus = "pending" | "approved" | "active" | "rejected" | "suspended" | "closed";
 export type ReferralLeadStatus = "submitted" | "waiting_for_introduction" | "under_review" | "accepted" | "duplicate" | "rejected" | "contacted" | "qualified" | "proposal_sent" | "won" | "lost";
 export type ReferralRewardStatus = "waiting_client_payment" | "earned" | "approved" | "scheduled" | "paid" | "cancelled";
+export type ReferralPreferredContact = "email" | "whatsapp";
 
 export interface ReferralActivity {
   type?: string;
@@ -48,6 +49,7 @@ export interface ReferralPartner {
   accessRecoveryResolvedAt?: string;
   accessRecoveryRequestCount?: number;
   lastNotification?: ReferralNotificationDelivery;
+  shareUrl?: string;
   activity: ReferralActivity[];
   createdAt: string;
   updatedAt: string;
@@ -104,7 +106,7 @@ export interface ReferralApplicationPayload {
   name: string;
   email?: string;
   phone?: string;
-  preferredContact: "email" | "whatsapp" | "phone" | "sms" | "other";
+  preferredContact: ReferralPreferredContact;
   country: string;
   locale: string;
   profileType: string;
@@ -156,7 +158,7 @@ export interface DirectReferralPayload {
   referrerName: string;
   referrerEmail?: string;
   referrerPhone?: string;
-  preferredContact: "email" | "whatsapp" | "phone" | "sms" | "other";
+  preferredContact: ReferralPreferredContact;
   referrerCountry: string;
   referrerProfileType: string;
   referrerWebsite?: string;
@@ -244,7 +246,7 @@ export interface ManualReferralEntryPayload {
   name?: string;
   email?: string;
   phone?: string;
-  preferredContact?: "email" | "whatsapp" | "phone" | "sms" | "other";
+  preferredContact?: ReferralPreferredContact;
   country?: string;
   locale: string;
   profileType?: string;
@@ -276,6 +278,8 @@ export const createManualReferralEntry = (data: ManualReferralEntryPayload) => a
   notification?: ReferralNotificationDelivery;
   accessUrl?: string;
   shareUrl?: string;
+  subject?: string;
+  message?: string;
 }>(
   { method: "POST", url: "/api/referral-program/manual-entries", data },
   "Failed to create the manual referral entry."
@@ -286,9 +290,22 @@ export const getReferralPartners = (page = 1, status = "all", search = "") => au
   pagination: { currentPage: number; totalPages: number; total: number; limit: number };
 }>({ method: "GET", url: "/api/referral-program/partners", params: { page, status, search } }, "Failed to fetch referral partners.");
 
-export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean; notification?: ReferralNotificationDelivery; accessUrl?: string; shareUrl?: string }>(
+export interface ReferralPartnerAccessPackage {
+  partner: ReferralPartner;
+  accessUrl: string;
+  shareUrl: string;
+  subject: string;
+  message: string;
+}
+
+export const updateReferralPartner = (id: string, data: { status: ReferralPartnerStatus; reason?: string; regenerateAccess?: boolean }) => authRequest<{ partner: ReferralPartner; emailSent: boolean; notification?: ReferralNotificationDelivery; accessUrl?: string; shareUrl?: string; subject?: string; message?: string }>(
   { method: "PATCH", url: `/api/referral-program/partners/${id}`, data },
   "Failed to update referral partner."
+);
+
+export const prepareReferralPartnerManualPackage = (id: string) => authRequest<ReferralPartnerAccessPackage>(
+  { method: "POST", url: `/api/referral-program/partners/${id}/manual-package` },
+  "Failed to prepare the manual partner access package."
 );
 
 export const getReferralLeads = (page = 1, status = "all", search = "") => authRequest<{

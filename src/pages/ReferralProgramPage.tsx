@@ -19,7 +19,7 @@ const labelClass = "mb-2 block text-[11px] font-black uppercase leading-snug tra
 const buttonClass = "cp-referral-button inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-center text-xs font-black transition sm:min-h-12 sm:px-6 sm:text-sm";
 type ModalKind = "direct" | "partner" | "prospect" | "strategic" | null;
 type ClientType = "person" | "company";
-type ContactPreference = "email" | "whatsapp" | "phone" | "sms" | "other";
+type ContactPreference = "email" | "whatsapp";
 type FeedbackState = {
   tone: "success" | "error" | "info";
   title: string;
@@ -32,7 +32,7 @@ const buildWhatsAppUrl = (message: string) => `https://wa.me/32473297112?text=${
 
 const resolvePreferredContact = (preferred: ContactPreference, email: string, phone: string): ContactPreference => {
   if (preferred === "email" && !email.trim() && phone.trim()) return "whatsapp";
-  if (["whatsapp", "phone", "sms"].includes(preferred) && !phone.trim() && email.trim()) return "email";
+  if (preferred === "whatsapp" && !phone.trim() && email.trim()) return "email";
   return preferred;
 };
 
@@ -64,11 +64,11 @@ export default function ReferralProgramPage() {
   const referralCode = useMemo(() => new URLSearchParams(window.location.search).get("ref") || "", []);
   const [activeModal, setActiveModal] = useState<ModalKind>(referralCode ? "prospect" : null);
   const [application, setApplication] = useState({
-    name: "", email: "", phone: "", preferredContact: "email" as "email" | "whatsapp" | "phone" | "sms" | "other", country: "", profileType: copy.form.profiles[0], program: "referral" as "referral" | "business",
+    name: "", email: "", phone: "", preferredContact: "email" as ContactPreference, country: "", profileType: copy.form.profiles[0], program: "referral" as "referral" | "business",
     website: "", termsAccepted: false, marketingConsent: false, websiteConfirmation: "",
   });
   const [direct, setDirect] = useState({
-    referrerName: "", referrerEmail: "", referrerPhone: "", preferredContact: "email" as "email" | "whatsapp" | "phone" | "sms" | "other", referrerCountry: "", referrerProfileType: copy.form.profiles[0], referrerWebsite: "",
+    referrerName: "", referrerEmail: "", referrerPhone: "", preferredContact: "email" as ContactPreference, referrerCountry: "", referrerProfileType: copy.form.profiles[0], referrerWebsite: "",
     clientType: "company" as ClientType, companyName: "", contactName: "", contactEmail: "", contactPhone: "", website: "", serviceNeeded: copy.services[0],
     budgetRange: "", needDescription: "", relationship: copy.leadForm.relationships[0], consentStatus: "agreed" as "agreed" | "not_yet",
     termsAccepted: false, websiteConfirmation: "",

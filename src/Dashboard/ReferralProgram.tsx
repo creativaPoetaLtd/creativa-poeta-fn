@@ -17,7 +17,7 @@ import VpnKey from "@mui/icons-material/VpnKey";
 import {
   ManualReferralEntryPayload, ReferralLead, ReferralLeadStatus, ReferralNotificationDelivery, ReferralPartner, ReferralPartnerStatus, ReferralReward,
   claimReferralLead, createManualReferralEntry, getReferralLeads, getReferralPartners, getReferralProgramSummary,
-  getReferralRewards, markReferralRewardPaid, updateReferralLead, updateReferralPartner,
+  getReferralRewards, markReferralRewardPaid, prepareReferralPartnerManualPackage, updateReferralLead, updateReferralPartner,
   updateReferralRewardStatus, upsertReferralReward,
 } from "../APIs/ReferralProgram";
 import { useAuth } from "../contexts/useAuth";
@@ -41,7 +41,8 @@ const notificationLabel = (notification?: Partial<ReferralNotificationDelivery> 
 };
 const notificationColor = (notification?: Partial<ReferralNotificationDelivery> | null) => {
   if (!notification?.status) return "default" as const;
-  if (["failed", "manual_required"].includes(notification.status)) return "error" as const;
+  if (notification.status === "failed") return "error" as const;
+  if (notification.status === "manual_required") return "warning" as const;
   if (notification.status === "read") return "success" as const;
   return "info" as const;
 };
@@ -54,6 +55,14 @@ const statusVariant = (status: string) => {
   if (["rejected", "duplicate", "lost", "cancelled", "suspended"].includes(status)) return "error" as const;
   if (["under_review", "contacted", "proposal_sent", "earned", "scheduled"].includes(status)) return "info" as const;
   return "warning" as const;
+};
+
+type PartnerAccessPackageState = {
+  partnerId?: string;
+  accessUrl?: string;
+  shareUrl?: string;
+  subject?: string;
+  message?: string;
 };
 
 export default function ReferralProgram() {
@@ -131,6 +140,8 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
     partnerId?: string;
     accessUrl?: string;
     shareUrl?: string;
+    subject?: string;
+    message?: string;
     notification?: ReferralNotificationDelivery;
   } | null>(null);
   const existing = Boolean(form.existingPartnerId?.trim());
@@ -143,7 +154,7 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
   };
   const copy = async (value: string, label: string) => {
     await navigator.clipboard.writeText(value);
-    onNotice({ message: `${label} copied. You can send it by WhatsApp, SMS, email or another private channel.`, severity: "success" });
+    onNotice({ message: `${label} copied. You can now send it through the appropriate private channel.`, severity: "success" });
   };
   const submit = async () => {
     try {
@@ -153,6 +164,8 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
         partnerId: response.partner.partnerId,
         accessUrl: response.accessUrl,
         shareUrl: response.shareUrl,
+        subject: response.subject,
+        message: response.message,
         notification: response.notification,
       });
       onNotice({ message: response.lead ? "Partner and client introduction recorded." : "Partner application recorded.", severity: "success" });
@@ -178,6 +191,7 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
         </Alert>}
         {result.accessUrl && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Private partner access</Typography><Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>Only the partner should receive this link.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13 }}>{result.accessUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => result.accessUrl && void copy(result.accessUrl, "Private access link")}>Copy private link</ActionButton></Paper>}
         {result.shareUrl && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Client invitation link</Typography><Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>The partner may share this link with a client who agreed to be contacted.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13 }}>{result.shareUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => result.shareUrl && void copy(result.shareUrl, "Client invitation link")}>Copy client link</ActionButton></Paper>}
+        {result.message && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Complete approval message</Typography>{result.subject && <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}><b>Subject:</b> {result.subject}</Typography>}<TextField fullWidth multiline minRows={8} value={result.message} InputProps={{ readOnly: true }} sx={{ mt: 1.5 }} /><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => result.message && void copy(`${result.subject ? `${result.subject}\n\n` : ""}${result.message}`, "Complete approval message")}>Copy complete message</ActionButton></Paper>}
         {!result.accessUrl && !result.shareUrl && <Alert severity="warning">The record is pending. Approve it from Partner applications to generate the shareable links.</Alert>}
       </Box> : <Box sx={{ display: "grid", gap: 2.5 }}>
         <Box><Typography variant="h6" fontWeight={900}>Introducer / partner</Typography><Typography variant="body2" color="text.secondary">Enter an existing partner ID, or leave it empty to create a new record.</Typography></Box>
@@ -185,8 +199,8 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}><TextField disabled={existing} required={!existing} fullWidth label="Full name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} /></Grid>
           <Grid item xs={12} sm={6}><TextField disabled={existing} fullWidth type="email" label="Email (optional)" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} /></Grid>
-          <Grid item xs={12} sm={6}><TextField disabled={existing} fullWidth label="WhatsApp or phone (optional)" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} /></Grid>
-          <Grid item xs={12} sm={6}><FormControl disabled={existing} fullWidth><InputLabel>Preferred contact</InputLabel><Select label="Preferred contact" value={form.preferredContact} onChange={(event) => setForm({ ...form, preferredContact: event.target.value as ManualReferralEntryPayload["preferredContact"] })}>{["email", "whatsapp", "phone", "sms", "other"].map((value) => <MenuItem key={value} value={value}>{words(value)}</MenuItem>)}</Select></FormControl></Grid>
+          <Grid item xs={12} sm={6}><TextField disabled={existing} fullWidth label="WhatsApp number (optional)" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} /></Grid>
+          <Grid item xs={12} sm={6}><FormControl disabled={existing} fullWidth><InputLabel>Preferred contact</InputLabel><Select label="Preferred contact" value={form.preferredContact} onChange={(event) => setForm({ ...form, preferredContact: event.target.value as ManualReferralEntryPayload["preferredContact"] })}>{["email", "whatsapp"].map((value) => <MenuItem key={value} value={value}>{words(value)}</MenuItem>)}</Select></FormControl></Grid>
           <Grid item xs={12} sm={6}><TextField disabled={existing} required={!existing} fullWidth label="Country" value={form.country} onChange={(event) => setForm({ ...form, country: event.target.value })} /></Grid>
           <Grid item xs={12} sm={6}><TextField disabled={existing} required={!existing} fullWidth label="Profile" value={form.profileType} onChange={(event) => setForm({ ...form, profileType: event.target.value })} /></Grid>
           <Grid item xs={12} sm={6}><FormControl disabled={existing} fullWidth><InputLabel>Program</InputLabel><Select label="Program" value={form.program} onChange={(event) => setForm({ ...form, program: event.target.value as "referral" | "business" })}><MenuItem value="referral">Occasional introducer</MenuItem><MenuItem value="business">Commercial partner</MenuItem></Select></FormControl></Grid>
@@ -219,7 +233,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<ReferralPartner | null>(null);
-  const [generatedLinks, setGeneratedLinks] = useState<{ accessUrl?: string; shareUrl?: string } | null>(null);
+  const [generatedPackage, setGeneratedPackage] = useState<PartnerAccessPackageState | null>(null);
   const load = useCallback(async () => { try { setLoading(true); setPartners((await getReferralPartners(1, status, search)).partners || []); } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to load partners.", severity: "error" }); } finally { setLoading(false); } }, [onNotice, search, status]);
   useEffect(() => { const timer = window.setTimeout(() => void load(), 250); return () => window.clearTimeout(timer); }, [load]);
   const changeStatus = async (partner: ReferralPartner, nextStatus: ReferralPartnerStatus, regenerateAccess = false) => {
@@ -229,12 +243,12 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       const response = await updateReferralPartner(partner._id, { status: nextStatus, reason, regenerateAccess });
       setPartners((current) => current.map((item) => item._id === partner._id ? response.partner : item));
       setSelected((current) => current?._id === partner._id ? response.partner : current);
-      if (response.accessUrl || response.shareUrl) {
-        setGeneratedLinks({ accessUrl: response.accessUrl, shareUrl: response.shareUrl });
+      if (response.accessUrl || response.shareUrl || response.message) {
+        setGeneratedPackage({ partnerId: response.partner.partnerId, accessUrl: response.accessUrl, shareUrl: response.shareUrl, subject: response.subject, message: response.message });
         setSelected(response.partner);
       }
       const delivery = response.notification;
-      const deliveryFailed = Boolean(delivery && ["failed", "manual_required"].includes(delivery.status));
+      const deliveryFailed = delivery?.status === "failed";
       const deliveryMessage = delivery?.deliveredChannel
         ? `${words(delivery.kind)} notification sent via ${words(delivery.deliveredChannel)}${delivery.fallbackUsed ? " after fallback" : ""}.`
         : delivery
@@ -246,6 +260,24 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       });
       await onChanged();
     } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update partner.", severity: "error" }); }
+  };
+  const copy = async (value: string, label: string) => {
+    await navigator.clipboard.writeText(value);
+    onNotice({ message: `${label} copied.`, severity: "success" });
+  };
+  const prepareManualPackage = async (partner: ReferralPartner) => {
+    const confirmed = window.confirm("Create a new private access link? The previous private link will stop working. Nothing will be sent automatically.");
+    if (!confirmed) return;
+    try {
+      const response = await prepareReferralPartnerManualPackage(partner._id);
+      setPartners((current) => current.map((item) => item._id === partner._id ? response.partner : item));
+      setSelected(response.partner);
+      setGeneratedPackage({ partnerId: response.partner.partnerId, accessUrl: response.accessUrl, shareUrl: response.shareUrl, subject: response.subject, message: response.message });
+      onNotice({ message: "New manual approval package prepared. Nothing was sent automatically.", severity: "success" });
+      await onChanged();
+    } catch (error) {
+      onNotice({ message: error instanceof Error ? error.message : "Unable to prepare the manual package.", severity: "error" });
+    }
   };
   const rows = partners.map((partner) => {
     const statusLabel = words(partner.status, "pending");
@@ -260,8 +292,13 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
       Applied: formatDate(partner.createdAt),
     };
   });
-  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => setSelected(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => setSelected(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
-    <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedLinks(null); }} maxWidth="md" fullWidth>
+  const openPartner = (partner: ReferralPartner | null) => {
+    setGeneratedPackage(null);
+    setSelected(partner);
+  };
+
+  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => openPartner(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => openPartner(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
+    <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedPackage(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
       <DialogContent sx={{ pt: 3 }}>{selected && <Box sx={{ display: "grid", gap: 2 }}>
         <Paper variant="outlined" sx={{ p: 2 }}>
@@ -282,7 +319,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
           </Box>
         </Paper>
         {notificationLabel(selected.lastNotification) && <Alert severity={notificationSeverity(selected.lastNotification)}>
-          <Typography fontWeight={900}>Last {words(selected.lastNotification?.kind, "partner")} notification</Typography>
+          <Typography fontWeight={900}>{selected.lastNotification?.status === "manual_required" && ["approved", "active"].includes(selected.status) ? "Application approved — manual delivery required" : `Last ${words(selected.lastNotification?.kind, "partner")} notification`}</Typography>
           <Typography variant="body2">
             Preferred: {words(selected.lastNotification?.requestedChannel, "not recorded")} · Result: {words(selected.lastNotification?.status, "not recorded")}
             {selected.lastNotification?.deliveredChannel ? ` · Sent via ${words(selected.lastNotification.deliveredChannel)}` : ""}
@@ -290,6 +327,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
             {` · ${formatDate(selected.lastNotification?.updatedAt)}`}
           </Typography>
           {selected.lastNotification?.error && <Typography variant="body2" sx={{ mt: 0.75 }}>{selected.lastNotification.error}</Typography>}
+          {selected.lastNotification?.status === "manual_required" && ["approved", "active"].includes(selected.status) && <Typography variant="body2" sx={{ mt: 0.75 }}>The approval is valid. Prepare the complete package below, copy it and send it manually.</Typography>}
         </Alert>}
         <Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>Website / professional profile</Typography><Typography sx={{ mt: 1, wordBreak: "break-all" }}>{selected.website || "Not provided"}</Typography>{selected.networkDescription && <Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.networkDescription}</Typography>}</Paper>
         {selected.accessRecoveryStatus === "pending" && <Alert severity="error" icon={<VpnKey />}>
@@ -297,10 +335,21 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
           <Typography variant="body2">Requested {formatDate(selected.accessRecoveryRequestedAt)} · {selected.accessRecoveryRequestCount || 1} request(s). Verify the contact, generate a new link below and send it through the registered channel.</Typography>
         </Alert>}
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>{partnerStatuses.map((item) => <ActionButton key={item} size="small" variant={selected.status === item ? "primary" : "secondary"} onClick={() => void changeStatus(selected, item)}>{words(item)}</ActionButton>)}</Box>
-        {generatedLinks && <Alert severity="success"><Typography fontWeight={900}>Links ready to share</Typography><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>{generatedLinks.accessUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.accessUrl && void navigator.clipboard.writeText(generatedLinks.accessUrl)}>Copy private access</ActionButton>}{generatedLinks.shareUrl && <ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedLinks.shareUrl && void navigator.clipboard.writeText(generatedLinks.shareUrl)}>Copy client invitation</ActionButton>}</Box></Alert>}
-        {["approved", "active"].includes(selected.status) && <Alert severity="warning" action={<ActionButton size="small" variant="secondary" onClick={() => void changeStatus(selected, selected.status, true)}>Regenerate and resend</ActionButton>}>Generating a new private access invalidates the previous one. The new access will be sent through the preferred channel, with email fallback when available.</Alert>}
+        {["approved", "active"].includes(selected.status) && selected.shareUrl && <Paper variant="outlined" sx={{ p: 2, overflow: "hidden" }}><Typography fontWeight={900}>Current public client invitation link</Typography><Typography variant="body2" color="text.secondary" sx={{ my: 1 }}>This link may be copied and shared by the partner with interested clients.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13 }}>{selected.shareUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => void copy(selected.shareUrl || "", "Public invitation link")}>Copy public link</ActionButton></Paper>}
+        {generatedPackage && <Paper variant="outlined" sx={{ p: 2, display: "grid", gap: 2, overflow: "hidden", borderColor: "success.light" }}>
+          <Alert severity="success">Manual approval package ready. Partner ID: <b>{generatedPackage.partnerId || selected.partnerId}</b></Alert>
+          {generatedPackage.subject && <Typography variant="body2"><b>Email subject:</b> {generatedPackage.subject}</Typography>}
+          {generatedPackage.message && <><TextField fullWidth multiline minRows={10} value={generatedPackage.message} InputProps={{ readOnly: true }} /><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedPackage.message && void copy(`${generatedPackage.subject ? `${generatedPackage.subject}\n\n` : ""}${generatedPackage.message}`, "Complete approval message")}>Copy complete message</ActionButton></>}
+          {generatedPackage.accessUrl && <Box><Typography fontWeight={900}>Private access link</Typography><Typography variant="body2" color="text.secondary">For the partner only. It opens the secure client-introduction form.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13, my: 1 }}>{generatedPackage.accessUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedPackage.accessUrl && void copy(generatedPackage.accessUrl, "Private access link")}>Copy private link</ActionButton></Box>}
+          {generatedPackage.shareUrl && <Box><Typography fontWeight={900}>Public client invitation link</Typography><Typography variant="body2" color="text.secondary">The partner may copy and share this link with a person or company interested in Creativa Poeta.</Typography><Typography sx={{ wordBreak: "break-all", fontSize: 13, my: 1 }}>{generatedPackage.shareUrl}</Typography><ActionButton size="small" variant="secondary" startIcon={<ContentCopy />} onClick={() => generatedPackage.shareUrl && void copy(generatedPackage.shareUrl, "Public invitation link")}>Copy public link</ActionButton></Box>}
+        </Paper>}
+        {["approved", "active"].includes(selected.status) && <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+          <ActionButton size="small" variant="secondary" onClick={() => void prepareManualPackage(selected)}>Generate manual package (no send)</ActionButton>
+          <ActionButton size="small" variant="secondary" onClick={() => { if (window.confirm("Regenerate the private link and send the new approval package automatically? The previous private link will stop working.")) void changeStatus(selected, selected.status, true); }}>Regenerate and resend</ActionButton>
+        </Box>}
+        {["approved", "active"].includes(selected.status) && <Alert severity="warning">Generating a new private access link invalidates the previous private link. The manual option does not send anything automatically.</Alert>}
       </Box>}</DialogContent>
-      <DialogActions><ActionButton variant="secondary" onClick={() => { setSelected(null); setGeneratedLinks(null); }}>Close</ActionButton></DialogActions>
+      <DialogActions><ActionButton variant="secondary" onClick={() => { setSelected(null); setGeneratedPackage(null); }}>Close</ActionButton></DialogActions>
     </Dialog>
   </>;
 }

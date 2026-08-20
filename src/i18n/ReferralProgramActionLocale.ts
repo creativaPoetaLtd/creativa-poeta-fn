@@ -23,7 +23,7 @@ export type ReferralProgramActionCopy = {
   clientContactRequired: string;
   needOptional: string;
   strategicPhone: string;
-  contactOptions: Array<{ value: "email" | "whatsapp" | "phone" | "sms" | "other"; label: string }>;
+  contactOptions: Array<{ value: "email" | "whatsapp"; label: string }>;
   strategicButton: string;
   close: string;
   dialogOk: string;
@@ -72,7 +72,7 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     clientContactRequired: "Indiquez au moins un moyen de contacter le client : e-mail ou téléphone/WhatsApp.",
     needOptional: "Décrivez le besoin",
     strategicPhone: "Téléphone",
-    contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Appel téléphonique" }, { value: "sms", label: "SMS" }, { value: "other", label: "Autre" }],
+    contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }],
     strategicButton: "Proposer une collaboration",
     close: "Fermer",
     dialogOk: "J’ai compris",
@@ -115,7 +115,7 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     clientContactRequired: "Provide at least one way to contact the client: email or phone/WhatsApp.",
     needOptional: "Describe the need",
     strategicPhone: "Phone",
-    contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Phone call" }, { value: "sms", label: "SMS" }, { value: "other", label: "Other" }],
+    contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }],
     strategicButton: "Propose a collaboration",
     close: "Close",
     dialogOk: "I understand",
@@ -158,7 +158,7 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     clientContactRequired: "Geef minstens één contactmogelijkheid op: e-mail of telefoon/WhatsApp.",
     needOptional: "Beschrijf de behoefte",
     strategicPhone: "Telefoon",
-    contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefoongesprek" }, { value: "sms", label: "SMS" }, { value: "other", label: "Andere" }],
+    contactOptions: [{ value: "email", label: "E-mail" }, { value: "whatsapp", label: "WhatsApp" }],
     strategicButton: "Een samenwerking voorstellen",
     close: "Sluiten",
     dialogOk: "Ik begrijp het",
@@ -201,7 +201,7 @@ const referralProgramActionLocale: Record<"fr" | "en" | "nl" | "kiny", ReferralP
     clientContactRequired: "Tanga nibura uburyo bumwe bwo kuvugisha umukiliya: email cyangwa telefone/WhatsApp.",
     needOptional: "Sobanura ibyo bakeneye",
     strategicPhone: "Telefone",
-    contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefone" }, { value: "sms", label: "SMS" }, { value: "other", label: "Ubundi buryo" }],
+    contactOptions: [{ value: "email", label: "Email" }, { value: "whatsapp", label: "WhatsApp" }],
     strategicButton: "Saba ko tuganira ku bufatanye",
     close: "Funga",
     dialogOk: "Ndabyumvise",
