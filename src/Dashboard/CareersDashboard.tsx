@@ -3,12 +3,13 @@ import { Alert, Box, Checkbox, Chip, Dialog, DialogActions, DialogContent, Dialo
 import Add from "@mui/icons-material/Add";
 import Business from "@mui/icons-material/Business";
 import Close from "@mui/icons-material/Close";
+import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
 import People from "@mui/icons-material/People";
 import Visibility from "@mui/icons-material/Visibility";
 import {
   CareerApplication, CareerApplicationStatus, CareerJob, CareerJobPayload, CareerJobType,
-  closeCareerJob, createCareerJob, downloadCareerApplicationCv, getAdminCareerJobs, getCareerApplications,
+  closeCareerJob, createCareerJob, deleteCareerApplication, downloadCareerApplicationCv, getAdminCareerJobs, getCareerApplications,
   updateCareerApplicationStatus, updateCareerJob,
 } from "../APIs/CareerApi";
 import { ActionButton, DashboardCard, DataTable, MenuAction, PageHeader, StatusChip } from "./components/DashboardComponents";
@@ -78,6 +79,18 @@ export default function CareersDashboard() {
     }
   };
 
+  const removeApplication = async (application: CareerApplication) => {
+    if (!window.confirm(`Delete the application from ${application.fullName}? This action cannot be undone.`)) return;
+    try {
+      await deleteCareerApplication(application._id);
+      setApplications((current) => current.filter((item) => item._id !== application._id));
+      setSelectedApplication((current) => current?._id === application._id ? null : current);
+      setNotice({ message: "Application deleted.", severity: "success" });
+    } catch (error) {
+      setNotice({ message: error instanceof Error ? error.message : "Unable to delete the application.", severity: "error" });
+    }
+  };
+
   const jobRows = jobs.map((job) => ({
     id: job._id,
     Opportunity: <Box><Typography fontWeight={900}>{job.title}</Typography><Typography variant="caption" color="text.secondary">{job.department || job.company}</Typography></Box>,
@@ -107,7 +120,7 @@ export default function CareersDashboard() {
       <Tabs value={tab} onChange={(_, value) => setTab(value)} sx={{ borderBottom: "1px solid #e2e8f0", px: 1 }}><Tab label="Opportunities" /><Tab label="Applications" /></Tabs>
       <Box sx={{ p: { xs: 1.5, md: 2.5 } }}>
         {tab === 0 && <DataTable headers={["Opportunity", "Location", "Type", "Status", "Deadline"]} hiddenFields={["id"]} rows={jobRows} emptyMessage={loading ? "Loading opportunities..." : "No opportunities created yet"} customActions={(row) => { const job = jobs.find((item) => item._id === row.id); if (!job) return null; return <><MenuAction icon={<Edit />} label="Edit" color="#d39b00" onClick={() => setEditor(job)} />{job.status !== "closed" && <MenuAction icon={<Close />} label="Close" color="#ef4444" onClick={() => void closeJob(job)} />}</>; }} />}
-        {tab === 1 && <><Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}><FormControl size="small" sx={{ minWidth: 190 }}><InputLabel>Status</InputLabel><Select label="Status" value={applicationFilter} onChange={(event) => setApplicationFilter(event.target.value)}><MenuItem value="all">All applications</MenuItem>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box><DataTable headers={["Candidate", "Application", "Role", "Source", "Status", "Received"]} hiddenFields={["id"]} rows={applicationRows} emptyMessage={loading ? "Loading applications..." : "No applications received yet"} customActions={(row) => <MenuAction icon={<Visibility />} label="Review" color="#0ea5e9" onClick={() => setSelectedApplication(applications.find((item) => item._id === row.id) || null)} />} /></>}
+        {tab === 1 && <><Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}><FormControl size="small" sx={{ minWidth: 190 }}><InputLabel>Status</InputLabel><Select label="Status" value={applicationFilter} onChange={(event) => setApplicationFilter(event.target.value)}><MenuItem value="all">All applications</MenuItem>{applicationStatuses.map((status) => <MenuItem key={status} value={status}>{words(status)}</MenuItem>)}</Select></FormControl></Box><DataTable headers={["Candidate", "Application", "Role", "Source", "Status", "Received"]} hiddenFields={["id"]} rows={applicationRows} emptyMessage={loading ? "Loading applications..." : "No applications received yet"} customActions={(row) => { const application = applications.find((item) => item._id === row.id); if (!application) return null; return <><MenuAction icon={<Visibility />} label="Review" color="#0ea5e9" onClick={() => setSelectedApplication(application)} /><MenuAction icon={<Delete />} label="Delete" color="#dc2626" onClick={() => void removeApplication(application)} /></>; }} /></>}
       </Box>
     </Paper>
     <JobEditor open={Boolean(editor)} job={editor === "new" ? undefined : editor || undefined} onClose={() => setEditor(null)} onSaved={(job) => { setJobs((current) => editor === "new" ? [job, ...current] : current.map((item) => item._id === job._id ? job : item)); setEditor(null); setNotice({ message: editor === "new" ? "Opportunity created." : "Opportunity updated.", severity: "success" }); }} />
