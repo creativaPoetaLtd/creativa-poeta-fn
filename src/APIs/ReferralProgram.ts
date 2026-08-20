@@ -303,6 +303,11 @@ export const updateReferralPartner = (id: string, data: { status: ReferralPartne
   "Failed to update referral partner."
 );
 
+export const deleteReferralPartner = (id: string) => authRequest<{ message: string }>(
+  { method: "DELETE", url: `/api/referral-program/partners/${id}` },
+  "Failed to delete referral partner application."
+);
+
 export const prepareReferralPartnerManualPackage = (id: string) => authRequest<ReferralPartnerAccessPackage>(
   { method: "POST", url: `/api/referral-program/partners/${id}/manual-package` },
   "Failed to prepare the manual partner access package."
@@ -316,6 +321,11 @@ export const getReferralLeads = (page = 1, status = "all", search = "") => authR
 export const updateReferralLead = (id: string, data: { status?: ReferralLeadStatus; eligibility?: ReferralLead["eligibility"]; reason?: string }) => authRequest<{ lead: ReferralLead }>(
   { method: "PATCH", url: `/api/referral-program/leads/${id}`, data },
   "Failed to update referral lead."
+);
+
+export const deleteReferralLead = (id: string) => authRequest<{ message: string }>(
+  { method: "DELETE", url: `/api/referral-program/leads/${id}` },
+  "Failed to delete client introduction."
 );
 
 export const claimReferralLead = (id: string) => authRequest<{ lead: ReferralLead }>(
