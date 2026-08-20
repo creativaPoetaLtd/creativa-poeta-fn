@@ -88,6 +88,7 @@ export const updateCareerJob = (id: string, data: Partial<CareerJobPayload>) => 
 export const closeCareerJob = (id: string) => authRequest<{ message: string; job: CareerJob }>({ method: "DELETE", url: `/api/jobs/${id}` }, "Unable to close the opportunity.");
 export const getCareerApplications = (status = "all") => authRequest<{ applications: CareerApplication[] }>({ method: "GET", url: "/api/job/applications", params: { status } }, "Unable to load applications.");
 export const updateCareerApplicationStatus = (id: string, status: CareerApplicationStatus) => authRequest<{ message: string; application: CareerApplication }>({ method: "PATCH", url: `/api/job/applications/${id}`, data: { status } }, "Unable to update the application.");
+export const deleteCareerApplication = (id: string) => authRequest<{ message: string }>({ method: "DELETE", url: `/api/job/applications/${id}` }, "Unable to delete the application.");
 export const downloadCareerApplicationCv = async (id: string, originalName = "candidate-cv") => {
   const file = await authRequest<Blob>({ method: "GET", url: `/api/job/applications/${id}/cv`, responseType: "blob" }, "Unable to download the CV.");
   const objectUrl = window.URL.createObjectURL(file);

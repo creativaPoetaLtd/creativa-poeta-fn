@@ -10,13 +10,14 @@ import Handshake from "@mui/icons-material/Handshake";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Add from "@mui/icons-material/Add";
 import ContentCopy from "@mui/icons-material/ContentCopy";
+import Delete from "@mui/icons-material/Delete";
 import Refresh from "@mui/icons-material/Refresh";
 import Search from "@mui/icons-material/Search";
 import Visibility from "@mui/icons-material/Visibility";
 import VpnKey from "@mui/icons-material/VpnKey";
 import {
   ManualReferralEntryPayload, ReferralLead, ReferralLeadStatus, ReferralNotificationDelivery, ReferralPartner, ReferralPartnerStatus, ReferralReward,
-  claimReferralLead, createManualReferralEntry, getReferralLeads, getReferralPartners, getReferralProgramSummary,
+  claimReferralLead, createManualReferralEntry, deleteReferralLead, deleteReferralPartner, getReferralLeads, getReferralPartners, getReferralProgramSummary,
   getReferralRewards, markReferralRewardPaid, prepareReferralPartnerManualPackage, updateReferralLead, updateReferralPartner,
   updateReferralRewardStatus, upsertReferralReward,
 } from "../APIs/ReferralProgram";
@@ -97,8 +98,8 @@ export default function ReferralProgram() {
       </Tabs>
       <Box sx={{ p: { xs: 1.5, md: 2.5 } }}>
         {tab === 0 && <ProgramOverview metrics={metrics} setTab={setTab} />}
-        {tab === 1 && <PartnersPanel onNotice={setNotice} onChanged={loadSummary} />}
-        {tab === 2 && <LeadsPanel canApproveRewards={canApproveRewards} onNotice={setNotice} onChanged={loadSummary} />}
+        {tab === 1 && <PartnersPanel canManage={canManageReferrals} onNotice={setNotice} onChanged={loadSummary} />}
+        {tab === 2 && <LeadsPanel canManage={canManageReferrals} canApproveRewards={canApproveRewards} onNotice={setNotice} onChanged={loadSummary} />}
         {tab === 3 && <RewardsPanel canApprove={canApproveRewards} canPay={canPayRewards} onNotice={setNotice} onChanged={loadSummary} />}
         {tab === 4 && <PartnershipRequests />}
       </Box>
@@ -227,7 +228,7 @@ function ManualEntryDialog({ open, onClose, onNotice, onChanged }: {
   </Dialog>;
 }
 
-function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: string; severity: "success" | "error" }) => void; onChanged: () => Promise<void> }) {
+function PartnersPanel({ canManage, onNotice, onChanged }: { canManage: boolean; onNotice: (notice: { message: string; severity: "success" | "error" }) => void; onChanged: () => Promise<void> }) {
   const [partners, setPartners] = useState<ReferralPartner[]>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("all");
@@ -296,8 +297,21 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
     setGeneratedPackage(null);
     setSelected(partner);
   };
+  const removePartner = async (partner: ReferralPartner) => {
+    if (!window.confirm(`Delete the application from ${partner.name || "this applicant"}? This action cannot be undone.`)) return;
+    try {
+      await deleteReferralPartner(partner._id);
+      setPartners((current) => current.filter((item) => item._id !== partner._id));
+      setSelected((current) => current?._id === partner._id ? null : current);
+      setGeneratedPackage(null);
+      onNotice({ message: "Referral partner application deleted.", severity: "success" });
+      await onChanged();
+    } catch (error) {
+      onNotice({ message: error instanceof Error ? error.message : "Unable to delete partner application.", severity: "error" });
+    }
+  };
 
-  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => openPartner(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => openPartner(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} /></>; }} />
+  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={partnerStatuses} /><DataTable headers={["Partner", "Program", "Partner ID", "Status", "Notification", "Applied"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading partner applications..." : "No partner applications found"} onView={(id) => openPartner(partners.find((partner) => partner._id === id) || null)} customActions={(row) => { const partner = partners.find((item) => item._id === row.id); if (!partner) return null; return <><MenuAction icon={<Visibility />} label="View" onClick={() => openPartner(partner)} /><MenuAction icon={<CheckCircle />} label="Approve" color="#16a34a" onClick={() => void changeStatus(partner, "approved")} />{canManage && <MenuAction icon={<Delete />} label="Delete" color="#dc2626" onClick={() => void removePartner(partner)} />}</>; }} />
     <Dialog open={Boolean(selected)} onClose={() => { setSelected(null); setGeneratedPackage(null); }} maxWidth="md" fullWidth>
       <DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Partner application</DialogTitle>
       <DialogContent sx={{ pt: 3 }}>{selected && <Box sx={{ display: "grid", gap: 2 }}>
@@ -354,7 +368,7 @@ function PartnersPanel({ onNotice, onChanged }: { onNotice: (notice: { message: 
   </>;
 }
 
-function LeadsPanel({ canApproveRewards, onNotice, onChanged }: { canApproveRewards: boolean; onNotice: (notice: { message: string; severity: "success" | "error" }) => void; onChanged: () => Promise<void> }) {
+function LeadsPanel({ canManage, canApproveRewards, onNotice, onChanged }: { canManage: boolean; canApproveRewards: boolean; onNotice: (notice: { message: string; severity: "success" | "error" }) => void; onChanged: () => Promise<void> }) {
   const [leads, setLeads] = useState<ReferralLead[]>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("all");
@@ -367,8 +381,21 @@ function LeadsPanel({ canApproveRewards, onNotice, onChanged }: { canApproveRewa
   const change = async (data: { status?: ReferralLeadStatus; eligibility?: ReferralLead["eligibility"]; reason?: string }) => { if (!selected) return; try { replace((await updateReferralLead(selected._id, data)).lead); onNotice({ message: "Referral updated.", severity: "success" }); await onChanged(); } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to update referral.", severity: "error" }); } };
   const claim = async (lead: ReferralLead) => { try { replace((await claimReferralLead(lead._id)).lead); onNotice({ message: "Referral assigned to you.", severity: "success" }); } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to assign referral.", severity: "error" }); } };
   const createReward = async () => { if (!selected || !rewardRevenue) return; try { await upsertReferralReward(selected._id, { eligibleRevenueCents: Math.round(Number(rewardRevenue) * 100), status: "waiting_client_payment" }); onNotice({ message: "Reward ledger created from eligible revenue.", severity: "success" }); setRewardRevenue(""); await onChanged(); } catch (error) { onNotice({ message: error instanceof Error ? error.message : "Unable to create reward.", severity: "error" }); } };
+  const removeLead = async (lead: ReferralLead) => {
+    const label = lead.companyName || lead.contactName || "this client introduction";
+    if (!window.confirm(`Delete ${label}? This action cannot be undone.`)) return;
+    try {
+      await deleteReferralLead(lead._id);
+      setLeads((current) => current.filter((item) => item._id !== lead._id));
+      setSelected((current) => current?._id === lead._id ? null : current);
+      onNotice({ message: "Client introduction deleted.", severity: "success" });
+      await onChanged();
+    } catch (error) {
+      onNotice({ message: error instanceof Error ? error.message : "Unable to delete client introduction.", severity: "error" });
+    }
+  };
   const rows = leads.map((lead) => ({ id: lead._id, Opportunity: <Box><Typography fontWeight={900}>{lead.companyName || lead.contactName}</Typography><Typography variant="caption" color="text.secondary">{words(lead.clientType || "company")} · {lead.serviceNeeded}</Typography></Box>, Partner: <Box><Typography fontWeight={800}>{lead.partnerId}</Typography><Typography variant="caption">{lead.partnerName}</Typography></Box>, Consent: <Chip size="small" label={words(lead.consentStatus)} color={["agreed", "prospect_submitted"].includes(lead.consentStatus) ? "success" : "warning"} />, Eligibility: <Chip size="small" label={lead.eligibility} />, Status: <StatusChip status={lead.status} variant={statusVariant(lead.status)} />, Submitted: formatDate(lead.createdAt) }));
-  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={leadStatuses} /><DataTable headers={["Opportunity", "Partner", "Consent", "Eligibility", "Status", "Submitted"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading referrals..." : "No referrals found"} onView={(id) => setSelected(leads.find((lead) => lead._id === id) || null)} customActions={(row) => { const lead = leads.find((item) => item._id === row.id); return lead && !lead.assignedToEmail ? <MenuAction icon={<Handshake />} label="Take ownership" color="#16a34a" onClick={() => void claim(lead)} /> : null; }} />
+  return <><Filters search={search} setSearch={setSearch} status={status} setStatus={setStatus} options={leadStatuses} /><DataTable headers={["Opportunity", "Partner", "Consent", "Eligibility", "Status", "Submitted"]} rows={rows} hiddenFields={["id"]} emptyMessage={loading ? "Loading referrals..." : "No referrals found"} onView={(id) => setSelected(leads.find((lead) => lead._id === id) || null)} customActions={(row) => { const lead = leads.find((item) => item._id === row.id); if (!lead) return null; return <>{!lead.assignedToEmail && <MenuAction icon={<Handshake />} label="Take ownership" color="#16a34a" onClick={() => void claim(lead)} />}{canManage && <MenuAction icon={<Delete />} label="Delete" color="#dc2626" onClick={() => void removeLead(lead)} />}</>; }} />
     <Dialog open={Boolean(selected)} onClose={() => setSelected(null)} maxWidth="md" fullWidth><DialogTitle sx={{ bgcolor: "#071a33", color: "white" }}>Client introduction</DialogTitle><DialogContent sx={{ pt: 3 }}>{selected && <Box sx={{ display: "grid", gap: 2 }}><Paper variant="outlined" sx={{ p: 2 }}><Typography variant="h6" fontWeight={900}>{selected.companyName || selected.contactName}</Typography><Typography>{words(selected.clientType || "company")} · {selected.contactEmail || selected.contactPhone}</Typography><Typography variant="body2" color="text.secondary">Partner {selected.partnerId} · {selected.partnerName}</Typography></Paper><Paper variant="outlined" sx={{ p: 2 }}><Typography fontWeight={900}>{selected.serviceNeeded}</Typography><Typography sx={{ whiteSpace: "pre-wrap", mt: 1 }}>{selected.needDescription || "No need description provided."}</Typography><Divider sx={{ my: 1.5 }} /><Typography variant="body2"><b>Connection:</b> {selected.relationship}</Typography><Typography variant="body2"><b>Source:</b> {selected.introductionMethod}</Typography></Paper><Grid container spacing={2}><Grid item xs={12} sm={6}><FormControl fullWidth><InputLabel>Status</InputLabel><Select label="Status" value={selected.status} onChange={(event) => void change({ status: event.target.value as ReferralLeadStatus })}>{leadStatuses.map((item) => <MenuItem value={item} key={item}>{words(item)}</MenuItem>)}</Select></FormControl></Grid><Grid item xs={12} sm={6}><FormControl fullWidth><InputLabel>Eligibility</InputLabel><Select label="Eligibility" value={selected.eligibility} onChange={(event) => void change({ eligibility: event.target.value as ReferralLead["eligibility"] })}>{["pending", "eligible", "ineligible"].map((item) => <MenuItem value={item} key={item}>{item}</MenuItem>)}</Select></FormControl></Grid></Grid>{canApproveRewards && <Paper variant="outlined" sx={{ p: 2, bgcolor: "#faf5ff" }}><Typography fontWeight={900}>Reward ledger</Typography><Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>Enter eligible revenue excluding VAT and pass-through costs. The server applies the standard 10% rate without a fixed cap.</Typography><Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}><TextField size="small" type="number" label="Eligible revenue (EUR)" value={rewardRevenue} onChange={(event) => setRewardRevenue(event.target.value)} /><ActionButton variant="primary" disabled={!rewardRevenue} onClick={() => void createReward()}>Create / update reward</ActionButton></Box></Paper>}</Box>}</DialogContent><DialogActions><ActionButton variant="secondary" onClick={() => setSelected(null)}>Close</ActionButton></DialogActions></Dialog>
   </>;
 }
