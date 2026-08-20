@@ -14,6 +14,7 @@ export interface ContactPayload {
   name?: string;
   email: string;
   message: string;
+  locale?: string;
 }
 
 export interface ContactQuery {
@@ -22,6 +23,7 @@ export interface ContactQuery {
   fullName?: string;
   email: string;
   message: string;
+  locale?: string;
   status?: "pending" | "replied" | "closed" | string;
   isReplied?: boolean;
   replyMessage?: string;

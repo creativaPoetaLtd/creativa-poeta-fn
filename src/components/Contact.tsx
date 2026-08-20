@@ -50,6 +50,7 @@ const Contact = () => {
         fullName: name,
         email,
         message,
+        locale: lang || "en",
       });
       if (response.message) {
         toast.success(response.message);

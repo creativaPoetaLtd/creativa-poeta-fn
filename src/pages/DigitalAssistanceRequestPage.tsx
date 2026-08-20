@@ -312,6 +312,7 @@ export default function DigitalAssistanceRequestPage() {
         customServiceDescription: `Appareil / outil: ${form.device || "Non précise"}\nUrgence: ${form.urgency}`,
         customServiceNeeds: form.message,
         additionalInfo: `Ville / zone: ${form.city}`,
+        locale,
       });
       toast.success(copy.success);
       setForm(initialForm);
@@ -514,6 +515,7 @@ const MobileAssistanceRequest = ({ copy, locale }: MobileAssistanceRequestProps)
         serviceType: "Assistance numérique", selectedServices: form.selectedNeeds,
         customServiceDescription: `Appareil / outil: ${form.device || "Non précise"}\nUrgence: ${form.urgency}`,
         customServiceNeeds: form.message, additionalInfo: `Ville / zone: ${form.city}`,
+        locale,
       });
       toast.success(copy.success);
       setForm(initialForm);

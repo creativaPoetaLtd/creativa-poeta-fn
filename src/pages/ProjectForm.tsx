@@ -919,6 +919,7 @@ const ProjectForm = () => {
         customServiceNeeds: contextSummary,
         serviceSpecificOtherDescription: "",
         additionalInfo: contextSummary,
+        locale,
       };
 
       const { projectForm } = await import("../APIs/projectForm");

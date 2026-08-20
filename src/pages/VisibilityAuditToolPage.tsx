@@ -814,6 +814,7 @@ const VisibilityAuditToolPage = () => {
         email: form.email,
         phone: form.phone,
         company: form.company,
+        locale,
         serviceType: "Diagnostic visibilité",
         selectedServices: [
           "Test visibilité",
@@ -1273,6 +1274,7 @@ const MobileVisibilityAudit = ({ copy, locale }: MobileVisibilityAuditProps) => 
         email: form.email,
         phone: form.phone,
         company: form.company,
+        locale,
         serviceType: "Diagnostic visibilité",
         selectedServices: [
           "Test visibilité",

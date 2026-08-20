@@ -20,6 +20,7 @@ export interface ProjectInquiryPayload {
   customServiceNeeds?: string;
   serviceSpecificOtherDescription?: string;
   additionalInfo?: string;
+  locale?: string;
 }
 
 export interface ProjectRequest {
@@ -34,6 +35,7 @@ export interface ProjectRequest {
   customServiceNeeds?: string;
   serviceSpecificOtherDescription?: string;
   additionalInfo?: string;
+  locale?: string;
   status?: string;
   createdAt?: string;
   updatedAt?: string;
