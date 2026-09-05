@@ -23,7 +23,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ArticleIcon from "@mui/icons-material/Article";
 import BusinessIcon from "@mui/icons-material/Business";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -34,6 +34,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import PeopleIcon from "@mui/icons-material/People";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
@@ -52,6 +53,7 @@ import { getProjectSummary } from "../APIs/projectForm";
 import { getReferralProgramSummary } from "../APIs/ReferralProgram";
 import { getAnalyticsIncidentSummary } from "../APIs/websiteAnalytics";
 import { getWhatsAppSummary } from "../APIs/WhatsApp";
+import { probeProtectedArchiveAccess } from "../APIs/Trash";
 import { useAuth } from "../contexts/useAuth";
 import Analytics from "./Analytics";
 import Blogs from "./Blogs";
@@ -66,6 +68,7 @@ import Users from "./Users";
 import WebsiteAnalytics from "./WebsiteAnalytics";
 import WhatsAppInbox from "./WhatsAppInbox";
 import UptimeMonitoring from "./UptimeMonitoring";
+import Trash from "./Trash";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
@@ -205,6 +208,8 @@ export default function Dashboard() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [emailAttentionCount, setEmailAttentionCount] = useState(0);
   const [requestAttentionCounts, setRequestAttentionCounts] = useState<Record<string, number>>({});
+  const [canAccessProtectedArchive, setCanAccessProtectedArchive] = useState(false);
+  const [archiveAccessChecked, setArchiveAccessChecked] = useState(false);
   const menuOpen = Boolean(anchorEl);
   const currentRole = normalizeDashboardRole(user?.role, user?.email);
   const displayName = user?.name || "Admin";
@@ -216,7 +221,52 @@ export default function Dashboard() {
     if (["super_admin", "admin_0"].includes(currentRole)) return true;
     return userPermissions.has(permission);
   }, [currentRole, userPermissions]);
-  const visibleNavigationItems = navigationItems.filter((item) => {
+  useEffect(() => {
+    let mounted = true;
+
+    if (!user) {
+      setCanAccessProtectedArchive(false);
+      setArchiveAccessChecked(false);
+      return () => { mounted = false; };
+    }
+
+    if (currentRole === "super_admin") {
+      setCanAccessProtectedArchive(true);
+      setArchiveAccessChecked(true);
+      return () => { mounted = false; };
+    }
+
+    setCanAccessProtectedArchive(false);
+    setArchiveAccessChecked(false);
+    void probeProtectedArchiveAccess()
+      .then(() => {
+        if (mounted) setCanAccessProtectedArchive(true);
+      })
+      .catch(() => {
+        if (mounted) setCanAccessProtectedArchive(false);
+      })
+      .finally(() => {
+        if (mounted) setArchiveAccessChecked(true);
+      });
+
+    return () => { mounted = false; };
+  }, [currentRole, user]);
+
+  const availableNavigationItems = canAccessProtectedArchive
+    ? [
+        ...navigationItems,
+        {
+          text: "Deleted items",
+          icon: <DeleteSweepIcon />,
+          path: "/secure-admin-dashboard-2024/deleted-items",
+          color: "#dc2626",
+          section: "Systeme",
+          permission: "",
+        },
+      ]
+    : navigationItems;
+
+  const visibleNavigationItems = availableNavigationItems.filter((item) => {
     if (item.text === "Users" && !["super_admin", "admin_0"].includes(currentRole)) {
       return false;
     }
@@ -710,6 +760,18 @@ export default function Dashboard() {
             <Route path="emails" element={renderWithPermission("email:read", <Emails />)} />
             <Route path="internal-messages" element={renderWithPermission("internal:messages", <InternalMessages />)} />
             <Route path="users" element={renderWithPermission("users:manage", <Users />)} />
+            <Route
+              path="deleted-items"
+              element={
+                archiveAccessChecked ? (
+                  canAccessProtectedArchive ? (
+                    <Trash />
+                  ) : (
+                    <Navigate to="/secure-admin-dashboard-2024" replace />
+                  )
+                ) : null
+              }
+            />
             <Route path="settings" element={renderWithPermission("dashboard:read", <Settings />)} />
             <Route path="jobs" element={renderWithPermission("jobs:manage", <CareersDashboard />)} />
           </Routes>

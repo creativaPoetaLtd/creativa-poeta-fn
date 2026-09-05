@@ -6,7 +6,9 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
   Stack,
   TextField,
   Typography,
@@ -20,10 +22,16 @@ import {
   activateAdminAccount,
   checkAdminActivation,
   completeAdminPasswordReset,
+  confirmAdminMfaSetup,
   requestAdminPasswordReset,
+  startAdminMfaSetup,
+  verifyAdminMfa,
+  type AuthenticatedResponse,
+  type PrimaryAuthResponse,
 } from "../APIs/auth";
 
 type LoginMode = "login" | "activate" | "forgot" | "reset";
+type MfaStage = "setup" | "verify" | "recovery" | "recoveryCodes" | null;
 
 type LoginFormInputs = {
   email: string;
@@ -62,6 +70,14 @@ const Login: React.FC = () => {
   const [mode, setMode] = useState<LoginMode>(defaultMode);
   const [activationChecked, setActivationChecked] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [mfaStage, setMfaStage] = useState<MfaStage>(null);
+  const [challengeToken, setChallengeToken] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
+  const [setupQrCode, setSetupQrCode] = useState("");
+  const [setupKey, setSetupKey] = useState("");
+  const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
+  const [recoverySaved, setRecoverySaved] = useState(false);
+  const [pendingSession, setPendingSession] = useState<AuthenticatedResponse | null>(null);
   const {
     register,
     handleSubmit,
@@ -97,6 +113,7 @@ const Login: React.FC = () => {
     setError(null);
     setMessage(null);
     setActivationChecked(false);
+    setMfaStage(null);
     reset({ email: nextMode === "reset" ? resetEmail : "", password: "", confirmPassword: "" });
   };
 
@@ -109,6 +126,30 @@ const Login: React.FC = () => {
     navigate(redirectPath, { replace: true });
   };
 
+  const getErrorMessage = (err: unknown) => {
+    if (axios.isAxiosError<{ error?: string; message?: string }>(err)) {
+      return err.response?.data?.error || err.response?.data?.message || err.message || "Request failed. Try again.";
+    }
+    return err instanceof Error ? err.message : "Request failed. Try again.";
+  };
+
+  const handlePrimaryAuth = async (response: PrimaryAuthResponse) => {
+    if ("token" in response) {
+      finishLogin(response.token, response.user as User);
+      return;
+    }
+    setChallengeToken(response.challengeToken);
+    setMfaCode("");
+    if (!response.mfaSetupRequired) {
+      setMfaStage("verify");
+      return;
+    }
+    const setup = await startAdminMfaSetup(response.challengeToken);
+    setSetupQrCode(setup.qrCodeDataUrl);
+    setSetupKey(setup.setupKey);
+    setMfaStage("setup");
+  };
+
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
       setError(null);
@@ -116,14 +157,14 @@ const Login: React.FC = () => {
       setLoading(true);
 
       if (mode === "login") {
-        const response = await axios.post<{ token: string; user: User }>(
+        const response = await axios.post<PrimaryAuthResponse>(
           `${API_BASE_URL}/api/auth/login`,
           {
             email: data.email,
             password: data.password,
           }
         );
-        finishLogin(response.data.token, response.data.user);
+        await handlePrimaryAuth(response.data);
         return;
       }
 
@@ -135,7 +176,7 @@ const Login: React.FC = () => {
           return;
         }
         const response = await activateAdminAccount(data.email, data.password, data.confirmPassword);
-        finishLogin(response.token, response.user);
+        await handlePrimaryAuth(response);
         return;
       }
 
@@ -152,21 +193,154 @@ const Login: React.FC = () => {
           data.password,
           data.confirmPassword
         );
-        finishLogin(response.token, response.user);
+        await handlePrimaryAuth(response);
       }
     } catch (err: unknown) {
-      if (axios.isAxiosError<{ error?: string }>(err)) {
-        setError(err.response?.data?.error || err.message || "Request failed. Try again.");
-      } else {
-        setError(err instanceof Error ? err.message : "Request failed. Try again.");
-      }
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
   };
 
+  const submitMfa = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+      if (mfaStage === "setup") {
+        const response = await confirmAdminMfaSetup(challengeToken, mfaCode);
+        setPendingSession(response);
+        setRecoveryCodes(response.recoveryCodes);
+        setMfaStage("recoveryCodes");
+      } else {
+        const response = await verifyAdminMfa(
+          challengeToken,
+          mfaStage === "recovery" ? { recoveryCode: mfaCode } : { code: mfaCode }
+        );
+        finishLogin(response.token, response.user as User);
+      }
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const finishMfaEnrollment = () => {
+    if (pendingSession && recoverySaved) finishLogin(pendingSession.token, pendingSession.user as User);
+  };
+
   const showPassword = mode === "login" || mode === "reset" || (mode === "activate" && activationChecked);
   const showConfirmPassword = mode === "reset" || (mode === "activate" && activationChecked);
+
+  const mfaPanel = mfaStage ? (
+    <>
+      <Typography variant="h5" fontWeight="bold" textAlign="center" gutterBottom>
+        {mfaStage === "setup"
+          ? "Protect this account"
+          : mfaStage === "recoveryCodes"
+            ? "Save your recovery codes"
+            : "Security verification"}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" textAlign="center" sx={{ mb: 2 }}>
+        {mfaStage === "setup"
+          ? "Scan the QR code with your authenticator app, then enter the 6-digit code."
+          : mfaStage === "recoveryCodes"
+            ? "Store these one-time codes in a secure place. They will not be shown again."
+            : mfaStage === "recovery"
+              ? "Enter one unused recovery code."
+              : "Enter the 6-digit code from your authenticator app."}
+      </Typography>
+
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+
+      {mfaStage === "setup" && (
+        <Stack spacing={2} alignItems="center">
+          <Box
+            component="img"
+            src={setupQrCode}
+            alt="Authenticator setup QR code"
+            sx={{ width: 220, maxWidth: "100%", borderRadius: 1 }}
+          />
+          <Box sx={{ width: "100%", p: 1.5, bgcolor: "#f4f6f8", borderRadius: 1 }}>
+            <Typography variant="caption" color="text.secondary">Manual setup key</Typography>
+            <Typography sx={{ fontFamily: "monospace", overflowWrap: "anywhere", userSelect: "all" }}>
+              {setupKey}
+            </Typography>
+          </Box>
+        </Stack>
+      )}
+
+      {mfaStage === "recoveryCodes" ? (
+        <>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              gap: 1,
+              p: 2,
+              bgcolor: "#f4f6f8",
+              borderRadius: 1,
+            }}
+          >
+            {recoveryCodes.map((code) => (
+              <Typography key={code} sx={{ fontFamily: "monospace", textAlign: "center", userSelect: "all" }}>
+                {code}
+              </Typography>
+            ))}
+          </Box>
+          <FormControlLabel
+            sx={{ mt: 2, alignItems: "flex-start" }}
+            control={<Checkbox checked={recoverySaved} onChange={(event) => setRecoverySaved(event.target.checked)} />}
+            label="I have stored these recovery codes securely."
+          />
+          <Button
+            variant="contained"
+            fullWidth
+            disabled={!recoverySaved}
+            onClick={finishMfaEnrollment}
+            sx={{ mt: 1.5, py: 1.5, backgroundColor: "#EEBA2B", color: "#071a33", fontWeight: 900 }}
+          >
+            Continue
+          </Button>
+        </>
+      ) : (
+        <>
+          <TextField
+            label={mfaStage === "recovery" ? "Recovery code" : "Authentication code"}
+            value={mfaCode}
+            onChange={(event) => setMfaCode(event.target.value)}
+            fullWidth
+            margin="normal"
+            autoFocus
+            autoComplete="one-time-code"
+            inputProps={{ inputMode: mfaStage === "recovery" ? "text" : "numeric" }}
+          />
+          <Button
+            variant="contained"
+            fullWidth
+            disabled={loading || !mfaCode.trim()}
+            onClick={submitMfa}
+            sx={{ mt: 1.5, py: 1.5, backgroundColor: "#EEBA2B", color: "#071a33", fontWeight: 900 }}
+          >
+            {loading ? <CircularProgress size={20} sx={{ color: "#071a33" }} /> : mfaStage === "setup" ? "Enable MFA" : "Verify"}
+          </Button>
+          {mfaStage !== "setup" && (
+            <Button
+              fullWidth
+              onClick={() => {
+                setError(null);
+                setMfaCode("");
+                setMfaStage(mfaStage === "recovery" ? "verify" : "recovery");
+              }}
+              sx={{ mt: 1 }}
+            >
+              {mfaStage === "recovery" ? "Use authenticator code" : "Use a recovery code"}
+            </Button>
+          )}
+        </>
+      )}
+    </>
+  ) : null;
 
   return (
     <Box
@@ -181,6 +355,8 @@ const Login: React.FC = () => {
     >
       <Card sx={{ maxWidth: 460, width: "100%", p: 3, boxShadow: 3 }}>
         <CardContent>
+          {mfaPanel || (
+          <>
           <Typography variant="h5" fontWeight="bold" textAlign="center" gutterBottom>
             {copy.title}
           </Typography>
@@ -275,6 +451,8 @@ const Login: React.FC = () => {
               Return to Homepage
             </Typography>
           </Box>
+          </>
+          )}
         </CardContent>
       </Card>
     </Box>

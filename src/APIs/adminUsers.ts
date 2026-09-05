@@ -63,6 +63,7 @@ export interface AdminUser {
   accountStatus?: AccountStatus;
   mailboxAccess?: MailboxAccess[];
   createdAt?: string;
+  protectedArchiveAccess?: boolean;
 }
 
 export interface CreateAdminPayload {
@@ -132,5 +133,16 @@ export const deleteAdminUser = async (id: string) => {
       url: `/api/auth/admins/${id}`,
     },
     "Failed to delete admin user."
+  );
+};
+
+export const setAdminProtectedArchiveAccess = async (id: string, enabled: boolean) => {
+  return authRequest<{ user: AdminUser; message: string }>(
+    {
+      method: "PATCH",
+      url: `/api/auth/admins/${id}/trash-access`,
+      data: { enabled },
+    },
+    "Failed to update protected archive access."
   );
 };

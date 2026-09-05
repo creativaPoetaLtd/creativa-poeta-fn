@@ -655,6 +655,50 @@ const pageTemplates = {
       ],
     ],
   },
+  impact: {
+    path: "/impact",
+    title: (lang) =>
+      lang === "fr"
+        ? "Creativa Poeta Impact | Une Pierre de Plus"
+        : lang === "nl"
+          ? "Creativa Poeta Impact | Digitale hulp voor projecten"
+          : "Creativa Poeta Impact | Digital skills for good",
+    description: (lang) =>
+      lang === "fr"
+        ? "Creativa Poeta accompagne associations, eglises, ONG et projets a impact avec une premiere solution numerique gratuite ou a tarif solidaire."
+        : lang === "nl"
+          ? "Creativa Poeta helpt verenigingen, kerken, ngo's en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief."
+          : "Creativa Poeta supports charities, churches, NGOs and impact projects with a first digital solution, free or at a solidarity rate.",
+    keywords:
+      "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, Belgium, Rwanda",
+    sections: (lang) =>
+      lang === "fr"
+        ? [
+            [
+              "Vos actions changent des vies",
+              "Creativa Poeta met une partie de ses competences numeriques au service d'organisations et de projets qui produisent un impact positif.",
+            ],
+            [
+              "Une premiere pierre concrete",
+              "Site, page d'evenement, formulaire, support visuel ou automatisation: nous definissons une contribution limitee, utile et realiste.",
+            ],
+            [
+              "Un echange transparent",
+              "Le perimetre gratuit, les frais externes eventuels, la propriete des livrables et les conditions de portfolio sont precises avant le travail.",
+            ],
+          ]
+        : lang === "nl"
+          ? [
+              ["Uw inzet verandert levens", "Creativa Poeta zet een deel van haar digitale kennis in voor organisaties en projecten met een positieve impact."],
+              ["Een concrete eerste steen", "Website, evenementpagina, formulier, visueel materiaal of automatisering: we bepalen een beperkte en nuttige bijdrage."],
+              ["Een transparante uitwisseling", "Gratis scope, mogelijke externe kosten, eigendom en portfoliovoorwaarden worden vooraf vastgelegd."],
+            ]
+          : [
+              ["Your work changes lives", "Creativa Poeta contributes part of its digital expertise to organizations and projects creating positive impact."],
+              ["A concrete first stone", "Website, event page, form, visual asset or automation: we define a focused, useful and realistic contribution."],
+              ["A transparent exchange", "The free scope, possible external costs, ownership and portfolio terms are agreed before work begins."],
+            ],
+  },
   startProject: {
     path: "/start-project",
     title: () => "Start your project | Creativa Poeta",

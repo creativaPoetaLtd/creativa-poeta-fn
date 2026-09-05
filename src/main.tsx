@@ -38,6 +38,7 @@ import ReferralProgramTermsPage from "./pages/ReferralProgramTermsPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
+import ImpactPage from "./pages/ImpactPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -73,6 +74,11 @@ const appElement = (
             <Route path="/fr/contact" element={<ContactPage />} />
             <Route path="/nl/contact" element={<ContactPage />} />
             <Route path="/rw/contact" element={<ContactPage />} />
+            <Route path="/impact" element={<ImpactPage />} />
+            <Route path="/en/impact" element={<ImpactPage />} />
+            <Route path="/fr/impact" element={<ImpactPage />} />
+            <Route path="/nl/impact" element={<ImpactPage />} />
+            <Route path="/rw/impact" element={<ImpactPage />} />
             <Route path="/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/en/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/fr/referral-partners" element={<ReferralProgramPage />} />

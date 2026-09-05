@@ -9,6 +9,29 @@ export interface AuthUser {
   accountStatus?: string;
 }
 
+export interface AuthenticatedResponse {
+  token: string;
+  user: AuthUser;
+}
+
+export interface MfaChallengeResponse {
+  mfaRequired: true;
+  mfaSetupRequired: boolean;
+  challengeToken: string;
+}
+
+export type PrimaryAuthResponse = AuthenticatedResponse | MfaChallengeResponse;
+
+export interface MfaSetupResponse {
+  setupKey: string;
+  qrCodeDataUrl: string;
+  expiresAt: string;
+}
+
+export interface MfaSetupConfirmation extends AuthenticatedResponse {
+  recoveryCodes: string[];
+}
+
 export const checkAdminActivation = async (email: string) => {
   return publicRequest<{ message: string; user: AuthUser }>(
     {
@@ -21,7 +44,7 @@ export const checkAdminActivation = async (email: string) => {
 };
 
 export const activateAdminAccount = async (email: string, password: string, confirmPassword: string) => {
-  return publicRequest<{ token: string; user: AuthUser }>(
+  return publicRequest<PrimaryAuthResponse>(
     {
       method: "POST",
       url: "/api/auth/activate",
@@ -48,7 +71,7 @@ export const completeAdminPasswordReset = async (
   password: string,
   confirmPassword: string
 ) => {
-  return publicRequest<{ token: string; user: AuthUser }>(
+  return publicRequest<PrimaryAuthResponse>(
     {
       method: "POST",
       url: "/api/auth/password-reset/complete",
@@ -57,6 +80,27 @@ export const completeAdminPasswordReset = async (
     "Failed to reset password."
   );
 };
+
+export const startAdminMfaSetup = async (challengeToken: string) =>
+  publicRequest<MfaSetupResponse>(
+    { method: "POST", url: "/api/auth/mfa/setup", data: { challengeToken } },
+    "Failed to start multi-factor authentication setup."
+  );
+
+export const confirmAdminMfaSetup = async (challengeToken: string, code: string) =>
+  publicRequest<MfaSetupConfirmation>(
+    { method: "POST", url: "/api/auth/mfa/setup/confirm", data: { challengeToken, code } },
+    "Failed to confirm multi-factor authentication."
+  );
+
+export const verifyAdminMfa = async (
+  challengeToken: string,
+  values: { code?: string; recoveryCode?: string }
+) =>
+  publicRequest<AuthenticatedResponse & { recoveryCodeUsed?: boolean; recoveryCodesRemaining?: number }>(
+    { method: "POST", url: "/api/auth/mfa/verify", data: { challengeToken, ...values } },
+    "Failed to verify the authentication code."
+  );
 
 export const changeAdminPassword = async (
   currentPassword: string,

@@ -22,6 +22,8 @@ import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
 import Email from "@mui/icons-material/Email";
 import LinkIcon from "@mui/icons-material/Link";
+import LockOpen from "@mui/icons-material/LockOpen";
+import Shield from "@mui/icons-material/Shield";
 import People from "@mui/icons-material/People";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import PersonOff from "@mui/icons-material/PersonOff";
@@ -35,6 +37,7 @@ import {
   createAdminUser,
   deleteAdminUser,
   getAdminUsers,
+  setAdminProtectedArchiveAccess,
   updateAdminUser,
 } from "../APIs/adminUsers";
 import { useAuth } from "../contexts/useAuth";
@@ -277,6 +280,7 @@ export default function Users() {
     const query = search.trim().toLowerCase();
     return users.filter((adminUser) => {
       const role = normalizeRole(adminUser.role, adminUser.email);
+      if (role === "super_admin" || isRootAdminEmail(adminUser.email)) return false;
       const accountStatus = adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled");
       const matchesSearch =
         !query ||
@@ -290,12 +294,17 @@ export default function Users() {
   }, [filterStatus, search, users]);
 
   const metrics = useMemo(
-    () => ({
-      total: users.length,
-      active: users.filter((adminUser) => (adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled")) === "active").length,
-      pending: users.filter((adminUser) => adminUser.accountStatus === "pending").length,
-      levelZero: users.filter((adminUser) => normalizeRole(adminUser.role, adminUser.email) === "admin_0").length,
-    }),
+    () => {
+      const visibleUsers = users.filter(
+        (adminUser) => normalizeRole(adminUser.role, adminUser.email) !== "super_admin" && !isRootAdminEmail(adminUser.email)
+      );
+      return {
+        total: visibleUsers.length,
+        active: visibleUsers.filter((adminUser) => (adminUser.accountStatus || (adminUser.isActive ? "active" : "disabled")) === "active").length,
+        pending: visibleUsers.filter((adminUser) => adminUser.accountStatus === "pending").length,
+        levelZero: visibleUsers.filter((adminUser) => normalizeRole(adminUser.role, adminUser.email) === "admin_0").length,
+      };
+    },
     [users]
   );
 
@@ -408,6 +417,22 @@ export default function Users() {
       showMessage("Admin user deleted.");
     } catch (err) {
       showMessage(err instanceof Error ? err.message : "Failed to delete admin.", "error");
+    }
+  };
+
+  const handleProtectedArchiveAccess = async (adminUser: AdminUser) => {
+    if (!isSuperAdmin) return;
+
+    try {
+      const id = getUserId(adminUser);
+      const enabled = !adminUser.protectedArchiveAccess;
+      const response = await setAdminProtectedArchiveAccess(id, enabled);
+      setUsers((current) =>
+        current.map((item) => (getUserId(item) === id ? { ...item, ...response.user } : item))
+      );
+      showMessage(response.message || (enabled ? "Protected archive access granted." : "Protected archive access removed."));
+    } catch (err) {
+      showMessage(err instanceof Error ? err.message : "Failed to update protected archive access.", "error");
     }
   };
 
@@ -674,6 +699,14 @@ export default function Users() {
                 onClick={() => void handleDeleteUser(adminUser)}
                 color={manageable ? "#ef4444" : "#94a3b8"}
               />
+              {isSuperAdmin && (
+                <MenuAction
+                  icon={adminUser.protectedArchiveAccess ? <LockOpen /> : <Shield />}
+                  label={adminUser.protectedArchiveAccess ? "Remove protected archive access" : "Grant protected archive access"}
+                  onClick={() => void handleProtectedArchiveAccess(adminUser)}
+                  color={adminUser.protectedArchiveAccess ? "#64748b" : "#7c3aed"}
+                />
+              )}
             </>
           );
         }}

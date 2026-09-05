@@ -60,6 +60,7 @@ function Footer() {
       : locale === "kiny"
       ? "Career & opportunities"
       : "Carrières & opportunités";
+  const impactLabel = "Creativa Poeta Impact";
   const resourcesTitle =
     locale === "nl"
       ? "Ontdek Creativa Poeta"
@@ -91,6 +92,7 @@ function Footer() {
     { label: footerCopy.competence20, path: "/services/graphic-design" },
   ];
   const resourceLinks = [
+    { label: impactLabel, path: "/impact" },
     { label: careerLabel, path: "/career" },
     { label: blogLabel, path: "/blogs" },
     { label: knowledgeLabel, path: "/knowledge" },

@@ -36,6 +36,8 @@ const menuCopy: Record<
     contact: string;
     assistanceRequest: string;
     assistanceRequestText: string;
+    impact: string;
+    impactText: string;
     partnership: string;
     partnershipText: string;
     careerText: string;
@@ -52,6 +54,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Demander une assistance",
     assistanceRequestText: "Dépannage, configuration et aide numérique pas à pas",
+    impact: "Impact",
+    impactText: "Nos compétences numériques au service des projets utiles",
     partnership: "Referral & partenaires",
     partnershipText: "Présentez un client, gagnez une récompense, ou proposez une collaboration",
     careerText: "Opportunités, programme d’apporteurs et candidatures spontanées",
@@ -74,6 +78,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Request assistance",
     assistanceRequestText: "Troubleshooting, setup and step-by-step digital help",
+    impact: "Impact",
+    impactText: "Our digital skills in service of useful projects",
     partnership: "Referral & partners",
     partnershipText: "Refer a client, earn a reward, or propose a broader collaboration",
     careerText: "Open opportunities, client introducer program and spontaneous applications",
@@ -96,6 +102,8 @@ const menuCopy: Record<
     contact: "Contact",
     assistanceRequest: "Digitale hulp aanvragen",
     assistanceRequestText: "Problemen oplossen, installatie en begeleiding",
+    impact: "Impact",
+    impactText: "Onze digitale kennis voor projecten die ertoe doen",
     partnership: "Referral & partners",
     partnershipText: "Breng een klant aan, ontvang een beloning of stel een samenwerking voor",
     careerText: "Openstaande kansen, klantenaanbrengers en spontane sollicitaties",
@@ -118,6 +126,8 @@ const menuCopy: Record<
     contact: "Twandikire",
     assistanceRequest: "Saba assistance",
     assistanceRequestText: "Depannage, setup no kugufasha gukoresha digital",
+    impact: "Impact",
+    impactText: "Digital skills zacu ku mishinga ifitiye abantu akamaro",
     partnership: "Referral & partners",
     partnershipText: "Tumenyeshe client, ubone reward, cyangwa usabe collaboration yagutse",
     careerText: "Opportunities, client introducer program na spontaneous applications",
@@ -178,6 +188,12 @@ function NavBar() {
       text: "",
       href: localizePath("/"),
       featured: false,
+    },
+    {
+      label: copy.impact,
+      text: copy.impactText,
+      href: localizePath("/impact"),
+      featured: true,
     },
     {
       label: copy.audit,
