@@ -54,7 +54,7 @@ import {
 } from "./components/DashboardComponents";
 
 const statusOptions = ["Pending", "In-Progress", "Completed", "Cancelled"];
-type RequestKind = "projects" | "visibility" | "assistance";
+type RequestKind = "projects" | "impact" | "visibility" | "assistance";
 
 type ProjectsProps = {
   kind?: RequestKind;
@@ -77,6 +77,13 @@ const requestKindCopy: Record<
     empty: "No project requests found",
     totalLabel: "Project Requests",
   },
+  impact: {
+    title: "CP Impact",
+    subtitle: "Applications submitted through the CP Impact program form.",
+    loading: "Loading CP Impact applications...",
+    empty: "No CP Impact applications found",
+    totalLabel: "Impact Applications",
+  },
   visibility: {
     title: "Visibility Tests",
     subtitle: "Inbox for visibility tests submitted from Tester ma visibilité.",
@@ -95,6 +102,9 @@ const requestKindCopy: Record<
 
 const getServiceType = (project: ProjectRequest) =>
   (project.serviceType || "").trim().toLowerCase();
+
+const isImpactRequest = (project: ProjectRequest) =>
+  getServiceType(project).includes("creativa poeta impact");
 
 const isVisibilityRequest = (project: ProjectRequest) => {
   const serviceType = getServiceType(project);
@@ -119,9 +129,10 @@ const isAssistanceRequest = (project: ProjectRequest) => {
 };
 
 const matchesRequestKind = (project: ProjectRequest, kind: RequestKind) => {
+  if (kind === "impact") return isImpactRequest(project);
   if (kind === "visibility") return isVisibilityRequest(project);
   if (kind === "assistance") return isAssistanceRequest(project);
-  return !isVisibilityRequest(project) && !isAssistanceRequest(project);
+  return !isImpactRequest(project) && !isVisibilityRequest(project) && !isAssistanceRequest(project);
 };
 
 const normalizeStatus = (status?: string, isReplied?: boolean) => {
@@ -145,6 +156,23 @@ const getStatusVariant = (status: string): StatusVariant => {
       return "warning";
   }
 };
+
+const impactReplyTemplates = {
+  fr: {
+    subject: "Votre candidature CP Impact",
+    message: (name: string) => `Bonjour ${name},\n\nMerci pour votre candidature à CP Impact. Nous avons étudié les informations transmises et revenons vers vous au sujet de votre projet.\n\nL’équipe Creativa Poeta Impact`,
+  },
+  en: {
+    subject: "Your CP Impact application",
+    message: (name: string) => `Hello ${name},\n\nThank you for applying to CP Impact. We have reviewed the information you provided and are following up about your project.\n\nThe Creativa Poeta Impact team`,
+  },
+  nl: {
+    subject: "Uw CP Impact-aanvraag",
+    message: (name: string) => `Hallo ${name},\n\nBedankt voor uw aanvraag bij CP Impact. We hebben de verstrekte informatie bekeken en nemen contact met u op over uw project.\n\nHet Creativa Poeta Impact-team`,
+  },
+};
+
+const getImpactReplyLanguage = (locale?: string) => locale === "fr" || locale === "nl" ? locale : "en";
 
 const formatDate = (dateString?: string) => {
   if (!dateString) return "Unknown date";
@@ -208,7 +236,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
         throw new Error("Please login to access project requests.");
       }
 
-      const data = await getProjects(1, 100, "all");
+      const data = await getProjects(1, 100, "all", kind);
       const receivedProjects = data.requests || data.projects || [];
       setProjects([...receivedProjects].sort((a, b) => getProjectDateValue(b) - getProjectDateValue(a)));
     } catch (err) {
@@ -216,7 +244,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
     } finally {
       setLoading(false);
     }
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated, kind, token]);
 
   useEffect(() => {
     if (isAuthenticated && token) {
@@ -340,6 +368,13 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
 
   const handleReply = (project: ProjectRequest) => {
     setSelectedProject(project);
+    if (kind === "impact") {
+      const template = impactReplyTemplates[getImpactReplyLanguage(project.locale)];
+      setReplySubject(template.subject);
+      setReplyMessage(template.message(project.name));
+      setReplyModalOpen(true);
+      return;
+    }
     setReplySubject(`Re: ${project.serviceType || "Project request"}`);
     setReplyMessage(
       `Bonjour ${project.name},\n\nMerci pour votre demande. Nous l'avons bien recue et nous allons revenir vers vous avec les prochaines etapes.\n\nCreativa Poeta`
@@ -387,7 +422,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
           </Typography>
         </Box>
       ),
-      Company: project.company || "Personal request",
+      [kind === "impact" ? "Organization" : "Company"]: project.company || "Personal request",
       Service: (
         <Chip
           label={serviceType}
@@ -535,7 +570,7 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
       </Card>
 
       <DataTable
-        headers={["Client", "Company", "Service", "Needs", "Owner", "Status", "Date"]}
+        headers={["Client", kind === "impact" ? "Organization" : "Company", "Service", "Needs", "Owner", "Status", "Date"]}
         hiddenFields={["id"]}
         rows={tableRows}
         onView={(id) => {
@@ -651,9 +686,10 @@ export default function Projects({ kind = "projects" }: ProjectsProps) {
               )}
 
               {[
-                ["Other need", selectedProject.customServiceDescription],
-                ["Context", selectedProject.customServiceNeeds],
-                ["Additional info", selectedProject.additionalInfo],
+                [kind === "impact" ? "Mission" : "Service details", selectedProject.serviceSpecificOtherDescription],
+                [kind === "impact" ? "Problem to solve" : "Other need", selectedProject.customServiceDescription],
+                [kind === "impact" ? "Expected outcome" : "Context", selectedProject.customServiceNeeds],
+                [kind === "impact" ? "Organization details" : "Additional info", selectedProject.additionalInfo],
                 ["Reply sent", selectedProject.replyMessage],
               ]
                 .filter(([, value]) => Boolean(value))

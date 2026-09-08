@@ -659,18 +659,18 @@ const pageTemplates = {
     path: "/impact",
     title: (lang) =>
       lang === "fr"
-        ? "Creativa Poeta Impact | Une Pierre de Plus"
+        ? "Creativa Poeta Impact | Programme numerique solidaire"
         : lang === "nl"
           ? "Creativa Poeta Impact | Digitale hulp voor projecten"
           : "Creativa Poeta Impact | Digital skills for good",
     description: (lang) =>
       lang === "fr"
-        ? "Creativa Poeta accompagne associations, eglises, ONG et projets a impact avec une premiere solution numerique gratuite ou a tarif solidaire."
+        ? "Creativa Poeta accompagne associations, ONG, collectifs et projets a impact avec une premiere solution numerique gratuite ou a tarif solidaire."
         : lang === "nl"
-          ? "Creativa Poeta helpt verenigingen, kerken, ngo's en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief."
-          : "Creativa Poeta supports charities, churches, NGOs and impact projects with a first digital solution, free or at a solidarity rate.",
+          ? "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief."
+          : "Creativa Poeta supports charities, NGOs, community groups and impact projects with a first digital solution, free or at a solidarity rate.",
     keywords:
-      "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, Belgium, Rwanda",
+      "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, community projects",
     sections: (lang) =>
       lang === "fr"
         ? [
@@ -698,6 +698,50 @@ const pageTemplates = {
               ["A concrete first stone", "Website, event page, form, visual asset or automation: we define a focused, useful and realistic contribution."],
               ["A transparent exchange", "The free scope, possible external costs, ownership and portfolio terms are agreed before work begins."],
             ],
+  },
+  impactHow: {
+    path: "/impact/comment-ca-marche",
+    title: (lang) => lang === "fr" ? "Comment ça marche | Creativa Poeta Impact" : lang === "nl" ? "Hoe werkt het | Creativa Poeta Impact" : "How it works | Creativa Poeta Impact",
+    description: (lang) => lang === "fr" ? "Découvrez les étapes, les solutions numériques possibles et des exemples concrets du programme Creativa Poeta Impact." : lang === "nl" ? "Ontdek de stappen, mogelijke digitale oplossingen en concrete voorbeelden van Creativa Poeta Impact." : "Explore the steps, possible digital solutions and practical examples from Creativa Poeta Impact.",
+    keywords: "Creativa Poeta Impact process, nonprofit digital support, pro bono digital services",
+    sections: (lang) => lang === "fr"
+      ? [
+          ["Présentez votre mission", "Expliquez votre action, le public aidé et le problème concret à résoudre."],
+          ["Une première pierre", "Nous définissons ensemble une réalisation limitée, utile et réaliste."],
+          ["Réalisation et transmission", "Vous validez les étapes puis recevez le livrable, les accès et des instructions simples."],
+        ]
+      : lang === "nl"
+        ? [
+            ["Stel uw missie voor", "Leg uw actie, doelgroep en het concrete probleem uit."],
+            ["Een eerste steen", "Samen bepalen we een beperkte, nuttige en haalbare realisatie."],
+            ["Realisatie en overdracht", "U keurt de stappen goed en ontvangt het resultaat, de toegangen en eenvoudige instructies."],
+          ]
+        : [
+            ["Present your mission", "Explain your work, the people you support and the practical problem."],
+            ["A first stone", "Together we define a limited, useful and realistic delivery."],
+            ["Delivery and handover", "You approve the steps and receive the deliverable, access and simple instructions."],
+          ],
+  },
+  impactConditions: {
+    path: "/impact/conditions",
+    title: (lang) => lang === "fr" ? "Conditions | Creativa Poeta Impact" : lang === "nl" ? "Voorwaarden | Creativa Poeta Impact" : "Conditions | Creativa Poeta Impact",
+    description: (lang) => lang === "fr" ? "Critères, périmètre, coûts éventuels, propriété et engagements du programme Creativa Poeta Impact." : lang === "nl" ? "Criteria, scope, mogelijke kosten, eigendom en engagementen van Creativa Poeta Impact." : "Criteria, scope, possible costs, ownership and commitments for Creativa Poeta Impact.",
+    keywords: "Creativa Poeta Impact conditions, eligibility, nonprofit digital support",
+    sections: (lang) => lang === "fr"
+      ? [["Sélection transparente", "L'impact, le besoin, la faisabilité et les capacités disponibles sont étudiés."], ["Un périmètre écrit", "Ce qui est inclus, les frais externes éventuels et la propriété sont précisés avant le travail."]]
+      : lang === "nl"
+        ? [["Transparante selectie", "Impact, behoefte, haalbaarheid en beschikbare capaciteit worden beoordeeld."], ["Een schriftelijke scope", "Wat inbegrepen is, mogelijke externe kosten en eigendom worden vooraf vastgelegd."]]
+        : [["Transparent selection", "Impact, need, feasibility and available capacity are assessed."], ["A written scope", "What is included, possible external costs and ownership are agreed before work starts."]],
+  },
+  impactApplication: {
+    path: "/impact/candidature",
+    title: (lang) => lang === "fr" ? "Présenter un projet | Creativa Poeta Impact" : lang === "nl" ? "Een project voorstellen | Creativa Poeta Impact" : "Present a project | Creativa Poeta Impact",
+    description: (lang) => lang === "fr" ? "Présentez gratuitement votre mission et votre besoin numérique à l'équipe Creativa Poeta Impact." : lang === "nl" ? "Stel uw missie en digitale behoefte gratis voor aan het Creativa Poeta Impact-team." : "Present your mission and digital need to the Creativa Poeta Impact team for free.",
+    keywords: "Creativa Poeta Impact application, nonprofit digital help, submit impact project",
+    sections: (lang) => [[
+      lang === "fr" ? "Trois étapes courtes" : lang === "nl" ? "Drie korte stappen" : "Three short steps",
+      lang === "fr" ? "Décrivez votre organisation, sa mission et le résultat concret souhaité. Aucun jargon technique n'est nécessaire." : lang === "nl" ? "Beschrijf uw organisatie, missie en het gewenste concrete resultaat. Technische taal is niet nodig." : "Describe your organization, its mission and the practical result you need. No technical language is required.",
+    ]],
   },
   startProject: {
     path: "/start-project",

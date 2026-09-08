@@ -93,13 +93,14 @@ export const getProjectSummary = async () => {
 export const getProjects = async <T = ProjectListResponse>(
   page = 1,
   limit = 25,
-  status = "all"
+  status = "all",
+  kind?: "projects" | "impact" | "visibility" | "assistance"
 ): Promise<T> => {
   return authRequest<T>(
     {
       method: "GET",
       url: "/api/project",
-      params: { page, limit, status },
+      params: { page, limit, status, kind },
     },
     "Failed to fetch project requests."
   );
