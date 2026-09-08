@@ -5,7 +5,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronLeft,
-  Church,
+  Building2,
   CircleDollarSign,
   GraduationCap,
   HeartHandshake,
@@ -28,7 +28,7 @@ import impactLocale, { type ImpactLanguage } from "../i18n/ImpactLocale";
 import { projectForm } from "../APIs/projectForm";
 import "./ImpactPage.css";
 
-const audienceIcons = [HeartHandshake, Church, GraduationCap, UsersRound, Palette, Leaf];
+const audienceIcons = [HeartHandshake, Building2, GraduationCap, UsersRound, Palette, Leaf];
 const promiseIcons = [Sparkles, CircleDollarSign, HeartHandshake, LockKeyhole];
 
 type ImpactFormState = {
@@ -100,28 +100,28 @@ const ImpactPage = () => {
   const seo = useMemo(() => {
     if (language === "fr") {
       return {
-        title: "Creativa Poeta Impact | Une Pierre de Plus",
+        title: "Creativa Poeta Impact | Programme numérique solidaire",
         description:
-          "Creativa Poeta accompagne associations, églises, ONG et projets à impact avec une première solution numérique gratuite ou à tarif solidaire.",
+          "Creativa Poeta accompagne associations, ONG, collectifs et projets à impact avec une première solution numérique gratuite ou à tarif solidaire.",
         keywords:
-          "Creativa Poeta Impact, pro bono numérique, site association, outil numérique ONG, aide digitale église, Belgique, Rwanda",
+          "Creativa Poeta Impact, pro bono numérique, site association, outil numérique ONG, projet communautaire",
       };
     }
     if (language === "nl") {
       return {
         title: "Creativa Poeta Impact | Digitale hulp voor projecten",
         description:
-          "Creativa Poeta helpt verenigingen, kerken, ngo's en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief.",
+          "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief.",
         keywords:
-          "Creativa Poeta Impact, digitale hulp vereniging, website vzw, digitale oplossing ngo, België, Rwanda",
+          "Creativa Poeta Impact, digitale hulp vereniging, website vzw, digitale oplossing ngo, gemeenschapsproject",
       };
     }
     return {
       title: "Creativa Poeta Impact | Digital skills for good",
       description:
-        "Creativa Poeta supports charities, churches, NGOs and impact projects with a first digital solution, free or at a solidarity rate.",
+        "Creativa Poeta supports charities, NGOs, community groups and impact projects with a first digital solution, free or at a solidarity rate.",
       keywords:
-        "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, Belgium, Rwanda",
+        "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, community projects",
     };
   }, [language]);
 
@@ -217,7 +217,7 @@ const ImpactPage = () => {
         email: form.email.trim(),
         phone: form.phone.trim(),
         company: form.organization.trim(),
-        serviceType: "Creativa Poeta Impact — Une Pierre de Plus",
+        serviceType: "Creativa Poeta Impact",
         selectedServices: form.needs,
         customServiceDescription: form.problem.trim(),
         customServiceNeeds: form.result.trim(),
@@ -260,7 +260,7 @@ const ImpactPage = () => {
             url: "https://creativapoeta.com",
           },
           serviceType: "Digital support for social impact projects",
-          areaServed: ["Belgium", "Rwanda"],
+          areaServed: "Worldwide",
         }}
       />
 
@@ -324,9 +324,9 @@ const ImpactPage = () => {
               <p>{copy.whyBody}</p>
               <div className="impact-frictions">
                 {copy.frictions.map((item, index) => (
-                  <div key={item}>
+                  <div key={item.title}>
                     <span>0{index + 1}</span>
-                    <p>{item}</p>
+                    <p><strong>{item.title}</strong> — {item.text}</p>
                   </div>
                 ))}
               </div>

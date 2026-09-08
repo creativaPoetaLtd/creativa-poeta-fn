@@ -107,6 +107,13 @@ function Footer() {
     : locale === "kiny"
     ? { title: "Kumenyekanisha abakiliya & partnerships", intro: "Network yawe ishobora guhuza businesses na digital services zikeneye.", overview: "Uko ikora", guide: "Guide ifatika", join: "Injira muri porogaramu", submit: "Menyekanisha umukiliya", business: "Abafatanyabikorwa b’ubucuruzi", strategic: "Ubufatanye bwihariye", terms: "Amategeko ya porogaramu" }
     : { title: "Apporteurs de clients & partenariats", intro: "Votre réseau peut connecter les entreprises aux services numériques dont elles ont besoin.", overview: "Comment ça marche", guide: "Guide pratique", join: "Rejoindre le programme", submit: "Présenter un client", business: "Partenaires commerciaux", strategic: "Collaboration sur mesure", terms: "Conditions du programme" };
+  const impactFooter = locale === "nl"
+    ? { title: "Creativa Poeta Impact", intro: "Digitale expertise voor verenigingen, ngo's, collectieven en projecten die een positief verschil maken.", overview: "Overzicht", how: "Hoe werkt het", conditions: "Voorwaarden", apply: "Een project voorstellen", support: "Het programma steunen" }
+    : locale === "en"
+    ? { title: "Creativa Poeta Impact", intro: "Digital expertise for charities, NGOs, community groups and projects creating positive change.", overview: "Overview", how: "How it works", conditions: "Conditions", apply: "Present a project", support: "Support the program" }
+    : locale === "kiny"
+    ? { title: "Creativa Poeta Impact", intro: "Digital expertise ku mashyirahamwe n'imishinga ifitiye abantu akamaro.", overview: "Overview", how: "Uko ikora", conditions: "Conditions", apply: "Tanga project", support: "Shyigikira program" }
+    : { title: "Creativa Poeta Impact", intro: "Nos compétences numériques au service des associations, ONG, collectifs et projets qui changent les choses.", overview: "Aperçu", how: "Comment ça marche", conditions: "Conditions", apply: "Présenter un projet", support: "Soutenir le programme" };
   // const { t } = useTranslation();
   // const today = new Date();
   // const[isLoading, setIsLoading] = useState(false);
@@ -227,6 +234,22 @@ function Footer() {
           </a>
           </div> */}
           </div>
+          <section className="mt-10 w-full border-t border-white/15 pt-7">
+            <div className="grid gap-5 rounded-2xl border border-[#6686ff]/40 bg-[#172038] p-5 md:grid-cols-[1fr_2fr] md:p-7">
+              <div>
+                <p className="text-xl font-black text-white">{impactFooter.title}</p>
+                <p className="mt-2 max-w-md text-sm font-semibold leading-relaxed text-slate-300">{impactFooter.intro}</p>
+                <Link to={linkPath("/impact/candidature")} className="mt-4 inline-flex min-h-[42px] items-center rounded-full bg-[#b8ef45] px-5 text-sm font-black text-[#172038] transition hover:bg-white">{impactFooter.apply}</Link>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-sm font-bold sm:grid-cols-3">
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-200 hover:border-[#6686ff] hover:text-white" to={linkPath("/impact")}>{impactFooter.overview}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-200 hover:border-[#6686ff] hover:text-white" to={linkPath("/impact/comment-ca-marche")}>{impactFooter.how}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-200 hover:border-[#6686ff] hover:text-white" to={linkPath("/impact/conditions")}>{impactFooter.conditions}</Link>
+                <Link className="rounded-lg border border-white/10 p-3 text-slate-200 hover:border-[#6686ff] hover:text-white" to={linkPath("/impact/candidature")}>{impactFooter.apply}</Link>
+                <a className="rounded-lg border border-white/10 p-3 text-slate-200 hover:border-[#b8ef45] hover:text-white" href="mailto:contact@creativapoeta.com?subject=Soutenir%20Creativa%20Poeta%20Impact">{impactFooter.support}</a>
+              </div>
+            </div>
+          </section>
           <section className="mt-10 w-full border-t border-white/15 pt-7">
             <div className="grid gap-5 rounded-2xl border border-[#EEBA2B]/25 bg-black/20 p-5 backdrop-blur-sm md:grid-cols-[1fr_2fr] md:p-7">
               <div>
