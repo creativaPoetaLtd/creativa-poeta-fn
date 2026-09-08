@@ -38,7 +38,10 @@ import ReferralProgramTermsPage from "./pages/ReferralProgramTermsPage.tsx";
 import CookieConsent from "./components/cookies/CookieConsent.tsx";
 import WebsiteAnalyticsTracker from "./analytics/WebsiteAnalyticsTracker.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
-import ImpactPage from "./pages/ImpactPage.tsx";
+import ImpactHomePage from "./pages/ImpactHomePage.tsx";
+import ImpactHowPage from "./pages/ImpactHowPage.tsx";
+import ImpactConditionsPage from "./pages/ImpactConditionsPage.tsx";
+import ImpactApplicationPage from "./pages/ImpactApplicationPage.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -74,11 +77,26 @@ const appElement = (
             <Route path="/fr/contact" element={<ContactPage />} />
             <Route path="/nl/contact" element={<ContactPage />} />
             <Route path="/rw/contact" element={<ContactPage />} />
-            <Route path="/impact" element={<ImpactPage />} />
-            <Route path="/en/impact" element={<ImpactPage />} />
-            <Route path="/fr/impact" element={<ImpactPage />} />
-            <Route path="/nl/impact" element={<ImpactPage />} />
-            <Route path="/rw/impact" element={<ImpactPage />} />
+            <Route path="/impact" element={<ImpactHomePage />} />
+            <Route path="/en/impact" element={<ImpactHomePage />} />
+            <Route path="/fr/impact" element={<ImpactHomePage />} />
+            <Route path="/nl/impact" element={<ImpactHomePage />} />
+            <Route path="/rw/impact" element={<ImpactHomePage />} />
+            <Route path="/impact/comment-ca-marche" element={<ImpactHowPage />} />
+            <Route path="/en/impact/comment-ca-marche" element={<ImpactHowPage />} />
+            <Route path="/fr/impact/comment-ca-marche" element={<ImpactHowPage />} />
+            <Route path="/nl/impact/comment-ca-marche" element={<ImpactHowPage />} />
+            <Route path="/rw/impact/comment-ca-marche" element={<ImpactHowPage />} />
+            <Route path="/impact/conditions" element={<ImpactConditionsPage />} />
+            <Route path="/en/impact/conditions" element={<ImpactConditionsPage />} />
+            <Route path="/fr/impact/conditions" element={<ImpactConditionsPage />} />
+            <Route path="/nl/impact/conditions" element={<ImpactConditionsPage />} />
+            <Route path="/rw/impact/conditions" element={<ImpactConditionsPage />} />
+            <Route path="/impact/candidature" element={<ImpactApplicationPage />} />
+            <Route path="/en/impact/candidature" element={<ImpactApplicationPage />} />
+            <Route path="/fr/impact/candidature" element={<ImpactApplicationPage />} />
+            <Route path="/nl/impact/candidature" element={<ImpactApplicationPage />} />
+            <Route path="/rw/impact/candidature" element={<ImpactApplicationPage />} />
             <Route path="/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/en/referral-partners" element={<ReferralProgramPage />} />
             <Route path="/fr/referral-partners" element={<ReferralProgramPage />} />

@@ -40,6 +40,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import WorkIcon from "@mui/icons-material/Work";
 import HandshakeIcon from "@mui/icons-material/Handshake";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -95,6 +96,14 @@ const navigationItems = [
     icon: <WorkIcon />,
     path: "/secure-admin-dashboard-2024/projects",
     color: "#4CAF50",
+    section: "Demandes",
+    permission: "requests:projects",
+  },
+  {
+    text: "CP Impact",
+    icon: <VolunteerActivismIcon />,
+    path: "/secure-admin-dashboard-2024/cp-impact",
+    color: "#2659ff",
     section: "Demandes",
     permission: "requests:projects",
   },
@@ -309,6 +318,7 @@ export default function Dashboard() {
       setRequestAttentionCounts({
         "Website Analytics": Number(analyticsIncidentMetrics.open || 0),
         Projects: Number(projectMetrics.projects || 0),
+        "CP Impact": Number(projectMetrics.impact || 0),
         "Visibility Tests": Number(projectMetrics.visibility || 0),
         "Assistance Requests": Number(projectMetrics.assistance || 0),
         "Referral & Partners": Number(partnershipMetrics.attention || 0),
@@ -750,6 +760,7 @@ export default function Dashboard() {
             <Route path="website-analytics" element={renderWithPermission("analytics:read", <WebsiteAnalytics />)} />
             <Route path="uptime-monitoring" element={renderWithPermission("analytics:read", <UptimeMonitoring />)} />
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
+            <Route path="cp-impact" element={renderWithPermission("requests:projects", <Projects kind="impact" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
             <Route path="referral-program" element={renderWithPermission("referrals:read", <ReferralProgram />)} />
