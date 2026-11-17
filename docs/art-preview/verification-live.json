@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "Live gallery shows published data rather than sample fixtures",
+    "Private draft is absent",
+    "Real artwork supports multiple photographs",
+    "Variant changes actual displayed price",
+    "Cart is repriced by server",
+    "Quantity updates server quote",
+    "Selection persists on reload",
+    "Enquiry form checks contact details and consent",
+    "Submission receives an actual stored reference",
+    "Request confirmation explicitly takes no payment",
+    "Protected Art module loads real administrator data",
+    "Price editor accepts decimal commas",
+    "Photo reordering keeps its associated description",
+    "Catalogue editor saves translation, image order and price",
+    "Customer selection appears in protected enquiry dashboard",
+    "Saved photo order appears on public artwork",
+    "Saved public price is current",
+    "Mobile selection fits the viewport",
+    "No uncaught browser errors"
+  ],
+  "errors": [],
+  "isolatedData": true
+}

@@ -35,6 +35,8 @@ export type AdminPermission =
   | "email:send"
   | "email:manage"
   | "blogs:manage"
+  | "art:catalog"
+  | "art:requests"
   | "seo:manage"
   | "jobs:manage"
   | "users:manage"

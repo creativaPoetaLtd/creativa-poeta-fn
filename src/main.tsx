@@ -42,6 +42,7 @@ import ImpactHomePage from "./pages/ImpactHomePage.tsx";
 import ImpactHowPage from "./pages/ImpactHowPage.tsx";
 import ImpactConditionsPage from "./pages/ImpactConditionsPage.tsx";
 import ImpactApplicationPage from "./pages/ImpactApplicationPage.tsx";
+import ArtRoutes from "./pages/ArtRoutes.tsx";
 
 const appElement = (
   <React.StrictMode>
@@ -51,6 +52,7 @@ const appElement = (
           <ScrollToTop />
           <WebsiteAnalyticsTracker />
           <Routes>
+            {["", "/en", "/fr", "/nl", "/rw"].map((prefix) => <Route key={`${prefix}/art`} path={`${prefix}/art/*`} element={<ArtRoutes />} />)}
             <Route path="/" element={<App />} />
             <Route path="/en" element={<App />} />
             <Route path="/fr" element={<App />} />

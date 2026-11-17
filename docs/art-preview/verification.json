@@ -1,0 +1,31 @@
+{
+  "checks": [
+    "French home and five collection links",
+    "Preview cannot be mistaken for a live store",
+    "Desktop home: no horizontal overflow",
+    "Desktop home: typography fits its artwork",
+    "Gallery initially shows all four studies",
+    "Search filters by title",
+    "Collection filter",
+    "Full artwork stays within its viewing area",
+    "Material selector updates",
+    "Detail view updates",
+    "Zoom dialog opens",
+    "Escape closes zoom and restores focus",
+    "Selected options reach the custom request",
+    "Empty form is rejected",
+    "Message is prepared without sending or ordering",
+    "en: localized home",
+    "nl: localized home",
+    "Unknown artwork has a recovery link",
+    "Mobile home: no horizontal overflow",
+    "Mobile home: typography fits its artwork",
+    "Mobile menu navigates and closes",
+    "Mobile portrait artwork: no horizontal overflow",
+    "Mobile related artworks: typography fits its artwork",
+    "Mobile collections: no horizontal overflow",
+    "All image assets loaded",
+    "No uncaught browser errors"
+  ],
+  "errors": []
+}

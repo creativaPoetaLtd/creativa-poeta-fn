@@ -70,6 +70,7 @@ import WebsiteAnalytics from "./WebsiteAnalytics";
 import WhatsAppInbox from "./WhatsAppInbox";
 import UptimeMonitoring from "./UptimeMonitoring";
 import Trash from "./Trash";
+import ArtStudio from "./ArtStudio";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
@@ -107,6 +108,8 @@ const navigationItems = [
     section: "Demandes",
     permission: "requests:projects",
   },
+  { text: "CP Art · Catalogue", icon: <ArticleIcon />, path: "/secure-admin-dashboard-2024/cp-art", color: "#976443", section: "Contenu", permission: "art:catalog" },
+  { text: "CP Art · Demandes", icon: <WorkIcon />, path: "/secure-admin-dashboard-2024/cp-art-requests", color: "#976443", section: "Demandes", permission: "art:requests" },
   {
     text: "Visibility Tests",
     icon: <SearchIcon />,
@@ -761,6 +764,8 @@ export default function Dashboard() {
             <Route path="uptime-monitoring" element={renderWithPermission("analytics:read", <UptimeMonitoring />)} />
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="cp-impact" element={renderWithPermission("requests:projects", <Projects kind="impact" />)} />
+            <Route path="cp-art" element={renderWithPermission("art:catalog", <ArtStudio />)} />
+            <Route path="cp-art-requests" element={renderWithPermission("art:requests", <ArtStudio section="requests" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />
             <Route path="referral-program" element={renderWithPermission("referrals:read", <ReferralProgram />)} />

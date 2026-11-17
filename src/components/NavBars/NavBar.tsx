@@ -196,6 +196,12 @@ function NavBar() {
       featured: true,
     },
     {
+      label: "Creativa Poeta Art",
+      text: lang === "fr" ? "Des œuvres qui ont quelque chose à dire" : lang === "nl" ? "Kunst die iets te vertellen heeft" : "Art with something to say",
+      href: localizePath("/art"),
+      featured: true,
+    },
+    {
       label: copy.audit,
       text: copy.auditText,
       href: localizePath("/tester-visibilite"),

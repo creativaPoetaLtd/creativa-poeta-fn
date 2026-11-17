@@ -1,0 +1,27 @@
+{
+  "passed": 21,
+  "checks": [
+    "Public catalog excludes drafts even with injected filters",
+    "Public catalog strips supplier references",
+    "Admin catalogue requires authentication",
+    "Limited user cannot access catalogue",
+    "Limited user cannot access client enquiries",
+    "Server price defeats forged basket amounts",
+    "Unsupported shipping country is rejected",
+    "Variant shipping restriction is enforced",
+    "Contact consent is mandatory",
+    "Enquiry can be recorded without taking a payment",
+    "Retry returns the original enquiry reference",
+    "Retry identifier cannot silently submit a different selection",
+    "Duplicate retry creates only one enquiry",
+    "Client cannot mark a request paid",
+    "Admin updates follow-up without changing payment state",
+    "Stale catalogue saves are rejected",
+    "Admin can update catalogue prices",
+    "New quotes use updated prices",
+    "Recorded request keeps its original price snapshot",
+    "Artwork can be archived without deletion",
+    "Archived artwork cannot enter a quote"
+  ],
+  "isolatedData": true
+}
