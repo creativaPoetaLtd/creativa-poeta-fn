@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-11-17T12:48:12.973Z",
+  "count": 21,
+  "stripe": "simulated only",
+  "checks": [
+    "Merchant enters their own delivery rates using decimal commas",
+    "Shipping settings stay within the mobile viewport",
+    "Real artwork price clearly states that VAT is included",
+    "Selection includes configured delivery fees in its TTC grand total",
+    "Customer delivery choice recalculates the total",
+    "Payment button waits for explicit terms acceptance",
+    "Simulated checkout is visibly identified as a test",
+    "Shipping choices and checkout fit the mobile viewport",
+    "Checkout redirects only to the hosted Stripe origin",
+    "Return page does not claim payment before the signed confirmation",
+    "Private receipt token is removed from the address bar",
+    "Pending payment preserves the selection",
+    "Receipt confirms payment after the matching signed webhook",
+    "Only a confirmed matching order clears the original selection",
+    "Failed payments retain the cart and release the failed retry identifier",
+    "Customer can create a fresh checkout after a failed payment",
+    "Opening an older receipt cannot clear a newer pending checkout",
+    "Leaving checkout preserves the selection without claiming a payment",
+    "Order administration shows the paid order with its delivery snapshot",
+    "Test orders carry a do-not-manufacture notice",
+    "No browser JavaScript errors occur in the commerce journey"
+  ]
+}

@@ -2,7 +2,7 @@ export type ArtLanguage = "fr" | "en" | "nl";
 export type ArtText = Record<ArtLanguage, string>;
 export const artText = (fr: string, en: string, nl: string): ArtText => ({ fr, en, nl });
 export type ArtImage = { url: string; alt: ArtText };
-export type ArtVariant = { id: string; material: string; format: string; priceCents: number; fulfillment: "studio" | "print_on_demand"; leadDaysMin: number; leadDaysMax: number; countries: string[]; available: boolean; provider?: string; providerReference?: string };
+export type ArtVariant = { id: string; material: string; format: string; priceCents: number; fulfillment: "studio" | "print_on_demand"; leadDaysMin: number; leadDaysMax: number; countries: string[]; available: boolean; provider?: string; providerReference?: string; shippingProfileId?: string };
 
 export type ArtCollection = {
   slug: string;

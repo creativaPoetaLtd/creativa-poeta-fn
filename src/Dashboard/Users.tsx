@@ -131,6 +131,8 @@ const permissionOptions: Array<{ key: AdminPermission; label: string; group: str
   { key: "email:manage", label: "CP Mail manage", group: "Emails" },
   { key: "blogs:manage", label: "Blogs", group: "Content" },
   { key: "art:catalog", label: "CP Art — catalogue", group: "Content" },
+  { key: "art:settings", label: "CP Art — livraison et paiements", group: "Content" },
+  { key: "art:orders", label: "CP Art — commandes", group: "Requests" },
   { key: "art:requests", label: "CP Art — demandes clients", group: "Requests" },
   { key: "seo:manage", label: "SEO tools", group: "Content" },
   { key: "jobs:manage", label: "Jobs", group: "System" },

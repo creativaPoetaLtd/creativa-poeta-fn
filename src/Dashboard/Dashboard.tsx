@@ -71,6 +71,7 @@ import WhatsAppInbox from "./WhatsAppInbox";
 import UptimeMonitoring from "./UptimeMonitoring";
 import Trash from "./Trash";
 import ArtStudio from "./ArtStudio";
+import ArtCommerce from "./ArtCommerce";
 import { getAdminRoleColor } from "./utils/adminRoleColors";
 
 const drawerWidth = 292;
@@ -109,6 +110,8 @@ const navigationItems = [
     permission: "requests:projects",
   },
   { text: "CP Art · Catalogue", icon: <ArticleIcon />, path: "/secure-admin-dashboard-2024/cp-art", color: "#976443", section: "Contenu", permission: "art:catalog" },
+  { text: "CP Art · Livraison et ventes", icon: <ArticleIcon />, path: "/secure-admin-dashboard-2024/cp-art-settings", color: "#976443", section: "Contenu", permission: "art:settings" },
+  { text: "CP Art · Commandes", icon: <WorkIcon />, path: "/secure-admin-dashboard-2024/cp-art-orders", color: "#976443", section: "Demandes", permission: "art:orders" },
   { text: "CP Art · Demandes", icon: <WorkIcon />, path: "/secure-admin-dashboard-2024/cp-art-requests", color: "#976443", section: "Demandes", permission: "art:requests" },
   {
     text: "Visibility Tests",
@@ -765,6 +768,8 @@ export default function Dashboard() {
             <Route path="projects" element={renderWithPermission("requests:projects", <Projects kind="projects" />)} />
             <Route path="cp-impact" element={renderWithPermission("requests:projects", <Projects kind="impact" />)} />
             <Route path="cp-art" element={renderWithPermission("art:catalog", <ArtStudio />)} />
+            <Route path="cp-art-settings" element={renderWithPermission("art:settings", <ArtCommerce />)} />
+            <Route path="cp-art-orders" element={renderWithPermission("art:orders", <ArtCommerce section="orders" />)} />
             <Route path="cp-art-requests" element={renderWithPermission("art:requests", <ArtStudio section="requests" />)} />
             <Route path="visibility-tests" element={renderWithPermission("requests:visibility", <Projects kind="visibility" />)} />
             <Route path="assistance-requests" element={renderWithPermission("requests:assistance", <Projects kind="assistance" />)} />

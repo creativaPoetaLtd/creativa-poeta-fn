@@ -34,6 +34,17 @@
 .art-delivery-country + p { margin-top: 12px; }
 .art-selection-total { padding: 24px 0; border-top: 1px solid var(--art-line); margin-top: 25px; }
 .art-selection-total > div { display: flex; justify-content: space-between; gap: 15px; font-size: 14px; }
+.art-selection-total > .art-shipping-group { display: block; margin: 18px 0; }
+.art-shipping-group label { display: grid; gap: 8px; font-size: 12px; }
+.art-shipping-group select { width: 100%; min-width: 0; background: #faf8f3; padding: 12px; border: 1px solid var(--art-line); font-size: 14px; color: var(--art-ink); }
+.art-grand-total { border-top: 1px solid var(--art-line); padding-top: 18px; margin-top: 18px; font-weight: 700; }
+.art-payment-panel { border-bottom: 1px solid var(--art-line); margin-bottom: 30px; padding-bottom: 30px; }
+.art-payment-panel > p { font-size: 13px; line-height: 1.7; margin-bottom: 18px; }
+.art-payment-panel > .art-text-link { font-size: 12px; margin-bottom: 18px; }
+.art-test-notice { border: 1px solid #bc963d; background: #faf0cd; color: #594711; padding: 14px; line-height: 1.6; }
+.art-order-receipt { max-width: 760px; min-height: 50vh; margin: 65px auto; display: flex; flex-direction: column; align-items: flex-start; gap: 23px; overflow-wrap: anywhere; }
+.art-order-receipt h1 { font-size: clamp(36px, 6vw, 64px); }
+.art-order-receipt > p { line-height: 1.8; }
 .art-selection-total > p { color: var(--art-muted); font-size: 11px; margin-top: 12px; }
 .art-custom-form .art-consent { display: flex; align-items: start; gap: 10px; font-size: 11px; font-weight: 400; }
 .art-custom-form .art-consent input { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; accent-color: var(--art-accent); }

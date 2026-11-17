@@ -1,5 +1,22 @@
 # Creativa Poeta Art — galerie, catalogue et demandes
 
+## Livraison et commandes : troisième étape
+
+Les prix du catalogue réel sont désormais explicitement TTC. Les frais sont renseignés par le vendeur dans `/secure-admin-dashboard-2024/cp-art-settings`, avec des profils séparés pour l’atelier et les imprimeurs, des zones UE et plusieurs modes de livraison. Les champs vides ne deviennent jamais des frais gratuits. Chaque variante reçoit son profil dans l’éditeur du catalogue. Les tarifs de profils différents s’additionnent et tout profil non chiffré empêche le paiement.
+
+Le récapitulatif serveur expose les modes disponibles, les frais et le total TTC. Le paiement Stripe Checkout est préparé derrière des autorisations serveur et des confirmations fiscales/commerciales, toutes fermées au départ. Aucun taux de TVA n’est inventé. La configuration Stripe Tax et ses enregistrements doivent être validés sur le compte du vendeur avant activation ; les prix et les frais transmis à Stripe incluent la taxe.
+
+La route `/fr/art/commande` (également EN/NL) vérifie la confirmation reçue par le serveur, avec un accès privé transmis dans le fragment puis retiré de la barre d’adresse. Le retour depuis Stripe ne suffit pas à déclarer une commande payée. Les nouvelles commandes et leur suivi apparaissent dans `/secure-admin-dashboard-2024/cp-art-orders`. Les permissions `art:settings` et `art:orders` sont configurables. L’attribution des profils aux variantes reste accessible avec `art:catalog`.
+
+La préparation, les livraisons et les impressions restent manuelles. Aucun email de commande propre à CP Art, aucune facture fiscale et aucun transfert de fichier maître à un imprimeur ne sont implémentés dans cette étape ; les reçus Stripe doivent être activés et vérifiés sur le compte. Le paramétrage et les limites du paiement sont décrits dans `creativaPoeta_bn/docs/CP_ART_COMMERCE.md`.
+
+Validation locale : compilation frontend réussie ; 52 tests backend, 21 scénarios API catalogue/demandes, 28 scénarios API commerce, 26 contrôles de présentation, 19 contrôles navigateur du catalogue raccordé et 21 contrôles navigateur commerce. Stripe et les données des commandes sont simulés dans une base temporaire ; aucun encaissement réel, fabrication ou déploiement n’a été réalisé.
+
+Captures : [réglages de livraison](admin-livraison-desktop.png), [sélection et paiement mobile](paiement-selection-mobile.png), [commande confirmée en test](commande-confirmee-mobile.png), [administration des commandes](admin-commandes-desktop.png). Rapports : [API commerce](verification-commerce-api.json), [navigateur commerce](verification-commerce-browser.json).
+
+Le frontend reste sur `feature/cp-art-gallery`, le backend sur `feature/cp-art-catalog`. L’aperçu local par défaut présente toujours les études non vendables. Les fonctionnalités de vente ne sont visibles qu’avec le catalogue réel et leur configuration complète.
+
+
 ## Catalogue et demandes : deuxième étape
 
 Le frontend est sur `feature/cp-art-gallery` et le backend associé sur `feature/cp-art-catalog`. Cette étape reste locale ; aucun push ni déploiement de CP Art n’a été effectué.
@@ -13,7 +30,7 @@ Le catalogue enregistre jusqu’à 12 photographies ordonnées avec leurs descri
 
 La galerie réelle et les fiches sont raccordées à l’API. Le visiteur peut préparer une sélection persistante, modifier les quantités et choisir un pays de l’Union européenne. Le serveur vérifie à nouveau les prix et la disponibilité avant de produire le récapitulatif. Une demande avec consentement est enregistrée avec une référence et un instantané des prix, puis apparaît dans le tableau de bord. Une répétition de la même soumission retrouve la même référence ; une demande différente ne peut pas réutiliser silencieusement cette référence.
 
-**Les demandes ne sont pas des achats.** Aucun paiement n’est pris, aucun email automatique n’est envoyé et aucune fabrication n’est lancée. Les frais de livraison restent à confirmer. Le statut de paiement ne peut pas être modifié par le client ou par le formulaire de suivi.
+**Les demandes ne sont pas des achats.** Ce parcours de demande ne prend aucun paiement, n’envoie aucun email automatique et ne lance aucune fabrication. La nouvelle étape de paiement distincte est décrite en tête de ce document. Le statut de paiement ne peut pas être modifié par le client ou par le formulaire de suivi.
 
 ### Configuration du catalogue réel
 
@@ -71,7 +88,7 @@ Les routes existent également avec les préfixes anglais et néerlandais. La na
 
 Cette étape est un aperçu local, non publié. Les pages Art portent une directive `noindex, nofollow` et ne sont pas ajoutées au sitemap de production. Aucune étude n’est vendable et aucun prix, avis client, stock ou délai de livraison n’est inventé. Les variantes de support et de format sont illustratives.
 
-Le catalogue administrable et les demandes sont désormais implémentés comme décrit ci-dessus. Restent l’ajout des œuvres réelles et de leurs prix validés, la livraison chiffrée, les fichiers privés de fabrication, le paiement et le raccordement à l’imprimeur. Les créations commerciales seront ajoutées à partir des œuvres réelles du propriétaire.
+Le catalogue administrable et les demandes sont désormais implémentés comme décrit ci-dessus. Restent l’ajout des œuvres réelles, des prix et des frais choisis par le vendeur, les fichiers privés de fabrication, la configuration et la validation du compte Stripe de test, puis le raccordement éventuel à l’imprimeur. Les créations commerciales seront ajoutées à partir des œuvres réelles du propriétaire.
 
 ## Vérifications
 
