@@ -179,12 +179,8 @@
 .impact-form__progress span { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #eef1f6; font-weight: 800; font-size: 12px; }
 .impact-form__progress .is-active span { background: var(--impact-blue); color: white; }
 .impact-form__step-label { color: var(--impact-muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
-.impact-form__step-meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
-.impact-form__step-meta .impact-form__step-label { margin: 0; }
-.impact-form__required-note { margin: 0; color: #6f788c; font-size: 12px; line-height: 1.4; }
-.impact-form__required-note span, .impact-form__required { margin-left: 3px; color: #d23b2d; font-weight: 900; }
-.impact-form__required-note span { margin: 0 5px 0 0; }
 .impact-form__label { display: inline; }
+.impact-form__required { margin-left: 3px; color: #d23b2d; font-weight: 900; }
 .impact-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 19px; }
 .impact-form__grid > label, .impact-form__needs legend { display: grid; gap: 8px; color: #3b455b; font-weight: 700; font-size: 13px; }
 .impact-form__wide { grid-column: 1 / -1; }
@@ -220,7 +216,6 @@
 .impact-success > span { width: 74px; height: 74px; display: grid; place-items: center; margin: 0 auto 24px; border-radius: 24px 24px 24px 7px; background: #effbd8; color: #4f7a00; }
 .impact-success h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
 .impact-success > p { max-width: 560px; margin: 16px auto; color: var(--impact-muted); line-height: 1.7; }
-.impact-success .impact-success__note { padding: 12px; border-radius: 10px; background: var(--impact-soft); color: var(--impact-ink); font-weight: 700; }
 
 @media (max-width: 1000px) {
   .impact-audiences { grid-template-columns: repeat(3, 1fr); }

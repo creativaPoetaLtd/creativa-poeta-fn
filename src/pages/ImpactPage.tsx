@@ -47,7 +47,6 @@ type ImpactFormState = {
   problem: string;
   result: string;
   deadline: string;
-  externalCosts: string;
   representationConsent: boolean;
   selectionConsent: boolean;
   privacyConsent: boolean;
@@ -69,7 +68,6 @@ const initialForm: ImpactFormState = {
   problem: "",
   result: "",
   deadline: "",
-  externalCosts: "",
   representationConsent: false,
   selectionConsent: false,
   privacyConsent: false,
@@ -102,16 +100,16 @@ const ImpactPage = () => {
       return {
         title: "Creativa Poeta Impact | Programme numérique solidaire",
         description:
-          "Creativa Poeta accompagne associations, ONG, collectifs et projets à impact avec une première solution numérique gratuite ou à tarif solidaire.",
+          "Creativa Poeta accompagne associations, ONG, collectifs et projets à impact avec une première solution numérique concrète et adaptée.",
         keywords:
-          "Creativa Poeta Impact, pro bono numérique, site association, outil numérique ONG, projet communautaire",
+          "Creativa Poeta Impact, accompagnement numérique, site association, outil numérique ONG, projet communautaire",
       };
     }
     if (language === "nl") {
       return {
         title: "Creativa Poeta Impact | Digitale hulp voor projecten",
         description:
-          "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief.",
+          "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een concrete en passende eerste digitale oplossing.",
         keywords:
           "Creativa Poeta Impact, digitale hulp vereniging, website vzw, digitale oplossing ngo, gemeenschapsproject",
       };
@@ -119,9 +117,9 @@ const ImpactPage = () => {
     return {
       title: "Creativa Poeta Impact | Digital skills for good",
       description:
-        "Creativa Poeta supports charities, NGOs, community groups and impact projects with a first digital solution, free or at a solidarity rate.",
+        "Creativa Poeta supports charities, NGOs, community groups and impact projects with a concrete and suitable first digital solution.",
       keywords:
-        "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, community projects",
+        "Creativa Poeta Impact, digital support, charity website, NGO digital tools, community projects",
     };
   }, [language]);
 
@@ -188,7 +186,6 @@ const ImpactPage = () => {
       formStep === 2 &&
       (!form.problem ||
         !form.result ||
-        !form.externalCosts ||
         !form.representationConsent ||
         !form.selectionConsent ||
         !form.privacyConsent)
@@ -229,7 +226,6 @@ const ImpactPage = () => {
           `Bénéficiaires: ${form.beneficiaries}`,
           `Vérification: ${form.verification || "Non renseignée"}`,
           `Échéance: ${form.deadline || "Non renseignée"}`,
-          `Frais externes: ${form.externalCosts}`,
           "Consentements: représentation autorisée, sélection non garantie, réponse à la demande autorisée.",
         ].join("\n"),
         locale: language,
@@ -543,7 +539,6 @@ const ImpactPage = () => {
                 <p className="impact-eyebrow">Creativa Poeta Impact</p>
                 <h2>{formCopy.successTitle}</h2>
                 <p>{formCopy.successText}</p>
-                <p className="impact-success__note">{formCopy.successNote}</p>
                 <button type="button" className="impact-button impact-button--primary" onClick={() => { setSubmitted(false); closeApplication(); }}>
                   {formCopy.closeSuccess}
                 </button>
@@ -595,7 +590,6 @@ const ImpactPage = () => {
                     <label className="impact-form__wide">{formCopy.problem}<textarea required rows={3} value={form.problem} onChange={(event) => setForm({ ...form, problem: event.target.value })} /></label>
                     <label className="impact-form__wide">{formCopy.result}<textarea required rows={3} value={form.result} onChange={(event) => setForm({ ...form, result: event.target.value })} /></label>
                     <label>{formCopy.deadline}<input value={form.deadline} onChange={(event) => setForm({ ...form, deadline: event.target.value })} /></label>
-                    <label>{formCopy.externalCosts}<select required value={form.externalCosts} onChange={(event) => setForm({ ...form, externalCosts: event.target.value })}><option value="" />{formCopy.externalCostOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
                     <div className="impact-form__wide impact-form__consents">
                       <label><input type="checkbox" checked={form.representationConsent} onChange={(event) => setForm({ ...form, representationConsent: event.target.checked })} /><span />{formCopy.representationConsent}</label>
                       <label><input type="checkbox" checked={form.selectionConsent} onChange={(event) => setForm({ ...form, selectionConsent: event.target.checked })} /><span />{formCopy.selectionConsent}</label>

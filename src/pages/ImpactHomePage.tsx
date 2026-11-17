@@ -38,7 +38,7 @@ const pageLabels = {
       { value: 15, suffix: "k", label: "heures consacrées à ces projets" },
       { value: 50, label: "solutions numériques déployées" },
     ],
-    audienceAction: "Vérifier les conditions", supportTitle: "Vous voulez financer une prochaine “pierre” numérique ?", supportText: "Entreprises, fondations et particuliers peuvent soutenir du temps de conception, des licences ou de l’hébergement pour les projets sélectionnés.", supportAction: "Devenir soutien d’impact",
+    audienceAction: "Vérifier les conditions", supportTitle: "Vous voulez contribuer à une prochaine “pierre” numérique ?", supportText: "Entreprises, fondations et particuliers peuvent partager leur expertise, leurs ressources ou leur réseau avec les projets sélectionnés.", supportAction: "Proposer une contribution",
   },
   en: {
     signature: "CP Impact — an initiative by Creativa Poeta",
@@ -49,7 +49,7 @@ const pageLabels = {
       { title: "Program conditions", text: "What is included, our criteria and everyone's commitments.", action: "Read the conditions" },
       { title: "Present a project", text: "Three short steps to explain your mission and your need.", action: "Start the application" },
     ],
-    audienceAction: "Check the conditions", supportTitle: "Would you like to fund the next digital “stone”?", supportText: "Companies, foundations and individuals can support design time, licenses or hosting for selected projects.", supportAction: "Become an impact supporter",
+    audienceAction: "Check the conditions", supportTitle: "Would you like to contribute to the next digital “stone”?", supportText: "Companies, foundations and individuals can share their expertise, resources or network with selected projects.", supportAction: "Offer a contribution",
     statsEyebrow: "Our impact in figures",
     statsTitle: "Concrete action, with impact already delivered.",
     stats: [
@@ -68,7 +68,7 @@ const pageLabels = {
       { title: "Programmavoorwaarden", text: "Wat inbegrepen is, onze criteria en ieders engagementen.", action: "Lees de voorwaarden" },
       { title: "Een project voorstellen", text: "Drie korte stappen om uw missie en behoefte toe te lichten.", action: "Start de aanvraag" },
     ],
-    audienceAction: "Bekijk de voorwaarden", supportTitle: "Wilt u de volgende digitale “steen” financieren?", supportText: "Bedrijven, stichtingen en particulieren kunnen ontwerptijd, licenties of hosting voor geselecteerde projecten ondersteunen.", supportAction: "Word impactpartner",
+    audienceAction: "Bekijk de voorwaarden", supportTitle: "Wilt u bijdragen aan de volgende digitale “steen”?", supportText: "Bedrijven, stichtingen en particulieren kunnen hun expertise, middelen of netwerk delen met geselecteerde projecten.", supportAction: "Stel een bijdrage voor",
     statsEyebrow: "Onze impact in cijfers",
     statsTitle: "Concrete acties met een impact die nu al zichtbaar is.",
     stats: [

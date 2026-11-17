@@ -74,8 +74,6 @@ export type ImpactCopy = {
     problem: string;
     result: string;
     deadline: string;
-    externalCosts: string;
-    externalCostOptions: string[];
     representationConsent: string;
     selectionConsent: string;
     privacyConsent: string;
@@ -88,7 +86,6 @@ export type ImpactCopy = {
     needsRequired: string;
     successTitle: string;
     successText: string;
-    successNote: string;
     closeSuccess: string;
     error: string;
   };
@@ -102,10 +99,10 @@ const fr: ImpactCopy = {
   title: "Vos actions changent des vies.",
   titleAccent: "Le numérique peut amplifier leur impact.",
   intro:
-    "Nous accompagnons gratuitement ou à conditions solidaires des associations, ONG, collectifs et initiatives à impact qui ont un besoin numérique concret et des ressources limitées.",
+    "Nous accompagnons des associations, ONG, collectifs et initiatives à impact qui ont un besoin numérique concret et des ressources limitées.",
   apply: "Présenter votre projet",
   discover: "Découvrir le programme",
-  trust: ["Candidature gratuite", "Aucun abonnement", "Aucun accès bancaire"],
+  trust: ["Demande en 3 étapes", "Réponse sous 7 à 14 jours", "Périmètre défini ensemble"],
   capacity:
     "Les places sont limitées. Chaque demande est étudiée selon son impact, son urgence, sa faisabilité et nos capacités disponibles.",
   whyEyebrow: "Pourquoi cette initiative",
@@ -123,7 +120,7 @@ const fr: ImpactCopy = {
     },
     {
       title: "Donner plus de force aux petites équipes",
-      text: "Faute de temps, de budget ou de compétences, elles peinent à structurer leurs outils numériques.",
+      text: "Faute de temps, d’outils ou de compétences, elles peinent à structurer leurs usages numériques.",
     },
   ],
   audienceEyebrow: "Pour qui ?",
@@ -166,19 +163,19 @@ const fr: ImpactCopy = {
     },
   ],
   promiseEyebrow: "Un échange transparent",
-  promiseTitle: "Gratuit ne signifie ni caché, ni sans limites.",
+  promiseTitle: "Un cadre clair, sans zones d’ombre.",
   promiseIntro:
     "Nous définissons une première réalisation par écrit. Vous savez ce qui est inclus, ce qui ne l’est pas et qui garde le contrôle.",
   promises: [
     {
-      title: "Ce que nous offrons",
+      title: "Ce que nous réalisons",
       text: "Le temps de conception et de réalisation du premier lot convenu.",
       items: ["Périmètre écrit", "Corrections raisonnables", "Fichiers et accès", "Documentation simple"],
     },
     {
-      title: "Ce qui peut rester payant",
-      text: "Uniquement des services externes validés avant le démarrage.",
-      items: ["Domaine ou hébergement", "Licence ou outil tiers", "Email, SMS ou IA", "Paiement direct au fournisseur"],
+      title: "Comment nous avançons",
+      text: "Des étapes courtes permettent de garder le projet lisible et maîtrisé.",
+      items: ["Un interlocuteur désigné", "Validations aux étapes clés", "Délais partagés", "Décisions tracées"],
     },
     {
       title: "Ce que nous pouvons demander",
@@ -206,7 +203,7 @@ const fr: ImpactCopy = {
   selectionGroups: [
     { title: "Ce que nous recherchons", tone: "yes", items: ["Impact positif concret", "Organisation ou responsable identifiable", "Besoin précis et réaliste", "Interlocuteur disponible pour collaborer"] },
     { title: "Nos priorités possibles", tone: "priority", items: ["Petites structures avec peu de ressources", "Territoires et communautés peu desservis", "Jeunes et publics vulnérables", "Résultat utile et mesurable"] },
-    { title: "Ce que nous refusons", tone: "no", items: ["Fraude, haine ou discrimination", "Collecte de fonds douteuse", "Usage non protégé de données sensibles", "Bénéfice commercial déguisé en action sociale"] },
+    { title: "Ce que nous refusons", tone: "no", items: ["Fraude, haine ou discrimination", "Pratiques trompeuses ou non vérifiables", "Usage non protégé de données sensibles", "Bénéfice commercial déguisé en action sociale"] },
   ],
   showCriteria: "Voir nos critères",
   hideCriteria: "Masquer les critères",
@@ -223,19 +220,19 @@ const fr: ImpactCopy = {
   faqEyebrow: "Questions fréquentes",
   faqTitle: "Des réponses claires avant de vous engager.",
   faqs: [
-    { question: "Est-ce réellement gratuit ?", answer: "Oui, pour un projet sélectionné et dans le périmètre écrit. Certains frais externes peuvent être nécessaires, mais ils sont annoncés avant et payés directement au fournisseur." },
+    { question: "Que comprend la première intervention ?", answer: "Elle porte sur un résultat numérique précis, défini ensemble avant le démarrage, avec les étapes, responsabilités et livrables clairement indiqués." },
     { question: "Faut-il disposer d’un statut officiel ?", answer: "Pas nécessairement. Une structure enregistrée, un collectif sérieux ou une initiative identifiable peut candidater si son activité et ses responsables peuvent être vérifiés." },
     { question: "Devons-nous donner nos mots de passe ?", answer: "Non pour candidater ou recevoir une première maquette. Si un accès devient nécessaire, nous expliquons pourquoi et demandons uniquement le niveau minimal." },
     { question: "À qui appartiendra le résultat ?", answer: "L’organisation conserve ses contenus, son domaine, ses données et les comptes ouverts à son nom. Les modalités exactes sont écrites dans l’accord." },
-    { question: "Pouvons-nous demander un grand site ou une application ?", answer: "Le programme vise une première intervention limitée. Un besoin plus grand peut être découpé en phases, proposé à tarif solidaire ou financé par un partenaire d’impact." },
+    { question: "Pouvons-nous demander un grand site ou une application ?", answer: "Le programme vise une première intervention limitée. Un besoin plus grand peut être découpé en étapes ou orienté vers une solution plus adaptée." },
   ],
   finalTitle: "Vous construisez quelque chose d’utile ? Nous pouvons peut-être apporter une pierre.",
   finalText: "Décrivez simplement votre mission, votre problème et le résultat souhaité. Aucun vocabulaire technique n’est nécessaire.",
   emailTeam: "Écrire à l’équipe Impact",
-  disclaimer: "Creativa Poeta Impact n’est pas un fonds de financement et ne verse pas d’argent. Le programme apporte des compétences et des réalisations numériques aux projets sélectionnés.",
+  disclaimer: "Creativa Poeta Impact accompagne les projets sélectionnés avec des compétences et des réalisations numériques, dans un périmètre défini ensemble.",
   form: {
     close: "Fermer le formulaire",
-    eyebrow: "Candidature gratuite",
+    eyebrow: "Candidature CP Impact",
     title: "Présentez votre projet",
     intro: "Trois étapes courtes. Décrivez votre situation avec vos mots — aucun jargon technique n’est nécessaire.",
     step: "Étape",
@@ -257,8 +254,6 @@ const fr: ImpactCopy = {
     problem: "Quel problème rencontrez-vous aujourd’hui ?",
     result: "Quel résultat concret souhaitez-vous obtenir ?",
     deadline: "Y a-t-il une date importante ? (facultatif)",
-    externalCosts: "Si un coût externe est indispensable, votre organisation peut-elle le prendre en charge après validation ?",
-    externalCostOptions: ["Oui", "Peut-être, selon le montant", "Non", "Je ne sais pas"],
     representationConsent: "Je confirme être autorisé·e à représenter cette organisation.",
     selectionConsent: "Je comprends que cette demande ne garantit pas la sélection du projet.",
     privacyConsent: "J’accepte l’utilisation de mes coordonnées pour répondre à cette demande.",
@@ -271,7 +266,6 @@ const fr: ImpactCopy = {
     needsRequired: "Sélectionnez au moins un besoin.",
     successTitle: "Votre projet est bien arrivé.",
     successText: "Merci de nous avoir présenté votre mission. Notre équipe examinera la demande et vous répondra, dans la mesure du possible, sous 7 à 14 jours.",
-    successNote: "Aucun paiement ne sera demandé pour l’examen de votre candidature.",
     closeSuccess: "Revenir au programme",
     error: "L’envoi n’a pas abouti. Vérifiez votre connexion ou écrivez-nous à contact@creativapoeta.com.",
   },
@@ -285,10 +279,10 @@ const en: ImpactCopy = {
   program: "CP Impact",
   title: "Your work changes lives.",
   titleAccent: "Digital tools can amplify its impact.",
-  intro: "We offer free or solidarity-based support to charities, NGOs, community groups and impact initiatives with a concrete digital need and limited resources.",
+  intro: "We support charities, NGOs, community groups and impact initiatives with a concrete digital need and limited resources.",
   apply: "Present your project",
   discover: "Discover the program",
-  trust: ["Free application", "No subscription", "No banking access"],
+  trust: ["Three-step application", "Reply within 7–14 days", "Scope defined together"],
   capacity: "Places are limited. Every request is assessed on its impact, urgency, feasibility and our available capacity.",
   whyEyebrow: "Why this initiative",
   whyTitle: "Good initiatives should not remain invisible.",
@@ -304,7 +298,7 @@ const en: ImpactCopy = {
     },
     {
       title: "Give small teams more capacity",
-      text: "Without enough time, budget or expertise, they struggle to structure their digital tools.",
+      text: "Without enough time, tools or expertise, they struggle to structure their digital work.",
     },
   ],
   audienceEyebrow: "Who is it for?",
@@ -328,11 +322,11 @@ const en: ImpactCopy = {
     { title: "Automation & AI", summary: "Save time when the use is relevant and responsible.", items: ["Transcription and captions", "Content classification", "Simple newsletter", "Search across resources"], note: "Medical, social, personal or otherwise sensitive content always remains subject to human validation." },
   ],
   promiseEyebrow: "A transparent exchange",
-  promiseTitle: "Free does not mean hidden or unlimited.",
+  promiseTitle: "A clear framework, with no grey areas.",
   promiseIntro: "We define a first deliverable in writing. You know what is included, what is not, and who remains in control.",
   promises: [
-    { title: "What we offer", text: "Design and delivery time for the agreed first scope.", items: ["Written scope", "Reasonable revisions", "Files and access", "Simple documentation"] },
-    { title: "What may still cost", text: "Only external services approved before work begins.", items: ["Domain or hosting", "Third-party license or tool", "Email, SMS or AI", "Direct payment to provider"] },
+    { title: "What we deliver", text: "Design and delivery time for the agreed first scope.", items: ["Written scope", "Reasonable revisions", "Files and access", "Simple documentation"] },
+    { title: "How we move forward", text: "Short stages keep the project clear and under control.", items: ["A named contact", "Validation at key stages", "Shared timelines", "Recorded decisions"] },
     { title: "What we may ask", text: "Once satisfied, permission to tell the project's story honestly.", items: ["Approved case study", "Voluntary testimonial", "Discreet credit", "No future commitment"] },
     { title: "What stays yours", text: "Your organization keeps ownership and control of its project.", items: ["Domain and content", "Data and accounts", "Access handed over", "Confidentiality and GDPR"] },
   ],
@@ -350,7 +344,7 @@ const en: ImpactCopy = {
   selectionGroups: [
     { title: "What we look for", tone: "yes", items: ["Concrete positive impact", "Identifiable organization or lead", "Specific and realistic need", "Available project contact"] },
     { title: "Possible priorities", tone: "priority", items: ["Small teams with few resources", "Underserved communities and areas", "Young or vulnerable audiences", "Useful, measurable outcome"] },
-    { title: "What we decline", tone: "no", items: ["Fraud, hate or discrimination", "Questionable fundraising", "Unprotected sensitive data", "Commercial gain disguised as social impact"] },
+    { title: "What we decline", tone: "no", items: ["Fraud, hate or discrimination", "Misleading or unverifiable practices", "Unprotected sensitive data", "Commercial gain disguised as social impact"] },
   ],
   showCriteria: "See our criteria",
   hideCriteria: "Hide criteria",
@@ -367,25 +361,25 @@ const en: ImpactCopy = {
   faqEyebrow: "Frequently asked questions",
   faqTitle: "Clear answers before you commit.",
   faqs: [
-    { question: "Is it really free?", answer: "Yes, for a selected project and within the written scope. Some external costs may be necessary, but they are disclosed in advance and paid directly to the provider." },
+    { question: "What does the first intervention include?", answer: "It focuses on one precise digital outcome, agreed before work begins, with stages, responsibilities and deliverables clearly stated." },
     { question: "Do we need an official legal status?", answer: "Not necessarily. A registered organization, a serious collective or an identifiable initiative may apply if its work and leadership can be verified." },
     { question: "Do we need to share passwords?", answer: "Not to apply or receive a first mock-up. If access becomes necessary, we explain why and request only the minimum level." },
     { question: "Who owns the result?", answer: "The organization keeps its content, domain, data and accounts opened in its name. Exact terms are written into the agreement." },
-    { question: "Can we request a large website or app?", answer: "The program focuses on a limited first intervention. Larger needs may be split into phases, offered at a solidarity rate or funded by an impact partner." },
+    { question: "Can we request a large website or app?", answer: "The program focuses on a limited first intervention. Larger needs may be split into stages or directed towards a more suitable solution." },
   ],
   finalTitle: "Building something useful? Perhaps we can add one stone.",
   finalText: "Simply describe your mission, the problem and the outcome you need. No technical vocabulary is required.",
   emailTeam: "Email the Impact team",
-  disclaimer: "Creativa Poeta Impact is not a funding body and does not provide money. The program contributes digital skills and deliverables to selected projects.",
+  disclaimer: "Creativa Poeta Impact supports selected projects with digital skills and deliverables, within a scope defined together.",
   form: {
     ...fr.form,
-    close: "Close form", eyebrow: "Free application", title: "Present your project", intro: "Three short steps. Describe the situation in your own words — no technical jargon required.", step: "Step", steps: ["Contact", "Mission", "Need"],
+    close: "Close form", eyebrow: "CP Impact application", title: "Present your project", intro: "Three short steps. Describe the situation in your own words — no technical jargon required.", step: "Step", steps: ["Contact", "Mission", "Need"],
     firstName: "First name", lastName: "Last name", role: "Your role", email: "Professional email", phone: "Phone or WhatsApp", country: "Country", organization: "Organization name", organizationType: "Organization type",
     organizationTypes: ["Charity / nonprofit", "NGO", "Foundation", "Local collective", "Education / youth", "Community initiative", "Cultural project", "Environmental project", "Cooperative", "Social enterprise", "Other"],
     mission: "What is your organization's mission?", beneficiaries: "Who do you support?", verification: "Link that helps verify your work (website or social profile)", needs: "What kind of help could be useful?",
     needOptions: ["New website or landing page", "Website improvement", "Event page", "Form or registration", "Contact organization", "Automation", "Visual identity or materials", "Translation or captions", "AI-enabled solution", "I am not sure yet"],
-    problem: "What problem do you face today?", result: "What concrete outcome do you want?", deadline: "Is there an important date? (optional)", externalCosts: "If an external cost is essential, can your organization cover it after approval?", externalCostOptions: ["Yes", "Maybe, depending on the amount", "No", "I don't know"],
-    representationConsent: "I confirm that I am authorized to represent this organization.", selectionConsent: "I understand that this request does not guarantee selection.", privacyConsent: "I agree that my contact details may be used to answer this request.", privacyLink: "Privacy policy", previous: "Back", next: "Continue", submit: "Send our project", submitting: "Sending…", required: "Please complete the indicated fields.", needsRequired: "Select at least one need.", successTitle: "Your project has arrived.", successText: "Thank you for presenting your mission. Our team will review the request and, where possible, reply within 7 to 14 days.", successNote: "No payment will be requested to review your application.", closeSuccess: "Return to the program", error: "We could not send the request. Check your connection or email contact@creativapoeta.com.",
+    problem: "What problem do you face today?", result: "What concrete outcome do you want?", deadline: "Is there an important date? (optional)",
+    representationConsent: "I confirm that I am authorized to represent this organization.", selectionConsent: "I understand that this request does not guarantee selection.", privacyConsent: "I agree that my contact details may be used to answer this request.", privacyLink: "Privacy policy", previous: "Back", next: "Continue", submit: "Send our project", submitting: "Sending…", required: "Please complete the indicated fields.", needsRequired: "Select at least one need.", successTitle: "Your project has arrived.", successText: "Thank you for presenting your mission. Our team will review the request and, where possible, reply within 7 to 14 days.", closeSuccess: "Return to the program", error: "We could not send the request. Check your connection or email contact@creativapoeta.com.",
   },
 };
 
@@ -397,10 +391,10 @@ const nl: ImpactCopy = {
   program: "CP Impact",
   title: "Uw inzet verandert levens.",
   titleAccent: "Digitale middelen kunnen die impact vergroten.",
-  intro: "We helpen verenigingen, ngo’s, collectieven en impactinitiatieven gratis of aan een sociaal tarief wanneer zij een concrete digitale behoefte en beperkte middelen hebben.",
+  intro: "We helpen verenigingen, ngo’s, collectieven en impactinitiatieven met een concrete digitale behoefte en beperkte middelen.",
   apply: "Stel uw project voor",
   discover: "Ontdek het programma",
-  trust: ["Gratis aanvraag", "Geen abonnement", "Geen banktoegang"],
+  trust: ["Aanvraag in drie stappen", "Antwoord binnen 7–14 dagen", "Scope samen bepaald"],
   capacity: "De plaatsen zijn beperkt. Elke aanvraag wordt beoordeeld op impact, urgentie, haalbaarheid en onze beschikbare capaciteit.",
   whyEyebrow: "Waarom dit initiatief",
   whyTitle: "Goede initiatieven mogen niet onzichtbaar blijven.",
@@ -416,7 +410,7 @@ const nl: ImpactCopy = {
     },
     {
       title: "Kleine teams meer slagkracht geven",
-      text: "Door een gebrek aan tijd, budget of expertise slagen ze er moeilijk in hun digitale tools te structureren.",
+      text: "Door een gebrek aan tijd, hulpmiddelen of expertise slagen ze er moeilijk in hun digitale werking te structureren.",
     },
   ],
   audienceEyebrow: "Voor wie?",
@@ -440,11 +434,11 @@ const nl: ImpactCopy = {
     { title: "Automatisering & AI", summary: "Bespaar tijd wanneer het gebruik relevant en verantwoord is.", items: ["Transcriptie en ondertiteling", "Inhoud ordenen", "Eenvoudige nieuwsbrief", "Zoeken in bronnen"], note: "Medische, sociale, persoonlijke of andere gevoelige inhoud blijft altijd onderworpen aan menselijke controle." },
   ],
   promiseEyebrow: "Een transparante uitwisseling",
-  promiseTitle: "Gratis betekent niet verborgen of onbeperkt.",
+  promiseTitle: "Een duidelijk kader, zonder grijze zones.",
   promiseIntro: "We leggen een eerste oplevering schriftelijk vast. U weet wat inbegrepen is, wat niet, en wie de controle houdt.",
   promises: [
-    { title: "Wat wij aanbieden", text: "Ontwerp- en realisatietijd voor de afgesproken eerste scope.", items: ["Schriftelijke scope", "Redelijke correcties", "Bestanden en toegang", "Eenvoudige documentatie"] },
-    { title: "Wat betalend kan blijven", text: "Alleen externe diensten die vooraf zijn goedgekeurd.", items: ["Domein of hosting", "Licentie of externe tool", "E-mail, sms of AI", "Rechtstreeks betalen aan leverancier"] },
+    { title: "Wat wij realiseren", text: "Ontwerp- en realisatietijd voor de afgesproken eerste scope.", items: ["Schriftelijke scope", "Redelijke correcties", "Bestanden en toegang", "Eenvoudige documentatie"] },
+    { title: "Hoe we vooruitgaan", text: "Korte stappen houden het project helder en beheersbaar.", items: ["Een vaste contactpersoon", "Validatie op sleutelmomenten", "Gedeelde planning", "Vastgelegde beslissingen"] },
     { title: "Wat wij kunnen vragen", text: "Na tevredenheid, toestemming om het project eerlijk te tonen.", items: ["Goedgekeurde case", "Vrije getuigenis", "Discrete credit", "Geen toekomstige verplichting"] },
     { title: "Wat van u blijft", text: "Uw organisatie behoudt eigendom en controle over haar project.", items: ["Domein en inhoud", "Data en accounts", "Toegang overgedragen", "Vertrouwelijkheid en AVG"] },
   ],
@@ -462,7 +456,7 @@ const nl: ImpactCopy = {
   selectionGroups: [
     { title: "Wat we zoeken", tone: "yes", items: ["Concrete positieve impact", "Identificeerbare organisatie of leider", "Specifieke, haalbare behoefte", "Beschikbare contactpersoon"] },
     { title: "Mogelijke prioriteiten", tone: "priority", items: ["Kleine teams met weinig middelen", "Minder bediende buurten en gemeenschappen", "Jongeren of kwetsbare groepen", "Nuttig, meetbaar resultaat"] },
-    { title: "Wat we weigeren", tone: "no", items: ["Fraude, haat of discriminatie", "Twijfelachtige fondsenwerving", "Onbeschermde gevoelige data", "Commerciële winst vermomd als sociale impact"] },
+    { title: "Wat we weigeren", tone: "no", items: ["Fraude, haat of discriminatie", "Misleidende of niet-verifieerbare praktijken", "Onbeschermde gevoelige data", "Commerciële winst vermomd als sociale impact"] },
   ],
   showCriteria: "Bekijk onze criteria",
   hideCriteria: "Verberg de criteria",
@@ -479,25 +473,25 @@ const nl: ImpactCopy = {
   faqEyebrow: "Veelgestelde vragen",
   faqTitle: "Duidelijke antwoorden voordat u begint.",
   faqs: [
-    { question: "Is het echt gratis?", answer: "Ja, voor een geselecteerd project binnen de schriftelijke scope. Externe kosten kunnen nodig zijn, maar worden vooraf gemeld en rechtstreeks aan de leverancier betaald." },
+    { question: "Wat omvat de eerste interventie?", answer: "Ze richt zich op één precies digitaal resultaat dat vooraf samen wordt bepaald, met duidelijke stappen, verantwoordelijkheden en opleveringen." },
     { question: "Hebben we een officieel juridisch statuut nodig?", answer: "Niet noodzakelijk. Een geregistreerde organisatie, een ernstig collectief of een herkenbaar initiatief kan zich aanmelden als de werking en verantwoordelijken verifieerbaar zijn." },
     { question: "Moeten we wachtwoorden delen?", answer: "Niet om aan te vragen of een eerste ontwerp te ontvangen. Als toegang nodig wordt, leggen we uit waarom en vragen we alleen het minimale niveau." },
     { question: "Van wie is het resultaat?", answer: "De organisatie behoudt haar inhoud, domein, data en accounts op haar naam. De exacte afspraken staan in de overeenkomst." },
-    { question: "Kunnen we een grote website of app vragen?", answer: "Het programma richt zich op een beperkte eerste interventie. Grotere behoeften kunnen in fasen, aan sociaal tarief of met een impactpartner worden aangepakt." },
+    { question: "Kunnen we een grote website of app vragen?", answer: "Het programma richt zich op een beperkte eerste interventie. Grotere behoeften kunnen in stappen worden verdeeld of naar een geschiktere oplossing worden geleid." },
   ],
   finalTitle: "Bouwt u iets nuttigs? Misschien kunnen wij één steen bijdragen.",
   finalText: "Beschrijf eenvoudig uw missie, het probleem en het gewenste resultaat. Technische woorden zijn niet nodig.",
   emailTeam: "Mail het Impact-team",
-  disclaimer: "Creativa Poeta Impact is geen financieringsfonds en keert geen geld uit. Het programma levert digitale kennis en realisaties aan geselecteerde projecten.",
+  disclaimer: "Creativa Poeta Impact ondersteunt geselecteerde projecten met digitale kennis en realisaties, binnen een scope die we samen bepalen.",
   form: {
     ...en.form,
-    close: "Formulier sluiten", eyebrow: "Gratis aanvraag", title: "Stel uw project voor", intro: "Drie korte stappen. Beschrijf de situatie in uw eigen woorden — technische termen zijn niet nodig.", step: "Stap", steps: ["Contact", "Missie", "Behoefte"],
+    close: "Formulier sluiten", eyebrow: "CP Impact-aanvraag", title: "Stel uw project voor", intro: "Drie korte stappen. Beschrijf de situatie in uw eigen woorden — technische termen zijn niet nodig.", step: "Stap", steps: ["Contact", "Missie", "Behoefte"],
     firstName: "Voornaam", lastName: "Achternaam", role: "Uw functie", email: "Professionele e-mail", phone: "Telefoon of WhatsApp", country: "Land", organization: "Naam van de organisatie", organizationType: "Type organisatie",
     organizationTypes: ["Vereniging / vzw", "Ngo", "Stichting", "Lokaal collectief", "Onderwijs / jeugd", "Gemeenschapsinitiatief", "Cultureel project", "Milieuproject", "Coöperatie", "Sociale onderneming", "Andere"],
     mission: "Wat is de missie van uw organisatie?", beneficiaries: "Wie ondersteunt u?", verification: "Link waarmee we uw activiteit kunnen verifiëren (site of sociaal profiel)", needs: "Welke hulp kan nuttig zijn?",
     needOptions: ["Nieuwe website of landingspagina", "Website verbeteren", "Evenementpagina", "Formulier of inschrijvingen", "Contacten organiseren", "Automatisering", "Visuele identiteit of materiaal", "Vertaling of ondertiteling", "AI-oplossing", "Ik weet het nog niet"],
-    problem: "Welk probleem ervaart u vandaag?", result: "Welk concreet resultaat wilt u bereiken?", deadline: "Is er een belangrijke datum? (optioneel)", externalCosts: "Kan uw organisatie een noodzakelijke externe kost betalen na voorafgaande goedkeuring?", externalCostOptions: ["Ja", "Misschien, afhankelijk van het bedrag", "Nee", "Ik weet het niet"],
-    representationConsent: "Ik bevestig dat ik deze organisatie mag vertegenwoordigen.", selectionConsent: "Ik begrijp dat deze aanvraag geen selectie garandeert.", privacyConsent: "Ik ga ermee akkoord dat mijn contactgegevens worden gebruikt om deze aanvraag te beantwoorden.", privacyLink: "Privacybeleid", previous: "Terug", next: "Doorgaan", submit: "Ons project verzenden", submitting: "Verzenden…", required: "Vul de aangeduide velden in.", needsRequired: "Selecteer minstens één behoefte.", successTitle: "Uw project is goed aangekomen.", successText: "Bedankt om uw missie voor te stellen. Ons team bekijkt de aanvraag en antwoordt waar mogelijk binnen 7 tot 14 dagen.", successNote: "Voor de beoordeling van uw aanvraag wordt geen betaling gevraagd.", closeSuccess: "Terug naar het programma", error: "De aanvraag kon niet worden verzonden. Controleer uw verbinding of mail contact@creativapoeta.com.",
+    problem: "Welk probleem ervaart u vandaag?", result: "Welk concreet resultaat wilt u bereiken?", deadline: "Is er een belangrijke datum? (optioneel)",
+    representationConsent: "Ik bevestig dat ik deze organisatie mag vertegenwoordigen.", selectionConsent: "Ik begrijp dat deze aanvraag geen selectie garandeert.", privacyConsent: "Ik ga ermee akkoord dat mijn contactgegevens worden gebruikt om deze aanvraag te beantwoorden.", privacyLink: "Privacybeleid", previous: "Terug", next: "Doorgaan", submit: "Ons project verzenden", submitting: "Verzenden…", required: "Vul de aangeduide velden in.", needsRequired: "Selecteer minstens één behoefte.", successTitle: "Uw project is goed aangekomen.", successText: "Bedankt om uw missie voor te stellen. Ons team bekijkt de aanvraag en antwoordt waar mogelijk binnen 7 tot 14 dagen.", closeSuccess: "Terug naar het programma", error: "De aanvraag kon niet worden verzonden. Controleer uw verbinding of mail contact@creativapoeta.com.",
   },
 };
 

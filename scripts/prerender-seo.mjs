@@ -665,12 +665,12 @@ const pageTemplates = {
           : "Creativa Poeta Impact | Digital skills for good",
     description: (lang) =>
       lang === "fr"
-        ? "Creativa Poeta accompagne associations, ONG, collectifs et projets a impact avec une premiere solution numerique gratuite ou a tarif solidaire."
+        ? "Creativa Poeta accompagne associations, ONG, collectifs et projets a impact avec une premiere solution numerique concrete et adaptee."
         : lang === "nl"
-          ? "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een eerste digitale oplossing, gratis of aan sociaal tarief."
-          : "Creativa Poeta supports charities, NGOs, community groups and impact projects with a first digital solution, free or at a solidarity rate.",
+          ? "Creativa Poeta helpt verenigingen, ngo's, collectieven en impactprojecten met een concrete en passende eerste digitale oplossing."
+          : "Creativa Poeta supports charities, NGOs, community groups and impact projects with a concrete and suitable first digital solution.",
     keywords:
-      "Creativa Poeta Impact, pro bono digital support, charity website, NGO digital tools, community projects",
+      "Creativa Poeta Impact, digital support, charity website, NGO digital tools, community projects",
     sections: (lang) =>
       lang === "fr"
         ? [
@@ -684,26 +684,26 @@ const pageTemplates = {
             ],
             [
               "Un echange transparent",
-              "Le perimetre gratuit, les frais externes eventuels, la propriete des livrables et les conditions de portfolio sont precises avant le travail.",
+              "Le perimetre, les responsabilites, la propriete des livrables et les conditions de portfolio sont precises avant le travail.",
             ],
           ]
         : lang === "nl"
           ? [
               ["Uw inzet verandert levens", "Creativa Poeta zet een deel van haar digitale kennis in voor organisaties en projecten met een positieve impact."],
               ["Een concrete eerste steen", "Website, evenementpagina, formulier, visueel materiaal of automatisering: we bepalen een beperkte en nuttige bijdrage."],
-              ["Een transparante uitwisseling", "Gratis scope, mogelijke externe kosten, eigendom en portfoliovoorwaarden worden vooraf vastgelegd."],
+              ["Een transparante uitwisseling", "Scope, verantwoordelijkheden, eigendom en portfoliovoorwaarden worden vooraf vastgelegd."],
             ]
           : [
               ["Your work changes lives", "Creativa Poeta contributes part of its digital expertise to organizations and projects creating positive impact."],
               ["A concrete first stone", "Website, event page, form, visual asset or automation: we define a focused, useful and realistic contribution."],
-              ["A transparent exchange", "The free scope, possible external costs, ownership and portfolio terms are agreed before work begins."],
+              ["A transparent exchange", "Scope, responsibilities, ownership and portfolio terms are agreed before work begins."],
             ],
   },
   impactHow: {
     path: "/impact/comment-ca-marche",
     title: (lang) => lang === "fr" ? "Comment ça marche | Creativa Poeta Impact" : lang === "nl" ? "Hoe werkt het | Creativa Poeta Impact" : "How it works | Creativa Poeta Impact",
     description: (lang) => lang === "fr" ? "Découvrez les étapes, les solutions numériques possibles et des exemples concrets du programme Creativa Poeta Impact." : lang === "nl" ? "Ontdek de stappen, mogelijke digitale oplossingen en concrete voorbeelden van Creativa Poeta Impact." : "Explore the steps, possible digital solutions and practical examples from Creativa Poeta Impact.",
-    keywords: "Creativa Poeta Impact process, nonprofit digital support, pro bono digital services",
+    keywords: "Creativa Poeta Impact process, nonprofit digital support, digital services for impact projects",
     sections: (lang) => lang === "fr"
       ? [
           ["Présentez votre mission", "Expliquez votre action, le public aidé et le problème concret à résoudre."],
@@ -725,18 +725,18 @@ const pageTemplates = {
   impactConditions: {
     path: "/impact/conditions",
     title: (lang) => lang === "fr" ? "Conditions | Creativa Poeta Impact" : lang === "nl" ? "Voorwaarden | Creativa Poeta Impact" : "Conditions | Creativa Poeta Impact",
-    description: (lang) => lang === "fr" ? "Critères, périmètre, coûts éventuels, propriété et engagements du programme Creativa Poeta Impact." : lang === "nl" ? "Criteria, scope, mogelijke kosten, eigendom en engagementen van Creativa Poeta Impact." : "Criteria, scope, possible costs, ownership and commitments for Creativa Poeta Impact.",
+    description: (lang) => lang === "fr" ? "Critères, périmètre, propriété et engagements du programme Creativa Poeta Impact." : lang === "nl" ? "Criteria, scope, eigendom en engagementen van Creativa Poeta Impact." : "Criteria, scope, ownership and commitments for Creativa Poeta Impact.",
     keywords: "Creativa Poeta Impact conditions, eligibility, nonprofit digital support",
     sections: (lang) => lang === "fr"
-      ? [["Sélection transparente", "L'impact, le besoin, la faisabilité et les capacités disponibles sont étudiés."], ["Un périmètre écrit", "Ce qui est inclus, les frais externes éventuels et la propriété sont précisés avant le travail."]]
+      ? [["Sélection transparente", "L'impact, le besoin, la faisabilité et les capacités disponibles sont étudiés."], ["Un périmètre écrit", "Ce qui est inclus, les responsabilités et la propriété sont précisés avant le travail."]]
       : lang === "nl"
-        ? [["Transparante selectie", "Impact, behoefte, haalbaarheid en beschikbare capaciteit worden beoordeeld."], ["Een schriftelijke scope", "Wat inbegrepen is, mogelijke externe kosten en eigendom worden vooraf vastgelegd."]]
-        : [["Transparent selection", "Impact, need, feasibility and available capacity are assessed."], ["A written scope", "What is included, possible external costs and ownership are agreed before work starts."]],
+        ? [["Transparante selectie", "Impact, behoefte, haalbaarheid en beschikbare capaciteit worden beoordeeld."], ["Een schriftelijke scope", "Wat inbegrepen is, verantwoordelijkheden en eigendom worden vooraf vastgelegd."]]
+        : [["Transparent selection", "Impact, need, feasibility and available capacity are assessed."], ["A written scope", "What is included, responsibilities and ownership are agreed before work starts."]],
   },
   impactApplication: {
     path: "/impact/candidature",
     title: (lang) => lang === "fr" ? "Présenter un projet | Creativa Poeta Impact" : lang === "nl" ? "Een project voorstellen | Creativa Poeta Impact" : "Present a project | Creativa Poeta Impact",
-    description: (lang) => lang === "fr" ? "Présentez gratuitement votre mission et votre besoin numérique à l'équipe Creativa Poeta Impact." : lang === "nl" ? "Stel uw missie en digitale behoefte gratis voor aan het Creativa Poeta Impact-team." : "Present your mission and digital need to the Creativa Poeta Impact team for free.",
+    description: (lang) => lang === "fr" ? "Présentez votre mission et votre besoin numérique à l'équipe Creativa Poeta Impact." : lang === "nl" ? "Stel uw missie en digitale behoefte voor aan het Creativa Poeta Impact-team." : "Present your mission and digital need to the Creativa Poeta Impact team.",
     keywords: "Creativa Poeta Impact application, nonprofit digital help, submit impact project",
     sections: (lang) => [[
       lang === "fr" ? "Trois étapes courtes" : lang === "nl" ? "Drie korte stappen" : "Three short steps",
