@@ -13,12 +13,12 @@ Les adresses ci-dessous concernent le site principal. Connectez-vous avec votre 
 
 1. Cliquez sur **Ajouter une œuvre**.
 2. Renseignez son adresse, par exemple `la-force-du-silence`, et choisissez sa collection.
-3. Gardez le statut **Brouillon** pendant la préparation. L’ordre d’affichage permet de placer les premières œuvres dans la galerie ; les petits nombres apparaissent d’abord.
+3. Gardez le statut **Brouillon** pendant la préparation. L’ordre d’affichage classe les œuvres dans la galerie : 0 apparaît avant 1, puis 2, etc. Vous pouvez garder 0 ; à valeur égale, les œuvres les plus récentes apparaissent d’abord.
 4. Dans l’onglet **FR**, saisissez le titre, une phrase de présentation et l’histoire/signification de l’œuvre. Indiquez votre signature dans **Artiste** et choisissez son orientation.
-5. Ajoutez les traductions EN et NL si vous les avez. À défaut, les textes français servent de repli dans le catalogue réel.
+5. Pour les langues, rédigez d’abord en FR, puis cliquez sur **Traduire vers EN** et **Traduire vers NL**. Les textes artistiques et descriptions de photos sont traduits avec OpenAI ; aucune image ni fichier d’impression n’est envoyé. Seuls les champs vides sont remplis, les traductions déjà saisies restent en place. Relisez les onglets EN et NL, corrigez si nécessaire, puis enregistrez la fiche. Le bouton de traduction seul ne sauvegarde et ne publie rien. À défaut de traduction, le catalogue utilise le texte français.
 6. Cliquez sur **Ajouter des photos** : JPEG, PNG ou WebP, jusqu’à 12 images par œuvre et 3 Mo par image. Décrivez les photos au minimum en français. La première photo représente l’œuvre dans la galerie ; les flèches permettent de les réordonner.
 7. Utilisez uniquement des images de présentation. Ne téléversez pas les fichiers maîtres haute définition destinés à l’impression : les images de la galerie sont publiques.
-8. Dans **Les détails qui parlent**, ajoutez si nécessaire le nom et la signification de détails symboliques. Ils complètent le récit principal.
+8. Dans **Les détails qui parlent (facultatif)**, ajoutez seulement les éléments précis que vous souhaitez expliquer, avec leur nom et leur signification. Vous pouvez ne rien ajouter ; une ligne entièrement vide sera ignorée à l’enregistrement. Un détail partiellement rempli doit être complété ou retiré.
 
 ## 3. Créer les versions vendues
 
